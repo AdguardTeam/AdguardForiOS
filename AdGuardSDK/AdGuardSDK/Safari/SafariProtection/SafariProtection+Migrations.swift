@@ -76,7 +76,7 @@ extension SafariProtection: SafariProtectionMigrationsProtocol {
     }
 
     public func convertFiltersAndReloadCbs(onCbReloaded: ((_ error: Error?) -> Void)?) {
-        BackgroundTaskExecutor.executeAsyncronousTask("SafariProtection+Migrations.convertFiltersAndReloadCbs") { [weak self] onTaskFinished in
+        BackgroundTaskExecutor.executeAsynchronousTask("SafariProtection+Migrations.convertFiltersAndReloadCbs") { [weak self] onTaskFinished in
             self?.cbQueue.async { [weak self] in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Migrations) - reloadContentBlockers; self is missing!")

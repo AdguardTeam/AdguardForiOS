@@ -194,7 +194,7 @@ final class StartupService : NSObject {
             dnsProvidersManager: dnsProvidersManager,
             networkSettings: networkSettingsService,
             dnsConfigAssistant: dnsConfigAssistant,
-            settingsResetor: settingsReset,
+            settingsResetService: settingsReset,
             dnsProtection: dnsProtection
         )
         locator.addService(service: migrationService)

@@ -313,7 +313,7 @@ extension SafariProtection {
         onFiltersUpdated: @escaping (_ error: Result<FiltersUpdateResult>) -> Void,
         onCbReloaded: @escaping (_ error: Error?) -> Void
     ) {
-        BackgroundTaskExecutor.executeAsyncronousTask("SafariProtection+Filters.updateFiltersMetaAndLocalizations") { [weak self] onTaskFinished in
+        BackgroundTaskExecutor.executeAsynchronousTask("SafariProtection+Filters.updateFiltersMetaAndLocalizations") { [weak self] onTaskFinished in
             self?.workingQueue.async { [weak self] in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; self is missing!")

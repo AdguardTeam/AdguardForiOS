@@ -75,7 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppDelegate.initLogger(resources: resources)
         DDLogInfo("Starting application")
 
-        StartupService.start()
+        // StartupService may perform slow operations involving working with files or SQLite database.
+        // It is safer to try to protect it from suspending by using a background task.
+        _ = UIBackgroundTask.execute(name: "AppDelegate.init") {
+            StartupService.start()
+        }
 
         self.resources = ServiceLocator.shared.getService()!
         self.safariProtection = ServiceLocator.shared.getService()!
@@ -154,6 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if firstRun && application.applicationState != .background {
             configuration.showStatusBar = false
+            // TODO: this is a slow operation that works with network and it is called on the main thread, rework this
             setupOnFirstAppRun()
             // After first app run we don't need to call finishBackgroundUpdate
             return true
@@ -265,6 +270,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // The logic for using the 20 seconds limit: it takes at least 10 seconds to run rules conversion with the
             // default set of filter lists, and a couple more seconds on saving content blockers to files.
             DDLogInfo("(AppDelegate) - backgroundFetch; remaining time is not enough to complete the task, exiting immediately")
+            UIApplication.shared.endBackgroundTask(backgroundTaskId)
             completionHandler(.noData)
             return
         }

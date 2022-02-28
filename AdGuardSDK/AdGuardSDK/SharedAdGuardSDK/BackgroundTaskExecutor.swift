@@ -22,12 +22,12 @@ import Foundation
 /// Usually iOS gives us 30 seconds to complete such tasks
 public final class BackgroundTaskExecutor {
 
-    public static func executeSyncronousTask(_ reason: String, blockToExecute: @escaping () -> Void) {
+    public static func executeSynchronousTask(_ reason: String, blockToExecute: @escaping () -> Void) {
 #if os(iOS)
         ProcessInfo().performExpiringActivity(withReason: reason) { expired in
             if expired {
                 // TODO: this does not help much since iOS will still kill the app if the task is still in progress.
-                Logger.logInfo("(BackgroundTaskExecutor) - executeSyncronousTask; Task with reason=\(reason) has expired")
+                Logger.logInfo("(BackgroundTaskExecutor) - executeSynchronousTask; Task with reason=\(reason) has expired")
             } else {
                 blockToExecute()
             }
@@ -35,14 +35,14 @@ public final class BackgroundTaskExecutor {
 #endif
     }
 
-    public static func executeAsyncronousTask(_ reason: String, blockToExecute: @escaping (_ onTaskFinished: @escaping () -> Void) -> Void) {
+    public static func executeAsynchronousTask(_ reason: String, blockToExecute: @escaping (_ onTaskFinished: @escaping () -> Void) -> Void) {
 #if os(iOS)
         ProcessInfo().performExpiringActivity(withReason: reason) { expired in
             if expired {
                 // TODO: this does not help much since iOS will still kill the app if the task is still in progress.
-                Logger.logInfo("(BackgroundTaskExecutor) - executeAsyncronousTask; Task with reason=\(reason) has expired")
+                Logger.logInfo("(BackgroundTaskExecutor) - executeAsynchronousTask; Task with reason=\(reason) has expired")
             } else {
-                Logger.logInfo("(BackgroundTaskExecutor) - executeAsyncronousTask; Task with reason=\(reason) has started")
+                Logger.logInfo("(BackgroundTaskExecutor) - executeAsynchronousTask; Task with reason=\(reason) has started")
                 let group = DispatchGroup()
                 group.enter()
 
@@ -51,7 +51,7 @@ public final class BackgroundTaskExecutor {
                 }
 
                 group.wait()
-                Logger.logInfo("(BackgroundTaskExecutor) - executeAsyncronousTask; Task with reason=\(reason) has finished")
+                Logger.logInfo("(BackgroundTaskExecutor) - executeAsynchronousTask; Task with reason=\(reason) has finished")
             }
         }
 #endif

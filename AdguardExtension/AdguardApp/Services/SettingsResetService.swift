@@ -22,10 +22,10 @@ import DnsAdGuardSDK
 /// Protocol for reseting service
 protocol SettingsResetServiceProtocol: AnyObject {
     /// Reset safari protection, DNS protection, all in app statistics, providers, purchase info, resources, vpn manager. Post notification that settings were reseted
-    /// - Parameter synchroniously: if true than method is executed synchroniously
+    /// - Parameter sync: if true than method is executed synchroniously
     /// - Parameter fromUI: if true than a loader will be displayed while settings are being reset
     /// - Parameter resetLicense: if true then current license will be removed
-    func resetAllSettings(synchroniously: Bool, fromUI: Bool, resetLicense: Bool)
+    func resetAllSettings(sync: Bool, fromUI: Bool, resetLicense: Bool)
 
     /// Reset all statistics info like chart statistics, activity statistics and DNS log statistics. Post notification that statistics were reseted
     func resetAllStatistics()
@@ -88,21 +88,21 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     // MARK: - Public methods
 
     // TODO: - Method looks ugly. We should refactor it
-    func resetAllSettings(synchroniously: Bool, fromUI: Bool, resetLicense: Bool) {
+    func resetAllSettings(sync: Bool, fromUI: Bool, resetLicense: Bool) {
         if fromUI {
             DispatchQueue.asyncSafeMain {
                 AppDelegate.shared.presentLoadingAlert()
             }
         }
         var syncGroup: DispatchGroup?
-        if synchroniously {
+        if sync {
             syncGroup = DispatchGroup()
             syncGroup?.enter()
         }
         workingQueue.async { [weak self] in
             guard let self = self else { return }
 
-            DDLogInfo("(SettingsReseterService) - resetAllSettings; Start reset")
+            DDLogInfo("(SettingsResetService) - resetAllSettings; Start reset")
 
             // Reset Shared Defaults
             self.resources.reset()
@@ -115,12 +115,16 @@ final class SettingsResetService: SettingsResetServiceProtocol {
             group.enter()
             self.safariProtection.reset(withReloadCB: false) { error in
                 if let error = error  {
-                    DDLogError("(SettingsReseterService) - resetAllSettings; Safari protection reset error: \(error)")
+                    DDLogError("(SettingsResetService) - resetAllSettings; Safari protection reset error: \(error)")
                     group.leave()
                     return
                 }
                 self.enablePredefinedFiltersAndGroups()
-                self.updateSafariProtectionMeta()
+                if fromUI {
+                    // Do not run this long operation if settings reset hasn't been launched from the UI.
+                    // This function downloads filters updates and may simply take too much time.
+                    self.updateSafariProtectionMeta()
+                }
                 group.leave()
             }
             group.wait()
@@ -165,7 +169,7 @@ final class SettingsResetService: SettingsResetServiceProtocol {
             if fromUI {
                 DispatchQueue.main.async {
                     AppDelegate.shared.setMainPageAsCurrentAndPopToRootControllersEverywhere()
-                    DDLogInfo("(SettingsReseterService) - resetAllSettings; Reseting is over")
+                    DDLogInfo("(SettingsResetService) - resetAllSettings; Reseting is over")
                 }
             }
         }
@@ -177,26 +181,26 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     func resetAllStatistics() {
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-            DDLogInfo("(SettingsReseterService) - resetStatistics; Start reset statistics")
+            DDLogInfo("(SettingsResetService) - resetStatistics; Start reset statistics")
 
-            let activityReseted = self.resetActivityStatistics()
-            let chartReseted = self.resetChartStatistics()
-            let dnsLogReseted = self.resetDnsLogStatistics()
+            let activityReset = self.resetActivityStatistics()
+            let chartReset = self.resetChartStatistics()
+            let dnsLogReset = self.resetDnsLogStatistics()
 
-            DDLogInfo("(SettingsReseterService) - resetStatistics; Activity is reseted = \(activityReseted); Chart reseted = \(chartReseted); DNS log reseted = \(dnsLogReseted)")
+            DDLogInfo("(SettingsResetService) - resetStatistics; Activity reset = \(activityReset); Chart reset = \(chartReset); DNS log reset = \(dnsLogReset)")
             // Notify that settings were reset
             NotificationCenter.default.post(name: .resetStatistics, object: self)
-            DDLogInfo("(SettingsReseterService) - resetStatistics; Reset statistics is over")
+            DDLogInfo("(SettingsResetService) - resetStatistics; Reset statistics is over")
         }
     }
 
     func resetActivityStatistics() -> Bool {
         do {
             try activityStatistics.reset()
-            DDLogInfo("(SettingsReseterService) - resetStatistics; Activity statistics reseted successfully")
+            DDLogInfo("(SettingsResetService) - resetStatistics; Activity statistics reset successfully")
             return true
         } catch {
-            DDLogError("(SettingsReseterService) - resetStatistics; Error occurred while reseting activity statistics: \(error)")
+            DDLogError("(SettingsResetService) - resetStatistics; Error occurred while resetting activity statistics: \(error)")
             return false
         }
     }
@@ -204,11 +208,11 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     func resetChartStatistics() -> Bool {
         do {
             try chartStatistics.reset()
-            DDLogInfo("(SettingsReseterService) - resetStatistics; Chart statistics reseted successfully")
+            DDLogInfo("(SettingsResetService) - resetStatistics; Chart statistics reset successfully")
             return true
 
         } catch {
-            DDLogError("(SettingsReseterService) - resetStatistics; Error occurred while reseting chart statistics: \(error)")
+            DDLogError("(SettingsResetService) - resetStatistics; Error occurred while resetting chart statistics: \(error)")
             return false
         }
     }
@@ -216,10 +220,10 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     func resetDnsLogStatistics() -> Bool {
         do {
             try dnsLogStatistics.reset()
-            DDLogInfo("(SettingsReseterService) - resetStatistics; Dns log statistics reseted successfully")
+            DDLogInfo("(SettingsResetService) - resetStatistics; Dns log statistics reset successfully")
             return true
         } catch {
-            DDLogError("(SettingsReseterService) - resetStatistics; Error occurred while reseting dns log statistics: \(error)")
+            DDLogError("(SettingsResetService) - resetStatistics; Error occurred while resetting dns log statistics: \(error)")
             return false
         }
     }
@@ -229,18 +233,18 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     private func resetDnsProtection() {
         do {
             try dnsProtection.reset()
-            DDLogInfo("(SettingsReseterService) - resetDnsProtection; Dns Protection reseted successfully")
+            DDLogInfo("(SettingsResetService) - resetDnsProtection; Dns Protection reset successfully")
         } catch {
-            DDLogError("(SettingsReseterService) - resetDnsProtection; Error occurred while reseting dns protection: \(error)")
+            DDLogError("(SettingsResetService) - resetDnsProtection; Error occurred while resetting dns protection: \(error)")
         }
     }
 
     private func resetDnsProviderManager() {
         do {
             try dnsProvidersManager.reset()
-            DDLogInfo("(SettingsReseterService) - resetDnsProviderManager; Dns provider manager reseted successfully")
+            DDLogInfo("(SettingsResetService) - resetDnsProviderManager; Dns provider manager reset successfully")
         } catch {
-            DDLogError("(SettingsReseterService) - resetDnsProviderManager; Error occurred while reseting dns provider manager: \(error)")
+            DDLogError("(SettingsResetService) - resetDnsProviderManager; Error occurred while resetting dns provider manager: \(error)")
         }
     }
 
@@ -249,9 +253,9 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     private func enablePredefinedFiltersAndGroups() {
         do {
             try safariProtection.enablePredefinedGroupsAndFilters()
-            DDLogInfo("(SettingsReseterService) - enablePredefinedFiltersAndGroups; Successfully enable predefined filters and groups after reset safari protection")
+            DDLogInfo("(SettingsResetService) - enablePredefinedFiltersAndGroups; Successfully enable predefined filters and groups after reset safari protection")
         } catch {
-            DDLogError("(SettingsReseterService) - enablePredefinedFiltersAndGroups; Error occurred while enabling predefined filters and groups on safari protection reset")
+            DDLogError("(SettingsResetService) - enablePredefinedFiltersAndGroups; Error occurred while enabling predefined filters and groups on safari protection reset")
         }
     }
 
@@ -259,19 +263,19 @@ final class SettingsResetService: SettingsResetServiceProtocol {
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
             case .success(_):
-                DDLogInfo("(SettingsReseterService) - updateSafariProtectionMeta; Safari protection meta successfully updated")
+                DDLogInfo("(SettingsResetService) - updateSafariProtectionMeta; Safari protection meta successfully updated")
 
             case .error(let error):
-                DDLogError("(SettingsReseterService) - updateSafariProtectionMeta; On update safari protection meta error occurred: \(error)")
+                DDLogError("(SettingsResetService) - updateSafariProtectionMeta; On update safari protection meta error occurred: \(error)")
             }
 
         } onCbReloaded: { error in
             if let error = error {
-                DDLogError("(SettingsReseterService) - updateSafariProtectionMeta; On reload CB error occurred: \(error)")
+                DDLogError("(SettingsResetService) - updateSafariProtectionMeta; On reload CB error occurred: \(error)")
                 return
             }
 
-            DDLogInfo("(SettingsReseterService) - updateSafariProtectionMeta; Successfully reload CB")
+            DDLogInfo("(SettingsResetService) - updateSafariProtectionMeta; Successfully reload CB")
         }
     }
 }

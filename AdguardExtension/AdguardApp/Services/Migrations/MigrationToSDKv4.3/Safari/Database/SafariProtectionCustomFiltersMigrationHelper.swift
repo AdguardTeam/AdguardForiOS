@@ -33,6 +33,7 @@ final class SafariProtectionCustomFiltersMigrationHelper: SafariProtectionCustom
     private let filtersDirectoryUrl: URL
 
     init(newDBFilePath: String, filtersDirectoryUrl: URL) throws {
+        // TODO: change it globally here? are we crazy? refactor this.
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         self.newAdguardDB = try Connection(newDBFilePath, readonly: false)
 

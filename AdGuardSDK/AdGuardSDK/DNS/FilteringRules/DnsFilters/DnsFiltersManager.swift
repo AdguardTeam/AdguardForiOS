@@ -152,7 +152,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     }
 
     func addFilter(withName name: String, url: URL, isEnabled: Bool, onFilterAdded: @escaping (Error?) -> Void) {
-        BackgroundTaskExecutor.executeAsyncronousTask("DnsFiltersManager.addFilter") { [weak self] onTaskFinished in
+        BackgroundTaskExecutor.executeAsynchronousTask("DnsFiltersManager.addFilter") { [weak self] onTaskFinished in
             self?.workingQueue.async { [weak self] in
                 guard let self = self else {
                     Logger.logError("(DnsFiltersService) - addFilter; Error: \(CommonError.missingSelf.debugDescription)")
@@ -186,7 +186,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     }
 
     func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
-        BackgroundTaskExecutor.executeAsyncronousTask("DnsFiltersManager.updateFilter") { [weak self] onTaskFinished in
+        BackgroundTaskExecutor.executeAsynchronousTask("DnsFiltersManager.updateFilter") { [weak self] onTaskFinished in
             self?.workingQueue.async { [weak self] in
                 guard let self = self else {
                     Logger.logError("(DnsFiltersService) - updateFilter; Error: \(CommonError.missingSelf.debugDescription)")
@@ -213,7 +213,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     }
 
     func updateAllFilters(onFilterUpdated: @escaping (DnsFiltersUpdateResult) -> Void) {
-        BackgroundTaskExecutor.executeAsyncronousTask("DnsFiltersManager.updateAllFilters") { [weak self] onTaskFinished in
+        BackgroundTaskExecutor.executeAsynchronousTask("DnsFiltersManager.updateAllFilters") { [weak self] onTaskFinished in
             self?.workingQueue.async { [weak self] in
                 guard let self = self else {
                     Logger.logError("(DnsFiltersService) - updateAllFilters; Error: \(CommonError.missingSelf.debugDescription)")

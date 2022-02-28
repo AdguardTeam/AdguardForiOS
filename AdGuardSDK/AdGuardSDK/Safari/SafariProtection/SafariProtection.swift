@@ -210,7 +210,7 @@ public final class SafariProtection: SafariProtectionProtocol {
 
     /* Creates JSON files for Content blockers and reloads CBs to apply new JSONs */
     func reloadContentBlockers(onCbReloaded: @escaping (_ error: Error?) -> Void) {
-        BackgroundTaskExecutor.executeAsyncronousTask("SafariProtection.reloadContentBlockers") { [weak self] onTaskFinished in
+        BackgroundTaskExecutor.executeAsynchronousTask("SafariProtection.reloadContentBlockers") { [weak self] onTaskFinished in
             self?.cbQueue.async { [weak self] in
                 guard let self = self else {
                     Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")

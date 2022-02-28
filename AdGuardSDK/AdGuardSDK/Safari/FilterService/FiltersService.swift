@@ -217,9 +217,9 @@ final class FiltersService: FiltersServiceProtocol {
 
         var updateResult = FiltersUpdateResult()
 
-        let comletionGroup = DispatchGroup()
+        let completionGroup = DispatchGroup()
 
-        workingQueue.async(group: comletionGroup) { [weak self] in
+        workingQueue.async(group: completionGroup) { [weak self] in
             guard let self = self else {
                 preconditionError = CommonError.missingSelf
                 return
@@ -292,7 +292,7 @@ final class FiltersService: FiltersServiceProtocol {
                 self.userDefaultsStorage.lastFiltersUpdateCheckDate = Date()
             }
         }
-        comletionGroup.notify(queue: completionQueue) {
+        completionGroup.notify(queue: completionQueue) {
             if let preconditionError = preconditionError {
                 onFiltersUpdated(.error(preconditionError))
             }

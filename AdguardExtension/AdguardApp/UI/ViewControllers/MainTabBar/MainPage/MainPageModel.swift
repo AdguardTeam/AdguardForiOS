@@ -59,58 +59,89 @@ final class MainPageModel: MainPageModelProtocol {
         delegate?.updateStarted()
 
         workingQueue.async { [weak self] in
-            guard let self = self else { return }
-            @Atomic var filtersCount = 0
-            @Atomic var needRestartVpn = false
-            @Atomic var updateError: Error?
-            let group = DispatchGroup()
+            guard let self = self else {
+                return
+            }
 
-            group.enter()
-            self.safariProtection.updateFiltersMetaAndLocalizations(true) { result in
-                switch result {
-                case .error(let error):
-                    _updateError.mutate { $0 = error }
-                case .success(let updateResult):
-                    _filtersCount.mutate { $0 += updateResult.updatedFilterIds.count }
-                    // Reloads vpn if dns filters have been updated
-                    if needRestartVpn {
-                        self.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil)
-                        _needRestartVpn.mutate { $0 = false }
+            let result = UIBackgroundTask.execute(name: "MainPageModel.updateFilters", checkRemainingTime: true) {
+                self.updateFiltersInternal()
+            }
+
+            if !result {
+                // If the background operation was not launched due to not enough remaining time, render that there
+                // was no updates in the UI.
+                DispatchQueue.main.async {
+                    self.delegate?.updateFinished(message: String.localizedString("filters_noUpdates"))
+                }
+            }
+        }
+    }
+
+    // MARK: - private methods
+
+    private func updateFiltersInternal() {
+        @Atomic var filtersCount = 0
+        @Atomic var needRestartVpn = false
+        @Atomic var updateError: Error?
+        let group = DispatchGroup()
+
+        group.enter()
+        self.safariProtection.updateFiltersMetaAndLocalizations(true) { result in
+            switch result {
+            case .error(let error):
+                _updateError.mutate {
+                    $0 = error
+                }
+            case .success(let updateResult):
+                _filtersCount.mutate {
+                    $0 += updateResult.updatedFilterIds.count
+                }
+                // Reloads vpn if dns filters have been updated
+                if needRestartVpn {
+                    self.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil)
+                    _needRestartVpn.mutate {
+                        $0 = false
                     }
                 }
-            } onCbReloaded: { error in
-                if let error = error {
-                    _updateError.mutate { $0 = error }
+            }
+        } onCbReloaded: { error in
+            if let error = error {
+                _updateError.mutate {
+                    $0 = error
                 }
-                group.leave()
             }
+            group.leave()
+        }
 
-            group.enter()
-            self.dnsProtection.updateAllFilters { result in
-                _filtersCount.mutate { $0 += result.updatedFiltersIds.count }
-                _needRestartVpn.mutate { $0 = !result.updatedFiltersIds.isEmpty }
-                group.leave()
+        group.enter()
+        self.dnsProtection.updateAllFilters { result in
+            _filtersCount.mutate {
+                $0 += result.updatedFiltersIds.count
             }
+            _needRestartVpn.mutate {
+                $0 = !result.updatedFiltersIds.isEmpty
+            }
+            group.leave()
+        }
 
-            group.wait()
+        group.wait()
 
-            let message: String
-            if let error = updateError {
-                DDLogError("(MainPageModel) - updateFilters; Error: \(error)")
-                message = String.localizedString("filter_updates_error")
+        let message: String
+        if let error = updateError {
+            DDLogError("(MainPageModel) - updateFiltersAsync; Error: \(error)")
+            message = String.localizedString("filter_updates_error")
+        } else if filtersCount > 0 {
+            let format = String.localizedString("filters_updated_format")
+            message = String(format: format, filtersCount)
+            if needRestartVpn {
+                self.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil)
             }
-            else if filtersCount > 0 {
-                let format = String.localizedString("filters_updated_format")
-                message = String(format: format, filtersCount)
-                if needRestartVpn { self.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil) }
-            }
-            else {
-                message = String.localizedString("filters_noUpdates")
-            }
+        } else {
+            message = String.localizedString("filters_noUpdates")
+        }
 
-            DispatchQueue.main.async {
-                self.delegate?.updateFinished(message: message)
-            }
+        DispatchQueue.main.async {
+            self.delegate?.updateFinished(message: message)
         }
     }
 }
