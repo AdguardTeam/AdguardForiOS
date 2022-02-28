@@ -42,13 +42,13 @@ public class NetworkUtils: NetworkUtilsProtocol {
 
     // We cannot use the @available attribute on properties. Therefore, we have to use a function to get it.
     private var _monitor: Any?
-    @available(iOS 12.0, *)
+    @available(iOS 13.0, *)
     private func monitor() -> NWPathMonitor {
         return _monitor as! NWPathMonitor
     }
 
     public init() {
-        if #available(iOS 12.0, *) {
+        if #available(iOS 13.0, *) {
             _monitor = NWPathMonitor()
             var group: DispatchGroup? = DispatchGroup()
             group?.enter()
@@ -59,10 +59,8 @@ public class NetworkUtils: NetworkUtilsProtocol {
                 Logger.logInfo("(NetworkUtils) - path supportsIPv4: \(newPath.supportsIPv4)")
                 Logger.logInfo("(NetworkUtils) - path supportsIPv6: \(newPath.supportsIPv6)")
 
-                if #available(iOS 13.0, *) {
-                    for gateway in newPath.gateways {
-                        Logger.logInfo("(NetworkUtils) - gateway: \(gateway.debugDescription)")
-                    }
+                for gateway in newPath.gateways {
+                    Logger.logInfo("(NetworkUtils) - gateway: \(gateway.debugDescription)")
                 }
 
                 for interface in newPath.availableInterfaces {
@@ -86,7 +84,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
     }
 
     deinit {
-        if #available(iOS 12.0, *) {
+        if #available(iOS 13.0, *) {
             monitor().cancel()
         }
     }
@@ -110,7 +108,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
 
     public var isIpv4Available: Bool {
 
-        if #available(iOS 12.0, *) {
+        if #available(iOS 13.0, *) {
             // availableInterfaces theoretically can be empty if currentPath was not initialised yet
             if !monitor().currentPath.availableInterfaces.isEmpty {
                 return monitor().currentPath.supportsIPv4
@@ -130,7 +128,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
 
     public var isIpv6Available: Bool {
 
-        if #available(iOS 12.0, *) {
+        if #available(iOS 13.0, *) {
             // availableInterfaces theoretically can be empty if currentPath was not initialised yet
             if !monitor().currentPath.availableInterfaces.isEmpty {
                 return monitor().currentPath.supportsIPv6
