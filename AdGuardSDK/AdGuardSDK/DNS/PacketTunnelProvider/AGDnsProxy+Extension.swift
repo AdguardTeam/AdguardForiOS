@@ -133,6 +133,7 @@ extension AGDnsProxyConfig {
             fallbackDomains: defaultConfig.fallbackDomains,
             detectSearchDomains: defaultConfig.detectSearchDomains,
             filters: configuration.filters.map { AGDnsFilterParams(from: $0)},
+            filtersMemoryLimitBytes: defaultConfig.filtersMemoryLimitBytes,
             blockedResponseTtlSecs: configuration.blockedResponseTtlSecs,
             dns64Settings: AGDns64Settings(from: configuration.dns64Upstreams),
             listeners: defaultConfig.listeners,
@@ -153,11 +154,12 @@ extension AGDnsProxyConfig {
 
     var extendedDescription: String {
         return """
-               upsteams:\((upstreams ?? []).map { $0.extendedDescription })
+               upstreams:\((upstreams ?? []).map { $0.extendedDescription })
                fallbacks: \((fallbacks ?? []).map { $0.extendedDescription })
                fallbackDomains: \(fallbackDomains ?? [])
                detectSearchDomains: \(detectSearchDomains)
                filters: \(filters ?? [])
+               filtersMemoryLimitBytes: \(filtersMemoryLimitBytes)
                blockedResponseTtlSecs: \(blockedResponseTtlSecs)
                dns64Settings: \(dns64Settings.extendedDescription)
                ipv6Available: \(ipv6Available)
