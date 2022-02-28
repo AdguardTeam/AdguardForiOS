@@ -113,7 +113,7 @@ extension SafariProtection {
     }
 
     public func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void) {
-        BackgroundTaskExecutor.executeAsyncronousTask("SafariProtection+BackgroundFetch.finishBackgroundUpdate") { [weak self] onTaskFinished in
+        BackgroundTaskExecutor.executeAsynchronousTask("SafariProtection+BackgroundFetch.finishBackgroundUpdate") { [weak self] onTaskFinished in
             guard let self = self else {
                 Logger.logError("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate; Missing self")
                 onUpdateFinished(CommonError.missingSelf)

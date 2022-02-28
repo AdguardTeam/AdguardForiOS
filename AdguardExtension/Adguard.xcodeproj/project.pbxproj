@@ -1037,6 +1037,8 @@
 		7EF5C57226C26E18001851D6 /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C57126C26E18001851D6 /* EdgeInsetLabel.swift */; };
 		7EF5C57326C26E18001851D6 /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C57126C26E18001851D6 /* EdgeInsetLabel.swift */; };
 		7EF6AF87233D11B000D29B36 /* RequestsBlockingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */; };
+		9538244825EE1D4C56266B8D /* UIBackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9538230DE1EE6F0E77428D65 /* UIBackgroundTask.swift */; };
+		953824D8D036C781AB604207 /* UIBackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9538230DE1EE6F0E77428D65 /* UIBackgroundTask.swift */; };
 		A5E02637261E336100198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02636261E336100198396 /* AGDnsProxy */; };
 		B22FCD93270B7DBF00B1C935 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		B22FCD9E270B7DFA00B1C935 /* TunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08D44D226E1F6730023FC20 /* TunnelProvider.swift */; };
@@ -3545,6 +3547,7 @@
 		7EF5C56E26C26D3A001851D6 /* UserNotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNotificationService.swift; path = UserNotificationService/UserNotificationService.swift; sourceTree = "<group>"; };
 		7EF5C57126C26E18001851D6 /* EdgeInsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabel.swift; sourceTree = "<group>"; };
 		7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsBlockingController.swift; sourceTree = "<group>"; };
+		9538230DE1EE6F0E77428D65 /* UIBackgroundTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBackgroundTask.swift; sourceTree = "<group>"; };
 		B22FCD9C270B7DBF00B1C935 /* Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Tunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2673DB527173DFD00E04747 /* SDKMigrationServiceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKMigrationServiceHelper.swift; sourceTree = "<group>"; };
 		B2673DB827173DFD00E04747 /* SafariProtectionFiltersDatabaseMigrationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariProtectionFiltersDatabaseMigrationHelper.swift; sourceTree = "<group>"; };
@@ -5500,6 +5503,7 @@
 				7EF5C50D26C261AF001851D6 /* SharedResources */,
 				7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */,
 				D07373A126EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift */,
+				9538230DE1EE6F0E77428D65 /* UIBackgroundTask.swift */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -7604,10 +7608,10 @@
 			mainGroup = 65F398081B7B684700ABCD39;
 			packageReferences = (
 				7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */,
-				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
+				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */,
+				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */,
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
-				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */,
 				7EF5C55E26C269D6001851D6 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
@@ -8693,6 +8697,7 @@
 				C23752C536495C1B3D940B7C /* YouTubeAdsJsResult.swift in Sources */,
 				C23440501FAFDF3FB74002E1 /* YoutubeHtmlBuilder.swift in Sources */,
 				C23C7CC726EF4E648BA10BF0 /* YoutubePlayerController.swift in Sources */,
+				9538244825EE1D4C56266B8D /* UIBackgroundTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9192,6 +9197,7 @@
 				C23C36EFEC43C4267DF350F8 /* YouTubeAdsJsResult.swift in Sources */,
 				C23F7795678B947257A70C8F /* YoutubeHtmlBuilder.swift in Sources */,
 				C232DE371FC6B1E899089CF0 /* YoutubePlayerController.swift in Sources */,
+				953824D8D036C781AB604207 /* UIBackgroundTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13538,7 +13544,7 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -13562,7 +13568,7 @@
 				version = 1.7.3;
 			};
 		};
-		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
+		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
 			requirement = {
@@ -13570,7 +13576,7 @@
 				minimumVersion = 0.0.3;
 			};
 		};
-		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
@@ -13623,22 +13629,22 @@
 		};
 		B2C8E9A32716FDF500ACDED8 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D024973D25714928000EED34 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D093AA5F25344B4E0015351F /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D09E271A2541D00B002D6BC0 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D0B546032435D740002F0AEC /* Lottie */ = {

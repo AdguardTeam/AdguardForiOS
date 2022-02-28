@@ -46,6 +46,9 @@ final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
     var blocklistFilter: DnsProxyFilter {
         let filterId = DnsUserRuleType.blocklist.enabledRulesFilterId
         let path = filterFilesStorage.getUrlForFilter(withId: filterId).path
+        if !FileManager.default.fileExists(atPath: path) {
+            return DnsProxyFilter(filterId: filterId, filterData: .text(""))
+        }
         return DnsProxyFilter(filterId: filterId, filterData: .file(path))
     }
 

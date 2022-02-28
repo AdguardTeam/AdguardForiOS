@@ -59,14 +59,18 @@ final class ChartViewModel: ChartViewModelProtocol {
 
     var statisticsPeriod: StatisticsPeriod {
         didSet {
-            guard isStarted else { return }
+            guard isStarted else {
+                return
+            }
             startChartStatisticsAutoUpdate()
         }
     }
 
     var chartType: ChartType = .requests {
         didSet {
-            guard isStarted else { return }
+            guard isStarted else {
+                return
+            }
             startChartStatisticsAutoUpdate()
         }
     }
@@ -112,12 +116,20 @@ final class ChartViewModel: ChartViewModelProtocol {
 
     // Update chart points
     private func chartStatisticUpdate() {
-        let info = self.statisticsInfo
-        let records = self.getChartRecords(for: self.statisticsPeriod)
+        // Ignore the result, we don't care if it was successfully launched here
+        _ = UIBackgroundTask.execute(name: "ChartViewModel.chartStatisticUpdate", checkRemainingTime: true) {
+            let info = self.statisticsInfo
+            let records = self.getChartRecords(for: self.statisticsPeriod)
 
-        let points = getPreparedPoints(requestsPoints: records.requests.points, encryptedPoints: records.encrypted.points)
+            let points = self.getPreparedPoints(requestsPoints: records.requests.points, encryptedPoints: records.encrypted.points)
 
-        self.delegate?.numberOfRequestsChanged(with: (points.requestsPoints, points.encryptedPoints), countersStatisticsRecord: info, firstFormattedDate: firstFormattedDate, lastFormattedDate: lastFormattedDate, maxRequests: Int(points.maxYelement))
+            self.delegate?.numberOfRequestsChanged(
+                    with: (points.requestsPoints, points.encryptedPoints),
+                    countersStatisticsRecord: info,
+                    firstFormattedDate: self.firstFormattedDate,
+                    lastFormattedDate: self.lastFormattedDate,
+                    maxRequests: Int(points.maxYelement))
+        }
     }
 
     // Return statistics date from SDK
@@ -153,7 +165,7 @@ final class ChartViewModel: ChartViewModelProtocol {
     private func getPreparedPoints(requestsPoints: [Point], encryptedPoints: [Point]) -> ChartPoints {
         guard requestsPoints.count == encryptedPoints.count,
               !requestsPoints.isEmpty
-        else {
+                else {
             DDLogWarn("(ChartViewModel) findMaxElements; Number of requests points not equal to number of encrypted points or points number is zero")
             return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
         }

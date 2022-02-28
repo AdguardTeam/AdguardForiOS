@@ -37,22 +37,22 @@ final class MigrationService: MigrationServiceProtocol {
     private let networkSettings: NetworkSettingsServiceProtocol
     private let versionProvider: MigrationServiceVersionProvider
     private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
-    private let settingsResetor: SettingsResetServiceProtocol
+    private let settingsResetService: SettingsResetServiceProtocol
     private let dnsProtection: DnsProtectionProtocol
 
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
 
     init(
-        resources: AESharedResourcesProtocol,
-        networking: ACNNetworkingProtocol,
-        configurationService: ConfigurationServiceProtocol,
-        productInfo: ADProductInfoProtocol,
-        safariProtection: SafariProtectionProtocol,
-        dnsProvidersManager: DnsProvidersManagerProtocol,
-        networkSettings: NetworkSettingsServiceProtocol,
-        dnsConfigAssistant: DnsConfigManagerAssistantProtocol,
-        settingsResetor: SettingsResetServiceProtocol,
-        dnsProtection: DnsProtectionProtocol
+            resources: AESharedResourcesProtocol,
+            networking: ACNNetworkingProtocol,
+            configurationService: ConfigurationServiceProtocol,
+            productInfo: ADProductInfoProtocol,
+            safariProtection: SafariProtectionProtocol,
+            dnsProvidersManager: DnsProvidersManagerProtocol,
+            networkSettings: NetworkSettingsServiceProtocol,
+            dnsConfigAssistant: DnsConfigManagerAssistantProtocol,
+            settingsResetService: SettingsResetServiceProtocol,
+            dnsProtection: DnsProtectionProtocol
     ) {
         self.resources = resources
         self.networking = networking
@@ -63,7 +63,7 @@ final class MigrationService: MigrationServiceProtocol {
         self.networkSettings = networkSettings
         self.versionProvider = MigrationServiceVersionProvider(resources: resources)
         self.dnsConfigAssistant = dnsConfigAssistant
-        self.settingsResetor = settingsResetor
+        self.settingsResetService = settingsResetService
         self.dnsProtection = dnsProtection
     }
 
@@ -96,7 +96,13 @@ final class MigrationService: MigrationServiceProtocol {
          */
         if versionProvider.isLastVersionLessThan4_1 {
             DDLogInfo("(MigrationService) - reset the app to default state")
-            settingsResetor.resetAllSettings(synchroniously: true, fromUI: false, resetLicense: false)
+            settingsResetService.resetAllSettings(sync: true, fromUI: false, resetLicense: false)
+            // For older versions after resetting settings mark it as a "first run" to conduct necessary init.
+            resources.firstRun = true
+
+            // TODO: reconsider the way the state is being reset since migration is called on the main thread
+            // The current implementation tried to perform heavy operations during the settings reset, it must not be
+            // called this way.
         }
 
         /*
