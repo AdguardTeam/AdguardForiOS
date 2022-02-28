@@ -82,21 +82,21 @@ extension DnsProtection {
 
     public var filters: [DnsFilter] {
         workingQueue.sync {
-            return dnsFiltersManager.filters
+            dnsFiltersManager.filters
         }
     }
 
     public var allowlistFilterId: Int {
-        return DnsUserRuleType.allowlist.enabledRulesFilterId
+        DnsUserRuleType.allowlist.enabledRulesFilterId
     }
 
     public var blocklistFilterId: Int {
-        return DnsUserRuleType.blocklist.enabledRulesFilterId
+        DnsUserRuleType.blocklist.enabledRulesFilterId
     }
 
     public var dnsLibsFilters: [Int: String]  {
         workingQueue.sync {
-            return dnsFiltersManager.getDnsLibsFilters()
+            dnsFiltersManager.getDnsLibsFilters()
         }
     }
 
