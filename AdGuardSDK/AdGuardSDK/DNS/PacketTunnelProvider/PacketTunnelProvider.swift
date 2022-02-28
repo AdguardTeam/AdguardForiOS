@@ -178,11 +178,16 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         self.reachabilityObserver = NotificationCenter.default.observe(name: .reachabilityChanged, object: nil, queue: nil) { [weak self] note in
             guard let self = self, let reachability = note.object as? Reachability else { return }
-            // We don't need to restart tunnel when there is no connection
-            Logger.logInfo("Reachability connection changed from \(self.reachabilityConnection) to \(reachability.connection)")
-            if reachability.connection != .unavailable && reachability.connection != self.reachabilityConnection {
+
+            let currentConnection = reachability.connection
+            Logger.logInfo("Reachability connection changed from \(self.reachabilityConnection) to \(currentConnection)")
+
+            // Save the current reachability.connection even if it's unavailable.
+            self.reachabilityConnection = currentConnection
+
+            // However, we don't need to restart tunnel when there is no connection.
+            if currentConnection != .unavailable && currentConnection != self.reachabilityConnection {
                 self.tunnelProxy.networkChanged()
-                self.reachabilityConnection = reachability.connection
             }
         }
     }
