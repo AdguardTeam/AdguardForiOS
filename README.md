@@ -109,6 +109,10 @@ Then you can run Fastlane using a command like this:
 
 - `bundle exec fastlane [lane]`
 
+Register your device:
+
+- `bundle exec fastlane run register_device udid:"UUID" name:"Device name"`
+
 ### Codesigning
 
 Run this command to get proper codesigning certificates:
