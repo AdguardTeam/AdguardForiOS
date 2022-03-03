@@ -182,13 +182,13 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             let currentConnection = reachability.connection
             Logger.logInfo("Reachability connection changed from \(self.reachabilityConnection) to \(currentConnection)")
 
-            // Save the current reachability.connection even if it's unavailable.
-            self.reachabilityConnection = currentConnection
-
             // However, we don't need to restart tunnel when there is no connection.
             if currentConnection != .unavailable && currentConnection != self.reachabilityConnection {
                 self.tunnelProxy.networkChanged()
             }
+
+            // Save the current reachability.connection even if it's unavailable.
+            self.reachabilityConnection = currentConnection
         }
     }
 }
