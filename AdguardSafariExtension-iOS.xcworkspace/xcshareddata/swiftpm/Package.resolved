@@ -92,6 +92,15 @@
         }
       },
       {
+        "package": "SwiftyBeaver",
+        "repositoryURL": "https://github.com/SwiftyBeaver/SwiftyBeaver",
+        "state": {
+          "branch": "master",
+          "revision": "adc6078b7024c500fdd009abd259c5da1816927c",
+          "version": null
+        }
+      },
+      {
         "package": "Zip",
         "repositoryURL": "https://github.com/marmelroy/Zip.git",
         "state": {
