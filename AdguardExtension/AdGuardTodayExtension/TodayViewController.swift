@@ -22,6 +22,8 @@ import SafariAdGuardSDK
 import SharedAdGuardSDK
 import DnsAdGuardSDK
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(TodayViewController.self)
+
 class TodayViewController: UIViewController, NCWidgetProviding {
 
     @IBOutlet weak var height: NSLayoutConstraint!
@@ -71,24 +73,24 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     required init?(coder: NSCoder) {
         Self.initLogger(with: resources)
-        DDLogInfo("(TodayViewController) - init start")
+        LOG.info("(TodayViewController) - init start")
 
         // Services initialising
         do {
             self.serviceInitializer = try ServiceInitializer(resources: resources)
         } catch {
-            DDLogError("(TodayViewController) - init; error - \(error)")
+            LOG.error("(TodayViewController) - init; error - \(error)")
             return nil
         }
 
         super.init(coder: coder)
 
-        DDLogInfo("(TodayViewController) - init end")
+        LOG.info("(TodayViewController) - init end")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        DDLogInfo("(TodayViewController) - viewDidLoad")
+        LOG.info("(TodayViewController) - viewDidLoad")
 
         height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
 
@@ -100,12 +102,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     // MARK: - NCWidgetProviding methods
 
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        DDLogInfo("(TodayViewController) - widgetPerformUpdate start")
+        LOG.info("(TodayViewController) - widgetPerformUpdate start")
         setColorsToLabels()
         updateWidgetSafari()
         updateWidgetSystem()
         updateWidgetComplex()
-        DDLogInfo("(TodayViewController) - widgetPerformUpdate end")
+        LOG.info("(TodayViewController) - widgetPerformUpdate end")
         completionHandler(NCUpdateResult.newData)
     }
 
@@ -130,9 +132,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let enabled = sender.isOn
         serviceInitializer.complexProtection.switchSafariProtection(state: enabled, for: self) { (error) in
             if error != nil {
-                DDLogError("Error invalidating json from Today Extension")
+                LOG.error("Error invalidating json from Today Extension")
             } else {
-                DDLogInfo("Successfull invalidating of json from Today Extension")
+                LOG.info("Successfull invalidating of json from Today Extension")
             }
         }
 
@@ -177,11 +179,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         if let url = URL(string: openSystemProtectionUrl){
             extensionContext?.open(url, completionHandler: { (success) in
                 if !success {
-                    DDLogError("Error redirecting to app from Today Extension")
+                    LOG.error("Error redirecting to app from Today Extension")
                 }
             })
         } else {
-            DDLogError("Error redirecting to app from Today Extension")
+            LOG.error("Error redirecting to app from Today Extension")
         }
     }
 
@@ -368,19 +370,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
 
         let isDebugLogs = resources.isDebugLogs
-        DDLogInfo("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
+        LOG.info("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
 
         Logger.logInfo = { msg in
-            DDLogInfo(msg)
+            LOG.info(msg)
         }
 
         Logger.logDebug = { msg in
-            DDLogDebug(msg)
+            LOG.debug(msg)
         }
 
         Logger.logError = { msg in
-            DDLogError(msg)
+            LOG.error(msg)
         }
     }
 }

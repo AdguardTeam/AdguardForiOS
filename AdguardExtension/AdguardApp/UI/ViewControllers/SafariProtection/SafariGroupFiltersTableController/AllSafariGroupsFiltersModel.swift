@@ -19,6 +19,8 @@
 import SharedAdGuardSDK
 import SafariAdGuardSDK
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AllSafariGroupsFiltersModel.self)
+
 final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtocol {
 
     // MARK: - Public properties
@@ -117,7 +119,7 @@ extension AllSafariGroupsFiltersModel {
             }
         } onCbReloaded: { error in
             if let error = error {
-                DDLogError("(AllSafariGroupsFiltersModel) - addCustomFilter; Reload CB error when adding custom filter with url=\(meta.filterDownloadPage ?? "nil"); Error: \(error)")
+                LOG.error("(AllSafariGroupsFiltersModel) - addCustomFilter; Reload CB error when adding custom filter with url=\(meta.filterDownloadPage ?? "nil"); Error: \(error)")
             }
         }
     }
@@ -142,13 +144,13 @@ extension AllSafariGroupsFiltersModel {
         guard let newModel = newModel as? StateHeaderViewModel<SafariGroup.GroupType> else { return }
 
         let groupType = newModel.id
-        DDLogInfo("(AllSafariGroupsFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
+        LOG.info("(AllSafariGroupsFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
 
         do {
             try safariProtection.setGroup(groupType: groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
         }
         catch {
-            DDLogError("(AllSafariGroupsFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
+            LOG.error("(AllSafariGroupsFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
         }
 
         modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: safariProtection.groups, proStatus: configuration.proStatus)
@@ -171,7 +173,7 @@ extension AllSafariGroupsFiltersModel {
             _ = try setFilter(with: groupType.id, filterId: filterId, enabled: newState)
         }
         catch {
-            DDLogError("(OneSafariGroupFiltersModel) - safariFilterStateChanged; Error changing safari filter state; Error: \(error)")
+            LOG.error("(OneSafariGroupFiltersModel) - safariFilterStateChanged; Error changing safari filter state; Error: \(error)")
         }
     }
 

@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SocialNetworkAuthParametersParser.self)
 
 struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
@@ -40,7 +43,7 @@ struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
 
     private func socialLoginErrorProcessor(error: String) {
         var userInfo = [AnyHashable: Any]()
-        DDLogInfo("(URLSchemeProcessor) Social login error: \(error)")
+        LOG.info("(URLSchemeProcessor) Social login error: \(error)")
         switch error {
         case socialErrorUserNotFound:
             userInfo[PurchaseAssistant.kPSNotificationTypeKey] = PurchaseAssistant.kPSNotificationLoginUserNotFound

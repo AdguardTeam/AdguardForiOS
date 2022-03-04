@@ -18,6 +18,7 @@
 
 import SafariAdGuardSDK
 import DnsAdGuardSDK
+import SharedAdGuardSDK
 
 protocol ServiceInitializerProtocol  {
     var networkService: ACNNetworkingProtocol { get }
@@ -29,6 +30,8 @@ protocol ServiceInitializerProtocol  {
     var activityStatistics: ActivityStatisticsProtocol { get }
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ServiceInitializer.self)
+
 final class ServiceInitializer: ServiceInitializerProtocol {
     let networkService: ACNNetworkingProtocol = ACNNetworking()
     let productInfo: ADProductInfoProtocol = ADProductInfo()
@@ -39,14 +42,14 @@ final class ServiceInitializer: ServiceInitializerProtocol {
     let activityStatistics: ActivityStatisticsProtocol
 
     init(resources: AESharedResourcesProtocol) throws {
-        DDLogInfo("(TodayViewController) - init services start")
+        LOG.info("(TodayViewController) - init services start")
         let networkService = ACNNetworking()
         let productInfo = ADProductInfo()
         let purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
 
         let sharedStorageUrls = SharedStorageUrls()
 
-        DDLogInfo("(TodayViewController) - init safari protection service")
+        LOG.info("(TodayViewController) - init safari protection service")
         let safariConfiguration = SafariConfiguration(
             resources: resources, 
             isProPurchased: purchaseService.isProPurchased
@@ -74,7 +77,7 @@ final class ServiceInitializer: ServiceInitializerProtocol {
             isProPurchased: purchaseService.isProPurchased
         )
 
-        DDLogInfo("(TodayViewController) - init dns protection service")
+        LOG.info("(TodayViewController) - init dns protection service")
 
         self.dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: resources.sharedDefaults(), networkUtils: NetworkUtils())
 
@@ -97,10 +100,10 @@ final class ServiceInitializer: ServiceInitializerProtocol {
 
         // MARK: - ActivityStatistics
 
-        DDLogInfo("(TodayViewController) - init activity statistics service")
+        LOG.info("(TodayViewController) - init activity statistics service")
 
         self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl, readOnly: true)
 
-        DDLogInfo("(TodayViewController) - init services end")
+        LOG.info("(TodayViewController) - init services end")
     }
 }

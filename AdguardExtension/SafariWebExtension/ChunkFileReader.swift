@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
 
 /**
  `ChunkFileReader` is responsible for reading file by chunks without fully loading it to RAM,
@@ -42,6 +43,8 @@ import Foundation
 
  - Important: Don't forget to close file with `close` function after finished reading it
  */
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ChunkFileReader.self)
+
 final class ChunkFileReader {
 
     // TODO: - write tests
@@ -52,7 +55,7 @@ final class ChunkFileReader {
 
     init?(fileUrl: URL, chunkSize: UInt64 = 32768) {
         guard let fileHandle = FileHandle(forReadingAtPath: fileUrl.path) else {
-            DDLogError("(ChunkFileReader) - init error")
+            LOG.error("(ChunkFileReader) - init error")
             return nil
         }
         self.chunkSize = chunkSize
@@ -65,7 +68,7 @@ final class ChunkFileReader {
 
     func nextChunk() -> String? {
         guard let fileHandle = fileHandle else {
-            DDLogError("(ChunkFileReader) - nextChunk; Attempt to read from closed file")
+            LOG.error("(ChunkFileReader) - nextChunk; Attempt to read from closed file")
             return nil
         }
 
@@ -78,14 +81,14 @@ final class ChunkFileReader {
                 return nil
             }
         } catch {
-            DDLogError("(ChunkFileReader) - nextChunk; Error reading file: \(error)")
+            LOG.error("(ChunkFileReader) - nextChunk; Error reading file: \(error)")
             return nil
         }
     }
 
     func rewind() -> Bool {
         guard let fileHandle = fileHandle else {
-            DDLogError("(ChunkFileReader) - rewind; Attempt to rewind with closed file")
+            LOG.error("(ChunkFileReader) - rewind; Attempt to rewind with closed file")
             return false
         }
 
@@ -93,7 +96,7 @@ final class ChunkFileReader {
             try fileHandle.seek(toOffset: 0)
             return true
         } catch {
-            DDLogError("(ChunkFileReader) - rewind; Error when rewinding: \(error)")
+            LOG.error("(ChunkFileReader) - rewind; Error when rewinding: \(error)")
             return false
         }
     }
@@ -102,7 +105,7 @@ final class ChunkFileReader {
         do {
             try fileHandle?.close()
         } catch {
-            DDLogError("(ChunkFileReader) - close; Error closing file: \(error)")
+            LOG.error("(ChunkFileReader) - close; Error closing file: \(error)")
         }
         fileHandle = nil
     }

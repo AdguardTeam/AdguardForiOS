@@ -17,6 +17,9 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariWebExtensionParametersParser.self)
 
 /// This object is responsible for obtaining parameters from app scheme links
 /// And performing an action considering these parameters
@@ -32,7 +35,7 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
               let encodedDomain = url.parseUrl().params?["domain"],
               let decodedDomain = encodedDomain.removingPercentEncoding
         else {
-            DDLogError("Failed to extract info from url=\(url.absoluteString)")
+            LOG.error("Failed to extract info from url=\(url.absoluteString)")
             return false
         }
 
@@ -43,7 +46,7 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
         let result = Domain.findDomains(in: decodedDomain)
 
         if result.isEmpty {
-            DDLogError("(SafariWebExtensionParametersParser) - parse; Failed to get absolute domain string from string=\(decodedDomain)")
+            LOG.error("(SafariWebExtensionParametersParser) - parse; Failed to get absolute domain string from string=\(decodedDomain)")
             return false
         }
 

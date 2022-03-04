@@ -18,6 +18,9 @@
 
 import DnsAdGuardSDK
 import SafariAdGuardSDK
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ImportSettingsController.self)
 
 final class ImportSettingsController: BottomAlertController {
 
@@ -116,12 +119,12 @@ extension ImportSettingsController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ImportSettingsCell") as? ImportSettingsCell else {
-            DDLogError("can not instantiate ImportSettingsCell")
+            LOG.error("can not instantiate ImportSettingsCell")
             return UITableViewCell()
         }
 
         guard let row = model?.rows[indexPath.row] else {
-            DDLogError("can not find row at index: \(indexPath.row)")
+            LOG.error("can not find row at index: \(indexPath.row)")
             return UITableViewCell()
         }
 

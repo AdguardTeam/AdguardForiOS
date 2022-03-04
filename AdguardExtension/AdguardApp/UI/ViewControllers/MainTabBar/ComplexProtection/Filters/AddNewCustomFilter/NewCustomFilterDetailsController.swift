@@ -42,6 +42,8 @@ struct EditCustomFilterModel {
     let homePage: String?
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(NewCustomFilterDetailsController.self)
+
 final class NewCustomFilterDetailsController: BottomAlertController {
 
     var newFilterModel: NewCustomFilterModel?
@@ -164,7 +166,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         )
         delegate?.addCustomFilter(meta) { [weak self] error in
             if let error = error {
-                DDLogError("(NewCustomFilterDetailsController) - addCustomFilter; Error adding custom filter to DB; Error: \(error)")
+                LOG.error("(NewCustomFilterDetailsController) - addCustomFilter; Error adding custom filter to DB; Error: \(error)")
                 self?.showUnknownErrorAlert()
                 self?.addButton.isEnabled = true
                 return
@@ -186,7 +188,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
             addButton.isEnabled = true
             dismiss(animated: true)
         } catch {
-            DDLogError("(NewCustomFilterDetailsController) - addAction; Error renaming filter; Error: \(error)")
+            LOG.error("(NewCustomFilterDetailsController) - addAction; Error renaming filter; Error: \(error)")
             showUnknownErrorAlert()
         }
     }

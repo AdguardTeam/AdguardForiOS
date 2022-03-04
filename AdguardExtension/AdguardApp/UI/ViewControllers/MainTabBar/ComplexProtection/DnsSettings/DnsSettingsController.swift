@@ -18,6 +18,9 @@
 
 import UIKit
 import DnsAdGuardSDK
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsSettingsController.self)
 
 final class DnsSettingsController : UITableViewController {
 
@@ -240,7 +243,7 @@ final class DnsSettingsController : UITableViewController {
         if resources.dnsImplementation == .native {
             if #available(iOS 14.0, *), complexProtection.systemProtectionEnabled {
                 nativeDnsManager.removeDnsConfig { error in
-                    DDLogError("Error removing dns manager: \(error.debugDescription)")
+                    LOG.error("Error removing dns manager: \(error.debugDescription)")
                     DispatchQueue.main.async { [weak self] in
                         sender.isOn = self?.complexProtection.systemProtectionEnabled ?? false
                     }
@@ -249,7 +252,7 @@ final class DnsSettingsController : UITableViewController {
                 sender.isOn = complexProtection.systemProtectionEnabled
                 nativeDnsManager.saveDnsConfig { error in
                     if let error = error {
-                        DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
+                        LOG.error("Received error when turning system protection on; Error: \(error.localizedDescription)")
                     }
                     DispatchQueue.main.async {
                         AppDelegate.shared.presentHowToSetupController()

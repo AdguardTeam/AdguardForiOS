@@ -17,6 +17,9 @@
 //
 
 import UIKit
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(BugReportController.self)
 
 final class BugReportController: UIViewController {
 
@@ -95,7 +98,7 @@ final class BugReportController: UIViewController {
         }
 
         guard isValidEmail && isValidDescription else {
-            DDLogDebug("Mail: \(email); description: \(description)")
+            LOG.debug("Mail: \(email); description: \(description)")
             sendButton.stopIndicator()
             sendButton.isEnabled = true
             return

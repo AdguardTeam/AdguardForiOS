@@ -19,6 +19,7 @@
 import CoreServices
 import Foundation
 import UIKit.UIImage
+import SharedAdGuardSDK
 
 struct Context {
     let icon: UIImage?
@@ -29,6 +30,9 @@ struct Context {
 
 /// This object is responsible for providing extension context
 /// It transforms `NSExtensionContext` into normal readable object `Context`
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ContextProvider.self)
+
 struct ContextProvider {
 
     enum ContextError: Error, CustomDebugStringConvertible {
@@ -59,14 +63,14 @@ struct ContextProvider {
 
         let type = String(kUTTypePropertyList)
         guard itemProvider.hasItemConformingToTypeIdentifier(type) else {
-            DDLogError("(ContextProvider) - process; Error: itemProvider doesn't conform to type \(type))")
+            LOG.error("(ContextProvider) - process; Error: itemProvider doesn't conform to type \(type))")
             completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
             return
         }
 
         itemProvider.loadItem(forTypeIdentifier: type, options: nil) { result, loadItemError in
             guard loadItemError == nil else {
-                DDLogError("(ContextProvider) - process; Error loading item: \(loadItemError!)")
+                LOG.error("(ContextProvider) - process; Error loading item: \(loadItemError!)")
                 completionQueue.async { onContextObtained(.failure(ContextError.errorLoadingItem)) }
                 return
             }
@@ -78,13 +82,13 @@ struct ContextProvider {
         let completionQueue = DispatchQueue.main
 
         guard let dictResult = dict as? [String: Any] else {
-            DDLogError("(ContextProvider) - process; Error result is not a valid dict. Results: \(String(describing: dict))")
+            LOG.error("(ContextProvider) - process; Error result is not a valid dict. Results: \(String(describing: dict))")
             completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
             return
         }
 
         guard let infoDict = dictResult[NSExtensionJavaScriptPreprocessingResultsKey] as? [String: Any] else {
-            DDLogError("(ContextProvider) - process; Can't get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(dictResult)")
+            LOG.error("(ContextProvider) - process; Can't get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(dictResult)")
             completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
             return
         }
@@ -94,7 +98,7 @@ struct ContextProvider {
               let url = URL(string: urlString),
               let domain = url.host
         else {
-            DDLogError("(ContextProvider) - process; Error obtaining page url")
+            LOG.error("(ContextProvider) - process; Error obtaining page url")
             completionQueue.async { onContextObtained(.failure(ContextError.obtainDomain)) }
             return
         }

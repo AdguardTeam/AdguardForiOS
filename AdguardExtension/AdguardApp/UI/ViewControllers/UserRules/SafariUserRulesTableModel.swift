@@ -19,6 +19,8 @@
 import SharedAdGuardSDK
 import SafariAdGuardSDK
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariUserRulesTableModel.self)
+
 final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
 
     // MARK: - Internal properties
@@ -110,7 +112,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
             modelProvider.modifyRule(rule, newRule: newRule)
         }
         catch {
-            DDLogError("(SafariUserRulesTableModel) - ruleStateChanged; Error: \(error)")
+            LOG.error("(SafariUserRulesTableModel) - ruleStateChanged; Error: \(error)")
         }
     }
 

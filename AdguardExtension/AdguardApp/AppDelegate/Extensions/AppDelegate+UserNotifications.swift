@@ -17,6 +17,10 @@
 //
 
 // Handle UserNotificationService notifications
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AppDelegate.self)
+
 extension AppDelegate {
     func subscribeToUserNotificationServiceNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(showAlertNotification(notification:)), name: .showCommonAlert, object: nil)
@@ -31,7 +35,7 @@ extension AppDelegate {
 
     @objc private func openDnsFiltersController(notification: Notification) {
         let success = presentDnsFiltersController()
-        DDLogInfo("Presented DnsFiltersController successfully = \(success ? "Yes" : "No")")
+        LOG.info("Presented DnsFiltersController successfully = \(success ? "Yes" : "No")")
     }
 
     private func showCommonAlertForTopVc(_ body: String?, _ title: String?) {

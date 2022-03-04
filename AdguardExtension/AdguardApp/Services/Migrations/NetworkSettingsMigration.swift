@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
+import SharedAdGuardSDK
 
 /// Network settings migration protocol
 protocol NetworkSettingsMigrationProtocol {
@@ -24,6 +25,8 @@ protocol NetworkSettingsMigrationProtocol {
      */
     func startMigration()
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(NetworkSettingsMigrations.self)
 
 /// Network settings migration service
 final class NetworkSettingsMigrations: NetworkSettingsMigrationProtocol {
@@ -47,16 +50,16 @@ final class NetworkSettingsMigrations: NetworkSettingsMigrationProtocol {
     func startMigration() {
         let exceptions = fetchOldWifiExceptions()
         if exceptions.isEmpty {
-            DDLogWarn("(NetworkSettingsMigration) - startMigration; Nothing to migrate")
+            LOG.warn("(NetworkSettingsMigration) - startMigration; Nothing to migrate")
             return
         }
 
         do {
             try exceptions.forEach { try networkSettingsService.add(exception: $0) }
             removeOldExceptionsFile()
-            DDLogInfo("(NetworkSettingsMigration) - startMigration; All \(exceptions.count) exceptions successfully migrated")
+            LOG.info("(NetworkSettingsMigration) - startMigration; All \(exceptions.count) exceptions successfully migrated")
         } catch {
-            DDLogError("(NetworkSettingsMigration) - startMigration; On adding exception error occurred: \(error)")
+            LOG.error("(NetworkSettingsMigration) - startMigration; On adding exception error occurred: \(error)")
         }
     }
 
@@ -65,12 +68,12 @@ final class NetworkSettingsMigrations: NetworkSettingsMigrationProtocol {
     private func fetchOldWifiExceptions() -> [WifiException] {
         do {
             guard let data = resources.loadData(fromFileRelativePath: jsonNetworkSettingsFileName) else {
-                DDLogError("(NetworkSettingsMigration) - fetchOldWifiException; Failed to load wifi exceptions from file")
+                LOG.error("(NetworkSettingsMigration) - fetchOldWifiException; Failed to load wifi exceptions from file")
                 return []
             }
             return try JSONDecoder().decode([WifiException].self, from: data)
         } catch {
-            DDLogInfo("(NetworkSettingsMigration) - fetchOldWifiException; Decoding network settings error occurred: \(error)")
+            LOG.info("(NetworkSettingsMigration) - fetchOldWifiException; Decoding network settings error occurred: \(error)")
             return []
         }
     }
@@ -80,14 +83,14 @@ final class NetworkSettingsMigrations: NetworkSettingsMigrationProtocol {
         do {
             let path = resources.path(forRelativePath: jsonNetworkSettingsFileName)
             guard fileManager.fileExists(atPath: path) else {
-                DDLogWarn("(NetworkSettingsMigration) - removeOldExceptionsFile; File doesn't exists")
+                LOG.warn("(NetworkSettingsMigration) - removeOldExceptionsFile; File doesn't exists")
                 return
             }
 
             try fileManager.removeItem(atPath: path)
-            DDLogInfo("(NetworkSettingsMigration) - removeOldExceptionsFile; Exception file successfully removed")
+            LOG.info("(NetworkSettingsMigration) - removeOldExceptionsFile; Exception file successfully removed")
         } catch {
-            DDLogError("(NetworkSettingsMigration) - removeOldExceptionsFile; Error occurred while removing exception file: \(error)")
+            LOG.error("(NetworkSettingsMigration) - removeOldExceptionsFile; Error occurred while removing exception file: \(error)")
         }
     }
 }

@@ -20,11 +20,14 @@ import UIKit.UIImage
 import SafariAdGuardSDK
 import SafariServices
 import UIKit
+import SharedAdGuardSDK
 
 protocol SafariGroupsModelDelegate: AnyObject {
     func modelChanged(_ rowToChange: Int)
     func modelsChanged()
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariGroupsModel.self)
 
 final class SafariGroupsModel {
 
@@ -55,7 +58,7 @@ final class SafariGroupsModel {
     // MARK: - Public methods
 
     func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool) {
-        DDLogInfo("(SafariGroupsModel) - setGroup; Trying to change group=\(groupType) to state=\(enabled)")
+        LOG.info("(SafariGroupsModel) - setGroup; Trying to change group=\(groupType) to state=\(enabled)")
 
         do {
             try safariProtection.setGroup(groupType: groupType, enabled: enabled, onCbReloaded: nil)
@@ -64,7 +67,7 @@ final class SafariGroupsModel {
             delegate?.modelChanged(row)
         }
         catch {
-            DDLogError("(SafariGroupsModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
+            LOG.error("(SafariGroupsModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
         }
     }
 

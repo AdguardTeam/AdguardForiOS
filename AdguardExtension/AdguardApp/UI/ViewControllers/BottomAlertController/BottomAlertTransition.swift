@@ -18,6 +18,9 @@
 
 import Foundation
 import UIKit
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(BottomAlertPresentingTransition.self)
 
 class BottomAlertPresentingTransition: NSObject, UIViewControllerAnimatedTransitioning {
 
@@ -39,7 +42,7 @@ class BottomAlertPresentingTransition: NSObject, UIViewControllerAnimatedTransit
             let bottomConstraint = toVc.keyboardHeightLayoutConstraint,
             let toView = toVc.view
         else {
-            DDLogError("Animation without Content view")
+            LOG.error("Animation without Content view")
             return
         }
 

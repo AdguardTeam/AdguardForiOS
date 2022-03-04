@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
 
 protocol LoginResponseParserProtocol {
     func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?)
@@ -26,6 +27,7 @@ protocol LoginResponseParserProtocol {
     func processOauthTokenResponse(data: Data)->(accessToken: String?, expirationDate: Date?, error: NSError?)
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(LoginResponseParser.self)
 
 class LoginResponseParser: LoginResponseParserProtocol {
 
@@ -83,7 +85,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
         catch {
             let responseString = String(data: data, encoding: .utf8)
-            DDLogError("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
+            LOG.error("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
             return (false, false, nil, nil, error)
         }
@@ -98,7 +100,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
         catch {
             let responseString = String(data: data, encoding: .utf8)
-            DDLogError("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
+            LOG.error("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
             return (false, nil, error)
         }
@@ -112,7 +114,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
         catch {
             let responseString = String(data: data, encoding: .utf8)
-            DDLogError("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
+            LOG.error("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
             return (nil, nil, error)
         }
@@ -124,7 +126,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
 
         guard let status = json[LOGIN_AUTH_STATUS_PARAM] as? String else {
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
-            DDLogError("(LoginService) login error - json does not contain status param." )
+            LOG.error("(LoginService) login error - json does not contain status param." )
             return (false, false, nil, nil, error)
         }
 
@@ -150,7 +152,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
 
         if status == AUTH_BAD_CREDINTIALS {
 
-            DDLogInfo("(LoginService) login error - bad credintials" )
+            LOG.info("(LoginService) login error - bad credintials" )
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
             return (false, false, nil, nil, error)
         }
@@ -170,14 +172,14 @@ class LoginResponseParser: LoginResponseParserProtocol {
     private func processStatusResponseJson(json: [String: Any]) -> (premium: Bool,expirationDate: Date?, NSError?) {
 
         guard let status = json[STATUS_RESPONSE_STATUS_PARAM] as? String else {
-            DDLogInfo("(LoginService) processStatusResponseJson error - json does not contain status" )
+            LOG.info("(LoginService) processStatusResponseJson error - json does not contain status" )
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
             return (false, nil, error)
         }
 
         if status == STATUS_RESPONSE_STATUS_ERROR {
             let licenseKeyStatus = (json["licenseKeyStatus"] as? String) ?? ""
-            DDLogInfo("(LoginService) processStatusResponseJson error - status = ERROR licenseKeyStatus: \(licenseKeyStatus)")
+            LOG.info("(LoginService) processStatusResponseJson error - status = ERROR licenseKeyStatus: \(licenseKeyStatus)")
 
             var error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
 

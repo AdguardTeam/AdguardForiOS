@@ -18,6 +18,7 @@
 
 import Foundation
 import UIKit.UIDevice
+import SharedAdGuardSDK
 
 /**
  LoginService - this service is responsible for working with adguard logins and licenses
@@ -52,6 +53,8 @@ protocol LoginServiceProtocol {
     /* resets all login data */
     func reset(completion:@escaping ()->Void )
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(LoginService.self)
 
 final class LoginService: LoginServiceProtocol {
 
@@ -200,7 +203,7 @@ final class LoginService: LoginServiceProtocol {
     }
 
     func getOauthToken(username: String, password: String, twoFactorToken: String?, callback: @escaping (_ token: String?, _ error: NSError?)->Void) {
-        DDLogInfo("(LoginService) getOauthToken ")
+        LOG.info("(LoginService) getOauthToken ")
 
         var params = ["username" : username,
                       "password" : password,
@@ -215,7 +218,7 @@ final class LoginService: LoginServiceProtocol {
 
         guard let url = URL(string: OAUTH_TOKEN_URL) else  {
             callback(nil, NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(LoginService) getOauthToken error. Can not make URL from String \(OAUTH_TOKEN_URL)")
+            LOG.error("(LoginService) getOauthToken error. Can not make URL from String \(OAUTH_TOKEN_URL)")
             return
         }
 
@@ -224,18 +227,18 @@ final class LoginService: LoginServiceProtocol {
         network.data(with: request) { [weak self] (dataOrNil, response, error) in
             guard let sSelf = self else { return }
             guard error == nil else {
-                DDLogError("(LoginService) getOauthToken - got error \(error!.localizedDescription)")
+                LOG.error("(LoginService) getOauthToken - got error \(error!.localizedDescription)")
                 callback(nil, error as NSError?)
                 return
             }
 
             guard let data = dataOrNil else {
-                DDLogError("(LoginService) getOauthToken - response data is nil")
+                LOG.error("(LoginService) getOauthToken - response data is nil")
                 callback(nil, NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                 return
             }
 
-            DDLogInfo("(LoginService) getOauthToken get response")
+            LOG.info("(LoginService) getOauthToken get response")
 
             let result = sSelf.loginResponseParser.processOauthTokenResponse(data: data)
 
@@ -278,12 +281,12 @@ final class LoginService: LoginServiceProtocol {
     private func loginInternal(accessToken: String, attributionRecords: String?, callback: @escaping (NSError?) -> Void) {
 
         guard let appId = keychain.appId else {
-            DDLogError("(LoginService) loginInternal error - can not obtain appId)")
+            LOG.error("(LoginService) loginInternal error - can not obtain appId)")
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: [:]))
             return
         }
 
-        DDLogInfo("(LoginService) - loginInternal. Login with access_token")
+        LOG.info("(LoginService) - loginInternal. Login with access_token")
 
         let params = [LOGIN_APP_NAME_PARAM: LoginService.APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
@@ -291,7 +294,7 @@ final class LoginService: LoginServiceProtocol {
 
         guard let url = URL(string: AUTH_TOKEN_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(LoginService) login error. Can not make URL from String \(AUTH_TOKEN_URL)")
+            LOG.error("(LoginService) login error. Can not make URL from String \(AUTH_TOKEN_URL)")
             return
         }
 
@@ -303,23 +306,23 @@ final class LoginService: LoginServiceProtocol {
             guard let sSelf = self else { return }
 
             guard error == nil else {
-                DDLogError("(LoginService) loginInternal - got error \(error!.localizedDescription)")
+                LOG.error("(LoginService) loginInternal - got error \(error!.localizedDescription)")
                 callback(error! as NSError)
                 return
             }
 
             guard let data = dataOrNil  else{
-                DDLogError("(LoginService) loginInternal - got empty response")
+                LOG.error("(LoginService) loginInternal - got empty response")
                 callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                 return
             }
 
             let (loggedIn, premium, expirationDate, licenseKey, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
 
-            DDLogInfo("(LoginService) loginInternal - processLoginResponse: loggedIn - \(loggedIn ? "true" : "false") premium = \(premium) expirationDate = " + (expirationDate == nil ? "nil" : expirationDate!.description))
+            LOG.info("(LoginService) loginInternal - processLoginResponse: loggedIn - \(loggedIn ? "true" : "false") premium = \(premium) expirationDate = " + (expirationDate == nil ? "nil" : expirationDate!.description))
 
             if error != nil {
-                DDLogError("(LoginService) loginInternal - processLoginResponse error: \(error!.localizedDescription)")
+                LOG.error("(LoginService) loginInternal - processLoginResponse error: \(error!.localizedDescription)")
                 callback(error!)
                 return
             }
@@ -330,10 +333,10 @@ final class LoginService: LoginServiceProtocol {
 
     private func requestStatus(licenseKey: String?, attributionRecords: String?, callback: @escaping (NSError?)->Void ) {
 
-        DDLogInfo("(LoginService) requestStatus " + (licenseKey == nil ? "without license key" : "with license key"))
+        LOG.info("(LoginService) requestStatus " + (licenseKey == nil ? "without license key" : "with license key"))
 
         guard let appId = keychain.appId else {
-            DDLogError("(LoginService) loginInternal error - can not obtain appId)")
+            LOG.error("(LoginService) loginInternal error - can not obtain appId)")
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: [:]))
             return
         }
@@ -349,13 +352,13 @@ final class LoginService: LoginServiceProtocol {
         }
 
         if let attributionRecords = attributionRecords {
-            DDLogInfo("(LoginService) - requestStatus; Attribution records added as parameter for request status")
+            LOG.info("(LoginService) - requestStatus; Attribution records added as parameter for request status")
             params[STATUS_ATTRIBUTION_RECORDS_PARAM] = attributionRecords
         }
 
         guard let url = URL(string: STATUS_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(LoginService) checkStatus error. Can not make URL from String \(STATUS_URL)")
+            LOG.error("(LoginService) checkStatus error. Can not make URL from String \(STATUS_URL)")
             return
         }
 
@@ -365,24 +368,24 @@ final class LoginService: LoginServiceProtocol {
             guard let sSelf = self else { return }
 
             guard error == nil else {
-                DDLogError("(LoginService) checkStatus - got error \(error!.localizedDescription)")
+                LOG.error("(LoginService) checkStatus - got error \(error!.localizedDescription)")
                 callback(error! as NSError)
                 return
             }
 
             guard let data = dataOrNil  else {
-                DDLogError("(LoginService) checkStatus - got empty response")
+                LOG.error("(LoginService) checkStatus - got empty response")
                 callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                 return
             }
 
             let (premium, expirationDate, error) = sSelf.loginResponseParser.processStatusResponse(data: data)
 
-            DDLogInfo("(LoginService) checkStatus - processStatusResponse: premium = \(premium) " + (expirationDate == nil ? "" : "expirationDate = \(expirationDate!)"))
+            LOG.info("(LoginService) checkStatus - processStatusResponse: premium = \(premium) " + (expirationDate == nil ? "" : "expirationDate = \(expirationDate!)"))
 
 
             if error != nil {
-                DDLogError("(LoginService) checkStatus - processStatusResponse error: \(error!.localizedDescription)")
+                LOG.error("(LoginService) checkStatus - processStatusResponse error: \(error!.localizedDescription)")
                 callback(error!)
                 return
             }
@@ -397,10 +400,10 @@ final class LoginService: LoginServiceProtocol {
 
     private func resetLicense(callback: @escaping (NSError?)->Void) {
 
-        DDLogInfo("(LoginService) resetLicense")
+        LOG.info("(LoginService) resetLicense")
 
         guard let appId = keychain.appId else {
-            DDLogError("(LoginService) loginInternal error - can not obtain appId)")
+            LOG.error("(LoginService) loginInternal error - can not obtain appId)")
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: [:]))
             return
         }
@@ -413,7 +416,7 @@ final class LoginService: LoginServiceProtocol {
 
         guard let url = URL(string: RESET_LICENSE_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(LoginService) checkStatus error. Can not make URL from String \(RESET_LICENSE_URL)")
+            LOG.error("(LoginService) checkStatus error. Can not make URL from String \(RESET_LICENSE_URL)")
             return
         }
 
@@ -423,12 +426,12 @@ final class LoginService: LoginServiceProtocol {
         network.data(with: request) { (dataOrNil, response, error) in
 
             guard error == nil else {
-                DDLogError("(LoginService) resetLicense - got error \(error!.localizedDescription)")
+                LOG.error("(LoginService) resetLicense - got error \(error!.localizedDescription)")
                 callback(error! as NSError)
                 return
             }
 
-            DDLogInfo("(LoginService) resetLicense succeeded")
+            LOG.info("(LoginService) resetLicense succeeded")
 
             callback(nil)
         }
@@ -446,7 +449,7 @@ final class LoginService: LoginServiceProtocol {
         timer = Timer(fire: time, interval: 0, repeats: false) { [weak self] (timer) in
             guard let sSelf = self else { return }
 
-            DDLogInfo("(LoginService) expiration timer fired")
+            LOG.info("(LoginService) expiration timer fired")
 
             if let callback = sSelf.activeChanged {
                 callback()

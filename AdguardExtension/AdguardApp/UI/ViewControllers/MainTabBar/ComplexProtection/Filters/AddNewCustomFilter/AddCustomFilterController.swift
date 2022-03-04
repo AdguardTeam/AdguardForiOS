@@ -25,6 +25,8 @@ enum NewFilterType {
     case safariCustom, dnsCustom
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AddCustomFilterController.self)
+
 final class AddCustomFilterController: BottomAlertController {
 
     var type: NewFilterType = .safariCustom
@@ -142,13 +144,13 @@ final class AddCustomFilterController: BottomAlertController {
             let parser = CustomFilterMetaParser()
             do {
                 let meta = try parser.getMetaFrom(url: url, for: .safari)
-                DDLogInfo("(AddCustomFilterController) - parse URL; Successfully get meta from url: \(url)")
+                LOG.info("(AddCustomFilterController) - parse URL; Successfully get meta from url: \(url)")
                 DispatchQueue.main.async {
                     completion()
                     self?.presentNewCustomFilterDetailsController(meta)
                 }
             } catch {
-                DDLogError("(AddCustomFilterController) - parse URL; Failed to get meta from url: \(url); Error: \(error)")
+                LOG.error("(AddCustomFilterController) - parse URL; Failed to get meta from url: \(url); Error: \(error)")
                 DispatchQueue.main.async {
                     completion()
                     let errorMessage = String.localizedString("add_custom_filter_error_message")

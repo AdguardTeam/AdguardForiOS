@@ -36,6 +36,9 @@
 		2465359826E74B7200234EA5 /* DnsProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */; };
 		24D0AF3126F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
 		24D0AF3226F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
+		3D8EA87A27D12F3300F0172F /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8EA87927D12F3300F0172F /* SwiftyBeaver */; };
+		3D8EA88527D1339A00F0172F /* LoggerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA88427D1339A00F0172F /* LoggerWrapper.swift */; };
+		3D8EA88827D133C600F0172F /* LoggerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA88727D133C600F0172F /* LoggerFactory.swift */; };
 		7E15DFD126E603040020247E /* CompaniesStatisticsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */; };
 		7E15DFD326E604920020247E /* ActivityStatisticsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */; };
 		7E15DFD526E606E60020247E /* DnsTrackersProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */; };
@@ -477,6 +480,8 @@
 		2456E6F626F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesManagersProviderMock.swift; sourceTree = "<group>"; };
 		2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProtection+UserRules.swift"; sourceTree = "<group>"; };
 		24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsBackgroundFetchUpdateProtocol.swift; sourceTree = "<group>"; };
+		3D8EA88427D1339A00F0172F /* LoggerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerWrapper.swift; sourceTree = "<group>"; };
+		3D8EA88727D133C600F0172F /* LoggerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerFactory.swift; sourceTree = "<group>"; };
 		7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatisticsTest.swift; sourceTree = "<group>"; };
 		7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsMock.swift; sourceTree = "<group>"; };
 		7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackersProviderMock.swift; sourceTree = "<group>"; };
@@ -769,6 +774,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E16F29826FA0E5E00383410 /* OrderedCollections in Frameworks */,
+				3D8EA87A27D12F3300F0172F /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1095,6 +1101,8 @@
 			isa = PBXGroup;
 			children = (
 				7E6E806826C2A04100925F96 /* Logger.swift */,
+				3D8EA88427D1339A00F0172F /* LoggerWrapper.swift */,
+				3D8EA88727D133C600F0172F /* LoggerFactory.swift */,
 			);
 			path = Logger;
 			sourceTree = "<group>";
@@ -1739,6 +1747,7 @@
 			name = SharedAdGuardSDK;
 			packageProductDependencies = (
 				7E16F29726FA0E5E00383410 /* OrderedCollections */,
+				3D8EA87927D12F3300F0172F /* SwiftyBeaver */,
 			);
 			productName = SharedAdGuardSDK;
 			productReference = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */;
@@ -1856,12 +1865,13 @@
 			);
 			mainGroup = D0A0E38B26B16B03005344D2;
 			packageReferences = (
-				D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
-				D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */,
+				D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift.git" */,
+				D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip.git" */,
 				7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */,
-				D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */,
-				7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability.swift" */,
+				7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections.git" */,
 				D04F6A932718307700224DEF /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
+				3D8EA87827D12F3300F0172F /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
 			productRefGroup = D0A0E39626B16B03005344D2 /* Products */;
 			projectDirPath = "";
@@ -2284,6 +2294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D8EA88827D133C600F0172F /* LoggerFactory.swift in Sources */,
 				7EC8A39E26E769DB005244CF /* UserRulesManagerProtocol.swift in Sources */,
 				7EC8A39326E769CA005244CF /* UserDefaultsStorage.swift in Sources */,
 				7EC8A38926E769B4005244CF /* RequestSender.swift in Sources */,
@@ -2309,6 +2320,7 @@
 				7EC8A38C26E769BA005244CF /* Logger.swift in Sources */,
 				7EC8A3BB26E76B4E005244CF /* FilterMetaProtocol.swift in Sources */,
 				7EC8A39F26E769DB005244CF /* UserRule.swift in Sources */,
+				3D8EA88527D1339A00F0172F /* LoggerWrapper.swift in Sources */,
 				7EC8A39426E769CA005244CF /* ResetableProtocol.swift in Sources */,
 				7EC8A38A26E769B4005244CF /* ParserProtocol.swift in Sources */,
 				7EC8A3E726E77D5E005244CF /* NotificationCenter+Utils.swift in Sources */,
@@ -3179,7 +3191,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+		3D8EA87827D12F3300F0172F /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
 			requirement = {
@@ -3195,7 +3215,7 @@
 				version = 1.7.11;
 			};
 		};
-		D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */ = {
+		D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -3211,7 +3231,7 @@
 				version = 2.0.24;
 			};
 		};
-		D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */ = {
+		D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
 			requirement = {
@@ -3219,7 +3239,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+		D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
@@ -3230,19 +3250,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3D8EA87927D12F3300F0172F /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D8EA87827D12F3300F0172F /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
+		};
 		7E16F29726FA0E5E00383410 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			package = 7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections.git" */;
 			productName = OrderedCollections;
 		};
 		B26B92212718273000F1D482 /* Reachability */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */;
+			package = D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability.swift" */;
 			productName = Reachability;
 		};
 		B2C8E9B82717009800ACDED8 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */;
+			package = D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip.git" */;
 			productName = Zip;
 		};
 		D04F6A942718307700224DEF /* ContentBlockerConverter */ = {
@@ -3252,7 +3277,7 @@
 		};
 		D0DA0A1A27184EBA007681B2 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			package = D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
 			productName = SQLite;
 		};
 		D0DA0A282718567F007681B2 /* AGDnsProxy */ = {

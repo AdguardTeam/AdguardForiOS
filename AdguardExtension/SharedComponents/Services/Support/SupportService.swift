@@ -20,6 +20,7 @@ import Zip
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 import AGDnsProxy
+import SharedAdGuardSDK
 
 protocol SupportServiceProtocol {
     /// Preparing logs archive to sharing. Return archive file URL in temporary directory
@@ -31,6 +32,8 @@ protocol SupportServiceProtocol {
     /// Sending feedback data to our backend
     func sendFeedback(_ email: String, description: String, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void)
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SupportService.self)
 
 /// Support service assemble app state info
 final class SupportService: SupportServiceProtocol {
@@ -123,7 +126,7 @@ final class SupportService: SupportServiceProtocol {
             return logsZipUrl
         }
         catch {
-            DDLogError("(SupportService) - exportLogs; Failed to export logs: \(error)")
+            LOG.error("(SupportService) - exportLogs; Failed to export logs: \(error)")
         }
         return nil
     }
@@ -143,7 +146,7 @@ final class SupportService: SupportServiceProtocol {
             self.logsZipDirectory = nil
         }
         catch {
-            DDLogError("(SupportService) - deleteLogsFiles; Error removing logs files: \(error)")
+            LOG.error("(SupportService) - deleteLogsFiles; Error removing logs files: \(error)")
         }
     }
 

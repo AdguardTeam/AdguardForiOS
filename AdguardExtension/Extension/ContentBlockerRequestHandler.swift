@@ -17,6 +17,9 @@
 //
 
 import SafariAdGuardSDK
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ContentBlockerRequestHandler.self)
 
 class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
     func beginRequest(with context: NSExtensionContext) {
@@ -31,10 +34,10 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
         let migration = ContentBlockerMigrationService(resources: resources)
         migration.migrateIfNeeded()
 
-        DDLogInfo("ActionRequestHandler start request")
+        LOG.info("ActionRequestHandler start request")
 
         guard let cbBundleId = Bundle.main.bundleIdentifier else {
-            DDLogError("ActionRequestHandler received nil bundle id")
+            LOG.error("ActionRequestHandler received nil bundle id")
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return
         }
@@ -50,13 +53,13 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
             )
             url = jsonProvider.jsonUrl
         } catch {
-            DDLogError("ActionRequestHandler error getting JSON URL; Error: \(error)")
+            LOG.error("ActionRequestHandler error getting JSON URL; Error: \(error)")
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return
         }
 
         guard let url = url, let attachment = NSItemProvider(contentsOf: url) else {
-            DDLogError("ActionRequestHandler Can't init attachment")
+            LOG.error("ActionRequestHandler Can't init attachment")
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return
         }
@@ -64,7 +67,7 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
         let item = NSExtensionItem()
         item.attachments = [attachment]
 
-        DDLogInfo("ActionRequestHandler complete request")
+        LOG.info("ActionRequestHandler complete request")
         context.completeRequest(returningItems: [item], completionHandler: nil)
     }
 }

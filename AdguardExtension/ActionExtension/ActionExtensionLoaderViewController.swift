@@ -17,9 +17,13 @@
 //
 
 import UIKit
+import SharedAdGuardSDK
 
 /// This screen is needed to provide a model for `ActionExtensionTableController`
 /// If any error is occured it displays it
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ActionExtensionLoaderViewController.self)
+
 final class ActionExtensionLoaderViewController: UIViewController {
 
     // MARK: - UI Elements
@@ -122,7 +126,7 @@ final class ActionExtensionLoaderViewController: UIViewController {
                 migration.migrate()
             }
             catch {
-                DDLogError("(ActionExtensionLoaderViewController) migration failed: \(error)")
+                LOG.error("(ActionExtensionLoaderViewController) migration failed: \(error)")
             }
         }
     }

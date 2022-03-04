@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(OpenUserFilterControllerParser.self)
 
 struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
 
@@ -27,13 +30,13 @@ struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
     func parse(_ url: URL) -> Bool {
         let rule = String(url.path.suffix(url.path.count - 1))
         if rule.isEmpty {
-            DDLogError("(OpenUserFilterControllerParser) - parse; Failed to get rule from URL=\(url.absoluteString)")
+            LOG.error("(OpenUserFilterControllerParser) - parse; Failed to get rule from URL=\(url.absoluteString)")
             return false
         }
 
         let result = Domain.findDomains(in: rule)
         if result.isEmpty {
-            DDLogError("(OpenUserFilterControllerParser) - parse; Failed to get absolute domain string from string=\(rule)")
+            LOG.error("(OpenUserFilterControllerParser) - parse; Failed to get absolute domain string from string=\(rule)")
             return false
         }
 

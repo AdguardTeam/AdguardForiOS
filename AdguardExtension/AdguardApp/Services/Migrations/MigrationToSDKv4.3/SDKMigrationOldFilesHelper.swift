@@ -17,6 +17,9 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SDKMigrationOldFilesHelperProtocol.self)
 
 /// This object is a helper for `MigrationService`
 /// It is responsible for removing unused files and replace used ones
@@ -83,7 +86,7 @@ final class SDKMigrationOldFilesHelper: SDKMigrationOldFilesHelperProtocol {
                 }
             }
             catch {
-                DDLogError("replaceCbJsonFilesSDKMigrationOldFilesHelper) replaceCbJsonFiles - replace error: \(error)")
+                LOG.error("replaceCbJsonFilesSDKMigrationOldFilesHelper) replaceCbJsonFiles - replace error: \(error)")
             }
         }
     }

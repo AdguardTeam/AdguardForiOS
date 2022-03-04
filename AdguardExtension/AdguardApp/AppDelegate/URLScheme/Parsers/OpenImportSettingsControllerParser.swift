@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(OpenImportSettingsControllerParser.self)
 
 struct OpenImportSettingsControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
@@ -30,7 +33,7 @@ struct OpenImportSettingsControllerParser: IURLSchemeParametersParser {
             let settings = try parser.parse(query: json)
             return executor.openImportSettingsController(showLaunchScreen: true, settings: settings)
         } catch {
-            DDLogError("(OpenImportSettingsControllerParser) - parse; Error occurred while parsing json = \(json)")
+            LOG.error("(OpenImportSettingsControllerParser) - parse; Error occurred while parsing json = \(json)")
             return false
         }
     }

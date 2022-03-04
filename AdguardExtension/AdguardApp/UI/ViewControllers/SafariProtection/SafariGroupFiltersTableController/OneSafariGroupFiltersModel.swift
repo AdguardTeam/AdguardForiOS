@@ -33,6 +33,8 @@ protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSo
     func setup(tableView: UITableView)
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(OneSafariGroupFiltersModel.self)
+
 // TODO: - We should change the order of the filters
 // For more info about filters order implementation look up `UserRulesModelsProvider`
 
@@ -162,7 +164,7 @@ extension OneSafariGroupFiltersModel {
             }
         } onCbReloaded: { error in
             if let error = error {
-                DDLogError("(OneSafariGroupFiltersModel) - addCustomFilter; Reload CB error when adding custom filter with url=\(meta.filterDownloadPage ?? "nil"); Error: \(error)")
+                LOG.error("(OneSafariGroupFiltersModel) - addCustomFilter; Reload CB error when adding custom filter with url=\(meta.filterDownloadPage ?? "nil"); Error: \(error)")
             }
         }
     }
@@ -185,7 +187,7 @@ extension OneSafariGroupFiltersModel {
         do {
             _ = try setFilter(with: groupType.id, filterId: filterId, enabled: newState)
         } catch {
-            DDLogError("(OneSafariGroupFiltersModel) - safariFilterStateChanged; Error changing safari filter state; Error: \(error)")
+            LOG.error("(OneSafariGroupFiltersModel) - safariFilterStateChanged; Error changing safari filter state; Error: \(error)")
         }
     }
 
@@ -201,12 +203,12 @@ extension OneSafariGroupFiltersModel {
         guard let newModel = newModel as? StateHeaderViewModel<SafariGroup.GroupType> else { return }
 
         let groupType = newModel.id
-        DDLogInfo("(OneSafariGroupFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
+        LOG.info("(OneSafariGroupFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
 
         do {
             try safariProtection.setGroup(groupType: groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
         } catch {
-            DDLogError("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
+            LOG.error("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
         }
 
         groupModel = StateHeaderViewModel(

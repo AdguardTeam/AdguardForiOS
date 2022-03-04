@@ -25,6 +25,8 @@ protocol UpstreamsControllerDelegate: AnyObject {
     func updateDescriptionLabel(type: UpstreamType, text: String)
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(UpstreamsController.self)
+
 final class UpstreamsController: BottomAlertController {
     @IBOutlet weak var upstreamTypeLabel: ThemableLabel!
     @IBOutlet weak var textFieldDesciptionLabel: ThemableLabel!
@@ -84,7 +86,7 @@ final class UpstreamsController: BottomAlertController {
         let validAddresses = addresses.filter { UrlUtils.isIpv4($0) || UrlUtils.isIpv6($0) }
 
         if validAddresses.count != addresses.count && !text.isEmpty {
-            DDLogError("(UpstreamsController) saveAction error - invalid addresses)")
+            LOG.error("(UpstreamsController) saveAction error - invalid addresses)")
             let messsage = type == .customAddress ? String.localizedString("invalid_ip_message") : String.localizedString("invalid_upstream_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: messsage)
             return
@@ -195,7 +197,7 @@ final class UpstreamsController: BottomAlertController {
                 }
                 else {
                     let message = errors.first
-                    DDLogError("(UppstreamsController) saveAction error - \(message?.localizedDescription ?? "nil" )")
+                    LOG.error("(UppstreamsController) saveAction error - \(message?.localizedDescription ?? "nil" )")
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("invalid_upstream_message"))
                 }
             }

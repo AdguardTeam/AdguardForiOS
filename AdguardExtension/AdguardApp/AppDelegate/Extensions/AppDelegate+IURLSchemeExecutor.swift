@@ -17,6 +17,9 @@
 //
 
 import SafariAdGuardSDK
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AppDelegate.self)
 
 extension AppDelegate: IURLSchemeExecutor {
 
@@ -57,23 +60,23 @@ extension AppDelegate: IURLSchemeExecutor {
     }
 
     func openUserRulesRedirectController(for action: UserRulesRedirectAction) -> Bool {
-        DDLogInfo("(AppDelegate) - open UserRulesRedirectController with action = \(action)")
+        LOG.info("(AppDelegate) - open UserRulesRedirectController with action = \(action)")
         return self.presentUserRulesRedirectController(for: action)
     }
 
     func openMainPageControllerAndTurnOnProtection(for domain: String) -> Bool {
-        DDLogInfo("(AppDelegate) - openMainPageControllerAndTurnOnProtection for domain=\(domain) ")
+        LOG.info("(AppDelegate) - openMainPageControllerAndTurnOnProtection for domain=\(domain) ")
         return self.presentMainPageControllerAndTurnOnProtection(for: domain)
     }
 
     func openPurchaseLicenseController() -> Bool {
-        DDLogInfo("(AppDelegate) - open PurchaseLicenseController")
+        LOG.info("(AppDelegate) - open PurchaseLicenseController")
         return self.presentPurchaseLicenseController()
     }
 
     func openAdvancedProtectionController(enableAdvancedProtection: Bool?) -> Bool {
         let enabledState = enableAdvancedProtection == nil ? "nil" : "\(enableAdvancedProtection!)"
-        DDLogInfo("(AppDelegate) - open openAdvancedProtectionController; enabledAdvancedProtection = \(enabledState)")
+        LOG.info("(AppDelegate) - open openAdvancedProtectionController; enabledAdvancedProtection = \(enabledState)")
         return self.presentAdvancedProtectionController(enableAdvancedProtection: enableAdvancedProtection)
     }
 }

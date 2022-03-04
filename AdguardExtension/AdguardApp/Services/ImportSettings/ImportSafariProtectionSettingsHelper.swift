@@ -30,6 +30,8 @@ protocol ImportSafariProtectionSettingsHelperProtocol {
     func importCustomSafariFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void)
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ImportSafariProtectionSettingsHelper.self)
+
 /// This object is responsible for importing Safari protection settings
 final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettingsHelperProtocol {
 
@@ -78,7 +80,7 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
     func importCustomSafariFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
-                DDLogError("(ImportSafariProtectionSettingsHelper) - importCustomSafariFilters; Missing self")
+                LOG.error("(ImportSafariProtectionSettingsHelper) - importCustomSafariFilters; Missing self")
                 DispatchQueue.main.async { completion([]) }
                 return
             }
@@ -132,7 +134,7 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
 
     private func addCustomFilter(_ filter: ImportSettings.FilterSettings, completion: @escaping (_ success: Bool) -> Void) {
         guard let url = URL(string: filter.url) else {
-            DDLogError("(ImportSafariProtectionSettingsHelper) - addCustomFilter; Incorrect URL string = \(filter.url)")
+            LOG.error("(ImportSafariProtectionSettingsHelper) - addCustomFilter; Incorrect URL string = \(filter.url)")
             self.completionQueue.async { completion(false) }
             return
         }
@@ -141,17 +143,17 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
             let meta = try parser.getMetaFrom(url: url, for: .safari)
             safariProtection.add(customFilter: meta, enabled: true) { error in
                 if let error = error {
-                    DDLogError("(ImportSafariProtectionSettingsHelper) - addCustomFilter; Error occurred while adding new custom filter with url = \(url); Error: \(error)")
+                    LOG.error("(ImportSafariProtectionSettingsHelper) - addCustomFilter; Error occurred while adding new custom filter with url = \(url); Error: \(error)")
                     self.completionQueue.async { completion(false) }
                     return
                 }
 
-                DDLogInfo("(ImportSafariProtectionSettingsHelper) - addCustomFilter; Successfully add new custom filter with url = \(url)")
+                LOG.info("(ImportSafariProtectionSettingsHelper) - addCustomFilter; Successfully add new custom filter with url = \(url)")
                 self.completionQueue.async { completion(true) }
             }
 
         } catch {
-            DDLogError("(ImportSafariProtectionSettingsHelper) - addCustomFilter; Error occurred while trying to add filter with url=\(url); Error: \(error)")
+            LOG.error("(ImportSafariProtectionSettingsHelper) - addCustomFilter; Error occurred while trying to add filter with url=\(url); Error: \(error)")
             self.completionQueue.async { completion(false) }
         }
     }
@@ -177,10 +179,10 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
     private func setFilter(_ filter: SafariGroup.Filter, enabled: Bool) -> ImportSettings.ImportSettingStatus {
         do {
             try safariProtection.setFilter(withId: filter.filterId, groupId: filter.group.groupId, enabled: enabled)
-            DDLogInfo("(ImportSafariProtectionSettingsHelper) - setFilter; Successfully set enable to \(enabled) for filter with id = \(filter.filterId) for group id = \(filter.group.groupId)")
+            LOG.info("(ImportSafariProtectionSettingsHelper) - setFilter; Successfully set enable to \(enabled) for filter with id = \(filter.filterId) for group id = \(filter.group.groupId)")
             return .successful
         } catch {
-            DDLogError("(ImportSafariProtectionSettingsHelper) - setFilter; Error occurred while setting enable to \(enabled) for filter with id = \(filter.filterId) for group id = \(filter.group.groupId)")
+            LOG.error("(ImportSafariProtectionSettingsHelper) - setFilter; Error occurred while setting enable to \(enabled) for filter with id = \(filter.filterId) for group id = \(filter.group.groupId)")
             return .unsuccessful
         }
     }
@@ -189,9 +191,9 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
         groupsToEnable.forEach {
             do {
                 try safariProtection.setGroup(groupType: $0, enabled: true)
-                DDLogInfo("(ImportSafariProtectionSettingsHelper) - enableGroups; Group \($0) was enabled")
+                LOG.info("(ImportSafariProtectionSettingsHelper) - enableGroups; Group \($0) was enabled")
             } catch {
-                DDLogError("(ImportSafariProtectionSettingsHelper) - enableGroups; Error occurred while enabling group \($0); Error: \(error)")
+                LOG.error("(ImportSafariProtectionSettingsHelper) - enableGroups; Error occurred while enabling group \($0); Error: \(error)")
             }
         }
     }
@@ -229,17 +231,17 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
     private func disableGroupAndAllFilters(for group: SafariGroup) {
         do {
             try safariProtection.setGroup(groupType: group.groupType, enabled: false)
-            DDLogInfo("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Group = \(group.groupType) was disabled")
+            LOG.info("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Group = \(group.groupType) was disabled")
         } catch {
-            DDLogError("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Error occurred while disabling group = \(group.groupType); Error: \(error)")
+            LOG.error("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Error occurred while disabling group = \(group.groupType); Error: \(error)")
         }
 
         group.filters.forEach { filter in
             do {
                 try safariProtection.setFilter(withId: filter.filterId, groupId: filter.group.groupId, enabled: false)
-                DDLogInfo("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Filter with id = \(filter.filterId) was disabled")
+                LOG.info("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Filter with id = \(filter.filterId) was disabled")
             } catch {
-                DDLogError("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Error occurred while disabling filter with id = \(filter.filterId); Error: \(error)")
+                LOG.error("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Error occurred while disabling filter with id = \(filter.filterId); Error: \(error)")
             }
         }
     }
@@ -248,9 +250,9 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
         group.filters.forEach {
             do {
                 try safariProtection.deleteCustomFilter(withId: $0.filterId)
-                DDLogInfo("(ImportSafariProtectionSettingsHelper) - deleteFilters; Successfully delete filter with id = \($0.filterId)")
+                LOG.info("(ImportSafariProtectionSettingsHelper) - deleteFilters; Successfully delete filter with id = \($0.filterId)")
             } catch {
-                DDLogError("(ImportSafariProtectionSettingsHelper) - deleteFilters; Error occurred while deleting filter with id = \($0.filterId); Error: \(error)")
+                LOG.error("(ImportSafariProtectionSettingsHelper) - deleteFilters; Error occurred while deleting filter with id = \($0.filterId); Error: \(error)")
             }
         }
     }
@@ -259,16 +261,16 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
         guard let customGroup = safariProtection.groups.first(where: { $0.groupType == .custom }),
               let customSafariFilter = customGroup.filters.first(where: { $0.filterDownloadPage == filter.url })
         else {
-            DDLogError("(ImportSafariProtectionSettingsHelper) - setCustomSafariFilter; Custom safari filter with url=\(filter.url) not exists")
+            LOG.error("(ImportSafariProtectionSettingsHelper) - setCustomSafariFilter; Custom safari filter with url=\(filter.url) not exists")
             return .unsuccessful
         }
 
         do {
             try safariProtection.setFilter(withId: customSafariFilter.filterId, groupId: SafariGroup.GroupType.custom.id, enabled: true)
-            DDLogInfo("(ImportSafariProtectionSettingsHelper) - setCustomSafariFilter; Successfully enable custom safari filter with url=\(filter.url)")
+            LOG.info("(ImportSafariProtectionSettingsHelper) - setCustomSafariFilter; Successfully enable custom safari filter with url=\(filter.url)")
             return .successful
         } catch {
-            DDLogError("(ImportSafariProtectionSettingsHelper) - setCustomSafariFilter; Custom safari filter with url=\(filter.url) were not enabled: Error: \(error)")
+            LOG.error("(ImportSafariProtectionSettingsHelper) - setCustomSafariFilter; Custom safari filter with url=\(filter.url) were not enabled: Error: \(error)")
             return .unsuccessful
         }
     }

@@ -28,6 +28,9 @@ import AGDnsProxy
  The main logic of this class is implemented in `DnsAdGuardSDK.PacketTunnelProvider`
  - Seealso https://developer.apple.com/documentation/networkextension/nepackettunnelprovider
  */
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(TunnelProvider.self)
+
 class TunnelProvider: PacketTunnelProvider {
     static let tunnelRemoteAddress = "127.1.1.1"
 
@@ -118,33 +121,33 @@ class TunnelProvider: PacketTunnelProvider {
         let debugLogs = resources.isDebugLogs
         ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
         ACLLogger.singleton().logLevel = debugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        DDLogInfo("Init tunnel with loglevel: \(debugLogs ? "DEBUG" : "NORMAL")")
+        LOG.info("Init tunnel with loglevel: \(debugLogs ? "DEBUG" : "NORMAL")")
 
         Logger.logInfo = { msg in
-            DDLogInfo(msg)
+            LOG.info(msg)
         }
 
         Logger.logDebug = { msg in
-            DDLogDebug(msg)
+            LOG.debug(msg)
         }
 
         Logger.logError = { msg in
-            DDLogError(msg)
+            LOG.error(msg)
         }
     }
 
     private static func migrateIfNeeded(resources: AESharedResourcesProtocol, configuration: DnsConfigurationProtocol, networkUtils: NetworkUtilsProtocol) {
-        DDLogInfo("(TunnelProvider) - migrateIfNeeded; Starting migration in tunnel")
+        LOG.info("(TunnelProvider) - migrateIfNeeded; Starting migration in tunnel")
         let migrationVersionProvider = MigrationServiceVersionProvider(resources: resources)
         if migrationVersionProvider.isMigrationFrom4_1To4_3Needed {
             do {
                 let dnsProvidersManager = try DnsProvidersManager(configuration: configuration, userDefaults: resources.sharedDefaults(), networkUtils: networkUtils)
                 let migration = try DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
                 migration.migrate()
-                DDLogInfo("(TunnelProvider) - migrateIfNeeded; Migration in tunnel finished")
+                LOG.info("(TunnelProvider) - migrateIfNeeded; Migration in tunnel finished")
             }
             catch {
-                DDLogError("(TunnelProvider) migration failed: \(error)")
+                LOG.error("(TunnelProvider) migration failed: \(error)")
             }
         }
     }

@@ -19,6 +19,8 @@
 import SafariAdGuardSDK
 import SharedAdGuardSDK
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ServicesInitializer.self)
+
 /// Singleton to quikcly get different services objects and remove initialization logic from view controllers
 final class ServicesInitializer {
 
@@ -38,14 +40,14 @@ final class ServicesInitializer {
         let appPath = Bundle.main.bundlePath as NSString
         let fullPath = appPath.appendingPathComponent("../../") as String
         guard let bundle = Bundle(path: fullPath), let path = bundle.path(forResource: "defaults", ofType: "plist") else {
-            DDLogError("(ServicesInitializer) - wrong appPath");
+            LOG.error("(ServicesInitializer) - wrong appPath");
             throw CommonError.missingFile(filename: fullPath)
         }
         if let defs = NSDictionary(contentsOfFile: path) as? [String: Any] {
-            DDLogInfo("(ServicesInitializer) - default.plist loaded!")
+            LOG.info("(ServicesInitializer) - default.plist loaded!")
             resources.sharedDefaults().register(defaults: defs)
         } else {
-            DDLogError("(ServicesInitializer) - default.plist was not loaded.")
+            LOG.error("(ServicesInitializer) - default.plist was not loaded.")
             throw CommonError.missingFile(filename: "default.plist")
         }
 
@@ -89,19 +91,19 @@ final class ServicesInitializer {
         // Init Logger
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
         let isDebugLogs = resources.isDebugLogs
-        DDLogInfo("Start Action extension with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
+        LOG.info("Start Action extension with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
 
         Logger.logInfo = { msg in
-            DDLogInfo(msg)
+            LOG.info(msg)
         }
 
         Logger.logDebug = { msg in
-            DDLogDebug(msg)
+            LOG.debug(msg)
         }
 
         Logger.logError = { msg in
-            DDLogError(msg)
+            LOG.error(msg)
         }
     }
 }

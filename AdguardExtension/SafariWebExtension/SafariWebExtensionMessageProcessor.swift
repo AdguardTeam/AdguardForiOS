@@ -17,10 +17,13 @@
 //
 
 import SafariAdGuardSDK
+import SharedAdGuardSDK
 
 protocol SafariWebExtensionMessageProcessorProtocol {
     func process(message: Message) -> [String: Any?]
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariWebExtensionMessageProcessor.self)
 
 final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorProtocol {
 
@@ -58,7 +61,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             shouldUpdateAdvancedRules = false
             return [Message.shouldUpdateAdvancedRules: shouldUpdate]
         default:
-            DDLogError("Received bad case")
+            LOG.error("Received bad case")
             return [Message.messageTypeKey: MessageType.error.rawValue]
         }
     }

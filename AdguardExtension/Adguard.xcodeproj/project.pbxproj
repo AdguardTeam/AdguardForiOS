@@ -364,8 +364,6 @@
 		24F67F5A26E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */; };
 		24F8A94D271DB62600ADA050 /* NetworkSettingsMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CE2B83271DA4E700E169E7 /* NetworkSettingsMigration.swift */; };
 		24FB8B1326EB9C330031ED4D /* UITraitEnvironment+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */; };
-		3D8EA80D27D0C90900F0172F /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8EA80C27D0C90900F0172F /* SwiftyBeaver */; };
-		3D8EA80F27D0C92900F0172F /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8EA80E27D0C92900F0172F /* SwiftyBeaver */; };
 		3D8EA81827D0CE4000F0172F /* NativeLoggerWrapperOsLogImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81727D0CE4000F0172F /* NativeLoggerWrapperOsLogImpl.swift */; };
 		3D8EA81927D0CE4000F0172F /* NativeLoggerWrapperOsLogImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81727D0CE4000F0172F /* NativeLoggerWrapperOsLogImpl.swift */; };
 		3D8EA81B27D0CE9300F0172F /* NativeLoggerWrapperSystemLoggerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81A27D0CE9300F0172F /* NativeLoggerWrapperSystemLoggerImpl.swift */; };
@@ -376,16 +374,12 @@
 		3D8EA82227D0CF0E00F0172F /* ConsoleAppDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82027D0CF0E00F0172F /* ConsoleAppDestination.swift */; };
 		3D8EA82427D0CF4200F0172F /* LoggerManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82327D0CF4200F0172F /* LoggerManagerImpl.swift */; };
 		3D8EA82527D0CF4200F0172F /* LoggerManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82327D0CF4200F0172F /* LoggerManagerImpl.swift */; };
-		3D8EA82727D0CF7C00F0172F /* LoggerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82627D0CF7C00F0172F /* LoggerWrapper.swift */; };
-		3D8EA82827D0CF7C00F0172F /* LoggerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82627D0CF7C00F0172F /* LoggerWrapper.swift */; };
 		3D8EA82A27D0CFA500F0172F /* LogLevelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82927D0CFA500F0172F /* LogLevelMode.swift */; };
 		3D8EA82B27D0CFA500F0172F /* LogLevelMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82927D0CFA500F0172F /* LogLevelMode.swift */; };
 		3D8EA82D27D0CFC400F0172F /* LoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82C27D0CFC400F0172F /* LoggerManager.swift */; };
 		3D8EA82E27D0CFC400F0172F /* LoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82C27D0CFC400F0172F /* LoggerManager.swift */; };
 		3D8EA83027D0CFD900F0172F /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82F27D0CFD800F0172F /* LogLevel.swift */; };
 		3D8EA83127D0CFD900F0172F /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82F27D0CFD800F0172F /* LogLevel.swift */; };
-		3D8EA83327D0CFF300F0172F /* LoggerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA83227D0CFF300F0172F /* LoggerFactory.swift */; };
-		3D8EA83427D0CFF300F0172F /* LoggerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA83227D0CFF300F0172F /* LoggerFactory.swift */; };
 		3D8EA83627D0D0D600F0172F /* LogLevelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA83527D0D0D600F0172F /* LogLevelExtensions.swift */; };
 		3D8EA83727D0D0D600F0172F /* LogLevelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA83527D0D0D600F0172F /* LogLevelExtensions.swift */; };
 		3D8EA83927D0D0FC00F0172F /* LogLevelModeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA83827D0D0FC00F0172F /* LogLevelModeExtensions.swift */; };
@@ -2755,11 +2749,9 @@
 		3D8EA81D27D0CEBA00F0172F /* NativeLoggerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeLoggerWrapper.swift; sourceTree = "<group>"; };
 		3D8EA82027D0CF0E00F0172F /* ConsoleAppDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleAppDestination.swift; sourceTree = "<group>"; };
 		3D8EA82327D0CF4200F0172F /* LoggerManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerManagerImpl.swift; sourceTree = "<group>"; };
-		3D8EA82627D0CF7C00F0172F /* LoggerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerWrapper.swift; sourceTree = "<group>"; };
 		3D8EA82927D0CFA500F0172F /* LogLevelMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevelMode.swift; sourceTree = "<group>"; };
 		3D8EA82C27D0CFC400F0172F /* LoggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerManager.swift; sourceTree = "<group>"; };
 		3D8EA82F27D0CFD800F0172F /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
-		3D8EA83227D0CFF300F0172F /* LoggerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerFactory.swift; sourceTree = "<group>"; };
 		3D8EA83527D0D0D600F0172F /* LogLevelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevelExtensions.swift; sourceTree = "<group>"; };
 		3D8EA83827D0D0FC00F0172F /* LogLevelModeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevelModeExtensions.swift; sourceTree = "<group>"; };
 		4020A90022C3C863009C188F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
@@ -4010,7 +4002,6 @@
 			files = (
 				655AAC9E1D379E9C00E316EA /* libresolv.tbd in Frameworks */,
 				6598869D1CF74DE9003ECD1C /* AVKit.framework in Frameworks */,
-				3D8EA80F27D0C92900F0172F /* SwiftyBeaver in Frameworks */,
 				6598869E1CF74DE9003ECD1C /* MessageUI.framework in Frameworks */,
 				7ED0B19626C40DCA00B0CE7B /* Setapp in Frameworks */,
 				6598869F1CF74DE9003ECD1C /* Social.framework in Frameworks */,
@@ -4068,7 +4059,6 @@
 				B2C19E5A2716B25D00331109 /* NetworkExtension.framework in Frameworks */,
 				7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */,
 				D09E271B2541D00B002D6BC0 /* Setapp in Frameworks */,
-				3D8EA80D27D0C90900F0172F /* SwiftyBeaver in Frameworks */,
 				2408A8862747DC7700D2D1DE /* iAd.framework in Frameworks */,
 				65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */,
 				B29D53AA270D40EB0045CB16 /* SharedAdGuardSDK.framework in Frameworks */,
@@ -4510,10 +4500,8 @@
 			children = (
 				3D8EA81527D0CCC500F0172F /* Destinations */,
 				3D8EA81627D0CCD900F0172F /* NativeLoggerWrapper */,
-				3D8EA83227D0CFF300F0172F /* LoggerFactory.swift */,
 				3D8EA82C27D0CFC400F0172F /* LoggerManager.swift */,
 				3D8EA82327D0CF4200F0172F /* LoggerManagerImpl.swift */,
-				3D8EA82627D0CF7C00F0172F /* LoggerWrapper.swift */,
 				3D8EA82F27D0CFD800F0172F /* LogLevel.swift */,
 				3D8EA82927D0CFA500F0172F /* LogLevelMode.swift */,
 			);
@@ -6992,7 +6980,6 @@
 				D093AA5F25344B4E0015351F /* Setapp */,
 				A5E02630261E330900198396 /* AGDnsProxy */,
 				7EF5C56326C26AC0001851D6 /* Sentry */,
-				3D8EA80E27D0C92900F0172F /* SwiftyBeaver */,
 			);
 			productName = AdguardExtension;
 			productReference = 659886B91CF74DE9003ECD1C /* AdguardPro.app */;
@@ -7054,7 +7041,6 @@
 				D09E271A2541D00B002D6BC0 /* Setapp */,
 				7EF5C55F26C269D6001851D6 /* Sentry */,
 				B29D5393270D1D9E0045CB16 /* AGDnsProxy */,
-				3D8EA80C27D0C90900F0172F /* SwiftyBeaver */,
 			);
 			productName = AdguardExtension;
 			productReference = 65F398111B7B684700ABCD39 /* Adguard.app */;
@@ -7707,7 +7693,6 @@
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
 				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				7EF5C55E26C269D6001851D6 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
-				3D8EA80B27D0C90900F0172F /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
 			projectDirPath = "";
@@ -8764,7 +8749,6 @@
 				244E3B0E273988A300FD4C1E /* DnsConfigManagerAssistant.swift in Sources */,
 				7EC8A40C26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */,
 				24B33CFF26C50E0300499281 /* OnboardingContentBlockerCell.swift in Sources */,
-				3D8EA82827D0CF7C00F0172F /* LoggerWrapper.swift in Sources */,
 				659886911CF74DE9003ECD1C /* ACLExecuteBlockDelayed.m in Sources */,
 				D083ADAE2732BC3500A8F96E /* MigrationStateManager.swift in Sources */,
 				D0B545FD2435D6D2002F0AEC /* Dns64Utils.swift in Sources */,
@@ -8784,7 +8768,6 @@
 				D0B545AB2435D640002F0AEC /* RequestsBlockingController.swift in Sources */,
 				D0B5456F2435D5CD002F0AEC /* DnsRequestLogModel.swift in Sources */,
 				249606CF258B831100C747BA /* SocialSignInButton.swift in Sources */,
-				3D8EA83427D0CFF300F0172F /* LoggerFactory.swift in Sources */,
 				C7DD466027552F00006E1E6C /* LicenseSubscriptionTermsCell.swift in Sources */,
 				D00E441C2562A4B0002DDE98 /* ImportSettingsCell.swift in Sources */,
 				D0B545A82435D640002F0AEC /* DnsSettingsController.swift in Sources */,
@@ -9006,7 +8989,6 @@
 				7E1BAE72233A1AFF00F1EBEB /* SafariProtectionController.swift in Sources */,
 				7E50493022F07C4E0095181C /* UIView+Utils.swift in Sources */,
 				D0CDAEA52191C9540028001B /* String+Utils.swift in Sources */,
-				3D8EA83327D0CFF300F0172F /* LoggerFactory.swift in Sources */,
 				D0611F0A27396C7400124BC4 /* SafariMigration4_3.swift in Sources */,
 				242A07B126C677D900181D35 /* AdvancedProtectionController.swift in Sources */,
 				24B36A8F26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift in Sources */,
@@ -9035,7 +9017,6 @@
 				247CB63A2600CBE40047974C /* OpenTunnelModeControllerParser.swift in Sources */,
 				7EAA0D8726CA8E8C007208E5 /* UITextView+Utils.swift in Sources */,
 				7E2D93FF26F4893200534DC5 /* Constants+SafariFilters.swift in Sources */,
-				3D8EA82727D0CF7C00F0172F /* LoggerWrapper.swift in Sources */,
 				247CB5C52600BB1C0047974C /* OpenMainPageControllerParser.swift in Sources */,
 				2490F6582700983400B1514D /* SendFeedbackRequest.swift in Sources */,
 				244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */,
@@ -13655,14 +13636,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3D8EA80B27D0C90900F0172F /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -13714,16 +13687,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3D8EA80C27D0C90900F0172F /* SwiftyBeaver */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D8EA80B27D0C90900F0172F /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
-			productName = SwiftyBeaver;
-		};
-		3D8EA80E27D0C92900F0172F /* SwiftyBeaver */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D8EA80B27D0C90900F0172F /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
-			productName = SwiftyBeaver;
-		};
 		7E2522132408201700743648 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */;

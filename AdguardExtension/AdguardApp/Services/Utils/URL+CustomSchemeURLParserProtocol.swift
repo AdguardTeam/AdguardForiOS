@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
 
 protocol CustomSchemeURLParserProtocol {
     func parseAuthUrl() -> URLParserResult
@@ -27,6 +28,8 @@ struct URLParserResult {
     var command: String?
     var params: [String: String]?
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(URL.self)
 
 extension URL: CustomSchemeURLParserProtocol {
 
@@ -58,7 +61,7 @@ extension URL: CustomSchemeURLParserProtocol {
     private func splitURLByChar(separator: Character) -> [String]? {
         let components = self.absoluteString.split(separator: separator, maxSplits: 1)
         if components.count != 2 {
-            DDLogError("(CustomSchemeURLPareser) parseCustomUrlScheme error - unsupported url format")
+            LOG.error("(CustomSchemeURLPareser) parseCustomUrlScheme error - unsupported url format")
             return nil
         }
         return components.compactMap { String($0) }
@@ -85,7 +88,7 @@ extension URL: CustomSchemeURLParserProtocol {
             return URLParserResult(command: command, params: params)
         }
 
-        DDLogError("(CustomSchemeURLPareser) parseCustomUrlScheme error - unsupported url format")
+        LOG.error("(CustomSchemeURLPareser) parseCustomUrlScheme error - unsupported url format")
         return URLParserResult()
     }
 }

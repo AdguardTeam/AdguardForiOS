@@ -17,6 +17,9 @@
 //
 
 import UIKit
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SupportTableViewController.self)
 
 class SupportTableViewController: UITableViewController {
 
@@ -114,7 +117,7 @@ class SupportTableViewController: UITableViewController {
         do {
             zipLog = try support.exportLogs()
         } catch {
-            DDLogError("(SupportTableViewController) - exportLogsTapped; On export zip file error occurred: \(error)")
+            LOG.error("(SupportTableViewController) - exportLogsTapped; On export zip file error occurred: \(error)")
             showUnknownErrorAlert()
         }
         guard let zipLog = zipLog else {
@@ -125,7 +128,7 @@ class SupportTableViewController: UITableViewController {
         let activityVC = UIActivityViewController(activityItems: [zipLog] as [Any], applicationActivities: nil)
         activityVC.completionWithItemsHandler = {[weak self] _, _, _, error in
             if let error = error {
-                DDLogError("Error exporting logs: \(error)")
+                LOG.error("Error exporting logs: \(error)")
             }
             self?.support.deleteLogsFiles()
         }

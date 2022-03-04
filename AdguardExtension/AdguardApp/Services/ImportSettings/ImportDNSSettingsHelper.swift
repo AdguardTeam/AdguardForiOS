@@ -31,6 +31,8 @@ protocol ImportDNSSettingsHelperProtocol {
     func importDnsFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void)
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ImportDNSSettingsHelper.self)
+
 /// This object is responsible for importing DNS protection settings
 final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
 
@@ -68,10 +70,10 @@ final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
             if let provider = dnsProvidersManager.allProviders.first(where: { $0.dnsServers.contains(where: { $0.id == serverId }) }) {
                 do {
                     try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
-                    DDLogInfo("(ImportDNSSettingsHelper) - importDnsServer; Server with id = \(serverId) and provider = \(provider.name) were successfully selected")
+                    LOG.info("(ImportDNSSettingsHelper) - importDnsServer; Server with id = \(serverId) and provider = \(provider.name) were successfully selected")
                     return true
                 } catch {
-                    DDLogError("(ImportDNSSettingsHelper) - importDnsServer; Error occurred while selecting server with id = \(serverId) and provider = \(provider.name)")
+                    LOG.error("(ImportDNSSettingsHelper) - importDnsServer; Error occurred while selecting server with id = \(serverId) and provider = \(provider.name)")
                     return false
                 }
             }
@@ -82,7 +84,7 @@ final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
     func importDnsFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
-                DDLogError("(ImportDNSSettingsHelper) - importDnsFilters; Missing self")
+                LOG.error("(ImportDNSSettingsHelper) - importDnsFilters; Missing self")
                 DispatchQueue.main.async { completion([]) }
                 return
             }
@@ -129,34 +131,34 @@ final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
 
     private func addDnsFilter(_ filter: ImportSettings.FilterSettings, completion: @escaping (_ success: Bool) -> Void) {
         guard let url = URL(string: filter.url) else {
-            DDLogError("(ImportDNSSettingsHelper) - subscribeDnsFilter; Invalid URL string: \(filter.url)")
+            LOG.error("(ImportDNSSettingsHelper) - subscribeDnsFilter; Invalid URL string: \(filter.url)")
             completion(false)
             return
         }
 
         dnsProtection.addFilter(withName: filter.name, url: url, isEnabled: true) { error in
             if let error = error {
-                DDLogError("(ImportDNSSettingsHelper) - subscribeDnsFilter; Error occurred while trying to add DNS filter with url = \(url); Error: \(error)")
+                LOG.error("(ImportDNSSettingsHelper) - subscribeDnsFilter; Error occurred while trying to add DNS filter with url = \(url); Error: \(error)")
                 completion(false)
                 return
             }
-            DDLogInfo("(ImportDNSSettingsHelper) - subscribeDnsFilter; DNS Filter with url = \(url) successfully added")
+            LOG.info("(ImportDNSSettingsHelper) - subscribeDnsFilter; DNS Filter with url = \(url) successfully added")
             completion(true)
         }
     }
 
     private func setDnsFilter(_ filter: ImportSettings.FilterSettings) -> Bool {
         guard let id = dnsProtection.filters.first(where: { $0.filterDownloadPage == filter.url })?.filterId else {
-            DDLogError("(ImportDNSSettingsHelper) - setDnsFilter; Dns filter with url=\(filter.url) not exists")
+            LOG.error("(ImportDNSSettingsHelper) - setDnsFilter; Dns filter with url=\(filter.url) not exists")
             return false
         }
 
         do {
             try dnsProtection.setFilter(withId: id, to: true)
-            DDLogInfo("(ImportDNSSettingsHelper) - setDnsFilter; Successfully enable dns filter with url=\(filter.url)")
+            LOG.info("(ImportDNSSettingsHelper) - setDnsFilter; Successfully enable dns filter with url=\(filter.url)")
             return true
         } catch {
-            DDLogError("(ImportDNSSettingsHelper) - setDnsFilter; Dns filter with url=\(filter.url) were not enabled: Error: \(error)")
+            LOG.error("(ImportDNSSettingsHelper) - setDnsFilter; Dns filter with url=\(filter.url) were not enabled: Error: \(error)")
             return false
         }
     }
@@ -165,9 +167,9 @@ final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
         dnsProtection.filters.forEach {
             do {
                 try dnsProtection.removeFilter(withId: $0.filterId)
-                DDLogInfo("(ImportDNSSettingsHelper) - removeAllDnsFilters; DNS filter with id = \($0.filterId) were removed")
+                LOG.info("(ImportDNSSettingsHelper) - removeAllDnsFilters; DNS filter with id = \($0.filterId) were removed")
             } catch {
-                DDLogError("(ImportDNSSettingsHelper) - removeAllDnsFilters; Error occurred while removing filter with id = \($0.filterId)")
+                LOG.error("(ImportDNSSettingsHelper) - removeAllDnsFilters; Error occurred while removing filter with id = \($0.filterId)")
             }
         }
     }

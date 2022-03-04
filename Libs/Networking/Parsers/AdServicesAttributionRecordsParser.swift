@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
 
 /// This struct represent Apple search ads attribution records JSON
 struct AttributionRecords: Codable {
@@ -49,6 +50,8 @@ struct AttributionRecords: Codable {
     }
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AdServicesAttributionRecordsParser.self)
+
 /// This object represent attribution records parser for URL response
 final class AdServicesAttributionRecordsParser: ParserProtocol {
     typealias Model = [String: String]
@@ -60,13 +63,13 @@ final class AdServicesAttributionRecordsParser: ParserProtocol {
                     let records = try JSONDecoder().decode(AttributionRecords.self, from: data)
                     return records.jsonMap
                 } catch {
-                    DDLogError("(AdServicesAttributionRecordsParser) - parse; Serialization error: \(error)")
+                    LOG.error("(AdServicesAttributionRecordsParser) - parse; Serialization error: \(error)")
                     return nil
                 }
             }
-            DDLogError("(AdServicesAttributionRecordsParser) - parse; Response status code is \(response.statusCode)")
+            LOG.error("(AdServicesAttributionRecordsParser) - parse; Response status code is \(response.statusCode)")
         }
-        DDLogError("(AdServicesAttributionRecordsParser) - parse; Response is nil")
+        LOG.error("(AdServicesAttributionRecordsParser) - parse; Response is nil")
         return nil
     }
 }

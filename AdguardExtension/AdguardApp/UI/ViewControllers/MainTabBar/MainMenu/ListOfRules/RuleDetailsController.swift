@@ -25,6 +25,8 @@ protocol RuleDetailsControllerDelegate {
     func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(RuleDetailsController.self)
+
 final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
 
     struct Context {
@@ -117,7 +119,7 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
             dismiss(animated: true, completion: nil)
         }
         catch {
-            DDLogError("(RuleDetailsController) - removeAction; Error removing rule: \(error)")
+            LOG.error("(RuleDetailsController) - removeAction; Error removing rule: \(error)")
             showUnknownErrorAlert()
         }
     }

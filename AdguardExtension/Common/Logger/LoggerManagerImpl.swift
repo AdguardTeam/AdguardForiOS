@@ -1,5 +1,6 @@
 import Foundation
 import SwiftyBeaver
+import AGDnsProxy
 
 /// Manager that create os and file log destinations. Creates and stores labeled loggers
 final class ComLog_LoggerManagerImpl: ComLog_LoggerManager {
@@ -29,7 +30,7 @@ final class ComLog_LoggerManagerImpl: ComLog_LoggerManager {
         let swiftyBeaverLogLevel = logLevel.getSwiftyBeaverLogLevel()
         osLogDestination.minLevel = swiftyBeaverLogLevel
         fileLogDestination.minLevel = swiftyBeaverLogLevel
-        AGLogger.setup(logLevel: convertToVpnLibLogLevel(logLevel))
+        AGLogger.setLevel(convertToVpnLibLogLevel(logLevel))
     }
 
     private func convertToVpnLibLogLevel(_ level: ComLog_LogLevel) -> AGLogLevel {

@@ -17,6 +17,9 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(OpenDnsProvidersControllerWithAdguardParser.self)
 
 /// this object should be used for parsing "adguard:add_dns_server" urls
 struct OpenDnsProvidersControllerWithAdguardParser: IURLSchemeParametersParser {
@@ -29,7 +32,7 @@ struct OpenDnsProvidersControllerWithAdguardParser: IURLSchemeParametersParser {
     func parse(_ url: URL) -> Bool {
         let params = url.parseUrl().params
         guard let upstream = params?["address"], !upstream.isEmpty else {
-            DDLogError("OpenDnsProvidersControllerWithAdguardParser error: there is no 'address' field in url: \(url.absoluteString)")
+            LOG.error("OpenDnsProvidersControllerWithAdguardParser error: there is no 'address' field in url: \(url.absoluteString)")
             return false
         }
 

@@ -15,6 +15,10 @@ class ComLog_NativeLoggerWrapperOsLogImpl: ComLog_NativeLoggerWrapper {
     }
 
     func send(_ message: String, _ logLevel: ComLog_LogLevel) {
-        os_log(logLevel.getOsLogLevel(), ComLog_NativeLoggerWrapperOsLogImpl.messageTemplate, message)
+        if #available(iOS 12.0, *) {
+            os_log(logLevel.getOsLogLevel(), ComLog_NativeLoggerWrapperOsLogImpl.messageTemplate, message)
+        } else {
+            os_log(ComLog_NativeLoggerWrapperOsLogImpl.messageTemplate, log: osLog, type: logLevel.getOsLogLevel(), message)
+        }
     }
 }

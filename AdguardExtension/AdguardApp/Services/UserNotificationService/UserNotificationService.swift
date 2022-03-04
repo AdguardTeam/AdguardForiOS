@@ -18,6 +18,7 @@
 
 import Foundation
 import UserNotifications
+import SharedAdGuardSDK
 
 // Must support NSSecureCoding thus it is Int
 enum PushNotificationCommands: Int {
@@ -49,6 +50,8 @@ protocol UserNotificationServiceProtocol {
      **/
     func postNotificationInForeground(body: String, title: String)
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(UserNotificationService.self)
 
 class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUserNotificationCenterDelegate {
 
@@ -156,7 +159,7 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
 
         center.add(request) { (error) in
             if let error = error {
-                DDLogError("(UserNotificationService) - alertNotification error : \(error)")
+                LOG.error("(UserNotificationService) - alertNotification error : \(error)")
             }
         }
     }

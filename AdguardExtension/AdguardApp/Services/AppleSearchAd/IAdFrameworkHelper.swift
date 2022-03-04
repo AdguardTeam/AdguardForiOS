@@ -15,10 +15,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
+import SharedAdGuardSDK
 
 protocol IAdFrameworkHelperProtocol {
     func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void)
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(IAdFrameworkHelper.self)
 
 /// This object is a helper for `AppleSearchAdsService` and works with iAd framework
 final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
@@ -41,7 +44,7 @@ final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
             case .success(let details):
                 self?.processAttributionDetails(details, completionHandler: completionHandler)
             case .failure(let error):
-                DDLogError("(IAdFrameworkHelper) - fetchAttributionRecords; Search Ads error: \(error)")
+                LOG.error("(IAdFrameworkHelper) - fetchAttributionRecords; Search Ads error: \(error)")
                 completionHandler(.failure(error))
                 return
             }
@@ -52,14 +55,14 @@ final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
 
         var json = [String: String]()
         for (version, adDictionary) in attributionDetails {
-            DDLogInfo("(IAdFrameworkHelper) - processAttributionDetails; Search Ads version: \(version)")
+            LOG.info("(IAdFrameworkHelper) - processAttributionDetails; Search Ads version: \(version)")
             if let attributionInfo = adDictionary as? [String: String] {
                 json = attributionInfo
             }
         }
 
         if json.isEmpty {
-            DDLogError("(IAdFrameworkHelper) - processAttributionDetails; Search Ads data is missing")
+            LOG.error("(IAdFrameworkHelper) - processAttributionDetails; Search Ads data is missing")
             completionHandler(.failure(AppleSearchAdsService.AdsError.missingAttributionData))
             return
         }

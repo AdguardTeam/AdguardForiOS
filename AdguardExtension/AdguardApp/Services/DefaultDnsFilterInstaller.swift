@@ -17,10 +17,13 @@
 //
 
 import DnsAdGuardSDK
+import SharedAdGuardSDK
 
 protocol DefaultDnsFilterInstallerProtocol: AnyObject {
     func installDefaultDnsFilterIfNeeded()
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DefaultDnsFilterInstaller.self)
 
 /// This object is responsible for installing default DNS filter if it wasn't installed yet
 final class DefaultDnsFilterInstaller: DefaultDnsFilterInstallerProtocol {
@@ -49,10 +52,10 @@ final class DefaultDnsFilterInstaller: DefaultDnsFilterInstallerProtocol {
 
         dnsProtection.addFilter(withName: "AdGuard DNS filter", url: defaultFilterUrl, isEnabled: false) { [weak resources] error in
             if let error = error {
-                DDLogError("(DefaultDnsFilterInstaller) - installDefaultDnsFilterIfNeeded; Failed to install default DNS filter with error: \(error)")
+                LOG.error("(DefaultDnsFilterInstaller) - installDefaultDnsFilterIfNeeded; Failed to install default DNS filter with error: \(error)")
                 return
             }
-            DDLogError("(DefaultDnsFilterInstaller) - installDefaultDnsFilterIfNeeded; Installed default DNS filter")
+            LOG.error("(DefaultDnsFilterInstaller) - installDefaultDnsFilterIfNeeded; Installed default DNS filter")
             resources?.defaultDnsFilterWasInstalled = true
         }
     }

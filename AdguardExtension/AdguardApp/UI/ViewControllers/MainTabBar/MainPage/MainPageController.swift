@@ -21,6 +21,8 @@ import SharedAdGuardSDK
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(MainPageController.self)
+
 final class MainPageController: UIViewController, DateTypeChangedProtocol, ComplexSwitchDelegate, OnboardingControllerDelegate, LicensePageViewControllerDelegate, MainPageModelDelegate {
 
     var ready = false
@@ -311,13 +313,13 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             if systemProtectionButton.buttonIsOn {
                 if #available(iOS 14.0, *) {
                     nativeDnsManager.removeDnsConfig { error in
-                        DDLogError("Error removing dns manager: \(error.debugDescription)")
+                        LOG.error("Error removing dns manager: \(error.debugDescription)")
                     }
                 }
             } else if #available(iOS 14.0, *) {
                 nativeDnsManager.saveDnsConfig { error in
                     if let error = error {
-                        DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
+                        LOG.error("Received error when turning system protection on; Error: \(error.localizedDescription)")
                     }
                     DispatchQueue.main.async {
                         AppDelegate.shared.presentHowToSetupController()
@@ -722,7 +724,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
      and updates UI
     */
     private func observeContentBlockersState() {
-        DDLogInfo("Content blockers states changed; allContentBlockersEnabled = \(configuration.allContentBlockersEnabled)")
+        LOG.info("Content blockers states changed; allContentBlockersEnabled = \(configuration.allContentBlockersEnabled)")
         if configuration.allContentBlockersEnabled {
             hideContentBlockersInfo()
         } else {
@@ -731,7 +733,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         let onboardingShown = resources.sharedDefaults().bool(forKey: OnboardingWasShown)
 
-        DDLogInfo("Content blockers states changed; onboardingShown = \(onboardingShown); onBoardingIsInProcess = \(onBoardingIsInProcess)")
+        LOG.info("Content blockers states changed; onboardingShown = \(onboardingShown); onBoardingIsInProcess = \(onBoardingIsInProcess)")
         if !onBoardingIsInProcess {
             if !onboardingShown {
                 configuration.showStatusBar = false
@@ -910,7 +912,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         let storyboard = UIStoryboard(name: "ImportSettings", bundle: nil)
 
         guard let importController = storyboard.instantiateViewController(withIdentifier: "ImportSettingsController") as? ImportSettingsController else {
-            DDLogError("can not instantiate ImportSettingsController")
+            LOG.error("can not instantiate ImportSettingsController")
             return
         }
 

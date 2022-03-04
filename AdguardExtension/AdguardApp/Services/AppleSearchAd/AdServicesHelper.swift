@@ -16,10 +16,14 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
+import SharedAdGuardSDK
+
 protocol AdServicesHelperProtocol {
     @available(iOS 14.3, *)
     func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void)
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AdServicesHelper.self)
 
 /// This object is a helper for `AppleSearchAdsService` and works with AdService framework
 final class AdServicesHelper: AdServicesHelperProtocol {
@@ -47,19 +51,19 @@ final class AdServicesHelper: AdServicesHelperProtocol {
                 switch result {
                 case .success(let json):
                     if json.isEmpty {
-                        DDLogError("(AdServicesHelper) - fetchAttributionRecords; Search Ads data is missing")
+                        LOG.error("(AdServicesHelper) - fetchAttributionRecords; Search Ads data is missing")
                         completionHandler(.failure(AppleSearchAdsService.AdsError.missingAttributionData))
                         return
                     }
 
                     completionHandler(.success(json))
                 case .failure(let error):
-                    DDLogError("(AdServicesHelper) - fetchAttributionRecords; On http request error: \(error)")
+                    LOG.error("(AdServicesHelper) - fetchAttributionRecords; On http request error: \(error)")
                     completionHandler(.failure(error))
                 }
             }
         } catch {
-            DDLogError("(AdServicesHelper) - fetchAttributionRecords; Attribution token error occurred: \(error)")
+            LOG.error("(AdServicesHelper) - fetchAttributionRecords; Attribution token error occurred: \(error)")
             completionHandler(.failure(error))
         }
     }

@@ -18,11 +18,14 @@
 
 import SQLite
 import SafariAdGuardSDK
+import SharedAdGuardSDK
 
 protocol SafariProtectionCustomFiltersMigrationHelperProtocol: AnyObject {
     /// Saves custom filter meta to db and filter content to file
     func migrateCustomFilters(_ filters: [SafariProtectionFiltersDatabaseMigrationHelper.ObsoleteCustomFilter]) throws
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariProtectionCustomFiltersMigrationHelper.self)
 
 /// This object is a helper for `SDKMigrationServiceHelper`
 /// It is responsible for migrating custom filters
@@ -44,7 +47,7 @@ final class SafariProtectionCustomFiltersMigrationHelper: SafariProtectionCustom
         // `busyHandler` is needed to handle error when db is locked and try once more
         self.newAdguardDB.busyTimeout = 0.5
         self.newAdguardDB.busyHandler { _ in
-            DDLogInfo("(SafariProtectionCustomFiltersMigrationHelper) - init; adguard.db is locked")
+            LOG.info("(SafariProtectionCustomFiltersMigrationHelper) - init; adguard.db is locked")
             return true
         }
 
@@ -52,7 +55,7 @@ final class SafariProtectionCustomFiltersMigrationHelper: SafariProtectionCustom
     }
 
     func migrateCustomFilters(_ filters: [SafariProtectionFiltersDatabaseMigrationHelper.ObsoleteCustomFilter]) throws {
-        DDLogInfo("(SafariProtectionCustomFiltersMigrationHelper) - migrateCustomFilters; Saving \(filters.count) custom filters to new DB")
+        LOG.info("(SafariProtectionCustomFiltersMigrationHelper) - migrateCustomFilters; Saving \(filters.count) custom filters to new DB")
         try filters.forEach { try addCustomFilterToDb($0) }
 
         for filter in filters {

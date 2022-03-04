@@ -30,6 +30,8 @@ protocol MainPageModelProtocol: AnyObject {
     var delegate: MainPageModelDelegate? { get set }
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(MainPageModel.self)
+
 /// Super old model, it should be removed
 /// Actually it was rewritten in Stories PR
 final class MainPageModel: MainPageModelProtocol {
@@ -128,7 +130,7 @@ final class MainPageModel: MainPageModelProtocol {
 
         let message: String
         if let error = updateError {
-            DDLogError("(MainPageModel) - updateFiltersAsync; Error: \(error)")
+            LOG.error("(MainPageModel) - updateFiltersAsync; Error: \(error)")
             message = String.localizedString("filter_updates_error")
         } else if filtersCount > 0 {
             let format = String.localizedString("filters_updated_format")

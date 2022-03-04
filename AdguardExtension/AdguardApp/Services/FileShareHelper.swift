@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
 
 /// FileShareHelper is reponsible for exporting and importing files to Files App
 protocol FileShareHelperProtocol {
@@ -26,6 +27,8 @@ protocol FileShareHelperProtocol {
     /// imports text from Files App. Returns @text of imported file as a string in callback
     func importFile(for vc: UIViewController, _ completion: @escaping (Result<String, Error>) -> Void)
 }
+
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FileShareHelper.self)
 
 final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelperProtocol {
 
@@ -47,7 +50,7 @@ final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelper
             vc.present(activityVC, animated: true, completion: nil)
         }
         catch {
-            DDLogError("(FileShareHelper) - exportFile; Error: \(error)")
+            LOG.error("(FileShareHelper) - exportFile; Error: \(error)")
         }
     }
 
@@ -74,7 +77,7 @@ final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelper
             importCompletion?(.success(text))
         }
         catch {
-            DDLogError("(FileShareHelper) - documentPicker; Error: \(error)")
+            LOG.error("(FileShareHelper) - documentPicker; Error: \(error)")
             importCompletion?(.failure(error))
         }
     }
