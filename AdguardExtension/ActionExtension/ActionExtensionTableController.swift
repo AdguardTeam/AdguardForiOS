@@ -21,7 +21,7 @@ import CoreServices
 import SafariAdGuardSDK
 
 /// This screen is the Action Extension itself. It contains UI elements for manipulating user rules data in place
-final class ActionExtensionTableController: UITableViewController {
+final class ActionExtensionTableController: UITableViewController {zzxc
 
     // MARK: - UI Elements
 
