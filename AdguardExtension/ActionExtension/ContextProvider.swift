@@ -51,45 +51,45 @@ struct ContextProvider {
         self.favIconService = favIconService
     }
 
-    func process(context: NSExtensionContext?, onContextObtained: @escaping (Result<Context, ContextError>) -> Void) {
+    func process(context: NSExtensionContext?, onContextObtained: @escaping (Result<Context>) -> Void) {
         let completionQueue = DispatchQueue.main
 
         guard let item = context?.inputItems.first as? NSExtensionItem,
               let itemProvider = item.attachments?.first
         else {
-            completionQueue.async { onContextObtained(.failure(ContextError.errorLoadingItem)) }
+            completionQueue.async { onContextObtained(.error(ContextError.errorLoadingItem)) }
             return
         }
 
         let type = String(kUTTypePropertyList)
         guard itemProvider.hasItemConformingToTypeIdentifier(type) else {
             LOG.error("(ContextProvider) - process; Error: itemProvider doesn't conform to type \(type))")
-            completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
+            completionQueue.async { onContextObtained(.error(ContextError.typeInconformance)) }
             return
         }
 
         itemProvider.loadItem(forTypeIdentifier: type, options: nil) { result, loadItemError in
             guard loadItemError == nil else {
                 LOG.error("(ContextProvider) - process; Error loading item: \(loadItemError!)")
-                completionQueue.async { onContextObtained(.failure(ContextError.errorLoadingItem)) }
+                completionQueue.async { onContextObtained(.error(ContextError.errorLoadingItem)) }
                 return
             }
             processDictionary(result, onContextObtained)
         }
     }
 
-    private func processDictionary(_ dict: NSSecureCoding?, _ onContextObtained: @escaping (Result<Context, ContextError>) -> Void) {
+    private func processDictionary(_ dict: NSSecureCoding?, _ onContextObtained: @escaping (Result<Context>) -> Void) {
         let completionQueue = DispatchQueue.main
 
         guard let dictResult = dict as? [String: Any] else {
             LOG.error("(ContextProvider) - process; Error result is not a valid dict. Results: \(String(describing: dict))")
-            completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
+            completionQueue.async { onContextObtained(.error(ContextError.typeInconformance)) }
             return
         }
 
         guard let infoDict = dictResult[NSExtensionJavaScriptPreprocessingResultsKey] as? [String: Any] else {
             LOG.error("(ContextProvider) - process; Can't get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(dictResult)")
-            completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
+            completionQueue.async { onContextObtained(.error(ContextError.typeInconformance)) }
             return
         }
 
@@ -99,7 +99,7 @@ struct ContextProvider {
               let domain = url.host
         else {
             LOG.error("(ContextProvider) - process; Error obtaining page url")
-            completionQueue.async { onContextObtained(.failure(ContextError.obtainDomain)) }
+            completionQueue.async { onContextObtained(.error(ContextError.obtainDomain)) }
             return
         }
 

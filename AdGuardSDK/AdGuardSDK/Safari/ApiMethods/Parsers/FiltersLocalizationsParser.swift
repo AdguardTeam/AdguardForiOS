@@ -18,13 +18,15 @@
 
 import SharedAdGuardSDK
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FiltersLocalizationsParser.self)
+
 /// Parser to parse data from `FiltersLocalizationsRequest` and returns `ExtendedFiltersMetaLocalizations`
 struct FiltersLocalizationsParser: ParserProtocol {
     typealias Model = ExtendedFiltersMetaLocalizations
 
     func parse(data: Data, response: URLResponse?) -> Model? {
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            Logger.logError("(FiltersLocalizationsParser) bad response")
+            LOG.error("(FiltersLocalizationsParser) bad response")
             return nil
         }
 

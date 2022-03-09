@@ -30,6 +30,8 @@ protocol MetaStorageProtocol: MetaStorageTypeAlias, ResetableSyncProtocol, AnyOb
     static var defaultDbLanguage: String { get }
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(MetaStorage.self)
+
 final class MetaStorage: MetaStorageProtocol {
 
     // MARK: - Public properties
@@ -56,19 +58,19 @@ final class MetaStorage: MetaStorageProtocol {
         // `busyHandler` is needed to handle error when db is locked and try once more
         self.filtersDb.busyTimeout = 5
         self.filtersDb.busyHandler { _ in
-            Logger.logError("(MetaStorage) - init; Safari filters db is locked")
+            LOG.error("(MetaStorage) - init; Safari filters db is locked")
             return true
         }
         insertCustomGroupIfNeeded()
     }
 
     func reset() throws {
-        Logger.logInfo("(MetaStorage) - reset start")
+        LOG.info("(MetaStorage) - reset start")
 
         try productionDbManager.reset()
         filtersDb = productionDbManager.filtersDb
 
-        Logger.logInfo("(MetaStorage) - reset; Successfully reset adguard.db reinitialize Connection object now")
+        LOG.info("(MetaStorage) - reset; Successfully reset adguard.db reinitialize Connection object now")
     }
 
     /*
@@ -91,7 +93,7 @@ final class MetaStorage: MetaStorageProtocol {
                               FilterGroupsTable.isEnabled <- false)
             try filtersDb.run(insertionQuery)
         } catch {
-            Logger.logError("Custom group insertion error: \(error)")
+            LOG.error("Custom group insertion error: \(error)")
         }
     }
 }

@@ -25,14 +25,14 @@ protocol FileShareHelperProtocol {
     func exportFile(for vc: UIViewController, filename: String, text: String)
 
     /// imports text from Files App. Returns @text of imported file as a string in callback
-    func importFile(for vc: UIViewController, _ completion: @escaping (Result<String, Error>) -> Void)
+    func importFile(for vc: UIViewController, _ completion: @escaping (Result<String>) -> Void)
 }
 
 private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FileShareHelper.self)
 
 final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelperProtocol {
 
-    private var importCompletion: ((Result<String, Error>) -> Void)?
+    private var importCompletion: ((Result<String>) -> Void)?
 
     func exportFile(for vc: UIViewController, filename: String, text: String) {
         let tmp = FileManager.default.temporaryDirectory.appendingPathComponent(filename)
@@ -54,7 +54,7 @@ final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelper
         }
     }
 
-    func importFile(for vc: UIViewController, _ completion: @escaping (Result<String, Error>) -> Void) {
+    func importFile(for vc: UIViewController, _ completion: @escaping (Result<String>) -> Void) {
         let controller = UIDocumentPickerViewController(documentTypes: ["public.text"], in: .open)
         controller.popoverPresentationController?.sourceView = vc.view
         controller.popoverPresentationController?.sourceRect = vc.view.frame
@@ -78,7 +78,7 @@ final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelper
         }
         catch {
             LOG.error("(FileShareHelper) - documentPicker; Error: \(error)")
-            importCompletion?(.failure(error))
+            importCompletion?(.error(error))
         }
     }
 }

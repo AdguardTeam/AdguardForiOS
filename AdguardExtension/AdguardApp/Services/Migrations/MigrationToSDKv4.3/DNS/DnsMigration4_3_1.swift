@@ -24,6 +24,8 @@ protocol DnsMigration4_3_1Protocol {
     func migrate()
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsMigration4_3_1.self)
+
 final class DnsMigration4_3_1: DnsMigration4_3_1Protocol {
 
     // MARK: - Private properties
@@ -45,7 +47,7 @@ final class DnsMigration4_3_1: DnsMigration4_3_1Protocol {
         case .notStarted:
             onNotStarted()
         case .finished:
-            Logger.logInfo("(DnsMigration4_3_1) - migrate; Migration already finished")
+            LOG.info("(DnsMigration4_3_1) - migrate; Migration already finished")
         case .started:
             onStarted()
         }
@@ -54,27 +56,27 @@ final class DnsMigration4_3_1: DnsMigration4_3_1Protocol {
     // MARK: - Private methods
 
     private func onNotStarted() {
-        Logger.logInfo("(DnsMigration4_3_1) - onNotStarted; Start migration")
+        LOG.info("(DnsMigration4_3_1) - onNotStarted; Start migration")
         stateManager.start()
 
         do {
             try migrateDnsRules(for: .blocklist)
             try migrateDnsRules(for: .allowlist)
             stateManager.finish()
-            Logger.logInfo("(DnsMigration4_3_1) - onNotStarted; Migration succeeded")
+            LOG.info("(DnsMigration4_3_1) - onNotStarted; Migration succeeded")
         } catch {
             stateManager.failure()
-            Logger.logError("(DnsMigration4_3_1) - onNotStarted; Migration failed: \(error)")
+            LOG.error("(DnsMigration4_3_1) - onNotStarted; Migration failed: \(error)")
         }
     }
 
     private func onStarted() {
-        Logger.logInfo("(DnsMigration4_3_1) - onStarted; Migration already started. Wait it")
+        LOG.info("(DnsMigration4_3_1) - onStarted; Migration already started. Wait it")
         // wait for finish
         let group = DispatchGroup()
         group.enter()
         stateManager.onMigrationFinished {
-            Logger.logInfo("DnsMigration4_3_1) - onStarted; Migration finished")
+            LOG.info("DnsMigration4_3_1) - onStarted; Migration finished")
             group.leave()
         }
 
@@ -82,14 +84,14 @@ final class DnsMigration4_3_1: DnsMigration4_3_1Protocol {
         // TODO: - Refactor it later
         let waitResult = group.wait(timeout: .now() + 3.0)
 
-        Logger.logInfo("DnsMigration4_3_1) - onStarted; The wait is over; waitResult succeeded=\(waitResult == .success)")
+        LOG.info("DnsMigration4_3_1) - onStarted; The wait is over; waitResult succeeded=\(waitResult == .success)")
     }
 
     private func migrateDnsRules(for type: DnsUserRuleType) throws {
-        Logger.logInfo("(DnsMigration4_3_1) - migrateDnsRules; Starting migrate safari rules for type=\(type)")
+        LOG.info("(DnsMigration4_3_1) - migrateDnsRules; Starting migrate safari rules for type=\(type)")
         let rules = dnsProtection.allRules(for: type)
         if rules.isEmpty {
-            Logger.logInfo("(DnsMigration4_3_1) - migrateDnsRules; Dns rules migration for type=\(type) not started; Reason: nothing to migrate")
+            LOG.info("(DnsMigration4_3_1) - migrateDnsRules; Dns rules migration for type=\(type) not started; Reason: nothing to migrate")
             return
         }
         dnsProtection.removeAllRules(for: type)
@@ -111,6 +113,6 @@ final class DnsMigration4_3_1: DnsMigration4_3_1Protocol {
         }
 
         try dnsProtection.add(rules: rulesNeedToSet, override: true, for: type)
-        Logger.logInfo("(DnsMigration4_3_1) - migrateDnsRules; Dns rules migration for type=\(type) ended with success")
+        LOG.info("(DnsMigration4_3_1) - migrateDnsRules; Dns rules migration for type=\(type) ended with success")
     }
 }

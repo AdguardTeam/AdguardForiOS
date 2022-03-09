@@ -20,6 +20,8 @@ import NetworkExtension
 import Reachability
 import SharedAdGuardSDK
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(PacketTunnelProvider.self)
+
 /**
  This object gives access to a virtual network interface
  It contains all thelogic needed for tunnel to be run
@@ -76,7 +78,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         statisticsDbContainerUrl: URL,
         networkUtils: NetworkUtilsProtocol
     ) throws {
-        Logger.logInfo("(PacketTunnelProvider) init start")
+        LOG.info("(PacketTunnelProvider) init start")
 
         let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
         let dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: userDefaultsStorage, networkUtils: networkUtils)
@@ -129,28 +131,28 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         tunnelProxy.delegate = self
 
-        Logger.logInfo("(PacketTunnelProvider) init finished")
+        LOG.info("(PacketTunnelProvider) init finished")
     }
 
     // MARK: packet tunnel lifecycle
 
     public override func startTunnel(options: [String : NSObject]? = nil, completionHandler: @escaping (Error?) -> Void) {
-        Logger.logInfo("(PacketTunnelProvider) startTunnel")
+        LOG.info("(PacketTunnelProvider) startTunnel")
 
         do {
             try reachabilityHandler.startNotifier()
         }
         catch {
-            Logger.logError("Reachability handler start error: \(error)")
+            LOG.error("Reachability handler start error: \(error)")
             completionHandler(error)
             return
         }
 
         tunnelProxy.startTunnel(options: options) { [weak self] error in
             if error == nil {
-                Logger.logInfo("(PacketTunnelProvider) startTunnel; finished starting")
+                LOG.info("(PacketTunnelProvider) startTunnel; finished starting")
             } else {
-                Logger.logInfo("(PacketTunnelProvider) startTunnel; finished starting with error: \(error!)")
+                LOG.info("(PacketTunnelProvider) startTunnel; finished starting with error: \(error!)")
             }
             self?.startReachabilityHandling()
             completionHandler(error)
@@ -158,18 +160,18 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     }
 
     public override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        Logger.logInfo("(PacketTunnelProvider) stopTunnel with reason: \(reason)")
+        LOG.info("(PacketTunnelProvider) stopTunnel with reason: \(reason)")
         reachabilityHandler.stopNotifier()
         tunnelProxy.stopTunnel(with: reason, completionHandler: completionHandler)
     }
 
     public override func sleep(completionHandler: @escaping () -> Void) {
-        Logger.logInfo("(PacketTunnelProvider) Sleep Event")
+        LOG.info("(PacketTunnelProvider) Sleep Event")
         tunnelProxy.sleep(completionHandler: completionHandler)
     }
 
     public override func wake() {
-        Logger.logInfo("(PacketTunnelProvider) Wake Event")
+        LOG.info("(PacketTunnelProvider) Wake Event")
         tunnelProxy.wake()
     }
 
@@ -180,7 +182,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             guard let self = self, let reachability = note.object as? Reachability else { return }
 
             let currentConnection = reachability.connection
-            Logger.logInfo("Reachability connection changed from \(self.reachabilityConnection) to \(currentConnection)")
+            LOG.info("Reachability connection changed from \(self.reachabilityConnection) to \(currentConnection)")
 
             // Save the current reachability.connection even if it's unavailable.
             self.reachabilityConnection = currentConnection

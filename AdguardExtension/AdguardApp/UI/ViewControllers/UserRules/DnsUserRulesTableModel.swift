@@ -185,7 +185,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
                 self?.delegate?.importWillStart()
                 self?.addNewRulesAfterImport(text, completion)
                 self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
-            case .failure(let error):
+            case .error(let error):
                 completion(error)
             }
         }

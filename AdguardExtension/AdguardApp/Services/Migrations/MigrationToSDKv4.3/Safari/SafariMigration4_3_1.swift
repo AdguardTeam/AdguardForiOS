@@ -24,6 +24,8 @@ protocol SafariMigration4_3_1Protocol {
     func migrate()
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariMigration4_3_1.self)
+
 final class SafariMigration4_3_1: SafariMigration4_3_1Protocol {
 
     // MARK: - Private properties
@@ -41,12 +43,12 @@ final class SafariMigration4_3_1: SafariMigration4_3_1Protocol {
     // MARK: - Public methods
 
     func migrate() {
-        Logger.logInfo("(SafariMigration4_3_1) - migrate; Migrate called")
+        LOG.info("(SafariMigration4_3_1) - migrate; Migrate called")
         switch stateManager.state {
         case .notStarted:
             onNotStarted()
         case .finished:
-            Logger.logInfo("(SafariMigration4_3_1) - migrate; Migration already finished")
+            LOG.info("(SafariMigration4_3_1) - migrate; Migration already finished")
         case .started:
             onStarted()
         }
@@ -55,7 +57,7 @@ final class SafariMigration4_3_1: SafariMigration4_3_1Protocol {
     // MARK: - Private methods
 
     private func onNotStarted() {
-        Logger.logInfo("(SafariMigration4_3_1) - onNotStarted; Start migration")
+        LOG.info("(SafariMigration4_3_1) - onNotStarted; Start migration")
         stateManager.start()
 
         do {
@@ -63,28 +65,28 @@ final class SafariMigration4_3_1: SafariMigration4_3_1Protocol {
             try migrateSafariRules(for: .allowlist)
             try migrateSafariRules(for: .invertedAllowlist)
             stateManager.finish()
-            Logger.logInfo("(SafariMigration4_3_1) - onNotStarted; Migration succeeded")
+            LOG.info("(SafariMigration4_3_1) - onNotStarted; Migration succeeded")
 
             safariProtection.convertFiltersAndReloadCbs { error in
                 if let error = error {
-                    Logger.logInfo("(SafariMigration4_3_1) - onNotStarted; Error occurred while reloading CBs; Error: \(error)")
+                    LOG.info("(SafariMigration4_3_1) - onNotStarted; Error occurred while reloading CBs; Error: \(error)")
                     return
                 }
-                Logger.logInfo("(SafariMigration4_3_1) - onNotStarted; Successfully reload CBs after safari user rules migration")
+                LOG.info("(SafariMigration4_3_1) - onNotStarted; Successfully reload CBs after safari user rules migration")
             }
         } catch {
             stateManager.failure()
-            Logger.logError("(SafariMigration4_3_1) - onNotStarted; Migration failed: \(error)")
+            LOG.error("(SafariMigration4_3_1) - onNotStarted; Migration failed: \(error)")
         }
     }
 
     private func onStarted() {
-        Logger.logInfo("(SafariMigration4_3_1) - onStarted; Migration already started. Wait it")
+        LOG.info("(SafariMigration4_3_1) - onStarted; Migration already started. Wait it")
         // wait for finish
         let group = DispatchGroup()
         group.enter()
         stateManager.onMigrationFinished {
-            Logger.logInfo("SafariMigration4_3_1) - onStarted; Migration finished")
+            LOG.info("SafariMigration4_3_1) - onStarted; Migration finished")
             group.leave()
         }
 
@@ -92,14 +94,14 @@ final class SafariMigration4_3_1: SafariMigration4_3_1Protocol {
         // TODO: - Refactor it later
         let waitResult = group.wait(timeout: .now() + 3.0)
 
-        Logger.logInfo("SafariMigration4_3_1) - onStarted; The wait is over; waitResult succeeded=\(waitResult == .success)")
+        LOG.info("SafariMigration4_3_1) - onStarted; The wait is over; waitResult succeeded=\(waitResult == .success)")
     }
 
     private func migrateSafariRules(for type: SafariUserRuleType) throws {
-        Logger.logInfo("(SafariMigration4_3_1) - migrateSafariRules; Starting migrate safari rules for type=\(type)")
+        LOG.info("(SafariMigration4_3_1) - migrateSafariRules; Starting migrate safari rules for type=\(type)")
         let rules = safariProtection.getRules(for: type)
         if rules.isEmpty {
-            Logger.logInfo("(SafariMigration4_3_1) - migrateSafariRules; Safari rules migration for type=\(type) not started; Reason: nothing to migrate")
+            LOG.info("(SafariMigration4_3_1) - migrateSafariRules; Safari rules migration for type=\(type) not started; Reason: nothing to migrate")
             return
         }
         safariProtection.removeRules(for: type)
@@ -121,6 +123,6 @@ final class SafariMigration4_3_1: SafariMigration4_3_1Protocol {
         }
 
         try safariProtection.add(rules: rulesNeedToSet, for: type, override: true)
-        Logger.logInfo("(SafariMigration4_3_1) - migrateSafariRules; Safari rules migration for type=\(type) ended with success")
+        LOG.info("(SafariMigration4_3_1) - migrateSafariRules; Safari rules migration for type=\(type) ended with success")
     }
 }

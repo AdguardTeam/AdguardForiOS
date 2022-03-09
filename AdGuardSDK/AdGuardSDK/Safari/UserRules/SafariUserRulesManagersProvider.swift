@@ -24,6 +24,8 @@ public protocol SafariUserRulesManagersProviderProtocol: ResetableSyncProtocol {
     var invertedAllowlistRulesManager: UserRulesManagerProtocol { get }
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariUserRulesManagersProvider.self)
+
 final public class SafariUserRulesManagersProvider: SafariUserRulesManagersProviderProtocol {
     private(set) lazy public var blocklistRulesManager: UserRulesManagerProtocol = {
         let storage = SafariUserRulesStorage(userDefaults: userDefaultsStorage, rulesType: .blocklist)
@@ -51,12 +53,12 @@ final public class SafariUserRulesManagersProvider: SafariUserRulesManagersProvi
     }
 
     public func reset() throws {
-        Logger.logInfo("(UserRulesManagersProvider) - reset start")
+        LOG.info("(UserRulesManagersProvider) - reset start")
 
         try blocklistRulesManager.reset()
         try allowlistRulesManager.reset()
         try invertedAllowlistRulesManager.reset()
 
-        Logger.logInfo("(UserRulesManagersProvider) - reset; Successfully reset all user rules managers")
+        LOG.info("(UserRulesManagersProvider) - reset; Successfully reset all user rules managers")
     }
 }

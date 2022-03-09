@@ -104,7 +104,7 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
     }
 
     private func processResult(
-        _ result: Result<[String : String], Error>,
+        _ result: Result<[String : String]>,
         type: UsedFrameworks,
         completionHandler: @escaping (_ jsonString: String?) -> Void
     ) {
@@ -112,7 +112,7 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
         switch result {
         case .success(let json):
             jsonString = convertJSONtoParameterString(json: json, type: type)
-        case .failure(let error):
+        case .error(let error):
             jsonString = nil
             LOG.error("(AppleSearchAdsService) - processResult; Error occurred while receiving attribution records for framework = \(type); Error: \(error)")
         }

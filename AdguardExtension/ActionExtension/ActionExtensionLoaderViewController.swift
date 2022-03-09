@@ -64,8 +64,8 @@ final class ActionExtensionLoaderViewController: UIViewController {
                 let isSafariProtectionEnabled = self.isSafariProtectionEnabled(for: context.domain)
                 self.modelToPass = ActionExtensionTableController.Model(context: context, isSafariProtectionEnabled: isSafariProtectionEnabled)
                 self.performSegue(withIdentifier: self.segueId, sender: self)
-            case .failure(let error):
-                self.receivedError(error: error)
+            case .error(let error):
+                self.receivedError(error: error as! ContextProvider.ContextError)
             }
         }
     }

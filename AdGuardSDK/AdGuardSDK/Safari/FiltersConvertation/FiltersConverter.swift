@@ -78,6 +78,8 @@ protocol FiltersConverterProtocol {
     func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRules: [String]?) -> [FiltersConverterResult]
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FiltersConverter.self)
+
 final class FiltersConverter: FiltersConverterProtocol {
 
     /**
@@ -174,13 +176,16 @@ final class FiltersConverter: FiltersConverterProtocol {
         }
     }
 
+    private let LOG = ComLog_LoggerFactory.getLoggerWrapper("TEST")
+    
     private func convert(filters: [ContentBlockerType: [String]]) -> [FiltersConverterResult] {
-        Logger.logInfo("(FiltersConverter) - convertFilters; Safari rules conversion started")
+        LOG.info("(FiltersConverter) - convertFilters; Safari rules conversion started")
+        LOG.info("TEST LOG MESSAGE")
 
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
         let conversionResult: [FiltersConverterResult] = filters.concurrentMap { [unowned self] cbType, rules -> FiltersConverterResult in
 
-            Logger.logInfo("(FiltersConverter) - convertFilters; Start converting \(cbType)")
+            LOG.info("(FiltersConverter) - convertFilters; Start converting \(cbType)")
 
             let converter = ContentBlockerConverterWrapper()
             let result = converter.convertArray(
@@ -190,15 +195,15 @@ final class FiltersConverter: FiltersConverterProtocol {
                 advancedBlocking: configuration.advancedBlockingIsEnabled && configuration.proStatus
             )
 
-            Logger.logInfo("(FiltersConverter) - FiltersConverter for \(cbType) result: \(result.convertedCount) rules")
-            Logger.logDebug("(FiltersConverter) - FiltersConverter for \(cbType) result message: \(result.message)")
+            LOG.info("(FiltersConverter) - FiltersConverter for \(cbType) result: \(result.convertedCount) rules")
+            LOG.debug("(FiltersConverter) - FiltersConverter for \(cbType) result message: \(result.message)")
 
             // Just take the info we need
             let converterResult = FiltersConverterResult(type: cbType, conversionResult: result)
             return converterResult
         }
 
-        Logger.logInfo("(FiltersConverter) - convertFilters; Safari rules conversion finished")
+        LOG.info("(FiltersConverter) - convertFilters; Safari rules conversion finished")
         return conversionResult
     }
 }

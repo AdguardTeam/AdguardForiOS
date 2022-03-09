@@ -29,6 +29,8 @@ public protocol SafariProtectionMigrationsProtocol: AnyObject {
     func convertFiltersAndReloadCbs(onCbReloaded: ((_ error: Error?) -> Void)?)
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariProtection.self)
+
 // TODO: - We should change the way we migrate data in main app and remove this extension
 /// This extension is responsible for providing methods for migration in main app
 extension SafariProtection: SafariProtectionMigrationsProtocol {
@@ -36,19 +38,19 @@ extension SafariProtection: SafariProtectionMigrationsProtocol {
     public func getRules(for type: SafariUserRuleType) -> [UserRule] {
         workingQueue.sync {
             let allRules = getProvider(for: type).allRules
-            Logger.logInfo("(SafariProtection+Migrations) - getRules; Getting rules \(allRules.count) for type=\(type)")
+            LOG.info("(SafariProtection+Migrations) - getRules; Getting rules \(allRules.count) for type=\(type)")
             return allRules
         }
     }
 
     public func removeRules(for type: SafariUserRuleType) {
-        Logger.logInfo("(SafariProtection+Migrations) - removeRules; Remove all rules for type=\(type)")
+        LOG.info("(SafariProtection+Migrations) - removeRules; Remove all rules for type=\(type)")
         removeAllRules(for: type)
     }
 
     public func add(rules: [UserRule], for type: SafariUserRuleType, override: Bool) throws {
         try workingQueue.sync {
-            Logger.logInfo("(SafariProtection+Migrations) - addRules; Adding \(rules.count) rules; for type=\(type); override=\(override)")
+            LOG.info("(SafariProtection+Migrations) - addRules; Adding \(rules.count) rules; for type=\(type); override=\(override)")
 
             let provider = self.getProvider(for: type)
             try provider.add(rules: rules, override: override)
@@ -57,14 +59,14 @@ extension SafariProtection: SafariProtectionMigrationsProtocol {
 
     public func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool) throws {
         try workingQueue.sync {
-            Logger.logInfo("(SafariProtection+Migrations) - setGroup; Setting group with id=\(groupType.id) to enabled=\(enabled)")
+            LOG.info("(SafariProtection+Migrations) - setGroup; Setting group with id=\(groupType.id) to enabled=\(enabled)")
             try filters.setGroup(withId: groupType.id, enabled: enabled)
         }
     }
 
     public func setFilter(withId id: Int, _ groupId: Int, enabled: Bool) throws {
         try workingQueue.sync {
-            Logger.logInfo("(SafariProtection+Migrations) - setFilter; Setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
+            LOG.info("(SafariProtection+Migrations) - setFilter; Setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
             try self.filters.setFilter(withId: id, groupId, enabled: enabled)
         }
     }
@@ -79,7 +81,7 @@ extension SafariProtection: SafariProtectionMigrationsProtocol {
         BackgroundTaskExecutor.executeAsynchronousTask("SafariProtection+Migrations.convertFiltersAndReloadCbs") { [weak self] onTaskFinished in
             self?.cbQueue.async { [weak self] in
                 guard let self = self else {
-                    Logger.logError("(SafariProtection+Migrations) - reloadContentBlockers; self is missing!")
+                    LOG.error("(SafariProtection+Migrations) - reloadContentBlockers; self is missing!")
                     onCbReloaded?(CommonError.missingSelf)
                     onTaskFinished()
                     return
@@ -90,7 +92,7 @@ extension SafariProtection: SafariProtectionMigrationsProtocol {
                     try self.cbStorage.save(converterResults: convertedfilters)
                 }
                 catch {
-                    Logger.logError("(SafariProtection+Migrations) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
+                    LOG.error("(SafariProtection+Migrations) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
                     self.completionQueue.async {
                         onCbReloaded?(error)
                         onTaskFinished()
@@ -100,7 +102,7 @@ extension SafariProtection: SafariProtectionMigrationsProtocol {
 
                 self.cbService.updateContentBlockers { [weak self] error in
                     guard let self = self else {
-                        Logger.logError("(SafariProtection+Migrations) - reloadContentBlockers; self is missing!")
+                        LOG.error("(SafariProtection+Migrations) - reloadContentBlockers; self is missing!")
                         self?.completionQueue.async {
                             onCbReloaded?(CommonError.missingSelf)
                             onTaskFinished()

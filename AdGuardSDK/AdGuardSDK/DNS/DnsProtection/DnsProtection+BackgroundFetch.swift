@@ -18,15 +18,17 @@
 
 import SharedAdGuardSDK
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProtection.self)
+
 extension DnsProtection {
     public func updateFiltersInBackground(onFiltersUpdate: @escaping ((_ error: Error?) -> Void)) {
         workingQueue.async { [weak self] in
             self?.dnsFiltersManager.updateAllFilters { result in
                 if result.unupdatedFiltersIds.isEmpty {
-                    Logger.logInfo("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Filters with id = \(result.updatedFiltersIds) were updated")
+                    LOG.info("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Filters with id = \(result.updatedFiltersIds) were updated")
                     self?.completionQueue.async { onFiltersUpdate(nil) }
                 } else {
-                    Logger.logError("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Some filters with id = \(result.unupdatedFiltersIds) were not updated")
+                    LOG.error("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Some filters with id = \(result.unupdatedFiltersIds) were not updated")
                     self?.completionQueue.async { onFiltersUpdate(CommonError.error(message: "Some filters were not updated")) }
                 }
             }

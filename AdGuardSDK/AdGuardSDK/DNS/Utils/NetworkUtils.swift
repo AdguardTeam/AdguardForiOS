@@ -38,6 +38,8 @@ public protocol NetworkUtilsProtocol {
     func upstreamIsValid(_ upstream: String) -> Bool
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(NetworkUtils.self)
+
 public class NetworkUtils: NetworkUtilsProtocol {
 
     // We cannot use the @available attribute on properties. Therefore, we have to use a function to get it.
@@ -53,26 +55,26 @@ public class NetworkUtils: NetworkUtilsProtocol {
             var group: DispatchGroup? = DispatchGroup()
             group?.enter()
             monitor().pathUpdateHandler = { newPath in
-                Logger.logInfo("(NetworkUtils) - NWPathMonitor received the current path update")
-                Logger.logInfo("(NetworkUtils) - path status: \(newPath.status)")
-                Logger.logInfo("(NetworkUtils) - path debugDescription: \(newPath.debugDescription)")
-                Logger.logInfo("(NetworkUtils) - path supportsIPv4: \(newPath.supportsIPv4)")
-                Logger.logInfo("(NetworkUtils) - path supportsIPv6: \(newPath.supportsIPv6)")
+                LOG.info("(NetworkUtils) - NWPathMonitor received the current path update")
+                LOG.info("(NetworkUtils) - path status: \(newPath.status)")
+                LOG.info("(NetworkUtils) - path debugDescription: \(newPath.debugDescription)")
+                LOG.info("(NetworkUtils) - path supportsIPv4: \(newPath.supportsIPv4)")
+                LOG.info("(NetworkUtils) - path supportsIPv6: \(newPath.supportsIPv6)")
 
                 for gateway in newPath.gateways {
-                    Logger.logInfo("(NetworkUtils) - gateway: \(gateway.debugDescription)")
+                    LOG.info("(NetworkUtils) - gateway: \(gateway.debugDescription)")
                 }
 
                 for interface in newPath.availableInterfaces {
-                    Logger.logInfo("(NetworkUtils) - interface: [\(interface.index)] \(interface.name)")
-                    Logger.logInfo("(NetworkUtils) - interface debugDescription: \(interface.debugDescription)")
-                    Logger.logInfo("(NetworkUtils) - interface type: \(interface.type)")
+                    LOG.info("(NetworkUtils) - interface: [\(interface.index)] \(interface.name)")
+                    LOG.info("(NetworkUtils) - interface debugDescription: \(interface.debugDescription)")
+                    LOG.info("(NetworkUtils) - interface type: \(interface.type)")
                 }
 
                 group?.leave()
                 group = nil
             }
-            Logger.logInfo("(NetworkUtils) - NWPathMonitor start")
+            LOG.info("(NetworkUtils) - NWPathMonitor start")
 
             // We must start the monitor to have the actual value of the path at any time
             monitor().start(queue: DispatchQueue(label: "NWPathMonitor handler queue"))
@@ -171,7 +173,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
         let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
 
         if let error = AGDnsUtils.test(dnsUpstream, ipv6Available: isIpv6Available, offline: false) {
-            Logger.logError("(NetworkUtils) - upstreamIsValid; Error: \(error)")
+            LOG.error("(NetworkUtils) - upstreamIsValid; Error: \(error)")
             return false
         } else {
             return true

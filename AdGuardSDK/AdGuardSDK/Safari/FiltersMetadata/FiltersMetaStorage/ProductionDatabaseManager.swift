@@ -34,6 +34,8 @@ protocol ProductionDatabaseManagerProtocol: ResetableSyncProtocol {
     func updateDatabaseIfNeeded() throws
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ProductionDatabaseManager.self)
+
 final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
 
     enum ManagerError: Error, CustomDebugStringConvertible {
@@ -100,7 +102,7 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
     // MARK: - Public methods
 
     func updateDatabaseIfNeeded() throws {
-        Logger.logInfo("(ProductionDatabaseManager) - updateDatabaseIfNeeded start")
+        LOG.info("(ProductionDatabaseManager) - updateDatabaseIfNeeded start")
 
         try defaultDatabaseManager.updateDefaultDb()
 
@@ -115,11 +117,11 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         // Remove default.db when update finished
         try defaultDatabaseManager.removeDefaultDb()
 
-        Logger.logInfo("(ProductionDatabaseManager) - updateDatabaseIfNeeded finished; shouldUpgradeDb=\(shouldUpgradeDb); updateVersions=\(updateVersions)")
+        LOG.info("(ProductionDatabaseManager) - updateDatabaseIfNeeded finished; shouldUpgradeDb=\(shouldUpgradeDb); updateVersions=\(updateVersions)")
     }
 
     func reset() throws {
-        Logger.logInfo("(ProductionDatabaseManager) - reset start")
+        LOG.info("(ProductionDatabaseManager) - reset start")
 
         // Update default.db to the latest saved
         try defaultDatabaseManager.updateDefaultDb()
@@ -130,7 +132,7 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         // Reinitialize database object
         filtersDb = try Connection(productionDbFileUrl.path)
 
-        Logger.logInfo("(ProductionDatabaseManager) - reset; Successfully reset adguard.db")
+        LOG.info("(ProductionDatabaseManager) - reset; Successfully reset adguard.db")
     }
 
     // MARK: - Private methods

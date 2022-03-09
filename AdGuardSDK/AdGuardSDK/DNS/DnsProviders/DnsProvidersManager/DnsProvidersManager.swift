@@ -78,6 +78,8 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
     func removeCustomProvider(withId id: Int) throws
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProvidersManager.self)
+
 final public class DnsProvidersManager: DnsProvidersManagerProtocol {
 
     // MARK: - Internal variables
@@ -120,7 +122,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
          userDefaults: UserDefaultsStorageProtocol,
          customProvidersStorage: CustomDnsProvidersStorageProtocol,
          predefinedProviders: PredefinedDnsProvidersDecoderProtocol) {
-        Logger.logInfo("(DnsProvidersManager) - init start")
+        LOG.info("(DnsProvidersManager) - init start")
         self.configuration = configuration
         self.userDefaults = userDefaults
         self.customProvidersStorage = customProvidersStorage
@@ -132,19 +134,19 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         self.customProviders = providersWithState.custom
         self.activeDnsProvider = providersWithState.activeDnsProvider
         self.activeDnsServer = providersWithState.activeDnsServer
-        Logger.logInfo("(DnsProvidersManager) - init end")
+        LOG.info("(DnsProvidersManager) - init end")
     }
 
     // MARK: - Public methods
 
     public func update(dnsImplementation: DnsImplementation) {
-        Logger.logInfo("(DnsProvidersManager) - updateDnsImplementation; Changed to \(dnsImplementation)")
+        LOG.info("(DnsProvidersManager) - updateDnsImplementation; Changed to \(dnsImplementation)")
         configuration.dnsImplementation = dnsImplementation
         reinitializeProviders()
     }
 
     public func selectProvider(withId id: Int, serverId: Int) throws {
-        Logger.logInfo("(DnsProvidersManager) - selectProvider; Selecting provider with id=\(id) serverId=\(serverId)")
+        LOG.info("(DnsProvidersManager) - selectProvider; Selecting provider with id=\(id) serverId=\(serverId)")
 
         guard let provider = allProviders.first(where: { $0.providerId == id }) else {
             throw DnsProviderError.invalidProvider(providerId: id)
@@ -158,13 +160,13 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         userDefaults.activeDnsInfo = newActiveDnsInfo
         reinitializeProviders()
 
-        Logger.logInfo("(DnsProvidersManager) - selectProvider; Selected provider with id=\(id) serverId=\(serverId)")
+        LOG.info("(DnsProvidersManager) - selectProvider; Selected provider with id=\(id) serverId=\(serverId)")
     }
 
     // TODO: - It's a crutch, should be refactored
     /// isMigration parameter is a crutch to quickly migrate custom DNS providers without checking their upstreams
     public func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool, isMigration: Bool) throws {
-        Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Trying to add custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
+        LOG.info("(DnsProvidersManager) - addCustomProvider; Trying to add custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
 
         // check server exists
         let servers = customProvidersStorage.providers.map { $0.server }
@@ -183,11 +185,11 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         reinitializeProviders()
 
 
-        Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Added custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
+        LOG.info("(DnsProvidersManager) - addCustomProvider; Added custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
     }
 
     public func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool) throws {
-        Logger.logInfo("(DnsProvidersManager) - updateCustomProvider; Trying to update custom provider with id=\(id) name=\(newName), upstreams=\(newUpstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
+        LOG.info("(DnsProvidersManager) - updateCustomProvider; Trying to update custom provider with id=\(id) name=\(newName), upstreams=\(newUpstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
 
         // check another server with given upstream exists
         let servers = customProvidersStorage.providers.compactMap {
@@ -208,11 +210,11 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         }
         reinitializeProviders()
 
-        Logger.logInfo("(DnsProvidersManager) - updateCustomProvider; Updated custom provider with id=\(id) name=\(newName), upstreams=\(newUpstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
+        LOG.info("(DnsProvidersManager) - updateCustomProvider; Updated custom provider with id=\(id) name=\(newName), upstreams=\(newUpstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
     }
 
     public func removeCustomProvider(withId id: Int) throws {
-        Logger.logInfo("(DnsProvidersManager) - removeCustomProvider; Trying to remove provider with id=\(id)")
+        LOG.info("(DnsProvidersManager) - removeCustomProvider; Trying to remove provider with id=\(id)")
 
         try customProvidersStorage.removeCustomProvider(withId: id)
 
@@ -224,11 +226,11 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         }
         reinitializeProviders()
 
-        Logger.logInfo("(DnsProvidersManager) - removeCustomProvider; Removed provider with id=\(id)")
+        LOG.info("(DnsProvidersManager) - removeCustomProvider; Removed provider with id=\(id)")
     }
 
     public func reset() throws {
-        Logger.logInfo("(DnsProvidersManager) - reset; Start")
+        LOG.info("(DnsProvidersManager) - reset; Start")
 
         let defaultProviderId = PredefinedDnsProvider.systemDefaultProviderId
         let defaultServerId = PredefinedDnsServer.systemDefaultServerId
@@ -237,7 +239,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         try! customProvidersStorage.reset()
         reinitializeProviders()
 
-        Logger.logInfo("(DnsProvidersManager) - reset; Finish")
+        LOG.info("(DnsProvidersManager) - reset; Finish")
     }
 
     // MARK: - Private methods

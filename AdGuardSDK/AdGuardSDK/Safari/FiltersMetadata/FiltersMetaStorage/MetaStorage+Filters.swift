@@ -133,6 +133,8 @@ protocol FiltersMetaStorageProtocol {
     func renameFilter(withId id: Int, name: String) throws
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(MetaStorage.self)
+
 extension MetaStorage: FiltersMetaStorageProtocol {
 
     // Checks existing filter id and returns new unique id for custom filter
@@ -157,7 +159,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
             let description = filterLocalization?.description ?? filter.description
             return FiltersTable(dbFilter: dbFilter, localizedName: name, localizedDescription: description)
         }
-        Logger.logDebug("(FiltersMetaStorage) - getLocalizedFiltersForGroup with id=\(id); lang=\(lang); return \(dbFilters.count) objects")
+        LOG.debug("(FiltersMetaStorage) - getLocalizedFiltersForGroup with id=\(id); lang=\(lang); return \(dbFilters.count) objects")
         return dbFilters
     }
 
@@ -166,7 +168,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
         //Query: UPDATE "filters" SET "is_enabled" = enabled WHERE ("filter_id" = filterId)
         let query = FiltersTable.table.where(FiltersTable.filterId == id).update(FiltersTable.isEnabled <- enabled)
         let rowId = try filtersDb.run(query)
-        Logger.logInfo("(FiltersMetaStorage) - Filter enabled state with filter Id \(rowId) was updated to state \(enabled)")
+        LOG.info("(FiltersMetaStorage) - Filter enabled state with filter Id \(rowId) was updated to state \(enabled)")
     }
 
     /**
@@ -177,7 +179,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
      - Returns true if update occured and false otherwise
      */
     func update(filter: ExtendedFilterMetaProtocol) throws -> Bool {
-        Logger.logDebug("(FiltersMetaStorage) - updateFilter start; Filter id=\(filter.filterId)")
+        LOG.debug("(FiltersMetaStorage) - updateFilter start; Filter id=\(filter.filterId)")
 
 
         // Query: SELECT version FROM filters WHERE filter_id = filter.filterId
@@ -185,7 +187,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
 
         if let currentFilterLastUpdateDate = try filtersDb.pluck(lastUpdateDateQuery)?.get(FiltersTable.lastUpdateTime) {
             if let newUpdateDate = filter.lastUpdateDate, currentFilterLastUpdateDate == newUpdateDate {
-                Logger.logInfo("(FiltersMetaStorage) - updateFilter; Update ended with reason: New meta update date is the same as current meta update date")
+                LOG.info("(FiltersMetaStorage) - updateFilter; Update ended with reason: New meta update date is the same as current meta update date")
                 return false
             }
         }
@@ -196,7 +198,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
                                 .update(filter.updateSetters)
 
         try filtersDb.run(query)
-        Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(filter.filterId)")
+        LOG.info("(FiltersMetaStorage) - Filter was updated with id \(filter.filterId)")
         return true
     }
 
@@ -206,7 +208,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
      - Returns array of filter ids that were updated
      */
     func update(filters: [ExtendedFilterMetaProtocol]) throws -> [Int] {
-        Logger.logDebug("(FiltersMetaStorage) - updateFilters start; Filters number = \(filters.count)")
+        LOG.debug("(FiltersMetaStorage) - updateFilters start; Filters number = \(filters.count)")
         return try filters.compactMap {
             let wasUpdated = try update(filter: $0)
             return wasUpdated ? $0.filterId : nil
@@ -218,7 +220,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
         // Query: INSERT OR REPLACE INTO "filters" (filter_id, group_id, is_enabled, version, last_update_time, display_number, name, description, homepage, subscriptionUrl)
         let query = FiltersTable.table.insert(or: .replace, filter.getDbAddSetters(isEnabled: enabled))
         try filtersDb.run(query)
-        Logger.logInfo("(FiltersMetaStorage) - Filter was added with id \(filter.filterId)")
+        LOG.info("(FiltersMetaStorage) - Filter was added with id \(filter.filterId)")
     }
 
     // Deletes filter and all data associated with it
@@ -230,7 +232,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
     func deleteFilters(withIds ids: [Int]) throws {
         let filtersToDelete = FiltersTable.table.filter(ids.contains(FiltersTable.filterId))
         let deletedRows = try filtersDb.run(filtersToDelete.delete())
-        Logger.logDebug("(FiltersMetaStorage) - deleteFilters; deleted \(deletedRows) filters")
+        LOG.debug("(FiltersMetaStorage) - deleteFilters; deleted \(deletedRows) filters")
 
         try deleteLangsForFilters(withIds: ids)
         try deleteTagsForFilters(withIds: ids)
@@ -241,6 +243,6 @@ extension MetaStorage: FiltersMetaStorageProtocol {
         // Query: UPDATE filters SET (name) WHERE filter_id = id
         let query = FiltersTable.table.where(FiltersTable.filterId == id).update(FiltersTable.name <- name)
         try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - renameCustomFilterName; updated name for filter with id \(id) with name \(name)")
+        LOG.debug("(FiltersMetaStorage) - renameCustomFilterName; updated name for filter with id \(id) with name \(name)")
     }
 }

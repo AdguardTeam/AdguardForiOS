@@ -25,6 +25,8 @@ protocol DnsProxyProtocol: AnyObject {
     func resolve(dnsRequest: Data, onRequestResolved: @escaping (Data?) -> Void)
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProxy.self)
+
 /// This object is a wrapper arround `AGDnsProxy`
 /// It is used to control proxy lifecycle
 /// and to resolve requests that we obtain from `PacketTunnelProvider`
@@ -59,11 +61,11 @@ final class DnsProxy: DnsProxyProtocol {
 
     func stop() {
         resolveQueue.sync(flags: .barrier) { [weak self] in
-            Logger.logInfo("(DnsProxy) - stop")
+            LOG.info("(DnsProxy) - stop")
             self?.proxy?.stop()
             self?.proxy = nil
             self?.proxySettingsProvider.reset()
-            Logger.logInfo("(DnsProxy) - stopped")
+            LOG.info("(DnsProxy) - stopped")
         }
     }
 
@@ -77,7 +79,7 @@ final class DnsProxy: DnsProxyProtocol {
     // MARK: - Private methods
 
     private func internalStart(_ systemDnsUpstreams: [DnsUpstream]) -> Error? {
-        Logger.logInfo("(DnsProxy) - start")
+        LOG.info("(DnsProxy) - start")
 
         // Configuration
         if proxy != nil {
@@ -99,7 +101,7 @@ final class DnsProxy: DnsProxyProtocol {
             )
         }
         catch {
-            Logger.logError("(DnsProxy) - internalStart; Error initializing statistics: \(error)")
+            LOG.error("(DnsProxy) - internalStart; Error initializing statistics: \(error)")
             return error
         }
 
@@ -113,19 +115,19 @@ final class DnsProxy: DnsProxyProtocol {
         // Error reference
         var error: NSError?
 
-        Logger.logInfo("(DnsProxy) start with config: \n\(agConfig.extendedDescription)")
+        LOG.info("(DnsProxy) start with config: \n\(agConfig.extendedDescription)")
 
         // Proxy init
         proxy = AGDnsProxy(config: agConfig, handler: agEvents, error: &error)
 
         if let error = error {
-            Logger.logError("(DnsProxy) - started with error: \(error)")
+            LOG.error("(DnsProxy) - started with error: \(error)")
             return error
         } else if proxy != nil {
-            Logger.logInfo("(DnsProxy) - started successfully")
+            LOG.info("(DnsProxy) - started successfully")
             return nil
         } else {
-            Logger.logError("(DnsProxy) - started with unknown error")
+            LOG.error("(DnsProxy) - started with unknown error")
             assertionFailure("Error and AGDnsProxy can't be both nil at the same time")
             return CommonError.missingData
         }

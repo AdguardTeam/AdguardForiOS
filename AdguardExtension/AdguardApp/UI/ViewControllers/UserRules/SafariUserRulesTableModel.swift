@@ -168,7 +168,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
             case .success(let text):
                 self?.delegate?.importWillStart()
                 self?.addNewRulesAfterImport(text, completion)
-            case .failure(let error):
+            case .error(let error):
                 completion(error)
             }
         }

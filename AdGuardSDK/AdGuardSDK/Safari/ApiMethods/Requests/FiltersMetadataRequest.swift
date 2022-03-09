@@ -18,6 +18,8 @@
 
 import SharedAdGuardSDK
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FiltersMetadataRequest.self)
+
 /// Request to obtain filters meta data
 struct FiltersMetadataRequest: RequestProtocol {
 
@@ -48,7 +50,7 @@ struct FiltersMetadataRequest: RequestProtocol {
 
         guard let resultStr = params.constructLink(url: path),
             let resultUrl = URL(string: resultStr) else  {
-            Logger.logError("FiltersMetadataRequest errror - can not construct url" )
+            LOG.error("FiltersMetadataRequest errror - can not construct url" )
             return nil
         }
 

@@ -37,6 +37,8 @@ protocol DefaultDatabaseManagerProtocol {
     func removeDefaultDb() throws
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DefaultDatabaseManager.self)
+
 final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
 
     enum ManagerError: Error, CustomDebugStringConvertible {
@@ -94,14 +96,14 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
 
     // Unarchives default database file
     func updateDefaultDb() throws {
-        Logger.logInfo("(DefaultDatabaseManager) - updateDefaultDb; Unarchiving default.db")
+        LOG.info("(DefaultDatabaseManager) - updateDefaultDb; Unarchiving default.db")
         let defaultDbArchiveUrl = dbContainerUrl.appendingPathComponent(defaultDbArchiveFile)
         try Zip.unzipFile(defaultDbArchiveUrl, destination: dbContainerUrl, overwrite: true, password: nil)
     }
 
     func removeDefaultDb() throws {
         guard defaultDbFileExists else {
-            Logger.logError("default.db file is missing, nothing to delete")
+            LOG.error("default.db file is missing, nothing to delete")
             return
         }
 

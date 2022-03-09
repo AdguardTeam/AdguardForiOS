@@ -20,7 +20,7 @@ import SharedAdGuardSDK
 
 protocol AdServicesHelperProtocol {
     @available(iOS 14.3, *)
-    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void)
+    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String]>) -> Void)
 }
 
 private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AdServicesHelper.self)
@@ -44,7 +44,7 @@ final class AdServicesHelper: AdServicesHelperProtocol {
     // MARK: - Public methods
 
     @available(iOS 14.3, *)
-    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
+    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String]>) -> Void) {
         do {
             let attributionToken = try adServicesWrapper.getAttributionToken()
             httpRequestService.getAttributionRecords(attributionToken) { result in
@@ -52,19 +52,19 @@ final class AdServicesHelper: AdServicesHelperProtocol {
                 case .success(let json):
                     if json.isEmpty {
                         LOG.error("(AdServicesHelper) - fetchAttributionRecords; Search Ads data is missing")
-                        completionHandler(.failure(AppleSearchAdsService.AdsError.missingAttributionData))
+                        completionHandler(.error(AppleSearchAdsService.AdsError.missingAttributionData))
                         return
                     }
 
                     completionHandler(.success(json))
                 case .failure(let error):
                     LOG.error("(AdServicesHelper) - fetchAttributionRecords; On http request error: \(error)")
-                    completionHandler(.failure(error))
+                    completionHandler(.error(error))
                 }
             }
         } catch {
             LOG.error("(AdServicesHelper) - fetchAttributionRecords; Attribution token error occurred: \(error)")
-            completionHandler(.failure(error))
+            completionHandler(.error(error))
         }
     }
 }

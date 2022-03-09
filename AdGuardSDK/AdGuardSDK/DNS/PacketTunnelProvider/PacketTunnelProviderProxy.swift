@@ -39,6 +39,8 @@ protocol PacketTunnelProviderProxyProtocol: AnyObject {
     func networkChanged()
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(PacketTunnelProviderProxy.self)
+
 /**
  Proxy is a design pattern, that perfectly fits it this case. You can find more info here https://refactoring.guru/design-patterns/proxy
  We use this tunnel proxy to be able to test tunnel behaviour
@@ -116,19 +118,19 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             guard let self = self else { return }
 
             let shouldRestartWhenNetworkChanges = self.dnsConfiguration.lowLevelConfiguration.restartByReachability
-            Logger.logInfo("(PacketTunnelProviderProxy) - networkChanged; shouldRestartWhenNetworkChanges=\(shouldRestartWhenNetworkChanges)")
+            LOG.info("(PacketTunnelProviderProxy) - networkChanged; shouldRestartWhenNetworkChanges=\(shouldRestartWhenNetworkChanges)")
 
             // Stop packet handling and dnsProxy right away
-            Logger.logInfo("(PacketTunnelProviderProxy) - stopping packet handling")
+            LOG.info("(PacketTunnelProviderProxy) - stopping packet handling")
             self.stopPacketHanding()
 
-            Logger.logInfo("(PacketTunnelProviderProxy) - stopping dnsProxy")
+            LOG.info("(PacketTunnelProviderProxy) - stopping dnsProxy")
             self.dnsProxy.stop()
 
             // If the user has enabled "restartByReachability", we reinitialize the whole PacketTunnelProvider on every network change
             // This is done by cancelling tunnel (it will be then restarted back automatically due to the on-demand rules)
             if shouldRestartWhenNetworkChanges {
-                Logger.logInfo("(PacketTunnelProviderProxy) - cancelling tunnel")
+                LOG.info("(PacketTunnelProviderProxy) - cancelling tunnel")
                 self.delegate?.cancelTunnel(with: nil)
                 return
             }
@@ -136,13 +138,13 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             // This is the default behavior, we restart proxy internally without reinitializing PacketTunnelProvider.
             let group = DispatchGroup()
             group.enter()
-            Logger.logInfo("(PacketTunnelProviderProxy) - starting the tunnel")
+            LOG.info("(PacketTunnelProviderProxy) - starting the tunnel")
             self.startTunnel { [weak self] error in
                 if let error = error {
-                    Logger.logError("(PacketTunnelProviderProxy) - networkChanged; Error: \(error)")
+                    LOG.error("(PacketTunnelProviderProxy) - networkChanged; Error: \(error)")
                     self?.delegate?.cancelTunnel(with: error)
                 } else {
-                    Logger.logInfo("(PacketTunnelProviderProxy) - networkChanged; Successfully restarted proxy after the network change")
+                    LOG.info("(PacketTunnelProviderProxy) - networkChanged; Successfully restarted proxy after the network change")
                 }
                 group.leave()
             }
@@ -157,7 +159,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
         updateTunnelSettings { [weak self] result in
             guard let self = self else {
                 let error = CommonError.missingSelf
-                Logger.logError("(PacketTunnelProviderProxy) - startTunnel; Error: \(error)")
+                LOG.error("(PacketTunnelProviderProxy) - startTunnel; Error: \(error)")
                 onTunnelStarted(error)
                 return
             }
@@ -181,7 +183,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
 
         let allSystemServers = networkUtils.systemDnsServers
 
-        Logger.logInfo("updateTunnelSettings with system servers: \(allSystemServers)")
+        LOG.info("updateTunnelSettings with system servers: \(allSystemServers)")
 
         let systemDnsServers = allSystemServers.filter { $0 != addresses.localDnsIpv4 && $0 != addresses.localDnsIpv6 }
 
@@ -190,7 +192,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
 
         // Check if user's already provided all needed settings
         if providersManager.activeDnsServer.upstreams.count > 0 && hasFallbacks && hasBootstraps || !systemDnsServers.isEmpty {
-            Logger.logInfo("(PacketTunnelProviderProxy) - updateTunnelSettings; All settings we need are set by the user, starting tunnel now")
+            LOG.info("(PacketTunnelProviderProxy) - updateTunnelSettings; All settings we need are set by the user, starting tunnel now")
 
             // Setting tunnel settings
             setTunnelSettings { error in
@@ -203,18 +205,18 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             return
         }
 
-        Logger.logInfo("(PacketTunnelProviderProxy) - updateTunnelSettings; Upstreams or fallbacks are not set by the user. Get system DNS now")
+        LOG.info("(PacketTunnelProviderProxy) - updateTunnelSettings; Upstreams or fallbacks are not set by the user. Get system DNS now")
 
         // Setting empty settings to read system DNS servers
         // If we don't set them we wil be unable to read system DNS servers
         // and will be reading servers that we did set previously
         delegate?.setTunnelSettings(nil) { error in
             if let error = error {
-                Logger.logError("(PacketTunnelProviderProxy) - updateTunnelSettings; Error setting empty settings; Error: \(error)")
+                LOG.error("(PacketTunnelProviderProxy) - updateTunnelSettings; Error setting empty settings; Error: \(error)")
                 onSettingsUpdated(.error(error))
                 return
             } else {
-                Logger.logInfo("(PacketTunnelProviderProxy) - updateTunnelSettings; Successfully set empty settings")
+                LOG.info("(PacketTunnelProviderProxy) - updateTunnelSettings; Successfully set empty settings")
             }
 
             // https://github.com/AdguardTeam/AdguardForiOS/issues/1499
@@ -242,7 +244,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     private func setTunnelSettings(_ onSettingsSet: @escaping (Error?) -> Void) {
         // Get tunnel mode user did select
         let tunnelMode = dnsConfiguration.lowLevelConfiguration.tunnelMode
-        Logger.logInfo("(PacketTunnelProviderProxy) - setTunnelSettings; Start with tunnelMode=\(tunnelMode)")
+        LOG.info("(PacketTunnelProviderProxy) - setTunnelSettings; Start with tunnelMode=\(tunnelMode)")
 
         let full = tunnelMode != .split
         let withoutIcon = tunnelMode == .fullWithoutVpnIcon
@@ -253,9 +255,9 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
         // Tell tunnel to set new tunnel settings
         delegate?.setTunnelSettings(tunnelSettings) { error in
             if let error = error {
-                Logger.logError("(PacketTunnelProviderProxy) - setTunnelSettings; Error setting settings=\(tunnelSettings); Error: \(error)")
+                LOG.error("(PacketTunnelProviderProxy) - setTunnelSettings; Error setting settings=\(tunnelSettings); Error: \(error)")
             } else {
-                Logger.logInfo("(PacketTunnelProviderProxy) - setTunnelSettings; Successfully set settings=\(tunnelSettings)")
+                LOG.info("(PacketTunnelProviderProxy) - setTunnelSettings; Successfully set settings=\(tunnelSettings)")
             }
             onSettingsSet(error)
         }
@@ -276,11 +278,11 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             if let str = String(data: data, encoding: .utf8) {
                 switch (level) {
                 case AGLogLevel.AGLL_INFO:
-                    Logger.logInfo("(DnsLibs) - \(str)")
+                    LOG.info("(DnsLibs) - \(str)")
                 case AGLogLevel.AGLL_ERR, AGLogLevel.AGLL_WARN:
-                    Logger.logError("(DnsLibs) - \(str)")
+                    LOG.error("(DnsLibs) - \(str)")
                 default:
-                    Logger.logDebug("(DnsLibs) - \(str)")
+                    LOG.debug("(DnsLibs) - \(str)")
                 }
             }
         }

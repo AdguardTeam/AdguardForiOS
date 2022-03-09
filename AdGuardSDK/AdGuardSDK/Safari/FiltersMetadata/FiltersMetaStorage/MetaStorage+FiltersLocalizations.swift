@@ -55,6 +55,8 @@ protocol FiltersLocalizationsMetaStorageProtocol {
     func collectFiltersMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(MetaStorage.self)
+
 extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
 
     // Returns localized strings for specified filter and language
@@ -66,7 +68,7 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
             return nil
         }
         let filterLocalization = FilterLocalizationsTable(dbFilterLocalization: dbFilterLocalization)
-        Logger.logDebug("(FiltersMetaStorage) - getLocalizationForFilter returning \(filterLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
+        LOG.debug("(FiltersMetaStorage) - getLocalizationForFilter returning \(filterLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
         return filterLocalization
     }
 
@@ -80,7 +82,7 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
                                                     FilterLocalizationsTable.name <- localization.name,
                                                     FilterLocalizationsTable.description <- localization.description)
         try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Insert localization for filter with id=\(id) for lang=\(lang)")
+        LOG.debug("(FiltersMetaStorage) - Insert localization for filter with id=\(id) for lang=\(lang)")
     }
 
     func deleteAllLocalizationForFilters(withIds ids: [Int]) throws {
@@ -93,7 +95,7 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
         // Query: DELETE FROM filter_localizations WHERE filter_id = id
         let query = FilterLocalizationsTable.table.where(FilterLocalizationsTable.filterId == id).delete()
         try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Delete all localization for filter with id=\(id)")
+        LOG.debug("(FiltersMetaStorage) - Delete all localization for filter with id=\(id)")
     }
 
     // MARK: - MetaStorage filters meta localization

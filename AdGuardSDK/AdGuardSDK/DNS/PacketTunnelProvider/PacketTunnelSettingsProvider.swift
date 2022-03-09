@@ -23,6 +23,8 @@ protocol PacketTunnelSettingsProviderProtocol {
     func createSettings(full: Bool, withoutVpnIcon: Bool) -> NEPacketTunnelNetworkSettings
 }
 
+private let LOG = ComLog_LoggerFactory.getLoggerWrapper(PacketTunnelSettingsProvider.self)
+
 /// This object creates `NEPacketTunnelNetworkSettings` for `PacketTunnelProvider`
 /// Used to incapsulate settings creation logic
 final class PacketTunnelSettingsProvider: PacketTunnelSettingsProviderProtocol {
@@ -41,7 +43,7 @@ final class PacketTunnelSettingsProvider: PacketTunnelSettingsProviderProtocol {
         let ipv4Available = networkUtils.isIpv4Available
         let ipv6Available = networkUtils.isIpv6Available
 
-        Logger.logInfo("Create tunnel settings. ipv4: \(ipv4Available ? "true": "false") ipv6: \(ipv6Available ? "true": "false")")
+        LOG.info("Create tunnel settings. ipv4: \(ipv4Available ? "true": "false") ipv6: \(ipv6Available ? "true": "false")")
 
         let localDnsAddress = ipv4Available ? addresses.localDnsIpv4 : addresses.localDnsIpv6
         let dns = NEDNSSettings(servers: [localDnsAddress])

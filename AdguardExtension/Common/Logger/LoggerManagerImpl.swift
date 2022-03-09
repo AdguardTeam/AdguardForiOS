@@ -5,21 +5,17 @@ import AGDnsProxy
 /// Manager that create os and file log destinations. Creates and stores labeled loggers
 final class ComLog_LoggerManagerImpl: ComLog_LoggerManager {
 
-    var rootLogDirectory: URL { ComLog_LoggerManagerImpl.rootLogDirectory }
+    var rootLogDirectory: URL
 
-    private static var rootLogDirectory: URL = {
-        let sharedDirectory = SharedResourcesService.sharedResourcesUrl
-        let folderURL = sharedDirectory.appendingPathComponent("logs")
-        return folderURL
-    }()
+    private var osLogDestination: BaseDestination!
+    private var fileLogDestination: BaseDestination!
 
-    private var osLogDestination: BaseDestination = createOSLogDestination()
-    private var fileLogDestination: BaseDestination = createFileLogDestination()
+    init(url: URL) {
+        rootLogDirectory = url
 
-
-
-    init() {
         defer {
+            osLogDestination = createOSLogDestination()
+            fileLogDestination = createFileLogDestination()
             SwiftyBeaver.addDestination(osLogDestination)
             SwiftyBeaver.addDestination(fileLogDestination)
             configure(.info)
@@ -42,14 +38,14 @@ final class ComLog_LoggerManagerImpl: ComLog_LoggerManager {
         }
     }
 
-    private static func createOSLogDestination() -> BaseDestination  {
+    private  func createOSLogDestination() -> BaseDestination  {
         let osLogDestination = ComLog_ConsoleAppDestination()
         osLogDestination.format = "[$T] $L $X - $M"
         osLogDestination.asynchronously = true
         return osLogDestination
     }
 
-    private static func createFileLogDestination() -> BaseDestination {
+    private func createFileLogDestination() -> BaseDestination {
         let logDirNameByProcessName = Bundle.main.bundleIdentifier ?? "UnknownProcess"
         let specificLogDirectory = rootLogDirectory.appendingPathComponent(logDirNameByProcessName)
         let logFileUrl = specificLogDirectory.appendingPathComponent("Log", isDirectory: false)
@@ -64,7 +60,7 @@ final class ComLog_LoggerManagerImpl: ComLog_LoggerManager {
         return fileDestination
     }
 
-    private static func createLogDirectoryIfNeeded(_ url: URL) {
+    private  func createLogDirectoryIfNeeded(_ url: URL) {
         if FileManager.default.fileExists(atPath: url.path) { return }
 
         do {

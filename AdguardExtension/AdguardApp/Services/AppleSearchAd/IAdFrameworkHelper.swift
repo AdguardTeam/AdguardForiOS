@@ -18,7 +18,7 @@
 import SharedAdGuardSDK
 
 protocol IAdFrameworkHelperProtocol {
-    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void)
+    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String]>) -> Void)
 }
 
 private let LOG = ComLog_LoggerFactory.getLoggerWrapper(IAdFrameworkHelper.self)
@@ -38,20 +38,20 @@ final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
 
     // MARK: - Public methods
 
-    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
+    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String]>) -> Void) {
         adClientWrapper.requestAttributionDetails { [weak self] result in
             switch result {
             case .success(let details):
                 self?.processAttributionDetails(details, completionHandler: completionHandler)
             case .failure(let error):
                 LOG.error("(IAdFrameworkHelper) - fetchAttributionRecords; Search Ads error: \(error)")
-                completionHandler(.failure(error))
+                completionHandler(.error(error))
                 return
             }
         }
     }
 
-    private func processAttributionDetails(_ attributionDetails: [String: NSObject], completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
+    private func processAttributionDetails(_ attributionDetails: [String: NSObject], completionHandler: @escaping (Result<[String: String]>) -> Void) {
 
         var json = [String: String]()
         for (version, adDictionary) in attributionDetails {
@@ -63,7 +63,7 @@ final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
 
         if json.isEmpty {
             LOG.error("(IAdFrameworkHelper) - processAttributionDetails; Search Ads data is missing")
-            completionHandler(.failure(AppleSearchAdsService.AdsError.missingAttributionData))
+            completionHandler(.error(AppleSearchAdsService.AdsError.missingAttributionData))
             return
         }
 

@@ -117,9 +117,8 @@ final class StartupService : NSObject {
         let configuration: ConfigurationServiceProtocol = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: configuration)
         
-        //let manager: ComLog_LoggerManager = ComLog_LoggerManagerImpl(sharedResources.sharedLogsURL())
-        //locator.addService(service: manager)
-        
+        let manager: ComLog_LoggerManager = ComLog_LoggerManagerImpl(url: sharedResources.sharedLogsURL())
+        locator.addService(service: manager)
 
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         locator.addService(service: networkSettingsService)
