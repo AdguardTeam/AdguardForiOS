@@ -70,7 +70,7 @@ final class ActionExtensionLoaderViewController: UIViewController {
         }
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {zxc
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? ActionExtensionTableController, let model = modelToPass else {
             return
         }
