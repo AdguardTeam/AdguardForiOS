@@ -42,7 +42,7 @@ class YouTubeAdsRequestHandler : UINavigationController {
         // Init Logger
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
         let isDebugLogs = resources.isDebugLogs
-        LOG.info("(YouTubeAdsRequestHandler) Start with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
+        LOG.info("Start with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
     }
 
@@ -52,15 +52,15 @@ class YouTubeAdsRequestHandler : UINavigationController {
         extensionContext?.handleInputItem({ [weak self] jsResult in
             if let result = jsResult {
                 self?.notifications.postNotificationWithoutBadge(title: nil, body: result.status.title, onNotificationSent: {
-                    LOG.info("(YouTubeAdsRequestHandler) js finished with result: \(result)")
+                    LOG.info("js finished with result: \(result)")
                     self?.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
                 })
             } else {
-                LOG.info("(YouTubeAdsRequestHandler) js finished, result is nil")
+                LOG.info("js finished, result is nil")
                 self?.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
             }
         }) { [weak self] youTubeShareLinkResult in
-            LOG.info("(YouTubeAdsRequestHandler) result of youtube app share link handling: \(youTubeShareLinkResult.messageForLog)")
+            LOG.info("Result of youtube app share link handling: \(youTubeShareLinkResult.messageForLog)")
             guard let videoId = youTubeShareLinkResult.videoId else {
                 self?.finish(withError: youTubeShareLinkResult.sharingLinkError)
                 return
@@ -70,7 +70,7 @@ class YouTubeAdsRequestHandler : UINavigationController {
                 let playerController = YoutubePlayerController(videoId: videoId)
                 self?.viewControllers.append(playerController)
             }
-        } ?? LOG.info("(YouTubeAdsRequestHandler) Failed to access extensionContext")
+        } ?? LOG.info("Failed to access extensionContext")
     }
 
     @objc private func openURL(_ url: URL) {
@@ -116,19 +116,19 @@ fileprivate extension NSExtensionContext {
         itemProvider.loadItem(forTypeIdentifier: String(kUTTypePropertyList), options: nil) { results, error in
 
             if let error = error {
-                LOG.error("(YouTubeAdsRequestHandler) Error: \(error)")
+                LOG.error("Error: \(error)")
                 onJsExecuted(nil)
                 return
             }
 
             guard let jsResultDict = results as? [String: Any] else {
-                LOG.error("(YouTubeAdsRequestHandler) Error - result dict incorrect. Results: \(results.debugDescription )")
+                LOG.error("Error - result dict incorrect. Results: \(results.debugDescription )")
                 onJsExecuted(nil)
                 return
             }
 
             guard let youTubeAdsJsResultDict = jsResultDict[NSExtensionJavaScriptPreprocessingResultsKey] as? [String: Any] else {
-                LOG.error("(YouTubeAdsRequestHandler) Error - can not get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(results.debugDescription )")
+                LOG.error("Error - can not get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(results.debugDescription )")
                 onJsExecuted(nil)
                 return
             }

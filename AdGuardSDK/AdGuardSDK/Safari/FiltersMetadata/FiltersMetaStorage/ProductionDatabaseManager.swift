@@ -102,7 +102,7 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
     // MARK: - Public methods
 
     func updateDatabaseIfNeeded() throws {
-        LOG.info("(ProductionDatabaseManager) - updateDatabaseIfNeeded start")
+        LOG.info("UpdateDatabaseIfNeeded start")
 
         try defaultDatabaseManager.updateDefaultDb()
 
@@ -117,11 +117,11 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         // Remove default.db when update finished
         try defaultDatabaseManager.removeDefaultDb()
 
-        LOG.info("(ProductionDatabaseManager) - updateDatabaseIfNeeded finished; shouldUpgradeDb=\(shouldUpgradeDb); updateVersions=\(updateVersions)")
+        LOG.info("ShouldUpgradeDb=\(shouldUpgradeDb); updateVersions=\(updateVersions)")
     }
 
     func reset() throws {
-        LOG.info("(ProductionDatabaseManager) - reset start")
+        LOG.info("Reset start")
 
         // Update default.db to the latest saved
         try defaultDatabaseManager.updateDefaultDb()
@@ -132,7 +132,7 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         // Reinitialize database object
         filtersDb = try Connection(productionDbFileUrl.path)
 
-        LOG.info("(ProductionDatabaseManager) - reset; Successfully reset adguard.db")
+        LOG.info("Successfully reset adguard.db")
     }
 
     // MARK: - Private methods

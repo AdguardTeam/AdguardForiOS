@@ -52,10 +52,10 @@ final class DefaultDnsFilterInstaller: DefaultDnsFilterInstallerProtocol {
 
         dnsProtection.addFilter(withName: "AdGuard DNS filter", url: defaultFilterUrl, isEnabled: false) { [weak resources] error in
             if let error = error {
-                LOG.error("(DefaultDnsFilterInstaller) - installDefaultDnsFilterIfNeeded; Failed to install default DNS filter with error: \(error)")
+                LOG.error("Failed to install default DNS filter with error: \(error)")
                 return
             }
-            LOG.error("(DefaultDnsFilterInstaller) - installDefaultDnsFilterIfNeeded; Installed default DNS filter")
+            LOG.error("Installed default DNS filter")
             resources?.defaultDnsFilterWasInstalled = true
         }
     }

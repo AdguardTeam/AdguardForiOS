@@ -25,10 +25,10 @@ extension DnsProtection {
         workingQueue.async { [weak self] in
             self?.dnsFiltersManager.updateAllFilters { result in
                 if result.unupdatedFiltersIds.isEmpty {
-                    LOG.info("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Filters with id = \(result.updatedFiltersIds) were updated")
+                    LOG.info("Filters with id = \(result.updatedFiltersIds) were updated")
                     self?.completionQueue.async { onFiltersUpdate(nil) }
                 } else {
-                    LOG.error("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Some filters with id = \(result.unupdatedFiltersIds) were not updated")
+                    LOG.error("Some filters with id = \(result.unupdatedFiltersIds) were not updated")
                     self?.completionQueue.async { onFiltersUpdate(CommonError.error(message: "Some filters were not updated")) }
                 }
             }

@@ -126,7 +126,7 @@ final class ActionExtensionLoaderViewController: UIViewController {
                 migration.migrate()
             }
             catch {
-                LOG.error("(ActionExtensionLoaderViewController) migration failed: \(error)")
+                LOG.error("Migration failed: \(error)")
             }
         }
     }

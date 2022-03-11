@@ -50,7 +50,7 @@ struct FiltersMetadataRequest: RequestProtocol {
 
         guard let resultStr = params.constructLink(url: path),
             let resultUrl = URL(string: resultStr) else  {
-            LOG.error("FiltersMetadataRequest errror - can not construct url" )
+            LOG.error("Error - can not construct url" )
             return nil
         }
 

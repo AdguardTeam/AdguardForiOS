@@ -58,32 +58,32 @@ class SafariMigration4_3: SafariMigration4_3Protocol {
 
     func migrate() {
 
-        LOG.info("(SafariMigration4_3) migrate called")
+        LOG.info("Migrate called")
         switch stateManager.state {
         case .notStarted:
-            LOG.info("(SafariMigration4_3) start migration")
+            LOG.info("Start migration")
             stateManager.start()
 
             do {
                 try migrateSafariProtection()
                 stateManager.finish()
 
-                LOG.info("(SafariMigration4_3) migration succeeded")
+                LOG.info("Migration succeeded")
             }
             catch {
                 stateManager.failure()
-                LOG.error("(SafariMigration4_3) migration failed: \(error)")
+                LOG.error("Migration failed: \(error)")
             }
         case .finished:
-            LOG.info("(SafariMigration4_3) migration allready finished")
+            LOG.info("Migration allready finished")
             return
         case .started:
-            LOG.info("(SafariMigration4_3) migration allready started. Wait it")
+            LOG.info("Migration allready started. Wait it")
             // wait for finish
             let group = DispatchGroup()
             group.enter()
             stateManager.onMigrationFinished {
-                LOG.info("(SafariMigration4_3) migration finished")
+                LOG.info("Migration finished")
                 group.leave()
             }
 
@@ -91,7 +91,7 @@ class SafariMigration4_3: SafariMigration4_3Protocol {
             // TODO: - Refactor it later
             let waitResult = group.wait(timeout: .now() + 10.0)
 
-            LOG.info("(SafariMigration4_3) the wait is over; waitResult successeeded=\(waitResult == .success)")
+            LOG.info("The wait is over; waitResult successeeded=\(waitResult == .success)")
             return
         }
     }

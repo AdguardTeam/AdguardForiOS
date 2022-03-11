@@ -66,7 +66,7 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
     ) throws {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         self.oldAdguardDB = try Connection(oldAdguardDBFilePath, readonly: true)
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Connection with old AdGuard DB established")
+        LOG.info("=Connection with old AdGuard DB established")
 
         self.oldAdguardDBFilePath = oldAdguardDBFilePath
         self.oldDefaultDBFilePath = oldDefaultDBFilePath
@@ -75,7 +75,7 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
     // MARK: - Internal methods
 
     func getGroupsStates() throws -> [(groupId: Int, isEnabled: Bool)] {
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Fetching data from filter_groups table")
+        LOG.info("Fetching data from filter_groups table")
 
         // Query: SELECT group_id, is_enabled FROM filter_groups
         let query = FilterGroupsTable.table.select(FilterGroupsTable.groupId, FilterGroupsTable.isEnabled)
@@ -86,12 +86,12 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
             return (groupId: table.groupId, isEnabled: table.isEnabled )
         }
 
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Fetched from filter_groups table \(groupIds.count) groups")
+        LOG.info("Fetched from filter_groups table \(groupIds.count) groups")
         return groupIds
     }
 
     func getFiltersStates() throws -> [(filterId: Int, groupId: Int, isEnabled: Bool)] {
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Fetching data from filters table")
+        LOG.info("Fetching data from filters table")
 
         // Query: SELECT * FROM filters
         let query = FiltersTable.table
@@ -102,12 +102,12 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
             return (filterId: table.filterId, groupId: table.groupId, isEnabled: table.isEnabled)
         }
 
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Fetched from filters table \(filterIds.count) filters")
+        LOG.info("Fetched from filters table \(filterIds.count) filters")
         return filterIds
     }
 
     func getUserRules() throws -> [SDKSafariMigrationRule] {
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Fetching data from filter_rules table")
+        LOG.info("Fetching data from filter_rules table")
 
         // Query: SELECT * FROM filter_rules WHERE filter_id == baseUserRulesFilterId
         let query = FilterRulesTable.table.where(FilterRulesTable.filterId == baseUserRulesFilterId)
@@ -116,12 +116,12 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
             return ObsoleteFilterRules(from: filterRulesTable)
         }
 
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Fetched from filter_rules table \(userRulesMeta.count) user rules meta")
+        LOG.info("Fetched from filter_rules table \(userRulesMeta.count) user rules meta")
         return userRulesMeta
     }
 
     func getCustomFilters() throws -> [ObsoleteCustomFilter] {
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Fetching data from filter_rules table")
+        LOG.info("Fetching data from filter_rules table")
 
         // SELECT * FROM filters WHERE (filter_id >= baseCustomFilterId)
         let queryCustomFilters = FiltersTable.table.where(FiltersTable.filterId >= baseCustomFilterId)
@@ -129,7 +129,7 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
         let customFiltersFromDb = try oldAdguardDB.prepare(queryCustomFilters).map { row in
             return FiltersTable(dbFilter: row)
         }
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Fetched from filters table \(customFiltersFromDb.count) custom filters")
+        LOG.info("Fetched from filters table \(customFiltersFromDb.count) custom filters")
 
         return try customFiltersFromDb.map { customFilter in
             // SELECT * FROM filter_rules WHERE (filter_id == customFilter.filterId)
@@ -139,17 +139,17 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
                 let filterRulesTable = FilterRulesTable(dbFilterRule: row)
                 return ObsoleteFilterRules(from: filterRulesTable)
             }
-            LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Fetched \(customFilterRules.count) rules for custom filter with id=\(customFilter.filterId)")
+            LOG.info("Fetched \(customFilterRules.count) rules for custom filter with id=\(customFilter.filterId)")
 
             return ObsoleteCustomFilter(from: customFilter, rules: customFilterRules)
         }
     }
 
     func removeOldDBFiles() throws {
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Removing old DB files")
+        LOG.info("Removing old DB files")
         try fileManager.removeItem(atPath: oldAdguardDBFilePath)
         try fileManager.removeItem(atPath: oldDefaultDBFilePath)
-        LOG.info("(SafariProtectionFiltersDatabaseMigrationHelper) - Removed old DB files")
+        LOG.info("Removed old DB files")
     }
 }
 

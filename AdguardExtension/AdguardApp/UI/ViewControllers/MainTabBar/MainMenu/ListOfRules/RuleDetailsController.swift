@@ -119,7 +119,7 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
             dismiss(animated: true, completion: nil)
         }
         catch {
-            LOG.error("(RuleDetailsController) - removeAction; Error removing rule: \(error)")
+            LOG.error("Error removing rule: \(error)")
             showUnknownErrorAlert()
         }
     }

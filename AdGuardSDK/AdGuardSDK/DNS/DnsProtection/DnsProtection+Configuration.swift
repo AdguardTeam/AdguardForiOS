@@ -93,7 +93,7 @@ extension DnsProtection {
 
     public func updateConfig(with newConfig: DnsConfigurationProtocol) {
         workingQueue.sync {
-            LOG.info("(DnsProtection+Configuration) - updateConfig;")
+            LOG.info("updateConfig")
             self.configuration.updateConfig(with: newConfig)
         }
     }

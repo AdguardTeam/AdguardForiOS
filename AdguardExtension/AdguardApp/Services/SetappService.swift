@@ -49,14 +49,14 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
         self.purchaseService = purchaseService
         self.resources = resources
 
-        LOG.info("(SetappService) - init; setappUsed  = \(resources.setappUsed )")
+        LOG.info("SetappService - init; setappUsed  = \(resources.setappUsed )")
         if resources.setappUsed {
             purchaseService.updateSetappState(subscription: SetappManager.shared.subscription)
         }
     }
 
     func start() {
-        LOG.info("(SetappService) - starting Setapp; Current status = \(SetappManager.shared.subscription.description); setappUsed = \(resources.setappUsed)")
+        LOG.info("Starting Setapp; Current status = \(SetappManager.shared.subscription.description); setappUsed = \(resources.setappUsed)")
         if resources.setappUsed {
             startManager()
         }
@@ -71,7 +71,7 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
             startManager()
 
             if SetappManager.shared.canOpen(url: url) {
-                LOG.info("(SetappService) - Setapp can openUrl; url: \(url)")
+                LOG.info("Setapp can openUrl; url: \(url)")
 
                 return SetappManager.shared.open(url: url, options: options) { [weak self] result in
                     switch result {
@@ -94,8 +94,8 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
     // MARK: -- SetAppManagerDelegate
 
     func setappManager(_ manager: SetappManager, didUpdateSubscriptionTo newSetappSubscription: SetappSubscription) {
-        LOG.info("(SetappService) setapp subscription changed")
-        LOG.info("(SetappService) setapp new subscription is active: \(manager.subscription.isActive)")
+        LOG.info("Setapp subscription changed")
+        LOG.info("Setapp new subscription is active: \(manager.subscription.isActive)")
 
         purchaseService.updateSetappState(subscription: manager.subscription)
         resources.setappUsed = true
@@ -104,7 +104,7 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
     // MARK: -- private methods
 
     private func startManager() {
-        LOG.info("(SetappService) - startManager; start = \(started)")
+        LOG.info("startManager; start = \(started)")
 
         if started {
             return
@@ -115,7 +115,7 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
         SetappManager.shared.delegate = self
 
         SetappManager.setLogHandle { (message: String, logLevel: SetappLogLevel) in
-            LOG.info("(Setapp) [\(logLevel)], \(message)")
+            LOG.info("[\(logLevel)], \(message)")
         }
 
         started = true

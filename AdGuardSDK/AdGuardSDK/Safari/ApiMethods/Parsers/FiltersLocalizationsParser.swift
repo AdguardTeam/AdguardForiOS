@@ -26,7 +26,7 @@ struct FiltersLocalizationsParser: ParserProtocol {
 
     func parse(data: Data, response: URLResponse?) -> Model? {
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            LOG.error("(FiltersLocalizationsParser) bad response")
+            LOG.error("Bad response")
             return nil
         }
 

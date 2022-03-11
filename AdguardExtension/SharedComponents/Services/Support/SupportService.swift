@@ -126,7 +126,7 @@ final class SupportService: SupportServiceProtocol {
             return logsZipUrl
         }
         catch {
-            LOG.error("(SupportService) - exportLogs; Failed to export logs: \(error)")
+            LOG.error("Failed to export logs: \(error)")
         }
         return nil
     }
@@ -146,7 +146,7 @@ final class SupportService: SupportServiceProtocol {
             self.logsZipDirectory = nil
         }
         catch {
-            LOG.error("(SupportService) - deleteLogsFiles; Error removing logs files: \(error)")
+            LOG.error("Error removing logs files: \(error)")
         }
     }
 

@@ -126,7 +126,7 @@ private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProtection.self)
 extension DnsProtection {
     public func rulesString(for type: DnsUserRuleType) -> String {
         workingQueue.sync {
-            LOG.info("(DnsProtection+UserRules) - rulesString; Returning rules string for type=\(type)")
+            LOG.info("Returning rules string for type=\(type)")
             let manager = getManager(for: type)
             return manager.rulesString
         }
@@ -134,7 +134,7 @@ extension DnsProtection {
 
     public func allRules(for type: DnsUserRuleType) -> [UserRule] {
         workingQueue.sync {
-            LOG.info("(DnsProtection+UserRules) - allRules; Returning all rules for type=\(type)")
+            LOG.info("Returning all rules for type=\(type)")
             let manager = getManager(for: type)
             return manager.allRules
         }
@@ -142,7 +142,7 @@ extension DnsProtection {
 
     public func add(rule: UserRule, override: Bool, for type: DnsUserRuleType) throws {
         try workingQueue.sync {
-            LOG.info("(DnsProtection+UserRules) - addRule; Adding rule: \(rule); for type=\(type); override=\(override)")
+            LOG.info("Adding rule: \(rule); for type=\(type); override=\(override)")
             let manager = getManager(for: type)
             try manager.add(rule: rule, override: override)
         }
@@ -150,7 +150,7 @@ extension DnsProtection {
 
     public func add(rules: [UserRule], override: Bool, for type: DnsUserRuleType) throws {
         try workingQueue.sync {
-            LOG.info("(DnsProtection+UserRules) - addRules; Adding \(rules.count) rules; for type=\(type); override=\(override)")
+            LOG.info("Adding \(rules.count) rules; for type=\(type); override=\(override)")
             let manager = getManager(for: type)
             try manager.add(rules: rules, override: override)
         }
@@ -158,7 +158,7 @@ extension DnsProtection {
 
     public func set(rules: [String], for type: DnsUserRuleType) {
         workingQueue.sync {
-            LOG.info("(DnsProtection+UserRules) - setRules; Setting \(rules.count) rules; for type=\(type)")
+            LOG.info("Setting \(rules.count) rules; for type=\(type)")
             let manager = getManager(for: type)
             manager.set(rules: rules)
         }
@@ -166,7 +166,7 @@ extension DnsProtection {
 
     public func modifyRule(_ oldRuleText: String, _ newRule: UserRule, for type: DnsUserRuleType) throws {
         try workingQueue.sync {
-            LOG.info("(DnsProtection+UserRules) - modifyRule; Modifying old rule=\(oldRuleText) to new rule=\(newRule)")
+            LOG.info("Modifying old rule=\(oldRuleText) to new rule=\(newRule)")
             let manager = getManager(for: type)
             try manager.modifyRule(oldRuleText, newRule)
         }
@@ -174,7 +174,7 @@ extension DnsProtection {
 
     public func turnRules(_ rules: [String], on: Bool, for type: DnsUserRuleType) {
         workingQueue.sync {
-            LOG.info("(DnsProtection+UserRules) - turnRules; Turning \(rules.count) rules on=\(on) for type=\(type)")
+            LOG.info("Turning \(rules.count) rules on=\(on) for type=\(type)")
             let manager = getManager(for: type)
             rules.forEach {
                 try? manager.modifyRule($0, UserRule(ruleText: $0, isEnabled: on))
@@ -184,7 +184,7 @@ extension DnsProtection {
 
     public func removeRule(withText ruleText: String, for type: DnsUserRuleType) throws {
         try workingQueue.sync {
-            LOG.info("(DnsProtection+UserRules) - removeRule; Removing rule=\(ruleText) for type=\(type)")
+            LOG.info("Removing rule=\(ruleText) for type=\(type)")
             let manager = getManager(for: type)
             try manager.removeRule(withText: ruleText)
         }
@@ -192,7 +192,7 @@ extension DnsProtection {
 
     public func removeRules(_ rules: [String], for type: DnsUserRuleType) {
         workingQueue.sync {
-            LOG.info("(DnsProtection+UserRules) - removeRules; Removing \(rules.count) rules for type=\(type)")
+            LOG.info("Removing \(rules.count) rules for type=\(type)")
             let manager = getManager(for: type)
             rules.forEach {
                 try? manager.removeRule(withText: $0)
@@ -202,7 +202,7 @@ extension DnsProtection {
 
     public func removeAllRules(for type: DnsUserRuleType) {
         workingQueue.sync {
-            LOG.info("(DnsProtection+UserRules) - removeAllRules; Removing all rules for type=\(type)")
+            LOG.info("Removing all rules for type=\(type)")
             let manager = getManager(for: type)
             manager.removeAllRules()
         }

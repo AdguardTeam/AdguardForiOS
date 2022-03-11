@@ -134,7 +134,7 @@ class VpnManager: VpnManagerProtocol {
     // MARK: - VpnManagerProtocol methods
 
     func checkVpnInstalled(completion: @escaping (Error?)->Void) {
-        LOG.info("(VpnManager) checkVpnInstalled called")
+        LOG.info("checkVpnInstalled called")
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
@@ -151,7 +151,7 @@ class VpnManager: VpnManagerProtocol {
     }
 
     func updateSettings(completion: ((Error?) -> Void)?) {
-        LOG.info("(VpnManager) updateSettings called waiting for 1 second before restart")
+        LOG.info("UpdateSettings called waiting for 1 second before restart")
 
         /* There was a problem when user could produce lots of VPN restarts in a row. To avoid multiple restarts for every user action we wait for 1 second for next restart, if there weren't any than we restart it.
          Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719
@@ -172,7 +172,7 @@ class VpnManager: VpnManagerProtocol {
             self?.updateSettingsCallback = completion
 
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-                LOG.info("(VpnManager) 1 second passed calling updateSettings now")
+                LOG.info("1 second passed calling updateSettings now")
                 self?.updateSettingsInternal { error in
                     DispatchQueue.main.async {
                         self?.timer?.invalidate()
@@ -186,7 +186,7 @@ class VpnManager: VpnManagerProtocol {
     }
 
     func removeVpnConfiguration(completion: @escaping (Error?) -> Void) {
-        LOG.info("(VpnManager) removeVpnConfiguration called")
+        LOG.info("removeVpnConfiguration called")
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
@@ -209,7 +209,7 @@ class VpnManager: VpnManagerProtocol {
 
     func installVpnConfiguration(completion: @escaping (Error?) -> Void) {
 
-        LOG.info("(VpnManager) installVpnConfiguration")
+        LOG.info("installVpnConfiguration")
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
@@ -236,7 +236,7 @@ class VpnManager: VpnManagerProtocol {
     }
 
     func getConfigurationStatus(callback: @escaping (VpnConfigurationStatus) -> Void) {
-        LOG.info("(VpnManager) getConfigurationStatus called")
+        LOG.info("getConfigurationStatus called")
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
@@ -253,7 +253,7 @@ class VpnManager: VpnManagerProtocol {
         workingQueue.async { [weak self] in
             guard let self = self else { return }
 
-            LOG.info("(VpnManager) updateSettings")
+            LOG.info("updateSettings")
 
             let (manager, error) = self.loadManager()
 
@@ -263,7 +263,7 @@ class VpnManager: VpnManagerProtocol {
             }
 
             if manager == nil {
-                LOG.error("(VpnManager) updateSettings error - there is no installed vpn configurations to update")
+                LOG.error("There is no installed vpn configurations to update")
                 let error = VpnManagerError.managerNotInstalled
                 completion?(error)
 
@@ -280,7 +280,7 @@ class VpnManager: VpnManagerProtocol {
     }
 
     private func loadManager()->(NETunnelProviderManager?, Error?) {
-        LOG.info("(VpnManager) loadManager ")
+        LOG.info("loadManager ")
 
         var manager: NETunnelProviderManager?
         var resultError: Error?
@@ -294,17 +294,17 @@ class VpnManager: VpnManagerProtocol {
             guard let self = self else { return }
             if error != nil {
                 resultError = error
-                LOG.error("(VpnManager) loadManager error: \(error!)")
+                LOG.error("loadManager error: \(error!)")
                 return
             }
 
             if managers?.count ?? 0 == 0 {
-                LOG.info("(VpnManager) loadManager - manager not installed")
+                LOG.info("loadManager - manager not installed")
                 return
             }
 
             if managers!.count > 1 {
-                LOG.error("(VpnManager) loadManager error - there are \(managers!.count) managers installed. Delete all managers")
+                LOG.error("loadManager error - there are \(managers!.count) managers installed. Delete all managers")
 
                 for manager in managers! {
                     _ = self.removeManager(manager)
@@ -315,7 +315,7 @@ class VpnManager: VpnManagerProtocol {
                 return
             }
 
-            LOG.info("(VpnManager) loadManager success)")
+            LOG.info("loadManager success)")
             manager = managers?.first
         }
 
@@ -327,7 +327,7 @@ class VpnManager: VpnManagerProtocol {
 
     private func createManager()->NETunnelProviderManager {
 
-        LOG.info("(VpnManager) createManager")
+        LOG.info("createManager")
 
         let manager = providerManagerType.self.init()
 
@@ -335,7 +335,7 @@ class VpnManager: VpnManagerProtocol {
     }
 
     private func setupConfiguration(_ manager: NETunnelProviderManager) {
-        LOG.info("(VpnManager) setupConfiguration called")
+        LOG.info("setupConfiguration called")
 
         // do not update configuration for not premium users
         if !appConfiguration.proStatus {
@@ -362,7 +362,7 @@ class VpnManager: VpnManagerProtocol {
         }
 
         if resources.dnsImplementation == .native {
-            LOG.info("(VpnManager) set manager isEnabled = false because native mode is enabled ")
+            LOG.info("set manager isEnabled = false because native mode is enabled ")
         }
 
         manager.isEnabled = resources.dnsImplementation == .native ? false : enabled
@@ -373,7 +373,7 @@ class VpnManager: VpnManagerProtocol {
 
     private func saveManager(_ manager: NETunnelProviderManager)->Error? {
 
-        LOG.info("(VpnManager) saveManager")
+        LOG.info("saveManager")
         var resultError: Error?
 
         let group = DispatchGroup()
@@ -382,10 +382,10 @@ class VpnManager: VpnManagerProtocol {
         manager.saveToPreferences { (error) in
             resultError = error
             if error != nil {
-                LOG.error("(VpnManager) saveManager error: \(error!)")
+                LOG.error("saveManager error: \(error!)")
             }
             else {
-                LOG.info("(VpnManager) saveManager success")
+                LOG.info("saveManager success")
             }
 
             group.leave()
@@ -397,7 +397,7 @@ class VpnManager: VpnManagerProtocol {
     }
 
     private func removeManager(_ manager: NETunnelProviderManager)->Error? {
-        LOG.info("(VpnManager) - removeManager called")
+        LOG.info("removeManager called")
 
         var resultError: Error?
         let group = DispatchGroup()
@@ -414,15 +414,15 @@ class VpnManager: VpnManagerProtocol {
     }
 
     private func restartTunnel(_ manager: NETunnelProviderManager) {
-        LOG.info("(VpnManager) - restartTunnel called")
+        LOG.info("restartTunnel called")
 
         // Assigning start tunnel function to call it in observer
         startTunnel = {
-            LOG.info("(VpnManager) - Trying to start VPN tunnel after restart")
+            LOG.info("Trying to start VPN tunnel after restart")
             do {
                 try manager.connection.startVPNTunnel()
             } catch {
-                LOG.error("(VpnManager) - start tunnel error: \(error.localizedDescription)")
+                LOG.error("startTunnel error: \(error.localizedDescription)")
             }
         }
         manager.connection.stopVPNTunnel()
@@ -439,10 +439,10 @@ class VpnManager: VpnManagerProtocol {
             actualEnabled = manager.connection.status == .connected || manager.connection.status == .connecting
         }
 
-        LOG.info("(VpnManager) savedState: \(savedEnabled) actual: \(actualEnabled)")
+        LOG.info("savedState: \(savedEnabled) actual: \(actualEnabled)")
 
         if actualEnabled != savedEnabled {
-            LOG.info("(VpnManager) vpn enabled state was changed outside the application to state: \(actualEnabled)")
+            LOG.info("vpn enabled state was changed outside the application to state: \(actualEnabled)")
             NotificationCenter.default.post(name:VpnManager.stateChangedNotification, object: actualEnabled)
         }
     }

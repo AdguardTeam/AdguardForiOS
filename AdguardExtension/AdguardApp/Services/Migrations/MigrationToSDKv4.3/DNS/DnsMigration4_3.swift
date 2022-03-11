@@ -66,10 +66,10 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
 
     func migrate() {
 
-        LOG.info("(DnsMigration4_3) migrate called")
+        LOG.info("Migrate called")
         switch stateManager.state {
         case .notStarted:
-            LOG.info("(DnsMigration4_3) start migration")
+            LOG.info("Start migration")
             stateManager.start()
 
             do {
@@ -77,24 +77,24 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
                 try migrateDnsStatistics()
                 stateManager.finish()
 
-                LOG.info("(DnsMigration4_3) migration succeeded")
+                LOG.info("Migration succeeded")
             }
             catch {
-                LOG.error("(DnsMigration4_3) failure: \(error)")
+                LOG.error("Failure: \(error)")
                 stateManager.failure()
             }
 
         case .finished:
-            LOG.info("(DnsMigration4_3) allready migrated")
+            LOG.info("Allready migrated")
             return
         case .started:
 
-            LOG.info("(DnsMigration4_3) allready started. Wait for finish.")
+            LOG.info("Allready started. Wait for finish.")
             // wait for finish
             let group = DispatchGroup()
             group.enter()
             stateManager.onMigrationFinished {
-                LOG.info("(DnsMigration4_3) migration finished")
+                LOG.info("Migration finished")
                 group.leave()
             }
 
@@ -102,7 +102,7 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
             // TODO: - Refactor it later
             let waitResult = group.wait(timeout: .now() + 10.0)
 
-            LOG.info("(DnsMigration4_3) the wait is over; waitResult successeeded=\(waitResult == .success)")
+            LOG.info("The wait is over; waitResult successeeded=\(waitResult == .success)")
             return
         }
     }

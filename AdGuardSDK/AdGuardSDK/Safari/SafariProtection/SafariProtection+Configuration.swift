@@ -94,7 +94,7 @@ extension SafariProtection {
 
     public func update(proStatus: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+Configuration) - updateProStatus; Updating proStatus from=\(self.configuration.proStatus) to=\(proStatus)")
+            LOG.info("Updating proStatus from=\(self.configuration.proStatus) to=\(proStatus)")
 
             executeBlockAndReloadCbs {
                 if configuration.proStatus != proStatus {
@@ -105,15 +105,15 @@ extension SafariProtection {
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+Configuration) - update.proStatus.reloadContentBlockers; self is missing!")
+                    LOG.error("update.proStatus.reloadContentBlockers; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+Configuration) - updateProStatus; Error reloading CBs when updating proStatus; Error: \(error)")
+                    LOG.error("Error reloading CBs when updating proStatus; Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+Configuration) - updateProStatus; Successfully reloaded CBs after updating proStatus")
+                    LOG.info("Successfully reloaded CBs after updating proStatus")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -122,7 +122,7 @@ extension SafariProtection {
 
     public func update(safariProtectionEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+Configuration) - updateSafariProtection; Updating safariProtection from=\(self.configuration.safariProtectionEnabled) to=\(safariProtectionEnabled)")
+            LOG.info("Updating safariProtection from=\(self.configuration.safariProtectionEnabled) to=\(safariProtectionEnabled)")
 
             executeBlockAndReloadCbs {
                 if configuration.safariProtectionEnabled != safariProtectionEnabled {
@@ -133,15 +133,15 @@ extension SafariProtection {
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+Configuration) - update.safariProtection.reloadContentBlockers; self is missing!")
+                    LOG.error("update.safariProtection.reloadContentBlockers; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+Configuration) - updateSafariProtection; Error reloading CBs when updating safariProtection; Error: \(error)")
+                    LOG.error("Error reloading CBs when updating safariProtection; Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+Configuration) - updateSafariProtection; Successfully reloaded CBs after updating safariProtection")
+                    LOG.info("Successfully reloaded CBs after updating safariProtection")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -150,29 +150,29 @@ extension SafariProtection {
 
     public func update(advancedProtectionEnabled: Bool) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+Configuration) - updateAdvancedProtection; Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
+            LOG.info("Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
             let result = updateInternal(advancedProtectionEnabled: advancedProtectionEnabled)
-            LOG.info("(SafariProtection+Configuration - updateAdvancedProtection; advancedProtection was updated = \(result)")
+            LOG.info("advancedProtection was updated = \(result)")
         }
     }
 
     public func update(advancedProtectionEnabled: Bool, onCbReloaded: ((Error?) -> Void)?) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+Configuration) - updateAdvancedProtection; Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
+            LOG.info("Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
 
             executeBlockAndReloadCbs {
                 return updateInternal(advancedProtectionEnabled: advancedProtectionEnabled)
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+Configuration) - update.advancedProtection.reloadContentBlockers; self is missing!")
+                    LOG.error("update.advancedProtection.reloadContentBlockers; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+Configuration) - updateAdvancedProtection; Error reloading CBs when updating advancedProtection; Error: \(error)")
+                    LOG.error("Error reloading CBs when updating advancedProtection; Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+Configuration) - updateAdvancedProtection; Successfully reloaded CBs after updating advancedProtection")
+                    LOG.info("Successfully reloaded CBs after updating advancedProtection")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -181,7 +181,7 @@ extension SafariProtection {
 
     public func update(blocklistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+Configuration) - updateBlocklistIsEnabled; Updating blocklist state from=\(self.configuration.blocklistIsEnabled) to=\(blocklistIsEnabled)")
+            LOG.info("Updating blocklist state from=\(self.configuration.blocklistIsEnabled) to=\(blocklistIsEnabled)")
 
             executeBlockAndReloadCbs {
                 if configuration.blocklistIsEnabled != blocklistIsEnabled {
@@ -192,15 +192,15 @@ extension SafariProtection {
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+Configuration) - update.blocklistIsEnabled.reloadContentBlockers; self is missing!")
+                    LOG.error("update.blocklistIsEnabled.reloadContentBlockers; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+Configuration) - updateBlocklistIsEnabled; Error reloading CBs when updating blocklist state; Error: \(error)")
+                    LOG.error("Error reloading CBs when updating blocklist state; Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+Configuration) - updateBlocklistIsEnabled; Successfully reloaded CBs after updating blocklist state")
+                    LOG.info("Successfully reloaded CBs after updating blocklist state")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -209,7 +209,7 @@ extension SafariProtection {
 
     public func update(allowlistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Updating allowlist state from=\(self.configuration.allowlistIsEnabled) to=\(allowlistIsEnabled)")
+            LOG.info("Updating allowlist state from=\(self.configuration.allowlistIsEnabled) to=\(allowlistIsEnabled)")
 
             executeBlockAndReloadCbs {
                 if configuration.allowlistIsEnabled != allowlistIsEnabled {
@@ -220,15 +220,15 @@ extension SafariProtection {
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+Configuration) - update.allowlistIsEnabled.reloadContentBlockers; self is missing!")
+                    LOG.error("update.allowlistIsEnabled.reloadContentBlockers; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Error reloading CBs when updating allowlist state; Error: \(error)")
+                    LOG.error("Error reloading CBs when updating allowlist state; Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Successfully reloaded CBs after updating allowlist state")
+                    LOG.info("Successfully reloaded CBs after updating allowlist state")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -237,7 +237,7 @@ extension SafariProtection {
 
     public func update(allowlistIsInverted: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+Configuration) - updateAllowlistIsInverted; Updating allowlist invertion state from=\(self.configuration.allowlistIsInverted) to=\(allowlistIsInverted)")
+            LOG.info("Updating allowlist invertion state from=\(self.configuration.allowlistIsInverted) to=\(allowlistIsInverted)")
 
             executeBlockAndReloadCbs {
                 if configuration.allowlistIsInverted != allowlistIsInverted {
@@ -248,15 +248,15 @@ extension SafariProtection {
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+Configuration) - update.allowlistIsInverted.reloadContentBlockers; self is missing!")
+                    LOG.error("update.allowlistIsInverted.reloadContentBlockers; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Error reloading CBs when updating allowlist invertion; Error: \(error)")
+                    LOG.error("Error reloading CBs when updating allowlist invertion; Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Successfully reloaded CBs after updating allowlist invertion")
+                    LOG.info("Successfully reloaded CBs after updating allowlist invertion")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -265,7 +265,7 @@ extension SafariProtection {
 
     public func updateConfig(with newConfig: SafariConfigurationProtocol) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+Configuration) - updateConfig;")
+            LOG.info("updateConfig;")
             configuration.updateConfig(with: newConfig)
         }
     }
@@ -277,7 +277,7 @@ extension SafariProtection {
             configuration.advancedBlockingIsEnabled = advancedProtectionEnabled
             return true
         } else {
-            LOG.info("(SafariProtection+Configuration) - updateInternalAdvancedProtection; Advanced protection hasn't been updated; reason - old value is equal to new value")
+            LOG.info("Advanced protection hasn't been updated; reason - old value is equal to new value")
             return false
         }
     }

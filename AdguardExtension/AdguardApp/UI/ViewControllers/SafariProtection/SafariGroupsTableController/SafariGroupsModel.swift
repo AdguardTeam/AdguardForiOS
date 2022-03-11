@@ -58,7 +58,7 @@ final class SafariGroupsModel {
     // MARK: - Public methods
 
     func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool) {
-        LOG.info("(SafariGroupsModel) - setGroup; Trying to change group=\(groupType) to state=\(enabled)")
+        LOG.info("Trying to change group=\(groupType) to state=\(enabled)")
 
         do {
             try safariProtection.setGroup(groupType: groupType, enabled: enabled, onCbReloaded: nil)
@@ -67,7 +67,7 @@ final class SafariGroupsModel {
             delegate?.modelChanged(row)
         }
         catch {
-            LOG.error("(SafariGroupsModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
+            LOG.error("DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
         }
     }
 

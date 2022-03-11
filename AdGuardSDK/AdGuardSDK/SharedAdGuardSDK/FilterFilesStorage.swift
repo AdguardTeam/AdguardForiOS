@@ -97,11 +97,11 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
     // MARK: - Initialization
 
     public init(filterFilesDirectoryUrl: URL) throws {
-        LOG.info("(FilterFilesStorage) - init start; filterFilesDirectoryUrl=\(filterFilesDirectoryUrl)")
+        LOG.info("FilterFilesDirectoryUrl=\(filterFilesDirectoryUrl)")
 
         // We are trying to create directory if passed URL is not a valid directory
         if !filterFilesDirectoryUrl.isDirectory {
-            LOG.info("(FilterFilesStorage) - creating a new filter files directory")
+            LOG.info("Creating a new filter files directory")
             try fileManager.createDirectory(at: filterFilesDirectoryUrl, withIntermediateDirectories: true, attributes: nil)
         }
 
@@ -111,35 +111,35 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
     // MARK: - Public methods
 
     public func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
-        LOG.info("(FilterFilesStorage) - update filter \(id)")
+        LOG.info("Update filter \(id)")
         let filterFileUrl = urlForFilter(withId: id)
         downloadFilter(withUrl: filterFileUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
 
     public func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void) {
-        LOG.info("(FilterFilesStorage) - update custom filter \(id) from \(subscriptionUrl)")
+        LOG.info("Update custom filter \(id) from \(subscriptionUrl)")
         downloadFilter(withUrl: subscriptionUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
 
     public func getFilterContentForFilter(withId id: Int) -> String? {
-        LOG.debug("(FilterFilesStorage) - get filter \(id) content")
+        LOG.debug("Get filter \(id) content")
         let fileUrl = fileUrlForFilter(withId: id)
 
         guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
-            LOG.error("(FilterFilesStorage) - getFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
+            LOG.error("GetFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
 
             // try to get presaved filter file
             if  let presavedFilterFileUrl = defaultFilteUrlForFilter(withId: id),
                 let content = try? String.init(contentsOf: presavedFilterFileUrl, encoding: .utf8) {
-                LOG.info("(FilterFilesStorage) - return default filter for filter with id=\(id)")
+                LOG.info("Return default filter for filter with id=\(id)")
                 return content
             }
 
-            LOG.debug("(FilterFilesStorage) - filter \(id) not found")
+            LOG.debug("Filter \(id) not found")
             return nil
         }
 
-        LOG.debug("(FilterFilesStorage) - filter \(id) content length is \(content.utf8.count)")
+        LOG.debug("Filter \(id) content length is \(content.utf8.count)")
         return content
     }
 
@@ -155,14 +155,14 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
     }
 
     public func saveFilter(withId id: Int, filterContent: String) throws {
-        LOG.info("(FilterFilesStorage) - save filter \(id), content length is \(filterContent.utf8.count)")
+        LOG.info("Save filter \(id), content length is \(filterContent.utf8.count)")
         let filterFileUrl = fileUrlForFilter(withId: id)
         try filterContent.write(to: filterFileUrl, atomically: true, encoding: .utf8)
-        LOG.info("(FilterFilesStorage) - filter \(id) has been saved to \(filterFileUrl)")
+        LOG.info("Filter \(id) has been saved to \(filterFileUrl)")
     }
 
     public func deleteFilter(withId id: Int) throws {
-        LOG.info("(FilterFilesStorage) - delete filter \(id)")
+        LOG.info("Delete filter \(id)")
         let filterFileUrl = fileUrlForFilter(withId: id)
         try fileManager.removeItem(at: filterFileUrl)
     }
@@ -172,7 +172,7 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
     }
 
     public func reset() throws {
-        LOG.info("(FilterFilesStorage) - reset start")
+        LOG.info("Reset start")
 
         // Delete all custom filters files
         let filtersUrls = try fileManager.contentsOfDirectory(at: filterFilesDirectoryUrl, includingPropertiesForKeys: nil, options: [])
@@ -184,13 +184,13 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
                 try fileManager.removeItem(at: filterUrl)
             }
         }
-        LOG.info("(FilterFilesStorage) - reset; Successfully deleted directory with filters")
+        LOG.info("Successfully deleted directory with filters")
     }
 
     // MARK: - Private methods
 
     private func downloadFilter(withUrl url: URL, filterId: Int, onFilterDownloaded: @escaping (Error?) -> Void) {
-        LOG.debug("(FilterFilesStorage) - download \(filterId) from \(url)")
+        LOG.debug("Download \(filterId) from \(url)")
         let filterFileUrl = fileUrlForFilter(withId: filterId)
 
         filtersDownloadQueue.async {
@@ -200,7 +200,7 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
                 onFilterDownloaded(nil)
             }
             catch {
-                LOG.error("(FilterFilesStorage) - downloadFilter - download error: \(error)")
+                LOG.error("Download error: \(error)")
                 onFilterDownloaded(error)
             }
         }

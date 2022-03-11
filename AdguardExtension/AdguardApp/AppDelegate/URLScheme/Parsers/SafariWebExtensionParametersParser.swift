@@ -46,7 +46,7 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
         let result = Domain.findDomains(in: decodedDomain)
 
         if result.isEmpty {
-            LOG.error("(SafariWebExtensionParametersParser) - parse; Failed to get absolute domain string from string=\(decodedDomain)")
+            LOG.error("Failed to get absolute domain string from string=\(decodedDomain)")
             return false
         }
 

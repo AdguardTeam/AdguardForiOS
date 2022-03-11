@@ -68,7 +68,7 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
             return nil
         }
         let filterLocalization = FilterLocalizationsTable(dbFilterLocalization: dbFilterLocalization)
-        LOG.debug("(FiltersMetaStorage) - getLocalizationForFilter returning \(filterLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
+        LOG.debug("Returning \(filterLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
         return filterLocalization
     }
 
@@ -82,7 +82,7 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
                                                     FilterLocalizationsTable.name <- localization.name,
                                                     FilterLocalizationsTable.description <- localization.description)
         try filtersDb.run(query)
-        LOG.debug("(FiltersMetaStorage) - Insert localization for filter with id=\(id) for lang=\(lang)")
+        LOG.debug("Insert localization for filter with id=\(id) for lang=\(lang)")
     }
 
     func deleteAllLocalizationForFilters(withIds ids: [Int]) throws {
@@ -95,7 +95,7 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
         // Query: DELETE FROM filter_localizations WHERE filter_id = id
         let query = FilterLocalizationsTable.table.where(FilterLocalizationsTable.filterId == id).delete()
         try filtersDb.run(query)
-        LOG.debug("(FiltersMetaStorage) - Delete all localization for filter with id=\(id)")
+        LOG.debug("Delete all localization for filter with id=\(id)")
     }
 
     // MARK: - MetaStorage filters meta localization

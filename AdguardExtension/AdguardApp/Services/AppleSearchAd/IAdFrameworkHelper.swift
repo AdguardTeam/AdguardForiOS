@@ -44,7 +44,7 @@ final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
             case .success(let details):
                 self?.processAttributionDetails(details, completionHandler: completionHandler)
             case .failure(let error):
-                LOG.error("(IAdFrameworkHelper) - fetchAttributionRecords; Search Ads error: \(error)")
+                LOG.error("Search Ads error: \(error)")
                 completionHandler(.error(error))
                 return
             }
@@ -55,14 +55,14 @@ final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
 
         var json = [String: String]()
         for (version, adDictionary) in attributionDetails {
-            LOG.info("(IAdFrameworkHelper) - processAttributionDetails; Search Ads version: \(version)")
+            LOG.info("Search Ads version: \(version)")
             if let attributionInfo = adDictionary as? [String: String] {
                 json = attributionInfo
             }
         }
 
         if json.isEmpty {
-            LOG.error("(IAdFrameworkHelper) - processAttributionDetails; Search Ads data is missing")
+            LOG.error("Search Ads data is missing")
             completionHandler(.error(AppleSearchAdsService.AdsError.missingAttributionData))
             return
         }

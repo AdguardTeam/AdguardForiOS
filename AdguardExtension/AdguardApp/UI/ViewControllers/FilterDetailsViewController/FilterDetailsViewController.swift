@@ -142,7 +142,7 @@ final class FilterDetailsViewController: UIViewController {
             }
         }
         catch {
-            LOG.error("(FilterDetailsViewController) - deleteButtonTapped; Error deleting custom filter with id=\(filterMeta.filterId); Error: \(error)")
+            LOG.error("Error deleting custom filter with id=\(filterMeta.filterId); Error: \(error)")
             showUnknownErrorAlert()
         }
     }
@@ -167,7 +167,7 @@ extension FilterDetailsViewController: SwitchTableViewCellDelegate {
             filterMeta = newFilterMeta
         }
         catch {
-            LOG.error("(FilterDetailsViewController) - switchStateChanged; Error changing state for filter with id=\(filterMeta.filterId), group id=\(filterMeta.groupId.debugDescription); Error: \(error)")
+            LOG.error("Error changing state for filter with id=\(filterMeta.filterId), group id=\(filterMeta.groupId.debugDescription); Error: \(error)")
             showUnknownErrorAlert()
         }
     }

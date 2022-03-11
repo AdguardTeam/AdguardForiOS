@@ -52,43 +52,43 @@ final class SafariProtectionAllowlistRulesMigrationHelper: SafariProtectionAllow
     }
 
     func getAllowlistRules() throws -> [SDKSafariMigrationRule] {
-        LOG.info("(SafariProtectionAllowlistRulesMigrationHelper) - Start fetching data from allowlist rule file")
+        LOG.info("Start fetching data from allowlist rule file")
         let url = URL(fileURLWithPath: rulesContainerDirectoryPath).appendingPathComponent(oldSafariAllowListRulesFileName)
         guard fileManager.fileExists(atPath: url.path) else {
-            LOG.warn("(SafariProtectionAllowlistRulesMigrationHelper) -  allowlist rules file doesn't exist")
+            LOG.warn("Allowlist rules file doesn't exist")
             return []
         }
 
         let data = try Data(contentsOf: url)
             guard let result = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [SDKSafariMigrationAllowlistRule] else {
-            LOG.warn("(SafariProtectionAllowlistRulesMigrationHelper) - NSKeyedUnarchiver return nil data for allowlist rules file")
+            LOG.warn("NSKeyedUnarchiver return nil data for allowlist rules file")
             return []
         }
 
-        LOG.info("(SafariProtectionAllowlistRulesMigrationHelper) - Allowlist data successfully fetched, rules count: \(result.count)")
+        LOG.info("Allowlist data successfully fetched, rules count: \(result.count)")
         return result
     }
 
     func getInvertedAllowlistRules() throws -> [SDKSafariMigrationRule] {
-        LOG.info("(SafariProtectionAllowlistRulesMigrationHelper) - Start fetching data from inverted allowlist rules file")
+        LOG.info("Start fetching data from inverted allowlist rules file")
         let url = URL(fileURLWithPath: rulesContainerDirectoryPath).appendingPathComponent(oldSafariInvertedAllowListRulesFileName)
         guard fileManager.fileExists(atPath: url.path) else {
-            LOG.warn("(SafariProtectionAllowlistRulesMigrationHelper) -  inverted allowlist rules file doesn't exist")
+            LOG.warn("Inverted allowlist rules file doesn't exist")
             return []
         }
 
         let data = try Data(contentsOf: url)
         guard let result = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? SDKSafariMigrationInvertedAllowlistDomainObject else {
-            LOG.warn("(SafariProtectionAllowlistRulesMigrationHelper) - NSKeyedUnarchiver return nil data for inverted allowlist rules file")
+            LOG.warn("NSKeyedUnarchiver return nil data for inverted allowlist rules file")
             return []
         }
 
-        LOG.info("(SafariProtectionAllowlistRulesMigrationHelper) - Inverted allowlist data successfully fetched, rules count: \(result.rules.count)")
+        LOG.info("Inverted allowlist data successfully fetched, rules count: \(result.rules.count)")
         return result.rules
     }
 
     func removeOldRuleFiles() throws {
-        LOG.info("(SafariProtectionAllowlistRulesMigrationHelper) - Start removing rule files")
+        LOG.info("Start removing rule files")
 
         let invertedAllowlistRulesFileUrl = URL(fileURLWithPath: rulesContainerDirectoryPath).appendingPathComponent(oldSafariInvertedAllowListRulesFileName)
         let allowlistRulesFileUrl = URL(fileURLWithPath: rulesContainerDirectoryPath).appendingPathComponent(oldSafariAllowListRulesFileName)

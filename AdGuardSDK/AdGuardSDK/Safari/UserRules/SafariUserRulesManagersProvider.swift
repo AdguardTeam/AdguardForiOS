@@ -53,12 +53,12 @@ final public class SafariUserRulesManagersProvider: SafariUserRulesManagersProvi
     }
 
     public func reset() throws {
-        LOG.info("(UserRulesManagersProvider) - reset start")
+        LOG.info("Reset start")
 
         try blocklistRulesManager.reset()
         try allowlistRulesManager.reset()
         try invertedAllowlistRulesManager.reset()
 
-        LOG.info("(UserRulesManagersProvider) - reset; Successfully reset all user rules managers")
+        LOG.info("Successfully reset all user rules managers")
     }
 }

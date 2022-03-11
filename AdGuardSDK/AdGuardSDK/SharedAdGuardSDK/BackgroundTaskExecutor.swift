@@ -30,7 +30,7 @@ public final class BackgroundTaskExecutor {
         ProcessInfo().performExpiringActivity(withReason: reason) { expired in
             if expired {
                 // TODO: this does not help much since iOS will still kill the app if the task is still in progress.
-                LOG.info("(BackgroundTaskExecutor) - executeSynchronousTask; Task with reason=\(reason) has expired")
+                LOG.info("Task with reason=\(reason) has expired")
             } else {
                 blockToExecute()
             }
@@ -43,9 +43,9 @@ public final class BackgroundTaskExecutor {
         ProcessInfo().performExpiringActivity(withReason: reason) { expired in
             if expired {
                 // TODO: this does not help much since iOS will still kill the app if the task is still in progress.
-                LOG.info("(BackgroundTaskExecutor) - executeAsynchronousTask; Task with reason=\(reason) has expired")
+                LOG.info("Task with reason=\(reason) has expired")
             } else {
-                LOG.info("(BackgroundTaskExecutor) - executeAsynchronousTask; Task with reason=\(reason) has started")
+                LOG.info("Task with reason=\(reason) has started")
                 let group = DispatchGroup()
                 group.enter()
 
@@ -54,7 +54,7 @@ public final class BackgroundTaskExecutor {
                 }
 
                 group.wait()
-                LOG.info("(BackgroundTaskExecutor) - executeAsynchronousTask; Task with reason=\(reason) has finished")
+                LOG.info("Task with reason=\(reason) has finished")
             }
         }
 #endif

@@ -55,7 +55,7 @@ final class ChartViewModel: ChartViewModelProtocol {
             let record = try activityStatistics.getCounters(for: statisticsPeriod)
             return record
         } catch {
-            LOG.error("(ChartViewModel) statisticsInfo; getCounters return error: \(error)")
+            LOG.error("getCounters return error: \(error)")
             return CountersStatisticsRecord.emptyRecord()
         }
     }
@@ -169,7 +169,7 @@ final class ChartViewModel: ChartViewModelProtocol {
         guard requestsPoints.count == encryptedPoints.count,
               !requestsPoints.isEmpty
                 else {
-            LOG.warn("(ChartViewModel) findMaxElements; Number of requests points not equal to number of encrypted points or points number is zero")
+            LOG.warn("Number of requests points not equal to number of encrypted points or points number is zero")
             return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
         }
 
@@ -231,7 +231,7 @@ final class ChartViewModel: ChartViewModelProtocol {
     // Return modified points
     private func modifyPoints(points: ChartPoints) -> ChartPoints {
         guard points.requestsPoints.count == points.encryptedPoints.count, !points.requestsPoints.isEmpty else {
-            LOG.warn("(ChartViewModel) modifyCGPoints;  Number of requests points not equal to number of encrypted points or points number is zero")
+            LOG.warn("Number of requests points not equal to number of encrypted points or points number is zero")
             return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
         }
 

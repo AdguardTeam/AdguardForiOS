@@ -46,25 +46,25 @@ public final class UIBackgroundTask {
      */
     public static func execute(name: String, checkRemainingTime: Bool, blockToExecute: @escaping () -> Void) -> Bool {
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: name) {
-            LOG.info("(UIBackgroundTask) - execute \(name); background task is expiring, remaining time: \(UIApplication.shared.backgroundTimeRemaining)")
+            LOG.info("Execute \(name); background task is expiring, remaining time: \(UIApplication.shared.backgroundTimeRemaining)")
         }
 
         if backgroundTaskId == UIBackgroundTaskIdentifier.invalid {
-            LOG.warn("(UIBackgroundTask) - execute \(name); cannot start background operation")
+            LOG.warn("Execute \(name); cannot start background operation")
             return false
         }
 
-        LOG.info("(UIBackgroundTask) - execute \(name); start background operation")
+        LOG.info("Execute \(name); start background operation")
 
         if checkRemainingTime && UIApplication.shared.backgroundTimeRemaining < UIBackgroundTask.safeRemainingTimeSeconds {
-            LOG.info("(UIBackgroundTask) - execute \(name); remaining time is not enough to complete the task, exiting immediately")
+            LOG.info("Execute \(name); remaining time is not enough to complete the task, exiting immediately")
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
             return false
         }
 
         blockToExecute()
 
-        LOG.info("(UIBackgroundTask) - execute \(name); finished background operation")
+        LOG.info("Execute \(name); finished background operation")
         UIApplication.shared.endBackgroundTask(backgroundTaskId)
         return true
     }

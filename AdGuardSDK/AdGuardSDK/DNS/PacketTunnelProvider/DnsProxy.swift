@@ -61,11 +61,11 @@ final class DnsProxy: DnsProxyProtocol {
 
     func stop() {
         resolveQueue.sync(flags: .barrier) { [weak self] in
-            LOG.info("(DnsProxy) - stop")
+            LOG.info("stop")
             self?.proxy?.stop()
             self?.proxy = nil
             self?.proxySettingsProvider.reset()
-            LOG.info("(DnsProxy) - stopped")
+            LOG.info("stopped")
         }
     }
 
@@ -79,7 +79,7 @@ final class DnsProxy: DnsProxyProtocol {
     // MARK: - Private methods
 
     private func internalStart(_ systemDnsUpstreams: [DnsUpstream]) -> Error? {
-        LOG.info("(DnsProxy) - start")
+        LOG.info("start")
 
         // Configuration
         if proxy != nil {
@@ -101,7 +101,7 @@ final class DnsProxy: DnsProxyProtocol {
             )
         }
         catch {
-            LOG.error("(DnsProxy) - internalStart; Error initializing statistics: \(error)")
+            LOG.error("Error initializing statistics: \(error)")
             return error
         }
 
@@ -115,19 +115,19 @@ final class DnsProxy: DnsProxyProtocol {
         // Error reference
         var error: NSError?
 
-        LOG.info("(DnsProxy) start with config: \n\(agConfig.extendedDescription)")
+        LOG.info("Start with config: \n\(agConfig.extendedDescription)")
 
         // Proxy init
         proxy = AGDnsProxy(config: agConfig, handler: agEvents, error: &error)
 
         if let error = error {
-            LOG.error("(DnsProxy) - started with error: \(error)")
+            LOG.error("Started with error: \(error)")
             return error
         } else if proxy != nil {
-            LOG.info("(DnsProxy) - started successfully")
+            LOG.info("Started successfully")
             return nil
         } else {
-            LOG.error("(DnsProxy) - started with unknown error")
+            LOG.error("Started with unknown error")
             assertionFailure("Error and AGDnsProxy can't be both nil at the same time")
             return CommonError.missingData
         }

@@ -47,7 +47,7 @@ final class SafariProtectionCustomFiltersMigrationHelper: SafariProtectionCustom
         // `busyHandler` is needed to handle error when db is locked and try once more
         self.newAdguardDB.busyTimeout = 0.5
         self.newAdguardDB.busyHandler { _ in
-            LOG.info("(SafariProtectionCustomFiltersMigrationHelper) - init; adguard.db is locked")
+            LOG.info("adguard.db is locked")
             return true
         }
 
@@ -55,7 +55,7 @@ final class SafariProtectionCustomFiltersMigrationHelper: SafariProtectionCustom
     }
 
     func migrateCustomFilters(_ filters: [SafariProtectionFiltersDatabaseMigrationHelper.ObsoleteCustomFilter]) throws {
-        LOG.info("(SafariProtectionCustomFiltersMigrationHelper) - migrateCustomFilters; Saving \(filters.count) custom filters to new DB")
+        LOG.info("Saving \(filters.count) custom filters to new DB")
         try filters.forEach { try addCustomFilterToDb($0) }
 
         for filter in filters {

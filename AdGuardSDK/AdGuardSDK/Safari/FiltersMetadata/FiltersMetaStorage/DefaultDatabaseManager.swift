@@ -96,7 +96,7 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
 
     // Unarchives default database file
     func updateDefaultDb() throws {
-        LOG.info("(DefaultDatabaseManager) - updateDefaultDb; Unarchiving default.db")
+        LOG.info("Unarchiving default.db")
         let defaultDbArchiveUrl = dbContainerUrl.appendingPathComponent(defaultDbArchiveFile)
         try Zip.unzipFile(defaultDbArchiveUrl, destination: dbContainerUrl, overwrite: true, password: nil)
     }

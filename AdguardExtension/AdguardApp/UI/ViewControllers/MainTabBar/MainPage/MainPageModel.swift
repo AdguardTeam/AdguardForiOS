@@ -130,7 +130,7 @@ final class MainPageModel: MainPageModelProtocol {
 
         let message: String
         if let error = updateError {
-            LOG.error("(MainPageModel) - updateFiltersAsync; Error: \(error)")
+            LOG.error("Error: \(error)")
             message = String.localizedString("filter_updates_error")
         } else if filtersCount > 0 {
             let format = String.localizedString("filters_updated_format")

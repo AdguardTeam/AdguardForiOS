@@ -159,7 +159,7 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
 
         center.add(request) { (error) in
             if let error = error {
-                LOG.error("(UserNotificationService) - alertNotification error : \(error)")
+                LOG.error("alertNotification error : \(error)")
             }
         }
     }

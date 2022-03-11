@@ -50,16 +50,16 @@ final class NetworkSettingsMigrations: NetworkSettingsMigrationProtocol {
     func startMigration() {
         let exceptions = fetchOldWifiExceptions()
         if exceptions.isEmpty {
-            LOG.warn("(NetworkSettingsMigration) - startMigration; Nothing to migrate")
+            LOG.warn("Nothing to migrate")
             return
         }
 
         do {
             try exceptions.forEach { try networkSettingsService.add(exception: $0) }
             removeOldExceptionsFile()
-            LOG.info("(NetworkSettingsMigration) - startMigration; All \(exceptions.count) exceptions successfully migrated")
+            LOG.info("All \(exceptions.count) exceptions successfully migrated")
         } catch {
-            LOG.error("(NetworkSettingsMigration) - startMigration; On adding exception error occurred: \(error)")
+            LOG.error("On adding exception error occurred: \(error)")
         }
     }
 
@@ -68,12 +68,12 @@ final class NetworkSettingsMigrations: NetworkSettingsMigrationProtocol {
     private func fetchOldWifiExceptions() -> [WifiException] {
         do {
             guard let data = resources.loadData(fromFileRelativePath: jsonNetworkSettingsFileName) else {
-                LOG.error("(NetworkSettingsMigration) - fetchOldWifiException; Failed to load wifi exceptions from file")
+                LOG.error("Failed to load wifi exceptions from file")
                 return []
             }
             return try JSONDecoder().decode([WifiException].self, from: data)
         } catch {
-            LOG.info("(NetworkSettingsMigration) - fetchOldWifiException; Decoding network settings error occurred: \(error)")
+            LOG.info("Decoding network settings error occurred: \(error)")
             return []
         }
     }
@@ -83,14 +83,14 @@ final class NetworkSettingsMigrations: NetworkSettingsMigrationProtocol {
         do {
             let path = resources.path(forRelativePath: jsonNetworkSettingsFileName)
             guard fileManager.fileExists(atPath: path) else {
-                LOG.warn("(NetworkSettingsMigration) - removeOldExceptionsFile; File doesn't exists")
+                LOG.warn("File doesn't exists")
                 return
             }
 
             try fileManager.removeItem(atPath: path)
-            LOG.info("(NetworkSettingsMigration) - removeOldExceptionsFile; Exception file successfully removed")
+            LOG.info("Exception file successfully removed")
         } catch {
-            LOG.error("(NetworkSettingsMigration) - removeOldExceptionsFile; Error occurred while removing exception file: \(error)")
+            LOG.error("Error occurred while removing exception file: \(error)")
         }
     }
 }

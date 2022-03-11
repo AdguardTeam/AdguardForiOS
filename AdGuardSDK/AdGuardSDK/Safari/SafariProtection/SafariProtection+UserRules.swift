@@ -155,7 +155,7 @@ extension SafariProtection {
 
     public func rulesString(for type: SafariUserRuleType) -> String {
         workingQueue.sync {
-            LOG.info("(SafariProtection+UserRules) - rulesString; Returning rules string for type=\(type)")
+            LOG.info("Returning rules string for type=\(type)")
             let provider = getProvider(for: type)
             return provider.rulesString
         }
@@ -163,7 +163,7 @@ extension SafariProtection {
 
     public func allRules(for type: SafariUserRuleType) -> [UserRule] {
         workingQueue.sync {
-            LOG.info("(SafariProtection+UserRules) - allRules; Returning all rules for type=\(type)")
+            LOG.info("Returning all rules for type=\(type)")
             let provider = getProvider(for: type)
             return provider.allRules
         }
@@ -182,15 +182,15 @@ extension SafariProtection {
                 return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+UserRules) - addRule.onCbReloaded; self is missing!")
+                    LOG.error("addRule.onCbReloaded; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+UserRules) - addRule.onCbReloaded; Error reloading CBs when adding rule: \(rule) for type=\(type), override=\(override); Error: \(error)")
+                    LOG.error("addRule.onCbReloaded; Error reloading CBs when adding rule: \(rule) for type=\(type), override=\(override); Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+UserRules) - addRule.onCbReloaded; Successfully reloaded CBs after adding rule: \(rule) for type=\(type), override=\(override)")
+                    LOG.info("addRule.onCbReloaded; Successfully reloaded CBs after adding rule: \(rule) for type=\(type), override=\(override)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -199,7 +199,7 @@ extension SafariProtection {
 
     public func add(rules: [UserRule], for type: SafariUserRuleType, override: Bool, onCbReloaded: ((Error?) -> Void)?) throws {
         try workingQueue.sync {
-            LOG.info("(SafariProtection+UserRules) - addRules; Adding \(rules.count) rules; for type=\(type); override=\(override)")
+            LOG.info("Adding \(rules.count) rules; for type=\(type); override=\(override)")
 
             let provider = self.getProvider(for: type)
             try executeBlockAndReloadCbs {
@@ -207,15 +207,15 @@ extension SafariProtection {
                 return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+UserRules) - addRules.onCbReloaded; self is missing!")
+                    LOG.error("addRules.onCbReloaded; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+UserRules) - addRules.onCbReloaded; Error reloading CBs when adding \(rules.count) rules for type=\(type), override=\(override); Error: \(error)")
+                    LOG.error("addRules.onCbReloaded; Error reloading CBs when adding \(rules.count) rules for type=\(type), override=\(override); Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+UserRules) - addRules.onCbReloaded; Successfully reloaded CBs after adding \(rules.count) rules for type=\(type), override=\(override)")
+                    LOG.info("addRules.onCbReloaded; Successfully reloaded CBs after adding \(rules.count) rules for type=\(type), override=\(override)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -235,15 +235,15 @@ extension SafariProtection {
                 return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+UserRules) - setRules.onCbReloaded; self is missing!")
+                    LOG.error("setRules.onCbReloaded; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+UserRules) - setRules.onCbReloaded; Error reloading CBs when setting \(rules.count) rules for type=\(type); Error: \(error)")
+                    LOG.error("setRules.onCbReloaded; Error reloading CBs when setting \(rules.count) rules for type=\(type); Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+UserRules) - setRules.onCbReloaded; Successfully reloaded CBs after setting \(rules.count) rules for type=\(type)")
+                    LOG.info("setRules.onCbReloaded; Successfully reloaded CBs after setting \(rules.count) rules for type=\(type)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -252,7 +252,7 @@ extension SafariProtection {
 
     public func modifyRule(_ oldRuleText: String, _ newRule: UserRule, for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?) throws {
         try workingQueue.sync {
-            LOG.info("(SafariProtection+UserRules) - modifyRule; Modifying old rule=\(oldRuleText) to new rule=\(newRule)")
+            LOG.info("Modifying old rule=\(oldRuleText) to new rule=\(newRule)")
 
             let provider = getProvider(for: type)
             try executeBlockAndReloadCbs {
@@ -260,15 +260,15 @@ extension SafariProtection {
                 return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+UserRules) - modifyRule.onCbReloaded; self is missing!")
+                    LOG.error(".onCbReloaded; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+UserRules) - modifyRule.onCbReloaded; Error reloading CBs when modifying rule=\(oldRuleText) to \(newRule) for type=\(type); Error: \(error)")
+                    LOG.error("modifyRule.onCbReloaded; Error reloading CBs when modifying rule=\(oldRuleText) to \(newRule) for type=\(type); Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+UserRules) - modifyRule.onCbReloaded; Successfully reloaded CBs after modifying rule=\(oldRuleText) to \(newRule) for type=\(type)")
+                    LOG.info("modifyRule.onCbReloaded; Successfully reloaded CBs after modifying rule=\(oldRuleText) to \(newRule) for type=\(type)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -277,7 +277,7 @@ extension SafariProtection {
 
     public func turnRules(_ rules: [String], on: Bool, for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+UserRules) - turnRules; Turning \(rules.count) rules on=\(on) for type=\(type)")
+            LOG.info("Turning \(rules.count) rules on=\(on) for type=\(type)")
 
             let provider = getProvider(for: type)
             executeBlockAndReloadCbs {
@@ -287,15 +287,15 @@ extension SafariProtection {
                 return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+UserRules) - turnRules.onCbReloaded; self is missing!")
+                    LOG.error("turnRules.onCbReloaded; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+UserRules) - turnRules.onCbReloaded; Error reloading CBs when turning \(rules.count) rules on=\(on) for type=\(type); Error: \(error)")
+                    LOG.error("turnRules.onCbReloaded; Error reloading CBs when turning \(rules.count) rules on=\(on) for type=\(type); Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+UserRules) - turnRules.onCbReloaded; Successfully reloaded CBs after turning \(rules.count) rules on=\(on) for type=\(type)")
+                    LOG.info("turnRules.onCbReloaded; Successfully reloaded CBs after turning \(rules.count) rules on=\(on) for type=\(type)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -304,7 +304,7 @@ extension SafariProtection {
 
     public func removeRule(withText ruleText: String, for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?) throws {
         try workingQueue.sync {
-            LOG.info("(SafariProtection+UserRules) - removeRule; Removing rule=\(ruleText) for type=\(type)")
+            LOG.info("Removing rule=\(ruleText) for type=\(type)")
 
             let provider = getProvider(for: type)
             try executeBlockAndReloadCbs {
@@ -312,15 +312,15 @@ extension SafariProtection {
                 return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+UserRules) - removeRule.onCbReloaded; self is missing!")
+                    LOG.error("removeRule.onCbReloaded; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+UserRules) - removeRule.onCbReloaded; Error reloading CBs when removing rule=\(ruleText) for type=\(type); Error: \(error)")
+                    LOG.error("removeRule.onCbReloaded; Error reloading CBs when removing rule=\(ruleText) for type=\(type); Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+UserRules) - removeRule.onCbReloaded; Successfully reloaded CBs after removing rule=\(ruleText) for type=\(type)")
+                    LOG.info("removeRule.onCbReloaded; Successfully reloaded CBs after removing rule=\(ruleText) for type=\(type)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -329,7 +329,7 @@ extension SafariProtection {
 
     public func removeRules(_ rules: [String], for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+UserRules) - removeRules; Removing \(rules.count) rules for type=\(type)")
+            LOG.info("Removing \(rules.count) rules for type=\(type)")
 
             let provider = getProvider(for: type)
             executeBlockAndReloadCbs {
@@ -339,15 +339,15 @@ extension SafariProtection {
                 return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+UserRules) - removeRules.onCbReloaded; self is missing!")
+                    LOG.error("removeRules.onCbReloaded; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+UserRules) - removeRules.onCbReloaded; Error reloading CBs when removing \(rules.count) rules for type=\(type); Error: \(error)")
+                    LOG.error("removeRules.onCbReloaded; Error reloading CBs when removing \(rules.count) rules for type=\(type); Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+UserRules) - removeRules.onCbReloaded; Successfully reloaded CBs after removing \(rules.count) rules for type=\(type)")
+                    LOG.info("removeRules.onCbReloaded; Successfully reloaded CBs after removing \(rules.count) rules for type=\(type)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -367,15 +367,15 @@ extension SafariProtection {
                 return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+UserRules) - removeAllRules.onCbReloaded; self is missing!")
+                    LOG.error("removeAllRules.onCbReloaded; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+UserRules) - removeAllRules.onCbReloaded; Error reloading CBs when removing all rules for type=\(type); Error: \(error)")
+                    LOG.error("removeAllRules.onCbReloaded; Error reloading CBs when removing all rules for type=\(type); Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+UserRules) - removeAllRules.onCbReloaded; Successfully reloaded CBs after removing all rules for type=\(type)")
+                    LOG.info("removeAllRules.onCbReloaded; Successfully reloaded CBs after removing all rules for type=\(type)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -384,7 +384,7 @@ extension SafariProtection {
 
     public func removeAllUserRulesAssociatedWith(domain: String, onCbReloaded: ((Error?) -> Void)?) {
         workingQueue.sync {
-            LOG.info("(SafariProtection+UserRules) - removeAllUserRulesAssociatedWithDomain; Removing all rules for type=\(domain)")
+            LOG.info("Removing all rules for type=\(domain)")
 
             let provider = getProvider(for: .blocklist)
             executeBlockAndReloadCbs {
@@ -396,15 +396,15 @@ extension SafariProtection {
                 return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error("(SafariProtection+UserRules) - removeAllUserRulesAssociatedWithDomain.onCbReloaded; self is missing!")
+                    LOG.error("removeAllUserRulesAssociatedWithDomain.onCbReloaded; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
 
                 if let error = error {
-                    LOG.error("(SafariProtection+UserRules) - removeAllUserRulesAssociatedWithDomain; Error reloading CBs when removing all rules for domain=\(domain); Error: \(error)")
+                    LOG.error("removeAllUserRulesAssociatedWithDomain; Error reloading CBs when removing all rules for domain=\(domain); Error: \(error)")
                 } else {
-                    LOG.info("(SafariProtection+UserRules) - removeAllUserRulesAssociatedWithDomain; Successfully reloaded CBs after removing all rules for type=\(domain)")
+                    LOG.info("removeAllUserRulesAssociatedWithDomain; Successfully reloaded CBs after removing all rules for type=\(domain)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -424,19 +424,19 @@ extension SafariProtection {
     // MARK: - Private methods
 
     private func addRuleInternal(_ rule: UserRule, for type: SafariUserRuleType, override: Bool) throws {
-        LOG.info("(SafariProtection+UserRules) - addRuleInternal; Adding rule: \(rule); for type=\(type); override=\(override)")
+        LOG.info("Adding rule: \(rule); for type=\(type); override=\(override)")
         let provider = getProvider(for: type)
         try provider.add(rule: rule, override: override)
     }
 
     private func setRulesInternal(_ rules: [String], for type: SafariUserRuleType) {
-        LOG.info("(SafariProtection+UserRules) - setRulesInternal; Setting \(rules.count) rules; for type=\(type)")
+        LOG.info("Setting \(rules.count) rules; for type=\(type)")
         let provider = self.getProvider(for: type)
         provider.set(rules: rules)
     }
 
     private func removeAllRulesInternal(for type: SafariUserRuleType) {
-        LOG.info("(SafariProtection+UserRules) - removeAllRulesInternal; Removing all rules for type=\(type)")
+        LOG.info("Removing all rules for type=\(type)")
         let provider = getProvider(for: type)
         provider.removeAllRules()
     }

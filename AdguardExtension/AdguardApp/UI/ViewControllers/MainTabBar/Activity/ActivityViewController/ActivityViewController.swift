@@ -324,7 +324,7 @@ final class ActivityViewController: UITableViewController {
             alert.dismiss(animated: true, completion: nil)
             self?.requestsModel?.clearRecords()
             let resetResult = self?.settingsReset.resetDnsLogStatistics()
-            LOG.info("(ActivityViewController) - showResetAlert; DNS log statistics reseted successfully = \(resetResult ?? false)")
+            LOG.info("DNS log statistics reseted successfully = \(resetResult ?? false)")
         }
 
         alert.addAction(yesAction)

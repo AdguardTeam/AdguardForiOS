@@ -112,7 +112,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
             modelProvider.modifyRule(rule, newRule: newRule)
         }
         catch {
-            LOG.error("(SafariUserRulesTableModel) - ruleStateChanged; Error: \(error)")
+            LOG.error("Error: \(error)")
         }
     }
 

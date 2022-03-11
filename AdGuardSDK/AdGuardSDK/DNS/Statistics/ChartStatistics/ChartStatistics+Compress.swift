@@ -26,7 +26,7 @@ extension ChartStatistics {
     func compressTableIfNeeded() throws {
         let recordsCount = try statisticsDb.scalar(ChartStatisticsTable.table.count)
         if recordsCount >= 1000 {
-            LOG.info("(ChartStatistics) - compressTableIfNeeded; Number of records is greater 1500, compress now")
+            LOG.info("Number of records is greater 1500, compress now")
 
             // Ignoring the error here since compressing the table is not a crucial operation.
             try? compressTable()
@@ -34,14 +34,14 @@ extension ChartStatistics {
     }
 
     func compressTable() throws {
-        LOG.info("(ChartStatistics) - compressTable; Trying to compress the table")
+        LOG.info("Trying to compress the table")
 
         let recordsCountBeforeCompression = try statisticsDb.scalar(ChartStatisticsTable.table.count)
         let compressedRecords = try getCompressedRecords()
         try reset()
         try compressedRecords.forEach { try add(record: $0) }
 
-        LOG.info("(ChartStatistics) - compressTable; Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
+        LOG.info("Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
     }
 
     /// Returns specified `intervalsCount` number of  date intervals for specified `period`

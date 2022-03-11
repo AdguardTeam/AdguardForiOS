@@ -73,24 +73,24 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     required init?(coder: NSCoder) {
         Self.initLogger(with: resources)
-        LOG.info("(TodayViewController) - init start")
+        LOG.info("init start")
 
         // Services initialising
         do {
             self.serviceInitializer = try ServiceInitializer(resources: resources)
         } catch {
-            LOG.error("(TodayViewController) - init; error - \(error)")
+            LOG.error("init; error - \(error)")
             return nil
         }
 
         super.init(coder: coder)
 
-        LOG.info("(TodayViewController) - init end")
+        LOG.info("init end")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        LOG.info("(TodayViewController) - viewDidLoad")
+        LOG.info("viewDidLoad")
 
         height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
 
@@ -102,12 +102,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     // MARK: - NCWidgetProviding methods
 
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        LOG.info("(TodayViewController) - widgetPerformUpdate start")
+        LOG.info("widgetPerformUpdate start")
         setColorsToLabels()
         updateWidgetSafari()
         updateWidgetSystem()
         updateWidgetComplex()
-        LOG.info("(TodayViewController) - widgetPerformUpdate end")
+        LOG.info("widgetPerformUpdate end")
         completionHandler(NCUpdateResult.newData)
     }
 

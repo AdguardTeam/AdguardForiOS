@@ -59,11 +59,11 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
         let query = FilterGroupLocalizationsTable.table.filter(FilterGroupLocalizationsTable.groupId == id && FilterGroupLocalizationsTable.lang == lang)
 
         guard let dbGroulLocalization = try? filtersDb.pluck(query) else {
-            LOG.debug("(FiltersMetaStorage) - query result is nil for filter with id=\(id) for lang=\(lang)")
+            LOG.debug("Query result is nil for filter with id=\(id) for lang=\(lang)")
             return nil
         }
         let groupLocalization = FilterGroupLocalizationsTable(dbGroupLocalization: dbGroulLocalization)
-        LOG.debug("(FiltersMetaStorage) - getLocalizationForGroup returning \(groupLocalization) for filter with id=\(id) for lang=\(lang)")
+        LOG.debug("getLocalizationForGroup returning \(groupLocalization) for filter with id=\(id) for lang=\(lang)")
         return groupLocalization
     }
 
@@ -75,7 +75,7 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
                                                                FilterGroupLocalizationsTable.lang <- lang,
                                                                FilterGroupLocalizationsTable.name <- localization.name)
         try filtersDb.run(query)
-        LOG.debug("(FiltersMetaStorage) - Insert localization for group with id=\(id) lang=\(lang) and name=\(localization.name)")
+        LOG.debug("Insert localization for group with id=\(id) lang=\(lang) and name=\(localization.name)")
     }
 
 

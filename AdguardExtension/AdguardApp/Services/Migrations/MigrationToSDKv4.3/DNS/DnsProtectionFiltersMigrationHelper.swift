@@ -64,12 +64,12 @@ final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHe
             return obj as? SDKDnsMigrationObsoleteDnsFilter
         }
 
-        LOG.info("(DnsProtectionFiltersMigrationHelper) - getDnsFiltersMeta; Got \(dnsFilters.count) DNS filters meta")
+        LOG.info("Got \(dnsFilters.count) DNS filters meta")
         return dnsFilters
     }
 
     func saveDnsFiltersToSDK(_ filters: [SDKDnsMigrationObsoleteDnsFilter]) throws {
-        LOG.info("(DnsProtectionFiltersMigrationHelper) - saveDnsFiltersToSDK; Saving \(filters.count) DNS filters meta to new storage")
+        LOG.info("Saving \(filters.count) DNS filters meta to new storage")
 
         let newDnsFilters = filters.map {
             return DnsFilter(
@@ -93,7 +93,7 @@ final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHe
         let filtersData = try encoder.encode(newDnsFilters)
         resources.sharedDefaults().setValue(filtersData, forKey: "DnsAdGuardSDK.dnsFiltersKey")
 
-        LOG.info("(DnsProtectionFiltersMigrationHelper) - saveDnsFiltersToSDK; Saved \(filters.count) DNS filters meta to new storage")
+        LOG.info("Saved \(filters.count) DNS filters meta to new storage")
     }
 
     func removeDnsFiltersDataFromOldStorage() {
@@ -117,7 +117,7 @@ final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHe
      As custom DNS filters have stayed in same range, we won't change their identifiers
      */
     func replaceFilesForDnsFilters(with ids: [Int]) throws {
-        LOG.info("(DnsProtectionFiltersMigrationHelper) - replaceFilesForDnsFilters; Replacing \(ids.count) DNS filters files to new folder")
+        LOG.info("Replacing \(ids.count) DNS filters files to new folder")
 
         for id in ids {
             let oldFileName = "dns_filter_\(id).txt"
@@ -134,7 +134,7 @@ final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHe
             try FileManager.default.removeItem(at: oldFileUrl)
         }
 
-        LOG.info("(DnsProtectionFiltersMigrationHelper) - replaceFilesForDnsFilters; Replaced \(ids.count) DNS filters files to new folder")
+        LOG.info("Replaced \(ids.count) DNS filters files to new folder")
     }
 }
 

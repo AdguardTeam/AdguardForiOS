@@ -81,13 +81,13 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
 
     public func updateContentBlockers(onContentBlockersUpdated: @escaping (_ error: Error?) -> Void) {
         updateQueue.async { [weak self] in
-            LOG.info("(ContentBlockerService) - updateContentBlockers; CBs update started")
+            LOG.info("CBs update started")
 
             NotificationCenter.default.contentBlockersUpdateStarted()
             let updateError = self?.updateContentBlockersSync()
             NotificationCenter.default.contentBlockersUpdateFinished()
 
-            LOG.info("(ContentBlockerService) - updateContentBlockers; CBs update finished")
+            LOG.info("CBs update finished")
             onContentBlockersUpdated(updateError)
         }
     }
@@ -102,7 +102,7 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
             case .success(let enabled):
                 isEnabled = enabled
             case .error(let error):
-                LOG.error("(ContentBlockerService) - getState; Failed to reveal CB state, suppose it is disabled; Error: \(error)")
+                LOG.error("Failed to reveal CB state, suppose it is disabled; Error: \(error)")
             }
             group.leave()
         }
@@ -156,14 +156,14 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
         // Try to reload content blocker
         contentBlockersManager.reloadContentBlocker(withId: cbBundleId) { [weak self] error in
             guard let self = self else {
-                LOG.error("(ContentBlockerService) - reloadContentBlocker; сontentBlockersManager.reloadContentBlocker self is missing!")
+                LOG.error("сontentBlockersManager.reloadContentBlocker self is missing!")
                 onContentBlockerReloaded(CommonError.missingSelf)
                 NotificationCenter.default.standaloneContentBlockerUpdateFinished(cbType)
                 return
             }
 
             if let userInfo = (error as NSError?)?.userInfo {
-                LOG.error("(ContentBlockerService) - reloadContentBlocker; Error reloading content blocker; Error: \(userInfo)")
+                LOG.error("Error reloading content blocker; Error: \(userInfo)")
                 // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time
                 if firstTry {
                     // Do not notify when CB finished to reload if it was first try and there will be second reload

@@ -99,7 +99,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
             if let filterFileString = filterFilesStorage.getFilterContentForFilter(withId: $0.0) {
                 return FilterFileContent(text: filterFileString, group: $0.1)
             } else {
-                LOG.error("(ContentBlockerService) - convertFiltersAndUserRulesToJsons; Received nil file content for filter with id=\($0.0)")
+                LOG.error("Received nil file content for filter with id=\($0.0)")
                 return nil
             }
         }

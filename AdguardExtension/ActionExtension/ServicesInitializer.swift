@@ -40,14 +40,14 @@ final class ServicesInitializer {
         let appPath = Bundle.main.bundlePath as NSString
         let fullPath = appPath.appendingPathComponent("../../") as String
         guard let bundle = Bundle(path: fullPath), let path = bundle.path(forResource: "defaults", ofType: "plist") else {
-            LOG.error("(ServicesInitializer) - wrong appPath");
+            LOG.error("wrong appPath");
             throw CommonError.missingFile(filename: fullPath)
         }
         if let defs = NSDictionary(contentsOfFile: path) as? [String: Any] {
-            LOG.info("(ServicesInitializer) - default.plist loaded!")
+            LOG.info("default.plist loaded!")
             resources.sharedDefaults().register(defaults: defs)
         } else {
-            LOG.error("(ServicesInitializer) - default.plist was not loaded.")
+            LOG.error("default.plist was not loaded.")
             throw CommonError.missingFile(filename: "default.plist")
         }
 

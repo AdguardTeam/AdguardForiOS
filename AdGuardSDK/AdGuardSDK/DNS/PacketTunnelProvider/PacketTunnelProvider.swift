@@ -78,7 +78,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         statisticsDbContainerUrl: URL,
         networkUtils: NetworkUtilsProtocol
     ) throws {
-        LOG.info("(PacketTunnelProvider) init start")
+        LOG.info("Init start")
 
         let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
         let dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: userDefaultsStorage, networkUtils: networkUtils)
@@ -131,13 +131,13 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         tunnelProxy.delegate = self
 
-        LOG.info("(PacketTunnelProvider) init finished")
+        LOG.info("Init finished")
     }
 
     // MARK: packet tunnel lifecycle
 
     public override func startTunnel(options: [String : NSObject]? = nil, completionHandler: @escaping (Error?) -> Void) {
-        LOG.info("(PacketTunnelProvider) startTunnel")
+        LOG.info("StartTunnel")
 
         do {
             try reachabilityHandler.startNotifier()
@@ -150,9 +150,9 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         tunnelProxy.startTunnel(options: options) { [weak self] error in
             if error == nil {
-                LOG.info("(PacketTunnelProvider) startTunnel; finished starting")
+                LOG.info("Finished starting")
             } else {
-                LOG.info("(PacketTunnelProvider) startTunnel; finished starting with error: \(error!)")
+                LOG.info("Finished starting with error: \(error!)")
             }
             self?.startReachabilityHandling()
             completionHandler(error)
@@ -160,18 +160,18 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     }
 
     public override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        LOG.info("(PacketTunnelProvider) stopTunnel with reason: \(reason)")
+        LOG.info("StopTunnel with reason: \(reason)")
         reachabilityHandler.stopNotifier()
         tunnelProxy.stopTunnel(with: reason, completionHandler: completionHandler)
     }
 
     public override func sleep(completionHandler: @escaping () -> Void) {
-        LOG.info("(PacketTunnelProvider) Sleep Event")
+        LOG.info("Sleep Event")
         tunnelProxy.sleep(completionHandler: completionHandler)
     }
 
     public override func wake() {
-        LOG.info("(PacketTunnelProvider) Wake Event")
+        LOG.info("Wake Event")
         tunnelProxy.wake()
     }
 

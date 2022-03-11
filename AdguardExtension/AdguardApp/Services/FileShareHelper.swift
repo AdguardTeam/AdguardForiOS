@@ -50,7 +50,7 @@ final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelper
             vc.present(activityVC, animated: true, completion: nil)
         }
         catch {
-            LOG.error("(FileShareHelper) - exportFile; Error: \(error)")
+            LOG.error("exportFile; Error: \(error)")
         }
     }
 
@@ -77,7 +77,7 @@ final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelper
             importCompletion?(.success(text))
         }
         catch {
-            LOG.error("(FileShareHelper) - documentPicker; Error: \(error)")
+            LOG.error("documentPicker; Error: \(error)")
             importCompletion?(.error(error))
         }
     }

@@ -55,26 +55,26 @@ public class NetworkUtils: NetworkUtilsProtocol {
             var group: DispatchGroup? = DispatchGroup()
             group?.enter()
             monitor().pathUpdateHandler = { newPath in
-                LOG.info("(NetworkUtils) - NWPathMonitor received the current path update")
-                LOG.info("(NetworkUtils) - path status: \(newPath.status)")
-                LOG.info("(NetworkUtils) - path debugDescription: \(newPath.debugDescription)")
-                LOG.info("(NetworkUtils) - path supportsIPv4: \(newPath.supportsIPv4)")
-                LOG.info("(NetworkUtils) - path supportsIPv6: \(newPath.supportsIPv6)")
+                LOG.info("NWPathMonitor received the current path update")
+                LOG.info("Path status: \(newPath.status)")
+                LOG.info("Path debugDescription: \(newPath.debugDescription)")
+                LOG.info("Path supportsIPv4: \(newPath.supportsIPv4)")
+                LOG.info("Path supportsIPv6: \(newPath.supportsIPv6)")
 
                 for gateway in newPath.gateways {
-                    LOG.info("(NetworkUtils) - gateway: \(gateway.debugDescription)")
+                    LOG.info("gateway: \(gateway.debugDescription)")
                 }
 
                 for interface in newPath.availableInterfaces {
-                    LOG.info("(NetworkUtils) - interface: [\(interface.index)] \(interface.name)")
-                    LOG.info("(NetworkUtils) - interface debugDescription: \(interface.debugDescription)")
-                    LOG.info("(NetworkUtils) - interface type: \(interface.type)")
+                    LOG.info("Interface: [\(interface.index)] \(interface.name)")
+                    LOG.info("Interface debugDescription: \(interface.debugDescription)")
+                    LOG.info("Interface type: \(interface.type)")
                 }
 
                 group?.leave()
                 group = nil
             }
-            LOG.info("(NetworkUtils) - NWPathMonitor start")
+            LOG.info("NWPathMonitor start")
 
             // We must start the monitor to have the actual value of the path at any time
             monitor().start(queue: DispatchQueue(label: "NWPathMonitor handler queue"))
@@ -173,7 +173,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
         let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
 
         if let error = AGDnsUtils.test(dnsUpstream, ipv6Available: isIpv6Available, offline: false) {
-            LOG.error("(NetworkUtils) - upstreamIsValid; Error: \(error)")
+            LOG.error("upstreamIsValid; Error: \(error)")
             return false
         } else {
             return true

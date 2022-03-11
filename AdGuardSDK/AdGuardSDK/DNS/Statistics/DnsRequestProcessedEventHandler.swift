@@ -52,7 +52,7 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
     func handle(event: AGDnsRequestProcessedEventWrapper) {
         eventQueue.async { [weak self] in
             guard let self = self, event.error == nil else {
-                LOG.error("(DnsRequestProcessedEventHandler) - handleEvent; Error: \(event.error ?? "Missing self")")
+                LOG.error("Error: \(event.error ?? "Missing self")")
                 return
             }
 

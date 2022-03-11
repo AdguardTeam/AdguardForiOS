@@ -46,7 +46,7 @@ final class ServicesStorage: ServicesStorageProtocol {
          userDefaults: UserDefaults,
          jsonStorageUrl: URL) throws
     {
-        LOG.info("(ServicesStorage) - init start")
+        LOG.info("Init start")
 
         let filterFilesStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterFilesDirectoryUrl)
         try filterFilesStorage.unzipPredefinedFiltersIfNeeded()
@@ -84,6 +84,6 @@ final class ServicesStorage: ServicesStorageProtocol {
             filtersConverter: filtersConverter
         )
 
-        LOG.info("(ServicesStorage) - init end")
+        LOG.info("Init end")
     }
 }

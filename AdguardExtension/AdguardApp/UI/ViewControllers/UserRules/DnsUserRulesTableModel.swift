@@ -123,7 +123,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
             modelProvider.modifyRule(rule, newRule: newRule)
         }
         catch {
-            LOG.error("(DnsUserRulesTableModel) - ruleStateChanged; Error: \(error)")
+            LOG.error("Error: \(error)")
         }
     }
 

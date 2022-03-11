@@ -176,7 +176,7 @@ final class DnsProviderDetailsController : UITableViewController {
             delegate?.providerSelected()
             navigationController?.popViewController(animated: true)
         } catch {
-            LOG.error("(DnsProviderDetailsController) - selectTapped; While selecting provider error occurred: \(error)")
+            LOG.error("While selecting provider error occurred: \(error)")
             showUnknownErrorAlert()
         }
     }
@@ -247,7 +247,7 @@ extension DnsProviderDetailsController: SelectDnsProtocolControllerDelegate {
             try model.selectProviderWith(dnsProtocol: dnsProtocol)
             tableView.reloadData()
         } catch {
-            LOG.error("(DnsProviderDetailsController) - protocolSelected; While selecting protocol error occurred: \(error)")
+            LOG.error("While selecting protocol error occurred: \(error)")
             showUnknownErrorAlert()
         }
     }

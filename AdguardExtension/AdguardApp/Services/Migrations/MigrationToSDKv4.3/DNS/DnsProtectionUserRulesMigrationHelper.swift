@@ -63,17 +63,17 @@ final class DnsProtectionUserRulesMigrationHelper: DnsProtectionUserRulesMigrati
         allRulesAllowlist = 10004
      */
     func moveOldDnsUserRulesToNewFiles() throws {
-        LOG.info("(DnsProtectionUserRulesMigrationHelper) - moveOldDnsUserRulesToNewFiles; Migrating DNS blocklist rules")
+        LOG.info("Migrating DNS blocklist rules")
         try migrateBlocklistRules()
-        LOG.info("(DnsProtectionUserRulesMigrationHelper) - moveOldDnsUserRulesToNewFiles; Migrated DNS blocklist rules")
+        LOG.info("Migrated DNS blocklist rules")
 
-        LOG.info("(DnsProtectionUserRulesMigrationHelper) - moveOldDnsUserRulesToNewFiles; Migrating DNS allowlist rules")
+        LOG.info("Migrating DNS allowlist rules")
         try migrateAllowlistRules()
-        LOG.info("(DnsProtectionUserRulesMigrationHelper) - moveOldDnsUserRulesToNewFiles; Migrated DNS allowlist rules")
+        LOG.info("Migrated DNS allowlist rules")
     }
 
     func removeOldDnsUserRulesFiles() throws {
-        LOG.info("(DnsProtectionUserRulesMigrationHelper) - removeOldDnsUserRulesFiles; Removing old DNS user rules files")
+        LOG.info("Removing old DNS user rules files")
 
         let oldDnsBlocklistFileUrl = oldDnsUserRulesContainerFolderUrl.appendingPathComponent("dns_filter_1.txt")
         let oldDnsAllowlistFileUrl = oldDnsUserRulesContainerFolderUrl.appendingPathComponent("dns_filter_2.txt")
@@ -86,7 +86,7 @@ final class DnsProtectionUserRulesMigrationHelper: DnsProtectionUserRulesMigrati
             try FileManager.default.removeItem(at: oldDnsAllowlistFileUrl)
         }
 
-        LOG.info("(DnsProtectionUserRulesMigrationHelper) - removeOldDnsUserRulesFiles; Removed old DNS user rules files")
+        LOG.info("Removed old DNS user rules files")
     }
 
     // MARK: - Private methods

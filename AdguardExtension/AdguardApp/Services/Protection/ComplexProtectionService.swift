@@ -97,7 +97,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
         addObservers()
         checkVpnInstalled()
-        LOG.info("(ComplexProtectionService) - ComplexProtectionService was initialized")
+        LOG.info("ComplexProtectionService was initialized")
     }
 
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (_ safariError: Error?,_ systemError: Error?)->Void) {
@@ -107,11 +107,11 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
         let advancedProtectionEnabledOld = configuration.isAdvancedProtectionEnabled
         resources.complexProtectionEnabled = enabled
 
-        LOG.info("(ComplexProtectionService) - complexProtection state: \(complexEnabledOld)")
-        LOG.info("(ComplexProtectionService) - safariEnabled state: \(safariEnabledOld)")
-        LOG.info("(ComplexProtectionService) - systemProtection state: \(systemEnabledOld)")
-        LOG.info("(ComplexProtectionService) - advancedProtection state: \(advancedProtectionEnabledOld)")
-        LOG.info("(ComplexProtectionService) - switchComplexProtection to state: \(enabled)")
+        LOG.info("complexProtection state: \(complexEnabledOld)")
+        LOG.info("safariEnabled state: \(safariEnabledOld)")
+        LOG.info("systemProtection state: \(systemEnabledOld)")
+        LOG.info("advancedProtection state: \(advancedProtectionEnabledOld)")
+        LOG.info("switchComplexProtection to state: \(enabled)")
 
         if enabled && !safariEnabledOld && !systemEnabledOld {
             resources.safariProtectionEnabled = true
@@ -160,11 +160,11 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
         let safariOld = resources.safariProtectionEnabled
         let advancedProtectionOld = configuration.isAdvancedProtectionEnabled
 
-        LOG.info("(ComplexProtectionService) - complexProtection state: \(resources.complexProtectionEnabled)")
-        LOG.info("(ComplexProtectionService) - systemProtection state: \(systemOld)")
-        LOG.info("(ComplexProtectionService) - safariProtection state: \(safariOld)")
-        LOG.info("(ComplexProtectionService) - advancedProtection state: \(advancedProtectionOld)")
-        LOG.info("(ComplexProtectionService) - switchSafariProtection to state: \(enabled)")
+        LOG.info("complexProtection state: \(resources.complexProtectionEnabled)")
+        LOG.info("systemProtection state: \(systemOld)")
+        LOG.info("safariProtection state: \(safariOld)")
+        LOG.info("advancedProtection state: \(advancedProtectionOld)")
+        LOG.info("switchSafariProtection to state: \(enabled)")
 
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
@@ -243,17 +243,17 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 group.enter()
                 self.safariProtection.update(safariProtectionEnabled: self.safariProtectionEnabled ) { error in
                     safariError = error
-                    LOG.info("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
+                    LOG.info("Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
                     group.leave()
                 }
             }
 
             if system {
-                LOG.info("(ComplexProtectionService) - Begining updating dns protection")
+                LOG.info("Beginning updating dns protection")
                 group.enter()
                 self.updateVpnSettings(vc: vc) { error in
                     systemError = error
-                    LOG.info("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
+                    LOG.info("Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
                     group.leave()
                 }
             }
@@ -268,11 +268,11 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
         let needsUpdateSafari = false
         let needsUpdateSystem = true
 
-        LOG.info("(ComplexProtectionService) - complexProtection state: \(resources.complexProtectionEnabled)")
-        LOG.info("(ComplexProtectionService) - systemProtection state: \(resources.systemProtectionEnabled)")
-        LOG.info("(ComplexProtectionService) - safariProtection state: \(resources.safariProtectionEnabled)")
-        LOG.info("(ComplexProtectionService) - advancedProtection state \(configuration.isAdvancedProtectionEnabled)")
-        LOG.info("(ComplexProtectionService) - switchSystemProtection to state: \(enabled)")
+        LOG.info("complexProtection state: \(resources.complexProtectionEnabled)")
+        LOG.info("systemProtection state: \(resources.systemProtectionEnabled)")
+        LOG.info("safariProtection state: \(resources.safariProtectionEnabled)")
+        LOG.info("advancedProtection state \(configuration.isAdvancedProtectionEnabled)")
+        LOG.info("switchSystemProtection to state: \(enabled)")
 
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
@@ -295,7 +295,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
     private func updateVpnSettings(vc: UIViewController?, completion: @escaping (Error?)->Void) {
         if !proStatus {
-            LOG.info("(ComplexProtectionService) Failed \(#function) with reason: proStatus - \(proStatus)")
+            LOG.info("Failed \(#function) with reason: proStatus - \(proStatus)")
             completion(nil)
             return
         }
@@ -328,14 +328,14 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
     private func addObservers() {
         vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
-            LOG.info("(ComplexProtectionService) configurationRemovedNotification called")
+            LOG.info("configurationRemovedNotification called")
             guard let self = self else { return }
             self.resources.systemProtectionEnabled = false
             NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
         }
 
         vpnStateChangeObserver = NotificationCenter.default.observe(name: VpnManager.stateChangedNotification, object: nil, queue: nil) { [weak self] (note) in
-            LOG.info("(ComplexProtectionService) stateChangedNotification called")
+            LOG.info("stateChangedNotification called")
             guard let self = self else { return }
             if let enabled = note.object as? Bool {
                 self.resources.systemProtectionEnabled = enabled
@@ -349,7 +349,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
         }
 
         dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: nil) { [weak self] _ in
-            LOG.info("(ComplexProtectionService) dnsImplementationChanged called")
+            LOG.info("dnsImplementationChanged called")
             guard let self = self else { return }
 
             if self.resources.dnsImplementation == .adGuard {
@@ -374,7 +374,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
         vpnManager.checkVpnInstalled { [weak self] error in
             guard let self = self else { return }
             if error != nil {
-                LOG.error("(ComplexProtectionService) checkVpnInstalled error: \(error!)")
+                LOG.error("checkVpnInstalled error: \(error!)")
             }
             else {
                 if !self.vpnManager.vpnInstalled {
@@ -422,7 +422,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
     private func updateAdvancedProtection(withState: Bool, withReloadCB: Bool = false) {
         guard #available(iOS 15.0, *), configuration.proStatus else { return }
-        LOG.info("(ComplexProtectionService) - updateAdvancedProtection; Updating advanced protection with new state = \(withState)")
+        LOG.info("Updating advanced protection with new state = \(withState)")
         configuration.isAdvancedProtectionEnabled = withState
         if withReloadCB {
             safariProtection.update(advancedProtectionEnabled: withState, onCbReloaded: nil)

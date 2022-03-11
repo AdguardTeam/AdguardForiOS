@@ -51,7 +51,7 @@ class KeychainService : KeychainServiceProtocol {
         get {
             let (storedId, notFound) = getStoredAppId()
 
-            LOG.info("(KeychainService) get appId. strored: \(storedId ?? "nil")")
+            LOG.info("get appId. strored: \(storedId ?? "nil")")
 
             if storedId != nil {
                 return storedId
@@ -66,7 +66,7 @@ class KeychainService : KeychainServiceProtocol {
 
             let newAppId = generateAppId()
 
-            LOG.info("(KeychainService) generate new app id: \(newAppId)")
+            LOG.info("Generate new app id: \(newAppId)")
             if !save(appId: newAppId) {
                 return nil
             }
@@ -238,22 +238,22 @@ class KeychainService : KeychainServiceProtocol {
                      kSecReturnAttributes as String:  true,
                      kSecReturnData as String:        true]
 
-        LOG.info("(KeychainService) getStoredAppId")
+        LOG.info("getStoredAppId")
 
         var attributes: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &attributes)
 
         if status == errSecItemNotFound {
-            LOG.info("(KeychainService) getStoredAppId error - not found")
+            LOG.info("getStoredAppId error - not found")
             return (nil, true)
         }
         if status != errSecSuccess {
-            LOG.error("(KeychainService) getStoredAppId error. Status: \(status)")
+            LOG.error("getStoredAppId error. Status: \(status)")
             return (nil, false)
         }
 
         guard let resultArr = attributes as? [[String: Any]] else {
-            LOG.error("(KeychainService) getStoredAppId error. Unknown result format")
+            LOG.error("getStoredAppId error. Unknown result format")
             return (nil, false)
         }
 
@@ -261,21 +261,21 @@ class KeychainService : KeychainServiceProtocol {
 
             guard   let key = resultDict[kSecAttrAccount as String] as? String,
                     let value = resultDict[kSecValueData as String] else {
-                    LOG.error("(KeychainService) getStoredAppId error. Unknown result format 2")
+                    LOG.error("getStoredAppId error. Unknown result format 2")
                     continue
             }
 
             guard let valueString = String(data: value as! Data, encoding: .utf8) else {
-                LOG.error("(KeychainService) getStoredAppId error. Unknown result format 3")
+                LOG.error("getStoredAppId error. Unknown result format 3")
                 continue
             }
 
             if key != appIdKey {
-                LOG.error("(KeychainService) getStoredAppId error. appIdKey does not match")
+                LOG.error("getStoredAppId error. appIdKey does not match")
                 continue
             }
 
-            LOG.info("(KeychainService) getStoredAppId - success")
+            LOG.info("getStoredAppId - success")
             return (valueString, false)
         }
 
@@ -301,14 +301,14 @@ class KeychainService : KeychainServiceProtocol {
         var result: CFTypeRef?
         let status = SecItemAdd(query as CFDictionary, &result)
 
-        LOG.info("(KeychainService) save app id status: \(status)")
+        LOG.info("Save app id status: \(status)")
 
         return status == errSecSuccess
     }
 
     internal func deleteAppId()-> Bool {
 
-        LOG.info("(KeychainService) deleteAppId")
+        LOG.info("deleteAppId")
 
         // read app id from keychain
 
@@ -321,12 +321,12 @@ class KeychainService : KeychainServiceProtocol {
         var attributes: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &attributes)
         if(status != errSecSuccess) {
-            LOG.error("(KeychainService) deleteAppId read error. Status: \(status) ")
+            LOG.error("deleteAppId read error. Status: \(status) ")
             return false
         }
 
         guard let records = attributes as? [[String: Any]] else {
-            LOG.error("(KeychainService) deleteAppId read error. There are no records")
+            LOG.error("deleteAppId read error. There are no records")
             return false
         }
 
@@ -342,11 +342,11 @@ class KeychainService : KeychainServiceProtocol {
 
             let deleteStatus = SecItemDelete(deleteQuery as CFDictionary)
             if deleteStatus != errSecSuccess {
-                LOG.error("(KeychainService) deleteAppId delete error. Status: \(deleteStatus) ")
+                LOG.error("deleteAppId delete error. Status: \(deleteStatus) ")
                 return false
             }
 
-            LOG.info("(KeychainService) deleteAppId - success")
+            LOG.info("deleteAppId - success")
         }
 
         return true

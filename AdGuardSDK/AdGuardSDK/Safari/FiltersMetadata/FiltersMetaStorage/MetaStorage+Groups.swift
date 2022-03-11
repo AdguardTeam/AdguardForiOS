@@ -91,7 +91,7 @@ extension MetaStorage: GroupsMetaStorageProtocol {
 
             return FilterGroupsTable(dbGroup: group, localizedName: localizedName ?? dbGroup.name)
         }
-        LOG.debug("(FiltersMetaStorage) - getAllLocalizedGroups returning \(result.count) groups objects for lang=\(lang)")
+        LOG.debug("GetAllLocalizedGroups returning \(result.count) groups objects for lang=\(lang)")
         return result
     }
 
@@ -100,7 +100,7 @@ extension MetaStorage: GroupsMetaStorageProtocol {
         // Query: UPDATE filter_groups SET is_enabled = enabled WHERE group_id = id
         let query = FilterGroupsTable.table.filter(FilterGroupsTable.groupId == id)
         try filtersDb.run(query.update(FilterGroupsTable.isEnabled <- enabled))
-        LOG.debug("(FiltersMetaStorage) - setGroup group with id=\(id) was set to enabled=\(enabled)")
+        LOG.debug("SetGroup group with id=\(id) was set to enabled=\(enabled)")
     }
 
     // Updates group metadata with passed one
@@ -110,7 +110,7 @@ extension MetaStorage: GroupsMetaStorageProtocol {
                                      .where(FilterGroupsTable.groupId == group.groupId)
                                      .update(FilterGroupsTable.name <- group.groupName, FilterGroupsTable.displayNumber <- group.displayNumber)
         try filtersDb.run(query)
-        LOG.debug("(FiltersMetaStorage) - Update group with id=\(group.groupId)")
+        LOG.debug("Update group with id=\(group.groupId)")
     }
 
     // Updates passed groups meta

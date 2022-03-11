@@ -30,13 +30,13 @@ struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
     func parse(_ url: URL) -> Bool {
         let rule = String(url.path.suffix(url.path.count - 1))
         if rule.isEmpty {
-            LOG.error("(OpenUserFilterControllerParser) - parse; Failed to get rule from URL=\(url.absoluteString)")
+            LOG.error("Failed to get rule from URL=\(url.absoluteString)")
             return false
         }
 
         let result = Domain.findDomains(in: rule)
         if result.isEmpty {
-            LOG.error("(OpenUserFilterControllerParser) - parse; Failed to get absolute domain string from string=\(rule)")
+            LOG.error("Failed to get absolute domain string from string=\(rule)")
             return false
         }
 

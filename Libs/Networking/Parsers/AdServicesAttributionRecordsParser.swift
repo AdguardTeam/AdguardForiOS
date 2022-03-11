@@ -63,13 +63,13 @@ final class AdServicesAttributionRecordsParser: ParserProtocol {
                     let records = try JSONDecoder().decode(AttributionRecords.self, from: data)
                     return records.jsonMap
                 } catch {
-                    LOG.error("(AdServicesAttributionRecordsParser) - parse; Serialization error: \(error)")
+                    LOG.error("Serialization error: \(error)")
                     return nil
                 }
             }
-            LOG.error("(AdServicesAttributionRecordsParser) - parse; Response status code is \(response.statusCode)")
+            LOG.error("Response status code is \(response.statusCode)")
         }
-        LOG.error("(AdServicesAttributionRecordsParser) - parse; Response is nil")
+        LOG.error("Response is nil")
         return nil
     }
 }

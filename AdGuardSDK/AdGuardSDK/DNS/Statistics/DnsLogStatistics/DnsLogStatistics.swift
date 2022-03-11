@@ -77,28 +77,28 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
             try add(record: event)
             try purgeDnsLogIfNeeded()
         } catch {
-            LOG.error("(DnsLogStatistics) - processEvent; Error adding event to DB; Error: \(error)")
+            LOG.error("Error adding event to DB; Error: \(error)")
         }
     }
 
     // TODO: - Needs new tests
     /// Returns all available records from `DNS_log_statistics.db` for the specified `period`
     public func getDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent] {
-        LOG.info("(DnsLogStatistics) - getDnsLogRecords called")
+        LOG.info("getDnsLogRecords called")
         let query = DnsLogTable.table
             .where(period.interval.start...period.interval.end ~= DnsLogTable.startDate)
             .order(DnsLogTable.startDate.desc)
         let all: [DnsRequestProcessedEvent] = try statisticsDb.prepare(query).map {
             DnsRequestProcessedEvent(dbLogRecord: $0)
         }
-        LOG.info("(DnsLogStatistics) - getDnsLogRecords fetched \(all.count) log records")
+        LOG.info("getDnsLogRecords fetched \(all.count) log records")
         return all
     }
 
     // TODO: - Needs new tests
     /// Returns all available blocked records from `DNS_log_statistics.db` for the specified `period`
     public func getBlockedDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent] {
-        LOG.info("(DnsLogStatistics) - getBlockedDnsLogRecords called")
+        LOG.info("getBlockedDnsLogRecords called")
         let query = DnsLogTable.table
             .where(
                 period.interval.start...period.interval.end ~= DnsLogTable.startDate && (
@@ -111,14 +111,14 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
         let blocked: [DnsRequestProcessedEvent] = try statisticsDb.prepare(query).map {
             DnsRequestProcessedEvent(dbLogRecord: $0)
         }
-        LOG.info("(DnsLogStatistics) - getBlockedDnsLogRecords fetched \(blocked.count) log records")
+        LOG.info("getBlockedDnsLogRecords fetched \(blocked.count) log records")
         return blocked
     }
 
     // TODO: - Needs new tests
     /// Returns all available allowlisted records from `DNS_log_statistics.db` for the specified `period`
     public func getAllowlistedDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent] {
-        LOG.info("(DnsLogStatistics) - getAllowlistedDnsLogRecords called")
+        LOG.info("getAllowlistedDnsLogRecords called")
         let query = DnsLogTable.table
             .where(
                 period.interval.start...period.interval.end ~= DnsLogTable.startDate && (
@@ -130,18 +130,18 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
         let allowlisted: [DnsRequestProcessedEvent] = try statisticsDb.prepare(query).map {
             DnsRequestProcessedEvent(dbLogRecord: $0)
         }
-        LOG.info("(DnsLogStatistics) - getAllowlistedDnsLogRecords fetched \(allowlisted.count) log records")
+        LOG.info("getAllowlistedDnsLogRecords fetched \(allowlisted.count) log records")
         return allowlisted
     }
 
     /// Removes all records from `DNS_log_statistics.db`
     public func reset() throws {
-        LOG.info("(DnsLogStatistics) - reset called")
+        LOG.info("reset called")
 
         let resetQuery = DnsLogTable.table.delete()
         try statisticsDb.run(resetQuery)
 
-        LOG.info("(DnsLogStatistics) - reset successfully finished")
+        LOG.info("reset successfully finished")
     }
 
     // MARK: - Private methods
@@ -178,7 +178,7 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
         let recordsToRemoveCount = 500
         try removeLast(recordsToRemoveCount)
 
-        LOG.info("(DnsLogStatistics) - purgeDnsLogIfNeeded; Last \(recordsToRemoveCount) records were purged")
+        LOG.info("Last \(recordsToRemoveCount) records were purged")
     }
 
     /// Removes `n` last rows from the table

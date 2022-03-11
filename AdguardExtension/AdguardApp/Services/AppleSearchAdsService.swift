@@ -114,7 +114,7 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
             jsonString = convertJSONtoParameterString(json: json, type: type)
         case .error(let error):
             jsonString = nil
-            LOG.error("(AppleSearchAdsService) - processResult; Error occurred while receiving attribution records for framework = \(type); Error: \(error)")
+            LOG.error("Error occurred while receiving attribution records for framework = \(type); Error: \(error)")
         }
         completionQueue.async { completionHandler(jsonString) }
     }

@@ -58,19 +58,19 @@ final class MetaStorage: MetaStorageProtocol {
         // `busyHandler` is needed to handle error when db is locked and try once more
         self.filtersDb.busyTimeout = 5
         self.filtersDb.busyHandler { _ in
-            LOG.error("(MetaStorage) - init; Safari filters db is locked")
+            LOG.error("Safari filters db is locked")
             return true
         }
         insertCustomGroupIfNeeded()
     }
 
     func reset() throws {
-        LOG.info("(MetaStorage) - reset start")
+        LOG.info("Reset start")
 
         try productionDbManager.reset()
         filtersDb = productionDbManager.filtersDb
 
-        LOG.info("(MetaStorage) - reset; Successfully reset adguard.db reinitialize Connection object now")
+        LOG.info("Successfully reset adguard.db reinitialize Connection object now")
     }
 
     /*

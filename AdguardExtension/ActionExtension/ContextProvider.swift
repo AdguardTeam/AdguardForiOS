@@ -63,14 +63,14 @@ struct ContextProvider {
 
         let type = String(kUTTypePropertyList)
         guard itemProvider.hasItemConformingToTypeIdentifier(type) else {
-            LOG.error("(ContextProvider) - process; Error: itemProvider doesn't conform to type \(type))")
+            LOG.error("Error: itemProvider doesn't conform to type \(type))")
             completionQueue.async { onContextObtained(.error(ContextError.typeInconformance)) }
             return
         }
 
         itemProvider.loadItem(forTypeIdentifier: type, options: nil) { result, loadItemError in
             guard loadItemError == nil else {
-                LOG.error("(ContextProvider) - process; Error loading item: \(loadItemError!)")
+                LOG.error("Error loading item: \(loadItemError!)")
                 completionQueue.async { onContextObtained(.error(ContextError.errorLoadingItem)) }
                 return
             }
@@ -82,13 +82,13 @@ struct ContextProvider {
         let completionQueue = DispatchQueue.main
 
         guard let dictResult = dict as? [String: Any] else {
-            LOG.error("(ContextProvider) - process; Error result is not a valid dict. Results: \(String(describing: dict))")
+            LOG.error("Error result is not a valid dict. Results: \(String(describing: dict))")
             completionQueue.async { onContextObtained(.error(ContextError.typeInconformance)) }
             return
         }
 
         guard let infoDict = dictResult[NSExtensionJavaScriptPreprocessingResultsKey] as? [String: Any] else {
-            LOG.error("(ContextProvider) - process; Can't get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(dictResult)")
+            LOG.error("Can't get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(dictResult)")
             completionQueue.async { onContextObtained(.error(ContextError.typeInconformance)) }
             return
         }
@@ -98,7 +98,7 @@ struct ContextProvider {
               let url = URL(string: urlString),
               let domain = url.host
         else {
-            LOG.error("(ContextProvider) - process; Error obtaining page url")
+            LOG.error("Error obtaining page url")
             completionQueue.async { onContextObtained(.error(ContextError.obtainDomain)) }
             return
         }

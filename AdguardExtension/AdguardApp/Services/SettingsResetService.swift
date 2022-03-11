@@ -105,7 +105,7 @@ final class SettingsResetService: SettingsResetServiceProtocol {
         workingQueue.async { [weak self] in
             guard let self = self else { return }
 
-            LOG.info("(SettingsResetService) - resetAllSettings; Start reset")
+            LOG.info("Start reset")
 
             // Reset Shared Defaults
             self.resources.reset()
@@ -118,7 +118,7 @@ final class SettingsResetService: SettingsResetServiceProtocol {
             group.enter()
             self.safariProtection.reset(withReloadCB: false) { error in
                 if let error = error  {
-                    LOG.error("(SettingsResetService) - resetAllSettings; Safari protection reset error: \(error)")
+                    LOG.error("Safari protection reset error: \(error)")
                     group.leave()
                     return
                 }
@@ -172,7 +172,7 @@ final class SettingsResetService: SettingsResetServiceProtocol {
             if fromUI {
                 DispatchQueue.main.async {
                     AppDelegate.shared.setMainPageAsCurrentAndPopToRootControllersEverywhere()
-                    LOG.info("(SettingsResetService) - resetAllSettings; Reseting is over")
+                    LOG.info("Reseting is over")
                 }
             }
         }
@@ -184,26 +184,26 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     func resetAllStatistics() {
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-            LOG.info("(SettingsResetService) - resetStatistics; Start reset statistics")
+            LOG.info("Start reset statistics")
 
             let activityReset = self.resetActivityStatistics()
             let chartReset = self.resetChartStatistics()
             let dnsLogReset = self.resetDnsLogStatistics()
 
-            LOG.info("(SettingsResetService) - resetStatistics; Activity reset = \(activityReset); Chart reset = \(chartReset); DNS log reset = \(dnsLogReset)")
+            LOG.info("Activity reset = \(activityReset); Chart reset = \(chartReset); DNS log reset = \(dnsLogReset)")
             // Notify that settings were reset
             NotificationCenter.default.post(name: .resetStatistics, object: self)
-            LOG.info("(SettingsResetService) - resetStatistics; Reset statistics is over")
+            LOG.info("Reset statistics is over")
         }
     }
 
     func resetActivityStatistics() -> Bool {
         do {
             try activityStatistics.reset()
-            LOG.info("(SettingsResetService) - resetStatistics; Activity statistics reset successfully")
+            LOG.info("Activity statistics reset successfully")
             return true
         } catch {
-            LOG.error("(SettingsResetService) - resetStatistics; Error occurred while resetting activity statistics: \(error)")
+            LOG.error("Error occurred while resetting activity statistics: \(error)")
             return false
         }
     }
@@ -211,11 +211,11 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     func resetChartStatistics() -> Bool {
         do {
             try chartStatistics.reset()
-            LOG.info("(SettingsResetService) - resetStatistics; Chart statistics reset successfully")
+            LOG.info("Chart statistics reset successfully")
             return true
 
         } catch {
-            LOG.error("(SettingsResetService) - resetStatistics; Error occurred while resetting chart statistics: \(error)")
+            LOG.error("Error occurred while resetting chart statistics: \(error)")
             return false
         }
     }
@@ -223,10 +223,10 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     func resetDnsLogStatistics() -> Bool {
         do {
             try dnsLogStatistics.reset()
-            LOG.info("(SettingsResetService) - resetStatistics; Dns log statistics reset successfully")
+            LOG.info("Dns log statistics reset successfully")
             return true
         } catch {
-            LOG.error("(SettingsResetService) - resetStatistics; Error occurred while resetting dns log statistics: \(error)")
+            LOG.error("Error occurred while resetting dns log statistics: \(error)")
             return false
         }
     }
@@ -236,18 +236,18 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     private func resetDnsProtection() {
         do {
             try dnsProtection.reset()
-            LOG.info("(SettingsResetService) - resetDnsProtection; Dns Protection reset successfully")
+            LOG.info("Dns Protection reset successfully")
         } catch {
-            LOG.error("(SettingsResetService) - resetDnsProtection; Error occurred while resetting dns protection: \(error)")
+            LOG.error("Error occurred while resetting dns protection: \(error)")
         }
     }
 
     private func resetDnsProviderManager() {
         do {
             try dnsProvidersManager.reset()
-            LOG.info("(SettingsResetService) - resetDnsProviderManager; Dns provider manager reset successfully")
+            LOG.info("Dns provider manager reset successfully")
         } catch {
-            LOG.error("(SettingsResetService) - resetDnsProviderManager; Error occurred while resetting dns provider manager: \(error)")
+            LOG.error("Error occurred while resetting dns provider manager: \(error)")
         }
     }
 
@@ -256,9 +256,9 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     private func enablePredefinedFiltersAndGroups() {
         do {
             try safariProtection.enablePredefinedGroupsAndFilters()
-            LOG.info("(SettingsResetService) - enablePredefinedFiltersAndGroups; Successfully enable predefined filters and groups after reset safari protection")
+            LOG.info("Successfully enable predefined filters and groups after reset safari protection")
         } catch {
-            LOG.error("(SettingsResetService) - enablePredefinedFiltersAndGroups; Error occurred while enabling predefined filters and groups on safari protection reset")
+            LOG.error("Error occurred while enabling predefined filters and groups on safari protection reset")
         }
     }
 
@@ -266,19 +266,19 @@ final class SettingsResetService: SettingsResetServiceProtocol {
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
             case .success(_):
-                LOG.info("(SettingsResetService) - updateSafariProtectionMeta; Safari protection meta successfully updated")
+                LOG.info("Safari protection meta successfully updated")
 
             case .error(let error):
-                LOG.error("(SettingsResetService) - updateSafariProtectionMeta; On update safari protection meta error occurred: \(error)")
+                LOG.error("On update safari protection meta error occurred: \(error)")
             }
 
         } onCbReloaded: { error in
             if let error = error {
-                LOG.error("(SettingsResetService) - updateSafariProtectionMeta; On reload CB error occurred: \(error)")
+                LOG.error("On reload CB error occurred: \(error)")
                 return
             }
 
-            LOG.info("(SettingsResetService) - updateSafariProtectionMeta; Successfully reload CB")
+            LOG.info("Successfully reload CB")
         }
     }
 }

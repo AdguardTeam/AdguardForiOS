@@ -33,7 +33,7 @@ struct OpenImportSettingsControllerParser: IURLSchemeParametersParser {
             let settings = try parser.parse(query: json)
             return executor.openImportSettingsController(showLaunchScreen: true, settings: settings)
         } catch {
-            LOG.error("(OpenImportSettingsControllerParser) - parse; Error occurred while parsing json = \(json)")
+            LOG.error("Error occurred while parsing json = \(json)")
             return false
         }
     }

@@ -51,19 +51,19 @@ final class AdServicesHelper: AdServicesHelperProtocol {
                 switch result {
                 case .success(let json):
                     if json.isEmpty {
-                        LOG.error("(AdServicesHelper) - fetchAttributionRecords; Search Ads data is missing")
+                        LOG.error("Search Ads data is missing")
                         completionHandler(.error(AppleSearchAdsService.AdsError.missingAttributionData))
                         return
                     }
 
                     completionHandler(.success(json))
                 case .failure(let error):
-                    LOG.error("(AdServicesHelper) - fetchAttributionRecords; On http request error: \(error)")
+                    LOG.error("On http request error: \(error)")
                     completionHandler(.error(error))
                 }
             }
         } catch {
-            LOG.error("(AdServicesHelper) - fetchAttributionRecords; Attribution token error occurred: \(error)")
+            LOG.error("Attribution token error occurred: \(error)")
             completionHandler(.error(error))
         }
     }

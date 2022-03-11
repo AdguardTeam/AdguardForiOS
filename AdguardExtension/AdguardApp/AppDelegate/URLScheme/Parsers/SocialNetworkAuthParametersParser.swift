@@ -43,7 +43,7 @@ struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
 
     private func socialLoginErrorProcessor(error: String) {
         var userInfo = [AnyHashable: Any]()
-        LOG.info("(URLSchemeProcessor) Social login error: \(error)")
+        LOG.info("Social login error: \(error)")
         switch error {
         case socialErrorUserNotFound:
             userInfo[PurchaseAssistant.kPSNotificationTypeKey] = PurchaseAssistant.kPSNotificationLoginUserNotFound

@@ -121,7 +121,7 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
     /* Returns json Data from file name */
     private func getData(forFileName fileName: String) throws -> Data {
         guard let pathString = bundle.path(forResource: fileName, ofType: "json") else {
-            LOG.error("(DnsProvidersDecoder) - getData; Failed to get \(fileName).json path")
+            LOG.error("Failed to get \(fileName).json path")
             throw CommonError.missingFile(filename: "\(fileName).json")
         }
         let pathUrl = URL(fileURLWithPath: pathString)

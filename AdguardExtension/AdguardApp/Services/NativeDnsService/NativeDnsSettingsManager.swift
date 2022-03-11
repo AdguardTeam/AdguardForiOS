@@ -129,7 +129,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
 
         loadDnsManager { [weak self] dnsManager in
             guard let manager = dnsManager else {
-                LOG.error("(NativeDnsConfigManager) - saveDnsManager; Received nil DNS manager")
+                LOG.error("Received nil DNS manager")
                 onErrorReceived(NativeDnsSettingsManagerError.failedToLoadManager)
                 return
             }
@@ -142,7 +142,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
     func removeDnsConfig(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
         loadDnsManager { [weak self] dnsManager in
             guard let dnsManager = dnsManager else {
-                LOG.error("(NativeDnsConfigManager) - removeDnsManager; Received nil DNS manager")
+                LOG.error("Received nil DNS manager")
                 onErrorReceived(NativeDnsSettingsManagerError.failedToLoadManager)
                 return
             }
@@ -159,7 +159,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
     func reset() {
         removeDnsConfig { error in
             if let error = error {
-                LOG.error("(NativeDnsConfigManager) - reset; Error when resetting settings; Error: \(error)")
+                LOG.error("Error when resetting settings; Error: \(error)")
             }
         }
     }
@@ -171,7 +171,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
         let dnsManager = NEDNSSettingsManager.shared()
         dnsManager.loadFromPreferences { error in
             if let error = error {
-                LOG.error("(NativeDnsConfigManager) - loadDnsManager; Loading error: \(error)")
+                LOG.error("Loading error: \(error)")
                 onManagerLoaded(nil)
                 return
             }
@@ -183,7 +183,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
     private func getDnsManagerStatus(_ onStatusReceived: @escaping (_ status: ManagerStatus) -> Void) {
         loadDnsManager { dnsManager in
             guard let manager = dnsManager else {
-                LOG.error("(NativeDnsConfigManager) - getDnsManagerStatus; Received nil DNS manager")
+                LOG.error("Received nil DNS manager")
                 onStatusReceived(ManagerStatus())
                 return
             }
@@ -250,13 +250,13 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
             if self?.resources.dnsImplementation == .native {
                 self?.saveDnsConfig({ error in
                     if let error = error {
-                        LOG.error("(NativeDnsConfigManager) - dnsImplementationObserver; Saving dns manager error: \(error)")
+                        LOG.error("Saving dns manager error: \(error)")
                     }
                 })
             } else {
                 self?.removeDnsConfig({ error in
                     if let error = error {
-                        LOG.error("(NativeDnsConfigManager) - dnsImplementationObserver; Removing dns manager error: \(error)")
+                        LOG.error("Removing dns manager error: \(error)")
                     }
                 })
             }
@@ -279,13 +279,13 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
             if !self.configuration.proStatus {
                 self.removeDnsConfig{ error in
                     if let error = error {
-                        LOG.error("(NativeDnsConfigManager) - proObservation; Removing dns manager error: \(error)")
+                        LOG.error("Removing dns manager error: \(error)")
                     }
                 }
             } else if self.resources.dnsImplementation == .native && self.configuration.proStatus {
                 self.saveDnsConfig { error in
                     if let error = error {
-                        LOG.error("(NativeDnsConfigManager) - proObservation; Saving dns manager error: \(error)")
+                        LOG.error("Saving dns manager error: \(error)")
                     }
                 }
             }

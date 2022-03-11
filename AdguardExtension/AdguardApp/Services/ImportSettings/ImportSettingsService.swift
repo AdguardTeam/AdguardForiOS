@@ -238,17 +238,17 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
             case .success(_):
-                LOG.info("(ImportSettingsService) - updateMetaAndReloadCB; Successfully updates filters meta and localizations")
+                LOG.info("Successfully updates filters meta and localizations")
             case .error(let error):
-                LOG.error("(ImportSettingsService) - updateMetaAndReloadCB; Error occurred while updating filters meta and localizations; Error: \(error)")
+                LOG.error("Error occurred while updating filters meta and localizations; Error: \(error)")
             }
             group.leave()
         } onCbReloaded: { error in
             if let error = error {
-                LOG.error("(ImportSettingsService) - updateMetaAndReloadCB; Error occurred while reloading content blockers; Error: \(error)")
+                LOG.error("Error occurred while reloading content blockers; Error: \(error)")
                 return
             }
-            LOG.info("(ImportSettingsService) - updateMetaAndReloadCB; Content blockers successfully reloaded")
+            LOG.info("Content blockers successfully reloaded")
         }
         group.wait()
     }
