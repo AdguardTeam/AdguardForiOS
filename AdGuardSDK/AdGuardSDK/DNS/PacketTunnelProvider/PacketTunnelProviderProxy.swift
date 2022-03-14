@@ -275,14 +275,15 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
         AGLogger.setCallback { level, msg, length in
             guard let msg = msg else { return }
             let data = Data(bytes: msg, count: Int(length))
+            let label = "DnsLibs-Tunnel"
             if let str = String(data: data, encoding: .utf8) {
                 switch (level) {
                 case AGLogLevel.AGLL_INFO:
-                    LOG.info("(DnsLibs) - \(str)")
+                    LOG.info(label, str)
                 case AGLogLevel.AGLL_ERR, AGLogLevel.AGLL_WARN:
-                    LOG.error("(DnsLibs) - \(str)")
+                    LOG.error(label, str)
                 default:
-                    LOG.debug("(DnsLibs) - \(str)")
+                    LOG.debug(label, str)
                 }
             }
         }

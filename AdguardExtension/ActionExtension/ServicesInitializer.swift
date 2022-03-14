@@ -89,21 +89,27 @@ final class ServicesInitializer {
 
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
         // Init Logger
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+//        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+        
         let isDebugLogs = resources.isDebugLogs
         LOG.info("Start Action extension with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        
+//        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
 
-        Logger.logInfo = { msg in
-            LOG.info(msg)
-        }
-
-        Logger.logDebug = { msg in
-            LOG.debug(msg)
-        }
-
-        Logger.logError = { msg in
-            LOG.error(msg)
-        }
+        let logManager = ComLog_LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: ComLog_LogLevel = isDebugLogs ? .debug : .info
+        logManager.configure(logLevel)
+        LOG.info("initLogger \(logLevel)")
+//        Logger.logInfo = { msg in
+//            LOG.info(msg)
+//        }
+//
+//        Logger.logDebug = { msg in
+//            LOG.debug(msg)
+//        }
+//
+//        Logger.logError = { msg in
+//            LOG.error(msg)
+//        }
     }
 }

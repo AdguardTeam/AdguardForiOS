@@ -26,19 +26,9 @@ final class ComLog_LoggerManagerImpl: ComLog_LoggerManager {
         let swiftyBeaverLogLevel = logLevel.getSwiftyBeaverLogLevel()
         osLogDestination.minLevel = swiftyBeaverLogLevel
         fileLogDestination.minLevel = swiftyBeaverLogLevel
-        AGLogger.setLevel(convertToVpnLibLogLevel(logLevel))
     }
 
-    private func convertToVpnLibLogLevel(_ level: ComLog_LogLevel) -> AGLogLevel {
-        switch (level) {
-            case .info: return .AGLL_INFO
-            case .warn: return .AGLL_WARN
-            case .error: return .AGLL_ERR
-            case .debug: return .AGLL_TRACE
-        }
-    }
-
-    private  func createOSLogDestination() -> BaseDestination  {
+    private func createOSLogDestination() -> BaseDestination  {
         let osLogDestination = ComLog_ConsoleAppDestination()
         osLogDestination.format = "[$T] $L $X - $M"
         osLogDestination.asynchronously = true

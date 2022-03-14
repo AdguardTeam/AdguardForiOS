@@ -478,44 +478,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Init logger
 
     private static func initLogger(resources: AESharedResourcesProtocol) {
-        let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
-        dynamicLogLevel = isDebugLogs ? .debug : .info
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-
-        LOG.info("Init app, log level debug=\(isDebugLogs)")
+        let manager: ComLog_LoggerManager = ServiceLocator.shared.getService()!
 
         #if DEBUG
-        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
+        manager.configure(.debug)
+        manager.configureDnsLibsLogLevel(.debug)
+        LOG.info("Init app, log level debug")
+
+        #else
+        let sharedResource: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+        let logLevel: ComLog_LogLevel = sharedResource.isDebugLogs ? .debug : .info
+        manager.configure(logLevel)
+        manager.configureDnsLibsLogLevel(logLevel)
+        LOG.info("Init app, log level \(logLevel)")
+        
         #endif
-
-        AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_INFO)
-        AGLogger.setCallback { level, msg, length in
-            guard let msg = msg else { return }
-            let data = Data(bytes: msg, count: Int(length))
-            if let str = String(data: data, encoding: .utf8) {
-                switch (level) {
-                case AGLogLevel.AGLL_INFO:
-                    Logger.logInfo("(DnsLibs) - \(str)")
-                case AGLogLevel.AGLL_ERR, AGLogLevel.AGLL_WARN:
-                    Logger.logError("(DnsLibs) - \(str)")
-                default:
-                    Logger.logDebug("(DnsLibs) - \(str)")
-                }
-            }
-        }
-
-        Logger.logDebug = { msg in
-            LOG.debug(msg)
-        }
-
-        Logger.logInfo = { msg in
-            LOG.info(msg)
-        }
-
-        Logger.logError = { msg in
-            LOG.error(msg)
-        }
     }
 
     private func setupOnFirstAppRun() {

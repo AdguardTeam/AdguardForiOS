@@ -76,8 +76,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         LOG.info("init start")
 
         // Services initialising
+        let logManager = Self.initLogger(with: resources)
+        LOG.info("(TodayViewController) - init start")
+        
         do {
             self.serviceInitializer = try ServiceInitializer(resources: resources)
+            self.serviceInitializer.setLoggerManager(logManager)
         } catch {
             LOG.error("init; error - \(error)")
             return nil
@@ -364,26 +368,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     /// Initializes logger
-    private static func initLogger(with resources: AESharedResourcesProtocol) {
-        // TODO: refactor, everywhere is the same code
-        // Init Logger
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-
-        let isDebugLogs = resources.isDebugLogs
-        LOG.info("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-
-        Logger.logInfo = { msg in
-            LOG.info(msg)
-        }
-
-        Logger.logDebug = { msg in
-            LOG.debug(msg)
-        }
-
-        Logger.logError = { msg in
-            LOG.error(msg)
-        }
+    private static func initLogger(with resources: AESharedResourcesProtocol) -> ComLog_LoggerManager {
+        let logManager = ComLog_LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: ComLog_LogLevel = resources.isDebugLogs ? .debug : .info
+        logManager.configure(logLevel)
+        LOG.info("initLogger \(logLevel)")
+        return logManager
+  
     }
 }
 

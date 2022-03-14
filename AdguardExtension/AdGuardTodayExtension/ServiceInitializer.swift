@@ -28,6 +28,9 @@ protocol ServiceInitializerProtocol  {
     var complexProtection: ComplexProtectionServiceProtocol { get }
     var dnsProvidersManager: DnsProvidersManagerProtocol { get }
     var activityStatistics: ActivityStatisticsProtocol { get }
+    var loggerManager: ComLog_LoggerManager? { get }
+    
+    func setLoggerManager(_ loggerManager: ComLog_LoggerManager)
 }
 
 private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ServiceInitializer.self)
@@ -40,6 +43,8 @@ final class ServiceInitializer: ServiceInitializerProtocol {
     let complexProtection: ComplexProtectionServiceProtocol
     let dnsProvidersManager: DnsProvidersManagerProtocol
     let activityStatistics: ActivityStatisticsProtocol
+    
+    private(set) var loggerManager: ComLog_LoggerManager?
 
     init(resources: AESharedResourcesProtocol) throws {
         LOG.info("init services start")
@@ -105,5 +110,9 @@ final class ServiceInitializer: ServiceInitializerProtocol {
         self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl, readOnly: true)
 
         LOG.info("init services end")
+    }
+    
+    func setLoggerManager(_ loggerManager: ComLog_LoggerManager) {
+        self.loggerManager = loggerManager
     }
 }

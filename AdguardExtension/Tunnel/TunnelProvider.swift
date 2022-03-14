@@ -119,21 +119,13 @@ class TunnelProvider: PacketTunnelProvider {
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
         // TODO: refactor, everywhere is the same code
         let debugLogs = resources.isDebugLogs
-        ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
-        ACLLogger.singleton().logLevel = debugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        //        ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
+        //        ACLLogger.singleton().logLevel = debugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        
+        let logManager = ComLog_LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: ComLog_LogLevel = debugLogs ? .debug : .info
+        logManager.configure(logLevel)
         LOG.info("Init tunnel with loglevel: \(debugLogs ? "DEBUG" : "NORMAL")")
-
-        Logger.logInfo = { msg in
-            LOG.info(msg)
-        }
-
-        Logger.logDebug = { msg in
-            LOG.debug(msg)
-        }
-
-        Logger.logError = { msg in
-            LOG.error(msg)
-        }
     }
 
     private static func migrateIfNeeded(resources: AESharedResourcesProtocol, configuration: DnsConfigurationProtocol, networkUtils: NetworkUtilsProtocol) {

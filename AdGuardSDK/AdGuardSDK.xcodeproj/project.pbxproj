@@ -36,6 +36,8 @@
 		2465359826E74B7200234EA5 /* DnsProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */; };
 		24D0AF3126F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
 		24D0AF3226F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
+		3D1EA72D27DA39BB005E7153 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
+		3D1EA72E27DA39BB005E7153 /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3D8EA87A27D12F3300F0172F /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8EA87927D12F3300F0172F /* SwiftyBeaver */; };
 		3D8EA88527D1339A00F0172F /* LoggerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA88427D1339A00F0172F /* LoggerWrapper.swift */; };
 		3D8EA88827D133C600F0172F /* LoggerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA88727D133C600F0172F /* LoggerFactory.swift */; };
@@ -416,7 +418,6 @@
 		B26B926527198FC800F1D482 /* ParsedHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B925427198FC800F1D482 /* ParsedHost.swift */; };
 		B26B92672719AA0600F1D482 /* Locale+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B92662719AA0600F1D482 /* Locale+Language.swift */; };
 		B26B926A2719AA2800F1D482 /* Locale+LanguageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B92692719AA2800F1D482 /* Locale+LanguageTest.swift */; };
-		B29D5367270CE2CB0045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B29D53A0270D24FF0045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B29D53A8270D27960045CB16 /* SharedAdGuardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B29D53A7270D27270045CB16 /* SharedAdGuardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B29D53B6270D4A860045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
@@ -443,6 +444,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3D1EA72F27DA39BB005E7153 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EC8A37E26E7697C005244CF;
+			remoteInfo = SharedAdGuardSDK;
+		};
 		D04F6AB8271845E100224DEF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
@@ -465,6 +473,20 @@
 			remoteInfo = AdGuardAGDnsProxyDependencies;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3D1EA73127DA39BB005E7153 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3D1EA72E27DA39BB005E7153 /* SharedAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		24195D322719F44000F31547 /* SystemLibsResolv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SystemLibsResolv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -793,8 +815,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B29D5367270CE2CB0045CB16 /* SharedAdGuardSDK.framework in Frameworks */,
 				B2C8E9CE27170ED500ACDED8 /* AdGuardSdkDependencies.framework in Frameworks */,
+				3D1EA72D27DA39BB005E7153 /* SharedAdGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1785,10 +1807,12 @@
 				D049EB9C26B1868200B8088B /* Sources */,
 				D049EB9D26B1868200B8088B /* Frameworks */,
 				D049EB9E26B1868200B8088B /* Resources */,
+				3D1EA73127DA39BB005E7153 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3D1EA73027DA39BB005E7153 /* PBXTargetDependency */,
 			);
 			name = "AdGuardSDK-mac";
 			packageProductDependencies = (
@@ -1865,11 +1889,11 @@
 			);
 			mainGroup = D0A0E38B26B16B03005344D2;
 			packageReferences = (
-				D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift.git" */,
-				D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip.git" */,
+				D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */,
 				7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */,
-				D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability.swift" */,
-				7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections.git" */,
+				D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */,
+				7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				D04F6A932718307700224DEF /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
 				3D8EA87827D12F3300F0172F /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
@@ -2411,6 +2435,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3D1EA73027DA39BB005E7153 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EC8A37E26E7697C005244CF /* SharedAdGuardSDK */;
+			targetProxy = 3D1EA72F27DA39BB005E7153 /* PBXContainerItemProxy */;
+		};
 		D04F6AB9271845E100224DEF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B2C8E9AE2717008C00ACDED8 /* AdGuardSdkDependencies */;
@@ -2445,6 +2474,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2477,6 +2507,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2562,6 +2593,7 @@
 				INFOPLIST_FILE = AdGuardSDK/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2578,7 +2610,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -2600,6 +2632,7 @@
 				INFOPLIST_FILE = AdGuardSDK/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2616,7 +2649,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -2712,6 +2745,7 @@
 				INFOPLIST_FILE = AdGuardSDK/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2724,10 +2758,11 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -2749,6 +2784,7 @@
 				INFOPLIST_FILE = AdGuardSDK/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2761,10 +2797,11 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -2786,6 +2823,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2821,6 +2859,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3052,6 +3091,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3087,6 +3127,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3199,7 +3240,7 @@
 				kind = branch;
 			};
 		};
-		7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections.git" */ = {
+		7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
 			requirement = {
@@ -3215,7 +3256,7 @@
 				version = 1.7.11;
 			};
 		};
-		D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip.git" */ = {
+		D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -3231,7 +3272,7 @@
 				version = 2.0.24;
 			};
 		};
-		D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability.swift" */ = {
+		D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
 			requirement = {
@@ -3239,7 +3280,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift.git" */ = {
+		D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
@@ -3257,17 +3298,17 @@
 		};
 		7E16F29726FA0E5E00383410 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections.git" */;
+			package = 7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
 		};
 		B26B92212718273000F1D482 /* Reachability */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability.swift" */;
+			package = D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */;
 			productName = Reachability;
 		};
 		B2C8E9B82717009800ACDED8 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D04F6A942718307700224DEF /* ContentBlockerConverter */ = {
@@ -3277,7 +3318,7 @@
 		};
 		D0DA0A1A27184EBA007681B2 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D0DA0A282718567F007681B2 /* AGDnsProxy */ = {

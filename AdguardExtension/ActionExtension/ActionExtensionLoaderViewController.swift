@@ -58,14 +58,18 @@ final class ActionExtensionLoaderViewController: UIViewController {
         let contextProvider = ContextProvider()
         contextProvider.process(context: extensionContext) { [weak self] result in
             guard let self = self else { return }
-
+            
             switch result {
             case .success(let context):
                 let isSafariProtectionEnabled = self.isSafariProtectionEnabled(for: context.domain)
                 self.modelToPass = ActionExtensionTableController.Model(context: context, isSafariProtectionEnabled: isSafariProtectionEnabled)
                 self.performSegue(withIdentifier: self.segueId, sender: self)
             case .error(let error):
-                self.receivedError(error: error as! ContextProvider.ContextError)
+                if let error = error as? ContextProvider.ContextError {
+                    self.receivedError(error: error)
+                } else {
+                    LOG.error("Can't cast error as 'ContextProvider.ContextError': \(error)")
+                }
             }
         }
     }
