@@ -95,9 +95,9 @@
         "package": "SwiftyBeaver",
         "repositoryURL": "https://github.com/SwiftyBeaver/SwiftyBeaver",
         "state": {
-          "branch": "master",
-          "revision": "adc6078b7024c500fdd009abd259c5da1816927c",
-          "version": null
+          "branch": null,
+          "revision": "2c039501d6eeb4d4cd4aec4a8d884ad28862e044",
+          "version": "1.9.5"
         }
       },
       {

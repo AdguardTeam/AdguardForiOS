@@ -78,11 +78,19 @@ final class AdvancedSettingsController: UITableViewController {
     }
 
     @IBAction func debugLogsAction(_ sender: UISwitch) {
+        let manager: ComLog_LoggerManager = ServiceLocator.shared.getService()!
+        
         let isDebugLogs = sender.isOn
         resources.isDebugLogs = isDebugLogs
-        LOG.info("Log level changed to \(isDebugLogs ? "DEBUG" : "Normal")")
+        let logLevel: ComLog_LogLevel = resources.isDebugLogs ? .debug : .info
+        manager.configure(logLevel)
+        manager.configureDnsLibsLogLevel(logLevel)
+        LOG.info("Init app, log level \(logLevel)")
+
 //        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
 //        AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
+//        FIXME--DNS
+        
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedAdvancedSettings, completion: nil) // restart tunnel to apply new log level
     }
 

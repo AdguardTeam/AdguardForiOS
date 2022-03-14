@@ -538,28 +538,9 @@
 		3DB3A2E027DF371000CE8F68 /* LogLevelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA83527D0D0D600F0172F /* LogLevelExtensions.swift */; };
 		3DB3A2E127DF371100CE8F68 /* LogLevelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA83527D0D0D600F0172F /* LogLevelExtensions.swift */; };
 		3DB3A2E227DF374700CE8F68 /* ConsoleAppDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82027D0CF0E00F0172F /* ConsoleAppDestination.swift */; };
-		3DB3A2E327DF386900CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2E427DF386B00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
 		3DB3A2E527DF386B00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2E627DF386C00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2E727DF386D00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2E827DF386D00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2E927DF386E00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2EA27DF386E00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2EB27DF386F00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2EC27DF386F00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2EE27DF387100CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
 		3DB3A2EF27DF387300CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
 		3DB3A2F027DF387400CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2F127DF387400CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2F227DF387500CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2F327DF387500CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2F427DF387600CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2F527DF387700CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2F627DF387700CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2F727DF387900CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2F827DF389100CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A2F927DF389200CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
 		3DB3A2FA27DF38C200CE8F68 /* LoggerManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82327D0CF4200F0172F /* LoggerManagerImpl.swift */; };
 		3DB3A2FB27DF38C200CE8F68 /* LoggerManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82327D0CF4200F0172F /* LoggerManagerImpl.swift */; };
 		3DB3A2FC27DF38F000CE8F68 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82F27D0CFD800F0172F /* LogLevel.swift */; };
@@ -576,38 +557,17 @@
 		3DB3A30727DF396700CE8F68 /* ConsoleAppDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA82027D0CF0E00F0172F /* ConsoleAppDestination.swift */; };
 		3DB3A30827DF396900CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81727D0CE4000F0172F /* NativeLoggerWrapperOsLogImpl.swift */; };
 		3DB3A30927DF396A00CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81727D0CE4000F0172F /* NativeLoggerWrapperOsLogImpl.swift */; };
-		3DB3A30A27DF396D00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
-		3DB3A30B27DF396E00CE8F68 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
 		3DB3A30C27DF397300CE8F68 /* NativeLoggerWrapperSystemLoggerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81A27D0CE9300F0172F /* NativeLoggerWrapperSystemLoggerImpl.swift */; };
 		3DB3A30D27DF397600CE8F68 /* NativeLoggerWrapperSystemLoggerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81A27D0CE9300F0172F /* NativeLoggerWrapperSystemLoggerImpl.swift */; };
 		3DB3A30E27DF39F100CE8F68 /* NativeLoggerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81D27D0CEBA00F0172F /* NativeLoggerWrapper.swift */; };
 		3DB3A30F27DF39F200CE8F68 /* NativeLoggerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81D27D0CEBA00F0172F /* NativeLoggerWrapper.swift */; };
 		3DB3A31027DF3CA800CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
 		3DB3A31127DF3CA800CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31227DF3CA900CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31327DF3CA900CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31427DF3CAA00CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31527DF3CAA00CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31627DF3CAB00CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31727DF3CAB00CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31927DF3CAD00CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31A27DF3CAE00CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31B27DF3CAE00CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31C27DF3CAF00CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
 		3DB3A31D27DF3CAF00CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31E27DF3CB000CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A31F27DF3CB000CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A32027DF3CB100CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A32127DF3CB100CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A32227DF3CB200CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A32327DF3CB300CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A32427DF3CB300CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A32527DF3CB400CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
 		3DB3A32627DF3CB500CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A32727DF3CB500CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
-		3DB3A32827DF3CBE00CE8F68 /* AGLogger+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6D727D90969005E7153 /* AGLogger+setup.swift */; };
 		3DB3A32B27DF447800CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81727D0CE4000F0172F /* NativeLoggerWrapperOsLogImpl.swift */; };
 		3DB3A32C27DF447B00CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8EA81727D0CE4000F0172F /* NativeLoggerWrapperOsLogImpl.swift */; };
+		3DF1EB9527DFB592002D7B56 /* LoggerManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1EA6E227DA00C5005E7153 /* LoggerManagerExtensions.swift */; };
 		4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4020A90022C3C863009C188F /* MainNavigationController.swift */; };
 		494E0BBA26E7AF49005C21C4 /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
 		494E0BBB26E7AF4A005C21C4 /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
@@ -9075,8 +9035,6 @@
 				C7DD464D2754E19A006E1E6C /* UITraitCollection+Utils.swift in Sources */,
 				3DB3A30827DF396900CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D0611F0D27396E3100124BC4 /* SafariProtectionFiltersDatabaseMigrationHelper.swift in Sources */,
-				3DB3A30A27DF396D00CE8F68 /* LoggerManagerExtensions.swift in Sources */,
-				3DB3A31B27DF3CAE00CE8F68 /* AGLogger+setup.swift in Sources */,
 				2408A8AB2747ED5D00D2D1DE /* RequestSender.swift in Sources */,
 				D031A13F219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
 				2408A8A82747ED3300D2D1DE /* AdServicesWrapper.swift in Sources */,
@@ -9747,7 +9705,6 @@
 				D031A12C219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				655A02291C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				D083AD7A27301DC600A8F96E /* SharedResources.swift in Sources */,
-				3DB3A2F127DF387400CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				65EC9CC81BB9841400F53F3B /* ADProductInfo.m in Sources */,
 				D07256EE26BD579100654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2E027DF371000CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -9796,7 +9753,6 @@
 				3DB3A2B627DF31E100CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D031A102219EFC99002C17D9 /* CLIColor.m in Sources */,
 				3DB3A25D27DF2EBE00CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A31227DF3CA900CE8F68 /* AGLogger+setup.swift in Sources */,
 				D031A164219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				65EC9CC61BB9841400F53F3B /* ADLocales.m in Sources */,
 				655A02A41C6B7686000F00D7 /* Reachability.m in Sources */,
@@ -9811,7 +9767,6 @@
 				7E06B66722FB1606006859AC /* DDDispatchQueueLogFormatter.m in Sources */,
 				7E06B66822FB1606006859AC /* ACIOUtils.m in Sources */,
 				D083AD7527301DC300A8F96E /* SharedResources.swift in Sources */,
-				3DB3A2F527DF387700CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				7E06B66922FB1606006859AC /* ADProductInfo.m in Sources */,
 				D07256E926BD578F00654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2DC27DF370D00CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -9860,7 +9815,6 @@
 				3DB3A2B227DF31DE00CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				7E06B68622FB1606006859AC /* CLIColor.m in Sources */,
 				3DB3A26227DF2EC200CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A31727DF3CAB00CE8F68 /* AGLogger+setup.swift in Sources */,
 				7E06B68722FB1606006859AC /* DDAbstractDatabaseLogger.m in Sources */,
 				7E06B68822FB1606006859AC /* ADLocales.m in Sources */,
 				7E06B68922FB1606006859AC /* Reachability.m in Sources */,
@@ -9877,9 +9831,7 @@
 				7EBDD98926D6A2E9009531FA /* DDLog.m in Sources */,
 				7E85A82626F3928F0059BB33 /* ADProductInfo.m in Sources */,
 				7EBDD98226D6A1F2009531FA /* Message.swift in Sources */,
-				3DB3A2E427DF386B00CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				3DB3A2C927DF33D100CE8F68 /* NativeLoggerWrapperSystemLoggerImpl.swift in Sources */,
-				3DB3A31C27DF3CAF00CE8F68 /* AGLogger+setup.swift in Sources */,
 				7EBDD98E26D6A318009531FA /* ACLFileLocker.m in Sources */,
 				7E18443626F773470085CDE3 /* SharedResources+Theme.swift in Sources */,
 				7EBDD99326D6A351009531FA /* ACLFileLogger.m in Sources */,
@@ -9918,9 +9870,7 @@
 				7EBDD98A26D6A2EA009531FA /* DDLog.m in Sources */,
 				7E85A82526F3928E0059BB33 /* ADProductInfo.m in Sources */,
 				7EBDD98326D6A1F2009531FA /* Message.swift in Sources */,
-				3DB3A2F827DF389100CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				7EBDD98D26D6A318009531FA /* ACLFileLocker.m in Sources */,
-				3DB3A32827DF3CBE00CE8F68 /* AGLogger+setup.swift in Sources */,
 				7E18443826F773470085CDE3 /* SharedResources+Theme.swift in Sources */,
 				7EBDD99426D6A352009531FA /* ACLFileLogger.m in Sources */,
 				494E0BBA26E7AF49005C21C4 /* SharedStorageUrls.swift in Sources */,
@@ -9961,7 +9911,6 @@
 				7E174BF6271F13EB006B7271 /* PurchaseService.swift in Sources */,
 				2408A89C2747E6DC00D2D1DE /* SendFeedbackRequest.swift in Sources */,
 				B2C19E5F2716BA2E00331109 /* ServiceInitializer.swift in Sources */,
-				3DB3A31A27DF3CAE00CE8F68 /* AGLogger+setup.swift in Sources */,
 				B2C8E97D2716E84A00ACDED8 /* LowLevelDnsConfiguration+Utils.swift in Sources */,
 				B2C19E602716BAD800331109 /* SharedStorageUrls.swift in Sources */,
 				B2C8E9792716E4AD00ACDED8 /* PurchaseAssistant.swift in Sources */,
@@ -10029,7 +9978,6 @@
 				2408A88D2747E4CF00D2D1DE /* IAdFrameworkHelper.swift in Sources */,
 				B2C19E772716C53F00331109 /* UIColorUtils.swift in Sources */,
 				2408A89A2747E6C400D2D1DE /* SuccessFailureParser.swift in Sources */,
-				3DB3A2F727DF387900CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				2408A8932747E5C300D2D1DE /* HttpRequestServiceProtocol+sendFeedback.swift in Sources */,
 				3D1EA72727DA353C005E7153 /* LogLevelExtensions.swift in Sources */,
 				B2C19E782716C81300331109 /* NativeDnsSettingsManager.swift in Sources */,
@@ -10054,7 +10002,6 @@
 				7E60820626D562BC00D778F4 /* CocoaLumberjack.swift in Sources */,
 				7E6081D626D55C0100D778F4 /* YouTubeAdsRequestHandler.swift in Sources */,
 				7E60821626D5638B00D778F4 /* ACLFileLogger.m in Sources */,
-				3DB3A2E327DF386900CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				3DB3A2BA27DF329800CE8F68 /* LogLevel.swift in Sources */,
 				7E6081F426D55F3600D778F4 /* SharedResources+DebugLogs.swift in Sources */,
 				3DB3A2BF27DF32BE00CE8F68 /* ConsoleAppDestination.swift in Sources */,
@@ -10069,7 +10016,6 @@
 				3DB3A2B927DF329500CE8F68 /* LoggerManager.swift in Sources */,
 				7E60820A26D5633000D778F4 /* ACLLogger.m in Sources */,
 				7E60820426D562B700D778F4 /* DDLog.m in Sources */,
-				3DB3A31927DF3CAD00CE8F68 /* AGLogger+setup.swift in Sources */,
 				7E6081F526D5618D00D778F4 /* String+Utils.swift in Sources */,
 				3DB3A2CA27DF33D400CE8F68 /* NativeLoggerWrapperSystemLoggerImpl.swift in Sources */,
 				7E6081F726D561B600D778F4 /* UIColor+Utils.swift in Sources */,
@@ -10090,7 +10036,6 @@
 				6089DFC427A8432C00536667 /* UIViewController+Alert.swift in Sources */,
 				6089DFC227A83CFF00536667 /* DispatchQueue+Utils.swift in Sources */,
 				605E812F27A7F39600AFC107 /* URL+Utils.swift in Sources */,
-				3DB3A2F927DF389200CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				3DB3A2C727DF33CE00CE8F68 /* NativeLoggerWrapperSystemLoggerImpl.swift in Sources */,
 				605E812C27A7F1E500AFC107 /* Bundle+Utils.swift in Sources */,
 				605E812B27A7DC2D00AFC107 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
@@ -10113,7 +10058,6 @@
 				3DB3A2C027DF32D200CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				3DB3A2B827DF329400CE8F68 /* LoggerManager.swift in Sources */,
 				7E60820926D5633000D778F4 /* ACLLogger.m in Sources */,
-				3DB3A32727DF3CB500CE8F68 /* AGLogger+setup.swift in Sources */,
 				3DB3A2BE27DF32BD00CE8F68 /* ConsoleAppDestination.swift in Sources */,
 				7E60820326D562B600D778F4 /* DDLog.m in Sources */,
 				7E6081F626D5618D00D778F4 /* String+Utils.swift in Sources */,
@@ -10195,7 +10139,6 @@
 				D067D8E021428AA900ECDE6D /* ACIOUtils.m in Sources */,
 				D067D8E321428AA900ECDE6D /* ADProductInfo.m in Sources */,
 				D083AD7927301DC500A8F96E /* SharedResources.swift in Sources */,
-				3DB3A2F227DF387500CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				D031A12D219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				D07256ED26BD579100654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2DF27DF370F00CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -10244,7 +10187,6 @@
 				3DB3A2B527DF31E000CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D031A103219EFC99002C17D9 /* CLIColor.m in Sources */,
 				3DB3A25E27DF2EBF00CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A31327DF3CA900CE8F68 /* AGLogger+setup.swift in Sources */,
 				D031A165219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				D067D8FD21428AA900ECDE6D /* ADLocales.m in Sources */,
 				D067D8FE21428AA900ECDE6D /* Reachability.m in Sources */,
@@ -10259,7 +10201,6 @@
 				D031A12E219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				D067D91121428B4600ECDE6D /* ACIOUtils.m in Sources */,
 				D083AD7827301DC500A8F96E /* SharedResources.swift in Sources */,
-				3DB3A2F327DF387500CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				D067D91421428B4600ECDE6D /* ADProductInfo.m in Sources */,
 				D07256EC26BD579000654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2DE27DF370F00CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -10308,7 +10249,6 @@
 				3DB3A2B727DF31E200CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D031A104219EFC99002C17D9 /* CLIColor.m in Sources */,
 				3DB3A25F27DF2EBF00CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A31427DF3CAA00CE8F68 /* AGLogger+setup.swift in Sources */,
 				D031A166219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				D067D92E21428B4600ECDE6D /* ADLocales.m in Sources */,
 				D067D92F21428B4600ECDE6D /* Reachability.m in Sources */,
@@ -10323,7 +10263,6 @@
 				D031A12F219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				D067D94221428B9100ECDE6D /* ACIOUtils.m in Sources */,
 				D083AD7727301DC400A8F96E /* SharedResources.swift in Sources */,
-				3DB3A2F427DF387600CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				D067D94521428B9100ECDE6D /* ADProductInfo.m in Sources */,
 				D07256EB26BD579000654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2DD27DF370D00CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -10372,7 +10311,6 @@
 				3DB3A2B427DF31DF00CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D031A105219EFC99002C17D9 /* CLIColor.m in Sources */,
 				3DB3A26027DF2EC000CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A31527DF3CAA00CE8F68 /* AGLogger+setup.swift in Sources */,
 				D031A167219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				D067D95F21428B9100ECDE6D /* ADLocales.m in Sources */,
 				D067D96021428B9100ECDE6D /* Reachability.m in Sources */,
@@ -10387,7 +10325,6 @@
 				D031A130219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				D067D97321428BB500ECDE6D /* ACIOUtils.m in Sources */,
 				D083AD7627301DC300A8F96E /* SharedResources.swift in Sources */,
-				3DB3A2F627DF387700CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				D067D97621428BB500ECDE6D /* ADProductInfo.m in Sources */,
 				D07256EA26BD578F00654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2DB27DF370C00CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -10436,7 +10373,6 @@
 				3DB3A2B327DF31DF00CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D031A106219EFC99002C17D9 /* CLIColor.m in Sources */,
 				3DB3A26127DF2EC100CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A31627DF3CAB00CE8F68 /* AGLogger+setup.swift in Sources */,
 				D031A168219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				D067D99021428BB500ECDE6D /* ADLocales.m in Sources */,
 				D067D99121428BB500ECDE6D /* Reachability.m in Sources */,
@@ -10451,7 +10387,6 @@
 				D0B542992435C6A3002F0AEC /* DDDispatchQueueLogFormatter.m in Sources */,
 				3DB3A27B27DF2FC500CE8F68 /* LogLevel.swift in Sources */,
 				D0B5429A2435C6A3002F0AEC /* ACIOUtils.m in Sources */,
-				3DB3A2E627DF386C00CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				D083AD7427301DC100A8F96E /* SharedResources.swift in Sources */,
 				D07256EF26BD579200654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2DA27DF370B00CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -10500,7 +10435,6 @@
 				3DB3A2B027DF31D500CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D0B542BC2435C6A3002F0AEC /* CLIColor.m in Sources */,
 				3DB3A27527DF2F8900CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A31E27DF3CB000CE8F68 /* AGLogger+setup.swift in Sources */,
 				D0B542BD2435C6A3002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B542BE2435C6A3002F0AEC /* ADLocales.m in Sources */,
 				D0B542BF2435C6A3002F0AEC /* Reachability.m in Sources */,
@@ -10515,7 +10449,6 @@
 				D0B542D02435C6A7002F0AEC /* ACIOUtils.m in Sources */,
 				3DB3A27C27DF2FC600CE8F68 /* LogLevel.swift in Sources */,
 				D0B542D12435C6A7002F0AEC /* ADProductInfo.m in Sources */,
-				3DB3A2E727DF386D00CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				D083AD7327301DC000A8F96E /* SharedResources.swift in Sources */,
 				D07256F026BD579300654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2D927DF370B00CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -10564,7 +10497,6 @@
 				3DB3A2AF27DF31D400CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D0B542F52435C6A7002F0AEC /* CLIColor.m in Sources */,
 				3DB3A27627DF2F8A00CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A31F27DF3CB000CE8F68 /* AGLogger+setup.swift in Sources */,
 				D0B542F62435C6A7002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B542F72435C6A7002F0AEC /* ADLocales.m in Sources */,
 				D0B542F82435C6A7002F0AEC /* Reachability.m in Sources */,
@@ -10579,7 +10511,6 @@
 				D0B5430B2435C6AA002F0AEC /* DDDispatchQueueLogFormatter.m in Sources */,
 				3DB3A27D27DF2FC600CE8F68 /* LogLevel.swift in Sources */,
 				D0B5430C2435C6AA002F0AEC /* ACIOUtils.m in Sources */,
-				3DB3A2E827DF386D00CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				D083AD7227301DBF00A8F96E /* SharedResources.swift in Sources */,
 				D07256F126BD579400654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2D827DF370A00CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -10628,7 +10559,6 @@
 				3DB3A2B127DF31D500CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D0B5432E2435C6AA002F0AEC /* CLIColor.m in Sources */,
 				3DB3A27727DF2F8A00CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A32127DF3CB100CE8F68 /* AGLogger+setup.swift in Sources */,
 				D0B5432F2435C6AA002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B543302435C6AA002F0AEC /* ADLocales.m in Sources */,
 				D0B543312435C6AA002F0AEC /* Reachability.m in Sources */,
@@ -10643,7 +10573,6 @@
 				D0B543442435C6AE002F0AEC /* DDDispatchQueueLogFormatter.m in Sources */,
 				3DB3A27E27DF2FC700CE8F68 /* LogLevel.swift in Sources */,
 				D0B543452435C6AE002F0AEC /* ACIOUtils.m in Sources */,
-				3DB3A2E927DF386E00CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				D083AD7127301DBF00A8F96E /* SharedResources.swift in Sources */,
 				D07256F226BD579400654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2D727DF370A00CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -10692,7 +10621,6 @@
 				3DB3A2AE27DF31D300CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D0B543672435C6AE002F0AEC /* CLIColor.m in Sources */,
 				3DB3A27827DF2F8B00CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A32027DF3CB100CE8F68 /* AGLogger+setup.swift in Sources */,
 				D0B543682435C6AE002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B543692435C6AE002F0AEC /* ADLocales.m in Sources */,
 				D0B5436A2435C6AE002F0AEC /* Reachability.m in Sources */,
@@ -10707,7 +10635,6 @@
 				D0B5437D2435C6B1002F0AEC /* DDDispatchQueueLogFormatter.m in Sources */,
 				3DB3A27F27DF2FC800CE8F68 /* LogLevel.swift in Sources */,
 				D0B5437E2435C6B1002F0AEC /* ACIOUtils.m in Sources */,
-				3DB3A2EA27DF386E00CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				D083AD7027301DBE00A8F96E /* SharedResources.swift in Sources */,
 				D07256F326BD579500654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2D627DF370900CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -10756,7 +10683,6 @@
 				3DB3A2AD27DF31D300CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D0B543A02435C6B1002F0AEC /* CLIColor.m in Sources */,
 				3DB3A27927DF2F8B00CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A32327DF3CB300CE8F68 /* AGLogger+setup.swift in Sources */,
 				D0B543A12435C6B1002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B543A22435C6B1002F0AEC /* ADLocales.m in Sources */,
 				D0B543A32435C6B1002F0AEC /* Reachability.m in Sources */,
@@ -10771,7 +10697,6 @@
 				D0B543B62435C6B5002F0AEC /* DDDispatchQueueLogFormatter.m in Sources */,
 				3DB3A28027DF2FC900CE8F68 /* LogLevel.swift in Sources */,
 				D0B543B72435C6B5002F0AEC /* ACIOUtils.m in Sources */,
-				3DB3A2EB27DF386F00CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				D083AD6F27301DBE00A8F96E /* SharedResources.swift in Sources */,
 				D07256F426BD579500654177 /* Bundle+Utils.swift in Sources */,
 				3DB3A2D527DF370900CE8F68 /* LogLevelExtensions.swift in Sources */,
@@ -10820,7 +10745,6 @@
 				3DB3A2AC27DF31D200CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				D0B543D92435C6B5002F0AEC /* CLIColor.m in Sources */,
 				3DB3A27A27DF2F8C00CE8F68 /* LoggerManager.swift in Sources */,
-				3DB3A32227DF3CB200CE8F68 /* AGLogger+setup.swift in Sources */,
 				D0B543DA2435C6B5002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B543DB2435C6B5002F0AEC /* ADLocales.m in Sources */,
 				D0B543DC2435C6B5002F0AEC /* Reachability.m in Sources */,
@@ -10839,7 +10763,6 @@
 				2408A8BE2747F3C500D2D1DE /* AdClientWrapper.swift in Sources */,
 				B2673DEF2717506D00E04747 /* SharedStorageUrls.swift in Sources */,
 				B2673DF6271750C100E04747 /* DDLoggerNames.m in Sources */,
-				3DB3A32527DF3CB400CE8F68 /* AGLogger+setup.swift in Sources */,
 				B2673E0C2717512E00E04747 /* ACLFileLogger.m in Sources */,
 				B2673E0D2717514500E04747 /* String+Utils.swift in Sources */,
 				7E174BFD271F1523006B7271 /* KeychainService.swift in Sources */,
@@ -10907,7 +10830,6 @@
 				7E6AD39F271F15E400BCEA7F /* ABECRequest.m in Sources */,
 				B2673E062717510400E04747 /* Bundle+Utils.swift in Sources */,
 				2408A8BC2747F3BC00D2D1DE /* IAdFrameworkHelper.swift in Sources */,
-				3DB3A2EC27DF386F00CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				B2673E092717510E00E04747 /* APCommonSharedResources.m in Sources */,
 				3D1EA72827DA353E005E7153 /* LogLevelExtensions.swift in Sources */,
 				7E174BFE271F1532006B7271 /* LoginService.swift in Sources */,
@@ -10924,7 +10846,6 @@
 				B2673E51271753D300E04747 /* ADProductInfo.m in Sources */,
 				B2673E422717535D00E04747 /* PreloadedFilesManager.swift in Sources */,
 				B2673E27271752B200E04747 /* PurchaseStatusProtocol.swift in Sources */,
-				3DB3A30B27DF396E00CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				3DB3A30927DF396A00CE8F68 /* NativeLoggerWrapperOsLogImpl.swift in Sources */,
 				B2673E3C2717534900E04747 /* PurchaseAssistant.swift in Sources */,
 				B2673E182717524B00E04747 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
@@ -10988,7 +10909,6 @@
 				B2673E5A2717540D00E04747 /* ThemableButton.swift in Sources */,
 				B2673E5E2717541A00E04747 /* SharedStorageUrls.swift in Sources */,
 				B2673E2C271752C300E04747 /* NSStringPunycodeAdditions.m in Sources */,
-				3DB3A32427DF3CB300CE8F68 /* AGLogger+setup.swift in Sources */,
 				B2673E492717538E00E04747 /* ACNHttpUtils.m in Sources */,
 				B2673E28271752B600E04747 /* ACLWildcard.m in Sources */,
 				B2673E212717529C00E04747 /* SharedResources+DebugLogs.swift in Sources */,
@@ -11072,7 +10992,6 @@
 				B2673E742717549600E04747 /* SharedResources+DebugLogs.swift in Sources */,
 				B2673E7A271754A900E04747 /* ACLFileLocker.m in Sources */,
 				B2673E762717549C00E04747 /* AESharedResources.m in Sources */,
-				3DB3A2EE27DF387100CE8F68 /* LoggerManagerExtensions.swift in Sources */,
 				B2673E702717548800E04747 /* DDOSLogger.m in Sources */,
 				B2673E6F2717548400E04747 /* DDFileLogger.m in Sources */,
 				B2673E7B271754AC00E04747 /* ACLLogger.m in Sources */,
@@ -11089,6 +11008,7 @@
 				B2673E7C271754AE00E04747 /* Constants+Sentry.swift in Sources */,
 				3DB3A24D27DF2B7400CE8F68 /* LogLevel.swift in Sources */,
 				B2673E772717549F00E04747 /* ADLocales.m in Sources */,
+				3DF1EB9527DFB592002D7B56 /* LoggerManagerExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

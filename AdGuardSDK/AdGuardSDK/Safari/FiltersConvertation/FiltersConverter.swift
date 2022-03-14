@@ -175,8 +175,6 @@ final class FiltersConverter: FiltersConverterProtocol {
             filters.keys.forEach { filters[$0]?.append(properInvertedAllowlistRule) }
         }
     }
-
-    private let LOG = ComLog_LoggerFactory.getLoggerWrapper("TEST")
     
     private func convert(filters: [ContentBlockerType: [String]]) -> [FiltersConverterResult] {
         LOG.info("Safari rules conversion started")

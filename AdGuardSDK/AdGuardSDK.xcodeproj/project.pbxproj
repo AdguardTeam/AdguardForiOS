@@ -3236,8 +3236,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 1.9.5;
 			};
 		};
 		7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */ = {

@@ -74,14 +74,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         let resources = StartupService.initResources()
 
-        AppDelegate.initLogger(resources: resources)
-        LOG.info("Starting application")
-
         // StartupService may perform slow operations involving working with files or SQLite database.
         // It is safer to try to protect it from suspending by using a background task.
         _ = UIBackgroundTask.execute(name: "AppDelegate.init") {
             StartupService.start()
         }
+        
+        AppDelegate.initLogger(resources: resources)
+        LOG.info("Starting application")
 
         self.resources = ServiceLocator.shared.getService()!
         self.safariProtection = ServiceLocator.shared.getService()!

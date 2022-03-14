@@ -111,7 +111,6 @@ final class SupportService: SupportServiceProtocol {
         try appStateData?.write(to: appStateUrl)
 
         /// Flush Logs before appending them
-        ACLLogger.singleton()?.flush()
 
         /// Append log file for each process to base directory
         try appLogsUrls.forEach { appLogUrl in
@@ -258,7 +257,6 @@ final class SupportService: SupportServiceProtocol {
     private func createDebugInfo() -> String {
 
         /// Flush Logs before appending them
-        ACLLogger.singleton()?.flush()
 
         /// Append log file for each process to base directory
         return appLogsUrls.reduce("") { resultString, appLogUrl -> String in

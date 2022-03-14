@@ -279,11 +279,11 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             if let str = String(data: data, encoding: .utf8) {
                 switch (level) {
                 case AGLogLevel.AGLL_INFO:
-                    LOG.info(label, str)
+                    ComLog_LoggerWrapper.info(label, str)
                 case AGLogLevel.AGLL_ERR, AGLogLevel.AGLL_WARN:
-                    LOG.error(label, str)
+                    ComLog_LoggerWrapper.error(label, str)
                 default:
-                    LOG.debug(label, str)
+                    ComLog_LoggerWrapper.debug(label, str)
                 }
             }
         }
