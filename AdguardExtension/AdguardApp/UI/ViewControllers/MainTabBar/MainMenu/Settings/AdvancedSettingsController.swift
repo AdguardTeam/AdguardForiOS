@@ -84,7 +84,7 @@ final class AdvancedSettingsController: UITableViewController {
         resources.isDebugLogs = isDebugLogs
         let logLevel: ComLog_LogLevel = resources.isDebugLogs ? .debug : .info
         manager.configure(logLevel)
-        manager.configureDnsLibsLogLevel(logLevel)
+        manager.configureDnsLibsLogLevel(logLevel) // TODO: possible not used
         LOG.info("Init app, log level \(logLevel)")
 
 //        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel

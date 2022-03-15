@@ -306,6 +306,7 @@ final class SupportService: SupportServiceProtocol {
         if FileManager.default.fileExists(atPath: advancedRulesFileUrl.path) {
             try FileManager.default.copyItem(at: advancedRulesFileUrl, to: cbUrl.appendingPathComponent(advancedRulesFileUrl.lastPathComponent))
         }
+        //TODO: If file doesn't exist, logs cannot be exported and user sees an error
         try safariProtection.allContentBlockerJsonUrls.forEach { fileUrl in
             try FileManager.default.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent(fileUrl.lastPathComponent))
         }

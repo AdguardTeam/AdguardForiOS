@@ -482,14 +482,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         #if DEBUG
         manager.configure(.debug)
-        manager.configureDnsLibsLogLevel(.debug)
+        manager.configureDnsLibsLogLevel(.debug) // TODO: possible not used
         LOG.info("Init app, log level debug")
 
         #else
         let sharedResource: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
         let logLevel: ComLog_LogLevel = sharedResource.isDebugLogs ? .debug : .info
         manager.configure(logLevel)
-        manager.configureDnsLibsLogLevel(logLevel)
+        manager.configureDnsLibsLogLevel(logLevel) // TODO: possible not used
         LOG.info("Init app, log level \(logLevel)")
         
         #endif
