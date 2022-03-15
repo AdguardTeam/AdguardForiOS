@@ -57,7 +57,8 @@ NSString *ACNNetworkingErrorDomain = @"ACNNetworkingErrorDomain";
         NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
 
         NSString *cachePath = [[myPath stringByAppendingPathComponent:bundleIdentifier] stringByAppendingPathComponent:CACHE_NAME];
-        DDLogDebug(@"(ANCNetworking) Cache path: %@", cachePath);
+        // FIXME: Import normal log
+//        DDLogDebug(@"(ANCNetworking) Cache path: %@", cachePath);
 #else
         NSString *cachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:CACHE_NAME];
 

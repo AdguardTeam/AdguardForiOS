@@ -16,7 +16,6 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "ACLLogger.h"
 #import "NSString+Utils.h"
 #import "NSException+Utils.h"
 #import "ACLWildcard.h"
@@ -55,9 +54,9 @@
     ACLWildcard *wildcard = [[ACLWildcard alloc] initWithWildcard:pattern options:options error:&err];
 
     if  (err){
-
-        DDLogWarn(@"Can't create regex for: %@", pattern);
-        DDLogWarn(@"Regex creation error: %@", [err localizedDescription]);
+        // FIXME: Import normal log
+//        DDLogWarn(@"Can't create regex for: %@", pattern);
+//        DDLogWarn(@"Regex creation error: %@", [err localizedDescription]);
         return nil;
     }
 

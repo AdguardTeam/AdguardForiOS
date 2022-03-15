@@ -3,13 +3,11 @@
 
 #import "AESharedResources.h"
 #import "ACNNetworking.h"
-#import "DDLogMacros.h"
 #import "ADProductInfo.h"
 #import "Reachability.h"
 #import "ABECRequest.h"
 #import "ADLocales.h"
 #import "APCommonSharedResources.h"
-#import "ACLLogger.h"
 #import "NSString+Utils.h"
 
 #endif /* AdGuardTodayExtension_Bridging_Header_h */

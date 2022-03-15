@@ -46,7 +46,9 @@
     if ([pathUrl isFileURL]){
         attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[pathUrl path] error:&err];
         if (err)
-            DDLogWarn(@"Error getting time for file %@: %@", pathUrl, [err localizedDescription]);
+            // FIXME: Import normal log
+//            DDLogWarn(@"Error getting time for file %@: %@", pathUrl, [err localizedDescription]);
+            printf("");
         else
             result = [attrs fileModificationDate];
     }
@@ -64,7 +66,9 @@
     if ([pathUrl isFileURL]){
         attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[pathUrl path] error:&err];
         if (err)
-            DDLogWarn(@"Error getting time for file %@: %@", pathUrl, [err localizedDescription]);
+            // FIXME: Import normal log
+//            DDLogWarn(@"Error getting time for file %@: %@", pathUrl, [err localizedDescription]);
+            printf("");
         else
             result = [attrs fileCreationDate];
     }
@@ -87,8 +91,8 @@
     NSData *result = [NSData dataWithContentsOfURL:pathUrl options:NSDataReadingUncached error:&err];
 
     if (err) {
-
-        DDLogWarn(@"Error reading file %@: %@", pathUrl, [err localizedDescription]);
+        // FIXME: Import normal log
+//        DDLogWarn(@"Error reading file %@: %@", pathUrl, [err localizedDescription]);
         return nil;
     }
 
@@ -106,7 +110,9 @@
     NSError *err;
 
     if (![text writeToURL:pathUrl atomically:YES encoding:[ACFFileUtils defaultFileEncoding] error:&err])
-        DDLogWarn(@"Error writing to file %@: %@", pathUrl, [err localizedDescription]);
+        // FIXME: Import normal log
+//        DDLogWarn(@"Error writing to file %@: %@", pathUrl, [err localizedDescription]);
+        printf("");
 }
 
 /// Creates file or changes it's last updated time
@@ -120,12 +126,16 @@
 
         NSError *err;
         if (![manager setAttributes:@{NSFileModificationDate: [NSDate date]} ofItemAtPath:pathUrl.path error:&err])
-            DDLogWarn(@"Error touching file %@: %@", pathUrl, [err localizedDescription]);
+            // FIXME: Import normal log
+//            DDLogWarn(@"Error touching file %@: %@", pathUrl, [err localizedDescription]);
+            printf("");
     }
     else{
 
         if (![manager createFileAtPath:pathUrl.path contents:[NSData data] attributes:nil])
-            DDLogWarn(@"Error touching file %@: Can't create empty file.", pathUrl);
+            // FIXME: Import normal log
+//            DDLogWarn(@"Error touching file %@: Can't create empty file.", pathUrl);
+            printf("");
     }
 
 }
@@ -139,7 +149,9 @@
     NSError *err;
     BOOL result = [[NSFileManager defaultManager] removeItemAtURL:pathUrl error:&err];
     if (!result)
-        DDLogWarn(@"Error deleting %@: %@", pathUrl, [err localizedDescription]);
+        // FIXME: Import normal log
+//        DDLogWarn(@"Error deleting %@: %@", pathUrl, [err localizedDescription]);
+        printf("");
 
     return result;
 }

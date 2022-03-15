@@ -8,12 +8,10 @@
 #import "ADProductInfo.h"
 #import "NSString+Utils.h"
 #import "ACDnsUtils.h"
-#import "DDLogMacros.h"
 #import "Reachability.h"
 #import "ADLocales.h"
 #import "APCommonSharedResources.h"
 #import "ACNCidrRange.h"
 #import "ABECRequest.h"
-#import "ACLLogger.h"
 
 #endif /* AdGuard_Bridging_Header_h */
