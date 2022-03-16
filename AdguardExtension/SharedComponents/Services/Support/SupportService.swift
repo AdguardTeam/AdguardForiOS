@@ -33,7 +33,7 @@ protocol SupportServiceProtocol {
     func sendFeedback(_ email: String, description: String, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SupportService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SupportService.self)
 
 /// Support service assemble app state info
 final class SupportService: SupportServiceProtocol {
@@ -248,7 +248,7 @@ final class SupportService: SupportServiceProtocol {
     private func createDebugInfo() -> String {
 
         /// Append log file for each process to base
-        
+
         do {
             let data = try getLogDataForReport(appLogsUrls)
             if let stringData = String(data: data, encoding: .utf8), !stringData.isEmpty {
@@ -259,17 +259,17 @@ final class SupportService: SupportServiceProtocol {
         } catch {
             LOG.error("On creating report logs error occurred: \(error)")
         }
-        
+
         return ""
-        
+
     }
 
-    /* Returns delimeter for filename */
-    private func getDelimeter(for fileName: String) -> String {
-        var delimeter = "\r\n-------------------------------------------------------------\r\n"
-        delimeter += "LOG FILE: \(fileName)"
-        delimeter += "\r\n-------------------------------------------------------------\r\n"
-        return delimeter
+    /* Returns delimiter for filename */
+    private func getDelimiter(for fileName: String) -> String {
+        var delimiter = "\r\n-------------------------------------------------------------\r\n"
+        delimiter += "LOG FILE: \(fileName)"
+        delimiter += "\r\n-------------------------------------------------------------\r\n"
+        return delimiter
     }
 
     private func appendCBJsonsIntoTemporaryDirectory(cbUrl: URL) throws {
@@ -277,7 +277,7 @@ final class SupportService: SupportServiceProtocol {
         if fileManager.fileExists(atPath: advancedRulesFileUrl.path) {
             try fileManager.copyItem(at: advancedRulesFileUrl, to: cbUrl.appendingPathComponent(advancedRulesFileUrl.lastPathComponent))
         }
-        
+
         try safariProtection.allContentBlockerJsonUrls.forEach { fileUrl in
             if fileManager.fileExists(atPath: fileUrl.path) {
                 try fileManager.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent(fileUrl.lastPathComponent))
@@ -304,56 +304,56 @@ final class SupportService: SupportServiceProtocol {
             return partialResult + filterString
         }
     }
-    
+
     private func moveFiles(_ logFileURLs: [URL], _ targetDirectory: URL) throws {
         try logFileURLs.forEach {
             var targetDirectory = targetDirectory
             let fileName = $0.lastPathComponent
             targetDirectory.appendPathComponent(fileName)
-            
+
             try fileManager.moveItem(at: $0, to: targetDirectory)
         }
     }
-    
+
     private func getLogDataForReport(_ logFilePathes: [URL]) throws -> Data {
         var data = Data()
         for processLogDir in logFilePathes {
             let processData = try readLogFiles(processLogDir)
             data.append(processData)
         }
-        
+
         return data
     }
-    
+
     private func readLogFiles(_ processLogsDirPath: URL) throws -> Data {
         let singleProcessLogsContent = try getDirectoryContentUrls(processLogsDirPath)
         var data: Data = Data()
-        
+
         for logPath in singleProcessLogsContent {
             let partOfLogs = try readLogFile(logPath, processName: processLogsDirPath.lastPathComponent)
             data.append(partOfLogs)
         }
-        
+
         return data
     }
-    
+
     private func readLogFile(_ filePath: URL, processName: String) throws -> Data {
         var data: Data = Data()
-        
+
         let fileName = "\(processName).\(filePath.lastPathComponent)" // <PROCESS NAME>.<LOG FILE NAME>
         let singleLogFileData = try Data(contentsOf: filePath)
-        let delimeter = getDelimeter(for: fileName)
-        
-        if let delimeterData = delimeter.data(using: .utf8) {
+        let delimiter = getDelimiter(for: fileName)
+
+        if let delimeterData = delimiter.data(using: .utf8) {
             data.append(delimeterData)
         }
-        
+
         data.append(singleLogFileData)
-        
+
         return data
     }
-    
-    
+
+
     private func getDirectoryContentUrls(_ target: URL) throws -> [URL] {
         if try target.resourceValues(forKeys: [.isDirectoryKey]).isDirectory == true {
             let logsUrls = try fileManager

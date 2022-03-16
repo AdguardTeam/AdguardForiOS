@@ -30,7 +30,7 @@ protocol MetaStorageProtocol: MetaStorageTypeAlias, ResetableSyncProtocol, AnyOb
     static var defaultDbLanguage: String { get }
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(MetaStorage.self)
+private let LOG = LoggerFactory.getLoggerWrapper(MetaStorage.self)
 
 final class MetaStorage: MetaStorageProtocol {
 

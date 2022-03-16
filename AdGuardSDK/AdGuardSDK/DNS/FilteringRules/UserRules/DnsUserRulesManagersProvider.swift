@@ -23,7 +23,7 @@ protocol DnsUserRulesManagersProviderProtocol: ResetableSyncProtocol {
     var allowlistRulesManager: UserRulesManagerProtocol { get }
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsUserRulesManagersProvider.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsUserRulesManagersProvider.self)
 
 final class DnsUserRulesManagersProvider: DnsUserRulesManagersProviderProtocol {
     let blocklistRulesManager: UserRulesManagerProtocol

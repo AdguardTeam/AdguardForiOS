@@ -27,7 +27,7 @@ protocol SafariGroupsModelDelegate: AnyObject {
     func modelsChanged()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariGroupsModel.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariGroupsModel.self)
 
 final class SafariGroupsModel {
 

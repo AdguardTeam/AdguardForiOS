@@ -29,7 +29,7 @@ struct URLParserResult {
     var params: [String: String]?
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(URL.self)
+private let LOG = LoggerFactory.getLoggerWrapper(URL.self)
 
 extension URL: CustomSchemeURLParserProtocol {
 

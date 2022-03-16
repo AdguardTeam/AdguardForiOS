@@ -50,7 +50,7 @@ struct AttributionRecords: Codable {
     }
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AdServicesAttributionRecordsParser.self)
+private let LOG = LoggerFactory.getLoggerWrapper(AdServicesAttributionRecordsParser.self)
 
 /// This object represent attribution records parser for URL response
 final class AdServicesAttributionRecordsParser: ParserProtocol {

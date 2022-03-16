@@ -25,7 +25,7 @@ enum NewFilterType {
     case safariCustom, dnsCustom
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AddCustomFilterController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(AddCustomFilterController.self)
 
 final class AddCustomFilterController: BottomAlertController {
 

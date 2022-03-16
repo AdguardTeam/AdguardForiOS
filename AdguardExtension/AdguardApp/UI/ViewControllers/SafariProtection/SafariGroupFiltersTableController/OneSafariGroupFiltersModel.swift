@@ -33,7 +33,7 @@ protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSo
     func setup(tableView: UITableView)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(OneSafariGroupFiltersModel.self)
+private let LOG = LoggerFactory.getLoggerWrapper(OneSafariGroupFiltersModel.self)
 
 // TODO: - We should change the order of the filters
 // For more info about filters order implementation look up `UserRulesModelsProvider`

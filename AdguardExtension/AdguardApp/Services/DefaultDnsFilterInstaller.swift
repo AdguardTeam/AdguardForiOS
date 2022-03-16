@@ -23,7 +23,7 @@ protocol DefaultDnsFilterInstallerProtocol: AnyObject {
     func installDefaultDnsFilterIfNeeded()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DefaultDnsFilterInstaller.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DefaultDnsFilterInstaller.self)
 
 /// This object is responsible for installing default DNS filter if it wasn't installed yet
 final class DefaultDnsFilterInstaller: DefaultDnsFilterInstallerProtocol {

@@ -20,7 +20,7 @@ import NetworkExtension
 import Reachability
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(PacketTunnelProvider.self)
+private let LOG = LoggerFactory.getLoggerWrapper(PacketTunnelProvider.self)
 
 /**
  This object gives access to a virtual network interface

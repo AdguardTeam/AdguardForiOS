@@ -28,12 +28,12 @@ protocol ServiceInitializerProtocol  {
     var complexProtection: ComplexProtectionServiceProtocol { get }
     var dnsProvidersManager: DnsProvidersManagerProtocol { get }
     var activityStatistics: ActivityStatisticsProtocol { get }
-    var loggerManager: ComLog_LoggerManager? { get }
-    
-    func setLoggerManager(_ loggerManager: ComLog_LoggerManager)
+    var loggerManager: LoggerManager? { get }
+
+    func setLoggerManager(_ loggerManager: LoggerManager)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ServiceInitializer.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ServiceInitializer.self)
 
 final class ServiceInitializer: ServiceInitializerProtocol {
     let networkService: ACNNetworkingProtocol = ACNNetworking()
@@ -43,8 +43,8 @@ final class ServiceInitializer: ServiceInitializerProtocol {
     let complexProtection: ComplexProtectionServiceProtocol
     let dnsProvidersManager: DnsProvidersManagerProtocol
     let activityStatistics: ActivityStatisticsProtocol
-    
-    private(set) var loggerManager: ComLog_LoggerManager?
+
+    private(set) var loggerManager: LoggerManager?
 
     init(resources: AESharedResourcesProtocol) throws {
         LOG.info("init services start")
@@ -56,7 +56,7 @@ final class ServiceInitializer: ServiceInitializerProtocol {
 
         LOG.info("init safari protection service")
         let safariConfiguration = SafariConfiguration(
-            resources: resources, 
+            resources: resources,
             isProPurchased: purchaseService.isProPurchased
         )
 
@@ -111,8 +111,8 @@ final class ServiceInitializer: ServiceInitializerProtocol {
 
         LOG.info("init services end")
     }
-    
-    func setLoggerManager(_ loggerManager: ComLog_LoggerManager) {
+
+    func setLoggerManager(_ loggerManager: LoggerManager) {
         self.loggerManager = loggerManager
     }
 }

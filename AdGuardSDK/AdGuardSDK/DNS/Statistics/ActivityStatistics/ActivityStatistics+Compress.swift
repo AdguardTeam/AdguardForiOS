@@ -19,7 +19,7 @@
 import SQLite
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ActivityStatistics.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ActivityStatistics.self)
 
 /// Extension with table compression methods
 /// These methods are not part of Interface, do not use them directly

@@ -16,18 +16,29 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
+// TODO: This Objective-C class never USED, remove it
+
 #import "ACFFileUtils.h"
 #import "ACLang.h"
 #import <stdint.h>
 #import <stdio.h>
 #import <CoreFoundation/CoreFoundation.h>
 #import <CommonCrypto/CommonDigest.h>
-
+#import "ObjCLogMacro.h"
+#import <SharedAdGuardSDK/SharedAdGuardSDK.h>
 // In bytes
 #define FILE_HASH_DEFAULT_CHUNK_SIZE_FOR_READING_DATA 4096
 
 
 @implementation ACFFileUtils
+
+static LoggerWrapper *LOG = nil;
+
++ (void) initialize {
+    if (!LOG) {
+        LOG = [LoggerFactory objcGetLoggerWrapper: ACFFileUtils.self];
+    }
+}
 
 /// Returns UTF-8 encoding that is default for file contentю
 + (NSStringEncoding)defaultFileEncoding
@@ -45,11 +56,9 @@
 
     if ([pathUrl isFileURL]){
         attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[pathUrl path] error:&err];
-        if (err)
-            // FIXME: Import normal log
-//            DDLogWarn(@"Error getting time for file %@: %@", pathUrl, [err localizedDescription]);
-            printf("");
-        else
+        if (err) {
+            ObjcLogWarn(LOG, @"Error getting time for file %@: %@", pathUrl, [err localizedDescription]);
+        } else
             result = [attrs fileModificationDate];
     }
 
@@ -65,11 +74,9 @@
 
     if ([pathUrl isFileURL]){
         attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[pathUrl path] error:&err];
-        if (err)
-            // FIXME: Import normal log
-//            DDLogWarn(@"Error getting time for file %@: %@", pathUrl, [err localizedDescription]);
-            printf("");
-        else
+        if (err) {
+            ObjcLogWarn(LOG, @"Error getting time for file %@: %@", pathUrl, [err localizedDescription]);
+        } else
             result = [attrs fileCreationDate];
     }
 
@@ -91,8 +98,8 @@
     NSData *result = [NSData dataWithContentsOfURL:pathUrl options:NSDataReadingUncached error:&err];
 
     if (err) {
-        // FIXME: Import normal log
-//        DDLogWarn(@"Error reading file %@: %@", pathUrl, [err localizedDescription]);
+        ObjcLogWarn(LOG, @"Error reading file %@: %@", pathUrl, [err localizedDescription]);
+
         return nil;
     }
 
@@ -109,10 +116,9 @@
 
     NSError *err;
 
-    if (![text writeToURL:pathUrl atomically:YES encoding:[ACFFileUtils defaultFileEncoding] error:&err])
-        // FIXME: Import normal log
-//        DDLogWarn(@"Error writing to file %@: %@", pathUrl, [err localizedDescription]);
-        printf("");
+    if (![text writeToURL:pathUrl atomically:YES encoding:[ACFFileUtils defaultFileEncoding] error:&err]) {
+        ObjcLogWarn(LOG, @"Error writing to file %@: %@", pathUrl, [err localizedDescription])
+    }
 }
 
 /// Creates file or changes it's last updated time
@@ -125,19 +131,16 @@
     if ([pathUrl isFileURL] && [pathUrl checkResourceIsReachableAndReturnError:nil]) {
 
         NSError *err;
-        if (![manager setAttributes:@{NSFileModificationDate: [NSDate date]} ofItemAtPath:pathUrl.path error:&err])
-            // FIXME: Import normal log
-//            DDLogWarn(@"Error touching file %@: %@", pathUrl, [err localizedDescription]);
-            printf("");
+        if (![manager setAttributes:@{NSFileModificationDate: [NSDate date]} ofItemAtPath:pathUrl.path error:&err]) {
+            ObjcLogWarn(LOG, @"Error touching file %@: %@", pathUrl, [err localizedDescription]);
+        }
     }
     else{
 
-        if (![manager createFileAtPath:pathUrl.path contents:[NSData data] attributes:nil])
-            // FIXME: Import normal log
-//            DDLogWarn(@"Error touching file %@: Can't create empty file.", pathUrl);
-            printf("");
+        if (![manager createFileAtPath:pathUrl.path contents:[NSData data] attributes:nil]) {
+            ObjcLogWarn(LOG, @"Error touching file %@: Can't create empty file.", pathUrl)
+        }
     }
-
 }
 
 /// Deletes file or directory on the path.
@@ -148,10 +151,9 @@
 
     NSError *err;
     BOOL result = [[NSFileManager defaultManager] removeItemAtURL:pathUrl error:&err];
-    if (!result)
-        // FIXME: Import normal log
-//        DDLogWarn(@"Error deleting %@: %@", pathUrl, [err localizedDescription]);
-        printf("");
+    if (!result) {
+        ObjcLogWarn(LOG, @"Error deleting %@: %@", pathUrl, [err localizedDescription])
+    }
 
     return result;
 }

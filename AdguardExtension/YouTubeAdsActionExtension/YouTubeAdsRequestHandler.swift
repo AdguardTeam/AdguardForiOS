@@ -20,7 +20,7 @@ import UIKit
 import MobileCoreServices
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(YouTubeAdsRequestHandler.self)
+private let LOG = LoggerFactory.getLoggerWrapper(YouTubeAdsRequestHandler.self)
 
 /// Handler that can process 2 cases:
 /// - The YouTube link has been shared from the browser
@@ -41,13 +41,13 @@ class YouTubeAdsRequestHandler : UINavigationController {
 
         // Init Logger
 //        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        
-        let logManager = ComLog_LoggerManagerImpl(url: resources.sharedLogsURL())
+
+        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
         let isDebugLogs = resources.isDebugLogs
-        let logLevel: ComLog_LogLevel = isDebugLogs ? .debug : .info
+        let logLevel: LogLevel = isDebugLogs ? .debug : .info
         logManager.configure(logLevel)
         LOG.info("Start with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
-        
+
 //        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
     }
 

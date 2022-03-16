@@ -25,7 +25,7 @@ protocol DnsProxyProtocol: AnyObject {
     func resolve(dnsRequest: Data, onRequestResolved: @escaping (Data?) -> Void)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProxy.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProxy.self)
 
 /// This object is a wrapper arround `AGDnsProxy`
 /// It is used to control proxy lifecycle

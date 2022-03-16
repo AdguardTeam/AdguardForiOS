@@ -79,7 +79,7 @@ public protocol FilterFilesStorageProtocol: CustomFilterFilesStorageProtocol {
     func saveFilter(withId id: Int, filterContent: String) throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FilterFilesStorage.self)
+private let LOG = LoggerFactory.getLoggerWrapper(FilterFilesStorage.self)
 
 /* This class manages filters text files */
 public final class FilterFilesStorage: FilterFilesStorageProtocol {

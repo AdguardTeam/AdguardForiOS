@@ -43,7 +43,7 @@ protocol SettingsResetServiceProtocol: AnyObject {
 
 // TODO: Need tests for this service
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SettingsResetService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SettingsResetService.self)
 
 /// Service reset safari protection, DNS protection, all in app statistics, providers, purchase info, resources, vpn manager
 final class SettingsResetService: SettingsResetServiceProtocol {

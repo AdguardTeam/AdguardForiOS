@@ -35,7 +35,7 @@ protocol SetappServiceProtocol {
     func openUrl(_ url: URL, options: [UIApplication.OpenURLOptionsKey : Any])->Bool
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SetappService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SetappService.self)
 
 class SetappService: SetappServiceProtocol, SetappManagerDelegate {
 

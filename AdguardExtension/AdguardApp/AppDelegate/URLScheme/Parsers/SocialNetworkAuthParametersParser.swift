@@ -17,7 +17,7 @@
 //
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SocialNetworkAuthParametersParser.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SocialNetworkAuthParametersParser.self)
 
 struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor

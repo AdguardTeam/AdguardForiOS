@@ -54,7 +54,7 @@ protocol LoginServiceProtocol {
     func reset(completion:@escaping ()->Void )
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(LoginService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(LoginService.self)
 
 final class LoginService: LoginServiceProtocol {
 

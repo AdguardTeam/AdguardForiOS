@@ -124,7 +124,7 @@ public protocol SafariProtectionFiltersProtocol {
     func enablePredefinedGroupsAndFilters() throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariProtection.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariProtection.self)
 
 /* Extension is used to interact with filters and groups object and properly process operations with them */
 extension SafariProtection {

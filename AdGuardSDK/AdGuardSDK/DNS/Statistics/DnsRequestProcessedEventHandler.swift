@@ -23,7 +23,7 @@ protocol DnsRequestProcessedEventHandlerProtocol: AnyObject {
     func handle(event: AGDnsRequestProcessedEventWrapper)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsRequestProcessedEventHandler.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsRequestProcessedEventHandler.self)
 
 /// This object is used in Tunnel to save statistics data obtained from DNS-libs
 final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProtocol {

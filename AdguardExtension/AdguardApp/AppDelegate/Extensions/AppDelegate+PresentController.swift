@@ -19,7 +19,7 @@
 import UIKit
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AppDelegate.self)
+private let LOG = LoggerFactory.getLoggerWrapper(AppDelegate.self)
 
 // TODO: - We should check all these methods because practically all the screens changed
 extension AppDelegate {
@@ -235,7 +235,7 @@ extension AppDelegate {
      */
     func presentFiltersMasterController(showLaunchScreen: Bool = false, url: String? = nil, title: String? = nil) -> Bool {
         if !proStatus { return presentPurchaseLicenseController() }
-        
+
         guard let tabBar = getMainTabController() else {
             LOG.error("Tab bar is nil")
             return false
@@ -553,7 +553,7 @@ extension AppDelegate {
                     self.presentUserRulesTableController(for: userRulesTableController.rulesType)
                 }
             }
-            
+
             userRulesRedirectVC.action = action
             topVC.present(userRulesRedirectVC, animated: true)
             return true

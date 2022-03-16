@@ -29,7 +29,7 @@ import AGDnsProxy
  - Seealso https://developer.apple.com/documentation/networkextension/nepackettunnelprovider
  */
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(TunnelProvider.self)
+private let LOG = LoggerFactory.getLoggerWrapper(TunnelProvider.self)
 
 class TunnelProvider: PacketTunnelProvider {
     static let tunnelRemoteAddress = "127.1.1.1"
@@ -121,9 +121,9 @@ class TunnelProvider: PacketTunnelProvider {
         let debugLogs = resources.isDebugLogs
         //        ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
         //        ACLLogger.singleton().logLevel = debugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        
-        let logManager = ComLog_LoggerManagerImpl(url: resources.sharedLogsURL())
-        let logLevel: ComLog_LogLevel = debugLogs ? .debug : .info
+
+        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: LogLevel = debugLogs ? .debug : .info
         logManager.configure(logLevel)
         LOG.info("Init tunnel with loglevel: \(debugLogs ? "DEBUG" : "NORMAL")")
     }

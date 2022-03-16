@@ -16,8 +16,12 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
+// TODO: This Objective-C class never USED, remove it
+
 #import "ADLocations.h"
 #import "ACommons/ACLang.h"
+#import "ObjCLogMacro.h"
+#import <SharedAdGuardSDK/SharedAdGuardSDK.h>
 
 NSString *ADLDefaultApplicationBundleIdentifier = @"com.adguard";
 
@@ -35,9 +39,12 @@ static NSRecursiveLock *_lock;
 
 static NSURL *_programDataDirectory;
 static NSURL *_sharedProgramDataDirectory;
+static LoggerWrapper *LOG = nil;
 
 + (void)initialize{
-
+    if (!LOG) {
+        LOG = [LoggerFactory objcGetLoggerWrapper: ADLocations.self];
+    }
     if (self == [ADLocations class]) {
 
         _lock = [NSRecursiveLock new];
@@ -76,8 +83,7 @@ static NSURL *_sharedProgramDataDirectory;
         NSURL *url = [fm URLForDirectory:NSApplicationSupportDirectory inDomain:domain appropriateForURL:nil create:YES error:&err];
 
         if (err) {
-            // FIXME: Import normal log
-//            DDLogError(@"Cannot create application data directory: %@", [err localizedDescription]);
+            ObjcLogError(LOG, @"Cannot create application data directory: %@", [err localizedDescription]);
             [[NSException exceptionWithName:NSGenericException reason:@"Cannot create application data directory" userInfo:nil] raise];
         }
         NSString *ident = [[NSBundle bundleForClass:[self class]] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
@@ -91,8 +97,7 @@ static NSURL *_sharedProgramDataDirectory;
         if (![fm createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:&err]){
 
             url = nil;
-            // FIXME: Import normal log
-//            DDLogError(@"Cannot create application data directory: %@", [err localizedDescription]);
+            ObjcLogError(LOG, @"Cannot create application data directory: %@", [err localizedDescription])
         }
 
         return url;

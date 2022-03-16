@@ -114,7 +114,7 @@ protocol FiltersServiceProtocol: ResetableAsyncProtocol {
     func reinitializeGroups() throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FiltersService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(FiltersService.self)
 
 /*
  This class is a proxy between filters, groups objects and SQLite database.

@@ -25,7 +25,7 @@ protocol SafariProtectionCustomFiltersMigrationHelperProtocol: AnyObject {
     func migrateCustomFilters(_ filters: [SafariProtectionFiltersDatabaseMigrationHelper.ObsoleteCustomFilter]) throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariProtectionCustomFiltersMigrationHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariProtectionCustomFiltersMigrationHelper.self)
 
 /// This object is a helper for `SDKMigrationServiceHelper`
 /// It is responsible for migrating custom filters

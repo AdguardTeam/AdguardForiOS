@@ -41,7 +41,7 @@ public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
     func getPoints(for chartType: ChartType, for period: StatisticsPeriod, pointsCount: Int) throws -> ChartRecords
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ChartStatistics.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ChartStatistics.self)
 
 /// This object is responsible for managing statistics that is used to build charts
 final public class ChartStatistics: ChartStatisticsProtocol {

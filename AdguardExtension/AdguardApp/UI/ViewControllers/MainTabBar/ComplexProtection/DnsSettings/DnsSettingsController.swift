@@ -20,7 +20,7 @@ import UIKit
 import DnsAdGuardSDK
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsSettingsController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsSettingsController.self)
 
 final class DnsSettingsController : UITableViewController {
 

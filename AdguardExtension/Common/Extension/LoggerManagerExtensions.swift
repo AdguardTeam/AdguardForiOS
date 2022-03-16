@@ -19,12 +19,12 @@
 import Foundation
 import AGDnsProxy
 
-extension ComLog_LoggerManager {
-    func configureDnsLibsLogLevel(_ logLevel: ComLog_LogLevel) {
+extension LoggerManager {
+    func configureDnsLibsLogLevel(_ logLevel: LogLevel) {
         AGLogger.setup(convertToDnsLibLogLevel(logLevel))
     }
-    
-    private func convertToDnsLibLogLevel(_ level: ComLog_LogLevel) -> AGLogLevel {
+
+    private func convertToDnsLibLogLevel(_ level: LogLevel) -> AGLogLevel {
         switch (level) {
             case .info:     return .AGLL_INFO
             case .warn:     return .AGLL_WARN

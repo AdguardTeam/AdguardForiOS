@@ -33,7 +33,7 @@ protocol KeychainServiceProtocol {
     func reset()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(KeychainService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(KeychainService.self)
 
 class KeychainService : KeychainServiceProtocol {
 

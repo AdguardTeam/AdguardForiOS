@@ -37,7 +37,7 @@ protocol DnsProtectionFiltersMigrationHelperProtocol: AnyObject {
     func removeDnsFiltersDataFromOldStorage()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProtectionFiltersMigrationHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProtectionFiltersMigrationHelper.self)
 
 /// Implementation of `DnsProtectionFiltersMigrationHelperProtocol`
 final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHelperProtocol {

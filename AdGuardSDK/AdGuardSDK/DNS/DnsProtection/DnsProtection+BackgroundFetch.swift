@@ -18,7 +18,7 @@
 
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProtection.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProtection.self)
 
 extension DnsProtection {
     public func updateFiltersInBackground(onFiltersUpdate: @escaping ((_ error: Error?) -> Void)) {

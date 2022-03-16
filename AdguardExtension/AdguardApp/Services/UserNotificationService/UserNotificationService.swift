@@ -51,7 +51,7 @@ protocol UserNotificationServiceProtocol {
     func postNotificationInForeground(body: String, title: String)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(UserNotificationService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(UserNotificationService.self)
 
 class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUserNotificationCenterDelegate {
 

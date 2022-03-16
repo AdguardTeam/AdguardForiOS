@@ -22,7 +22,7 @@ protocol PredefinedDnsProvidersDecoderProtocol {
     var providers: [PredefinedDnsProvider] { get }
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(PredefinedDnsProvidersDecoder.self)
+private let LOG = LoggerFactory.getLoggerWrapper(PredefinedDnsProvidersDecoder.self)
 
 /**
  Decodes **providers.json** and **providers_i18n.json** and returns their data as an object

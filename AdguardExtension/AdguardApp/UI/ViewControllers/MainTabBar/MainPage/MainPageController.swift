@@ -21,7 +21,7 @@ import SharedAdGuardSDK
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(MainPageController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(MainPageController.self)
 
 final class MainPageController: UIViewController, DateTypeChangedProtocol, ComplexSwitchDelegate, OnboardingControllerDelegate, LicensePageViewControllerDelegate, MainPageModelDelegate {
 

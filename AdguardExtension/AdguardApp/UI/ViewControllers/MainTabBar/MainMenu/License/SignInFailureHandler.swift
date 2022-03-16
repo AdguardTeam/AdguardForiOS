@@ -24,7 +24,7 @@ protocol SignInFailureHandlerProtocol {
     func loginFailure(_ error: NSError?, auth2Fa: (() -> ())? ) -> SignInMessages
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SignInFailureHandler.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SignInFailureHandler.self)
 
 struct SignInFailureHandler: SignInFailureHandlerProtocol {
     private let notificationService: UserNotificationServiceProtocol

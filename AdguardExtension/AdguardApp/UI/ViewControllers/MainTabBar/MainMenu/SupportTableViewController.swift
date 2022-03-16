@@ -19,7 +19,7 @@
 import UIKit
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SupportTableViewController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SupportTableViewController.self)
 
 class SupportTableViewController: UITableViewController {
 

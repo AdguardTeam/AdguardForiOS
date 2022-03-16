@@ -20,7 +20,7 @@ import UIKit
 import SafariAdGuardSDK
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ComplexProtectionController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ComplexProtectionController.self)
 
 final class ComplexProtectionController: UITableViewController {
 

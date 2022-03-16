@@ -78,7 +78,7 @@ protocol FiltersConverterProtocol {
     func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRules: [String]?) -> [FiltersConverterResult]
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FiltersConverter.self)
+private let LOG = LoggerFactory.getLoggerWrapper(FiltersConverter.self)
 
 final class FiltersConverter: FiltersConverterProtocol {
 
@@ -175,10 +175,9 @@ final class FiltersConverter: FiltersConverterProtocol {
             filters.keys.forEach { filters[$0]?.append(properInvertedAllowlistRule) }
         }
     }
-    
+
     private func convert(filters: [ContentBlockerType: [String]]) -> [FiltersConverterResult] {
         LOG.info("Safari rules conversion started")
-        LOG.info("TEST LOG MESSAGE")
 
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
         let conversionResult: [FiltersConverterResult] = filters.concurrentMap { [unowned self] cbType, rules -> FiltersConverterResult in

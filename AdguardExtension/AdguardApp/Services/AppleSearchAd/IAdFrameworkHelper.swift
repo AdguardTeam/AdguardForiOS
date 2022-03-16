@@ -21,7 +21,7 @@ protocol IAdFrameworkHelperProtocol {
     func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String]>) -> Void)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(IAdFrameworkHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(IAdFrameworkHelper.self)
 
 /// This object is a helper for `AppleSearchAdsService` and works with iAd framework
 final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {

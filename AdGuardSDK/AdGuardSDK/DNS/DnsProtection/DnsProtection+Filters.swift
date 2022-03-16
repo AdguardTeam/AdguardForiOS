@@ -78,7 +78,7 @@ public protocol DnsProtectionFiltersProtocol {
     func updateAllFilters(onFilterUpdated: @escaping (_ result: DnsFiltersUpdateResult) -> Void)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProtection.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProtection.self)
 
 extension DnsProtection {
 

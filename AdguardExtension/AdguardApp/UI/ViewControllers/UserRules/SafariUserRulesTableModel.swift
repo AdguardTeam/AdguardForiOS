@@ -19,7 +19,7 @@
 import SharedAdGuardSDK
 import SafariAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariUserRulesTableModel.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariUserRulesTableModel.self)
 
 final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
 

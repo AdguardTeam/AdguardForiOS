@@ -25,7 +25,7 @@ protocol RuleDetailsControllerDelegate {
     func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(RuleDetailsController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(RuleDetailsController.self)
 
 final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
 

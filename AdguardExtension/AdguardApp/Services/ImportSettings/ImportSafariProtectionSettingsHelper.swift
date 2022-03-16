@@ -30,7 +30,7 @@ protocol ImportSafariProtectionSettingsHelperProtocol {
     func importCustomSafariFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ImportSafariProtectionSettingsHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ImportSafariProtectionSettingsHelper.self)
 
 /// This object is responsible for importing Safari protection settings
 final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettingsHelperProtocol {

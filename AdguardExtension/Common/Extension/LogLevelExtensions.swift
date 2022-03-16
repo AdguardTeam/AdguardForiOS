@@ -1,7 +1,7 @@
 import os.log
 import SwiftyBeaver
 
-extension ComLog_LogLevel {
+extension LogLevel {
 
     func getOsLogLevel() -> OSLogType {
         // Well, we convert our log level to the "OSLogType" log level to communicate with

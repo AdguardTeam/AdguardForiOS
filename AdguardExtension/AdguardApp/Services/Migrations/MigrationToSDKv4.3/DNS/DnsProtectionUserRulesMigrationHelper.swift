@@ -30,7 +30,7 @@ protocol DnsProtectionUserRulesMigrationHelperProtocol: AnyObject {
     func removeOldDnsUserRulesFiles() throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProtectionUserRulesMigrationHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProtectionUserRulesMigrationHelper.self)
 
 /// Implementation of `DnsProtectionUserRulesMigrationHelperProtocol`
 final class DnsProtectionUserRulesMigrationHelper: DnsProtectionUserRulesMigrationHelperProtocol {

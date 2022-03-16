@@ -19,7 +19,7 @@
 import UIKit
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(UIApplication.self)
+private let LOG = LoggerFactory.getLoggerWrapper(UIApplication.self)
 
 extension UIApplication {
 

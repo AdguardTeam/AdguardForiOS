@@ -42,7 +42,7 @@ public protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
     func getAllowlistedDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent]
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsLogStatistics.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsLogStatistics.self)
 
 /// This object is responsible for saving and getting statistics about DNS requests and responses
 /// It stores the last 1500 objects of log, if it is overflowed that it will purge the oldest 500 records
@@ -58,7 +58,7 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
 
         let dbName = Constants.Statistics.StatisticsType.dnsLog.dbFileName
         statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
-        
+
         // TODO: - It's a crutch; Refactor it later
         // This database is used by several threads at the same time.
         // It is possible that a database file is temporarily locked in one thread and is being accessed from another.

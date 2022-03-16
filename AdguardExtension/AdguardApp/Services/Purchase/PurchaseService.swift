@@ -48,7 +48,7 @@ typealias Product = (type: ProductType, price: String, period: Period?, trialPer
  Work with Adguard Licenses is delegated to EmailSignInController
  */
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(PurchaseService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(PurchaseService.self)
 
 // MARK: - service implementation -
 final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionObserver, SKProductsRequestDelegate {

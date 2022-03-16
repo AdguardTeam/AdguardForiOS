@@ -19,7 +19,7 @@
 import Foundation
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(UIBackgroundTask.self)
+private let LOG = LoggerFactory.getLoggerWrapper(UIBackgroundTask.self)
 
 public final class UIBackgroundTask {
 

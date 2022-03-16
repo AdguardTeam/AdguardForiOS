@@ -18,7 +18,7 @@
 
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FiltersLocalizationsParser.self)
+private let LOG = LoggerFactory.getLoggerWrapper(FiltersLocalizationsParser.self)
 
 /// Parser to parse data from `FiltersLocalizationsRequest` and returns `ExtendedFiltersMetaLocalizations`
 struct FiltersLocalizationsParser: ParserProtocol {

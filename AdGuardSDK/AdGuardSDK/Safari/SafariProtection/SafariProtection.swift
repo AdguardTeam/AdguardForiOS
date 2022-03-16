@@ -37,7 +37,7 @@ public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionBackgroundFetchProtocol
                                             & ResetableSafariProtectionAsyncProtocol
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariProtection.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariProtection.self)
 
 public final class SafariProtection: SafariProtectionProtocol {
 

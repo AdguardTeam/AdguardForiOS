@@ -20,7 +20,7 @@ import DnsAdGuardSDK
 import SafariAdGuardSDK
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ImportSettingsController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ImportSettingsController.self)
 
 final class ImportSettingsController: BottomAlertController {
 

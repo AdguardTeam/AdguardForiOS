@@ -39,7 +39,7 @@ public protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
     func getCounters(for period: StatisticsPeriod) throws -> CountersStatisticsRecord
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ActivityStatistics.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ActivityStatistics.self)
 
 /// This object is responsible for counters statistics
 /// It stores and manages data for counters

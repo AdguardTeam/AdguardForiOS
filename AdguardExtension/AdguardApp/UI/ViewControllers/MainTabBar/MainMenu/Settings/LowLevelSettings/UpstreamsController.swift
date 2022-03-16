@@ -25,7 +25,7 @@ protocol UpstreamsControllerDelegate: AnyObject {
     func updateDescriptionLabel(type: UpstreamType, text: String)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(UpstreamsController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(UpstreamsController.self)
 
 final class UpstreamsController: BottomAlertController {
     @IBOutlet weak var upstreamTypeLabel: ThemableLabel!

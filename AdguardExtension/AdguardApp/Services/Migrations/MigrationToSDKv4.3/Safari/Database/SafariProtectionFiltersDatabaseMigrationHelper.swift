@@ -37,7 +37,7 @@ protocol SafariProtectionFiltersDatabaseMigrationHelperProtocol: AnyObject {
     func removeOldDBFiles() throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariProtectionFiltersDatabaseMigrationHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariProtectionFiltersDatabaseMigrationHelper.self)
 
 /// This object is a helper for `SDKMigrationServiceHelper`
 /// It is a wrapper for old `adguard.db` database

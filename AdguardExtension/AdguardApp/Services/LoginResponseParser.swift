@@ -27,7 +27,7 @@ protocol LoginResponseParserProtocol {
     func processOauthTokenResponse(data: Data)->(accessToken: String?, expirationDate: Date?, error: NSError?)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(LoginResponseParser.self)
+private let LOG = LoggerFactory.getLoggerWrapper(LoginResponseParser.self)
 
 class LoginResponseParser: LoginResponseParserProtocol {
 

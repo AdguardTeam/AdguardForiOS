@@ -19,7 +19,7 @@
 import SafariAdGuardSDK
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ContentBlockerRequestHandler.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ContentBlockerRequestHandler.self)
 
 class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
     func beginRequest(with context: NSExtensionContext) {
@@ -29,13 +29,13 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
         // Init Logger
 //        ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
 //        ACLLogger.singleton().logLevel = resources.isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        
-        let logManager = ComLog_LoggerManagerImpl(url: resources.sharedLogsURL())
-        let logLevel: ComLog_LogLevel = resources.isDebugLogs ? .debug : .info
+
+        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
         logManager.configure(logLevel)
         LOG.info("initLogger \(logLevel)")
 
-        
+
         // migrate settings if needed
         let migration = ContentBlockerMigrationService(resources: resources)
         migration.migrateIfNeeded()

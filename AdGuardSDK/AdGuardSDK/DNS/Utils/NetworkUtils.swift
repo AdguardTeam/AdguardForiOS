@@ -38,7 +38,7 @@ public protocol NetworkUtilsProtocol {
     func upstreamIsValid(_ upstream: String) -> Bool
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(NetworkUtils.self)
+private let LOG = LoggerFactory.getLoggerWrapper(NetworkUtils.self)
 
 public class NetworkUtils: NetworkUtilsProtocol {
 

@@ -76,7 +76,7 @@ fileprivate enum StringConstants: String {
     }
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(URLSchemeParser.self)
+private let LOG = LoggerFactory.getLoggerWrapper(URLSchemeParser.self)
 
 struct URLSchemeParser: IURLSchemeParser {
 

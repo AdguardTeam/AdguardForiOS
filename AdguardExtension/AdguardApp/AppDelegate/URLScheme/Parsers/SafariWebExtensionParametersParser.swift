@@ -19,7 +19,7 @@
 import Foundation
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariWebExtensionParametersParser.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariWebExtensionParametersParser.self)
 
 /// This object is responsible for obtaining parameters from app scheme links
 /// And performing an action considering these parameters

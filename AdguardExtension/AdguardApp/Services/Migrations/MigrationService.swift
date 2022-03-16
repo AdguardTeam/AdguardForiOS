@@ -24,7 +24,7 @@ protocol MigrationServiceProtocol {
     func migrateIfNeeded()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(MigrationService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(MigrationService.self)
 
 /// This object is responsible for running migration code
 /// It has a knowledge of previous and current product versions

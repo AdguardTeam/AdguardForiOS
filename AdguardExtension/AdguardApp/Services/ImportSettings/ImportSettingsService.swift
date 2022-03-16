@@ -26,7 +26,7 @@ protocol ImportSettingsServiceProtocol {
     func applySettings(_ settings: ImportSettings, completion: @escaping (ImportSettings) -> Void)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ImportSettingsService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ImportSettingsService.self)
 
 /// This class is responsible for applying the imported settings
 final class ImportSettingsService: ImportSettingsServiceProtocol {

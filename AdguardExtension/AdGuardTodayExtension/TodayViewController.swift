@@ -22,7 +22,7 @@ import SafariAdGuardSDK
 import SharedAdGuardSDK
 import DnsAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(TodayViewController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(TodayViewController.self)
 
 class TodayViewController: UIViewController, NCWidgetProviding {
 
@@ -78,7 +78,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // Services initialising
         let logManager = Self.initLogger(with: resources)
         LOG.info("(TodayViewController) - init start")
-        
+
         do {
             self.serviceInitializer = try ServiceInitializer(resources: resources)
             self.serviceInitializer.setLoggerManager(logManager)
@@ -361,20 +361,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
             let averageElapsed = requestsNumber == 0 ? 0 : Double(elapsedSumm) / Double(requestsNumber)
             self.elapsedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
-            
+
             // TODO: change this to use requestsLabelTxt/encryptedLabelTxt later (requires new localized string)
             self.complexStatisticsLabel.text = String(format: String.localizedString("widget_statistics"), requestsNumber, encryptedNumber)
         }
     }
 
     /// Initializes logger
-    private static func initLogger(with resources: AESharedResourcesProtocol) -> ComLog_LoggerManager {
-        let logManager = ComLog_LoggerManagerImpl(url: resources.sharedLogsURL())
-        let logLevel: ComLog_LogLevel = resources.isDebugLogs ? .debug : .info
+    private static func initLogger(with resources: AESharedResourcesProtocol) -> LoggerManager {
+        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
         logManager.configure(logLevel)
         LOG.info("initLogger \(logLevel)")
         return logManager
-  
+
     }
 }
 

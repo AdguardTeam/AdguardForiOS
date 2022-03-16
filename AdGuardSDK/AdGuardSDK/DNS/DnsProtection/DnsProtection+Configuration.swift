@@ -48,7 +48,7 @@ public protocol DnsProtectionConfigurationProtocol {
     func updateConfig(with newConfig: DnsConfigurationProtocol)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProtection.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProtection.self)
 
 extension DnsProtection {
     public var proStatus: Bool {

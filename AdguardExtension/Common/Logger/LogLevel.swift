@@ -2,7 +2,7 @@ import Foundation
 import SwiftyBeaver
 import os.log
 
-enum ComLog_LogLevel {
+enum LogLevel {
     case info
     case warn
     case error

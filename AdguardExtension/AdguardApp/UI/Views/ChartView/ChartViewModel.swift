@@ -36,7 +36,7 @@ protocol ChartViewModelProtocol {
     func chartViewSizeChanged(frame: CGRect)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ChartViewModel.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ChartViewModel.self)
 
 final class ChartViewModel: ChartViewModelProtocol {
     private struct ChartPoints {

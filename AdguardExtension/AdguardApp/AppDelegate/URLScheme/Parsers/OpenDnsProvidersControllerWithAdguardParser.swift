@@ -19,7 +19,7 @@
 import Foundation
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(OpenDnsProvidersControllerWithAdguardParser.self)
+private let LOG = LoggerFactory.getLoggerWrapper(OpenDnsProvidersControllerWithAdguardParser.self)
 
 /// this object should be used for parsing "adguard:add_dns_server" urls
 struct OpenDnsProvidersControllerWithAdguardParser: IURLSchemeParametersParser {

@@ -42,7 +42,7 @@ struct EditCustomFilterModel {
     let homePage: String?
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(NewCustomFilterDetailsController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(NewCustomFilterDetailsController.self)
 
 final class NewCustomFilterDetailsController: BottomAlertController {
 

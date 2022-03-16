@@ -19,7 +19,7 @@
 import SharedAdGuardSDK
 import SafariAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AllSafariGroupsFiltersModel.self)
+private let LOG = LoggerFactory.getLoggerWrapper(AllSafariGroupsFiltersModel.self)
 
 final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtocol {
 

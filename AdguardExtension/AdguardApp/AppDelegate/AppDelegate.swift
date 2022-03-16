@@ -23,7 +23,7 @@ import AGDnsProxy
 import Sentry
 import UIKit
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AppDelegate.self)
+private let LOG = LoggerFactory.getLoggerWrapper(AppDelegate.self)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -79,8 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = UIBackgroundTask.execute(name: "AppDelegate.init") {
             StartupService.start()
         }
-        
-        AppDelegate.initLogger(resources: resources)
+
         LOG.info("Starting application")
 
         self.resources = ServiceLocator.shared.getService()!
@@ -473,26 +472,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             }
         }
-    }
-
-    // MARK: - Init logger
-
-    private static func initLogger(resources: AESharedResourcesProtocol) {
-        let manager: ComLog_LoggerManager = ServiceLocator.shared.getService()!
-
-        #if DEBUG
-        manager.configure(.debug)
-        manager.configureDnsLibsLogLevel(.debug) // TODO: possible not used
-        LOG.info("Init app, log level debug")
-
-        #else
-        let sharedResource: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-        let logLevel: ComLog_LogLevel = sharedResource.isDebugLogs ? .debug : .info
-        manager.configure(logLevel)
-        manager.configureDnsLibsLogLevel(logLevel) // TODO: possible not used
-        LOG.info("Init app, log level \(logLevel)")
-        
-        #endif
     }
 
     private func setupOnFirstAppRun() {

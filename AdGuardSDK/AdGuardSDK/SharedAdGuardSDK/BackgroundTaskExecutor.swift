@@ -19,7 +19,7 @@
 import Foundation
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(BackgroundTaskExecutor.self)
+private let LOG = LoggerFactory.getLoggerWrapper(BackgroundTaskExecutor.self)
 
 /// This object is responsible for executing tasks that can be continued in background
 /// Usually iOS gives us 30 seconds to complete such tasks

@@ -27,7 +27,7 @@ protocol FiltersConverterServiceProtocol {
     func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult]
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FiltersConverterService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(FiltersConverterService.self)
 
 /**
  This class is responsible for converting all enabled filters and user rules (blocklist / allowlist / inverted allowlist) to jsons objects

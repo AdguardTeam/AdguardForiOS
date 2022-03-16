@@ -90,7 +90,7 @@ protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
     func getJsonUrl(for cbType: ContentBlockerType) -> URL
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ContentBlockersInfoStorage.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ContentBlockersInfoStorage.self)
 
 /* This class is responsible for managing JSON files for every content blocker */
 final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {

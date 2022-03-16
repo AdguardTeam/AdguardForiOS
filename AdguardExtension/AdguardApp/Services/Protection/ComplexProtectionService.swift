@@ -44,7 +44,7 @@ enum ComplexProtectionError: Error {
     case invalidDnsImplementation
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ComplexProtectionService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ComplexProtectionService.self)
 
 // MARK: - Complex protection class -
 final class ComplexProtectionService: ComplexProtectionServiceProtocol{

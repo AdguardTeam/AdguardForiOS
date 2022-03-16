@@ -19,7 +19,7 @@
 import SharedAdGuardSDK
 import DnsAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsUserRulesTableModel.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsUserRulesTableModel.self)
 
 final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
 

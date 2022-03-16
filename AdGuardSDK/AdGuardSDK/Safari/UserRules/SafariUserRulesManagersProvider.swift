@@ -24,7 +24,7 @@ public protocol SafariUserRulesManagersProviderProtocol: ResetableSyncProtocol {
     var invertedAllowlistRulesManager: UserRulesManagerProtocol { get }
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariUserRulesManagersProvider.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariUserRulesManagersProvider.self)
 
 final public class SafariUserRulesManagersProvider: SafariUserRulesManagersProviderProtocol {
     private(set) lazy public var blocklistRulesManager: UserRulesManagerProtocol = {

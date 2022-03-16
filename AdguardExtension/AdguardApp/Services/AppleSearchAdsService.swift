@@ -29,7 +29,7 @@ fileprivate enum UsedFrameworks {
     case adServices
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AppleSearchAdsService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(AppleSearchAdsService.self)
 
 /// This object is responsible for providing attribution records
 /// for iAd framework response:

@@ -26,7 +26,7 @@ protocol DnsProviderDetailsControllerDelegate: AnyObject {
     func providerSelected()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProtectionUserRulesMigrationHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProtectionUserRulesMigrationHelper.self)
 
 /// Details controller that represent info about provider
 final class DnsProviderDetailsController : UITableViewController {

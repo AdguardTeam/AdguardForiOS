@@ -34,7 +34,7 @@ protocol ProductionDatabaseManagerProtocol: ResetableSyncProtocol {
     func updateDatabaseIfNeeded() throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ProductionDatabaseManager.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ProductionDatabaseManager.self)
 
 final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
 

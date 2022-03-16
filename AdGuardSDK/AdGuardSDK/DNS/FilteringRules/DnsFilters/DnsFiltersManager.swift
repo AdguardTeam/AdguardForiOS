@@ -75,7 +75,7 @@ protocol DnsFiltersManagerProtocol: ResetableSyncProtocol {
     func getDnsLibsFilters() -> [Int: String]
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsFiltersManager.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsFiltersManager.self)
 
 /**
  This class is responsible for managing DNS filters files, meta from server and meta from user
@@ -280,7 +280,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
         if filters.contains(where: { $0.subscriptionUrl == url }) {
             throw DnsFilterError.dnsFilterExists(subscriptionUrl: url.absoluteString)
         }
-        
+
         let filterId = nextFilterId
         let result = try updateFilterSync(with: filterId, url: url)
         let filter = DnsFilter(meta: result, name: name, filterId: filterId, subscriptionUrl: url, isEnabled: isEnabled)

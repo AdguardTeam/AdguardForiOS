@@ -25,7 +25,7 @@ protocol FilterDetailsViewControllerDelegate: NewCustomFilterDetailsControllerDe
     func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FilterDetailsViewController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(FilterDetailsViewController.self)
 
 final class FilterDetailsViewController: UIViewController {
 

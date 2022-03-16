@@ -28,7 +28,7 @@ protocol ServicesStorageProtocol {
     var converter: FiltersConverterServiceProtocol { get }
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ServicesStorage.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ServicesStorage.self)
 
 final class ServicesStorage: ServicesStorageProtocol {
 

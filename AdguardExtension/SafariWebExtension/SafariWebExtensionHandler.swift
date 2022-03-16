@@ -19,7 +19,7 @@
 import SafariServices
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariWebExtensionHandler.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariWebExtensionHandler.self)
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
 
@@ -54,14 +54,14 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     /// Initializes `ACLLogger`
     private func setupLogger() {
 //        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        
+
         let isDebugLogs = resources.isDebugLogs
         LOG.debug("Safari Web Extension was initialized with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
-        
+
 //        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        
-        let logManager = ComLog_LoggerManagerImpl(url: resources.sharedLogsURL())
-        let logLevel: ComLog_LogLevel = isDebugLogs ? .debug : .info
+
+        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: LogLevel = isDebugLogs ? .debug : .info
         logManager.configure(logLevel)
         LOG.info("initLogger \(logLevel)")
     }

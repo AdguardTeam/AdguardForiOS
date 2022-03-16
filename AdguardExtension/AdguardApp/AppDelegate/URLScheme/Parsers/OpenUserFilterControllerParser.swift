@@ -17,7 +17,7 @@
 //
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(OpenUserFilterControllerParser.self)
+private let LOG = LoggerFactory.getLoggerWrapper(OpenUserFilterControllerParser.self)
 
 struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
 

@@ -25,7 +25,7 @@ protocol ActivityViewControllerDelegate: AnyObject {
     func showTitle()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ActivityViewController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ActivityViewController.self)
 
 final class ActivityViewController: UITableViewController {
 

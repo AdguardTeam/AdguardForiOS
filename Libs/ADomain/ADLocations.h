@@ -16,6 +16,8 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
+// TODO: This Objective-C class never USED, remove it
+
 #import <Foundation/Foundation.h>
 
 /////////////////////////////////////////////////////////////////////

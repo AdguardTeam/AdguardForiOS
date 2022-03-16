@@ -24,7 +24,7 @@ protocol DnsMigration4_3Protocol {
     func migrate()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsMigration4_3.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsMigration4_3.self)
 
 class DnsMigration4_3: DnsMigration4_3Protocol {
 

@@ -56,7 +56,7 @@ public protocol RequestSenderProtocol {
 
 // MARK: - RequestSender
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(RequestSender.self)
+private let LOG = LoggerFactory.getLoggerWrapper(RequestSender.self)
 
 /**
  This class is responsible for sending requests

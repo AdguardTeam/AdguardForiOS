@@ -18,7 +18,7 @@
 
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FiltersMetadataRequest.self)
+private let LOG = LoggerFactory.getLoggerWrapper(FiltersMetadataRequest.self)
 
 /// Request to obtain filters meta data
 struct FiltersMetadataRequest: RequestProtocol {

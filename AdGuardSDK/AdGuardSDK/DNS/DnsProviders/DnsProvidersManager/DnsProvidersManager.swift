@@ -78,7 +78,7 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
     func removeCustomProvider(withId id: Int) throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProvidersManager.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProvidersManager.self)
 
 final public class DnsProvidersManager: DnsProvidersManagerProtocol {
 

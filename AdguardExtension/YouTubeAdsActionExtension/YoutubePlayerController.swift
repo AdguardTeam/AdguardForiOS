@@ -20,7 +20,7 @@ import UIKit
 import WebKit
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(YoutubePlayerController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(YoutubePlayerController.self)
 
 /// UIViewController with WKWebView to watch Youtube videos without ads 🎥
 /// See: [Jira task](https://jira.adguard.com/browse/AG-11561)

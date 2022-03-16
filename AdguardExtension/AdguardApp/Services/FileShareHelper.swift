@@ -28,7 +28,7 @@ protocol FileShareHelperProtocol {
     func importFile(for vc: UIViewController, _ completion: @escaping (Result<String>) -> Void)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(FileShareHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(FileShareHelper.self)
 
 final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelperProtocol {
 

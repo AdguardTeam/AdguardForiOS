@@ -37,7 +37,7 @@ protocol DefaultDatabaseManagerProtocol {
     func removeDefaultDb() throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DefaultDatabaseManager.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DefaultDatabaseManager.self)
 
 final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
 

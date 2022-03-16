@@ -121,7 +121,7 @@ public protocol DnsProtectionUserRulesManagerProtocol {
     func checkEnabledRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProtection.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProtection.self)
 
 extension DnsProtection {
     public func rulesString(for type: DnsUserRuleType) -> String {

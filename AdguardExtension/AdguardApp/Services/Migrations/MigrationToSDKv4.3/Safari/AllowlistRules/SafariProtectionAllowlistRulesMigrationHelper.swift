@@ -30,7 +30,7 @@ protocol SafariProtectionAllowlistRulesMigrationHelperProtocol: AnyObject {
     func removeOldRuleFiles() throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariProtectionAllowlistRulesMigrationHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariProtectionAllowlistRulesMigrationHelper.self)
 
 /// This object is a helper for `SDKMigrationServiceHelper`
 /// It is responsible for providing old allowlist and inverted allowlist rules objects and removing obsolete files

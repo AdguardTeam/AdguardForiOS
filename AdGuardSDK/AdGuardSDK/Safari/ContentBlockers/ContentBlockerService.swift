@@ -36,7 +36,7 @@ public protocol ContentBlockerServiceProtocol {
     func getState(for cbType: ContentBlockerType) -> Bool
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ContentBlockerService.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ContentBlockerService.self)
 
 /* This class is responsible for updating Safari content blockers */
 final public class ContentBlockerService: ContentBlockerServiceProtocol {

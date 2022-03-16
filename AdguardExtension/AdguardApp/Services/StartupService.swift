@@ -18,6 +18,9 @@
 
 import SafariAdGuardSDK
 import DnsAdGuardSDK
+import SharedAdGuardSDK
+
+private let LOG = LoggerFactory.getLoggerWrapper(StartupService.self)
 
 /// This service initializes all shared services and puts them into ServiceLocator
 final class StartupService : NSObject {
@@ -26,7 +29,7 @@ final class StartupService : NSObject {
         let locator = ServiceLocator.shared
 
         // init services
-        
+
         let sharedResources: AESharedResourcesProtocol = AESharedResources()
         locator.addService(service: sharedResources)
 
@@ -46,7 +49,11 @@ final class StartupService : NSObject {
         // init services
 
         let sharedResources: AESharedResourcesProtocol = locator.getService()!
-        
+
+        let logManager: LoggerManager = LoggerManagerImpl(url: sharedResources.sharedLogsURL())
+        locator.addService(service: logManager)
+        configureLogger(resources: sharedResources, manager: logManager)
+
         let networkService = ACNNetworking()
         locator.addService(service: networkService)
 
@@ -116,9 +123,6 @@ final class StartupService : NSObject {
 
         let configuration: ConfigurationServiceProtocol = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: configuration)
-        
-        let logManager: ComLog_LoggerManager = ComLog_LoggerManagerImpl(url: sharedResources.sharedLogsURL())
-        locator.addService(service: logManager)
 
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         locator.addService(service: networkSettingsService)
@@ -201,5 +205,23 @@ final class StartupService : NSObject {
             dnsProtection: dnsProtection
         )
         locator.addService(service: migrationService)
+    }
+
+
+
+    private static func configureLogger(resources: AESharedResourcesProtocol, manager: LoggerManager) {
+        #if DEBUG
+        manager.configure(.debug)
+        manager.configureDnsLibsLogLevel(.debug) // TODO: possible not used
+        LOG.info("Logger configured with log level debug")
+
+        #else
+        let sharedResource: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+        let logLevel: LogLevel = sharedResource.isDebugLogs ? .debug : .info
+        manager.configure(logLevel)
+        manager.configureDnsLibsLogLevel(logLevel) // TODO: possible not used
+        LOG.info("Logger configured with log level \(logLevel)")
+
+        #endif
     }
 }

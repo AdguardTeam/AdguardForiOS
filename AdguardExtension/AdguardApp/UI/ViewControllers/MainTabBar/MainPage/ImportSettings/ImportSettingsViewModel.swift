@@ -64,7 +64,7 @@ protocol ImportSettingsViewModelProtocol {
     func applySettings(callback: @escaping ()->Void)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ImportSettingsViewModel.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ImportSettingsViewModel.self)
 
 class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
 

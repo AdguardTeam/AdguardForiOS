@@ -21,7 +21,7 @@ import SafariAdGuardSDK
 import AGDnsProxy
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AdvancedSettingsController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(AdvancedSettingsController.self)
 
 final class AdvancedSettingsController: UITableViewController {
 
@@ -78,11 +78,11 @@ final class AdvancedSettingsController: UITableViewController {
     }
 
     @IBAction func debugLogsAction(_ sender: UISwitch) {
-        let manager: ComLog_LoggerManager = ServiceLocator.shared.getService()!
-        
+        let manager: LoggerManager = ServiceLocator.shared.getService()!
+
         let isDebugLogs = sender.isOn
         resources.isDebugLogs = isDebugLogs
-        let logLevel: ComLog_LogLevel = resources.isDebugLogs ? .debug : .info
+        let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
         manager.configure(logLevel)
         manager.configureDnsLibsLogLevel(logLevel) // TODO: possible not used
         LOG.info("Init app, log level \(logLevel)")
@@ -90,7 +90,7 @@ final class AdvancedSettingsController: UITableViewController {
 //        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
 //        AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
 //        FIXME--DNS
-        
+
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedAdvancedSettings, completion: nil) // restart tunnel to apply new log level
     }
 

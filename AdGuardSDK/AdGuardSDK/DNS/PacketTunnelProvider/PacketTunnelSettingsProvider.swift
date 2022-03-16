@@ -23,7 +23,7 @@ protocol PacketTunnelSettingsProviderProtocol {
     func createSettings(full: Bool, withoutVpnIcon: Bool) -> NEPacketTunnelNetworkSettings
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(PacketTunnelSettingsProvider.self)
+private let LOG = LoggerFactory.getLoggerWrapper(PacketTunnelSettingsProvider.self)
 
 /// This object creates `NEPacketTunnelNetworkSettings` for `PacketTunnelProvider`
 /// Used to incapsulate settings creation logic

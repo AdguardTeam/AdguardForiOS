@@ -30,7 +30,7 @@ protocol MainPageModelProtocol: AnyObject {
     var delegate: MainPageModelDelegate? { get set }
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(MainPageModel.self)
+private let LOG = LoggerFactory.getLoggerWrapper(MainPageModel.self)
 
 /// Super old model, it should be removed
 /// Actually it was rewritten in Stories PR

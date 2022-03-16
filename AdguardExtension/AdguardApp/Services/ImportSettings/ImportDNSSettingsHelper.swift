@@ -31,7 +31,7 @@ protocol ImportDNSSettingsHelperProtocol {
     func importDnsFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ImportDNSSettingsHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ImportDNSSettingsHelper.self)
 
 /// This object is responsible for importing DNS protection settings
 final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {

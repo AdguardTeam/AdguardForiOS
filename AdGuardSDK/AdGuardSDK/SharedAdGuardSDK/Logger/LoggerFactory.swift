@@ -1,10 +1,16 @@
-public class ComLog_LoggerFactory {
+public class LoggerFactory: NSObject {
 
-    public static func getLoggerWrapper(_ label: String) -> ComLog_LoggerWrapper {
-        return ComLog_LoggerWrapper(label)
+    @objc
+    public static func getLoggerWrapper(_ label: String) -> LoggerWrapper {
+        return LoggerWrapper(label)
     }
 
-    public static func getLoggerWrapper(_ clazz: Any.Type) -> ComLog_LoggerWrapper {
-        return ComLog_LoggerWrapper("\(clazz)")
+    @objc
+    public static func objcGetLoggerWrapper(_ clazz: AnyObject.Type) -> LoggerWrapper {
+        return LoggerWrapper("\(clazz)")
+    }
+
+    public static func getLoggerWrapper(_ clazz: Any.Type) -> LoggerWrapper {
+        return LoggerWrapper("\(clazz)")
     }
 }

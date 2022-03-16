@@ -43,7 +43,7 @@ import SharedAdGuardSDK
 
  - Important: Don't forget to close file with `close` function after finished reading it
  */
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ChunkFileReader.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ChunkFileReader.self)
 
 final class ChunkFileReader {
 

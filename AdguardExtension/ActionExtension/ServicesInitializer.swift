@@ -19,7 +19,7 @@
 import SafariAdGuardSDK
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ServicesInitializer.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ServicesInitializer.self)
 
 /// Singleton to quikcly get different services objects and remove initialization logic from view controllers
 final class ServicesInitializer {
@@ -90,14 +90,14 @@ final class ServicesInitializer {
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
         // Init Logger
 //        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        
+
         let isDebugLogs = resources.isDebugLogs
         LOG.info("Start Action extension with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
-        
+
 //        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
 
-        let logManager = ComLog_LoggerManagerImpl(url: resources.sharedLogsURL())
-        let logLevel: ComLog_LogLevel = isDebugLogs ? .debug : .info
+        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: LogLevel = isDebugLogs ? .debug : .info
         logManager.configure(logLevel)
         LOG.info("initLogger \(logLevel)")
 //        Logger.logInfo = { msg in

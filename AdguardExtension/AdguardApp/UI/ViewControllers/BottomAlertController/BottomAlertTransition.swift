@@ -20,7 +20,7 @@ import Foundation
 import UIKit
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(BottomAlertPresentingTransition.self)
+private let LOG = LoggerFactory.getLoggerWrapper(BottomAlertPresentingTransition.self)
 
 class BottomAlertPresentingTransition: NSObject, UIViewControllerAnimatedTransitioning {
 

@@ -19,7 +19,7 @@
 import SQLite
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ChartStatistics.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ChartStatistics.self)
 
 extension ChartStatistics {
     /// Compresses table if there are more than 1000 records

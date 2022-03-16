@@ -54,7 +54,7 @@ protocol NativeDnsSettingsManagerProtocol: AnyObject {
     func reset()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(NativeDnsSettingsManager.self)
+private let LOG = LoggerFactory.getLoggerWrapper(NativeDnsSettingsManager.self)
 
 /// Config Manager is responsible for controlling and providing actual state of DNS mobile config that can be found here
 final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {

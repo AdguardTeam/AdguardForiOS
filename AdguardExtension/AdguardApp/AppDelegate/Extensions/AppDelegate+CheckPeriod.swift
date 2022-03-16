@@ -19,7 +19,7 @@
 // Set period for minimum background fetch interval
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AppDelegate.self)
+private let LOG = LoggerFactory.getLoggerWrapper(AppDelegate.self)
 
 extension AppDelegate {
     static func setBackgroundFetchInterval(_ interval: TimeInterval) {

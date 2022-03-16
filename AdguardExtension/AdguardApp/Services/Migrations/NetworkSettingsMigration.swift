@@ -26,7 +26,7 @@ protocol NetworkSettingsMigrationProtocol {
     func startMigration()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(NetworkSettingsMigrations.self)
+private let LOG = LoggerFactory.getLoggerWrapper(NetworkSettingsMigrations.self)
 
 /// Network settings migration service
 final class NetworkSettingsMigrations: NetworkSettingsMigrationProtocol {

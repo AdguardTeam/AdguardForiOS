@@ -19,7 +19,7 @@
 import NetworkExtension
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(VpnConfigurationState.self)
+private let LOG = LoggerFactory.getLoggerWrapper(VpnConfigurationState.self)
 
 enum VpnConfigurationState: CustomStringConvertible {
     case enabled, connecting, disconnecting, disabled

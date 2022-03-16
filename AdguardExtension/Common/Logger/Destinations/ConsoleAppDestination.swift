@@ -3,11 +3,11 @@ import SwiftyBeaver
 import os.log
 
 /// Send log messages to debug console and Console.app
-class ComLog_ConsoleAppDestination: BaseDestination {
+class ConsoleAppDestination: BaseDestination {
 
     override public var defaultHashValue: Int { return 3 } // We use 3 because we want that 🐣
 
-    private var nativeLoggerWrapper: ComLog_NativeLoggerWrapper = ComLog_ConsoleAppDestination.createNativeLoggerWrapper()
+    private var nativeLoggerWrapper: NativeLoggerWrapper = ConsoleAppDestination.createNativeLoggerWrapper()
 
     override public func send(
         _ level: SwiftyBeaver.Level,
@@ -30,7 +30,7 @@ class ComLog_ConsoleAppDestination: BaseDestination {
         return formattedString
     }
 
-    private func convertToCommonLogLevel(_ logLevel: SwiftyBeaver.Level) -> ComLog_LogLevel {
+    private func convertToCommonLogLevel(_ logLevel: SwiftyBeaver.Level) -> LogLevel {
         switch (logLevel) {
             case .info: return .info
             case .warning: return .warn
@@ -40,12 +40,12 @@ class ComLog_ConsoleAppDestination: BaseDestination {
         }
     }
 
-    private static func createNativeLoggerWrapper() -> ComLog_NativeLoggerWrapper {
+    private static func createNativeLoggerWrapper() -> NativeLoggerWrapper {
         let subsystem = Bundle.main.bundleIdentifier ?? "com.AdGuardVpn.DefaultIdentifier"
         if #available(iOS 14.0, *) {
-            return ComLog_NativeLoggerWrapperSystemLoggerImpl(subsystem: subsystem)
+            return NativeLoggerWrapperSystemLoggerImpl(subsystem: subsystem)
         } else {
-            return ComLog_NativeLoggerWrapperOsLogImpl(subsystem: subsystem)
+            return NativeLoggerWrapperOsLogImpl(subsystem: subsystem)
         }
     }
 }

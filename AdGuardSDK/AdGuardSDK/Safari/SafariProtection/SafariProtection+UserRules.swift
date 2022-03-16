@@ -146,7 +146,7 @@ public protocol SafariProtectionUserRulesProtocol {
     func removeAllUserRulesAssociatedWith(domain: String, onCbReloaded: ((Error?) -> Void)?)
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariProtection.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariProtection.self)
 
 /* Extension is used to interact with all available user rules lists and properly process operations with them */
 extension SafariProtection {

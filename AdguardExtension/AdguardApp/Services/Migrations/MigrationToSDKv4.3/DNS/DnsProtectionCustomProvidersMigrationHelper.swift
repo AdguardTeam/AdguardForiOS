@@ -35,7 +35,7 @@ protocol DnsProtectionCustomProvidersMigrationHelperProtocol: AnyObject {
     func removeOldCustomDnsProvidersData()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsProtectionCustomProvidersMigrationHelper.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProtectionCustomProvidersMigrationHelper.self)
 
 /// Implementation for `DnsProtectionCustomProvidersMigrationHelperProtocol`
 final class DnsProtectionCustomProvidersMigrationHelper: DnsProtectionCustomProvidersMigrationHelperProtocol {

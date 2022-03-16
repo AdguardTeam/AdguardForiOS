@@ -22,7 +22,7 @@ import SharedAdGuardSDK
 /// This screen is needed to provide a model for `ActionExtensionTableController`
 /// If any error is occured it displays it
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(ActionExtensionLoaderViewController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(ActionExtensionLoaderViewController.self)
 
 final class ActionExtensionLoaderViewController: UIViewController {
 
@@ -46,7 +46,7 @@ final class ActionExtensionLoaderViewController: UIViewController {
 
         activityIndicator.startAnimating()
 
-        // FIXME: do not stop ui thread. 
+        // FIXME: do not stop ui thread.
         migrateIfNeeded()
 
         configuration.systemAppearenceIsDark = systemStyleIsDark
@@ -58,7 +58,7 @@ final class ActionExtensionLoaderViewController: UIViewController {
         let contextProvider = ContextProvider()
         contextProvider.process(context: extensionContext) { [weak self] result in
             guard let self = self else { return }
-            
+
             switch result {
             case .success(let context):
                 let isSafariProtectionEnabled = self.isSafariProtectionEnabled(for: context.domain)

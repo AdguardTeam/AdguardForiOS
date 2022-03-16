@@ -19,7 +19,7 @@
 import SafariAdGuardSDK
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(AppDelegate.self)
+private let LOG = LoggerFactory.getLoggerWrapper(AppDelegate.self)
 
 extension AppDelegate: IURLSchemeExecutor {
 

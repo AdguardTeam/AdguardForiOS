@@ -24,7 +24,7 @@ protocol SafariMigration4_3Protocol {
     func migrate()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariMigration4_3.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariMigration4_3.self)
 
 class SafariMigration4_3: SafariMigration4_3Protocol {
 

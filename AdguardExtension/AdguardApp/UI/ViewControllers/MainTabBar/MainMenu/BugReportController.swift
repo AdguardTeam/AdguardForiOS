@@ -19,7 +19,7 @@
 import UIKit
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(BugReportController.self)
+private let LOG = LoggerFactory.getLoggerWrapper(BugReportController.self)
 
 final class BugReportController: UIViewController {
 

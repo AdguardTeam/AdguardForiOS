@@ -3,7 +3,7 @@ import SwiftyBeaver
 import AGDnsProxy
 
 /// Manager that create os and file log destinations. Creates and stores labeled loggers
-final class ComLog_LoggerManagerImpl: ComLog_LoggerManager {
+final class LoggerManagerImpl: LoggerManager {
 
     var rootLogDirectory: URL
 
@@ -22,14 +22,14 @@ final class ComLog_LoggerManagerImpl: ComLog_LoggerManager {
         }
     }
 
-    func configure(_ logLevel: ComLog_LogLevel) {
+    func configure(_ logLevel: LogLevel) {
         let swiftyBeaverLogLevel = logLevel.getSwiftyBeaverLogLevel()
         osLogDestination.minLevel = swiftyBeaverLogLevel
         fileLogDestination.minLevel = swiftyBeaverLogLevel
     }
 
     private func createOSLogDestination() -> BaseDestination  {
-        let osLogDestination = ComLog_ConsoleAppDestination()
+        let osLogDestination = ConsoleAppDestination()
         osLogDestination.format = "[$T] $L $X - $M"
         osLogDestination.asynchronously = true
         return osLogDestination

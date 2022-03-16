@@ -48,7 +48,7 @@ enum VpnManagerError: Error {
     case managerNotInstalled
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(VpnManager.self)
+private let LOG = LoggerFactory.getLoggerWrapper(VpnManager.self)
 
 class VpnManager: VpnManagerProtocol {
 

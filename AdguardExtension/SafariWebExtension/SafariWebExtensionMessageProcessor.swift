@@ -24,7 +24,7 @@ protocol SafariWebExtensionMessageProcessorProtocol {
     func process(message: Message) -> [String: Any?]
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(SafariWebExtensionMessageProcessor.self)
+private let LOG = LoggerFactory.getLoggerWrapper(SafariWebExtensionMessageProcessor.self)
 
 final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorProtocol {
 

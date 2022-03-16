@@ -62,7 +62,7 @@ protocol TagsMetaStorageProtocol {
     func deleteTagsForFilters(withIds ids: [Int]) throws
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(TagsMetaStorageProtocol.self)
+private let LOG = LoggerFactory.getLoggerWrapper(TagsMetaStorageProtocol.self)
 
 extension MetaStorage: TagsMetaStorageProtocol {
 

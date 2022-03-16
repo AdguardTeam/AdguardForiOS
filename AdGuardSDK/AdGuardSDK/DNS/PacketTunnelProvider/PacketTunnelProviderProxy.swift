@@ -39,7 +39,7 @@ protocol PacketTunnelProviderProxyProtocol: AnyObject {
     func networkChanged()
 }
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(PacketTunnelProviderProxy.self)
+private let LOG = LoggerFactory.getLoggerWrapper(PacketTunnelProviderProxy.self)
 
 /**
  Proxy is a design pattern, that perfectly fits it this case. You can find more info here https://refactoring.guru/design-patterns/proxy
@@ -279,11 +279,11 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             if let str = String(data: data, encoding: .utf8) {
                 switch (level) {
                 case AGLogLevel.AGLL_INFO:
-                    ComLog_LoggerWrapper.info(label, str)
+                    LoggerWrapper.info(label, str)
                 case AGLogLevel.AGLL_ERR, AGLogLevel.AGLL_WARN:
-                    ComLog_LoggerWrapper.error(label, str)
+                    LoggerWrapper.error(label, str)
                 default:
-                    ComLog_LoggerWrapper.debug(label, str)
+                    LoggerWrapper.debug(label, str)
                 }
             }
         }

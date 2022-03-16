@@ -19,7 +19,7 @@
 import OrderedCollections
 import SharedAdGuardSDK
 
-private let LOG = ComLog_LoggerFactory.getLoggerWrapper(DnsUserRulesStorage.self)
+private let LOG = LoggerFactory.getLoggerWrapper(DnsUserRulesStorage.self)
 
 final class DnsUserRulesStorage: UserRulesStorageProtocol {
 
