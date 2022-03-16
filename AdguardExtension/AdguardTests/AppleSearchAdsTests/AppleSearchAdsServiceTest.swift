@@ -90,9 +90,9 @@ class AppleSearchAdsServiceTest: XCTestCase {
     func testProvideAttributionRecordsWithError() {
         let expectation = XCTestExpectation()
         if #available(iOS 14.3, *) {
-            adServicesHelper.stubbedFetchAttributionRecordsCompletionHandlerResult = .failure(testError)
+            adServicesHelper.stubbedFetchAttributionRecordsCompletionHandlerResult = .error(testError)
         } else {
-            iAdFrameworkHelper.stubbedFetchAttributionRecordsCompletionHandlerResult = .failure(testError)
+            iAdFrameworkHelper.stubbedFetchAttributionRecordsCompletionHandlerResult = .error(testError)
         }
 
         service.provideAttributionRecords { jsonString in

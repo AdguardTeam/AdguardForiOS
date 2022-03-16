@@ -84,7 +84,7 @@ final class AdvancedSettingsController: UITableViewController {
         resources.isDebugLogs = isDebugLogs
         let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
         manager.configure(logLevel)
-        manager.configureDnsLibsLogLevel(logLevel) // TODO: possible not used
+        manager.configureDnsLibsLogLevel(logLevel)
         LOG.info("Init app, log level \(logLevel)")
 
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedAdvancedSettings, completion: nil) // restart tunnel to apply new log level
