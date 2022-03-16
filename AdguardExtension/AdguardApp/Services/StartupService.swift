@@ -212,14 +212,14 @@ final class StartupService : NSObject {
     private static func configureLogger(resources: AESharedResourcesProtocol, manager: LoggerManager) {
         #if DEBUG
         manager.configure(.debug)
-        manager.configureDnsLibsLogLevel(.debug) // TODO: possible not used
+        manager.configureDnsLibsLogLevel(.debug)
         LOG.info("Logger configured with log level debug")
 
         #else
         let sharedResource: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
         let logLevel: LogLevel = sharedResource.isDebugLogs ? .debug : .info
         manager.configure(logLevel)
-        manager.configureDnsLibsLogLevel(logLevel) // TODO: possible not used
+        manager.configureDnsLibsLogLevel(logLevel)
         LOG.info("Logger configured with log level \(logLevel)")
 
         #endif
