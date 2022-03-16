@@ -49,7 +49,7 @@ protocol GroupLocalizationsMetaStorageProtocol {
     func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String
 }
 
-private let LOG = LoggerFactory.getLoggerWrapper(MetaStorage.self)
+private let LOG = LoggerFactory.getLoggerWrapper("MetaStorage+GroupLocalizations")
 
 extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
 

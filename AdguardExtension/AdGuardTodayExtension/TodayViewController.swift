@@ -69,23 +69,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     private var timer: Timer?
 
-    // MARK: View Controller lifecycle
-
     required init?(coder: NSCoder) {
-        Self.initLogger(with: resources)
-        LOG.info("init start")
-
-        // Services initialising
-        let logManager = Self.initLogger(with: resources)
-        LOG.info("(TodayViewController) - init start")
-
-        do {
-            self.serviceInitializer = try ServiceInitializer(resources: resources)
-            self.serviceInitializer.setLoggerManager(logManager)
-        } catch {
-            LOG.error("init; error - \(error)")
+        guard let serviceInitializer = ServiceInitializer() else {
+            LOG.error("ServiceInitializer is missing")
             return nil
         }
+        LOG.info("init start")
+        self.serviceInitializer = serviceInitializer
 
         super.init(coder: coder)
 
@@ -365,16 +355,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             // TODO: change this to use requestsLabelTxt/encryptedLabelTxt later (requires new localized string)
             self.complexStatisticsLabel.text = String(format: String.localizedString("widget_statistics"), requestsNumber, encryptedNumber)
         }
-    }
-
-    /// Initializes logger
-    private static func initLogger(with resources: AESharedResourcesProtocol) -> LoggerManager {
-        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
-        let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
-        logManager.configure(logLevel)
-        LOG.info("initLogger \(logLevel)")
-        return logManager
-
     }
 }
 

@@ -8,7 +8,7 @@ class NativeLoggerWrapperSystemLoggerImpl: NativeLoggerWrapper {
 
     private let logger: Logger
 
-    init(subsystem: String/*, label: String*/) {
+    init(subsystem: String) {
         self.logger = Logger(subsystem: subsystem, category: "General")
     }
 

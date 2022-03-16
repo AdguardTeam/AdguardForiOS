@@ -55,7 +55,7 @@ protocol FiltersLocalizationsMetaStorageProtocol {
     func collectFiltersMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String
 }
 
-private let LOG = LoggerFactory.getLoggerWrapper(MetaStorage.self)
+private let LOG = LoggerFactory.getLoggerWrapper("MetaStorage+FiltersLocalizations")
 
 extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
 

@@ -41,7 +41,7 @@ class ConsoleAppDestination: BaseDestination {
     }
 
     private static func createNativeLoggerWrapper() -> NativeLoggerWrapper {
-        let subsystem = Bundle.main.bundleIdentifier ?? "com.AdGuardVpn.DefaultIdentifier"
+        let subsystem = Bundle.main.bundleIdentifier ?? "com.AdGuard.DefaultIdentifier"
         if #available(iOS 14.0, *) {
             return NativeLoggerWrapperSystemLoggerImpl(subsystem: subsystem)
         } else {

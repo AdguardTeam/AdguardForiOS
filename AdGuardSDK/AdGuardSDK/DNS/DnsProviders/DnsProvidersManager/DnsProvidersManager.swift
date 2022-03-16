@@ -230,7 +230,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
     }
 
     public func reset() throws {
-        LOG.info("reset; Start")
+        LOG.info("Start resettings")
 
         let defaultProviderId = PredefinedDnsProvider.systemDefaultProviderId
         let defaultServerId = PredefinedDnsServer.systemDefaultServerId
@@ -239,7 +239,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         try! customProvidersStorage.reset()
         reinitializeProviders()
 
-        LOG.info("reset; Finish")
+        LOG.info("Finish resettings")
     }
 
     // MARK: - Private methods

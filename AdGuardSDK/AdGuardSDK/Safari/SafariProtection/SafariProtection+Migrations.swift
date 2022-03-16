@@ -29,7 +29,7 @@ public protocol SafariProtectionMigrationsProtocol: AnyObject {
     func convertFiltersAndReloadCbs(onCbReloaded: ((_ error: Error?) -> Void)?)
 }
 
-private let LOG = LoggerFactory.getLoggerWrapper(SafariProtection.self)
+private let LOG = LoggerFactory.getLoggerWrapper("SafariProtection+Migrations")
 
 // TODO: - We should change the way we migrate data in main app and remove this extension
 /// This extension is responsible for providing methods for migration in main app

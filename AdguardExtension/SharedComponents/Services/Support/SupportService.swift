@@ -307,25 +307,29 @@ final class SupportService: SupportServiceProtocol {
 
     private func moveFiles(_ logFileURLs: [URL], _ targetDirectory: URL) throws {
         try logFileURLs.forEach {
+            LOG.debug("Start moving item at path \($0)")
             var targetDirectory = targetDirectory
             let fileName = $0.lastPathComponent
             targetDirectory.appendPathComponent(fileName)
 
             try fileManager.moveItem(at: $0, to: targetDirectory)
+            LOG.debug("Successfully moved item from path \($0)")
         }
     }
 
     private func getLogDataForReport(_ logFilePathes: [URL]) throws -> Data {
+        LOG.debug("Start getting LogData from \(logFilePathes)")
         var data = Data()
         for processLogDir in logFilePathes {
             let processData = try readLogFiles(processLogDir)
             data.append(processData)
         }
-
+        LOG.debug("Returning data from \(logFilePathes)")
         return data
     }
 
     private func readLogFiles(_ processLogsDirPath: URL) throws -> Data {
+        LOG.debug("Start reading LogFiles from \(processLogsDirPath)")
         let singleProcessLogsContent = try getDirectoryContentUrls(processLogsDirPath)
         var data: Data = Data()
 
@@ -333,11 +337,12 @@ final class SupportService: SupportServiceProtocol {
             let partOfLogs = try readLogFile(logPath, processName: processLogsDirPath.lastPathComponent)
             data.append(partOfLogs)
         }
-
+        LOG.debug("Returning data from \(processLogsDirPath)")
         return data
     }
 
     private func readLogFile(_ filePath: URL, processName: String) throws -> Data {
+        LOG.debug("Start reading LogFile \(processName) from \(filePath)")
         var data: Data = Data()
 
         let fileName = "\(processName).\(filePath.lastPathComponent)" // <PROCESS NAME>.<LOG FILE NAME>
@@ -349,12 +354,13 @@ final class SupportService: SupportServiceProtocol {
         }
 
         data.append(singleLogFileData)
-
+        LOG.debug("Returning data from \(filePath) - \(processName)")
         return data
     }
 
 
     private func getDirectoryContentUrls(_ target: URL) throws -> [URL] {
+        LOG.debug("Start getting content from \(target)")
         if try target.resourceValues(forKeys: [.isDirectoryKey]).isDirectory == true {
             let logsUrls = try fileManager
                 .contentsOfDirectory(at: target, includingPropertiesForKeys: [.contentModificationDateKey], options: [.skipsHiddenFiles])
@@ -363,8 +369,10 @@ final class SupportService: SupportServiceProtocol {
                     let date1 = try $1.promisedItemResourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate!
                     return date0.compare(date1) == .orderedAscending
                 })
+            LOG.debug("Returning urls from \(target)")
             return logsUrls
         }
+        LOG.debug("Returning an empty array")
         return []
     }
 }

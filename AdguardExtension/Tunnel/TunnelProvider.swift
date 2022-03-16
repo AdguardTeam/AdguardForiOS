@@ -117,7 +117,6 @@ class TunnelProvider: PacketTunnelProvider {
     // MARK: - private methods
 
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
-        // TODO: refactor, everywhere is the same code
         let debugLogs = resources.isDebugLogs
         let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
         let logLevel: LogLevel = debugLogs ? .debug : .info

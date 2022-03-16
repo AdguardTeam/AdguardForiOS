@@ -28,9 +28,7 @@ protocol ServiceInitializerProtocol  {
     var complexProtection: ComplexProtectionServiceProtocol { get }
     var dnsProvidersManager: DnsProvidersManagerProtocol { get }
     var activityStatistics: ActivityStatisticsProtocol { get }
-    var loggerManager: LoggerManager? { get }
-
-    func setLoggerManager(_ loggerManager: LoggerManager)
+    var loggerManager: LoggerManager { get }
 }
 
 private let LOG = LoggerFactory.getLoggerWrapper(ServiceInitializer.self)
@@ -44,14 +42,18 @@ final class ServiceInitializer: ServiceInitializerProtocol {
     let dnsProvidersManager: DnsProvidersManagerProtocol
     let activityStatistics: ActivityStatisticsProtocol
 
-    private(set) var loggerManager: LoggerManager?
 
-    init(resources: AESharedResourcesProtocol) throws {
-        LOG.info("init services start")
+    private(set) var loggerManager: LoggerManager
+
+    init?() {
+        let resources = AESharedResources()
+        self.loggerManager = LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
+        loggerManager.configure(logLevel)
+        LOG.info("init services start with logLevel \(logLevel)")
         let networkService = ACNNetworking()
         let productInfo = ADProductInfo()
         let purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
-
         let sharedStorageUrls = SharedStorageUrls()
 
         LOG.info("init safari protection service")
@@ -60,14 +62,19 @@ final class ServiceInitializer: ServiceInitializerProtocol {
             isProPurchased: purchaseService.isProPurchased
         )
 
-        self.safariProtection = try SafariProtection(
-            configuration: safariConfiguration,
-            defaultConfiguration: safariConfiguration,
-            filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
-            dbContainerUrl: sharedStorageUrls.dbFolderUrl,
-            jsonStorageUrl: sharedStorageUrls.cbJsonsFolderUrl,
-            userDefaults: resources.sharedDefaults()
-        )
+        do {
+            self.safariProtection = try SafariProtection(
+                configuration: safariConfiguration,
+                defaultConfiguration: safariConfiguration,
+                filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
+                dbContainerUrl: sharedStorageUrls.dbFolderUrl,
+                jsonStorageUrl: sharedStorageUrls.cbJsonsFolderUrl,
+                userDefaults: resources.sharedDefaults()
+            )
+        } catch {
+            LOG.error("SafariProtection initialization failed \(error)")
+            return nil
+        }
 
         let networkSettings = NetworkSettingsService(resources: resources)
 
@@ -84,7 +91,12 @@ final class ServiceInitializer: ServiceInitializerProtocol {
 
         LOG.info("init dns protection service")
 
-        self.dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: resources.sharedDefaults(), networkUtils: NetworkUtils())
+        do {
+            self.dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: resources.sharedDefaults(), networkUtils: NetworkUtils())
+        } catch {
+            LOG.error("DnsProvidersManager initialization failed \(error)")
+            return nil
+        }
 
         let nativeDnsSettingsManager = NativeDnsSettingsManager(networkSettingsService: networkSettings, dnsProvidersManager: dnsProvidersManager, configuration: configuration, resources: resources)
 
@@ -107,7 +119,12 @@ final class ServiceInitializer: ServiceInitializerProtocol {
 
         LOG.info("init activity statistics service")
 
-        self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl, readOnly: true)
+        do {
+            self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl, readOnly: true)
+        } catch {
+            LOG.error("ActivityStatistics initialization failed \(error)")
+            return nil
+        }
 
         LOG.info("init services end")
     }

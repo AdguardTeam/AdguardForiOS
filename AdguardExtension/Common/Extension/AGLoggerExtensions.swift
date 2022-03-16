@@ -2,6 +2,7 @@ import Foundation
 import AGDnsProxy
 import SharedAdGuardSDK
 
+// This callback is called when check upstreams
 extension AGLogger {
     static func setup(_ logLevel: AGLogLevel) {
 

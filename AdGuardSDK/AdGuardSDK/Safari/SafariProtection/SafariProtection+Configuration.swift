@@ -64,7 +64,7 @@ public protocol SafariProtectionConfigurationProtocol {
     func updateConfig(with newConfig: SafariConfigurationProtocol)
 }
 
-private let LOG = LoggerFactory.getLoggerWrapper(SafariProtection.self)
+private let LOG = LoggerFactory.getLoggerWrapper("SafariProtection+Configuration")
 
 /* Extension is used to properly process all configuration changes */
 extension SafariProtection {

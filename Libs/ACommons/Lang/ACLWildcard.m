@@ -18,7 +18,6 @@
 
 // TODO: This Objective-C class never USED, remove it
 
-#import <SharedAdGuardSDK/SharedAdGuardSDK.h>
 #import "NSString+Utils.h"
 #import "NSException+Utils.h"
 #import "ACLWildcard.h"

@@ -47,7 +47,7 @@ protocol LangsMetaStorageProtocol {
     func deleteLangsForFilters(withIds ids: [Int]) throws
 }
 
-private let LOG = LoggerFactory.getLoggerWrapper(MetaStorage.self)
+private let LOG = LoggerFactory.getLoggerWrapper("MetaStorage+Langs")
 
 extension MetaStorage: LangsMetaStorageProtocol {
     // Returns array of languages for filter with specified id

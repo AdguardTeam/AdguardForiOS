@@ -70,7 +70,7 @@ protocol GroupsMetaStorageProtocol {
     func add(groups: [GroupMetaProtocol]) throws
 }
 
-private let LOG = LoggerFactory.getLoggerWrapper(MetaStorage.self)
+private let LOG = LoggerFactory.getLoggerWrapper("MetaStorage+Groups")
 
 extension MetaStorage: GroupsMetaStorageProtocol {
 

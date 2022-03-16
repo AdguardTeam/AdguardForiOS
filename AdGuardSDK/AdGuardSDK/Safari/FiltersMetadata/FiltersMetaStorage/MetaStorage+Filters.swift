@@ -133,7 +133,7 @@ protocol FiltersMetaStorageProtocol {
     func renameFilter(withId id: Int, name: String) throws
 }
 
-private let LOG = LoggerFactory.getLoggerWrapper(MetaStorage.self)
+private let LOG = LoggerFactory.getLoggerWrapper("MetaStorage+Filters")
 
 extension MetaStorage: FiltersMetaStorageProtocol {
 

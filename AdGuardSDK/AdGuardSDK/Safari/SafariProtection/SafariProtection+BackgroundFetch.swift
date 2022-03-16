@@ -85,7 +85,7 @@ public protocol SafariProtectionBackgroundFetchProtocol {
     func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void)
 }
 
-private let LOG = LoggerFactory.getLoggerWrapper(SafariProtection.self)
+private let LOG = LoggerFactory.getLoggerWrapper("SafariProtection+BackgroundFetch")
 
 /* Extension is used to update filters while main app is in the background */
 extension SafariProtection {

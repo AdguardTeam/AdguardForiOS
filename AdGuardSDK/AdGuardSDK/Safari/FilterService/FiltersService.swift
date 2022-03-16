@@ -379,7 +379,7 @@ final class FiltersService: FiltersServiceProtocol {
                 try self.metaStorage.add(filter: filterToAdd, enabled: enabled)
             }
             catch {
-                LOG.error("Error while adding: \(error)")
+                LOG.error("Error occurred while adding custom filter: \(error)")
                 self.completionQueue.async { onFilterAdded(error) }
                 return
             }
