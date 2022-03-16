@@ -27,9 +27,6 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
         let resources = AESharedResources()
 
         // Init Logger
-//        ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
-//        ACLLogger.singleton().logLevel = resources.isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-
         let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
         let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
         logManager.configure(logLevel)

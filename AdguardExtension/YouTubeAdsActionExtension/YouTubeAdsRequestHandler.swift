@@ -40,15 +40,11 @@ class YouTubeAdsRequestHandler : UINavigationController {
         let resources = AESharedResources()
 
         // Init Logger
-//        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-
         let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
         let isDebugLogs = resources.isDebugLogs
         let logLevel: LogLevel = isDebugLogs ? .debug : .info
         logManager.configure(logLevel)
         LOG.info("Start with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
-
-//        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
     }
 
     override func beginRequest(with context: NSExtensionContext) {

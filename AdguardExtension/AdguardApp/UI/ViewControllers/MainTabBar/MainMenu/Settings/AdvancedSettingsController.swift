@@ -87,10 +87,6 @@ final class AdvancedSettingsController: UITableViewController {
         manager.configureDnsLibsLogLevel(logLevel) // TODO: possible not used
         LOG.info("Init app, log level \(logLevel)")
 
-//        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-//        AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
-//        FIXME--DNS
-
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedAdvancedSettings, completion: nil) // restart tunnel to apply new log level
     }
 
