@@ -74,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         let resources = StartupService.initResources()
 
-        LOG.info("SUPERmegaTEST")
         // StartupService may perform slow operations involving working with files or SQLite database.
         // It is safer to try to protect it from suspending by using a background task.
         _ = UIBackgroundTask.execute(name: "AppDelegate.init") {
