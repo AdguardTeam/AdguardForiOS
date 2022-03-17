@@ -232,7 +232,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
     func deleteFilters(withIds ids: [Int]) throws {
         let filtersToDelete = FiltersTable.table.filter(ids.contains(FiltersTable.filterId))
         let deletedRows = try filtersDb.run(filtersToDelete.delete())
-        LOG.debug("deleted \(deletedRows) filters")
+        LOG.debug("Deleted \(deletedRows) filters")
 
         try deleteLangsForFilters(withIds: ids)
         try deleteTagsForFilters(withIds: ids)

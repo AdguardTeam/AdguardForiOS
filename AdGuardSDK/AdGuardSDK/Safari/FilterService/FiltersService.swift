@@ -974,7 +974,7 @@ final class FiltersService: FiltersServiceProtocol {
             guard let filterDownloadPage = filter.filterDownloadPage,
                     let subscriptionUrl = URL(string: filterDownloadPage)
             else {
-                LOG.error("FilterDownloadPage is missed for filter with id = \(filter.filterId)")
+                LOG.error("filterDownloadPage is missed for filter with id = \(filter.filterId)")
                 onFilesUpdated(FilterServiceError.missedFilterDownloadPage(filterName: "\(filter.name ?? "nil") and filter id = \(filter.filterId))"))
                 return
             }

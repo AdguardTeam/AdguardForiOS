@@ -50,13 +50,13 @@ final class ServiceInitializer: ServiceInitializerProtocol {
         self.loggerManager = LoggerManagerImpl(url: resources.sharedLogsURL())
         let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
         loggerManager.configure(logLevel)
-        LOG.info("init services start with logLevel \(logLevel)")
+        LOG.info("Init services start with logLevel \(logLevel)")
         let networkService = ACNNetworking()
         let productInfo = ADProductInfo()
         let purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
         let sharedStorageUrls = SharedStorageUrls()
 
-        LOG.info("init safari protection service")
+        LOG.info("Init safari protection service")
         let safariConfiguration = SafariConfiguration(
             resources: resources,
             isProPurchased: purchaseService.isProPurchased
@@ -89,7 +89,7 @@ final class ServiceInitializer: ServiceInitializerProtocol {
             isProPurchased: purchaseService.isProPurchased
         )
 
-        LOG.info("init dns protection service")
+        LOG.info("Init dns protection service")
 
         do {
             self.dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: resources.sharedDefaults(), networkUtils: NetworkUtils())
@@ -117,7 +117,7 @@ final class ServiceInitializer: ServiceInitializerProtocol {
 
         // MARK: - ActivityStatistics
 
-        LOG.info("init activity statistics service")
+        LOG.info("Init activity statistics service")
 
         do {
             self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl, readOnly: true)
@@ -126,7 +126,7 @@ final class ServiceInitializer: ServiceInitializerProtocol {
             return nil
         }
 
-        LOG.info("init services end")
+        LOG.info("Init services end")
     }
 
     func setLoggerManager(_ loggerManager: LoggerManager) {

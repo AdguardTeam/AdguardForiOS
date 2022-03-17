@@ -61,11 +61,11 @@ final class DnsProxy: DnsProxyProtocol {
 
     func stop() {
         resolveQueue.sync(flags: .barrier) { [weak self] in
-            LOG.info("stop")
+            LOG.info("Stop")
             self?.proxy?.stop()
             self?.proxy = nil
             self?.proxySettingsProvider.reset()
-            LOG.info("stopped")
+            LOG.info("Stopped")
         }
     }
 
@@ -79,7 +79,7 @@ final class DnsProxy: DnsProxyProtocol {
     // MARK: - Private methods
 
     private func internalStart(_ systemDnsUpstreams: [DnsUpstream]) -> Error? {
-        LOG.info("start")
+        LOG.info("Start")
 
         // Configuration
         if proxy != nil {

@@ -135,7 +135,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
                 throw DnsFilterError.dnsFilterAbsent(filterId: id)
             }
 
-            LOG.info(" Set filter with id=\(id) to enabled=\(enabled)")
+            LOG.info("Set filter with id=\(id) to enabled=\(enabled)")
         }
     }
 

@@ -30,7 +30,7 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
         let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
         let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
         logManager.configure(logLevel)
-        LOG.info("initLogger \(logLevel)")
+        LOG.info("InitLogger \(logLevel)")
 
 
         // migrate settings if needed

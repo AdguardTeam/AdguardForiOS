@@ -53,11 +53,11 @@ class YouTubeAdsRequestHandler : UINavigationController {
         extensionContext?.handleInputItem({ [weak self] jsResult in
             if let result = jsResult {
                 self?.notifications.postNotificationWithoutBadge(title: nil, body: result.status.title, onNotificationSent: {
-                    LOG.info("js finished with result: \(result)")
+                    LOG.info("Js finished with result: \(result)")
                     self?.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
                 })
             } else {
-                LOG.info("js finished, result is nil")
+                LOG.info("Js finished, result is nil")
                 self?.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
             }
         }) { [weak self] youTubeShareLinkResult in

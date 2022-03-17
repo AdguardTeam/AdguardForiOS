@@ -183,7 +183,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
 
         let allSystemServers = networkUtils.systemDnsServers
 
-        LOG.info("UpdateTunnelSettings with system servers: \(allSystemServers)")
+        LOG.info("updateTunnelSettings with system servers: \(allSystemServers)")
 
         let systemDnsServers = allSystemServers.filter { $0 != addresses.localDnsIpv4 && $0 != addresses.localDnsIpv6 }
 

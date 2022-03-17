@@ -170,7 +170,7 @@ extension SafariProtection {
 
     // 1st step of background update
     private func updateFilters(_ onFiltersUpdated: @escaping (_ result: BackgroundFetchUpdateResult) -> Void) {
-        LOG.info("UpdateFilters start")
+        LOG.info("updateFilters start")
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
@@ -268,7 +268,7 @@ extension SafariProtection {
 
     // 3rd step of background update
     private func reloadContentBlockers(_ onCbReloaded: @escaping (_ result: BackgroundFetchUpdateResult) -> Void) {
-        LOG.info("ReloadContentBlockers start")
+        LOG.info("reloadContentBlockers start")
 
         cbQueue.async { [weak self] in
             self?.cbService.updateContentBlockers { [weak self] error in

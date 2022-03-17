@@ -160,7 +160,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     }
 
     public override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        LOG.info("StopTunnel with reason: \(reason)")
+        LOG.info("stopTunnel with reason: \(reason)")
         reachabilityHandler.stopNotifier()
         tunnelProxy.stopTunnel(with: reason, completionHandler: completionHandler)
     }

@@ -298,7 +298,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         // post receipt to our backend
 
         guard let appId = keychain.appId else {
-            LOG.error("LoginInternal error - can not obtain appId)")
+            LOG.error("loginInternal error - can not obtain appId)")
             complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: [:]))
             return
         }
@@ -439,7 +439,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
 
-        LOG.info("PaymentQueue updatedTransactions")
+        LOG.info("paymentQueue updatedTransactions")
         var restored = false
         var purchased = false
 

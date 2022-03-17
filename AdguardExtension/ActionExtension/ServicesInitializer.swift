@@ -40,7 +40,7 @@ final class ServicesInitializer {
         let appPath = Bundle.main.bundlePath as NSString
         let fullPath = appPath.appendingPathComponent("../../") as String
         guard let bundle = Bundle(path: fullPath), let path = bundle.path(forResource: "defaults", ofType: "plist") else {
-            LOG.error("wrong appPath");
+            LOG.error("Wrong appPath");
             throw CommonError.missingFile(filename: fullPath)
         }
         if let defs = NSDictionary(contentsOfFile: path) as? [String: Any] {

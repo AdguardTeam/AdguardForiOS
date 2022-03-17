@@ -449,7 +449,7 @@ final class LoginService: LoginServiceProtocol {
         timer = Timer(fire: time, interval: 0, repeats: false) { [weak self] (timer) in
             guard let sSelf = self else { return }
 
-            LOG.info("expiration timer fired")
+            LOG.info("Expiration timer fired")
 
             if let callback = sSelf.activeChanged {
                 callback()

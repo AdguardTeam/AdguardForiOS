@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         let resources = StartupService.initResources()
 
+        LOG.info("SUPERmegaTEST")
         // StartupService may perform slow operations involving working with files or SQLite database.
         // It is safer to try to protect it from suspending by using a background task.
         _ = UIBackgroundTask.execute(name: "AppDelegate.init") {
@@ -286,7 +287,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        LOG.error("application Open URL.")
+        LOG.error("Application Open URL.")
         activateWithOpenUrl = true
 
         if setappService.openUrl(url, options: options) {
@@ -360,7 +361,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         safariProtection.updateSafariProtectionInBackground { [weak self] result in
             if let error = result.error {
-                LOG.error("received error from SDK: \(error)")
+                LOG.error("Received error from SDK: \(error)")
                 bgFetchResult = result.backgroundFetchResult
                 group.leave()
                 return
@@ -369,7 +370,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if result.oldBackgroundFetchState == .updateFinished || result.oldBackgroundFetchState == .loadAndSaveFilters {
                 // TODO: this is rather strange that we update DNS filters as a part of SafariProtection update.
                 self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters) { _ in
-                    LOG.info("background fetch ended call performFetchWithCompletionHandler after updating dns preferences")
+                    LOG.info("Background fetch ended call performFetchWithCompletionHandler after updating dns preferences")
                     bgFetchResult = result.backgroundFetchResult
                     group.leave()
                 }

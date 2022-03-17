@@ -126,7 +126,7 @@ class YoutubePlayerController : UIViewController {
 
     // Shows alert for given error and prints logMessage to the log
     private func showAlert(withError error: YouTubePlayerError, logMessage: String, fromFunction: String = #function) {
-        LOG.error("YoutubePlayerController -> \(fromFunction); \(logMessage)")
+        LOG.error("\(logMessage)")
         presentSimpleAlert(title: error.alertTitle, message: error.alertMessage) {
             self.dismiss(animated: true)
         }

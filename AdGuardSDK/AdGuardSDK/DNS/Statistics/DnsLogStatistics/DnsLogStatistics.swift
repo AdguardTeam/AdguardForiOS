@@ -136,12 +136,12 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
 
     /// Removes all records from `DNS_log_statistics.db`
     public func reset() throws {
-        LOG.info("reset called")
+        LOG.info("Reset called")
 
         let resetQuery = DnsLogTable.table.delete()
         try statisticsDb.run(resetQuery)
 
-        LOG.info("reset successfully finished")
+        LOG.info("Reset successfully finished")
     }
 
     // MARK: - Private methods

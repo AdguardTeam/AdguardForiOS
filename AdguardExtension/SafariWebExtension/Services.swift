@@ -37,7 +37,7 @@ final class Services {
         self.loggerManager = LoggerManagerImpl(url: resources.sharedLogsURL())
         let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
         loggerManager.configure(logLevel)
-        LOG.info("init services start with logLevel \(logLevel)")
+        LOG.info("Init services start with logLevel \(logLevel)")
 
     }
 }

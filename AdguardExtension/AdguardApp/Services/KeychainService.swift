@@ -51,7 +51,7 @@ class KeychainService : KeychainServiceProtocol {
         get {
             let (storedId, notFound) = getStoredAppId()
 
-            LOG.info("get appId. strored: \(storedId ?? "nil")")
+            LOG.info("Get appId. Stored: \(storedId ?? "nil")")
 
             if storedId != nil {
                 return storedId

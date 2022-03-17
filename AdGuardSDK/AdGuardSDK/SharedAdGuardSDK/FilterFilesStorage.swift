@@ -97,7 +97,7 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
     // MARK: - Initialization
 
     public init(filterFilesDirectoryUrl: URL) throws {
-        LOG.info("FilterFilesDirectoryUrl=\(filterFilesDirectoryUrl)")
+        LOG.info("filterFilesDirectoryUrl=\(filterFilesDirectoryUrl)")
 
         // We are trying to create directory if passed URL is not a valid directory
         if !filterFilesDirectoryUrl.isDirectory {
@@ -126,7 +126,7 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
         let fileUrl = fileUrlForFilter(withId: id)
 
         guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
-            LOG.error("GetFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
+            LOG.error("getFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
 
             // try to get presaved filter file
             if  let presavedFilterFileUrl = defaultFilteUrlForFilter(withId: id),

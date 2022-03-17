@@ -66,7 +66,7 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
     ) throws {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         self.oldAdguardDB = try Connection(oldAdguardDBFilePath, readonly: true)
-        LOG.info("=Connection with old AdGuard DB established")
+        LOG.info("Connection with old AdGuard DB established")
 
         self.oldAdguardDBFilePath = oldAdguardDBFilePath
         self.oldDefaultDBFilePath = oldDefaultDBFilePath

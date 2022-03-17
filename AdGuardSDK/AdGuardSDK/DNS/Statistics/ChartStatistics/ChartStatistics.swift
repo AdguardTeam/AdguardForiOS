@@ -156,12 +156,12 @@ final public class ChartStatistics: ChartStatisticsProtocol {
 
     /// Removes all records from the table
     public func reset() throws {
-        LOG.info("reset called")
+        LOG.info("Reset called")
 
         let resetQuery = ChartStatisticsTable.table.delete()
         try statisticsDb.run(resetQuery)
 
-        LOG.info("reset successfully finished")
+        LOG.info("Reset successfully finished")
     }
 
     // MARK: - Private methods

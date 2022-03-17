@@ -119,12 +119,12 @@ extension ImportSettingsController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ImportSettingsCell") as? ImportSettingsCell else {
-            LOG.error("can not instantiate ImportSettingsCell")
+            LOG.error("Can not instantiate ImportSettingsCell")
             return UITableViewCell()
         }
 
         guard let row = model?.rows[indexPath.row] else {
-            LOG.error("can not find row at index: \(indexPath.row)")
+            LOG.error("Can not find row at index: \(indexPath.row)")
             return UITableViewCell()
         }
 

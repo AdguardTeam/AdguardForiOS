@@ -74,12 +74,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             LOG.error("ServiceInitializer is missing")
             return nil
         }
-        LOG.info("init start")
+        LOG.info("Init start")
         self.serviceInitializer = serviceInitializer
 
         super.init(coder: coder)
 
-        LOG.info("init end")
+        LOG.info("Init end")
     }
 
     override func viewDidLoad() {

@@ -142,7 +142,7 @@ final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
                 completion(false)
                 return
             }
-            LOG.info(" DNS Filter with url = \(url) successfully added")
+            LOG.info("DNS Filter with url = \(url) successfully added")
             completion(true)
         }
     }

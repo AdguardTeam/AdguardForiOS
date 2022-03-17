@@ -251,7 +251,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
                 row.title = String(format: format, name)
             }
             else {
-                LOG.error("unknown filter")
+                LOG.error("Unknown filter")
             }
 
             row.imported = imported

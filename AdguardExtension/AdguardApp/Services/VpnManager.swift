@@ -151,7 +151,7 @@ class VpnManager: VpnManagerProtocol {
     }
 
     func updateSettings(completion: ((Error?) -> Void)?) {
-        LOG.info("UpdateSettings called waiting for 1 second before restart")
+        LOG.info("updateSettings called waiting for 1 second before restart")
 
         /* There was a problem when user could produce lots of VPN restarts in a row. To avoid multiple restarts for every user action we wait for 1 second for next restart, if there weren't any than we restart it.
          Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719
@@ -362,7 +362,7 @@ class VpnManager: VpnManagerProtocol {
         }
 
         if resources.dnsImplementation == .native {
-            LOG.info("set manager isEnabled = false because native mode is enabled ")
+            LOG.info("Set manager isEnabled = false because native mode is enabled ")
         }
 
         manager.isEnabled = resources.dnsImplementation == .native ? false : enabled
@@ -442,7 +442,7 @@ class VpnManager: VpnManagerProtocol {
         LOG.info("savedState: \(savedEnabled) actual: \(actualEnabled)")
 
         if actualEnabled != savedEnabled {
-            LOG.info("vpn enabled state was changed outside the application to state: \(actualEnabled)")
+            LOG.info("Vpn enabled state was changed outside the application to state: \(actualEnabled)")
             NotificationCenter.default.post(name:VpnManager.stateChangedNotification, object: actualEnabled)
         }
     }

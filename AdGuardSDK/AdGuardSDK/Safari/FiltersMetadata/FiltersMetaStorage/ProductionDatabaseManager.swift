@@ -102,7 +102,7 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
     // MARK: - Public methods
 
     func updateDatabaseIfNeeded() throws {
-        LOG.info("UpdateDatabaseIfNeeded start")
+        LOG.info("updateDatabaseIfNeeded start")
 
         try defaultDatabaseManager.updateDefaultDb()
 
@@ -117,7 +117,7 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         // Remove default.db when update finished
         try defaultDatabaseManager.removeDefaultDb()
 
-        LOG.info("ShouldUpgradeDb=\(shouldUpgradeDb); updateVersions=\(updateVersions)")
+        LOG.info("shouldUpgradeDb=\(shouldUpgradeDb); updateVersions=\(updateVersions)")
     }
 
     func reset() throws {

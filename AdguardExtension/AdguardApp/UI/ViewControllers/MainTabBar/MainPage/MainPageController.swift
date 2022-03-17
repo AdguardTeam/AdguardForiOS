@@ -912,7 +912,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         let storyboard = UIStoryboard(name: "ImportSettings", bundle: nil)
 
         guard let importController = storyboard.instantiateViewController(withIdentifier: "ImportSettingsController") as? ImportSettingsController else {
-            LOG.error("can not instantiate ImportSettingsController")
+            LOG.error("Can not instantiate ImportSettingsController")
             return
         }
 
