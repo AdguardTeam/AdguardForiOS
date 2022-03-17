@@ -28,7 +28,6 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
 
     override init() {
         super.init()
-        setupLogger()
     }
 
     func beginRequest(with context: NSExtensionContext) {
@@ -47,17 +46,5 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         let response = NSExtensionItem()
         response.userInfo = [SFExtensionMessageKey: result]
         context.completeRequest(returningItems: [response], completionHandler: nil)
-    }
-
-    // MARK: - Private methods
-
-    private func setupLogger() {
-        let isDebugLogs = resources.isDebugLogs
-        LOG.debug("Safari Web Extension was initialized with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
-
-        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
-        let logLevel: LogLevel = isDebugLogs ? .debug : .info
-        logManager.configure(logLevel)
-        LOG.info("initLogger \(logLevel)")
     }
 }

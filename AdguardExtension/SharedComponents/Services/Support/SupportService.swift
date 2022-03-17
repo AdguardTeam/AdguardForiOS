@@ -250,7 +250,7 @@ final class SupportService: SupportServiceProtocol {
         /// Append log file for each process to base
 
         do {
-            let data = try getLogDataForReport(appLogsUrls)
+            let data = try collectLogDataForReport(appLogsUrls)
             if let stringData = String(data: data, encoding: .utf8), !stringData.isEmpty {
                 LOG.info("Successfully create report logs data")
                 return stringData
@@ -317,14 +317,14 @@ final class SupportService: SupportServiceProtocol {
         }
     }
 
-    private func getLogDataForReport(_ logFilePathes: [URL]) throws -> Data {
-        LOG.debug("Start getting LogData from \(logFilePathes)")
+    private func collectLogDataForReport(_ logFilePathes: [URL]) throws -> Data {
+        LOG.debug("Start collecting report data")
         var data = Data()
         for processLogDir in logFilePathes {
             let processData = try readLogFiles(processLogDir)
             data.append(processData)
         }
-        LOG.debug("Returning data from \(logFilePathes)")
+        LOG.debug("Report data successfully collected")
         return data
     }
 
@@ -337,12 +337,12 @@ final class SupportService: SupportServiceProtocol {
             let partOfLogs = try readLogFile(logPath, processName: processLogsDirPath.lastPathComponent)
             data.append(partOfLogs)
         }
-        LOG.debug("Returning data from \(processLogsDirPath)")
+        LOG.debug("Successfully read all log files at path \(processLogsDirPath)")
         return data
     }
 
     private func readLogFile(_ filePath: URL, processName: String) throws -> Data {
-        LOG.debug("Start reading LogFile \(processName) from \(filePath)")
+        LOG.debug("Start reading log file at path \(filePath)")
         var data: Data = Data()
 
         let fileName = "\(processName).\(filePath.lastPathComponent)" // <PROCESS NAME>.<LOG FILE NAME>
@@ -354,7 +354,7 @@ final class SupportService: SupportServiceProtocol {
         }
 
         data.append(singleLogFileData)
-        LOG.debug("Returning data from \(filePath) - \(processName)")
+        LOG.debug("Successfully read log file data at path \(filePath)")
         return data
     }
 
@@ -369,10 +369,10 @@ final class SupportService: SupportServiceProtocol {
                     let date1 = try $1.promisedItemResourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate!
                     return date0.compare(date1) == .orderedAscending
                 })
-            LOG.debug("Returning urls from \(target)")
+            LOG.debug("Successfully received content list of (target)")
             return logsUrls
         }
-        LOG.debug("Returning an empty array")
+        LOG.debug("Target \(target) is not directory, returns empty list of content as default")
         return []
     }
 }

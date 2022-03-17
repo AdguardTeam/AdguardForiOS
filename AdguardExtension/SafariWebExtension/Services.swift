@@ -17,6 +17,9 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
+
+private let LOG = LoggerFactory.getLoggerWrapper(Services.self)
 
 final class Services {
     static let shared = Services()
@@ -24,10 +27,17 @@ final class Services {
     let resources: AESharedResourcesProtocol
     let urlsStorage: SharedStorageUrlsProtocol
     let processor: SafariWebExtensionMessageProcessorProtocol
-
+    private(set) var loggerManager: LoggerManager
+    
     init() {
         self.resources = AESharedResources()
         self.urlsStorage = SharedStorageUrls()
         self.processor = SafariWebExtensionMessageProcessor(resources: resources)
+        let resources = AESharedResources()
+        self.loggerManager = LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
+        loggerManager.configure(logLevel)
+        LOG.info("init services start with logLevel \(logLevel)")
+
     }
 }
