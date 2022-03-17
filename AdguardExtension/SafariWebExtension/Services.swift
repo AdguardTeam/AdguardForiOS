@@ -27,7 +27,7 @@ final class Services {
     let resources: AESharedResourcesProtocol
     let urlsStorage: SharedStorageUrlsProtocol
     let processor: SafariWebExtensionMessageProcessorProtocol
-    private(set) var loggerManager: LoggerManager
+    private let loggerManager: LoggerManager
     
     init() {
         self.resources = AESharedResources()
