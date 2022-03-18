@@ -260,7 +260,7 @@ extension SafariProtection {
                 return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    LOG.error(".onCbReloaded; self is missing!")
+                    LOG.error("modifyRule.onCbReloaded; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }

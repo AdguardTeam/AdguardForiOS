@@ -16,11 +16,11 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-// Set period for minimum background fetch interval
 import SharedAdGuardSDK
 
 private let LOG = LoggerFactory.getLoggerWrapper(AppDelegate.self)
 
+// Set period for minimum background fetch interval
 extension AppDelegate {
     static func setBackgroundFetchInterval(_ interval: TimeInterval) {
         guard interval >= UIApplication.backgroundFetchIntervalMinimum else {

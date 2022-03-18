@@ -23,13 +23,13 @@ import SafariAdGuardSDK
 import Sentry
 import AGDnsProxy
 
+private let LOG = LoggerFactory.getLoggerWrapper(TunnelProvider.self)
+
 /**
  This object gives access to a virtual network interface
  The main logic of this class is implemented in `DnsAdGuardSDK.PacketTunnelProvider`
  - Seealso https://developer.apple.com/documentation/networkextension/nepackettunnelprovider
  */
-
-private let LOG = LoggerFactory.getLoggerWrapper(TunnelProvider.self)
 
 class TunnelProvider: PacketTunnelProvider {
     static let tunnelRemoteAddress = "127.1.1.1"

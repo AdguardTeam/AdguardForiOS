@@ -2,7 +2,7 @@ import Foundation
 import SwiftyBeaver
 
 /// Logger with specified label
-public final class LoggerWrapper: NSObject {
+public final class LoggerWrapper : NSObject {
     @objc
     let label: String
 

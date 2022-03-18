@@ -60,23 +60,23 @@ extension AppDelegate: IURLSchemeExecutor {
     }
 
     func openUserRulesRedirectController(for action: UserRulesRedirectAction) -> Bool {
-        LOG.info("openUserRulesRedirectController with action = \(action)")
+        LOG.info("Open UserRulesRedirectController with action = \(action)")
         return self.presentUserRulesRedirectController(for: action)
     }
 
     func openMainPageControllerAndTurnOnProtection(for domain: String) -> Bool {
-        LOG.info("openMainPageControllerAndTurnOnProtection for domain=\(domain) ")
+        LOG.info("Open MainPageController and turn on protection for domain=\(domain) ")
         return self.presentMainPageControllerAndTurnOnProtection(for: domain)
     }
 
     func openPurchaseLicenseController() -> Bool {
-        LOG.info("openPurchaseLicenseController")
+        LOG.info("Open PurchaseLicenseController")
         return self.presentPurchaseLicenseController()
     }
 
     func openAdvancedProtectionController(enableAdvancedProtection: Bool?) -> Bool {
         let enabledState = enableAdvancedProtection == nil ? "nil" : "\(enableAdvancedProtection!)"
-        LOG.info("enabledAdvancedProtection = \(enabledState)")
+        LOG.info("Open AdvancedProtectionController = \(enabledState)")
         return self.presentAdvancedProtectionController(enableAdvancedProtection: enableAdvancedProtection)
     }
 }

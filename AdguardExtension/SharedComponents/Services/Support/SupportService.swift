@@ -358,7 +358,6 @@ final class SupportService: SupportServiceProtocol {
         return data
     }
 
-
     private func getDirectoryContentUrls(_ target: URL) throws -> [URL] {
         LOG.debug("Start getting content from \(target)")
         if try target.resourceValues(forKeys: [.isDirectoryKey]).isDirectory == true {

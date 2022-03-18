@@ -28,10 +28,10 @@ struct Context {
     let isJsInjectSupported: Bool
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(ContextProvider.self)
+
 /// This object is responsible for providing extension context
 /// It transforms `NSExtensionContext` into normal readable object `Context`
-
-private let LOG = LoggerFactory.getLoggerWrapper(ContextProvider.self)
 
 struct ContextProvider {
 

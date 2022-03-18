@@ -16,11 +16,11 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-// Handle UserNotificationService notifications
 import SharedAdGuardSDK
 
 private let LOG = LoggerFactory.getLoggerWrapper(AppDelegate.self)
 
+// Handle UserNotificationService notifications
 extension AppDelegate {
     func subscribeToUserNotificationServiceNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(showAlertNotification(notification:)), name: .showCommonAlert, object: nil)

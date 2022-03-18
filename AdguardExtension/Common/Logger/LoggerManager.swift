@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyBeaver
 
-protocol LoggerManager: AnyObject {
+protocol LoggerManager : AnyObject {
 
     var rootLogDirectory: URL { get }
 

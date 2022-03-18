@@ -1,4 +1,4 @@
-public class LoggerFactory: NSObject {
+public class LoggerFactory : NSObject {
 
     @objc
     public static func getLoggerWrapper(_ label: String) -> LoggerWrapper {

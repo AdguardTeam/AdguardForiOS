@@ -19,6 +19,8 @@
 import Foundation
 import SharedAdGuardSDK
 
+private let LOG = LoggerFactory.getLoggerWrapper(ChunkFileReader.self)
+
 /**
  `ChunkFileReader` is responsible for reading file by chunks without fully loading it to RAM,
  because in `SafariWebExtension` we have a limit of 6mb and average file is about 7mb
@@ -43,7 +45,6 @@ import SharedAdGuardSDK
 
  - Important: Don't forget to close file with `close` function after finished reading it
  */
-private let LOG = LoggerFactory.getLoggerWrapper(ChunkFileReader.self)
 
 final class ChunkFileReader {
 

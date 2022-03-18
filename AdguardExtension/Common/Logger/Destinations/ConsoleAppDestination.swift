@@ -3,7 +3,7 @@ import SwiftyBeaver
 import os.log
 
 /// Send log messages to debug console and Console.app
-class ConsoleAppDestination: BaseDestination {
+class ConsoleAppDestination : BaseDestination {
 
     override public var defaultHashValue: Int { return 3 } // We use 3 because we want that 🐣
 

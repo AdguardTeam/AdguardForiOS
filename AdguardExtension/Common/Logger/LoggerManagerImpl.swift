@@ -3,7 +3,7 @@ import SwiftyBeaver
 import AGDnsProxy
 
 /// Manager that create os and file log destinations. Creates and stores labeled loggers
-final class LoggerManagerImpl: LoggerManager {
+final class LoggerManagerImpl : LoggerManager {
 
     var rootLogDirectory: URL
 
