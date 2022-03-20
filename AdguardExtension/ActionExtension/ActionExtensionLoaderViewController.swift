@@ -17,9 +17,13 @@
 //
 
 import UIKit
+import SharedAdGuardSDK
 
 /// This screen is needed to provide a model for `ActionExtensionTableController`
 /// If any error is occured it displays it
+
+private let LOG = LoggerFactory.getLoggerWrapper(ActionExtensionLoaderViewController.self)
+
 final class ActionExtensionLoaderViewController: UIViewController {
 
     // MARK: - UI Elements
@@ -42,7 +46,7 @@ final class ActionExtensionLoaderViewController: UIViewController {
 
         activityIndicator.startAnimating()
 
-        // FIXME: do not stop ui thread. 
+        // FIXME: do not stop ui thread.
         migrateIfNeeded()
 
         configuration.systemAppearenceIsDark = systemStyleIsDark
@@ -60,8 +64,12 @@ final class ActionExtensionLoaderViewController: UIViewController {
                 let isSafariProtectionEnabled = self.isSafariProtectionEnabled(for: context.domain)
                 self.modelToPass = ActionExtensionTableController.Model(context: context, isSafariProtectionEnabled: isSafariProtectionEnabled)
                 self.performSegue(withIdentifier: self.segueId, sender: self)
-            case .failure(let error):
-                self.receivedError(error: error)
+            case .error(let error):
+                if let error = error as? ContextProvider.ContextError {
+                    self.receivedError(error: error)
+                } else {
+                    LOG.error("Can't cast error as 'ContextProvider.ContextError': \(error)")
+                }
             }
         }
     }
@@ -122,7 +130,7 @@ final class ActionExtensionLoaderViewController: UIViewController {
                 migration.migrate()
             }
             catch {
-                DDLogError("(ActionExtensionLoaderViewController) migration failed: \(error)")
+                LOG.error("Migration failed: \(error)")
             }
         }
     }

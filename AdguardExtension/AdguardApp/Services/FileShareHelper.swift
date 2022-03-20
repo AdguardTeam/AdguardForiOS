@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
 
 /// FileShareHelper is reponsible for exporting and importing files to Files App
 protocol FileShareHelperProtocol {
@@ -24,12 +25,14 @@ protocol FileShareHelperProtocol {
     func exportFile(for vc: UIViewController, filename: String, text: String)
 
     /// imports text from Files App. Returns @text of imported file as a string in callback
-    func importFile(for vc: UIViewController, _ completion: @escaping (Result<String, Error>) -> Void)
+    func importFile(for vc: UIViewController, _ completion: @escaping (Result<String>) -> Void)
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(FileShareHelper.self)
 
 final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelperProtocol {
 
-    private var importCompletion: ((Result<String, Error>) -> Void)?
+    private var importCompletion: ((Result<String>) -> Void)?
 
     func exportFile(for vc: UIViewController, filename: String, text: String) {
         let tmp = FileManager.default.temporaryDirectory.appendingPathComponent(filename)
@@ -47,11 +50,11 @@ final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelper
             vc.present(activityVC, animated: true, completion: nil)
         }
         catch {
-            DDLogError("(FileShareHelper) - exportFile; Error: \(error)")
+            LOG.error("exportFile; Error: \(error)")
         }
     }
 
-    func importFile(for vc: UIViewController, _ completion: @escaping (Result<String, Error>) -> Void) {
+    func importFile(for vc: UIViewController, _ completion: @escaping (Result<String>) -> Void) {
         let controller = UIDocumentPickerViewController(documentTypes: ["public.text"], in: .open)
         controller.popoverPresentationController?.sourceView = vc.view
         controller.popoverPresentationController?.sourceRect = vc.view.frame
@@ -74,8 +77,8 @@ final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelper
             importCompletion?(.success(text))
         }
         catch {
-            DDLogError("(FileShareHelper) - documentPicker; Error: \(error)")
-            importCompletion?(.failure(error))
+            LOG.error("documentPicker; Error: \(error)")
+            importCompletion?(.error(error))
         }
     }
 }

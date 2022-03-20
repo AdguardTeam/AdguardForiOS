@@ -19,6 +19,8 @@
 import SharedAdGuardSDK
 import DnsAdGuardSDK
 
+private let LOG = LoggerFactory.getLoggerWrapper(DnsUserRulesTableModel.self)
+
 final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
 
     // MARK: - Internal properties
@@ -121,7 +123,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
             modelProvider.modifyRule(rule, newRule: newRule)
         }
         catch {
-            DDLogError("(DnsUserRulesTableModel) - ruleStateChanged; Error: \(error)")
+            LOG.error("Error: \(error)")
         }
     }
 
@@ -183,7 +185,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
                 self?.delegate?.importWillStart()
                 self?.addNewRulesAfterImport(text, completion)
                 self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
-            case .failure(let error):
+            case .error(let error):
                 completion(error)
             }
         }

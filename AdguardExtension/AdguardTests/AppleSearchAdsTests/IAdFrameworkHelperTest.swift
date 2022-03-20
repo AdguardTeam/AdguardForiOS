@@ -38,7 +38,7 @@ class IAdFrameworkHelperTest: XCTestCase {
             case .success(let json):
                 XCTAssertFalse(json.isEmpty)
                 XCTAssertEqual(json, self.adClientWrapper.attributionRecords as! [String: String])
-            case .failure(let error): XCTFail("\(error)")
+            case .error(let error): XCTFail("\(error)")
             }
         }
 
@@ -51,7 +51,7 @@ class IAdFrameworkHelperTest: XCTestCase {
         helper.fetchAttributionRecords { records in
             switch records {
             case .success(_): XCTFail()
-            case .failure(let error):
+            case .error(let error):
                 XCTAssertEqual(error as! AppleSearchAdsService.AdsError,
                                AppleSearchAdsService.AdsError.missingAttributionData)
             }
@@ -66,11 +66,11 @@ class IAdFrameworkHelperTest: XCTestCase {
         helper.fetchAttributionRecords { records in
             switch records {
             case .success(_): XCTFail()
-            case .failure(let error):
+            case .error(let error):
                 XCTAssertEqual(error as NSError, self.testError)
             }
         }
-        
+
         XCTAssertEqual(adClientWrapper.invokedRequestAttributionDetailsCount, 1)
     }
 }

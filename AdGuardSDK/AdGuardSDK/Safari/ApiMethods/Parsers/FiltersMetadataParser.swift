@@ -18,13 +18,15 @@
 
 import SharedAdGuardSDK
 
+private let LOG = LoggerFactory.getLoggerWrapper(FiltersMetadataParser.self)
+
 /// Parser to parse data from `FiltersMetadataRequest` and returns `ExtendedFiltersMeta`
 struct FiltersMetadataParser: ParserProtocol {
     typealias Model = ExtendedFiltersMeta
 
     func parse(data: Data, response: URLResponse?) -> Model? {
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            Logger.logError("(FiltersMetadataParser) bad response")
+            LOG.error("Bad response")
             return nil
         }
 

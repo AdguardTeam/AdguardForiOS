@@ -22,6 +22,8 @@ import SafariAdGuardSDK
 import SharedAdGuardSDK
 import DnsAdGuardSDK
 
+private let LOG = LoggerFactory.getLoggerWrapper(TodayViewController.self)
+
 class TodayViewController: UIViewController, NCWidgetProviding {
 
     @IBOutlet weak var height: NSLayoutConstraint!
@@ -67,28 +69,22 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     private var timer: Timer?
 
-    // MARK: View Controller lifecycle
-
     required init?(coder: NSCoder) {
-        Self.initLogger(with: resources)
-        DDLogInfo("(TodayViewController) - init start")
-
-        // Services initialising
-        do {
-            self.serviceInitializer = try ServiceInitializer(resources: resources)
-        } catch {
-            DDLogError("(TodayViewController) - init; error - \(error)")
+        guard let serviceInitializer = ServiceInitializer() else {
+            LOG.error("ServiceInitializer is missing")
             return nil
         }
+        LOG.info("Init start")
+        self.serviceInitializer = serviceInitializer
 
         super.init(coder: coder)
 
-        DDLogInfo("(TodayViewController) - init end")
+        LOG.info("Init end")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        DDLogInfo("(TodayViewController) - viewDidLoad")
+        LOG.info("viewDidLoad")
 
         height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
 
@@ -100,12 +96,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     // MARK: - NCWidgetProviding methods
 
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        DDLogInfo("(TodayViewController) - widgetPerformUpdate start")
+        LOG.info("widgetPerformUpdate start")
         setColorsToLabels()
         updateWidgetSafari()
         updateWidgetSystem()
         updateWidgetComplex()
-        DDLogInfo("(TodayViewController) - widgetPerformUpdate end")
+        LOG.info("widgetPerformUpdate end")
         completionHandler(NCUpdateResult.newData)
     }
 
@@ -130,9 +126,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let enabled = sender.isOn
         serviceInitializer.complexProtection.switchSafariProtection(state: enabled, for: self) { (error) in
             if error != nil {
-                DDLogError("Error invalidating json from Today Extension")
+                LOG.error("Error invalidating json from Today Extension")
             } else {
-                DDLogInfo("Successfull invalidating of json from Today Extension")
+                LOG.info("Successfull invalidating of json from Today Extension")
             }
         }
 
@@ -177,11 +173,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         if let url = URL(string: openSystemProtectionUrl){
             extensionContext?.open(url, completionHandler: { (success) in
                 if !success {
-                    DDLogError("Error redirecting to app from Today Extension")
+                    LOG.error("Error redirecting to app from Today Extension")
                 }
             })
         } else {
-            DDLogError("Error redirecting to app from Today Extension")
+            LOG.error("Error redirecting to app from Today Extension")
         }
     }
 
@@ -355,32 +351,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
             let averageElapsed = requestsNumber == 0 ? 0 : Double(elapsedSumm) / Double(requestsNumber)
             self.elapsedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
-            
+
             // TODO: change this to use requestsLabelTxt/encryptedLabelTxt later (requires new localized string)
             self.complexStatisticsLabel.text = String(format: String.localizedString("widget_statistics"), requestsNumber, encryptedNumber)
-        }
-    }
-
-    /// Initializes logger
-    private static func initLogger(with resources: AESharedResourcesProtocol) {
-        // TODO: refactor, everywhere is the same code
-        // Init Logger
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-
-        let isDebugLogs = resources.isDebugLogs
-        DDLogInfo("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-
-        Logger.logInfo = { msg in
-            DDLogInfo(msg)
-        }
-
-        Logger.logDebug = { msg in
-            DDLogDebug(msg)
-        }
-
-        Logger.logError = { msg in
-            DDLogError(msg)
         }
     }
 }

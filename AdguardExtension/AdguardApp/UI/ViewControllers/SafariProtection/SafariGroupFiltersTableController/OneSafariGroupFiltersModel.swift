@@ -33,6 +33,8 @@ protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSo
     func setup(tableView: UITableView)
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(OneSafariGroupFiltersModel.self)
+
 // TODO: - We should change the order of the filters
 // For more info about filters order implementation look up `UserRulesModelsProvider`
 
@@ -148,7 +150,7 @@ extension OneSafariGroupFiltersModel {
         reinit()
 
         guard let newFilterMeta = group.filters.first(where: { $0.filterId == filterId }) else {
-            assertionFailure("group should contain filter with filterId=\(filterId)")
+            assertionFailure("Group should contain filter with filterId=\(filterId)")
             throw CommonError.missingData
         }
         return newFilterMeta
@@ -162,7 +164,7 @@ extension OneSafariGroupFiltersModel {
             }
         } onCbReloaded: { error in
             if let error = error {
-                DDLogError("(OneSafariGroupFiltersModel) - addCustomFilter; Reload CB error when adding custom filter with url=\(meta.filterDownloadPage ?? "nil"); Error: \(error)")
+                LOG.error("Reload CB error when adding custom filter with url=\(meta.filterDownloadPage ?? "nil"); Error: \(error)")
             }
         }
     }
@@ -171,7 +173,7 @@ extension OneSafariGroupFiltersModel {
         try safariProtection.renameCustomFilter(withId: filterId, to: newName)
         reinit()
         guard let newFilterMeta = group.filters.first(where: { $0.filterId == filterId }) else {
-            assertionFailure("group should contain filter with filterId=\(filterId)")
+            assertionFailure("Group should contain filter with filterId=\(filterId)")
             throw CommonError.missingData
         }
         return newFilterMeta
@@ -185,7 +187,7 @@ extension OneSafariGroupFiltersModel {
         do {
             _ = try setFilter(with: groupType.id, filterId: filterId, enabled: newState)
         } catch {
-            DDLogError("(OneSafariGroupFiltersModel) - safariFilterStateChanged; Error changing safari filter state; Error: \(error)")
+            LOG.error("Error changing safari filter state; Error: \(error)")
         }
     }
 
@@ -201,12 +203,12 @@ extension OneSafariGroupFiltersModel {
         guard let newModel = newModel as? StateHeaderViewModel<SafariGroup.GroupType> else { return }
 
         let groupType = newModel.id
-        DDLogInfo("(OneSafariGroupFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
+        LOG.info("Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
 
         do {
             try safariProtection.setGroup(groupType: groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
         } catch {
-            DDLogError("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
+            LOG.error("DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
         }
 
         groupModel = StateHeaderViewModel(
@@ -229,7 +231,7 @@ extension OneSafariGroupFiltersModel {
             let index = addButtonIsDisplayed ? indexPath.row - 1 : indexPath.row
             let filterId = filtersModels[index].filterId
             guard let filter = group.filters.first(where: { $0.filterId == filterId }) else {
-                assertionFailure("group should contain filter with filterId=\(filterId)")
+                assertionFailure("Group should contain filter with filterId=\(filterId)")
                 return
             }
             delegate?.filterTapped(filter)

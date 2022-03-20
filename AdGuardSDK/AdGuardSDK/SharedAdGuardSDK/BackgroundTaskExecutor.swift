@@ -17,6 +17,9 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
+
+private let LOG = LoggerFactory.getLoggerWrapper(BackgroundTaskExecutor.self)
 
 /// This object is responsible for executing tasks that can be continued in background
 /// Usually iOS gives us 30 seconds to complete such tasks
@@ -27,7 +30,7 @@ public final class BackgroundTaskExecutor {
         ProcessInfo().performExpiringActivity(withReason: reason) { expired in
             if expired {
                 // TODO: this does not help much since iOS will still kill the app if the task is still in progress.
-                Logger.logInfo("(BackgroundTaskExecutor) - executeSynchronousTask; Task with reason=\(reason) has expired")
+                LOG.info("Task with reason=\(reason) has expired")
             } else {
                 blockToExecute()
             }
@@ -40,9 +43,9 @@ public final class BackgroundTaskExecutor {
         ProcessInfo().performExpiringActivity(withReason: reason) { expired in
             if expired {
                 // TODO: this does not help much since iOS will still kill the app if the task is still in progress.
-                Logger.logInfo("(BackgroundTaskExecutor) - executeAsynchronousTask; Task with reason=\(reason) has expired")
+                LOG.info("Task with reason=\(reason) has expired")
             } else {
-                Logger.logInfo("(BackgroundTaskExecutor) - executeAsynchronousTask; Task with reason=\(reason) has started")
+                LOG.info("Task with reason=\(reason) has started")
                 let group = DispatchGroup()
                 group.enter()
 
@@ -51,7 +54,7 @@ public final class BackgroundTaskExecutor {
                 }
 
                 group.wait()
-                Logger.logInfo("(BackgroundTaskExecutor) - executeAsynchronousTask; Task with reason=\(reason) has finished")
+                LOG.info("Task with reason=\(reason) has finished")
             }
         }
 #endif

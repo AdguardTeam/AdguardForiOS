@@ -18,6 +18,9 @@
 
 import UIKit
 import MobileCoreServices
+import SharedAdGuardSDK
+
+private let LOG = LoggerFactory.getLoggerWrapper(YouTubeAdsRequestHandler.self)
 
 /// Handler that can process 2 cases:
 /// - The YouTube link has been shared from the browser
@@ -37,10 +40,11 @@ class YouTubeAdsRequestHandler : UINavigationController {
         let resources = AESharedResources()
 
         // Init Logger
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
         let isDebugLogs = resources.isDebugLogs
-        DDLogInfo("(YouTubeAdsRequestHandler) Start with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        let logLevel: LogLevel = isDebugLogs ? .debug : .info
+        logManager.configure(logLevel)
+        LOG.info("Start with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
     }
 
     override func beginRequest(with context: NSExtensionContext) {
@@ -49,15 +53,15 @@ class YouTubeAdsRequestHandler : UINavigationController {
         extensionContext?.handleInputItem({ [weak self] jsResult in
             if let result = jsResult {
                 self?.notifications.postNotificationWithoutBadge(title: nil, body: result.status.title, onNotificationSent: {
-                    DDLogInfo("(YouTubeAdsRequestHandler) js finished with result: \(result)")
+                    LOG.info("Js finished with result: \(result)")
                     self?.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
                 })
             } else {
-                DDLogInfo("(YouTubeAdsRequestHandler) js finished, result is nil")
+                LOG.info("Js finished, result is nil")
                 self?.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
             }
         }) { [weak self] youTubeShareLinkResult in
-            DDLogInfo("(YouTubeAdsRequestHandler) result of youtube app share link handling: \(youTubeShareLinkResult.messageForLog)")
+            LOG.info("Result of youtube app share link handling: \(youTubeShareLinkResult.messageForLog)")
             guard let videoId = youTubeShareLinkResult.videoId else {
                 self?.finish(withError: youTubeShareLinkResult.sharingLinkError)
                 return
@@ -67,7 +71,7 @@ class YouTubeAdsRequestHandler : UINavigationController {
                 let playerController = YoutubePlayerController(videoId: videoId)
                 self?.viewControllers.append(playerController)
             }
-        } ?? DDLogInfo("(YouTubeAdsRequestHandler) Failed to access extensionContext")
+        } ?? LOG.info("Failed to access extensionContext")
     }
 
     @objc private func openURL(_ url: URL) {
@@ -113,19 +117,19 @@ fileprivate extension NSExtensionContext {
         itemProvider.loadItem(forTypeIdentifier: String(kUTTypePropertyList), options: nil) { results, error in
 
             if let error = error {
-                DDLogError("(YouTubeAdsRequestHandler) Error: \(error)")
+                LOG.error("Error: \(error)")
                 onJsExecuted(nil)
                 return
             }
 
             guard let jsResultDict = results as? [String: Any] else {
-                DDLogError("(YouTubeAdsRequestHandler) Error - result dict incorrect. Results: \(results.debugDescription )")
+                LOG.error("Error - result dict incorrect. Results: \(results.debugDescription )")
                 onJsExecuted(nil)
                 return
             }
 
             guard let youTubeAdsJsResultDict = jsResultDict[NSExtensionJavaScriptPreprocessingResultsKey] as? [String: Any] else {
-                DDLogError("(YouTubeAdsRequestHandler) Error - can not get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(results.debugDescription )")
+                LOG.error("Error - can not get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(results.debugDescription )")
                 onJsExecuted(nil)
                 return
             }

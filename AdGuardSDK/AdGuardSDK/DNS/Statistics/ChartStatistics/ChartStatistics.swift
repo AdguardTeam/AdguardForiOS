@@ -41,6 +41,8 @@ public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
     func getPoints(for chartType: ChartType, for period: StatisticsPeriod, pointsCount: Int) throws -> ChartRecords
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(ChartStatistics.self)
+
 /// This object is responsible for managing statistics that is used to build charts
 final public class ChartStatistics: ChartStatisticsProtocol {
 
@@ -92,7 +94,7 @@ final public class ChartStatistics: ChartStatisticsProtocol {
             try add(record: record)
             try compressTableIfNeeded()
         } catch {
-            Logger.logError("(ChartStatistics) - processRecord; Error adding record to DB; Error: \(error)")
+            LOG.error("Error adding record to DB; Error: \(error)")
         }
     }
 
@@ -102,7 +104,7 @@ final public class ChartStatistics: ChartStatisticsProtocol {
      This method will return records sorted by `timeStamp` in ascending order
      */
     func getRecords(for period: StatisticsPeriod) throws -> [ChartStatisticsRecord] {
-        Logger.logDebug("(ChartStatistics) - getRecords for period=\(period.debugDescription)")
+        LOG.debug("getRecords for period=\(period.debugDescription)")
 
         let interval = period.interval
         let query = ChartStatisticsTable.table
@@ -112,13 +114,13 @@ final public class ChartStatistics: ChartStatisticsProtocol {
             ChartStatisticsRecord(dbRecord: $0)
         }
 
-        Logger.logDebug("(ChartStatistics) - getRecords; Return \(records.count) records for period=\(period.debugDescription)")
+        LOG.debug("Return \(records.count) records for period=\(period.debugDescription)")
 
         return records
     }
 
     public func getPoints(for chartType: ChartType, for period: StatisticsPeriod, pointsCount: Int) throws -> ChartRecords {
-        Logger.logDebug("(ChartStatistics) - getPoints for chartType=\(chartType) for period=\(period.debugDescription)")
+        LOG.debug("getPoints for chartType=\(chartType) for period=\(period.debugDescription)")
 
         /// Intervals for points. Each interval will contain 1 aggregated point
         let intervals = chartIntervals(for: period, intervalsCount: pointsCount)
@@ -148,18 +150,18 @@ final public class ChartStatistics: ChartStatisticsProtocol {
             }
         }
 
-        Logger.logDebug("(ChartStatistics) - getPoints for chartType=\(chartType) for period=\(period.debugDescription) returning \(points.count) points")
+        LOG.debug("getPoints for chartType=\(chartType) for period=\(period.debugDescription) returning \(points.count) points")
         return ChartRecords(chartType: chartType, points: points)
     }
 
     /// Removes all records from the table
     public func reset() throws {
-        Logger.logInfo("(ChartStatistics) - reset called")
+        LOG.info("Reset called")
 
         let resetQuery = ChartStatisticsTable.table.delete()
         try statisticsDb.run(resetQuery)
 
-        Logger.logInfo("(ChartStatistics) - reset successfully finished")
+        LOG.info("Reset successfully finished")
     }
 
     // MARK: - Private methods

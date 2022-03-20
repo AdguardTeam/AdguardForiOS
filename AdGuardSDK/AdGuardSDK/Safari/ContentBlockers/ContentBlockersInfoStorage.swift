@@ -90,6 +90,8 @@ protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
     func getJsonUrl(for cbType: ContentBlockerType) -> URL
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(ContentBlockersInfoStorage.self)
+
 /* This class is responsible for managing JSON files for every content blocker */
 final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
 
@@ -127,7 +129,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
             throw CommonError.error(message: "Received \(converterResults.count) results, but expecting \(ContentBlockerType.allCases.count)")
         }
 
-        Logger.logInfo("(ContentBlockersInfoStorage) - save cbJsons; Trying to save \(converterResults.count) jsons")
+        LOG.info("Trying to save \(converterResults.count) jsons")
 
         let result: [ConverterResult] = try converterResults.map {
             let urlToSave = getJsonUrl(for: $0.type)
@@ -139,13 +141,13 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     }
 
     func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult? {
-        Logger.logInfo("(ContentBlockersInfoStorage) - getConverterResult; Result request for \(cbType)")
+        LOG.info("Result request for \(cbType)")
         let allResults = userDefaultsStorage.allCbInfo
         return allResults.first(where: { $0.type == cbType })
     }
 
     func reset() throws {
-        Logger.logInfo("(ContentBlockersInfoStorage) - reset start")
+        LOG.info("Reset start")
 
         // Remove all converted JSON fils
         try fileManager.removeItem(at: jsonStorageUrl)
@@ -156,7 +158,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         // Clear user defaults
         userDefaultsStorage.allCbInfo = []
 
-        Logger.logInfo("(ContentBlockersInfoStorage) - reset; Successfully deleted directory with CBs JSONs")
+        LOG.info("Successfully deleted directory with CBs JSONs")
     }
 
     func getJsonUrl(for cbType: ContentBlockerType) -> URL {
@@ -166,7 +168,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     // MARK: - Private methods
 
     private func saveAdvancedRules(from results: [FiltersConverterResult]) throws {
-        Logger.logInfo("(ContentBlockersInfoStorage) - saveAdvancedRules; start")
+        LOG.info("saveAdvancedRules; start")
 
         // Remove duplicates from the rules.
         // Note that we persist the rules order (it is very important for interpreting them in the Web Extension).
@@ -187,7 +189,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
 
         try uniqueRulesText.write(to: advancedRulesFileUrl, atomically: true, encoding: .utf8)
         userDefaultsStorage.advancedRulesCount = rules.count
-        Logger.logInfo("(ContentBlockersInfoStorage) - saveAdvancedRules; finished saving \(rules.count) rules")
+        LOG.info("Finished saving \(rules.count) rules")
     }
 }
 

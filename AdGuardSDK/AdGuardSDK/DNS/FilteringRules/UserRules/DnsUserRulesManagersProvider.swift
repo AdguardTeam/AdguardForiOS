@@ -23,6 +23,8 @@ protocol DnsUserRulesManagersProviderProtocol: ResetableSyncProtocol {
     var allowlistRulesManager: UserRulesManagerProtocol { get }
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(DnsUserRulesManagersProvider.self)
+
 final class DnsUserRulesManagersProvider: DnsUserRulesManagersProviderProtocol {
     let blocklistRulesManager: UserRulesManagerProtocol
     let allowlistRulesManager: UserRulesManagerProtocol
@@ -41,11 +43,11 @@ final class DnsUserRulesManagersProvider: DnsUserRulesManagersProviderProtocol {
     }
 
     func reset() throws {
-        Logger.logInfo("(UserRulesManagersProvider) - reset start")
+        LOG.info("Reset start")
 
         try blocklistRulesManager.reset()
         try allowlistRulesManager.reset()
 
-        Logger.logInfo("(UserRulesManagersProvider) - reset; Successfully reset all user rules managers")
+        LOG.info("Successfully reset all user rules managers")
     }
 }

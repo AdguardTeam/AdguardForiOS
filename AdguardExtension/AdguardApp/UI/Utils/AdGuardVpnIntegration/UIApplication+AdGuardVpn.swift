@@ -17,6 +17,9 @@
 //
 
 import UIKit
+import SharedAdGuardSDK
+
+private let LOG = LoggerFactory.getLoggerWrapper(UIApplication.self)
 
 extension UIApplication {
 
@@ -61,7 +64,7 @@ extension UIApplication {
     static func openAdGuardVpnAppIfInstalled() {
         let appUrl = URL(string: "\(adguardVpnScheme)://")!
         if shared.canOpenURL(appUrl) {
-            DDLogInfo("AdGuard VPN is installed, open it now")
+            LOG.info("AdGuard VPN is installed, open it now")
             shared.open(appUrl)
         }
     }

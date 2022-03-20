@@ -16,22 +16,20 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "ACLFileLogger.h"
+import Foundation
+import AGDnsProxy
 
-@interface DDFileLogger (internal)
-
-- (NSFileHandle *)currentLogFileHandle;
-
-@end
-
-@implementation ACLFileLogger
-
-- (void)flush{
-    @try {
-        [super flush];
+extension LoggerManager {
+    func configureDnsLibsLogLevel(_ logLevel: LogLevel) {
+        AGLogger.setup(convertToDnsLibLogLevel(logLevel))
     }
-    @catch (NSException *exception) {
+
+    private func convertToDnsLibLogLevel(_ level: LogLevel) -> AGLogLevel {
+        switch (level) {
+            case .info:     return .AGLL_INFO
+            case .warn:     return .AGLL_WARN
+            case .error:    return .AGLL_ERR
+            case .debug:    return .AGLL_TRACE
+        }
     }
 }
-
-@end

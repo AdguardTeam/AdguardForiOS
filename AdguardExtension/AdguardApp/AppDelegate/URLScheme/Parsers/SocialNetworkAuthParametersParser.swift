@@ -16,6 +16,10 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
+import SharedAdGuardSDK
+
+private let LOG = LoggerFactory.getLoggerWrapper(SocialNetworkAuthParametersParser.self)
+
 struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
     private let socialErrorUserNotFound = "user_not_found"
@@ -40,7 +44,7 @@ struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
 
     private func socialLoginErrorProcessor(error: String) {
         var userInfo = [AnyHashable: Any]()
-        DDLogInfo("(URLSchemeProcessor) Social login error: \(error)")
+        LOG.info("Social login error: \(error)")
         switch error {
         case socialErrorUserNotFound:
             userInfo[PurchaseAssistant.kPSNotificationTypeKey] = PurchaseAssistant.kPSNotificationLoginUserNotFound

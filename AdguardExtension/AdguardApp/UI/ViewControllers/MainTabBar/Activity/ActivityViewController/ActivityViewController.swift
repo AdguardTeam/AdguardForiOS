@@ -18,11 +18,14 @@
 
 import UIKit
 import DnsAdGuardSDK
+import SharedAdGuardSDK
 
 protocol ActivityViewControllerDelegate: AnyObject {
     func hideTitle()
     func showTitle()
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(ActivityViewController.self)
 
 final class ActivityViewController: UITableViewController {
 
@@ -321,7 +324,7 @@ final class ActivityViewController: UITableViewController {
             alert.dismiss(animated: true, completion: nil)
             self?.requestsModel?.clearRecords()
             let resetResult = self?.settingsReset.resetDnsLogStatistics()
-            DDLogInfo("(ActivityViewController) - showResetAlert; DNS log statistics reseted successfully = \(resetResult ?? false)")
+            LOG.info("DNS log statistics reseted successfully = \(resetResult ?? false)")
         }
 
         alert.addAction(yesAction)

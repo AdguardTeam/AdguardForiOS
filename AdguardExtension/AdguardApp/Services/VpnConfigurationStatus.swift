@@ -17,6 +17,9 @@
 //
 
 import NetworkExtension
+import SharedAdGuardSDK
+
+private let LOG = LoggerFactory.getLoggerWrapper(VpnConfigurationState.self)
 
 enum VpnConfigurationState: CustomStringConvertible {
     case enabled, connecting, disconnecting, disabled
@@ -39,7 +42,7 @@ enum VpnConfigurationState: CustomStringConvertible {
         case .invalid: self = .disabled
         case .reasserting: self = .connecting
         @unknown default:
-            DDLogError("Unknown NEVPNStatus case")
+            LOG.error("Unknown NEVPNStatus case")
             self = .disabled
         }
     }

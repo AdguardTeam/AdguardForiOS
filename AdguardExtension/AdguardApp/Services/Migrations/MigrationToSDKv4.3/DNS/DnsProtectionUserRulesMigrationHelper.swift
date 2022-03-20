@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
 
 /// This object is a helper for `SDKMigrationServiceHelper`
 /// It is responsible for providing DNS allowlist and blocklist rules migration
@@ -28,6 +29,8 @@ protocol DnsProtectionUserRulesMigrationHelperProtocol: AnyObject {
     /// Removes files where DNS allowlist and blocklist rules used to be saved
     func removeOldDnsUserRulesFiles() throws
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProtectionUserRulesMigrationHelper.self)
 
 /// Implementation of `DnsProtectionUserRulesMigrationHelperProtocol`
 final class DnsProtectionUserRulesMigrationHelper: DnsProtectionUserRulesMigrationHelperProtocol {
@@ -60,17 +63,17 @@ final class DnsProtectionUserRulesMigrationHelper: DnsProtectionUserRulesMigrati
         allRulesAllowlist = 10004
      */
     func moveOldDnsUserRulesToNewFiles() throws {
-        DDLogInfo("(DnsProtectionUserRulesMigrationHelper) - moveOldDnsUserRulesToNewFiles; Migrating DNS blocklist rules")
+        LOG.info("Migrating DNS blocklist rules")
         try migrateBlocklistRules()
-        DDLogInfo("(DnsProtectionUserRulesMigrationHelper) - moveOldDnsUserRulesToNewFiles; Migrated DNS blocklist rules")
+        LOG.info("Migrated DNS blocklist rules")
 
-        DDLogInfo("(DnsProtectionUserRulesMigrationHelper) - moveOldDnsUserRulesToNewFiles; Migrating DNS allowlist rules")
+        LOG.info("Migrating DNS allowlist rules")
         try migrateAllowlistRules()
-        DDLogInfo("(DnsProtectionUserRulesMigrationHelper) - moveOldDnsUserRulesToNewFiles; Migrated DNS allowlist rules")
+        LOG.info("Migrated DNS allowlist rules")
     }
 
     func removeOldDnsUserRulesFiles() throws {
-        DDLogInfo("(DnsProtectionUserRulesMigrationHelper) - removeOldDnsUserRulesFiles; Removing old DNS user rules files")
+        LOG.info("Removing old DNS user rules files")
 
         let oldDnsBlocklistFileUrl = oldDnsUserRulesContainerFolderUrl.appendingPathComponent("dns_filter_1.txt")
         let oldDnsAllowlistFileUrl = oldDnsUserRulesContainerFolderUrl.appendingPathComponent("dns_filter_2.txt")
@@ -83,7 +86,7 @@ final class DnsProtectionUserRulesMigrationHelper: DnsProtectionUserRulesMigrati
             try FileManager.default.removeItem(at: oldDnsAllowlistFileUrl)
         }
 
-        DDLogInfo("(DnsProtectionUserRulesMigrationHelper) - removeOldDnsUserRulesFiles; Removed old DNS user rules files")
+        LOG.info("Removed old DNS user rules files")
     }
 
     // MARK: - Private methods

@@ -24,6 +24,8 @@ protocol DnsMigration4_3Protocol {
     func migrate()
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(DnsMigration4_3.self)
+
 class DnsMigration4_3: DnsMigration4_3Protocol {
 
     private let resources: AESharedResourcesProtocol
@@ -64,10 +66,10 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
 
     func migrate() {
 
-        Logger.logInfo("(DnsMigration4_3) migrate called")
+        LOG.info("Migrate called")
         switch stateManager.state {
         case .notStarted:
-            Logger.logInfo("(DnsMigration4_3) start migration")
+            LOG.info("Start migration")
             stateManager.start()
 
             do {
@@ -75,24 +77,24 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
                 try migrateDnsStatistics()
                 stateManager.finish()
 
-                Logger.logInfo("(DnsMigration4_3) migration succeeded")
+                LOG.info("Migration succeeded")
             }
             catch {
-                Logger.logError("(DnsMigration4_3) failure: \(error)")
+                LOG.error("Failure: \(error)")
                 stateManager.failure()
             }
 
         case .finished:
-            Logger.logInfo("(DnsMigration4_3) allready migrated")
+            LOG.info("Allready migrated")
             return
         case .started:
 
-            Logger.logInfo("(DnsMigration4_3) allready started. Wait for finish.")
+            LOG.info("Allready started. Wait for finish.")
             // wait for finish
             let group = DispatchGroup()
             group.enter()
             stateManager.onMigrationFinished {
-                Logger.logInfo("(DnsMigration4_3) migration finished")
+                LOG.info("Migration finished")
                 group.leave()
             }
 
@@ -100,7 +102,7 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
             // TODO: - Refactor it later
             let waitResult = group.wait(timeout: .now() + 10.0)
 
-            Logger.logInfo("(DnsMigration4_3) the wait is over; waitResult successeeded=\(waitResult == .success)")
+            LOG.info("The wait is over; waitResult successeeded=\(waitResult == .success)")
             return
         }
     }

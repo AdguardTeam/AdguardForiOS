@@ -18,6 +18,7 @@
 
 import DnsAdGuardSDK
 import UIKit
+import SharedAdGuardSDK
 
 protocol ChartViewModelDelegate: AnyObject {
     func numberOfRequestsChanged(with points: (requests: [CGPoint], encrypted: [CGPoint]),
@@ -34,6 +35,8 @@ protocol ChartViewModelProtocol {
     var delegate: ChartViewModelDelegate? { get set }
     func chartViewSizeChanged(frame: CGRect)
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(ChartViewModel.self)
 
 final class ChartViewModel: ChartViewModelProtocol {
     private struct ChartPoints {
@@ -52,7 +55,7 @@ final class ChartViewModel: ChartViewModelProtocol {
             let record = try activityStatistics.getCounters(for: statisticsPeriod)
             return record
         } catch {
-            DDLogError("(ChartViewModel) statisticsInfo; getCounters return error: \(error)")
+            LOG.error("getCounters return error: \(error)")
             return CountersStatisticsRecord.emptyRecord()
         }
     }
@@ -166,7 +169,7 @@ final class ChartViewModel: ChartViewModelProtocol {
         guard requestsPoints.count == encryptedPoints.count,
               !requestsPoints.isEmpty
                 else {
-            DDLogWarn("(ChartViewModel) findMaxElements; Number of requests points not equal to number of encrypted points or points number is zero")
+            LOG.warn("Number of requests points not equal to number of encrypted points or points number is zero")
             return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
         }
 
@@ -228,7 +231,7 @@ final class ChartViewModel: ChartViewModelProtocol {
     // Return modified points
     private func modifyPoints(points: ChartPoints) -> ChartPoints {
         guard points.requestsPoints.count == points.encryptedPoints.count, !points.requestsPoints.isEmpty else {
-            DDLogWarn("(ChartViewModel) modifyCGPoints;  Number of requests points not equal to number of encrypted points or points number is zero")
+            LOG.warn("Number of requests points not equal to number of encrypted points or points number is zero")
             return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
         }
 

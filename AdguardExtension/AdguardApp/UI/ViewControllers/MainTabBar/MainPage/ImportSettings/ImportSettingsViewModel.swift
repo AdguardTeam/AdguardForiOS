@@ -18,6 +18,7 @@
 
 import SafariAdGuardSDK
 import DnsAdGuardSDK
+import SharedAdGuardSDK
 
 enum ImportRowType {
     case cbFilter
@@ -62,6 +63,8 @@ protocol ImportSettingsViewModelProtocol {
     func setState(_ state: Bool, forRow: Int)
     func applySettings(callback: @escaping ()->Void)
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(ImportSettingsViewModel.self)
 
 class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
 
@@ -248,7 +251,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
                 row.title = String(format: format, name)
             }
             else {
-                DDLogError("unknown filter")
+                LOG.error("Unknown filter")
             }
 
             row.imported = imported

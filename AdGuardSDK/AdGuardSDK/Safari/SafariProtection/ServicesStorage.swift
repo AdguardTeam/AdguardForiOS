@@ -28,6 +28,8 @@ protocol ServicesStorageProtocol {
     var converter: FiltersConverterServiceProtocol { get }
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(ServicesStorage.self)
+
 final class ServicesStorage: ServicesStorageProtocol {
 
     let configuration: SafariConfigurationProtocol
@@ -44,7 +46,7 @@ final class ServicesStorage: ServicesStorageProtocol {
          userDefaults: UserDefaults,
          jsonStorageUrl: URL) throws
     {
-        Logger.logInfo("(ServicesStorage) - init start")
+        LOG.info("Init start")
 
         let filterFilesStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterFilesDirectoryUrl)
         try filterFilesStorage.unzipPredefinedFiltersIfNeeded()
@@ -82,6 +84,6 @@ final class ServicesStorage: ServicesStorageProtocol {
             filtersConverter: filtersConverter
         )
 
-        Logger.logInfo("(ServicesStorage) - init end")
+        LOG.info("Init end")
     }
 }

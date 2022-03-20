@@ -19,6 +19,8 @@
 import SafariAdGuardSDK
 import SharedAdGuardSDK
 
+private let LOG = LoggerFactory.getLoggerWrapper(ServicesInitializer.self)
+
 /// Singleton to quikcly get different services objects and remove initialization logic from view controllers
 final class ServicesInitializer {
 
@@ -38,14 +40,14 @@ final class ServicesInitializer {
         let appPath = Bundle.main.bundlePath as NSString
         let fullPath = appPath.appendingPathComponent("../../") as String
         guard let bundle = Bundle(path: fullPath), let path = bundle.path(forResource: "defaults", ofType: "plist") else {
-            DDLogError("(ServicesInitializer) - wrong appPath");
+            LOG.error("Wrong appPath");
             throw CommonError.missingFile(filename: fullPath)
         }
         if let defs = NSDictionary(contentsOfFile: path) as? [String: Any] {
-            DDLogInfo("(ServicesInitializer) - default.plist loaded!")
+            LOG.info("default.plist loaded!")
             resources.sharedDefaults().register(defaults: defs)
         } else {
-            DDLogError("(ServicesInitializer) - default.plist was not loaded.")
+            LOG.error("default.plist was not loaded.")
             throw CommonError.missingFile(filename: "default.plist")
         }
 
@@ -87,21 +89,12 @@ final class ServicesInitializer {
 
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
         // Init Logger
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
         let isDebugLogs = resources.isDebugLogs
-        DDLogInfo("Start Action extension with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        LOG.info("Start Action extension with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
 
-        Logger.logInfo = { msg in
-            DDLogInfo(msg)
-        }
-
-        Logger.logDebug = { msg in
-            DDLogDebug(msg)
-        }
-
-        Logger.logError = { msg in
-            DDLogError(msg)
-        }
+        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: LogLevel = isDebugLogs ? .debug : .info
+        logManager.configure(logLevel)
+        LOG.info("initLogger \(logLevel)")
     }
 }

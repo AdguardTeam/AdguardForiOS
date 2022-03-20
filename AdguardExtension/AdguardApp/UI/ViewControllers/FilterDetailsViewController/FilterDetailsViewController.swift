@@ -25,6 +25,8 @@ protocol FilterDetailsViewControllerDelegate: NewCustomFilterDetailsControllerDe
     func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(FilterDetailsViewController.self)
+
 final class FilterDetailsViewController: UIViewController {
 
     // MARK: - UI Elements
@@ -140,7 +142,7 @@ final class FilterDetailsViewController: UIViewController {
             }
         }
         catch {
-            DDLogError("(FilterDetailsViewController) - deleteButtonTapped; Error deleting custom filter with id=\(filterMeta.filterId); Error: \(error)")
+            LOG.error("Error deleting custom filter with id=\(filterMeta.filterId); Error: \(error)")
             showUnknownErrorAlert()
         }
     }
@@ -165,7 +167,7 @@ extension FilterDetailsViewController: SwitchTableViewCellDelegate {
             filterMeta = newFilterMeta
         }
         catch {
-            DDLogError("(FilterDetailsViewController) - switchStateChanged; Error changing state for filter with id=\(filterMeta.filterId), group id=\(filterMeta.groupId.debugDescription); Error: \(error)")
+            LOG.error("Error changing state for filter with id=\(filterMeta.filterId), group id=\(filterMeta.groupId.debugDescription); Error: \(error)")
             showUnknownErrorAlert()
         }
     }

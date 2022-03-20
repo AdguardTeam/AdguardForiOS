@@ -20,7 +20,7 @@ import Foundation
 import StoreKit
 import CommonCrypto
 import Setapp
-import class SharedAdGuardSDK.Atomic
+import SharedAdGuardSDK
 
 typealias Period = (unit: PurchasePeriod, numberOfUnits: Int)
 
@@ -47,6 +47,8 @@ typealias Product = (type: ProductType, price: String, period: Period?, trialPer
  In-app purchases are carried out directly in this service.
  Work with Adguard Licenses is delegated to EmailSignInController
  */
+
+private let LOG = LoggerFactory.getLoggerWrapper(PurchaseService.self)
 
 // MARK: - service implementation -
 final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionObserver, SKProductsRequestDelegate {
@@ -153,7 +155,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
             case lifetimeProductID, lifetimeAlternateProductID:
                 type = .lifetime
             default:
-                DDLogError("(PurchaseService) error, product with unknown product id: \(product.productIdentifier)")
+                LOG.error("Error, product with unknown product id: \(product.productIdentifier)")
                 assertionFailure("product with unknown product id: \(product.productIdentifier)")
                 continue
             }
@@ -258,7 +260,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         let expectedState = resources.sharedDefaults().string(forKey: AEDefaultsAuthStateString)
 
         if token == nil || state == nil || expectedState == nil || state! != expectedState! {
-            DDLogError("(PurchaseService) login with access token failed " + (token == nil ? "token == nil" : "") + (state == nil ? "state == nil" : "") + (expectedState == nil ? "expectedState == nil" : "") + (state != expectedState ? "state != expectedState" : ""))
+            LOG.error("Login with access token failed " + (token == nil ? "token == nil" : "") + (state == nil ? "state == nil" : "") + (expectedState == nil ? "expectedState == nil" : "") + (state != expectedState ? "state != expectedState" : ""))
             postNotification(PurchaseAssistant.kPSNotificationLoginFailure, nil)
             return
         }
@@ -296,7 +298,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         // post receipt to our backend
 
         guard let appId = keychain.appId else {
-            DDLogError("(LoginService) loginInternal error - can not obtain appId)")
+            LOG.error("loginInternal error - can not obtain appId)")
             complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: [:]))
             return
         }
@@ -312,7 +314,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
         guard let url = URL(string: VALIDATE_RECEIPT_URL) else  {
 
-            DDLogError("(PurchaseService) validateReceipt error. Can not make URL from String \(VALIDATE_RECEIPT_URL)")
+            LOG.error("ValidateReceipt error. Can not make URL from String \(VALIDATE_RECEIPT_URL)")
             return
         }
 
@@ -364,11 +366,11 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     func checkPremiumStatusChanged() {
 
-        DDLogInfo("(PurchaseService) checkPremiumExpired")
+        LOG.info("checkPremiumExpired")
 
         // we must validate receipts not only to check the expiration of the subscription,
         // but also for restoring purchases after reinstalling the application
-        DDLogInfo("(PurchaseService) checkPremiumExpired - validateReceipt")
+        LOG.info("checkPremiumExpired - validateReceipt")
         let wasActive = self.isInAppPurchaseActive()
         validateReceipt { [weak self] _ in
             guard let self = self else { return }
@@ -382,7 +384,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         }
 
         if loginService.loggedIn && loginService.hasPremiumLicense {
-            DDLogInfo("(PurchaseService) checkPremiumExpired - сheck adguard license status")
+            LOG.info("checkPremiumExpired - сheck adguard license status")
 
             checkStatusInternal { [weak self] error in
                 if error != nil || !(self?.loginService.active ?? false) {
@@ -437,7 +439,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
 
-        DDLogInfo("(PurchaseService) paymentQueue updatedTransactions")
+        LOG.info("paymentQueue updatedTransactions")
         var restored = false
         var purchased = false
 
@@ -446,7 +448,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
             let error = transaction.error as NSError?
 
             if let error = error {
-                DDLogError("(PurchaseService) payment Queue error \(error.localizedDescription)")
+                LOG.error("Payment Queue error \(error.localizedDescription)")
             }
 
             if !allProducts.contains(transaction.payment.productIdentifier) {
@@ -456,11 +458,11 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
             switch transaction.transactionState {
             case .purchasing, .deferred:
-                DDLogInfo("(PurchaseService) Transaction deffered or purchasing for product: \(transaction.payment.productIdentifier)")
+                LOG.info("Transaction deffered or purchasing for product: \(transaction.payment.productIdentifier)")
                 break
 
             case .failed:
-                DDLogInfo("(PurchaseService) Transaction failed for product: \(transaction.payment.productIdentifier)")
+                LOG.info("Transaction failed for product: \(transaction.payment.productIdentifier)")
                 SKPaymentQueue.default().finishTransaction(transaction)
                 if error?.code == SKError.paymentCancelled.rawValue {
                     postNotification(PurchaseAssistant.kPSNotificationCanceled, nil)
@@ -469,12 +471,12 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                 postNotification(PurchaseAssistant.kPSNotificationPurchaseFailure, transaction.error)
 
             case .purchased:
-                DDLogInfo("(PurchaseService) Transaction purchased for product: \(transaction.payment.productIdentifier)")
+                LOG.info("Transaction purchased for product: \(transaction.payment.productIdentifier)")
                 purchased = true
                 SKPaymentQueue.default().finishTransaction(transaction)
 
             case .restored:
-                DDLogInfo("(PurchaseService) Transaction restored for product: \(transaction.payment.productIdentifier)")
+                LOG.info("Transaction restored for product: \(transaction.payment.productIdentifier)")
                 restored = true
                 SKPaymentQueue.default().finishTransaction(transaction)
 
@@ -502,7 +504,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
 
-        DDLogInfo("(PurchaseService)productsRequest didReceive products count: \(response.products.count) ")
+        LOG.info("productsRequest didReceive products count: \(response.products.count) ")
         _atomicProductsToPurchase.mutate { $0.removeAll() }
 
         for product in response.products {
@@ -520,7 +522,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                     _atomicProductsToPurchase.mutate { $0.append(product) }
                 }
             default:
-                DDLogError("(PurchaseService) productsRequest didReceive error. Unknown productId \(product.productIdentifier)")
+                LOG.error("productsRequest didReceive error. Unknown productId \(product.productIdentifier)")
                 assertionFailure("Unknown productId \(product.productIdentifier)")
             }
         }
@@ -532,13 +534,13 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     }
 
     func request(_ request: SKRequest, didFailWithError error: Error) {
-        DDLogError("(PurchaseServie) request did fail with error: \(error.localizedDescription)")
+        LOG.error("Request did fail with error: \(error.localizedDescription)")
         productRequest = nil
     }
 
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
 
-        DDLogInfo("(PurchaseServie) restore completed")
+        LOG.info("Restore completed")
         for transaction in queue.transactions {
             if allProducts.contains(transaction.payment.productIdentifier)  {
                 return
@@ -551,7 +553,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
 
-        DDLogError("(PurchaseServie) restore failed with error: \(error.localizedDescription)")
+        LOG.error("Restore failed with error: \(error.localizedDescription)")
         let nsError = error as NSError
         if nsError.code == SKError.paymentCancelled.rawValue {
             postNotification(PurchaseAssistant.kPSNotificationCanceled, nil)
@@ -568,10 +570,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     @discardableResult private func processLoginResult(_ error: Error?)->Bool {
 
-        DDLogInfo("(PurchaseService) processLoginResult")
+        LOG.info("processLoginResult")
         if error != nil {
 
-            DDLogError("(PurchaseService) processLoginResult error \(error!.localizedDescription)")
+            LOG.error("processLoginResult error \(error!.localizedDescription)")
             postNotification(PurchaseAssistant.kPSNotificationLoginFailure, error)
             return false
         }
@@ -630,7 +632,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                     resources.sharedDefaults().set(true, forKey: AEDefaultsNonConsumableItemPurchased)
 
                 default:
-                    DDLogInfo("(PurchaseService) processValidateResponse - error. Unknown product ID: \(productId)")
+                    LOG.info("processValidateResponse - error. Unknown product ID: \(productId)")
                     // It is not an error. There we can recieve old product identifiers
 
                     if expirationDate == nil {
@@ -690,7 +692,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         case .year:
             returnPeriodUnit = .year
         @unknown default:
-            DDLogError("(PurchaseService) getPeriod - unknown period")
+            LOG.error("getPeriod - unknown period")
             returnPeriodUnit = .day
         }
 
@@ -723,7 +725,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     }
 
     func updateSetappState(subscription: SetappSubscription) {
-        DDLogInfo("(PurchaseService) - updateSetappState; sub is active = \(subscription.isActive); saved state = \(resources.purchasedThroughSetapp)")
+        LOG.info("Sub is active = \(subscription.isActive); saved state = \(resources.purchasedThroughSetapp)")
 
         if (subscription.isActive && !resources.purchasedThroughSetapp) ||
             !subscription.isActive && resources.purchasedThroughSetapp {

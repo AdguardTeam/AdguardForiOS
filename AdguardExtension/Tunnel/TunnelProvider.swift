@@ -23,11 +23,14 @@ import SafariAdGuardSDK
 import Sentry
 import AGDnsProxy
 
+private let LOG = LoggerFactory.getLoggerWrapper(TunnelProvider.self)
+
 /**
  This object gives access to a virtual network interface
  The main logic of this class is implemented in `DnsAdGuardSDK.PacketTunnelProvider`
  - Seealso https://developer.apple.com/documentation/networkextension/nepackettunnelprovider
  */
+
 class TunnelProvider: PacketTunnelProvider {
     static let tunnelRemoteAddress = "127.1.1.1"
 
@@ -114,37 +117,25 @@ class TunnelProvider: PacketTunnelProvider {
     // MARK: - private methods
 
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
-        // TODO: refactor, everywhere is the same code
         let debugLogs = resources.isDebugLogs
-        ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
-        ACLLogger.singleton().logLevel = debugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        DDLogInfo("Init tunnel with loglevel: \(debugLogs ? "DEBUG" : "NORMAL")")
-
-        Logger.logInfo = { msg in
-            DDLogInfo(msg)
-        }
-
-        Logger.logDebug = { msg in
-            DDLogDebug(msg)
-        }
-
-        Logger.logError = { msg in
-            DDLogError(msg)
-        }
+        let logManager = LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: LogLevel = debugLogs ? .debug : .info
+        logManager.configure(logLevel)
+        LOG.info("Init tunnel with loglevel: \(debugLogs ? "DEBUG" : "NORMAL")")
     }
 
     private static func migrateIfNeeded(resources: AESharedResourcesProtocol, configuration: DnsConfigurationProtocol, networkUtils: NetworkUtilsProtocol) {
-        DDLogInfo("(TunnelProvider) - migrateIfNeeded; Starting migration in tunnel")
+        LOG.info("Starting migration in tunnel")
         let migrationVersionProvider = MigrationServiceVersionProvider(resources: resources)
         if migrationVersionProvider.isMigrationFrom4_1To4_3Needed {
             do {
                 let dnsProvidersManager = try DnsProvidersManager(configuration: configuration, userDefaults: resources.sharedDefaults(), networkUtils: networkUtils)
                 let migration = try DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
                 migration.migrate()
-                DDLogInfo("(TunnelProvider) - migrateIfNeeded; Migration in tunnel finished")
+                LOG.info("Migration in tunnel finished")
             }
             catch {
-                DDLogError("(TunnelProvider) migration failed: \(error)")
+                LOG.error("Migration failed: \(error)")
             }
         }
     }

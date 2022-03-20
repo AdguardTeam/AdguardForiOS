@@ -62,6 +62,8 @@ protocol TagsMetaStorageProtocol {
     func deleteTagsForFilters(withIds ids: [Int]) throws
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper("TagsMetaStorageProtocol+Tags")
+
 extension MetaStorage: TagsMetaStorageProtocol {
 
     // Returns all tags from database
@@ -70,7 +72,7 @@ extension MetaStorage: TagsMetaStorageProtocol {
         let query = FilterTagsTable.table.order(FilterTagsTable.filterId)
 
         let result: [FilterTagsTable] = try filtersDb.prepare(query).map { FilterTagsTable(dbTag: $0) }
-        Logger.logDebug("(FiltersMetaStorage) - allTags returning \(result.count) tags objects")
+        LOG.debug("AllTags returning \(result.count) tags objects")
         return result
     }
 
@@ -82,7 +84,7 @@ extension MetaStorage: TagsMetaStorageProtocol {
                                    .order(FilterTagsTable.tagId)
 
         let result: [FilterTagsTable] = try filtersDb.prepare(query).map { FilterTagsTable(dbTag: $0) }
-        Logger.logDebug("(FiltersMetaStorage) - getTagsForFilter returning \(result.count) tags objects for filter with id=\(id)")
+        LOG.debug("GetTagsForFilter returning \(result.count) tags objects for filter with id=\(id)")
         return result
     }
 
@@ -100,7 +102,7 @@ extension MetaStorage: TagsMetaStorageProtocol {
         let tagsIds = tags.map { $0.tagId }
         let tagsToDelete = FilterTagsTable.table.filter(FilterTagsTable.filterId == id && !tagsIds.contains(FilterTagsTable.tagId))
         let deletedRows = try filtersDb.run(tagsToDelete.delete())
-        Logger.logDebug("(FiltersMetaStorage) - updateAll tags; deleted \(deletedRows) rows")
+        LOG.debug("Deleted \(deletedRows) rows")
     }
 
     // Updates passed tag for filter. If tag is missing adds it
@@ -112,13 +114,13 @@ extension MetaStorage: TagsMetaStorageProtocol {
                                                  FilterTagsTable.type <- tag.tagType.id,
                                                  FilterTagsTable.name <- tag.tagName)
         try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Insert tag with tagId = \(tag.tagId) and name \(tag.tagName)")
+        LOG.debug("Insert tag with tagId = \(tag.tagId) and name \(tag.tagName)")
     }
 
     // Deletes tags for filters with passed ids
     func deleteTagsForFilters(withIds ids: [Int]) throws {
         let tagsToDelete = FilterTagsTable.table.filter(ids.contains(FilterTagsTable.filterId))
         let deletedRows = try filtersDb.run(tagsToDelete.delete())
-        Logger.logDebug("(FiltersMetaStorage) - deleteTagsForFilters; deleted \(deletedRows) filters")
+        LOG.debug("Deleted \(deletedRows) filters")
     }
 }

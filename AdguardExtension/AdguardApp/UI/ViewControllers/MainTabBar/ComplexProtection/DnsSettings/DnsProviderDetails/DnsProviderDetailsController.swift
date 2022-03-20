@@ -18,12 +18,15 @@
 
 import SafariServices
 import DnsAdGuardSDK
+import SharedAdGuardSDK
 
 /// Delegate for DnsProvidersController
 protocol DnsProviderDetailsControllerDelegate: AnyObject {
     /// Notify the delegate that provider have been selected
     func providerSelected()
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(DnsProtectionUserRulesMigrationHelper.self)
 
 /// Details controller that represent info about provider
 final class DnsProviderDetailsController : UITableViewController {
@@ -173,7 +176,7 @@ final class DnsProviderDetailsController : UITableViewController {
             delegate?.providerSelected()
             navigationController?.popViewController(animated: true)
         } catch {
-            DDLogError("(DnsProviderDetailsController) - selectTapped; While selecting provider error occurred: \(error)")
+            LOG.error("While selecting provider error occurred: \(error)")
             showUnknownErrorAlert()
         }
     }
@@ -244,7 +247,7 @@ extension DnsProviderDetailsController: SelectDnsProtocolControllerDelegate {
             try model.selectProviderWith(dnsProtocol: dnsProtocol)
             tableView.reloadData()
         } catch {
-            DDLogError("(DnsProviderDetailsController) - protocolSelected; While selecting protocol error occurred: \(error)")
+            LOG.error("While selecting protocol error occurred: \(error)")
             showUnknownErrorAlert()
         }
     }

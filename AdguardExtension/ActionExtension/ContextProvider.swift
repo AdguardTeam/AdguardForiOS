@@ -19,6 +19,7 @@
 import CoreServices
 import Foundation
 import UIKit.UIImage
+import SharedAdGuardSDK
 
 struct Context {
     let icon: UIImage?
@@ -27,8 +28,11 @@ struct Context {
     let isJsInjectSupported: Bool
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(ContextProvider.self)
+
 /// This object is responsible for providing extension context
 /// It transforms `NSExtensionContext` into normal readable object `Context`
+
 struct ContextProvider {
 
     enum ContextError: Error, CustomDebugStringConvertible {
@@ -47,45 +51,45 @@ struct ContextProvider {
         self.favIconService = favIconService
     }
 
-    func process(context: NSExtensionContext?, onContextObtained: @escaping (Result<Context, ContextError>) -> Void) {
+    func process(context: NSExtensionContext?, onContextObtained: @escaping (Result<Context>) -> Void) {
         let completionQueue = DispatchQueue.main
 
         guard let item = context?.inputItems.first as? NSExtensionItem,
               let itemProvider = item.attachments?.first
         else {
-            completionQueue.async { onContextObtained(.failure(ContextError.errorLoadingItem)) }
+            completionQueue.async { onContextObtained(.error(ContextError.errorLoadingItem)) }
             return
         }
 
         let type = String(kUTTypePropertyList)
         guard itemProvider.hasItemConformingToTypeIdentifier(type) else {
-            DDLogError("(ContextProvider) - process; Error: itemProvider doesn't conform to type \(type))")
-            completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
+            LOG.error("Error: itemProvider doesn't conform to type \(type))")
+            completionQueue.async { onContextObtained(.error(ContextError.typeInconformance)) }
             return
         }
 
         itemProvider.loadItem(forTypeIdentifier: type, options: nil) { result, loadItemError in
             guard loadItemError == nil else {
-                DDLogError("(ContextProvider) - process; Error loading item: \(loadItemError!)")
-                completionQueue.async { onContextObtained(.failure(ContextError.errorLoadingItem)) }
+                LOG.error("Error loading item: \(loadItemError!)")
+                completionQueue.async { onContextObtained(.error(ContextError.errorLoadingItem)) }
                 return
             }
             processDictionary(result, onContextObtained)
         }
     }
 
-    private func processDictionary(_ dict: NSSecureCoding?, _ onContextObtained: @escaping (Result<Context, ContextError>) -> Void) {
+    private func processDictionary(_ dict: NSSecureCoding?, _ onContextObtained: @escaping (Result<Context>) -> Void) {
         let completionQueue = DispatchQueue.main
 
         guard let dictResult = dict as? [String: Any] else {
-            DDLogError("(ContextProvider) - process; Error result is not a valid dict. Results: \(String(describing: dict))")
-            completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
+            LOG.error("Error result is not a valid dict. Results: \(String(describing: dict))")
+            completionQueue.async { onContextObtained(.error(ContextError.typeInconformance)) }
             return
         }
 
         guard let infoDict = dictResult[NSExtensionJavaScriptPreprocessingResultsKey] as? [String: Any] else {
-            DDLogError("(ContextProvider) - process; Can't get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(dictResult)")
-            completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
+            LOG.error("Can't get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(dictResult)")
+            completionQueue.async { onContextObtained(.error(ContextError.typeInconformance)) }
             return
         }
 
@@ -94,8 +98,8 @@ struct ContextProvider {
               let url = URL(string: urlString),
               let domain = url.host
         else {
-            DDLogError("(ContextProvider) - process; Error obtaining page url")
-            completionQueue.async { onContextObtained(.failure(ContextError.obtainDomain)) }
+            LOG.error("Error obtaining page url")
+            completionQueue.async { onContextObtained(.error(ContextError.obtainDomain)) }
             return
         }
 

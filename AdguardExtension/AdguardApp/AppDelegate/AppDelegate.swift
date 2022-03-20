@@ -23,6 +23,8 @@ import AGDnsProxy
 import Sentry
 import UIKit
 
+private let LOG = LoggerFactory.getLoggerWrapper(AppDelegate.self)
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -72,14 +74,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         let resources = StartupService.initResources()
 
-        AppDelegate.initLogger(resources: resources)
-        DDLogInfo("Starting application")
-
         // StartupService may perform slow operations involving working with files or SQLite database.
         // It is safer to try to protect it from suspending by using a background task.
         _ = UIBackgroundTask.execute(name: "AppDelegate.init") {
             StartupService.start()
         }
+
+        LOG.info("Starting application")
 
         self.resources = ServiceLocator.shared.getService()!
         self.safariProtection = ServiceLocator.shared.getService()!
@@ -99,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         super.init()
 
-        DDLogInfo("Application has been started. Version: \(productInfo.buildVersion() ?? "nil")")
+        LOG.info("Application has been started. Version: \(productInfo.buildVersion() ?? "nil")")
     }
 
     deinit {
@@ -107,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        DDLogInfo("(AppDelegate) willFinishLaunchingWithOptions called in background=\(application.applicationState == .background)")
+        LOG.info("willFinishLaunchingWithOptions called in background=\(application.applicationState == .background)")
 
         //------------- Preparing for start application. Stage 1. -----------------
 
@@ -119,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         activateWithOpenUrl = false
 
-        DDLogInfo("(AppDelegate) Preparing for start application. Stage 1.")
+        LOG.info("Preparing for start application. Stage 1.")
 
         //------------ Interface Tuning -----------------------------------
         self.window?.backgroundColor = UIColor.clear
@@ -132,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        DDLogInfo("(AppDelegate) didFinishLaunchingWithOptions called in background=\(application.applicationState == .background)")
+        LOG.info("didFinishLaunchingWithOptions called in background=\(application.applicationState == .background)")
 
         SentrySDK.start { options in
             options.dsn = Constants.Sentry.dsnUrl
@@ -144,7 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         //------------- Preparing for start application. Stage 2. -----------------
-        DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
+        LOG.info("Preparing for start application. Stage 2.")
 
         let interval = resources.backgroundFetchUpdatePeriod.interval
         AppDelegate.setBackgroundFetchInterval(interval)
@@ -169,10 +170,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if application.applicationState != .background {
             safariProtection.finishBackgroundUpdate { error in
                 if let error = error {
-                    DDLogError("(AppDelegate) - didFinishLaunchingWithOptions; Finished background update with error: \(error)")
+                    LOG.error("didFinishLaunchingWithOptions; Finished background update with error: \(error)")
                     return
                 }
-                DDLogInfo("(AppDelegate) - didFinishLaunchingWithOptions; Finish background update successfully")
+                LOG.info("didFinishLaunchingWithOptions; Finish background update successfully")
             }
         }
 
@@ -183,16 +184,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Application Delegate Methods
 
     func applicationWillResignActive(_ application: UIApplication) {
-        DDLogInfo("(AppDelegate) applicationWillResignActive.")
+        LOG.info("applicationWillResignActive.")
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        DDLogInfo("(AppDelegate) applicationDidEnterBackground.")
+        LOG.info("applicationDidEnterBackground.")
         resources.synchronizeSharedDefaults()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        DDLogInfo("(AppDelegate) applicationWillEnterForeground.")
+        LOG.info("applicationWillEnterForeground.")
         configuration.checkContentBlockerEnabled()
         let safariConfig = SafariConfiguration(resources: resources, isProPurchased: purchaseService.isProPurchased)
         let dnsConfig = DnsConfiguration(resources: resources, isProPurchased: purchaseService.isProPurchased)
@@ -201,7 +202,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        DDLogInfo("(AppDelegate) applicationDidBecomeActive")
+        LOG.info("applicationDidBecomeActive")
         application.applicationIconBadgeNumber = 0
 
         // If theme mode is System Default gets current style
@@ -222,7 +223,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        DDLogInfo("(AppDelegate) applicationWillTerminate.")
+        LOG.info("applicationWillTerminate.")
         resources.synchronizeSharedDefaults()
     }
 
@@ -254,22 +255,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // we're holding an open file handle, for instance when we are working with a file or an SQLite database. So it
         // is rather dangerous since there are risks of data corruption.
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask {
-            DDLogInfo("(AppDelegate) - backgroundFetch; background task is expiring, remaining time: \(UIApplication.shared.backgroundTimeRemaining)")
+            LOG.info("Background task is expiring, remaining time: \(UIApplication.shared.backgroundTimeRemaining)")
         }
 
         if backgroundTaskId == UIBackgroundTaskIdentifier.invalid {
-            DDLogError("(AppDelegate) - backgroundFetch; cannot start background operation")
+            LOG.error("Cannot start background operation")
             completionHandler(.noData)
             return
         }
 
-        DDLogInfo("(AppDelegate) - backgroundFetch; start, remaining time: \(UIApplication.shared.backgroundTimeRemaining)")
+        LOG.info("Start, remaining time: \(UIApplication.shared.backgroundTimeRemaining)")
 
         if UIApplication.shared.backgroundTimeRemaining < 20 {
             // If less than 20 seconds is available for the background task we simply don't run it.
             // The logic for using the 20 seconds limit: it takes at least 10 seconds to run rules conversion with the
             // default set of filter lists, and a couple more seconds on saving content blockers to files.
-            DDLogInfo("(AppDelegate) - backgroundFetch; remaining time is not enough to complete the task, exiting immediately")
+            LOG.info("Remaining time is not enough to complete the task, exiting immediately")
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
             completionHandler(.noData)
             return
@@ -280,12 +281,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
             completionHandler(result)
 
-            DDLogInfo("(AppDelegate) - backgroundFetch; finished successfully")
+            LOG.info("Finished successfully")
         }
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        DDLogError("(AppDelegate) application Open URL.")
+        LOG.error("Application Open URL.")
         activateWithOpenUrl = true
 
         if setappService.openUrl(url, options: options) {
@@ -341,7 +342,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let shouldUpdate = shouldUpdateFilters()
-        DDLogInfo("(AppDelegate) - backgroundFetch; shouldUpdateFilters=\(shouldUpdate)")
+        LOG.info("shouldUpdateFilters=\(shouldUpdate)")
         if !shouldUpdate {
             return .noData
         }
@@ -359,7 +360,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         safariProtection.updateSafariProtectionInBackground { [weak self] result in
             if let error = result.error {
-                DDLogError("(AppDelegate) - backgroundFetch; received error from SDK: \(error)")
+                LOG.error("Received error from SDK: \(error)")
                 bgFetchResult = result.backgroundFetchResult
                 group.leave()
                 return
@@ -368,12 +369,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if result.oldBackgroundFetchState == .updateFinished || result.oldBackgroundFetchState == .loadAndSaveFilters {
                 // TODO: this is rather strange that we update DNS filters as a part of SafariProtection update.
                 self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters) { _ in
-                    DDLogInfo("(AppDelegate) - backgroundFetch; background fetch ended call performFetchWithCompletionHandler after updating dns preferences")
+                    LOG.info("Background fetch ended call performFetchWithCompletionHandler after updating dns preferences")
                     bgFetchResult = result.backgroundFetchResult
                     group.leave()
                 }
             } else {
-                DDLogInfo("(AppDelegate) - backgroundFetch; background fetch ended call performFetchWithCompletionHandler")
+                LOG.info("Background fetch ended call performFetchWithCompletionHandler")
                 bgFetchResult = result.backgroundFetchResult
                 group.leave()
             }
@@ -387,7 +388,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setappService.start()
 
         guard let mainPageController = getMainPageController() else {
-            DDLogError("mainPageController is nil")
+            LOG.error("mainPageController is nil")
             return
         }
 
@@ -400,14 +401,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         guard let dnsLogContainerVC = getDnsLogContainerController() else {
-            DDLogError("dnsLogContainerVC is nil")
+            LOG.error("dnsLogContainerVC is nil")
             return
         }
         /**
          To quickly show stats in ActivityViewController, we load ViewController when app starts
          */
         dnsLogContainerVC.loadViewIfNeeded()
-        DDLogInfo("Finished preparing controllers")
+        LOG.info("Finished preparing controllers")
     }
 
     // TODO: - Change the way we show overlimit error for DNS filters and handle the error
@@ -434,7 +435,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
              purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
                  guard let type =  notification.userInfo?[PurchaseAssistant.kPSNotificationTypeKey] as? String else { return }
 
-                 DDLogInfo("(AppDelegate) - Received notification type = \(type)")
+                 LOG.info("Received notification type = \(type)")
 
                  if type == PurchaseAssistant.kPSNotificationPremiumExpired {
                      self.userNotificationService.postNotification(title: String.localizedString("premium_expired_title"), body: String.localizedString("premium_expired_message"), userInfo: nil)
@@ -447,10 +448,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  guard let self = self else { return }
 
                  if !self.configuration.proStatus && self.vpnManager.vpnInstalled {
-                     DDLogInfo("(AppDelegate) Remove vpn configuration")
+                     LOG.info("Remove vpn configuration")
                      self.vpnManager.removeVpnConfiguration { (error) in
                          if error != nil {
-                             DDLogError("(AppDelegate) Remove vpn configuration failed: \(error!)")
+                             LOG.error("Remove vpn configuration failed: \(error!)")
                          }
                      }
                  }
@@ -473,58 +474,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    // MARK: - Init logger
-
-    private static func initLogger(resources: AESharedResourcesProtocol) {
-        let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
-        dynamicLogLevel = isDebugLogs ? .debug : .info
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-
-        DDLogInfo("(AppDelegate) - Init app, log level debug=\(isDebugLogs)")
-
-        #if DEBUG
-        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
-        #endif
-
-        AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_INFO)
-        AGLogger.setCallback { level, msg, length in
-            guard let msg = msg else { return }
-            let data = Data(bytes: msg, count: Int(length))
-            if let str = String(data: data, encoding: .utf8) {
-                switch (level) {
-                case AGLogLevel.AGLL_INFO:
-                    Logger.logInfo("(DnsLibs) - \(str)")
-                case AGLogLevel.AGLL_ERR, AGLogLevel.AGLL_WARN:
-                    Logger.logError("(DnsLibs) - \(str)")
-                default:
-                    Logger.logDebug("(DnsLibs) - \(str)")
-                }
-            }
-        }
-
-        Logger.logDebug = { msg in
-            DDLogDebug(msg)
-        }
-
-        Logger.logInfo = { msg in
-            DDLogInfo(msg)
-        }
-
-        Logger.logError = { msg in
-            DDLogError(msg)
-        }
-    }
-
     private func setupOnFirstAppRun() {
         guard firstRun else { return }
         firstRun = false
 
         do {
             try safariProtection.enablePredefinedGroupsAndFilters()
-            DDLogInfo("(AppDelegate) - setupOnFirstAppRun; Successfully setup predefined groups and filters")
+            LOG.info("Successfully setup predefined groups and filters")
         } catch {
-            DDLogError("(AppDelegate) - setupOnFirstAppRun; Error occurred while setup predefined groups and filters")
+            LOG.error("Error occurred while setup predefined groups and filters")
         }
 
         updateSafariProtectionMeta()
@@ -534,19 +492,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
             case .success(_):
-                DDLogInfo("(AppDelegate) - updateSafariProtectionMeta; Safari protection meta successfully updated")
+                LOG.info("Safari protection meta successfully updated")
 
             case .error(let error):
-                DDLogError("(AppDelegate) - updateSafariProtectionMeta; On update safari protection meta error occurred: \(error)")
+                LOG.error("On update safari protection meta error occurred: \(error)")
             }
 
         } onCbReloaded: { error in
             if let error = error {
-                DDLogError("(AppDelegate) - updateSafariProtectionMeta; On reload CB error occurred: \(error)")
+                LOG.error("On reload CB error occurred: \(error)")
                 return
             }
 
-            DDLogInfo("(AppDelegate) - updateSafariProtectionMeta; Successfully reload CB")
+            LOG.info("Successfully reload CB")
         }
     }
 }

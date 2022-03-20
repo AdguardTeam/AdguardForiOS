@@ -49,6 +49,8 @@ protocol GroupLocalizationsMetaStorageProtocol {
     func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper("MetaStorage+GroupLocalizations")
+
 extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
 
     // Returns localized strings for specified group and language
@@ -57,11 +59,11 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
         let query = FilterGroupLocalizationsTable.table.filter(FilterGroupLocalizationsTable.groupId == id && FilterGroupLocalizationsTable.lang == lang)
 
         guard let dbGroulLocalization = try? filtersDb.pluck(query) else {
-            Logger.logDebug("(FiltersMetaStorage) - query result is nil for filter with id=\(id) for lang=\(lang)")
+            LOG.debug("Query result is nil for filter with id=\(id) for lang=\(lang)")
             return nil
         }
         let groupLocalization = FilterGroupLocalizationsTable(dbGroupLocalization: dbGroulLocalization)
-        Logger.logDebug("(FiltersMetaStorage) - getLocalizationForGroup returning \(groupLocalization) for filter with id=\(id) for lang=\(lang)")
+        LOG.debug("getLocalizationForGroup returning \(groupLocalization) for filter with id=\(id) for lang=\(lang)")
         return groupLocalization
     }
 
@@ -73,7 +75,7 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
                                                                FilterGroupLocalizationsTable.lang <- lang,
                                                                FilterGroupLocalizationsTable.name <- localization.name)
         try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Insert localization for group with id=\(id) lang=\(lang) and name=\(localization.name)")
+        LOG.debug("Insert localization for group with id=\(id) lang=\(lang) and name=\(localization.name)")
     }
 
 

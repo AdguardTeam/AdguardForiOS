@@ -18,6 +18,7 @@
 
 import SafariAdGuardSDK
 import DnsAdGuardSDK
+import SharedAdGuardSDK
 
 protocol ServiceInitializerProtocol  {
     var networkService: ACNNetworkingProtocol { get }
@@ -27,7 +28,10 @@ protocol ServiceInitializerProtocol  {
     var complexProtection: ComplexProtectionServiceProtocol { get }
     var dnsProvidersManager: DnsProvidersManagerProtocol { get }
     var activityStatistics: ActivityStatisticsProtocol { get }
+    var loggerManager: LoggerManager { get }
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(ServiceInitializer.self)
 
 final class ServiceInitializer: ServiceInitializerProtocol {
     let networkService: ACNNetworkingProtocol = ACNNetworking()
@@ -38,28 +42,39 @@ final class ServiceInitializer: ServiceInitializerProtocol {
     let dnsProvidersManager: DnsProvidersManagerProtocol
     let activityStatistics: ActivityStatisticsProtocol
 
-    init(resources: AESharedResourcesProtocol) throws {
-        DDLogInfo("(TodayViewController) - init services start")
+
+    private(set) var loggerManager: LoggerManager
+
+    init?() {
+        let resources = AESharedResources()
+        self.loggerManager = LoggerManagerImpl(url: resources.sharedLogsURL())
+        let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
+        loggerManager.configure(logLevel)
+        LOG.info("Init services start with logLevel \(logLevel)")
         let networkService = ACNNetworking()
         let productInfo = ADProductInfo()
         let purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
-
         let sharedStorageUrls = SharedStorageUrls()
 
-        DDLogInfo("(TodayViewController) - init safari protection service")
+        LOG.info("Init safari protection service")
         let safariConfiguration = SafariConfiguration(
-            resources: resources, 
+            resources: resources,
             isProPurchased: purchaseService.isProPurchased
         )
 
-        self.safariProtection = try SafariProtection(
-            configuration: safariConfiguration,
-            defaultConfiguration: safariConfiguration,
-            filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
-            dbContainerUrl: sharedStorageUrls.dbFolderUrl,
-            jsonStorageUrl: sharedStorageUrls.cbJsonsFolderUrl,
-            userDefaults: resources.sharedDefaults()
-        )
+        do {
+            self.safariProtection = try SafariProtection(
+                configuration: safariConfiguration,
+                defaultConfiguration: safariConfiguration,
+                filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
+                dbContainerUrl: sharedStorageUrls.dbFolderUrl,
+                jsonStorageUrl: sharedStorageUrls.cbJsonsFolderUrl,
+                userDefaults: resources.sharedDefaults()
+            )
+        } catch {
+            LOG.error("SafariProtection initialization failed \(error)")
+            return nil
+        }
 
         let networkSettings = NetworkSettingsService(resources: resources)
 
@@ -74,9 +89,14 @@ final class ServiceInitializer: ServiceInitializerProtocol {
             isProPurchased: purchaseService.isProPurchased
         )
 
-        DDLogInfo("(TodayViewController) - init dns protection service")
+        LOG.info("Init dns protection service")
 
-        self.dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: resources.sharedDefaults(), networkUtils: NetworkUtils())
+        do {
+            self.dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: resources.sharedDefaults(), networkUtils: NetworkUtils())
+        } catch {
+            LOG.error("DnsProvidersManager initialization failed \(error)")
+            return nil
+        }
 
         let nativeDnsSettingsManager = NativeDnsSettingsManager(networkSettingsService: networkSettings, dnsProvidersManager: dnsProvidersManager, configuration: configuration, resources: resources)
 
@@ -97,10 +117,19 @@ final class ServiceInitializer: ServiceInitializerProtocol {
 
         // MARK: - ActivityStatistics
 
-        DDLogInfo("(TodayViewController) - init activity statistics service")
+        LOG.info("Init activity statistics service")
 
-        self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl, readOnly: true)
+        do {
+            self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl, readOnly: true)
+        } catch {
+            LOG.error("ActivityStatistics initialization failed \(error)")
+            return nil
+        }
 
-        DDLogInfo("(TodayViewController) - init services end")
+        LOG.info("Init services end")
+    }
+
+    func setLoggerManager(_ loggerManager: LoggerManager) {
+        self.loggerManager = loggerManager
     }
 }

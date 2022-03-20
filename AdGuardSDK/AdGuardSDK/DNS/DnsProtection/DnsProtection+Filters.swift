@@ -78,6 +78,8 @@ public protocol DnsProtectionFiltersProtocol {
     func updateAllFilters(onFilterUpdated: @escaping (_ result: DnsFiltersUpdateResult) -> Void)
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper("DnsProtection+Filters")
+
 extension DnsProtection {
 
     public var filters: [DnsFilter] {
@@ -103,20 +105,20 @@ extension DnsProtection {
     public func setFilter(withId id: Int, to enabled: Bool) throws {
         try workingQueue.sync {
             try dnsFiltersManager.setFilter(withId: id, to: enabled)
-            Logger.logInfo("(DnsProtection+Filters - setFilter; Enabled state for filter with id = \(id) is = \(enabled)")
+            LOG.info("Enabled state for filter with id = \(id) is = \(enabled)")
         }
     }
 
     public func renameFilter(withId id: Int, to name: String) throws {
         try workingQueue.sync {
             try dnsFiltersManager.renameFilter(withId: id, to: name)
-            Logger.logInfo("(DnsProtection+Filters - renameFilter; Filter with id = \(id) was renamed to \(name)")
+            LOG.info("Filter with id = \(id) was renamed to \(name)")
         }
     }
 
     public func addFilter(withName name: String, url: URL, isEnabled: Bool, onFilterAdded: @escaping (Error?) -> Void) {
         workingQueue.sync {
-            Logger.logInfo("(DnsProtection+Filters - addFilter; Start add filter with name = \(name), url = \(url), is enabled = \(isEnabled)")
+            LOG.info("Start add filter with name = \(name), url = \(url), is enabled = \(isEnabled)")
             dnsFiltersManager.addFilter(withName: name, url: url, isEnabled: isEnabled, onFilterAdded: onFilterAdded)
         }
     }
@@ -124,20 +126,20 @@ extension DnsProtection {
     public func removeFilter(withId id: Int) throws {
         try workingQueue.sync {
             try dnsFiltersManager.removeFilter(withId: id)
-            Logger.logInfo("(DnsProtection+Filters - removeFilter; Filter with id = \(id) was removed")
+            LOG.info("Filter with id = \(id) was removed")
         }
     }
 
     public func updateFilter(withId id: Int, onFilterUpdated: @escaping (_ error: Error?) -> Void) {
         workingQueue.sync {
-            Logger.logInfo("(DnsProtection+Filters) - updateFilter; Start updating filter with id = \(id)")
+            LOG.info("Start updating filter with id = \(id)")
             dnsFiltersManager.updateFilter(withId: id, onFilterUpdated: onFilterUpdated)
         }
     }
 
     public func updateAllFilters(onFilterUpdated: @escaping (_ result: DnsFiltersUpdateResult) -> Void) {
         workingQueue.sync {
-            Logger.logInfo("(DnsProtection+Filters) - updateAllFilters; Start updating all filters")
+            LOG.info("Start updating all filters")
             dnsFiltersManager.updateAllFilters(onFilterUpdated: onFilterUpdated)
         }
     }

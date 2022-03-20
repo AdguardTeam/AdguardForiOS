@@ -27,6 +27,8 @@ protocol FiltersConverterServiceProtocol {
     func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult]
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(FiltersConverterService.self)
+
 /**
  This class is responsible for converting all enabled filters and user rules (blocklist / allowlist / inverted allowlist) to jsons objects
  */
@@ -97,7 +99,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
             if let filterFileString = filterFilesStorage.getFilterContentForFilter(withId: $0.0) {
                 return FilterFileContent(text: filterFileString, group: $0.1)
             } else {
-                Logger.logError("(ContentBlockerService) - convertFiltersAndUserRulesToJsons; Received nil file content for filter with id=\($0.0)")
+                LOG.error("Received nil file content for filter with id=\($0.0)")
                 return nil
             }
         }

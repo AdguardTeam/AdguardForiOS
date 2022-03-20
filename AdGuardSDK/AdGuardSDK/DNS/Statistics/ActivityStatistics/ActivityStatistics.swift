@@ -39,6 +39,8 @@ public protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
     func getCounters(for period: StatisticsPeriod) throws -> CountersStatisticsRecord
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(ActivityStatistics.self)
+
 /// This object is responsible for counters statistics
 /// It stores and manages data for counters
 /// If data appears to be big it can compress it
@@ -52,14 +54,14 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
      - Parameter readOnly: if true, we won't try to create and compress the database on the service init. Default value is false. This flag is needed when this service is used for read-only purposes (for instance, in a Widget).
      */
     public init(statisticsDbContainerUrl: URL, readOnly: Bool = false) throws {
-        Logger.logInfo("(ActivityStatistics) - init start")
+        LOG.info("Init start")
 
         // Create directory if doesn't exist
         try FileManager.default.createDirectory(at: statisticsDbContainerUrl, withIntermediateDirectories: true, attributes: [:])
 
         let dbName = Constants.Statistics.StatisticsType.activity.dbFileName
         self.statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
-        Logger.logInfo("(ActivityStatistics) - connected to \(dbName)")
+        LOG.info("Connected to \(dbName)")
 
         // TODO: - It's a crutch; Refactor it later
         // This database is used by several threads/processes at the same time.
@@ -77,7 +79,7 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
             try? compressTable()
         }
 
-        Logger.logInfo("(ActivityStatistics) - init end")
+        LOG.info("Init end")
     }
 
     // MARK: - Public methods
@@ -86,7 +88,7 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
         do {
             try add(record: record)
         } catch {
-            Logger.logError("(ActivityStatistics) - processRecord; Error adding record to DB; Error: \(error)")
+            LOG.error("Error adding record to DB; Error: \(error)")
         }
     }
 
@@ -97,7 +99,7 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
      In case `timeStamp`s are equal will sort by `domain`
      */
     func getRecords(for period: StatisticsPeriod) throws -> [ActivityStatisticsRecord] {
-        Logger.logDebug("(ActivityStatistics) - getRecords for period=\(period.debugDescription)")
+        LOG.debug("getRecords for period=\(period.debugDescription)")
 
         let interval = period.interval
         let query = ActivityStatisticsTable.table
@@ -107,13 +109,13 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
             return ActivityStatisticsRecord(dbRecord: $0)
         }
 
-        Logger.logDebug("(ActivityStatistics) - getRecords; Return \(records.count) records for period=\(period.debugDescription)")
+        LOG.debug("Return \(records.count) records for period=\(period.debugDescription)")
 
         return records
     }
 
     public func getDomains(for period: StatisticsPeriod) throws -> [DomainsStatisticsRecord] {
-        Logger.logDebug("(ActivityStatistics) - getDomains for period=\(period.debugDescription)")
+        LOG.debug("getDomains for period=\(period.debugDescription)")
 
         let interval = period.interval
         let query = ActivityStatisticsTable.table
@@ -128,12 +130,12 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
 
         let result = try statisticsDb.prepare(query.asSQL()).map { DomainsStatisticsRecord(dbRecord: $0) }
 
-        Logger.logDebug("(ActivityStatistics) - getDomains; Return \(result.count) domains for period=\(period.debugDescription)")
+        LOG.debug("Return \(result.count) domains for period=\(period.debugDescription)")
         return result
     }
 
     public func getCounters(for period: StatisticsPeriod) throws -> CountersStatisticsRecord {
-        Logger.logDebug("(ActivityStatistics) - getCounters for period=\(period.debugDescription)")
+        LOG.debug("getCounters for period=\(period.debugDescription)")
 
         let interval = period.interval
         let query = ActivityStatisticsTable.table
@@ -147,25 +149,25 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
         let records = try statisticsDb.prepare(query.asSQL()).map { CountersStatisticsRecord(dbRecord: $0) }
 
         if records.count == 1 {
-            Logger.logDebug("(ActivityStatistics) - getCounters; Return \(records.first!) for period=\(period.debugDescription)")
+            LOG.debug("Return \(records.first!) for period=\(period.debugDescription)")
             return records.first!
         } else {
-            Logger.logDebug("(ActivityStatistics) - getCounters; Return zero CountersStatisticsRecord for period=\(period.debugDescription)")
+            LOG.debug("Return zero CountersStatisticsRecord for period=\(period.debugDescription)")
             return CountersStatisticsRecord.emptyRecord()
         }
     }
 
     public func reset() throws {
-        Logger.logInfo("(ActivityStatistics) - reset called")
+        LOG.info("Reset called")
 
         let resetQuery = ActivityStatisticsTable.table.delete()
         try statisticsDb.run(resetQuery)
 
-        Logger.logInfo("(ActivityStatistics) - reset successfully finished")
+        LOG.info("Reset successfully finished")
     }
 
     func add(record: ActivityStatisticsRecord) throws {
-        Logger.logDebug("(ActivityStatistics) - adding a record for \(record.domain)")
+        LOG.debug("Adding a record for \(record.domain)")
 
         let setters: [Setter] = [ActivityStatisticsTable.timeStamp <- record.timeStamp,
                                  ActivityStatisticsTable.domain <- record.domain,
@@ -177,14 +179,14 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
         let addQuery = ActivityStatisticsTable.table.insert(setters)
         try statisticsDb.run(addQuery)
 
-        Logger.logDebug("(ActivityStatistics) - record for \(record.domain) has been added")
+        LOG.debug("Record for \(record.domain) has been added")
     }
 
     // MARK: - Private methods
 
     /// Creates `activity_statistics_table` in statistics DB if it doesn't exist
     private func createTableIfNotExists() throws {
-        Logger.logInfo("(ActivityStatistics) - create the statistics table if it does not exist")
+        LOG.info("Сreate the statistics table if it does not exist")
 
         let query = ActivityStatisticsTable.table.create(temporary: false, ifNotExists: true) { builder in
             builder.column(ActivityStatisticsTable.timeStamp)
@@ -196,6 +198,6 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
         }
         try statisticsDb.run(query)
 
-        Logger.logInfo("(ActivityStatistics) - statistics table has been created")
+        LOG.info("Statistics table has been created")
     }
 }

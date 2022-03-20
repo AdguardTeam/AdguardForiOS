@@ -26,6 +26,8 @@ protocol ImportSettingsServiceProtocol {
     func applySettings(_ settings: ImportSettings, completion: @escaping (ImportSettings) -> Void)
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(ImportSettingsService.self)
+
 /// This class is responsible for applying the imported settings
 final class ImportSettingsService: ImportSettingsServiceProtocol {
 
@@ -236,17 +238,17 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
             case .success(_):
-                DDLogInfo("(ImportSettingsService) - updateMetaAndReloadCB; Successfully updates filters meta and localizations")
+                LOG.info("Successfully updates filters meta and localizations")
             case .error(let error):
-                DDLogError("(ImportSettingsService) - updateMetaAndReloadCB; Error occurred while updating filters meta and localizations; Error: \(error)")
+                LOG.error("Error occurred while updating filters meta and localizations; Error: \(error)")
             }
             group.leave()
         } onCbReloaded: { error in
             if let error = error {
-                DDLogError("(ImportSettingsService) - updateMetaAndReloadCB; Error occurred while reloading content blockers; Error: \(error)")
+                LOG.error("Error occurred while reloading content blockers; Error: \(error)")
                 return
             }
-            DDLogInfo("(ImportSettingsService) - updateMetaAndReloadCB; Content blockers successfully reloaded")
+            LOG.info("Content blockers successfully reloaded")
         }
         group.wait()
     }

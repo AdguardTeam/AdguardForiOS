@@ -47,6 +47,8 @@ protocol LangsMetaStorageProtocol {
     func deleteLangsForFilters(withIds ids: [Int]) throws
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper("MetaStorage+Langs")
+
 extension MetaStorage: LangsMetaStorageProtocol {
     // Returns array of languages for filter with specified id
     func getLangsForFilter(withId id: Int) throws -> [String] {
@@ -57,7 +59,7 @@ extension MetaStorage: LangsMetaStorageProtocol {
             let dbLang = FilterLangsTable(dbLang: lang)
             return dbLang.lang
         }
-        Logger.logDebug("(FiltersMetaStorage) - getLangsForFilter returning \(result.count) langs objects for filter with id=\(id)")
+        LOG.debug("Returning \(result.count) langs objects for filter with id=\(id)")
         return result
     }
 
@@ -72,7 +74,7 @@ extension MetaStorage: LangsMetaStorageProtocol {
         }
         let langsToDelete = FilterLangsTable.table.filter(FilterLangsTable.filterId == id && !langs.contains(FilterLangsTable.lang))
         let deletedRows = try filtersDb.run(langsToDelete.delete())
-        Logger.logDebug("(FiltersMetaStorage) - updateAll langs; deleted \(deletedRows) rows")
+        LOG.debug("Deleted \(deletedRows) rows")
     }
 
     // Updates passed language for filter. If language is missing adds it
@@ -80,13 +82,13 @@ extension MetaStorage: LangsMetaStorageProtocol {
         let query = FilterLangsTable.table.insert(or: .replace ,FilterLangsTable.filterId <- id, FilterLangsTable.lang <- lang)
         // Query: INSERT OR REPLACE INTO filter_langs (filter_id, lang)
         try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) -  Insert row with filterID \(id) and lang \(lang)")
+        LOG.debug("Insert row with filterID \(id) and lang \(lang)")
     }
 
     // Deletes langs for filters with passed ids
     func deleteLangsForFilters(withIds ids: [Int]) throws {
         let langsToDelete = FilterLangsTable.table.filter(ids.contains(FilterLangsTable.filterId))
         let deletedRows = try filtersDb.run(langsToDelete.delete())
-        Logger.logDebug("(FiltersMetaStorage) - deleteLangsForFilters; deleted \(deletedRows) filters")
+        LOG.debug("Deleted \(deletedRows) filters")
     }
 }

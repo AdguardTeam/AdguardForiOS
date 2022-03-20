@@ -16,12 +16,15 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
+// TODO: This Objective-C class never USED, remove it
+
 #import <objc/runtime.h>
 #import "NSString+Utils.h"
 #import "ACObject.h"
-#import "DDLogMacros.h"
 #import "ACommons/ACLang.h"
 #import "ACommons/ACIO.h"
+#import "ObjCLogMacro.h"
+#import <SharedAdGuardSDK/SharedAdGuardSDK.h>
 
 
 /////////////////////////////////////////////////////////////////////
@@ -37,7 +40,13 @@ static dispatch_queue_t workingQueue;
 #pragma mark Init and Class methods
 /////////////////////////////////////////////////////////////////////
 
+static LoggerWrapper *LOG = nil;
+
 +(void)initialize{
+
+    if (!LOG) {
+        LOG = [LoggerFactory objcGetLoggerWrapper: ACObject.self];
+    }
 
     @autoreleasepool {
 
@@ -127,7 +136,7 @@ static dispatch_queue_t workingQueue;
                     if (obj)
                         propertiesDict[key] = obj;
                 } @catch (NSException *exception) {
-                    DDLogError(@"An error occurred, while decoding object (initWithCoder initializer,  ACObject class), exception : %@", exception);
+                    ObjcLogError(LOG, @"An error occurred, while decoding object (initWithCoder initializer,  ACObject class), exception : %@", exception);
                 }
 
             }

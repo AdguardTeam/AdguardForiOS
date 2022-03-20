@@ -18,6 +18,8 @@
 
 #import "ACNNetworking.h"
 #import "ACLang.h"
+#import "ObjCLogMacro.h"
+#import <SharedAdGuardSDK/SharedAdGuardSDK.h>
 
 NSString *ACNNetworkingErrorDomain = @"ACNNetworkingErrorDomain";
 
@@ -38,6 +40,13 @@ NSString *ACNNetworkingErrorDomain = @"ACNNetworkingErrorDomain";
 
 @implementation ACNNetworking
 
+static LoggerWrapper *LOG = nil;
+
+ + (void) initialize {
+     if (!LOG)
+         LOG = [LoggerFactory objcGetLoggerWrapper: ACNNetworking.self];
+ }
+
 - (instancetype)init{
 
     if (self = [super init]) {
@@ -57,11 +66,11 @@ NSString *ACNNetworkingErrorDomain = @"ACNNetworkingErrorDomain";
         NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
 
         NSString *cachePath = [[myPath stringByAppendingPathComponent:bundleIdentifier] stringByAppendingPathComponent:CACHE_NAME];
-        DDLogDebug(@"(ANCNetworking) Cache path: %@", cachePath);
+
+        ObjcLogDebug(LOG, @"Cache path: %@", cachePath);
 #else
         NSString *cachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:CACHE_NAME];
-
-        DDLogDebug(@"(ANCNetworking) Cache path: %@", cachePath);
+        ObjcLogDebug(LOG, @"Cache path: %@", cachePath);
 #endif
 
         NSURLCache *myCache = [[NSURLCache alloc] initWithMemoryCapacity: 16384 diskCapacity: 10000000 diskPath: cachePath];

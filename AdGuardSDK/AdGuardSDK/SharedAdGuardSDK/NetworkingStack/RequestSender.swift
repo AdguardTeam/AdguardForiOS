@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
 
 // MARK: - RequestConfig
 
@@ -55,6 +56,8 @@ public protocol RequestSenderProtocol {
 
 // MARK: - RequestSender
 
+private let LOG = LoggerFactory.getLoggerWrapper(RequestSender.self)
+
 /**
  This class is responsible for sending requests
  `send` method accepts `requestConfig` with `Parser` so it knows
@@ -85,7 +88,7 @@ public final class RequestSender: RequestSenderProtocol{
         #else
         // Process HTTP requests in background
         ProcessInfo().performExpiringActivity(withReason: "Sending HTTP request") { [weak self, group] expired in
-            Logger.logDebug("Sending request with URL = \(requestConfig.request.urlRequest?.url?.absoluteString ?? "nil"); expired = \(expired)")
+            LOG.debug("Sending request with URL = \(requestConfig.request.urlRequest?.url?.absoluteString ?? "nil"); expired = \(expired)")
 
             group.enter()
             self?.requestQueue.async {
@@ -107,14 +110,14 @@ public final class RequestSender: RequestSenderProtocol{
     private func sendInternal<Parser>(requestConfig: RequestConfig<Parser>, completion: @escaping (Result<Parser.Model>) -> Void) where Parser : ParserProtocol {
         guard let urlRequest = requestConfig.request.urlRequest else {
             let error = RequestSenderError.stringToUrlError
-            Logger.logError("Error: \(error)")
+            LOG.error("Error: \(error)")
             completion(.error(error))
             return
         }
 
         let task = session.dataTask(with: urlRequest) { (data: Data?, response: URLResponse?, error: Error?) in
             if let error = error {
-                Logger.logError("Error: \(error)")
+                LOG.error("Error: \(error)")
                 completion(.error(error))
                 return
             }
@@ -122,7 +125,7 @@ public final class RequestSender: RequestSenderProtocol{
                 let parsedModel: Parser.Model = requestConfig.parser.parse(data: data, response: response)
                 else {
                     let error = RequestSenderError.receivedDataParsingError
-                    Logger.logError(error.localizedDescription)
+                    LOG.error(error.localizedDescription)
                     completion(.error(error))
                     return
             }

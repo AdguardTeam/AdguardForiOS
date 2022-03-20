@@ -23,6 +23,8 @@ protocol DnsRequestProcessedEventHandlerProtocol: AnyObject {
     func handle(event: AGDnsRequestProcessedEventWrapper)
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(DnsRequestProcessedEventHandler.self)
+
 /// This object is used in Tunnel to save statistics data obtained from DNS-libs
 final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProtocol {
 
@@ -50,11 +52,11 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
     func handle(event: AGDnsRequestProcessedEventWrapper) {
         eventQueue.async { [weak self] in
             guard let self = self, event.error == nil else {
-                Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; Error: \(event.error ?? "Missing self")")
+                LOG.error("Error: \(event.error ?? "Missing self")")
                 return
             }
 
-            Logger.logInfo("handleEvent domain: \(event.domain) answer: \(event.answer) status: \(event.status) rules: \(event.rules) type: \(event.type) whitelst: \(event.whitelist) upstreamId: \(event.upstreamId ?? 0)")
+            LOG.info("handleEvent domain: \(event.domain) answer: \(event.answer) status: \(event.status) rules: \(event.rules) type: \(event.type) whitelst: \(event.whitelist) upstreamId: \(event.upstreamId ?? 0)")
 
             let activeDnsUpstream: DnsProxyUpstream?
 

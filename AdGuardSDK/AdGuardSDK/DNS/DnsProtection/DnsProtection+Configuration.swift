@@ -48,6 +48,8 @@ public protocol DnsProtectionConfigurationProtocol {
     func updateConfig(with newConfig: DnsConfigurationProtocol)
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper("DnsProtection+Configuration")
+
 extension DnsProtection {
     public var proStatus: Bool {
         return workingQueue.sync { return configuration.proStatus }
@@ -91,7 +93,7 @@ extension DnsProtection {
 
     public func updateConfig(with newConfig: DnsConfigurationProtocol) {
         workingQueue.sync {
-            Logger.logInfo("(DnsProtection+Configuration) - updateConfig;")
+            LOG.info("updateConfig")
             self.configuration.updateConfig(with: newConfig)
         }
     }

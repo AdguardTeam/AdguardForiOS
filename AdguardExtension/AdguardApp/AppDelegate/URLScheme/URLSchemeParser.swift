@@ -37,6 +37,7 @@
  12. <inAppUrlScheme>://enableAdvancedProtection                     <--- Open Advanced protection screen
  13. <adguardScheme>://add_dns_server?address:<upstream>&name:<name> <--- Adding custom DNS server
  */
+import SharedAdGuardSDK
 
 protocol IURLSchemeParser {
     func parse(url: URL) -> Bool
@@ -75,6 +76,8 @@ fileprivate enum StringConstants: String {
     }
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(URLSchemeParser.self)
+
 struct URLSchemeParser: IURLSchemeParser {
 
     private let executor: IURLSchemeExecutor
@@ -95,79 +98,79 @@ struct URLSchemeParser: IURLSchemeParser {
         switch (scheme, command) {
         // Adding new user rule from safari
         case (.urlScheme, .urlSchemeCommandAdd):
-            DDLogInfo("(URLSchemeParser) openurl - adding new user rule from safari")
+            LOG.info("Openurl - adding new user rule from safari")
             let processor = OpenUserFilterControllerParser(executor: executor)
             return processor.parse(url)
 
         // Turning on/off DNS protection from widget
         case (.urlScheme, .openSystemProtection):
-            DDLogInfo("(URLSchemeParser) openurl - turning on/off DNS protection from widget")
+            LOG.info("Openurl - turning on/off DNS protection from widget")
             let processor = OpenDnsSettingsControllerWithLaunchScreenParser(executor: executor)
             return processor.parse(url)
 
         // Turning on/off complex protection from widget
         case (.urlScheme, .openComplexProtection):
-            DDLogInfo("(URLSchemeParser) openurl - turning on/off complex protection from widget")
+            LOG.info("Openurl - turning on/off complex protection from widget")
             let processor = OpenMainPageControllerControllerWithLaunchScreenParser(executor: executor)
             return processor.parse(url)
 
         // Activate license by URL
         case (.urlScheme, .activateLicense):
-            DDLogInfo("(URLSchemeParser) - activate license key from openUrl")
+            LOG.info("Activate license key from openUrl")
             let loginParser = OpenLoginControllerParser(executor: executor)
             return loginParser.parse(url)
 
         // Adding custom DNS server
         case (.sdnsScheme, _):
-            DDLogInfo("(URLSchemeParser) openurl sdns: \(url.absoluteString)")
+            LOG.info("Openurl sdns: \(url.absoluteString)")
             let processor = OpenDnsProvidersControllerWithSDNSParser(executor: executor)
             return processor.parse(url)
 
         // Adding custom DNS server
         case (.urlScheme, .addDnsServer):
-            DDLogInfo("(URLSchemeParser) openurl - add dns server: \(url.absoluteString)")
+            LOG.info("Openurl - add dns server: \(url.absoluteString)")
             let processor = OpenDnsProvidersControllerWithAdguardParser(executor: executor)
             return processor.parse(url)
 
         // Import settings
         case (.urlScheme, .applySettings):
-            DDLogInfo("(URLSchemeParser) openurl - apply settings")
+            LOG.info("Openurl - apply settings")
             let processor = OpenImportSettingsControllerParser(executor: executor)
             return processor.parse(url)
 
         // Subscribe to custom safari filter
         case (_, .subscribe):
-            DDLogInfo("(URLSchemeParser) openurl - subscribe filter")
+            LOG.info("Openurl - subscribe filter")
             let processor = OpenFiltersMasterControllerParser(executor: executor)
             return processor.parse(url)
 
         // Open Tunnel Mode settings
         case (_, .openTunnelModeSettings):
-            DDLogInfo("(URLSchemeParser) openurl - open tunnel mode settings")
+            LOG.info("Openurl - open tunnel mode settings")
             let processor = OpenTunnelModeControllerParser(executor: executor)
             return processor.parse(url)
 
         // Log in by social networks
         case (.urlScheme, .authScheme):
-            DDLogInfo("(URLSchemeParser) openurl - Log in by social networks")
+            LOG.info("Openurl - Log in by social networks")
             let processor = SocialNetworkAuthParametersParser(executor: executor)
             return processor.parse(url)
 
         // Open with safari web extension action
         case (.inAppUrlScheme, .urlSchemeSafariWebExtension):
-            DDLogInfo("(URLSchemeParser) openurl - open with safari web extension action")
+            LOG.info("Openurl - open with safari web extension action")
             let processor = SafariWebExtensionParametersParser(executor: executor)
             return processor.parse(url)
 
         // Open license controller
         case (.inAppUrlScheme, .upgradeApp):
-            DDLogInfo("(URLSchemeParser) openurl - open license screen; proStatus=\(configurationService.proStatus)")
+            LOG.info("Openurl - open license screen; proStatus=\(configurationService.proStatus)")
             let processor = OpenLicenseControllerParser(executor: executor)
             return processor.parse(url)
 
         // Open license controller
         case (.inAppUrlScheme, .enableAdvancedProtection):
-            DDLogInfo("(URLSchemeParser) openurl - open advanced protection screen; proStatus=\(configurationService.proStatus)")
+            LOG.info("Openurl - open advanced protection screen; proStatus=\(configurationService.proStatus)")
             let processor = OpenAdvancedProtectionParser(executor: executor)
             return processor.parse(url)
 

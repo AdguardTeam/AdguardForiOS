@@ -18,10 +18,13 @@
 
 import SafariAdGuardSDK
 import DnsAdGuardSDK
+import SharedAdGuardSDK
 
 protocol MigrationServiceProtocol {
     func migrateIfNeeded()
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(MigrationService.self)
 
 /// This object is responsible for running migration code
 /// It has a knowledge of previous and current product versions
@@ -74,7 +77,7 @@ final class MigrationService: MigrationServiceProtocol {
     }
 
     private func minorAndPatchMigration() {
-        DDLogInfo("(MigrationService) - minorAndPatchMigration")
+        LOG.info("minorAndPatchMigration")
 
         /*
          There was a migration here but it is removed now.
@@ -95,7 +98,7 @@ final class MigrationService: MigrationServiceProtocol {
          So, we've decided just to reset all the settings to default for users that had a version before 4.1.
          */
         if versionProvider.isLastVersionLessThan4_1 {
-            DDLogInfo("(MigrationService) - reset the app to default state")
+            LOG.info("Reset the app to default state")
             settingsResetService.resetAllSettings(sync: true, fromUI: false, resetLicense: false)
             // For older versions after resetting settings mark it as a "first run" to conduct necessary init.
             resources.firstRun = true
@@ -112,7 +115,7 @@ final class MigrationService: MigrationServiceProtocol {
          So we need to migrate this data respectively
          */
         if versionProvider.isMigrationFrom4_1To4_3Needed {
-            DDLogInfo("(MigrationService) - app migration to 4.3 started")
+            LOG.info("App migration to 4.3 started")
 
             let oldFilesMigration = SDKMigrationOldFilesHelper(
                 oldFilesContainerUrl: resources.sharedResuorcesURL(),
@@ -135,22 +138,22 @@ final class MigrationService: MigrationServiceProtocol {
                 try sdkMigrationHelper.migrate()
                 // Reloads Tunnel if it is active to apply migrated DNS settings
                 dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsSettings, completion: nil)
-                DDLogInfo("(MigrationService) - Successfully migrated old data to SDK")
+                LOG.info("Successfully migrated old data to SDK")
             } catch {
-                DDLogError("(MigrationService) - Failed to migrate old data to SDK; Error: \(error)")
+                LOG.error("Failed to migrate old data to SDK; Error: \(error)")
             }
         }
 
         if versionProvider.isMigrationFrom4_3_0To4_3_1Needed {
-            DDLogInfo("(MigrationService) - Starting migrate rules from 4.3.0 to 4.3.1")
+            LOG.info("Starting migrate rules from 4.3.0 to 4.3.1")
             let safariMigration4_3_1 = SafariMigration4_3_1(resources: resources, safariProtection: safariProtection as! SafariProtectionMigrationsProtocol)
             let dnsMigration4_3_1 = DnsMigration4_3_1(resources: resources, dnsProtection: dnsProtection)
 
             safariMigration4_3_1.migrate()
-            DDLogInfo("(MigrationService) - Successfully migrate safari rules from 4.3.0 to 4.3.1")
+            LOG.info("Successfully migrate safari rules from 4.3.0 to 4.3.1")
 
             dnsMigration4_3_1.migrate()
-            DDLogInfo("(MigrationService) - Successfully migrate dns rules from 4.3.0 to 4.3.1")
+            LOG.info("Successfully migrate dns rules from 4.3.0 to 4.3.1")
         }
 
         let currentBuildVersion = Int(productInfo.buildNumber())

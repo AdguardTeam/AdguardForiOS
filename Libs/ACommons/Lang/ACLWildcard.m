@@ -16,10 +16,13 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "ACLLogger.h"
+// TODO: This Objective-C class never USED, remove it
+
 #import "NSString+Utils.h"
 #import "NSException+Utils.h"
 #import "ACLWildcard.h"
+#import "ObjCLogMacro.h"
+#import <SharedAdGuardSDK/SharedAdGuardSDK.h>
 
 #define MASK_ANY_SYMBOLS        @"*"
 #define MASK_ANY_SYMBOL         @"?"
@@ -33,9 +36,17 @@
 
 @implementation ACLWildcard
 
+static LoggerWrapper *LOG = nil;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  Init and Class methods
 /////////////////////////////////////////////////////////////////////
+
++ (void) initialize {
+    if (!LOG) {
+        LOG = [LoggerFactory objcGetLoggerWrapper: ACLWildcard.self];
+    }
+}
 
 - (id)initWithWildcard:(NSString *)pattern options:(NSRegularExpressionOptions)options error:(NSError *__autoreleasing *)error
 {
@@ -54,10 +65,9 @@
     NSError *err;
     ACLWildcard *wildcard = [[ACLWildcard alloc] initWithWildcard:pattern options:options error:&err];
 
-    if  (err){
-
-        DDLogWarn(@"Can't create regex for: %@", pattern);
-        DDLogWarn(@"Regex creation error: %@", [err localizedDescription]);
+    if (err) {
+        ObjcLogWarn(LOG, @"Can't create regex for: %@", pattern);
+        ObjcLogWarn(LOG, @"Regex creation error: %@", [err localizedDescription]);
         return nil;
     }
 

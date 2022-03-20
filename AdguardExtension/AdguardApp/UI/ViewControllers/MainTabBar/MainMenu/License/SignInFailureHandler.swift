@@ -17,11 +17,14 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
 
 protocol SignInFailureHandlerProtocol {
     typealias SignInMessages = (errorMessage: String?, alertMessage: String?)?
     func loginFailure(_ error: NSError?, auth2Fa: (() -> ())? ) -> SignInMessages
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(SignInFailureHandler.self)
 
 struct SignInFailureHandler: SignInFailureHandlerProtocol {
     private let notificationService: UserNotificationServiceProtocol
@@ -35,7 +38,7 @@ struct SignInFailureHandler: SignInFailureHandlerProtocol {
         if error == nil || error?.domain != LoginService.loginErrorDomain {
             // unknown error
             let errorDescription = error?.localizedDescription ?? "nil"
-            DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
+            LOG.error("processLoginResponse - unknown error: \(errorDescription)")
             let message = String.localizedString("login_error_message")
 
             notificationService.postNotificationInForeground(body: message, title: "")

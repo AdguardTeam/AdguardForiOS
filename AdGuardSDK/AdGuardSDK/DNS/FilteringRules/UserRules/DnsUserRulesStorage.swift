@@ -19,6 +19,8 @@
 import OrderedCollections
 import SharedAdGuardSDK
 
+private let LOG = LoggerFactory.getLoggerWrapper(DnsUserRulesStorage.self)
+
 final class DnsUserRulesStorage: UserRulesStorageProtocol {
 
     var rules: OrderedSet<UserRule> {
@@ -61,7 +63,7 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
 
     // fileStorage should be passed as new object with unique folder to avoid filters ids collisions
     init(type: DnsUserRuleType, fileStorage: FilterFilesStorageProtocol, readOnly: Bool = false) {
-        Logger.logInfo("(DnsUserRulesStorage) - init start")
+        LOG.info("Init start")
         self.type = type
         self.fileStorage = fileStorage
 
@@ -78,24 +80,24 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
             // Create empty file if doesn't exist for all rules
             if fileStorage.getFilterContentForFilter(withId: type.allRulesFilterId) == nil {
                 do {
-                    Logger.logInfo("(DnsUserRulesStorage) - filter \(type.allRulesFilterId) not found, creating an empty filter")
+                    LOG.info("Filter \(type.allRulesFilterId) not found, creating an empty filter")
                     try fileStorage.saveFilter(withId: type.allRulesFilterId, filterContent: "")
                 } catch {
-                    Logger.logError("(DnsUserRulesStorage) - init; Failed to create empty file with id=\(type.allRulesFilterId). It can lead to various errors")
+                    LOG.error("Failed to create empty file with id=\(type.allRulesFilterId). It can lead to various errors")
                 }
             }
 
             // Create empty file if doesn't exist for enabled rules
             if fileStorage.getFilterContentForFilter(withId: type.enabledRulesFilterId) == nil {
                 do {
-                    Logger.logInfo("(DnsUserRulesStorage) - filter \(type.enabledRulesFilterId) not found, creating an empty filter")
+                    LOG.info("Filter \(type.enabledRulesFilterId) not found, creating an empty filter")
                     try fileStorage.saveFilter(withId: type.enabledRulesFilterId, filterContent: "")
                 } catch {
-                    Logger.logError("(DnsUserRulesStorage) - init; Failed to create empty file with id=\(type.enabledRulesFilterId). It can lead to various errors")
+                    LOG.error("Failed to create empty file with id=\(type.enabledRulesFilterId). It can lead to various errors")
                 }
             }
         }
-        Logger.logInfo("(DnsUserRulesStorage) - init end")
+        LOG.info("Init end")
     }
 
     // MARK: - Private methods
@@ -112,7 +114,7 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
         do {
             try fileStorage.saveFilter(withId: type.allRulesFilterId, filterContent: rulesString)
         } catch {
-            Logger.logError("(DnsUserRulesStorage) - saveAllRules; Error saving all rules; Error: \(error)")
+            LOG.error("Error saving all rules; Error: \(error)")
         }
     }
 
@@ -128,7 +130,7 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
         do {
             try fileStorage.saveFilter(withId: type.enabledRulesFilterId, filterContent: rulesString)
         } catch {
-            Logger.logError("(DnsUserRulesStorage) - saveEnabledRules; Error saving enabled rules; Error: \(error)")
+            LOG.error("Error saving enabled rules; Error: \(error)")
         }
     }
 }

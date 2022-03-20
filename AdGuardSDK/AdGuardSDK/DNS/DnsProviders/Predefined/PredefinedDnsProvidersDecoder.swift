@@ -22,6 +22,8 @@ protocol PredefinedDnsProvidersDecoderProtocol {
     var providers: [PredefinedDnsProvider] { get }
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(PredefinedDnsProvidersDecoder.self)
+
 /**
  Decodes **providers.json** and **providers_i18n.json** and returns their data as an object
  File **providers.json** contains JSON with information about predefined DNS providers
@@ -119,7 +121,7 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
     /* Returns json Data from file name */
     private func getData(forFileName fileName: String) throws -> Data {
         guard let pathString = bundle.path(forResource: fileName, ofType: "json") else {
-            Logger.logError("(DnsProvidersDecoder) - getData; Failed to get \(fileName).json path")
+            LOG.error("Failed to get \(fileName).json path")
             throw CommonError.missingFile(filename: "\(fileName).json")
         }
         let pathUrl = URL(fileURLWithPath: pathString)

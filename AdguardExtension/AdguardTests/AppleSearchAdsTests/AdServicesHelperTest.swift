@@ -47,7 +47,7 @@ class AdServicesHelperTest: XCTestCase {
                 XCTAssertNil(json["clickDate"])
                 XCTAssertEqual(json, attributionData)
                 expectation.fulfill()
-            case .failure(let error): XCTFail("\(error)")
+            case .error(let error): XCTFail("\(error)")
             }
         }
 
@@ -70,7 +70,7 @@ class AdServicesHelperTest: XCTestCase {
                 XCTAssertEqual(json["clickDate"], attributionData["clickDate"])
                 XCTAssertEqual(json, attributionData)
                 expectation.fulfill()
-            case .failure(let error): XCTFail("\(error)")
+            case .error(let error): XCTFail("\(error)")
             }
         }
 
@@ -87,7 +87,7 @@ class AdServicesHelperTest: XCTestCase {
         helper.fetchAttributionRecords { result in
             switch result {
             case .success(_): XCTFail()
-            case .failure(let error):
+            case .error(let error):
                 XCTAssertEqual(error as NSError, self.testError)
                 expectation.fulfill()
             }
@@ -106,7 +106,7 @@ class AdServicesHelperTest: XCTestCase {
         helper.fetchAttributionRecords { result in
             switch result {
             case .success(_): XCTFail()
-            case .failure(let error):
+            case .error(let error):
                 XCTAssertEqual(error as! AppleSearchAdsService.AdsError,
                                AppleSearchAdsService.AdsError.missingAttributionData)
                 expectation.fulfill()
@@ -128,7 +128,7 @@ class AdServicesHelperTest: XCTestCase {
         helper.fetchAttributionRecords { result in
             switch result {
             case .success(_): XCTFail()
-            case .failure(let error):
+            case .error(let error):
                 XCTAssertEqual(error as NSError, self.testError)
                 expectation.fulfill()
             }

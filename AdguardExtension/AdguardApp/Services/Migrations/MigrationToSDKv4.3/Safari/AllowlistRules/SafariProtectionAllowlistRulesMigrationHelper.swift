@@ -17,7 +17,7 @@
 //
 
 import Foundation
-import enum SharedAdGuardSDK.CommonError
+import SharedAdGuardSDK
 
 protocol SafariProtectionAllowlistRulesMigrationHelperProtocol: AnyObject {
     /// Returns swift allowlist rules objects from obsolete rules objects
@@ -29,6 +29,8 @@ protocol SafariProtectionAllowlistRulesMigrationHelperProtocol: AnyObject {
     /// Removes old files where allowlist rules used to store
     func removeOldRuleFiles() throws
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(SafariProtectionAllowlistRulesMigrationHelper.self)
 
 /// This object is a helper for `SDKMigrationServiceHelper`
 /// It is responsible for providing old allowlist and inverted allowlist rules objects and removing obsolete files
@@ -50,43 +52,43 @@ final class SafariProtectionAllowlistRulesMigrationHelper: SafariProtectionAllow
     }
 
     func getAllowlistRules() throws -> [SDKSafariMigrationRule] {
-        DDLogInfo("(SafariProtectionAllowlistRulesMigrationHelper) - Start fetching data from allowlist rule file")
+        LOG.info("Start fetching data from allowlist rule file")
         let url = URL(fileURLWithPath: rulesContainerDirectoryPath).appendingPathComponent(oldSafariAllowListRulesFileName)
         guard fileManager.fileExists(atPath: url.path) else {
-            DDLogWarn("(SafariProtectionAllowlistRulesMigrationHelper) -  allowlist rules file doesn't exist")
+            LOG.warn("Allowlist rules file doesn't exist")
             return []
         }
 
         let data = try Data(contentsOf: url)
             guard let result = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [SDKSafariMigrationAllowlistRule] else {
-            DDLogWarn("(SafariProtectionAllowlistRulesMigrationHelper) - NSKeyedUnarchiver return nil data for allowlist rules file")
+            LOG.warn("NSKeyedUnarchiver return nil data for allowlist rules file")
             return []
         }
 
-        DDLogInfo("(SafariProtectionAllowlistRulesMigrationHelper) - Allowlist data successfully fetched, rules count: \(result.count)")
+        LOG.info("Allowlist data successfully fetched, rules count: \(result.count)")
         return result
     }
 
     func getInvertedAllowlistRules() throws -> [SDKSafariMigrationRule] {
-        DDLogInfo("(SafariProtectionAllowlistRulesMigrationHelper) - Start fetching data from inverted allowlist rules file")
+        LOG.info("Start fetching data from inverted allowlist rules file")
         let url = URL(fileURLWithPath: rulesContainerDirectoryPath).appendingPathComponent(oldSafariInvertedAllowListRulesFileName)
         guard fileManager.fileExists(atPath: url.path) else {
-            DDLogWarn("(SafariProtectionAllowlistRulesMigrationHelper) -  inverted allowlist rules file doesn't exist")
+            LOG.warn("Inverted allowlist rules file doesn't exist")
             return []
         }
 
         let data = try Data(contentsOf: url)
         guard let result = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? SDKSafariMigrationInvertedAllowlistDomainObject else {
-            DDLogWarn("(SafariProtectionAllowlistRulesMigrationHelper) - NSKeyedUnarchiver return nil data for inverted allowlist rules file")
+            LOG.warn("NSKeyedUnarchiver return nil data for inverted allowlist rules file")
             return []
         }
 
-        DDLogInfo("(SafariProtectionAllowlistRulesMigrationHelper) - Inverted allowlist data successfully fetched, rules count: \(result.rules.count)")
+        LOG.info("Inverted allowlist data successfully fetched, rules count: \(result.rules.count)")
         return result.rules
     }
 
     func removeOldRuleFiles() throws {
-        DDLogInfo("(SafariProtectionAllowlistRulesMigrationHelper) - Start removing rule files")
+        LOG.info("Start removing rule files")
 
         let invertedAllowlistRulesFileUrl = URL(fileURLWithPath: rulesContainerDirectoryPath).appendingPathComponent(oldSafariInvertedAllowListRulesFileName)
         let allowlistRulesFileUrl = URL(fileURLWithPath: rulesContainerDirectoryPath).appendingPathComponent(oldSafariAllowListRulesFileName)

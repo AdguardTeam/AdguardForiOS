@@ -17,14 +17,15 @@
 //
 
 import Foundation
+import SharedAdGuardSDK
 
 class AdServicesHelperMock: AdServicesHelperProtocol {
 
     var invokedFetchAttributionRecords = false
     var invokedFetchAttributionRecordsCount = 0
-    var stubbedFetchAttributionRecordsCompletionHandlerResult: Result<[String: String], Error>?
+    var stubbedFetchAttributionRecordsCompletionHandlerResult: Result<[String: String]>?
 
-    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
+    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String]>) -> Void) {
         invokedFetchAttributionRecords = true
         invokedFetchAttributionRecordsCount += 1
         if let result = stubbedFetchAttributionRecordsCompletionHandlerResult {

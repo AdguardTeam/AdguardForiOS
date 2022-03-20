@@ -16,6 +16,10 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
+import SharedAdGuardSDK
+
+private let LOG = LoggerFactory.getLoggerWrapper(AppDelegate.self)
+
 // Handle UserNotificationService notifications
 extension AppDelegate {
     func subscribeToUserNotificationServiceNotifications() {
@@ -31,7 +35,7 @@ extension AppDelegate {
 
     @objc private func openDnsFiltersController(notification: Notification) {
         let success = presentDnsFiltersController()
-        DDLogInfo("Presented DnsFiltersController successfully = \(success ? "Yes" : "No")")
+        LOG.info("Presented DnsFiltersController successfully = \(success ? "Yes" : "No")")
     }
 
     private func showCommonAlertForTopVc(_ body: String?, _ title: String?) {

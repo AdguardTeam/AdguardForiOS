@@ -19,6 +19,9 @@
 import UIKit
 import SafariAdGuardSDK
 import AGDnsProxy
+import SharedAdGuardSDK
+
+private let LOG = LoggerFactory.getLoggerWrapper(AdvancedSettingsController.self)
 
 final class AdvancedSettingsController: UITableViewController {
 
@@ -75,11 +78,15 @@ final class AdvancedSettingsController: UITableViewController {
     }
 
     @IBAction func debugLogsAction(_ sender: UISwitch) {
+        let manager: LoggerManager = ServiceLocator.shared.getService()!
+
         let isDebugLogs = sender.isOn
         resources.isDebugLogs = isDebugLogs
-        DDLogInfo("Log level changed to \(isDebugLogs ? "DEBUG" : "Normal")")
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
+        let logLevel: LogLevel = resources.isDebugLogs ? .debug : .info
+        manager.configure(logLevel)
+        manager.configureDnsLibsLogLevel(logLevel)
+        LOG.info("Log level switched to \(logLevel)")
+
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedAdvancedSettings, completion: nil) // restart tunnel to apply new log level
     }
 
@@ -148,10 +155,10 @@ final class AdvancedSettingsController: UITableViewController {
             guard let self = self else { return }
             self.vpnManager.removeVpnConfiguration {(error) in
                 DispatchQueue.main.async {
-                    DDLogInfo("AdvancedSettingsController - removing VPN profile")
+                    LOG.info("AdvancedSettingsController - removing VPN profile")
                     if error != nil {
                         ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("remove_vpn_profile_error_title"), message: String.localizedString("remove_vpn_profile_error_message"))
-                        DDLogError("AdvancedSettingsController - error removing VPN profile")
+                        LOG.error("AdvancedSettingsController - error removing VPN profile")
                     }
                 }
             }

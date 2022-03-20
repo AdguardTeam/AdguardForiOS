@@ -85,6 +85,8 @@ public protocol SafariProtectionBackgroundFetchProtocol {
     func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void)
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper("SafariProtection+BackgroundFetch")
+
 /* Extension is used to update filters while main app is in the background */
 extension SafariProtection {
 
@@ -100,7 +102,7 @@ extension SafariProtection {
     // MARK: - Public methods
 
     public func updateSafariProtectionInBackground(_ onStateExecutionFinished: @escaping (_ result: BackgroundFetchUpdateResult) -> Void) {
-        Logger.logInfo("(SafariProtection+BackgroundFetch) - updateSafariProtectionInBackground; Start background fetch, current state = \(currentBackgroundFetchState)")
+        LOG.info("Start background fetch, current state = \(currentBackgroundFetchState)")
 
         switch currentBackgroundFetchState {
         case .loadAndSaveFilters, .updateFinished:
@@ -115,12 +117,12 @@ extension SafariProtection {
     public func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void) {
         BackgroundTaskExecutor.executeAsynchronousTask("SafariProtection+BackgroundFetch.finishBackgroundUpdate") { [weak self] onTaskFinished in
             guard let self = self else {
-                Logger.logError("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate; Missing self")
+                LOG.error("Missing self")
                 onUpdateFinished(CommonError.missingSelf)
                 onTaskFinished()
                 return
             }
-            Logger.logInfo("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate start; Current state = \(self.currentBackgroundFetchState)")
+            LOG.info("Current state = \(self.currentBackgroundFetchState)")
 
             switch self.currentBackgroundFetchState {
             case .loadAndSaveFilters:
@@ -168,7 +170,7 @@ extension SafariProtection {
 
     // 1st step of background update
     private func updateFilters(_ onFiltersUpdated: @escaping (_ result: BackgroundFetchUpdateResult) -> Void) {
-        Logger.logInfo("(SafariProtection+BackgroundFetch) - updateFilters start")
+        LOG.info("updateFilters start")
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
@@ -211,18 +213,18 @@ extension SafariProtection {
                         oldBackgroundFetchState: oldState,
                         error: nil
                     )
-                    Logger.logInfo("(SafariProtection+BackgroundFetch) - updateFilters; Filters were successfully loaded and saved; Update result: \(result)")
+                    LOG.info("Filters were successfully loaded and saved; Update result: \(result)")
                     onFiltersUpdated(result)
                     return
                 }
 
                 // Failed to update
                 if let error = safariFiltersUpdateError {
-                    Logger.logError("(SafariProtection+BackgroundFetch) - updateFilters; Safari update error: \(error)")
+                    LOG.error("Safari update error: \(error)")
 
                 }
                 if let error = dnsFiltersUpdateError {
-                    Logger.logError("(SafariProtection+BackgroundFetch) - updateFilters; DNS update error: \(error)")
+                    LOG.error("DNS update error: \(error)")
                 }
                 let result = BackgroundFetchUpdateResult(
                     backgroundFetchResult: .noData,
@@ -237,7 +239,7 @@ extension SafariProtection {
 
     // 2nd step of the background update
     private func convertFilters(_ onFiltersConverted: @escaping (_ result: BackgroundFetchUpdateResult) -> Void) {
-        Logger.logInfo("(SafariProtection+BackgroundFetch) - convertFiltersInBackground start")
+        LOG.info("convertFiltersInBackground start")
 
         cbQueue.async {
             let oldState = self.currentBackgroundFetchState
@@ -245,7 +247,7 @@ extension SafariProtection {
                 let convertedFilters = self.converter.convertFiltersAndUserRulesToJsons()
                 try self.cbStorage.save(converterResults: convertedFilters)
                 self.currentBackgroundFetchState = .reloadContentBlockers
-                Logger.logInfo("(SafariProtection+BackgroundFetch) - convertFilters; Successfully converted all filters to JSONs")
+                LOG.info("Successfully converted all filters to JSONs")
                 let result = BackgroundFetchUpdateResult(
                         backgroundFetchResult: .newData,
                         newBackgroundFetchState: .reloadContentBlockers,
@@ -253,7 +255,7 @@ extension SafariProtection {
                         error: nil)
                 self.completionQueue.async { onFiltersConverted(result) }
             } catch {
-                Logger.logError("(SafariProtection+BackgroundFetch) - convertFilters; Error converting filters: \(error)")
+                LOG.error("Error converting filters: \(error)")
                 let result = BackgroundFetchUpdateResult(
                         backgroundFetchResult: .noData,
                         newBackgroundFetchState: oldState,
@@ -266,7 +268,7 @@ extension SafariProtection {
 
     // 3rd step of background update
     private func reloadContentBlockers(_ onCbReloaded: @escaping (_ result: BackgroundFetchUpdateResult) -> Void) {
-        Logger.logInfo("(SafariProtection+BackgroundFetch) - reloadContentBlockers start")
+        LOG.info("reloadContentBlockers start")
 
         cbQueue.async { [weak self] in
             self?.cbService.updateContentBlockers { [weak self] error in
@@ -275,7 +277,7 @@ extension SafariProtection {
                 let oldState = self.currentBackgroundFetchState
 
                 if let error = error {
-                    Logger.logError("(SafariProtection+BackgroundFetch) - reloadContentBlockers; Error reloading CBs: \(error)")
+                    LOG.error("Error reloading CBs: \(error)")
                     let result = BackgroundFetchUpdateResult(
                         backgroundFetchResult: .noData,
                         newBackgroundFetchState: oldState,
@@ -284,7 +286,7 @@ extension SafariProtection {
                     )
                     self.completionQueue.async { onCbReloaded(result) }
                 } else {
-                    Logger.logInfo("(SafariProtection+BackgroundFetch) - reloadContentBlockers; Successfully reloaded all CBs")
+                    LOG.info("Successfully reloaded all CBs")
                     self.currentBackgroundFetchState = .updateFinished
                     let result = BackgroundFetchUpdateResult(
                         backgroundFetchResult: .newData,

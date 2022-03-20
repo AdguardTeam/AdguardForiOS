@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
+import SharedAdGuardSDK
 
 protocol AppleSearchAdsServiceProtocol {
     /// Provides attribution records in string JSON format
@@ -27,6 +28,8 @@ fileprivate enum UsedFrameworks {
     case iAd
     case adServices
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(AppleSearchAdsService.self)
 
 /// This object is responsible for providing attribution records
 /// for iAd framework response:
@@ -101,7 +104,7 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
     }
 
     private func processResult(
-        _ result: Result<[String : String], Error>,
+        _ result: Result<[String : String]>,
         type: UsedFrameworks,
         completionHandler: @escaping (_ jsonString: String?) -> Void
     ) {
@@ -109,9 +112,9 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
         switch result {
         case .success(let json):
             jsonString = convertJSONtoParameterString(json: json, type: type)
-        case .failure(let error):
+        case .error(let error):
             jsonString = nil
-            DDLogError("(AppleSearchAdsService) - processResult; Error occurred while receiving attribution records for framework = \(type); Error: \(error)")
+            LOG.error("Error occurred while receiving attribution records for framework = \(type); Error: \(error)")
         }
         completionQueue.async { completionHandler(jsonString) }
     }

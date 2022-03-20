@@ -19,6 +19,8 @@
 import SQLite
 import SharedAdGuardSDK
 
+private let LOG = LoggerFactory.getLoggerWrapper(ActivityStatistics.self)
+
 /// Extension with table compression methods
 /// These methods are not part of Interface, do not use them directly
 extension ActivityStatistics {
@@ -26,20 +28,20 @@ extension ActivityStatistics {
     /// Compresses the table
     func compressTable() throws {
         try statisticsDb.transaction(.immediate) {
-            Logger.logInfo("(ActivityStatistics) - compressTable; Trying to compress the table")
+            LOG.info("Trying to compress the table")
 
             let recordsCountBeforeCompression = try statisticsDb.scalar(ActivityStatisticsTable.table.count)
             let compressedRecords = try getCompressedRecords()
 
             guard compressedRecords.count != recordsCountBeforeCompression else {
-                Logger.logInfo("(ActivityStatistics) - compressTable; No need to compress statistics")
+                LOG.info("No need to compress statistics")
                 return
             }
 
             try reset()
             try add(records: compressedRecords)
 
-            Logger.logInfo("(ActivityStatistics) - compressTable; Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
+            LOG.info("Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
         }
     }
 
@@ -49,7 +51,7 @@ extension ActivityStatistics {
             return
         }
 
-        Logger.logInfo("(ActivityStatistics) - adding \(records.count) records")
+        LOG.info("Adding \(records.count) records")
 
         // Use chunks of smaller size to call insertMany in order to avoid exceeding NEPacketTunnelProvider's
         // memory limit. See here for details: https://github.com/AdguardTeam/AdguardForiOS/issues/1935
@@ -71,7 +73,7 @@ extension ActivityStatistics {
             try statisticsDb.run(addQuery)
         }
 
-        Logger.logInfo("(ActivityStatistics) - finished adding records")
+        LOG.info("Finished adding records")
     }
 
     private func getCompressedRecords() throws -> [ActivityStatisticsRecord] {

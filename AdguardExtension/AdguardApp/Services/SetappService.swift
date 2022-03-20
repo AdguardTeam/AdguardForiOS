@@ -18,6 +18,7 @@
 
 import Foundation
 import Setapp
+import SharedAdGuardSDK
 
 /**
  this service is responsible for managing the setapp license activation
@@ -34,6 +35,8 @@ protocol SetappServiceProtocol {
     func openUrl(_ url: URL, options: [UIApplication.OpenURLOptionsKey : Any])->Bool
 }
 
+private let LOG = LoggerFactory.getLoggerWrapper(SetappService.self)
+
 class SetappService: SetappServiceProtocol, SetappManagerDelegate {
 
     private let purchaseService: PurchaseServiceProtocol
@@ -46,14 +49,14 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
         self.purchaseService = purchaseService
         self.resources = resources
 
-        DDLogInfo("(SetappService) - init; setappUsed  = \(resources.setappUsed )")
+        LOG.info("SetappService - init; setappUsed  = \(resources.setappUsed )")
         if resources.setappUsed {
             purchaseService.updateSetappState(subscription: SetappManager.shared.subscription)
         }
     }
 
     func start() {
-        DDLogInfo("(SetappService) - starting Setapp; Current status = \(SetappManager.shared.subscription.description); setappUsed = \(resources.setappUsed)")
+        LOG.info("Starting Setapp; Current status = \(SetappManager.shared.subscription.description); setappUsed = \(resources.setappUsed)")
         if resources.setappUsed {
             startManager()
         }
@@ -68,15 +71,15 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
             startManager()
 
             if SetappManager.shared.canOpen(url: url) {
-                DDLogInfo("(SetappService) - Setapp can openUrl; url: \(url)")
+                LOG.info("Setapp can openUrl; url: \(url)")
 
                 return SetappManager.shared.open(url: url, options: options) { [weak self] result in
                     switch result {
                     case .success(let subscription):
-                        DDLogInfo("Successfully logged in with setapp, current subscription: \(subscription.description)")
+                        LOG.info("Successfully logged in with setapp, current subscription: \(subscription.description)")
                         self?.resources.setappUsed = true
                     case .failure(let error):
-                        DDLogError("Error while logging in with setapp: \(error)")
+                        LOG.error("Error while logging in with setapp: \(error)")
                         if (error as NSError).code == self?.deviceLimitErrorCode {
                             NotificationCenter.default.post(Notification(name: .setappDeviceLimitReched))
                         }
@@ -91,8 +94,8 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
     // MARK: -- SetAppManagerDelegate
 
     func setappManager(_ manager: SetappManager, didUpdateSubscriptionTo newSetappSubscription: SetappSubscription) {
-        DDLogInfo("(SetappService) setapp subscription changed")
-        DDLogInfo("(SetappService) setapp new subscription is active: \(manager.subscription.isActive)")
+        LOG.info("Setapp subscription changed")
+        LOG.info("Setapp new subscription is active: \(manager.subscription.isActive)")
 
         purchaseService.updateSetappState(subscription: manager.subscription)
         resources.setappUsed = true
@@ -101,7 +104,7 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
     // MARK: -- private methods
 
     private func startManager() {
-        DDLogInfo("(SetappService) - startManager; start = \(started)")
+        LOG.info("startManager; start = \(started)")
 
         if started {
             return
@@ -112,7 +115,7 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
         SetappManager.shared.delegate = self
 
         SetappManager.setLogHandle { (message: String, logLevel: SetappLogLevel) in
-            DDLogInfo("(Setapp) [\(logLevel)], \(message)")
+            LOG.info("[\(logLevel)], \(message)")
         }
 
         started = true

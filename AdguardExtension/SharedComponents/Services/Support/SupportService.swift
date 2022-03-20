@@ -20,6 +20,7 @@ import Zip
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 import AGDnsProxy
+import SharedAdGuardSDK
 
 protocol SupportServiceProtocol {
     /// Preparing logs archive to sharing. Return archive file URL in temporary directory
@@ -31,6 +32,8 @@ protocol SupportServiceProtocol {
     /// Sending feedback data to our backend
     func sendFeedback(_ email: String, description: String, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void)
 }
+
+private let LOG = LoggerFactory.getLoggerWrapper(SupportService.self)
 
 /// Support service assemble app state info
 final class SupportService: SupportServiceProtocol {
@@ -51,11 +54,11 @@ final class SupportService: SupportServiceProtocol {
     // MARK: - Helper variable
 
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
+    private let fileManager = FileManager.default
 
     private var appLogsUrls: [URL] {
         let logsUrl = resources.sharedLogsURL()
-        let fm = FileManager.default
-        let logsUrls = try? fm.contentsOfDirectory(at: logsUrl, includingPropertiesForKeys: [URLResourceKey.isDirectoryKey], options: [])
+        let logsUrls = try? fileManager.contentsOfDirectory(at: logsUrl, includingPropertiesForKeys: [URLResourceKey.isDirectoryKey], options: [])
         return logsUrls ?? []
     }
 
@@ -81,7 +84,6 @@ final class SupportService: SupportServiceProtocol {
 
     func exportLogs() throws -> URL? {
         let archiveName = "AdGuard_logs.zip"
-        let fileManager = FileManager.default
 
         let tmp = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         let baseUrl = tmp.appendingPathComponent("logs", isDirectory: true)
@@ -107,43 +109,34 @@ final class SupportService: SupportServiceProtocol {
         let appStateUrl = baseUrl.appendingPathComponent("state.txt")
         try appStateData?.write(to: appStateUrl)
 
-        /// Flush Logs before appending them
-        ACLLogger.singleton()?.flush()
-
-        /// Append log file for each process to base directory
-        try appLogsUrls.forEach { appLogUrl in
-            let logFileData = applicationLogData(fromUrl: appLogUrl)
-            let fileName = appLogUrl.lastPathComponent
-            let fileUrl = targetsUrl.appendingPathComponent(fileName)
-            try logFileData.write(to: fileUrl)
-        }
+        /// Move logs to tmp directory
+        try moveFiles(appLogsUrls, targetsUrl)
 
         do {
             try Zip.zipFiles(paths: [baseUrl], zipFilePath: logsZipUrl, password: nil, compression: .BestSpeed, progress: nil)
             return logsZipUrl
         }
         catch {
-            DDLogError("(SupportService) - exportLogs; Failed to export logs: \(error)")
+            LOG.error("Failed to export logs: \(error)")
         }
         return nil
     }
 
     func deleteLogsFiles() {
-        let fm = FileManager.default
 
         do {
             if let logsDirectory = self.logsDirectory {
-                try fm.removeItem(at: logsDirectory)
+                try fileManager.removeItem(at: logsDirectory)
             }
             if let logsZipDirectory = self.logsZipDirectory {
-                try fm.removeItem(at: logsZipDirectory)
+                try fileManager.removeItem(at: logsZipDirectory)
             }
 
             self.logsDirectory = nil
             self.logsZipDirectory = nil
         }
         catch {
-            DDLogError("(SupportService) - deleteLogsFiles; Error removing logs files: \(error)")
+            LOG.error("Error removing logs files: \(error)")
         }
     }
 
@@ -254,59 +247,41 @@ final class SupportService: SupportServiceProtocol {
 
     private func createDebugInfo() -> String {
 
-        /// Flush Logs before appending them
-        ACLLogger.singleton()?.flush()
+        /// Append log file for each process to base
 
-        /// Append log file for each process to base directory
-        return appLogsUrls.reduce("") { resultString, appLogUrl -> String in
-            let logFileData = applicationLogData(fromUrl: appLogUrl)
-            let fileName = appLogUrl.lastPathComponent
-            if let logString = String(data: logFileData, encoding: .utf8), !logString.isEmpty {
-                let delimeter = getDelimeter(for: fileName)
-                return delimeter + logString + "\r\n\r\n"
+        do {
+            let data = try collectLogDataForReport(appLogsUrls)
+            if let stringData = String(data: data, encoding: .utf8), !stringData.isEmpty {
+                LOG.info("Successfully create report logs data")
+                return stringData
             }
-            return ""
+            LOG.warn("Report logs data is missing")
+        } catch {
+            LOG.error("On creating report logs error occurred: \(error)")
         }
+
+        return ""
+
     }
 
-    /*
-     Returns Data for certain log file
-     We have multiple log files, one for each process
-     */
-    private func applicationLogData(fromUrl url: URL) -> Data {
-        let manager = ACLLogFileManagerDefault(logsDirectory: url.path)
-        let logFileInfos = manager?.sortedLogFileInfos ?? []
-
-        var logData = Data()
-        for info in logFileInfos.reversed() {
-            let delimeter = getDelimeter(for: info.fileName)
-            if let delimeterData = delimeter.data(using: .utf8) {
-                logData.append(delimeterData)
-            }
-
-            let fileUrl = URL(fileURLWithPath: info.filePath)
-            if let fileData = try? Data(contentsOf: fileUrl) {
-                logData.append(fileData)
-            }
-        }
-        return logData
-    }
-
-    /* Returns delimeter for filename */
-    private func getDelimeter(for fileName: String) -> String {
-        var delimeter = "\r\n-------------------------------------------------------------\r\n"
-        delimeter += "LOG FILE: \(fileName)"
-        delimeter += "\r\n-------------------------------------------------------------\r\n"
-        return delimeter
+    /* Returns delimiter for filename */
+    private func getDelimiter(for fileName: String) -> String {
+        var delimiter = "\r\n-------------------------------------------------------------\r\n"
+        delimiter += "LOG FILE: \(fileName)"
+        delimiter += "\r\n-------------------------------------------------------------\r\n"
+        return delimiter
     }
 
     private func appendCBJsonsIntoTemporaryDirectory(cbUrl: URL) throws {
         let advancedRulesFileUrl = safariProtection.advancedRulesFileUrl
-        if FileManager.default.fileExists(atPath: advancedRulesFileUrl.path) {
-            try FileManager.default.copyItem(at: advancedRulesFileUrl, to: cbUrl.appendingPathComponent(advancedRulesFileUrl.lastPathComponent))
+        if fileManager.fileExists(atPath: advancedRulesFileUrl.path) {
+            try fileManager.copyItem(at: advancedRulesFileUrl, to: cbUrl.appendingPathComponent(advancedRulesFileUrl.lastPathComponent))
         }
+
         try safariProtection.allContentBlockerJsonUrls.forEach { fileUrl in
-            try FileManager.default.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent(fileUrl.lastPathComponent))
+            if fileManager.fileExists(atPath: fileUrl.path) {
+                try fileManager.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent(fileUrl.lastPathComponent))
+            }
         }
     }
 
@@ -328,5 +303,75 @@ final class SupportService: SupportServiceProtocol {
             let filterString = "ID=\(filter.filterId) Name=\"\(filter.name ?? "UNDEFINED")\" Url=\(filter.filterDownloadPage ?? "UNDEFINED") Enabled=\(filter.isEnabled)\r\n"
             return partialResult + filterString
         }
+    }
+
+    private func moveFiles(_ logFileURLs: [URL], _ targetDirectory: URL) throws {
+        try logFileURLs.forEach {
+            LOG.debug("Start moving item at path \($0)")
+            var targetDirectory = targetDirectory
+            let fileName = $0.lastPathComponent
+            targetDirectory.appendPathComponent(fileName)
+
+            try fileManager.moveItem(at: $0, to: targetDirectory)
+            LOG.debug("Successfully moved item from path \($0)")
+        }
+    }
+
+    private func collectLogDataForReport(_ logFilePathes: [URL]) throws -> Data {
+        LOG.debug("Start collecting report data")
+        var data = Data()
+        for processLogDir in logFilePathes {
+            let processData = try readLogFiles(processLogDir)
+            data.append(processData)
+        }
+        LOG.debug("Report data successfully collected")
+        return data
+    }
+
+    private func readLogFiles(_ processLogsDirPath: URL) throws -> Data {
+        LOG.debug("Start reading LogFiles from \(processLogsDirPath)")
+        let singleProcessLogsContent = try getDirectoryContentUrls(processLogsDirPath)
+        var data: Data = Data()
+
+        for logPath in singleProcessLogsContent {
+            let partOfLogs = try readLogFile(logPath, processName: processLogsDirPath.lastPathComponent)
+            data.append(partOfLogs)
+        }
+        LOG.debug("Successfully read all log files at path \(processLogsDirPath)")
+        return data
+    }
+
+    private func readLogFile(_ filePath: URL, processName: String) throws -> Data {
+        LOG.debug("Start reading log file at path \(filePath)")
+        var data: Data = Data()
+
+        let fileName = "\(processName).\(filePath.lastPathComponent)" // <PROCESS NAME>.<LOG FILE NAME>
+        let singleLogFileData = try Data(contentsOf: filePath)
+        let delimiter = getDelimiter(for: fileName)
+
+        if let delimeterData = delimiter.data(using: .utf8) {
+            data.append(delimeterData)
+        }
+
+        data.append(singleLogFileData)
+        LOG.debug("Successfully read log file data at path \(filePath)")
+        return data
+    }
+
+    private func getDirectoryContentUrls(_ target: URL) throws -> [URL] {
+        LOG.debug("Start getting content from \(target)")
+        if try target.resourceValues(forKeys: [.isDirectoryKey]).isDirectory == true {
+            let logsUrls = try fileManager
+                .contentsOfDirectory(at: target, includingPropertiesForKeys: [.contentModificationDateKey], options: [.skipsHiddenFiles])
+                .sorted(by: {
+                    let date0 = try $0.promisedItemResourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate!
+                    let date1 = try $1.promisedItemResourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate!
+                    return date0.compare(date1) == .orderedAscending
+                })
+            LOG.debug("Successfully received content list of (target)")
+            return logsUrls
+        }
+        LOG.debug("Target \(target) is not directory, returns empty list of content as default")
+        return []
     }
 }

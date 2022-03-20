@@ -17,6 +17,9 @@
 //
 
 import SafariServices
+import SharedAdGuardSDK
+
+private let LOG = LoggerFactory.getLoggerWrapper(SafariWebExtensionHandler.self)
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
 
@@ -25,7 +28,6 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
 
     override init() {
         super.init()
-        setupLogger()
     }
 
     func beginRequest(with context: NSExtensionContext) {
@@ -34,25 +36,15 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         let messageDict = item.userInfo?[SFExtensionMessageKey] as! [String: Any]
 
         guard let message = Message(message: messageDict) else {
-            DDLogInfo("Received unknown message: \(messageDict)")
+            LOG.info("Received unknown message: \(messageDict)")
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return
         }
 
-        DDLogInfo("Received message from JS: \(messageDict)")
+        LOG.info("Received message from JS: \(messageDict)")
         let result = processor.process(message: message)
         let response = NSExtensionItem()
         response.userInfo = [SFExtensionMessageKey: result]
         context.completeRequest(returningItems: [response], completionHandler: nil)
-    }
-
-    // MARK: - Private methods
-
-    /// Initializes `ACLLogger`
-    private func setupLogger() {
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        let isDebugLogs = resources.isDebugLogs
-        DDLogDebug("Safari Web Extension was initialized with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
     }
 }
