@@ -30,19 +30,17 @@ enum PushNotificationCommands: Int {
 
 protocol UserNotificationServiceProtocol {
 
-    func requestPermissions()
+    func requestPermissions(_ completion: @escaping (_ permissionGranted: Bool) -> Void)
 
     /*
      Method to post notifications which come while app is in background
      **/
-    func postNotification(title: String, body: String, userInfo: [AnyHashable : Any]?)
+    func postNotification(title: String, body: String, userInfo: [AnyHashable: Any]?)
 
     /**
      Posts notification without badge (red circle in the top right corner of app icon)
      */
     func postNotificationWithoutBadge(title: String?, body: String?, onNotificationSent: @escaping () -> Void)
-
-    func removeNotifications()
 
     /*
      Method to post notifications which come while app is in foreground
@@ -55,9 +53,14 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
     @objc static let notificationBody = "notificationBody"
     @objc static let notificationTitle = "notificationTitle"
 
-    func requestPermissions() {
+    /// Requests user permission to send push notification
+    ///
+    /// - Parameter completion: returns permission status. Warning: called on UNUserNotificationServiceConnection queue
+    func requestPermissions(_ completion: @escaping (_ permisdsionGranted: Bool) -> Void) {
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { permission, _ in
+            completion(permission)
+        }
     }
 
     func postNotification(title: String, body: String, userInfo: [AnyHashable : Any]? = nil) {
@@ -92,11 +95,6 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
             }
             onNotificationSent()
         }
-    }
-
-    func removeNotifications() {
-        let center = UNUserNotificationCenter.current()
-        center.removeAllDeliveredNotifications()
     }
 
     func postNotificationInForeground(body: String, title: String) {
@@ -134,6 +132,19 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
 
         completionHandler()
     }
+
+//    func postLocalNotificationInBackgroundForRemoteMigration() {
+//        guard UIApplication.shared.applicationState == .background else {
+//            DDLogDebug("(UserNotificationService) - App is not in background. Do not post remote migration local push notification")
+//            return
+//        }
+//
+//        let title = "TITLE"
+//        let description = "DESCRIPTION"
+//
+//        DDLogDebug("(UserNotificationService) - Start posting remote migration local push notification")
+//        postNotification(title: title, body: description, userInfo: nil)
+//    }
 
     // MARK: - private methods
 

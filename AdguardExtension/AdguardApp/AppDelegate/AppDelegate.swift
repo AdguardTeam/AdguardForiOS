@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let complexProtection: ComplexProtectionServiceProtocol
     private let themeService: ThemeServiceProtocol
     private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
+    private let remoteMigrationService: RemoteMigrationService
 
     // MARK: - Application init
 
@@ -96,6 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.themeService = ServiceLocator.shared.getService()!
         self.dnsProtection = ServiceLocator.shared.getService()!
         self.dnsConfigAssistant = ServiceLocator.shared.getService()!
+        self.remoteMigrationService = ServiceLocator.shared.getService()!
 
         super.init()
 
@@ -331,6 +333,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         addPurchaseStatusObserver()
         purchaseService.checkLicenseStatus()
 
+        remoteMigrationService.checkRemoteMigration { isNeedMigration in
+            guard isNeedMigration else {
+                DDLogDebug("(AppDelegate) - backgroundFetch; Do not post remote migration local push notification, no need remote migration")
+                return
+            }
+
+            DDLogDebug("(AppDelegate) - backgroundFetch; Start posting remote migration local push notification")
+            let title = "TITLE"
+            let body = "DESCRIPTION"
+            self.userNotificationService.postNotification(title: title, body: body, userInfo: nil)
+
+            // FIXME: Need to sync it ???
+        }
+
         func shouldUpdateFilters() -> Bool {
             if !resources.wifiOnlyUpdates {
                 return true
@@ -393,7 +409,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         mainPageController.onReady = { [weak self] in
             // request permission for user notifications posting
-            self?.userNotificationService.requestPermissions()
+            self?.userNotificationService.requestPermissions { _ in }
 
             // Show rate app dialog when main page is initialized
             self?.showRateAppDialogIfNedeed()

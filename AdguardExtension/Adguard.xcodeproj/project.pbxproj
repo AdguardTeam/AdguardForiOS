@@ -364,6 +364,38 @@
 		24F67F5A26E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */; };
 		24F8A94D271DB62600ADA050 /* NetworkSettingsMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CE2B83271DA4E700E169E7 /* NetworkSettingsMigration.swift */; };
 		24FB8B1326EB9C330031ED4D /* UITraitEnvironment+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */; };
+		336FA0B5AD44CCA2E708BDF6 /* ViewControllerPresentationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAB7547B819D2C00DD191 /* ViewControllerPresentationQueue.swift */; };
+		336FA0E06E857C893A2FE7F5 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
+		336FA1C513658B9551CE4E56 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
+		336FA24287C5B8C97EB461A5 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
+		336FA28B765FFD115941BC29 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
+		336FA317692B9E002E812196 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */; };
+		336FA3408151DF8342BD11C3 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
+		336FA36B6E1926A255D971E3 /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAA4312C13C79B235EB41 /* RemoteMigrationDialog.swift */; };
+		336FA3C9E970ED22644F9526 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
+		336FA4CB8A6358A5C045839C /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
+		336FA516D2D0C667F66BDA70 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */; };
+		336FA53053FE020099E49B6B /* RemoteMigrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */; };
+		336FA628474190C8ECEAAAD0 /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
+		336FA67ACFFA39E47E45E25E /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
+		336FA858D4DC23A43D84E4E9 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
+		336FA85DF44F68482B3F840D /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
+		336FA86ED79ED6E25974EDC6 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
+		336FA8F839A81448709D8561 /* RemoteMigrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */; };
+		336FA921CFA57AB6FA466733 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
+		336FA9835FD683351684514F /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAA4312C13C79B235EB41 /* RemoteMigrationDialog.swift */; };
+		336FA9A2D898ED7FB81DBA0B /* ViewControllerPresentationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAB7547B819D2C00DD191 /* ViewControllerPresentationQueue.swift */; };
+		336FA9FE4AC403FEE40A9364 /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
+		336FAB6B3BE2B3ED131A1CED /* RemoteMigrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */; };
+		336FABC3341ACC4A76EC1BE8 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
+		336FAC177FF73FC88B38EB2F /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAA4312C13C79B235EB41 /* RemoteMigrationDialog.swift */; };
+		336FADBA80A957EEE49A440E /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
+		336FADD679886E781A168E14 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
+		336FADFE6DC2C140B3494C68 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
+		336FAE4FDB8BEC482B0EE14A /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */; };
+		336FAED3A8A14038DA17143E /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
+		336FAF1FC2C15A491353DB1F /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
+		336FAF8A134CDC55F24AAC68 /* ViewControllerPresentationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAB7547B819D2C00DD191 /* ViewControllerPresentationQueue.swift */; };
 		4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4020A90022C3C863009C188F /* MainNavigationController.swift */; };
 		494E0BBA26E7AF49005C21C4 /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
 		494E0BBB26E7AF4A005C21C4 /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
@@ -2724,6 +2756,14 @@
 		24F66A8426033C9D0097B426 /* OpenDnsSettingsControllerWithLaunchScreenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDnsSettingsControllerWithLaunchScreenParser.swift; sourceTree = "<group>"; };
 		24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMainPageControllerControllerWithLaunchScreenParser.swift; sourceTree = "<group>"; };
 		24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionParametersParser.swift; sourceTree = "<group>"; };
+		336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteMigrationServiceImpl.swift; path = UserNotificationService/RemoteMigrationServiceImpl.swift; sourceTree = "<group>"; };
+		336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
+		336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationRequestParser.swift; sourceTree = "<group>"; };
+		336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationRequest.swift; sourceTree = "<group>"; };
+		336FAA4312C13C79B235EB41 /* RemoteMigrationDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationDialog.swift; sourceTree = "<group>"; };
+		336FAB7547B819D2C00DD191 /* ViewControllerPresentationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresentationQueue.swift; sourceTree = "<group>"; };
+		336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequestServiceProtocolRemoteMigrationExtension.swift; sourceTree = "<group>"; };
+		336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteMigrationSerivce.swift; path = UserNotificationService/RemoteMigrationSerivce.swift; sourceTree = "<group>"; };
 		4020A90022C3C863009C188F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		4982C0BF26D78F2900CACBBE /* unused.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unused.ts; sourceTree = "<group>"; };
 		4982C0C026D78F2900CACBBE /* helpers.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helpers.ts; sourceTree = "<group>"; };
@@ -5779,6 +5819,8 @@
 				7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */,
 				7E3FEFB326CD3AB60080EC03 /* UITableView+Utils.swift */,
 				C7DD464A2754E144006E1E6C /* UITraitCollection+Utils.swift */,
+				336FAB7547B819D2C00DD191 /* ViewControllerPresentationQueue.swift */,
+				336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -5988,6 +6030,7 @@
 				7E3BDEDF23A15709009492CE /* GetProDialogView.swift */,
 				24C49DBC26C40AC900790CB3 /* WhatsNewBottomAlertController.swift */,
 				2444013826EE2F9500FB7CE5 /* ChartType+Utils.swift */,
+				336FAA4312C13C79B235EB41 /* RemoteMigrationDialog.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -6151,6 +6194,7 @@
 				7EB2F94723F2B64400F9A544 /* RequestFactory.swift */,
 				7EB2F95923F2C56200F9A544 /* HttpRequestService.swift */,
 				D07D343E2612207700213A5A /* HttpRequestServiceProtocol+sendFeedback.swift */,
+				336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -6161,6 +6205,7 @@
 				7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */,
 				7EB2F95723F2C28E00F9A544 /* SuccessFailureParser.swift */,
 				240C3ADC274650BC00CD10B3 /* AdServicesAttributionRecordsParser.swift */,
+				336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -6171,6 +6216,7 @@
 				7EB2F94223F2B64400F9A544 /* RequestProtocol.swift */,
 				7EB2F94F23F2B7C700F9A544 /* SendFeedbackRequest.swift */,
 				24DB3DBD2745443D0038627C /* AdServicesAttributionRecordsRequest.swift */,
+				336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -6815,6 +6861,8 @@
 				D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */,
 				7EA40F892722C81A00FAEE0B /* ChineseUserExposer.swift */,
 				C76FE7DC275F8D53002569DF /* DefaultDnsFilterInstaller.swift */,
+				336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */,
+				336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -8698,6 +8746,14 @@
 				C23440501FAFDF3FB74002E1 /* YoutubeHtmlBuilder.swift in Sources */,
 				C23C7CC726EF4E648BA10BF0 /* YoutubePlayerController.swift in Sources */,
 				9538244825EE1D4C56266B8D /* UIBackgroundTask.swift in Sources */,
+				336FAF1FC2C15A491353DB1F /* RemoteMigrationRequest.swift in Sources */,
+				336FAB6B3BE2B3ED131A1CED /* RemoteMigrationServiceImpl.swift in Sources */,
+				336FA9FE4AC403FEE40A9364 /* RemoteMigrationSerivce.swift in Sources */,
+				336FA0E06E857C893A2FE7F5 /* RemoteMigrationRequestParser.swift in Sources */,
+				336FA317692B9E002E812196 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */,
+				336FAF8A134CDC55F24AAC68 /* ViewControllerPresentationQueue.swift in Sources */,
+				336FAC177FF73FC88B38EB2F /* RemoteMigrationDialog.swift in Sources */,
+				336FA921CFA57AB6FA466733 /* UIApplicationExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8819,6 +8875,8 @@
 				7EAD353326C2D35E001AFB3A /* NotificationCenter+Utils.swift in Sources */,
 				D031A107219EFC99002C17D9 /* CLIColor.m in Sources */,
 				2408A8B12747EDB300D2D1DE /* SuccessFailureParser.swift in Sources */,
+				336FADD679886E781A168E14 /* RemoteMigrationRequest.swift in Sources */,
+				336FABC3341ACC4A76EC1BE8 /* RemoteMigrationRequestParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9198,6 +9256,14 @@
 				C23F7795678B947257A70C8F /* YoutubeHtmlBuilder.swift in Sources */,
 				C232DE371FC6B1E899089CF0 /* YoutubePlayerController.swift in Sources */,
 				953824D8D036C781AB604207 /* UIBackgroundTask.swift in Sources */,
+				336FADFE6DC2C140B3494C68 /* RemoteMigrationRequest.swift in Sources */,
+				336FA8F839A81448709D8561 /* RemoteMigrationServiceImpl.swift in Sources */,
+				336FA67ACFFA39E47E45E25E /* RemoteMigrationSerivce.swift in Sources */,
+				336FADBA80A957EEE49A440E /* RemoteMigrationRequestParser.swift in Sources */,
+				336FA516D2D0C667F66BDA70 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */,
+				336FA9A2D898ED7FB81DBA0B /* ViewControllerPresentationQueue.swift in Sources */,
+				336FA9835FD683351684514F /* RemoteMigrationDialog.swift in Sources */,
+				336FA85DF44F68482B3F840D /* UIApplicationExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9395,6 +9461,14 @@
 				D091CB292245133E00972AF7 /* ConfigurationService.swift in Sources */,
 				D09E2AB1254AC36B002D6BC0 /* Bundle+Utils.swift in Sources */,
 				240F14FA271DAF4700C0C8F1 /* NetworkSettingsMigrationTest.swift in Sources */,
+				336FA86ED79ED6E25974EDC6 /* RemoteMigrationRequest.swift in Sources */,
+				336FA53053FE020099E49B6B /* RemoteMigrationServiceImpl.swift in Sources */,
+				336FA628474190C8ECEAAAD0 /* RemoteMigrationSerivce.swift in Sources */,
+				336FA24287C5B8C97EB461A5 /* RemoteMigrationRequestParser.swift in Sources */,
+				336FAE4FDB8BEC482B0EE14A /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */,
+				336FA0B5AD44CCA2E708BDF6 /* ViewControllerPresentationQueue.swift in Sources */,
+				336FA36B6E1926A255D971E3 /* RemoteMigrationDialog.swift in Sources */,
+				336FA3408151DF8342BD11C3 /* UIApplicationExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9644,6 +9718,8 @@
 				B2C19E782716C81300331109 /* NativeDnsSettingsManager.swift in Sources */,
 				2408A88B2747E3D000D2D1DE /* AppleSearchAdsService.swift in Sources */,
 				B2C19E792716D0CB00331109 /* ConfigurationService.swift in Sources */,
+				336FAED3A8A14038DA17143E /* RemoteMigrationRequest.swift in Sources */,
+				336FA28B765FFD115941BC29 /* RemoteMigrationRequestParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10382,6 +10458,8 @@
 				7E174BFE271F1532006B7271 /* LoginService.swift in Sources */,
 				B2673E0A2717512300E04747 /* String+NSRange.swift in Sources */,
 				B2673E112717515900E04747 /* ACLFileLocker.m in Sources */,
+				336FA1C513658B9551CE4E56 /* RemoteMigrationRequest.swift in Sources */,
+				336FA4CB8A6358A5C045839C /* RemoteMigrationRequestParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10501,6 +10579,8 @@
 				2408A8B62747F39400D2D1DE /* AppleSearchAdsService.swift in Sources */,
 				B2673E30271752D100E04747 /* WebReporterWrapperProtocol.swift in Sources */,
 				B2673E1D2717525E00E04747 /* NSString+Utils.m in Sources */,
+				336FA3C9E970ED22644F9526 /* RemoteMigrationRequest.swift in Sources */,
+				336FA858D4DC23A43D84E4E9 /* RemoteMigrationRequestParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

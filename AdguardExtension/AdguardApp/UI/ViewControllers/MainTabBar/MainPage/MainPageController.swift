@@ -172,6 +172,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var dnsProvidersManager: DnsProvidersManagerProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsConfigAssistant: DnsConfigManagerAssistantProtocol = {
         ServiceLocator.shared.getService()! }()
+    private lazy var remoteMigrationService: RemoteMigrationService = { ServiceLocator.shared.getService()! }()
+    private lazy var userNotificationService: UserNotificationServiceProtocol = { ServiceLocator.shared.getService()! }()
 
     // MARK: - View models
     private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(safariProtection: safariProtection, dnsProtection: dnsProtection, dnsConfigAssistant: dnsConfigAssistant) }()
@@ -224,7 +226,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         processDnsServerChange()
         checkAdGuardVpnIsInstalled()
-        observeContentBlockersState()
+//        observeContentBlockersState()
+        startShowingInfoControllers()
+
 
         if let domain = domainToEnableProtectionFor, !domain.isEmpty {
             processDomainAndEnableProtection(domain)
@@ -583,7 +587,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
 
         contentBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main) { [weak self] _ in
-            self?.observeContentBlockersState()
+            self?.startShowingInfoControllers()
         }
 
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
@@ -936,6 +940,41 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         chartModel = ChartViewModel(statisticsPeriod: resources.chartDateType, activityStatistics: activityStatistics, chartStatistics: chartStatistics)
 
         chartModel.delegate = self
+    }
+
+    private func startShowingInfoControllers() {
+        DDLogInfo("(MainPageController) - startShowingInfoControllers; Start checking remote migration")
+        remoteMigrationService.checkRemoteMigration { isNeedMigration in
+            DispatchQueue.main.async {
+                let isNeedMigration = true
+                if isNeedMigration {
+                    DDLogInfo("(MainPageController) - startShowingInfoControllers; Need remote migration, register Push notification")
+                    self.userNotificationService.requestPermissions { permissionGranted in
+                        DispatchQueue.main.async {
+                            DDLogInfo("(MainPageController) - startShowingInfoControllers; User set permission to send push notification = \(permissionGranted); Show remote migration dialog")
+                            // FIXME: Show dialog with WebView
+                            guard let dialog = self.createRemoteMigrationDialog() else { return }
+                            self.present(dialog, animated: true)
+                        }
+                    }
+                    return
+                }
+
+                DDLogInfo("(MainPageController) - startShowingInfoControllers; No need remote migration. Start showing default dialog screen flow")
+                self.observeContentBlockersState()
+            }
+        }
+    }
+
+    private func createRemoteMigrationDialog() -> UIViewController? {
+        let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "\(RemoteMigrationDialog.self)") as? RemoteMigrationDialog else {
+            // FIXME: Add log
+            return nil
+        }
+
+        vc.onDismissCompletion = { self.observeContentBlockersState() }
+        return vc
     }
 }
 

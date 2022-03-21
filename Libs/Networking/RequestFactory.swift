@@ -31,4 +31,12 @@ public struct RequestFactory {
             parser: AdServicesAttributionRecordsParser()
         )
     }
+
+    /// Returns remote migration request config
+    static func remoteMigrationConfig() -> RequestConfig<RemoteMigrationRequestParser> {
+        return RequestConfig<RemoteMigrationRequestParser>(
+            request: RemoteMigrationRequest(),
+            parser: RemoteMigrationRequestParser()
+        )
+    }
 }

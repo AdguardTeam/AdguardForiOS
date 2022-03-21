@@ -26,7 +26,7 @@ final class StartupService : NSObject {
         let locator = ServiceLocator.shared
 
         // init services
-        
+
         let sharedResources: AESharedResourcesProtocol = AESharedResources()
         locator.addService(service: sharedResources)
 
@@ -46,7 +46,7 @@ final class StartupService : NSObject {
         // init services
 
         let sharedResources: AESharedResourcesProtocol = locator.getService()!
-        
+
         let networkService = ACNNetworking()
         locator.addService(service: networkService)
 
@@ -198,5 +198,11 @@ final class StartupService : NSObject {
             dnsProtection: dnsProtection
         )
         locator.addService(service: migrationService)
+
+        let remoteMigrationService: RemoteMigrationService = RemoteMigrationServiceImpl(
+            httpRequestService: httpRequestService,
+            userNotificationCenter: userNotificationService
+        )
+        locator.addService(service: remoteMigrationService)
     }
 }
