@@ -6,6 +6,29 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
 
     private let workingQueue = DispatchQueue(label: "\(RemoteMigrationServiceImpl.self).workingQueue")
     private let completionQueue = DispatchQueue(label: "\(RemoteMigrationServiceImpl.self).completionQueue")
+    private let syncQueue = DispatchQueue(label: "\(RemoteMigrationServiceImpl.self).syncQueue")
+
+    private var _remoteMigrationShowed = false
+    private var _isNeedMigration = false
+
+
+    var isNeedMigration: Bool {
+        get {
+            syncQueue.sync { _isNeedMigration }
+        }
+        set {
+            syncQueue.sync { _isNeedMigration = newValue }
+        }
+    }
+
+    var remoteMigrationShowed: Bool {
+        get {
+            syncQueue.sync { _remoteMigrationShowed }
+        }
+        set {
+            syncQueue.sync { _remoteMigrationShowed = newValue }
+        }
+    }
 
     init(httpRequestService: HttpRequestServiceProtocol,
          userNotificationCenter: UserNotificationServiceProtocol
@@ -17,11 +40,13 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
     func checkRemoteMigration(_ completion: @escaping (_ isNeedMigration: Bool) -> Void) {
         DDLogInfo("(RemoteMigrationServiceImpl) - Start checking remote migration")
         workingQueue.async {
-            self.checkRemoteMigrationInternal { completion($0) }
+            self.checkRemoteMigrationInternal {
+                self.isNeedMigration = true // FIXME: Use $0; true or false only for mock backend answers
+                completion($0)
+                NotificationCenter.default.post(name: .remoteMigrationStatusChanged, object: self, userInfo: nil)
+            }
         }
     }
-
-
 
     private func checkRemoteMigrationInternal(_ completion: @escaping (_ isNeedMigration: Bool) -> Void) {
         httpRequestService.checkRemoteMigration { result in

@@ -36,16 +36,22 @@ final class RemoteMigrationDialog : BottomAlertController {
     private func onAcceptTapped(_ sender: UIButton) {
         let url = URL(string: "https://adguard.com") // FIXME: Add correct URL
         let sfSafariViewController = SFSafariViewController(url: url!)
+        sfSafariViewController.delegate = self
         let parent = self.presentingViewController
-        dismiss(animated: true) {
-            parent?.present(sfSafariViewController, animated: true)
-        }
+        present(sfSafariViewController, animated: true)
+
+//        dismiss(animated: true) {
+//            parent?.present(sfSafariViewController, animated: true)
+//        }
     }
 
     @IBAction
     private func onDetailsTapped(_ sender: UIButton) {
         // FIXME: Redirect to pizdec
         UIApplication.shared.openAdguardUrl(action: "", from: "", buildVersion: "")
+        dismiss(animated: true) { [weak self] in
+            self?.onDismissCompletion?()
+        }
     }
 }
 
@@ -53,5 +59,13 @@ extension RemoteMigrationDialog : ThemableProtocol {
     func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels([titleLabel, descriptionLabel])
+    }
+}
+
+extension RemoteMigrationDialog: SFSafariViewControllerDelegate {
+    public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true) { [weak self] in
+            self?.onDismissCompletion?()
+        }
     }
 }

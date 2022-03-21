@@ -128,6 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if application.applicationState != .background {
             purchaseService.checkPremiumStatusChanged()
+            remoteMigrationService.checkRemoteMigration { _ in }
         }
 
         return true
@@ -412,7 +413,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self?.userNotificationService.requestPermissions { _ in }
 
             // Show rate app dialog when main page is initialized
-            self?.showRateAppDialogIfNedeed()
+            if self?.remoteMigrationService.isNeedMigration == false {
+                self?.showRateAppDialogIfNedeed()
+            }
         }
 
         guard let dnsLogContainerVC = getDnsLogContainerController() else {

@@ -226,13 +226,15 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         processDnsServerChange()
         checkAdGuardVpnIsInstalled()
-//        observeContentBlockersState()
-        startShowingInfoControllers()
+        observeContentBlockersState()
+//        startShowingInfoControllers()
 
 
         if let domain = domainToEnableProtectionFor, !domain.isEmpty {
             processDomainAndEnableProtection(domain)
         }
+
+        userNotificationService.postNotificationInForeground(body: "kek", title: "cheburek")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -240,6 +242,12 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         processState()
         updateProtectionStates()
         updateProtectionStatusText()
+        print("!!!!!!! \(#function)")
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("!!!!!!! \(#function)")
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -587,7 +595,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
 
         contentBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main) { [weak self] _ in
-            self?.startShowingInfoControllers()
+            self?.observeContentBlockersState()
         }
 
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
@@ -857,8 +865,14 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     private func callOnready() {
-        onReady?()
-        onReady = nil
+        guard !remoteMigrationService.remoteMigrationShowed, remoteMigrationService.isNeedMigration else {
+            self.onReady?()
+            self.onReady = nil
+            return
+        }
+
+        guard let dialog = self.createRemoteMigrationDialog() else { return }
+        self.present(dialog, animated: true)
     }
 
     /**
@@ -942,30 +956,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         chartModel.delegate = self
     }
 
-    private func startShowingInfoControllers() {
-        DDLogInfo("(MainPageController) - startShowingInfoControllers; Start checking remote migration")
-        remoteMigrationService.checkRemoteMigration { isNeedMigration in
-            DispatchQueue.main.async {
-                let isNeedMigration = true
-                if isNeedMigration {
-                    DDLogInfo("(MainPageController) - startShowingInfoControllers; Need remote migration, register Push notification")
-                    self.userNotificationService.requestPermissions { permissionGranted in
-                        DispatchQueue.main.async {
-                            DDLogInfo("(MainPageController) - startShowingInfoControllers; User set permission to send push notification = \(permissionGranted); Show remote migration dialog")
-                            // FIXME: Show dialog with WebView
-                            guard let dialog = self.createRemoteMigrationDialog() else { return }
-                            self.present(dialog, animated: true)
-                        }
-                    }
-                    return
-                }
-
-                DDLogInfo("(MainPageController) - startShowingInfoControllers; No need remote migration. Start showing default dialog screen flow")
-                self.observeContentBlockersState()
-            }
-        }
-    }
-
     private func createRemoteMigrationDialog() -> UIViewController? {
         let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "\(RemoteMigrationDialog.self)") as? RemoteMigrationDialog else {
@@ -973,7 +963,12 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             return nil
         }
 
-        vc.onDismissCompletion = { self.observeContentBlockersState() }
+        vc.onDismissCompletion = {
+//            guard !self.remoteMigrationShowed else { return }
+            self.remoteMigrationService.remoteMigrationShowed = true
+//            self.ready = true
+//            self.callOnready()
+        }
         return vc
     }
 }
