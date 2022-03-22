@@ -129,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if application.applicationState != .background {
             purchaseService.checkPremiumStatusChanged()
 
-
+            // No needs to perform extra check if 'remote migration' status has been checked via background fetch
             if !resources.backgroundFetchRemoteMigrationRequestResult {
                 DDLogInfo("(AppDelegate) Start checking if remote migration is needed")
                 remoteMigrationService.checkRemoteMigration { result in
@@ -347,7 +347,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // isNeedMigration = true // FOR DEBUG ONLY
             self.resources.backgroundFetchRemoteMigrationRequestResult = isNeedMigration
             guard isNeedMigration else {
-                DDLogDebug("(AppDelegate) - backgroundFetch; Do not post remote migration local push notification, no need remote migration")
+                DDLogDebug("(AppDelegate) - backgroundFetch; Do not post remote migration local push notification, no needs for remote migration")
                 return
             }
 

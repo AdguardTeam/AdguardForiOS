@@ -14,6 +14,7 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
     private var _remoteMigrationShowed = false
     private var _isNeedRemoteMigration: Bool = false
 
+    /// Flag meaning that 'need for remote migration' dialog has been shown
     var remoteMigrationDialogShown: Bool {
         get {
             syncQueue.sync { _remoteMigrationShowed }
@@ -23,6 +24,7 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
         }
     }
 
+    /// Flag meaning that backend has triggered remote migration
     var isNeedRemoteMigration: Bool {
         get {
             syncQueue.sync { _isNeedRemoteMigration }
@@ -66,7 +68,7 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
             let isNeedRemoteMigration: Bool
             switch result {
                 case .success(let status):
-                    DDLogInfo("(RemoteMigrationServiceImpl) - Successfully check migration status. Is migration need = \(status)")
+                    DDLogInfo("(RemoteMigrationServiceImpl) - Successfully check migration status. Is migration needed = \(status)")
                     isNeedRemoteMigration = status
                 case .failure(let error):
                     DDLogError("(RemoteMigrationServiceImpl) - Failed to check migration status. Return false as default status. Error: \(error)")

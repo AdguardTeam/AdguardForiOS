@@ -53,7 +53,7 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
     @objc static let notificationBody = "notificationBody"
     @objc static let notificationTitle = "notificationTitle"
 
-    /// Requests user permission to send push notification
+    /// Requests user permission to send a push notification
     ///
     /// - Parameter completion: returns permission status. Warning: called on UNUserNotificationServiceConnection queue
     func requestPermissions(_ completion: @escaping (_ permisdsionGranted: Bool) -> Void) {
@@ -132,19 +132,6 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
 
         completionHandler()
     }
-
-//    func postLocalNotificationInBackgroundForRemoteMigration() {
-//        guard UIApplication.shared.applicationState == .background else {
-//            DDLogDebug("(UserNotificationService) - App is not in background. Do not post remote migration local push notification")
-//            return
-//        }
-//
-//        let title = "TITLE"
-//        let description = "DESCRIPTION"
-//
-//        DDLogDebug("(UserNotificationService) - Start posting remote migration local push notification")
-//        postNotification(title: title, body: description, userInfo: nil)
-//    }
 
     // MARK: - private methods
 

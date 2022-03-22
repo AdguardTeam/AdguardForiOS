@@ -229,11 +229,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         checkAdGuardVpnIsInstalled()
         observeContentBlockersState()
 
-
         if let domain = domainToEnableProtectionFor, !domain.isEmpty {
             processDomainAndEnableProtection(domain)
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -862,6 +860,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     private func callOnReady() {
+        // We need to check if we need to inform the user that migration is necessary on each 'ready' shot
         let isNeedRemoteMigration = remoteMigrationService.isNeedRemoteMigration
         let remoteMigrationDialogShown = remoteMigrationService.remoteMigrationDialogShown
 
@@ -981,7 +980,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             return
         }
 
-        DDLogWarn("(MainPageController) Remote migration dialog not presented. Is for need remote migration = \(isNeedRemoteMigration), remote migration dialog has already been shown = \(remoteMigrationDialogShown)")
+        DDLogWarn("(MainPageController) Remote migration dialog not presented. Is needed for remote migration = \(isNeedRemoteMigration), remote migration dialog has already been shown = \(remoteMigrationDialogShown)")
     }
 
     private func presentRemoteMigrationDialog() {
@@ -999,7 +998,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             DDLogWarn("(MainPageController) Remote migration dialog is missing")
             return
         }
+
         DDLogInfo("(MainPageController) Start presenting remote migration dialog")
+        // Reset all the flags to avoid duplicates
         remoteMigrationService.remoteMigrationDialogShown = true
         resources.backgroundFetchRemoteMigrationRequestResult = false
         presentOn.present(dialog, animated: true)
