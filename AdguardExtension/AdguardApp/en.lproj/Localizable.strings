@@ -1233,3 +1233,31 @@
 // FIXME: Change later
 /* (RemoteMigrationDialog) details button title */
 "remote_migration_dialog_details_button_title" = "Details";
+
+// FIXME: Change later
+/* (AdGuardProFoundDialog) title */
+"adguard_pro_found_title" = "TITLE";
+
+// FIXME: Change later
+/* (AdGuardProFoundDialog) description */
+"adguard_pro_found_description" = "DESCRIPTION";
+
+// FIXME: Change later
+/* (AdGuardProFoundDialog) primary button title */
+"adguard_pro_found_primary_button_title" = "TITLE";
+
+// FIXME: Change later
+/* (AdGuardFoundDialog) title */
+"adguard_found_title" = "TITLE";
+
+// FIXME: Change later
+/* (AdGuardFoundDialog) description */
+"adguard_found_description" = "DESCRIPTION";
+
+// FIXME: Change later
+/* (AdGuardFoundDialog) primary button title */
+"adguard_found_primary_button_title" = "TITLE";
+
+// FIXME: Change later
+/* (AdGuardFoundDialog) neutral button title */
+"adguard_found_neutral_button_title" = "TITLE";
