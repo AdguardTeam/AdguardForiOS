@@ -84,6 +84,12 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
 
     private var bottomSpaceBeforePullUp: CGFloat = 0.0
 
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        modalPresentationStyle = .custom
+        transitioningDelegate = self
+    }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         modalPresentationStyle = .custom
