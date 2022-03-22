@@ -204,5 +204,5 @@ extension Notification.Name {
     static var contentBlockersStateChanged: Notification.Name { return .init(rawValue: "contentBlockersStateChanged") }
     static var advancedProtectionStateChanged: Notification.Name { return .init(rawValue: "advancedProtectionStateChanged") }
     static var showStatusBarChanged: Notification.Name { return .init(rawValue: "showStatusBarChanged") }
-    static var remoteMigrationStatusChanged: Notification.Name { return .init(rawValue: "remoteMigrationStatusChanged") }
+    static var needForMigration: Notification.Name { return .init(rawValue: "needForMigration") }
 }

@@ -128,7 +128,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if application.applicationState != .background {
             purchaseService.checkPremiumStatusChanged()
-            remoteMigrationService.checkRemoteMigration { _ in }
+
+
+            if !resources.backgroundFetchRemoteMigrationRequestResult {
+                DDLogInfo("(AppDelegate) Start checking if remote migration is needed")
+                remoteMigrationService.checkRemoteMigration { result in
+                    self.resources.backgroundFetchRemoteMigrationRequestResult = result
+                }
+            } else {
+                DDLogInfo("(AppDelegate) Remote migration check result has been received in background fetch earlier")
+            }
         }
 
         return true
@@ -335,17 +344,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         purchaseService.checkLicenseStatus()
 
         remoteMigrationService.checkRemoteMigration { isNeedMigration in
+            // isNeedMigration = true // FOR DEBUG ONLY
+            self.resources.backgroundFetchRemoteMigrationRequestResult = isNeedMigration
             guard isNeedMigration else {
                 DDLogDebug("(AppDelegate) - backgroundFetch; Do not post remote migration local push notification, no need remote migration")
                 return
             }
 
             DDLogDebug("(AppDelegate) - backgroundFetch; Start posting remote migration local push notification")
-            let title = "TITLE"
-            let body = "DESCRIPTION"
+            let title = String.localizedString("remote_migration_notification_title")
+            let body = String.localizedString("remote_migration_notification_body")
             self.userNotificationService.postNotification(title: title, body: body, userInfo: nil)
-
-            // FIXME: Need to sync it ???
         }
 
         func shouldUpdateFilters() -> Bool {

@@ -16,16 +16,16 @@ final class RemoteMigrationDialog : BottomAlertController {
         super.viewDidLoad()
         configureUI()
 
-        titleLabel.text = "TITLE TEXT" // FIXME: User localization string
-        descriptionLabel.text = "DESCRIPTION TEXT" // FIXME: User localization string
+        titleLabel.text = String.localizedString("remote_migration_dialog_title")
+        descriptionLabel.text = String.localizedString("remote_migration_dialog_description")
     }
 
     private func configureUI() {
         acceptButton.applyStandardGreenStyle()
         detailsButton.applyStandardOpaqueStyle()
 
-        acceptButton.setTitle("ACCEPT", for: .normal) // FIXME: User localization string
-        detailsButton.setTitle("ABOUT MIGRATION", for: .normal) // FIXME: User localization string
+        acceptButton.setTitle(String.localizedString("remote_migration_dialog_accept_button_title"), for: .normal)
+        detailsButton.setTitle(String.localizedString("remote_migration_dialog_details_button_title"), for: .normal)
 
         acceptButton.makeTitleTextCapitalized()
         detailsButton.makeTitleTextCapitalized()
@@ -39,15 +39,11 @@ final class RemoteMigrationDialog : BottomAlertController {
         sfSafariViewController.delegate = self
         let parent = self.presentingViewController
         present(sfSafariViewController, animated: true)
-
-//        dismiss(animated: true) {
-//            parent?.present(sfSafariViewController, animated: true)
-//        }
     }
 
     @IBAction
     private func onDetailsTapped(_ sender: UIButton) {
-        // FIXME: Redirect to pizdec
+        // FIXME: Redirect to about remote migration page
         UIApplication.shared.openAdguardUrl(action: "", from: "", buildVersion: "")
         dismiss(animated: true) { [weak self] in
             self?.onDismissCompletion?()

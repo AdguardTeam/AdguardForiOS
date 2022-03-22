@@ -352,6 +352,15 @@ extension AESharedResourcesProtocol {
         }
     }
 
+    var backgroundFetchRemoteMigrationRequestResult: Bool {
+        get {
+            sharedDefaults().bool(forKey: backgroundFetchRemoteMigrationRequestResultKey)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: backgroundFetchRemoteMigrationRequestResultKey)
+        }
+    }
+
     var isMigrationTo4_3Passed: Bool {
         get {
             return sharedDefaults().bool(forKey: migrationTo4_3PassedKey)
@@ -377,6 +386,7 @@ fileprivate extension AESharedResourcesProtocol {
     var advancedProtectionPermissionsGrantedKey: String { "advancedProtectionPermissionsGrantedKey" }
     var safariWebExtensionIsOnKey: String { "safariWebExtensionIsOnKey" }
     var whatsNewScreenShownKey: String { "whatsNewScreenShownKey" }
+    var backgroundFetchRemoteMigrationRequestResultKey: String { "backgroundFetchRemoteMigrationRequestResultKey" }
 
     // Migration keys
     var migrationTo4_3PassedKey: String { "isMigrationTo4_3PassedKey" }

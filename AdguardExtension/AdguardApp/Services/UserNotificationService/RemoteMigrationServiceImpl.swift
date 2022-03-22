@@ -5,6 +5,7 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
     private let httpRequestService: HttpRequestServiceProtocol
     private let userNotificationCenter: UserNotificationServiceProtocol
     private let keyChainService: KeychainServiceProtocol
+    private let resources: AESharedResourcesProtocol
 
     private let workingQueue = DispatchQueue(label: "\(RemoteMigrationServiceImpl.self).workingQueue")
     private let completionQueue = DispatchQueue(label: "\(RemoteMigrationServiceImpl.self).completionQueue")
@@ -13,7 +14,7 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
     private var _remoteMigrationShowed = false
     private var _isNeedRemoteMigration: Bool = false
 
-    var remoteMigrationShowed: Bool {
+    var remoteMigrationDialogShown: Bool {
         get {
             syncQueue.sync { _remoteMigrationShowed }
         }
@@ -33,11 +34,15 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
 
     init(httpRequestService: HttpRequestServiceProtocol,
          userNotificationCenter: UserNotificationServiceProtocol,
-         keyChainService: KeychainServiceProtocol
+         keyChainService: KeychainServiceProtocol,
+         resources: AESharedResourcesProtocol
     ) {
         self.httpRequestService = httpRequestService
         self.userNotificationCenter = userNotificationCenter
         self.keyChainService = keyChainService
+        self.resources = resources
+
+        _isNeedRemoteMigration = resources.backgroundFetchRemoteMigrationRequestResult
     }
 
     func checkRemoteMigration(_ completion: @escaping (_ isNeedMigration: Bool) -> Void) {
@@ -48,13 +53,10 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
         }
         workingQueue.async {
             self.checkRemoteMigrationInternal(appId) {
-                print("!!!! - THREAD SLEEP")
-                Thread.sleep(forTimeInterval: 10.0)
-                self.isNeedRemoteMigration = true // FIXME: Use $0; true or false only for mock backend answers
-                Thread.sleep(forTimeInterval: 10.0)
-                print("!!!! - THREAD WAKE UP")
+                self.isNeedRemoteMigration = $0
                 completion($0)
-                NotificationCenter.default.post(name: .remoteMigrationStatusChanged, object: self, userInfo: nil)
+                DDLogInfo("(RemoteMigrationServiceImpl) - Start posting 'need for migration' notification")
+                NotificationCenter.default.post(name: .needForMigration, object: self, userInfo: nil)
             }
         }
     }
