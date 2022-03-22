@@ -1,8 +1,10 @@
 import Foundation
 
 final class RemoteMigrationServiceImpl : RemoteMigrationService {
+
     private let httpRequestService: HttpRequestServiceProtocol
     private let userNotificationCenter: UserNotificationServiceProtocol
+    private let keyChainService: KeychainServiceProtocol
 
     private let workingQueue = DispatchQueue(label: "\(RemoteMigrationServiceImpl.self).workingQueue")
     private let completionQueue = DispatchQueue(label: "\(RemoteMigrationServiceImpl.self).completionQueue")
@@ -31,16 +33,22 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
     }
 
     init(httpRequestService: HttpRequestServiceProtocol,
-         userNotificationCenter: UserNotificationServiceProtocol
+         userNotificationCenter: UserNotificationServiceProtocol,
+         keyChainService: KeychainServiceProtocol
     ) {
         self.httpRequestService = httpRequestService
         self.userNotificationCenter = userNotificationCenter
+        self.keyChainService = keyChainService
     }
 
     func checkRemoteMigration(_ completion: @escaping (_ isNeedMigration: Bool) -> Void) {
         DDLogInfo("(RemoteMigrationServiceImpl) - Start checking remote migration")
+        guard let appId = keyChainService.appId else {
+            DDLogError("(RemoteMigrationServiceImpl) - Failed ro retrieve appId")
+            return
+        }
         workingQueue.async {
-            self.checkRemoteMigrationInternal {
+            self.checkRemoteMigrationInternal(appId) {
                 self.isNeedMigration = true // FIXME: Use $0; true or false only for mock backend answers
                 completion($0)
                 NotificationCenter.default.post(name: .remoteMigrationStatusChanged, object: self, userInfo: nil)
@@ -48,8 +56,8 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
         }
     }
 
-    private func checkRemoteMigrationInternal(_ completion: @escaping (_ isNeedMigration: Bool) -> Void) {
-        httpRequestService.checkRemoteMigration { result in
+    private func checkRemoteMigrationInternal(_ appId: String, _ completion: @escaping (_ isNeedMigration: Bool) -> Void) {
+        httpRequestService.checkRemoteMigration(appId) { result in
             let isNeedRemoteMigration: Bool
             switch result {
                 case .success(let status):

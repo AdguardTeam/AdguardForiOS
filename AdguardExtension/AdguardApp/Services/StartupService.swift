@@ -201,7 +201,8 @@ final class StartupService : NSObject {
 
         let remoteMigrationService: RemoteMigrationService = RemoteMigrationServiceImpl(
             httpRequestService: httpRequestService,
-            userNotificationCenter: userNotificationService
+            userNotificationCenter: userNotificationService,
+            keyChainService: keyChainService
         )
         locator.addService(service: remoteMigrationService)
     }

@@ -1,7 +1,17 @@
 import Foundation
 
-fileprivate struct RemoteMigrationTransfer : Decodable {
-    let transferApp: Bool
+/// The struct that stores 'migration is needed' response from AdGuard backend
+struct RemoteMigrationTransfer : Decodable {
+    let migrateApp: Bool
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.migrateApp = try container.decode(Bool.self, forKey: .migrateApp)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case migrateApp = "migrate_app"
+    }
 }
 
 struct RemoteMigrationRequestParser : ParserProtocol {
@@ -13,7 +23,7 @@ struct RemoteMigrationRequestParser : ParserProtocol {
             if response.statusCode == 200 {
                 do {
                     let transfer = try JSONDecoder().decode(RemoteMigrationTransfer.self, from: data)
-                    return transfer.transferApp
+                    return transfer.migrateApp
                 } catch {
                     DDLogError("(RemoteMigrationRequestParser) - Serialization error: \(error)")
                     return nil
