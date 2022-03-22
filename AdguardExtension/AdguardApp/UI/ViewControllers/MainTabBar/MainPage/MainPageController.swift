@@ -186,6 +186,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private var dnsImplementationObserver: NotificationToken?
     private var currentDnsServerObserver: NotificationToken?
     private var proStatusObserver: NotificationToken?
+    private var remoteMigrationObserver: NotificationToken?
 
     // MARK: - View Controller life cycle
 
@@ -227,6 +228,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         processDnsServerChange()
         checkAdGuardVpnIsInstalled()
         observeContentBlockersState()
+        addRemoteMigrationStatusObserver()
 //        startShowingInfoControllers()
 
 
@@ -234,7 +236,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             processDomainAndEnableProtection(domain)
         }
 
-        userNotificationService.postNotificationInForeground(body: "kek", title: "cheburek")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -242,6 +243,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         processState()
         updateProtectionStates()
         updateProtectionStatusText()
+
         print("!!!!!!! \(#function)")
     }
 
@@ -256,6 +258,11 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         if let nav = navigationController as? MainNavigationController {
             nav.addGestureRecognizer()
         }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+//        self.remoteMigrationObserver = nil
     }
 
     override func viewDidLayoutSubviews() {
@@ -613,13 +620,25 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
     }
 
+    private func addRemoteMigrationStatusObserver() {
+        remoteMigrationObserver = nil
+        remoteMigrationObserver = NotificationCenter.default.observe(name: .remoteMigrationStatusChanged, object: nil, queue: .main) { [weak self] _ in
+            print("!!!! - remote dialog from observer")
+            if self?.tabBarController?.selectedIndex != 0 { // 0 index is index of first tab of tab bar
+                self?.userNotificationService.postNotificationInForeground(body: "PUSH BODY", title: "PUSH TITILE")
+            } else {
+                self?.presentRemoteFromObs()
+            }
+        }
+    }
+
     /**
      Starts to rotate refresh button
      */
     private func updateStartedInternal(){
         updateInProcess = true
         iconButton?.isUserInteractionEnabled = false
-        updateButton.customView?.rotateImage(isNedeed: true)
+        updateButton.customView?.rotateImage(isNeeded: true)
     }
 
     /**
@@ -629,7 +648,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         DispatchQueue.main.async {[weak self] in
             self?.updateInProcess = false
             self?.iconButton?.isUserInteractionEnabled = true
-            self?.updateButton.customView?.rotateImage(isNedeed: false)
+            self?.updateButton.customView?.rotateImage(isNeeded: false)
             self?.updateProtectionStates()
 
             // return status title few seconds later
@@ -865,14 +884,13 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     private func callOnready() {
-        guard !remoteMigrationService.remoteMigrationShowed, remoteMigrationService.isNeedMigration else {
-            self.onReady?()
-            self.onReady = nil
+        guard remoteMigrationService.isNeedRemoteMigration, !remoteMigrationService.remoteMigrationShowed else {
+            onReady?()
+            onReady = nil
             return
         }
 
-        guard let dialog = self.createRemoteMigrationDialog() else { return }
-        self.present(dialog, animated: true)
+        presentRemoteFromObs()
     }
 
     /**
@@ -966,10 +984,15 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         vc.onDismissCompletion = {
 //            guard !self.remoteMigrationShowed else { return }
             self.remoteMigrationService.remoteMigrationShowed = true
-//            self.ready = true
-//            self.callOnready()
+            self.ready = true
+            self.onReady?()
         }
         return vc
+    }
+
+    private func presentRemoteFromObs() {
+        guard let dialog = createRemoteMigrationDialog() else { return }
+        present(dialog, animated: true)
     }
 }
 

@@ -11,17 +11,7 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
     private let syncQueue = DispatchQueue(label: "\(RemoteMigrationServiceImpl.self).syncQueue")
 
     private var _remoteMigrationShowed = false
-    private var _isNeedMigration = false
-
-
-    var isNeedMigration: Bool {
-        get {
-            syncQueue.sync { _isNeedMigration }
-        }
-        set {
-            syncQueue.sync { _isNeedMigration = newValue }
-        }
-    }
+    private var _isNeedRemoteMigration: Bool = false
 
     var remoteMigrationShowed: Bool {
         get {
@@ -29,6 +19,15 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
         }
         set {
             syncQueue.sync { _remoteMigrationShowed = newValue }
+        }
+    }
+
+    var isNeedRemoteMigration: Bool {
+        get {
+            syncQueue.sync { _isNeedRemoteMigration }
+        }
+        set {
+            syncQueue.sync { _isNeedRemoteMigration = newValue }
         }
     }
 
@@ -49,7 +48,11 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
         }
         workingQueue.async {
             self.checkRemoteMigrationInternal(appId) {
-                self.isNeedMigration = true // FIXME: Use $0; true or false only for mock backend answers
+                print("!!!! - THREAD SLEEP")
+                Thread.sleep(forTimeInterval: 10.0)
+                self.isNeedRemoteMigration = true // FIXME: Use $0; true or false only for mock backend answers
+                Thread.sleep(forTimeInterval: 10.0)
+                print("!!!! - THREAD WAKE UP")
                 completion($0)
                 NotificationCenter.default.post(name: .remoteMigrationStatusChanged, object: self, userInfo: nil)
             }

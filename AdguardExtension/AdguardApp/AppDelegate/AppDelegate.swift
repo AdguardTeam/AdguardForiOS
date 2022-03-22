@@ -413,7 +413,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self?.userNotificationService.requestPermissions { _ in }
 
             // Show rate app dialog when main page is initialized
-            if self?.remoteMigrationService.isNeedMigration == false {
+            if self?.remoteMigrationService.isNeedRemoteMigration == false {
                 self?.showRateAppDialogIfNedeed()
             }
         }
