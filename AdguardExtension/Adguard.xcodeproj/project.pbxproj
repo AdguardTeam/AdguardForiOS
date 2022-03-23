@@ -370,7 +370,6 @@
 		336FA28B765FFD115941BC29 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FA317692B9E002E812196 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */; };
 		336FA3408151DF8342BD11C3 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
-		336FA36B6E1926A255D971E3 /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAA4312C13C79B235EB41 /* RemoteMigrationDialog.swift */; };
 		336FA3C9E970ED22644F9526 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FA4CB8A6358A5C045839C /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FA516D2D0C667F66BDA70 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */; };
@@ -9459,7 +9458,6 @@
 				336FA628474190C8ECEAAAD0 /* RemoteMigrationSerivce.swift in Sources */,
 				336FA24287C5B8C97EB461A5 /* RemoteMigrationRequestParser.swift in Sources */,
 				336FAE4FDB8BEC482B0EE14A /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */,
-				336FA36B6E1926A255D971E3 /* RemoteMigrationDialog.swift in Sources */,
 				336FA3408151DF8342BD11C3 /* UIApplicationExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

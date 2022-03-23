@@ -22,21 +22,18 @@ class UserNotificationServiceMock: UserNotificationServiceProtocol {
 
     var postNotificationWasCalled = false
 
-    func requestPermissions() {
+    func requestPermissions(_ completion: @escaping (_ permissionGranted: Bool) -> Void) {
+        completion(true)
     }
 
     func postNotification(title: String, body: String, userInfo: [AnyHashable : Any]?) {
         postNotificationWasCalled = true
     }
-
     func postNotificationWithoutBadge(title: String?, body: String?, onNotificationSent: @escaping () -> Void) {
         onNotificationSent()
     }
 
     func postNotificationInForeground(body: String, title: String) {
 
-    }
-
-    func removeNotifications() {
     }
 }
