@@ -173,7 +173,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var dnsConfigAssistant: DnsConfigManagerAssistantProtocol = {
         ServiceLocator.shared.getService()! }()
     private lazy var remoteMigrationService: RemoteMigrationService = { ServiceLocator.shared.getService()! }()
-    private lazy var userNotificationService: UserNotificationServiceProtocol = { ServiceLocator.shared.getService()! }()
 
     // MARK: - View models
     private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(safariProtection: safariProtection, dnsProtection: dnsProtection, dnsConfigAssistant: dnsConfigAssistant) }()
