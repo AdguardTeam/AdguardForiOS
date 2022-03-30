@@ -22,8 +22,8 @@ extension UIView {
     // Use to animate image rotation
     // if isNedeed = true -> rotates
     // if isNedeed = false -> stops to rotate
-    public func rotateImage(isNedeed: Bool){
-        switch isNedeed {
+    public func rotateImage(isNeeded: Bool){
+        switch isNeeded {
         case true:
             let rotationAnimation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
             rotationAnimation.toValue = NSNumber(value: .pi * 2.0)

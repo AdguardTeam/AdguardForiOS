@@ -156,6 +156,6 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
             layoutFiltersLabel()
         }
 
-        stateImageView.rotateImage(isNedeed: model.shouldRotateImage)
+        stateImageView.rotateImage(isNeeded: model.shouldRotateImage)
     }
 }

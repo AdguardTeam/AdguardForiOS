@@ -1207,3 +1207,29 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Something went wrong";
+
+
+// FIXME: Change later
+/* (AppDelegate) Remote migration local push notification title */
+"remote_migration_notification_title" = "TITLE";
+
+// FIXME: Change later
+/* (AppDelegate) Remote migration local push notification body */
+"remote_migration_notification_body" = "BODY";
+
+// FIXME: Change later
+/* (RemoteMigrationDialog) title */
+"remote_migration_dialog_title" = "TITLE";
+
+// FIXME: Change later
+/* (RemoteMigrationDialog) description */
+"remote_migration_dialog_description" = "DESCRIPTION";
+
+// FIXME: Change later
+/* (RemoteMigrationDialog) accept button title */
+"remote_migration_dialog_accept_button_title" = "Accept";
+
+
+// FIXME: Change later
+/* (RemoteMigrationDialog) details button title */
+"remote_migration_dialog_details_button_title" = "Details";

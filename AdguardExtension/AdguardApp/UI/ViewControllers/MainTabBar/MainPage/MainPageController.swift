@@ -27,7 +27,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     var onReady: (()->Void)? {
         didSet {
             if ready && onReady != nil {
-                callOnready()
+                callOnReady()
             }
         }
     }
@@ -172,6 +172,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var dnsProvidersManager: DnsProvidersManagerProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsConfigAssistant: DnsConfigManagerAssistantProtocol = {
         ServiceLocator.shared.getService()! }()
+    private lazy var remoteMigrationService: RemoteMigrationService = { ServiceLocator.shared.getService()! }()
 
     // MARK: - View models
     private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(safariProtection: safariProtection, dnsProtection: dnsProtection, dnsConfigAssistant: dnsConfigAssistant) }()
@@ -184,6 +185,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private var dnsImplementationObserver: NotificationToken?
     private var currentDnsServerObserver: NotificationToken?
     private var proStatusObserver: NotificationToken?
+    private var remoteMigrationObserver: NotificationToken?
 
     // MARK: - View Controller life cycle
 
@@ -433,7 +435,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         configuration.showStatusBar = true
         onBoardingIsInProcess = false
         ready = true
-        callOnready()
+        callOnReady()
     }
 
     // MARK: - LicensePageViewControllerDelegate delegate
@@ -599,6 +601,10 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
             self?.processDnsServerChange()
         }
+
+        remoteMigrationObserver = NotificationCenter.default.observe(name: .needForMigration, object: nil, queue: .main) { [weak self] _ in
+            self?.processNeedForMigrationObserver()
+        }
     }
 
     /**
@@ -607,7 +613,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private func updateStartedInternal(){
         updateInProcess = true
         iconButton?.isUserInteractionEnabled = false
-        updateButton.customView?.rotateImage(isNedeed: true)
+        updateButton.customView?.rotateImage(isNeeded: true)
     }
 
     /**
@@ -617,7 +623,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         DispatchQueue.main.async {[weak self] in
             self?.updateInProcess = false
             self?.iconButton?.isUserInteractionEnabled = true
-            self?.updateButton.customView?.rotateImage(isNedeed: false)
+            self?.updateButton.customView?.rotateImage(isNeeded: false)
             self?.updateProtectionStates()
 
             // return status title few seconds later
@@ -852,9 +858,20 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
     }
 
-    private func callOnready() {
-        onReady?()
-        onReady = nil
+    private func callOnReady() {
+        // We need to check if we need to inform the user that migration is necessary on each 'ready' shot
+        let isNeedRemoteMigration = remoteMigrationService.isNeedRemoteMigration
+        let remoteMigrationDialogShown = remoteMigrationService.remoteMigrationDialogShown
+
+        guard isNeedRemoteMigration, !remoteMigrationDialogShown else {
+            DDLogInfo("(MainPageController) Remote migration dialog was not presented. Is need migration = \(isNeedRemoteMigration), is remote migration dialog has been shown = \(remoteMigrationDialogShown)")
+            onReady?()
+            onReady = nil
+            return
+        }
+
+        DDLogInfo("(MainPageController) Present remote migration dialog on callOnReady")
+        presentRemoteMigrationDialog()
     }
 
     /**
@@ -926,7 +943,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             contentBlockerHelperWasShown = true
         } else {
             ready = true
-            callOnready()
+            callOnReady()
         }
     }
 
@@ -936,6 +953,56 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         chartModel = ChartViewModel(statisticsPeriod: resources.chartDateType, activityStatistics: activityStatistics, chartStatistics: chartStatistics)
 
         chartModel.delegate = self
+    }
+
+    private func createRemoteMigrationDialog() -> UIViewController? {
+        let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "\(RemoteMigrationDialog.self)") as? RemoteMigrationDialog else {
+            DDLogError("(MainPageController) Missing \(RemoteMigrationDialog.self) in storyboard")
+            return nil
+        }
+
+        vc.onDismissCompletion = {
+            self.ready = true
+            self.onReady?()
+        }
+        return vc
+    }
+
+    private func processNeedForMigrationObserver() {
+        let isNeedRemoteMigration = remoteMigrationService.isNeedRemoteMigration
+        let remoteMigrationDialogShown = remoteMigrationService.remoteMigrationDialogShown
+
+        if isNeedRemoteMigration, !remoteMigrationDialogShown {
+            DDLogInfo("(MainPageController) Start presenting remote migration dialog from observer")
+            presentRemoteMigrationDialog()
+            return
+        }
+
+        DDLogWarn("(MainPageController) Remote migration dialog not presented. Is needed for remote migration = \(isNeedRemoteMigration), remote migration dialog has already been shown = \(remoteMigrationDialogShown)")
+    }
+
+    private func presentRemoteMigrationDialog() {
+        let presentOn: UIViewController
+        if let presented = presentedViewController {
+            DDLogInfo("(MainPageController) Some controller already presented. Let`s present remote migration dialog above it")
+            presentOn = presented
+        } else {
+            DDLogInfo("(MainPageController) Let`s present remote migration dialog on self")
+            presentOn = self
+        }
+
+
+        guard let dialog = createRemoteMigrationDialog() else {
+            DDLogWarn("(MainPageController) Remote migration dialog is missing")
+            return
+        }
+
+        DDLogInfo("(MainPageController) Start presenting remote migration dialog")
+        // Reset all the flags to avoid duplicates
+        remoteMigrationService.remoteMigrationDialogShown = true
+        resources.backgroundFetchRemoteMigrationRequestResult = false
+        presentOn.present(dialog, animated: true)
     }
 }
 
