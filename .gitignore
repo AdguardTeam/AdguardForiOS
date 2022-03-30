@@ -4,6 +4,7 @@ Adguard.ipa
 
 # fastlane auth key
 **/fastlane/AuthKey.p8
+**/fastlane/AuthKeyASL.p8
 
 # fastlane specific
 **/fastlane/report.xml
