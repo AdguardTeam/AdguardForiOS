@@ -16,24 +16,17 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+#include "../project.xcconfig"
 
-class UserNotificationServiceMock: UserNotificationServiceProtocol {
-
-    var postNotificationWasCalled = false
-
-    func requestPermissions(_ completion: @escaping (_ permissionGranted: Bool) -> Void) {
-        completion(true)
-    }
-
-    func postNotification(title: String, body: String, userInfo: [AnyHashable : Any]?) {
-        postNotificationWasCalled = true
-    }
-    func postNotificationWithoutBadge(title: String?, body: String?, onNotificationSent: @escaping () -> Void) {
-        onNotificationSent()
-    }
-
-    func postNotificationInForeground(body: String, title: String) {
-
-    }
-}
+// Main App bundle identifier for Adguard New App
+ADGUARD_BUNDLE_ID = com.adguard.AdGuardApp
+// Blocking extension bundle identifier
+ADGUARD_EXTENSION_BUNDLE_ID = $(ADGUARD_BUNDLE_ID).extension
+// VPN Tunnel provider bundle identifier
+ADGUARD_TUNNEL_BUNDLE_ID = $(ADGUARD_BUNDLE_ID).tunnel
+// Downloads session for filter updates identifier
+ADGUARD_FILTER_UPDATES_ID = $(ADGUARD_BUNDLE_ID).filterUpdatesSession
+// Group for shared resources
+ADGUARD_SHARED_RESOURCES_GROUP = group.com.adguard.AdguardApp
+// Group for shared resources
+AE_SHARED_SUBSCRIPTIOSN_GROUP = group.com.adguard.AdguardApp.subscriptions
