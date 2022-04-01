@@ -1,6 +1,7 @@
 import UIKit
 
-class AdGuardProFoundDialog: BottomAlertController {
+/// ASL account dialog
+final class AdGuardProFoundDialog: BottomAlertController {
     @IBOutlet weak var primaryButton: UIButton!
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!

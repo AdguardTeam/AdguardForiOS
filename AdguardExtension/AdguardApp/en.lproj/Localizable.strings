@@ -1208,56 +1208,64 @@
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Something went wrong";
 
+/* (AppDelegate) Remote migration local push notification title; Disclaimer: This functionality may not be implemented in future */
+"remote_migration_notification_title" = "Obsolete AdGuard app";
 
-// FIXME: Change later
-/* (AppDelegate) Remote migration local push notification title */
-"remote_migration_notification_title" = "TITLE";
+/* (AppDelegate) Remote migration local push notification body; Disclaimer: This functionality may not be implemented in future */
+"remote_migration_notification_body" = "Please install our new app. It’s free.";
 
-// FIXME: Change later
-/* (AppDelegate) Remote migration local push notification body */
-"remote_migration_notification_body" = "BODY";
+/* (RemoteMigrationDialog) title; Disclaimer: This functionality may not be implemented in future */
+"remote_migration_dialog_title" = "Obsolete AdGuard version";
 
-// FIXME: Change later
-/* (RemoteMigrationDialog) title */
-"remote_migration_dialog_title" = "TITLE";
+/* (RemoteMigrationDialog) description; Disclaimer: This functionality may not be implemented in future */
+"remote_migration_dialog_description" = "This app is out of date and will no longer receive updates. Please replace it with our new AdGuard app for iOS. It's free. ";
 
-// FIXME: Change later
-/* (RemoteMigrationDialog) description */
-"remote_migration_dialog_description" = "DESCRIPTION";
+/* (RemoteMigrationDialog) accept button title; Disclaimer: This functionality may not be implemented in future */
+"remote_migration_dialog_accept_button_title" = "Proceed";
 
-// FIXME: Change later
-/* (RemoteMigrationDialog) accept button title */
-"remote_migration_dialog_accept_button_title" = "Accept";
+/* (RemoteMigrationDialog) details button title; Disclaimer: This functionality may not be implemented in future */
+"remote_migration_dialog_details_button_title" = "Why is it happening?";
 
+/* (AdGuardProFoundDialog) title; Disclaimer: This functionality may not be implemented in future */
+"adguard_pro_found_title" = "AdGuard Pro is installed on this device";
 
-// FIXME: Change later
-/* (RemoteMigrationDialog) details button title */
-"remote_migration_dialog_details_button_title" = "Details";
+/* (AdGuardProFoundDialog) description; Disclaimer: This functionality may not be implemented in future */
+"adguard_pro_found_description" = "This AdGuard Pro app is obsolete and no longer needed. Instead, activate premium features here. Then you can safely uninstall AdGuard Pro.";
 
-// FIXME: Change later
-/* (AdGuardProFoundDialog) title */
-"adguard_pro_found_title" = "TITLE";
+/* (AdGuardProFoundDialog) primary button title; Disclaimer: This functionality may not be implemented in future */
+"adguard_pro_found_primary_button_title" = "Activate premium features";
 
-// FIXME: Change later
-/* (AdGuardProFoundDialog) description */
-"adguard_pro_found_description" = "DESCRIPTION";
+/* (AdGuardFoundDialog) title; Disclaimer: This functionality may not be implemented in future */
+"adguard_found_title" = "The old AdGuard app is also installed on this device";
 
-// FIXME: Change later
-/* (AdGuardProFoundDialog) primary button title */
-"adguard_pro_found_primary_button_title" = "TITLE";
+/* (AdGuardFoundDialog) description; Disclaimer: This functionality may not be implemented in future */
+"adguard_found_description" = "This app is obsolete. Before deleting it, please check: have you got a paid subscription or a purchased license key for it?";
 
-// FIXME: Change later
-/* (AdGuardFoundDialog) title */
-"adguard_found_title" = "TITLE";
+/* (AdGuardFoundDialog) primary button title; Disclaimer: This functionality may not be implemented in future */
+"adguard_found_primary_button_title" = "Yes";
 
-// FIXME: Change later
-/* (AdGuardFoundDialog) description */
-"adguard_found_description" = "DESCRIPTION";
+/* (AdGuardFoundDialog) neutral button title; Disclaimer: This functionality may not be implemented in future */
+"adguard_found_neutral_button_title" = "No";
 
-// FIXME: Change later
-/* (AdGuardFoundDialog) primary button title */
-"adguard_found_primary_button_title" = "TITLE";
+/* (CanDeleteAppDialog) title; Disclaimer: This functionality may not be implemented in future */
+"can_delete_app_dialog_title" = "You can delete the old AdGuard app.";
 
-// FIXME: Change later
-/* (AdGuardFoundDialog) neutral button title */
-"adguard_found_neutral_button_title" = "TITLE";
+/* (CanDeleteAppDialog) button title; Disclaimer: This functionality may not be implemented in future */
+"can_delete_app_dialog_button_title" = "Ok";
+
+/* (LicenseWasBindedDialog) title; Disclaimer: This functionality may not be implemented in future */
+"license_was_binded_dialog_title" = "Have you bound the license to your AdGuard account?";
+
+/* (LicenseWasBindedDialog) description; Disclaimer: This functionality may not be implemented in future */
+"license_was_binded_dialog_description" = "You need to create an AdGuard account and bind your license
+ to it. Open the old app and follow the instructions there.";
+
+/* (LicenseWasBindedDialog) button title; Disclaimer: This functionality may not be implemented in future */
+"license_was_binded_dialog_button_title" = "It’s done. I’m ready to log in";
+
+/* (RemoteMigrationInfoView) Old app detected message; Disclaimer: This functionality may not be implemented in future */
+"remote_migration_info_view_old_app_detected" = "The old AdGuard app is also installed on this device. <a href=%@>Delete it?</a>";
+
+/* (RemoteMigrationInfoView) Need migration message; Disclaimer: This functionality may not be implemented in future */
+"remote_migration_info_view_need_migration" = "Please replace this obsolete app with our new app. <a href=%@>Why?</a>";
+

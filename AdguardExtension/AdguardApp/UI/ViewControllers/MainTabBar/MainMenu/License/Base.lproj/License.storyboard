@@ -349,7 +349,7 @@
         <!--Sign In Controller-->
         <scene sceneID="eSG-aF-bm5">
             <objects>
-                <viewController storyboardIdentifier="SignInScene" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="feC-dX-1xt" customClass="SignInController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="feC-dX-1xt" customClass="SignInController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oLe-jr-YMA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

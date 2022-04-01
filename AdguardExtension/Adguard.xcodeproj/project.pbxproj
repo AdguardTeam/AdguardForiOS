@@ -366,43 +366,62 @@
 		24FB8B1326EB9C330031ED4D /* UITraitEnvironment+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */; };
 		31258EBE0244C5547C02217C /* Adguard-App-Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 312581016C85A960FCEED966 /* Adguard-App-Config.xcconfig */; };
 		31258F9DD7F14E640DBA6F7A /* project.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 312582CB637FF89D5EE82C0A /* project.xcconfig */; };
+		336FA08987F3D4D79C1FBC4F /* LicenseWasBindedDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAA0BCBF5B13A20C7186D /* LicenseWasBindedDialog.swift */; };
+		336FA0A0ECC50CF7B3FEFD1D /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FA0E06E857C893A2FE7F5 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
-		336FA13C143522372551C28F /* NewAppMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA47C776B335FB8508F0F /* NewAppMigrationDialog.swift */; };
-		336FA1684A221BE3B0B8342A /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FACC06ED2432C7740DE8A /* AdGuardProFoundDialog.swift */; };
+		336FA1824F0922F0D89AB510 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FA1C513658B9551CE4E56 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FA24287C5B8C97EB461A5 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FA28B765FFD115941BC29 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
+		336FA2EA3A65DC4129E6891C /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA798A2A44B9C00BFDC38 /* RemoteMigrationDialog.swift */; };
 		336FA317692B9E002E812196 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */; };
 		336FA3408151DF8342BD11C3 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
+		336FA3AD4FC858D5BFCD9FE9 /* RemoteMigrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */; };
 		336FA3C9E970ED22644F9526 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
+		336FA4340C3CE7B38900866C /* RemoteMigrationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAE60668A3405353894A6 /* RemoteMigrationInfoView.swift */; };
 		336FA4CB8A6358A5C045839C /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FA516D2D0C667F66BDA70 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */; };
 		336FA53053FE020099E49B6B /* RemoteMigrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */; };
+		336FA53BA666A24D5A3EBE22 /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA798A2A44B9C00BFDC38 /* RemoteMigrationDialog.swift */; };
+		336FA592CA7C999FE63D432C /* AdGuardFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEEFFB5105B8EBCEB757 /* AdGuardFoundDialog.swift */; };
+		336FA61DF4C18F24DA7DF688 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FA628474190C8ECEAAAD0 /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
 		336FA67ACFFA39E47E45E25E /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
-		336FA687C80B61EE79F002DF /* AdGuardFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA58C8E48A4CD461E7683 /* AdGuardFoundDialog.swift */; };
+		336FA7122C152BF9778E43AA /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FA858D4DC23A43D84E4E9 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
+		336FA859E781483BC78FF099 /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEE1744F0D0D8DC23F6F /* AdGuardProFoundDialog.swift */; };
 		336FA85DF44F68482B3F840D /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
 		336FA86ED79ED6E25974EDC6 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FA8F839A81448709D8561 /* RemoteMigrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */; };
+		336FA903815BED6E1DE50238 /* RemoteMigrationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAE60668A3405353894A6 /* RemoteMigrationInfoView.swift */; };
 		336FA921CFA57AB6FA466733 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
-		336FA92BA0F5388311BBEA19 /* AdGuardFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA58C8E48A4CD461E7683 /* AdGuardFoundDialog.swift */; };
-		336FA9835FD683351684514F /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAA4312C13C79B235EB41 /* RemoteMigrationDialog.swift */; };
+		336FA93F4B1CE7F5FF6F6DD9 /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEE1744F0D0D8DC23F6F /* AdGuardProFoundDialog.swift */; };
+		336FA9546BF3529A417CD493 /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEE1744F0D0D8DC23F6F /* AdGuardProFoundDialog.swift */; };
+		336FA9B1EFA8C55794845AE4 /* RemoteMigrationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAE60668A3405353894A6 /* RemoteMigrationInfoView.swift */; };
 		336FA9FE4AC403FEE40A9364 /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
+		336FAA2078B4A3689ED9DD32 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
+		336FAAAF6DE7BDD41A8BBFB8 /* AdGuardFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEEFFB5105B8EBCEB757 /* AdGuardFoundDialog.swift */; };
 		336FAB6B3BE2B3ED131A1CED /* RemoteMigrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */; };
-		336FAB7E8A3087BF612EF187 /* AdGuardFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA58C8E48A4CD461E7683 /* AdGuardFoundDialog.swift */; };
+		336FAB89894AA37A372D60EB /* LicenseWasBindedDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAA0BCBF5B13A20C7186D /* LicenseWasBindedDialog.swift */; };
+		336FAB9ECC024817EAA3170E /* CanDeleteAppDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA3D5458BFE72AFA24FEC /* CanDeleteAppDialog.swift */; };
+		336FABB8E92A5B9DFD572ED7 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FABC3341ACC4A76EC1BE8 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
-		336FAC177FF73FC88B38EB2F /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAA4312C13C79B235EB41 /* RemoteMigrationDialog.swift */; };
-		336FAC6049974D1B5BCC85B2 /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FACC06ED2432C7740DE8A /* AdGuardProFoundDialog.swift */; };
-		336FAC95756E90A36EC4792F /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FACC06ED2432C7740DE8A /* AdGuardProFoundDialog.swift */; };
-		336FAD3C7A9790659A4456E1 /* NewAppMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA47C776B335FB8508F0F /* NewAppMigrationDialog.swift */; };
+		336FAC46D3BEB78AF0E4DBC2 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */; };
+		336FAC8BA941CE742A3E0D75 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
+		336FAD3B3F8883DC05F02DD1 /* CanDeleteAppDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA3D5458BFE72AFA24FEC /* CanDeleteAppDialog.swift */; };
+		336FADA4C2354403E13A6CDB /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA798A2A44B9C00BFDC38 /* RemoteMigrationDialog.swift */; };
+		336FADADFAEBBBC155950BF8 /* CanDeleteAppDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA3D5458BFE72AFA24FEC /* CanDeleteAppDialog.swift */; };
 		336FADBA80A957EEE49A440E /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FADD679886E781A168E14 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FADFE6DC2C140B3494C68 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
+		336FAE0E54B3A55B4A5A511B /* LicenseWasBindedDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAA0BCBF5B13A20C7186D /* LicenseWasBindedDialog.swift */; };
+		336FAE4E2F8A9F5CFBE53A4F /* AdGuardFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEEFFB5105B8EBCEB757 /* AdGuardFoundDialog.swift */; };
 		336FAE4FDB8BEC482B0EE14A /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */; };
+		336FAE97926E13271FC432F1 /* AdGuardFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEEFFB5105B8EBCEB757 /* AdGuardFoundDialog.swift */; };
+		336FAE9DD21ED5A6061F789F /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEE1744F0D0D8DC23F6F /* AdGuardProFoundDialog.swift */; };
 		336FAED3A8A14038DA17143E /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FAF1FC2C15A491353DB1F /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
-		336FAF5DCB67E04670A8EEEE /* NewAppMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA47C776B335FB8508F0F /* NewAppMigrationDialog.swift */; };
+		336FAF481CB6FB0BE4F9B7F4 /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
 		4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4020A90022C3C863009C188F /* MainNavigationController.swift */; };
 		494E0BBA26E7AF49005C21C4 /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
 		494E0BBB26E7AF4A005C21C4 /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
@@ -3968,15 +3987,17 @@
 		312581016C85A960FCEED966 /* Adguard-App-Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Adguard-App-Config.xcconfig"; path = "AdguardNewApp/Adguard-App-Config.xcconfig"; sourceTree = "<group>"; };
 		312582CB637FF89D5EE82C0A /* project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = project.xcconfig; path = AdguardNewApp/project.xcconfig; sourceTree = "<group>"; };
 		336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteMigrationServiceImpl.swift; path = UserNotificationService/RemoteMigrationServiceImpl.swift; sourceTree = "<group>"; };
-		336FA47C776B335FB8508F0F /* NewAppMigrationDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAppMigrationDialog.swift; sourceTree = "<group>"; };
+		336FA3D5458BFE72AFA24FEC /* CanDeleteAppDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanDeleteAppDialog.swift; sourceTree = "<group>"; };
 		336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
-		336FA58C8E48A4CD461E7683 /* AdGuardFoundDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdGuardFoundDialog.swift; sourceTree = "<group>"; };
+		336FA798A2A44B9C00BFDC38 /* RemoteMigrationDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationDialog.swift; sourceTree = "<group>"; };
 		336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationRequestParser.swift; sourceTree = "<group>"; };
 		336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationRequest.swift; sourceTree = "<group>"; };
-		336FAA4312C13C79B235EB41 /* RemoteMigrationDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationDialog.swift; sourceTree = "<group>"; };
+		336FAA0BCBF5B13A20C7186D /* LicenseWasBindedDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseWasBindedDialog.swift; sourceTree = "<group>"; };
 		336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequestServiceProtocolRemoteMigrationExtension.swift; sourceTree = "<group>"; };
-		336FACC06ED2432C7740DE8A /* AdGuardProFoundDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdGuardProFoundDialog.swift; sourceTree = "<group>"; };
 		336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteMigrationSerivce.swift; path = UserNotificationService/RemoteMigrationSerivce.swift; sourceTree = "<group>"; };
+		336FAE60668A3405353894A6 /* RemoteMigrationInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationInfoView.swift; sourceTree = "<group>"; };
+		336FAEE1744F0D0D8DC23F6F /* AdGuardProFoundDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdGuardProFoundDialog.swift; sourceTree = "<group>"; };
+		336FAEEFFB5105B8EBCEB757 /* AdGuardFoundDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdGuardFoundDialog.swift; sourceTree = "<group>"; };
 		4020A90022C3C863009C188F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		4982C0BF26D78F2900CACBBE /* unused.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unused.ts; sourceTree = "<group>"; };
 		4982C0C026D78F2900CACBBE /* helpers.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helpers.ts; sourceTree = "<group>"; };
@@ -5851,6 +5872,19 @@
 			path = AppleSearchAd;
 			sourceTree = "<group>";
 		};
+		336FAF07F96EF974A0491DDE /* RemoteMigration */ = {
+			isa = PBXGroup;
+			children = (
+				336FAEEFFB5105B8EBCEB757 /* AdGuardFoundDialog.swift */,
+				336FAEE1744F0D0D8DC23F6F /* AdGuardProFoundDialog.swift */,
+				336FA3D5458BFE72AFA24FEC /* CanDeleteAppDialog.swift */,
+				336FAA0BCBF5B13A20C7186D /* LicenseWasBindedDialog.swift */,
+				336FA798A2A44B9C00BFDC38 /* RemoteMigrationDialog.swift */,
+				336FAE60668A3405353894A6 /* RemoteMigrationInfoView.swift */,
+			);
+			path = RemoteMigration;
+			sourceTree = "<group>";
+		};
 		4982C0BC26D78F2900CACBBE /* extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -7407,10 +7441,7 @@
 				7E3BDEDF23A15709009492CE /* GetProDialogView.swift */,
 				24C49DBC26C40AC900790CB3 /* WhatsNewBottomAlertController.swift */,
 				2444013826EE2F9500FB7CE5 /* ChartType+Utils.swift */,
-				336FAA4312C13C79B235EB41 /* RemoteMigrationDialog.swift */,
-				336FA47C776B335FB8508F0F /* NewAppMigrationDialog.swift */,
-				336FACC06ED2432C7740DE8A /* AdGuardProFoundDialog.swift */,
-				336FA58C8E48A4CD461E7683 /* AdGuardFoundDialog.swift */,
+				336FAF07F96EF974A0491DDE /* RemoteMigration */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -10725,11 +10756,13 @@
 				336FA9FE4AC403FEE40A9364 /* RemoteMigrationSerivce.swift in Sources */,
 				336FA0E06E857C893A2FE7F5 /* RemoteMigrationRequestParser.swift in Sources */,
 				336FA317692B9E002E812196 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */,
-				336FAC177FF73FC88B38EB2F /* RemoteMigrationDialog.swift in Sources */,
 				336FA921CFA57AB6FA466733 /* UIApplicationExtensions.swift in Sources */,
-				336FA13C143522372551C28F /* NewAppMigrationDialog.swift in Sources */,
-				336FA1684A221BE3B0B8342A /* AdGuardProFoundDialog.swift in Sources */,
-				336FA92BA0F5388311BBEA19 /* AdGuardFoundDialog.swift in Sources */,
+				336FAAAF6DE7BDD41A8BBFB8 /* AdGuardFoundDialog.swift in Sources */,
+				336FAE9DD21ED5A6061F789F /* AdGuardProFoundDialog.swift in Sources */,
+				336FADADFAEBBBC155950BF8 /* CanDeleteAppDialog.swift in Sources */,
+				336FAB89894AA37A372D60EB /* LicenseWasBindedDialog.swift in Sources */,
+				336FA2EA3A65DC4129E6891C /* RemoteMigrationDialog.swift in Sources */,
+				336FA4340C3CE7B38900866C /* RemoteMigrationInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11237,11 +11270,13 @@
 				336FA67ACFFA39E47E45E25E /* RemoteMigrationSerivce.swift in Sources */,
 				336FADBA80A957EEE49A440E /* RemoteMigrationRequestParser.swift in Sources */,
 				336FA516D2D0C667F66BDA70 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */,
-				336FA9835FD683351684514F /* RemoteMigrationDialog.swift in Sources */,
 				336FA85DF44F68482B3F840D /* UIApplicationExtensions.swift in Sources */,
-				336FAD3C7A9790659A4456E1 /* NewAppMigrationDialog.swift in Sources */,
-				336FAC95756E90A36EC4792F /* AdGuardProFoundDialog.swift in Sources */,
-				336FA687C80B61EE79F002DF /* AdGuardFoundDialog.swift in Sources */,
+				336FAE97926E13271FC432F1 /* AdGuardFoundDialog.swift in Sources */,
+				336FA859E781483BC78FF099 /* AdGuardProFoundDialog.swift in Sources */,
+				336FAD3B3F8883DC05F02DD1 /* CanDeleteAppDialog.swift in Sources */,
+				336FAE0E54B3A55B4A5A511B /* LicenseWasBindedDialog.swift in Sources */,
+				336FA53BA666A24D5A3EBE22 /* RemoteMigrationDialog.swift in Sources */,
+				336FA9B1EFA8C55794845AE4 /* RemoteMigrationInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11445,9 +11480,8 @@
 				336FA24287C5B8C97EB461A5 /* RemoteMigrationRequestParser.swift in Sources */,
 				336FAE4FDB8BEC482B0EE14A /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */,
 				336FA3408151DF8342BD11C3 /* UIApplicationExtensions.swift in Sources */,
-				336FAF5DCB67E04670A8EEEE /* NewAppMigrationDialog.swift in Sources */,
-				336FAC6049974D1B5BCC85B2 /* AdGuardProFoundDialog.swift in Sources */,
-				336FAB7E8A3087BF612EF187 /* AdGuardFoundDialog.swift in Sources */,
+				336FA592CA7C999FE63D432C /* AdGuardFoundDialog.swift in Sources */,
+				336FA93F4B1CE7F5FF6F6DD9 /* AdGuardProFoundDialog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12182,6 +12216,18 @@
 				B2AED28227F485AE00FDE212 /* YoutubeHtmlBuilder.swift in Sources */,
 				B2AED28327F485AE00FDE212 /* YoutubePlayerController.swift in Sources */,
 				B2AED28427F485AE00FDE212 /* UIBackgroundTask.swift in Sources */,
+				336FA0A0ECC50CF7B3FEFD1D /* RemoteMigrationRequestParser.swift in Sources */,
+				336FABB8E92A5B9DFD572ED7 /* RemoteMigrationRequest.swift in Sources */,
+				336FAC8BA941CE742A3E0D75 /* UIApplicationExtensions.swift in Sources */,
+				336FAF481CB6FB0BE4F9B7F4 /* RemoteMigrationSerivce.swift in Sources */,
+				336FA3AD4FC858D5BFCD9FE9 /* RemoteMigrationServiceImpl.swift in Sources */,
+				336FA903815BED6E1DE50238 /* RemoteMigrationInfoView.swift in Sources */,
+				336FADA4C2354403E13A6CDB /* RemoteMigrationDialog.swift in Sources */,
+				336FAE4E2F8A9F5CFBE53A4F /* AdGuardFoundDialog.swift in Sources */,
+				336FA9546BF3529A417CD493 /* AdGuardProFoundDialog.swift in Sources */,
+				336FAB9ECC024817EAA3170E /* CanDeleteAppDialog.swift in Sources */,
+				336FA08987F3D4D79C1FBC4F /* LicenseWasBindedDialog.swift in Sources */,
+				336FAC46D3BEB78AF0E4DBC2 /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12592,6 +12638,8 @@
 				B2F576E527F49D1100D87F88 /* NativeDnsSettingsManager.swift in Sources */,
 				B2F576E627F49D1100D87F88 /* AppleSearchAdsService.swift in Sources */,
 				B2F576E727F49D1100D87F88 /* ConfigurationService.swift in Sources */,
+				336FAA2078B4A3689ED9DD32 /* RemoteMigrationRequestParser.swift in Sources */,
+				336FA7122C152BF9778E43AA /* RemoteMigrationRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12713,6 +12761,8 @@
 				B2F5776A27F49DFD00D87F88 /* NotificationCenter+Utils.swift in Sources */,
 				B2F5776B27F49DFD00D87F88 /* CLIColor.m in Sources */,
 				B2F5776C27F49DFD00D87F88 /* SuccessFailureParser.swift in Sources */,
+				336FA1824F0922F0D89AB510 /* RemoteMigrationRequestParser.swift in Sources */,
+				336FA61DF4C18F24DA7DF688 /* RemoteMigrationRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

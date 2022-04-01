@@ -30,7 +30,7 @@ class GetProDialogView: UIView {
 
         let inset2: CGFloat = newRect.height / 3
 
-        let color = UIColor(hexString: "#f3f3f3")
+        let color = UIColor.AdGuardColor.lightGray6
         let bezierPath = UIBezierPath(roundedRect: newRect, cornerRadius: cornerRadius)
 
         let point1 = CGPoint(x: newRect.minX, y: newRect.minY + inset2)

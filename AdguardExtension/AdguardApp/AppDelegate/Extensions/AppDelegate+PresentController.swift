@@ -233,7 +233,7 @@ extension AppDelegate {
      */
     func presentFiltersMasterController(showLaunchScreen: Bool = false, url: String? = nil, title: String? = nil) -> Bool {
         if !proStatus { return presentPurchaseLicenseController() }
-        
+
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -551,7 +551,7 @@ extension AppDelegate {
                     self.presentUserRulesTableController(for: userRulesTableController.rulesType)
                 }
             }
-            
+
             userRulesRedirectVC.action = action
             topVC.present(userRulesRedirectVC, animated: true)
             return true
@@ -712,6 +712,30 @@ extension AppDelegate {
 
         alert.view.addSubview(loadingIndicator)
         window?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+
+    func pushSignInController() {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Failed to push sign in controller, tab bar is missing")
+            return
+        }
+
+        guard let selectedTab = TabBarTabs(rawValue: tabBar.selectedIndex) else {
+            DDLogError("Failed to push sign in controller, selected tab is missing")
+            return
+        }
+
+        guard let navController = getNavigationController(for: selectedTab) else {
+            DDLogError("Failed to push sign in controller, navigation controller is nil")
+            return
+        }
+
+        let storyboard = UIStoryboard(name: "License", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "\(SignInController.self)")
+
+        navController.pushViewController(vc, animated: true)
+
+        DDLogDebug("Successfully push sign in controller")
     }
 
     /* Returns navigation controller for certain tab */
