@@ -19,6 +19,18 @@
 import UIKit
 
 extension UIViewController {
+
+    /// Returns last presented controller for this controller. If no one was presented returns self
+    var lastPresentedController: UIViewController {
+        var last = self
+
+        while let presented = last.presentedViewController {
+            last = presented
+        }
+
+        return last
+    }
+
     func presentUpsellScreen() {
         let upsellVC = UpsellViewController(nibName: "UpsellViewController", bundle: nil)
         upsellVC.modalPresentationStyle = .overFullScreen

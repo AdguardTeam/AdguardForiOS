@@ -723,9 +723,9 @@
                                 <exclude reference="IU2-ER-A7n"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="hHh-fA-Fhj"/>
                                 <exclude reference="k7s-6e-bka"/>
                                 <exclude reference="zNb-KE-xE5"/>
+                                <exclude reference="hHh-fA-Fhj"/>
                                 <exclude reference="UZf-6G-4fC"/>
                             </mask>
                         </variation>
@@ -760,6 +760,7 @@
                     <connections>
                         <outlet property="adguardManImageView" destination="gM8-pc-xzq" id="laM-dL-fYX"/>
                         <outlet property="changeStatisticsDatesButton" destination="kfe-5H-fB1" id="bpY-pU-sXY"/>
+                        <outlet property="changeStatisticsDatesButtonContainer" destination="su3-Wd-237" id="lrC-RD-6bG"/>
                         <outlet property="chartView" destination="aEB-g1-RpB" id="Vwb-3R-zO3"/>
                         <outlet property="complexProtectionSwitch" destination="YUL-Oa-fId" id="jqh-kc-mId"/>
                         <outlet property="complexProtectionView" destination="VfD-f2-PUd" id="fQh-ZI-kul"/>

@@ -75,8 +75,10 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     // MARK: - Statistics elements
 
+    @IBOutlet weak var changeStatisticsDatesButtonContainer: UIView!
     @IBOutlet weak var changeStatisticsDatesButton: UIButton!
     @IBOutlet var chartView: ChartView!
+    private var stabView: UIView?
 
     @IBOutlet weak var statisticsStackView: UIStackView!
 
@@ -579,6 +581,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.updateProtectionStates()
             self?.updateProtectionStatusText()
             self?.checkAdGuardVpnIsInstalled()
+            self?.processState()
         })
 
         proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
@@ -608,6 +611,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         remoteMigrationObserver = NotificationCenter.default.observe(name: .needForMigration, object: nil, queue: .main) { [weak self] _ in
             self?.processNeedForMigrationObserver()
+            self?.processState()
         }
     }
 
@@ -669,10 +673,15 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
                 changeStatisticsDatesButton.isHidden = false
             }
         } else {
-            getProView.isHidden = remoteMigrationService.isNeedRemoteMigration || UIApplication.shared.detectLegacyAppInstalled() != nil
+            getProView.isHidden = remoteMigrationService.isNeedRemoteMigration || UIApplication.shared.legacyAppDetected
         }
 
-        addRemoteMigrationInfoViewIfNeeded()
+        // We need to check if user install / deinstall legacy apps and change UI
+        if UIApplication.shared.legacyAppDetected {
+            addRemoteMigrationInfoViewIfNeeded()
+        } else {
+            resetRemoteMigrationInfoView()
+        }
 
         systemProtectionButton.buttonIsOn = complexProtection.systemProtectionEnabled
     }
@@ -1009,15 +1018,11 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     private func presentRemoteMigrationDialog() {
-        let presentOn: UIViewController
-        if let presented = presentedViewController {
-            DDLogInfo("(MainPageController) Some controller already presented. Let`s present remote migration dialog above it")
-            presentOn = presented
-        } else {
-            DDLogInfo("(MainPageController) Let`s present remote migration dialog on self")
-            presentOn = self
+        let presentOn = lastPresentedController
+        if presentOn is RemoteMigrationDialog {
+            DDLogWarn("(MainPageController) \(RemoteMigrationDialog.self) already presented")
+            return
         }
-
 
         guard let dialog = createRemoteMigrationDialog() else {
             DDLogWarn("(MainPageController) Remote migration dialog is missing")
@@ -1032,13 +1037,10 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     private func presentLegacyAppDetectedDialog(_ legacy: UIApplication.LegacyAppType) {
-        let presentOn: UIViewController
-        if let presented = presentedViewController {
-            DDLogInfo("(MainPageController) Some controller already presented. Let`s present legacy app dialog above it")
-            presentOn = presented
-        } else {
-            DDLogInfo("(MainPageController) Let`s present legacy app dialog on self")
-            presentOn = self
+        let presentOn = lastPresentedController
+        if presentOn is AdGuardProFoundDialog || presentOn is AdGuardFoundDialog {
+            DDLogWarn("(MainPageController) LegacyAppDialog already presented")
+            return
         }
 
         let vc: UIViewController
@@ -1051,16 +1053,13 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
 
 
-
-
     /// Functions to work with migration info view
 
     private func  addRemoteMigrationInfoViewIfNeeded() {
-        let detected = UIApplication.shared.detectLegacyAppInstalled()
-        let newAppDetectedLegacyApp = detected != nil && UIApplication.shared.aslApp
+        let newAppDetectLegacyApp = UIApplication.shared.legacyAppDetected
         let legacyAppWithNeedingMigration =  remoteMigrationService.isNeedRemoteMigration && !UIApplication.shared.aslApp
 
-        guard newAppDetectedLegacyApp || legacyAppWithNeedingMigration else { return }
+        guard newAppDetectLegacyApp || legacyAppWithNeedingMigration else { return }
         remoteMigrationInfoView?.removeFromSuperview()
 
         if isIpadTrait {
@@ -1126,9 +1125,30 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         let stabView = UIView()
         stabView.backgroundColor = .clear
+        self.stabView = stabView
         statisticsStackView.insertArrangedSubview(stabView, at: 0)
         statisticsStackView.removeArrangedSubview(chartView)
         chartView.removeFromSuperview()
+    }
+
+    /// Removes remote migration info view and returns back chart view
+    private func resetRemoteMigrationInfoView() {
+        if let infoView = remoteMigrationInfoView {
+            statisticsStackView.removeArrangedSubview(infoView)
+            infoView.removeFromSuperview()
+        }
+
+        if let stabView = self.stabView {
+            statisticsStackView.removeArrangedSubview(stabView)
+            stabView.removeFromSuperview()
+            self.stabView = nil
+
+            if let dateButtonContainerIndex = statisticsStackView.arrangedSubviews.index(of: changeStatisticsDatesButtonContainer) {
+                let insertIndex = dateButtonContainerIndex + 1
+                guard statisticsStackView.arrangedSubviews.count >= insertIndex else { return }
+                statisticsStackView.insertArrangedSubview(chartView, at: insertIndex)
+            }
+        }
     }
 }
 

@@ -6,13 +6,24 @@ extension UIApplication {
         return Bundle.main.bundleIdentifier == "com.adguard.AdGuardApp"
     }
 
+    /// Returns true if legacy app was detected.
+    /// - Warning: True may be returned only if this computed property called from ASL app
+    var legacyAppDetected: Bool {
+        if let _ = detectLegacyAppInstalled() {
+            return true
+        }
+        return false
+    }
+
     /// Checks the type of a legacy app installed on the device
     ///
-    /// - Returns: Legacy app type or nil if legacy app was not found
+    /// - Returns: Legacy app type or nil if legacy app was not found.
+    /// - Warning: Legacy type will be returned only if ASL app call this function
     func detectLegacyAppInstalled() -> LegacyAppType? {
-        if canOpenUrl(scheme: "transfer-scheme-adguard-pro:") {
+        let isASL = aslApp
+        if canOpenUrl(scheme: "transfer-scheme-adguard-pro:"), isASL {
             return .adguardPro
-        } else if canOpenUrl(scheme: "transfer-scheme-adguard:") {
+        } else if canOpenUrl(scheme: "transfer-scheme-adguard:"), isASL {
             return .adguard
         }
         return nil
