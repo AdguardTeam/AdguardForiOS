@@ -11,17 +11,13 @@ final class RemoteMigrationInfoView : UIView {
 
     private var contentType: ContentType = .infoDialog
 
-    private var closeButtonHidden: Bool = true {
-        didSet {
-            closeButton.isHidden = closeButtonHidden
-            switchConstraints()
-        }
-    }
-
     private var withoutCloseButtonConstraints: [NSLayoutConstraint] = []
     private var withCloseButtonConstraints: [NSLayoutConstraint] = []
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
+
+    private var newAppLicensePurchased: Bool { configuration.proStatus && UIApplication.shared.aslApp }
 
     private lazy var textView: UITextView = {
         let textView = UITextView()
@@ -43,9 +39,8 @@ final class RemoteMigrationInfoView : UIView {
         return button
     }()
 
-    init(contentType: ContentType, closeButtonHidden: Bool) {
+    init(contentType: ContentType) {
         self.contentType = contentType
-        self.closeButtonHidden = closeButtonHidden
         super.init(frame: .zero)
         configureUI()
     }
@@ -61,7 +56,7 @@ final class RemoteMigrationInfoView : UIView {
         prepareConstraints()
         textView.delegate = self
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        closeButton.isHidden = closeButtonHidden
+        closeButton.isHidden = !newAppLicensePurchased
         updateTheme()
     }
 
@@ -96,8 +91,8 @@ final class RemoteMigrationInfoView : UIView {
     }
 
     private func switchConstraints() {
-        NSLayoutConstraint.deactivate(closeButtonHidden ? withCloseButtonConstraints : withoutCloseButtonConstraints)
-        NSLayoutConstraint.activate(closeButtonHidden ? withoutCloseButtonConstraints : withCloseButtonConstraints)
+        NSLayoutConstraint.deactivate(newAppLicensePurchased ? withoutCloseButtonConstraints : withCloseButtonConstraints)
+        NSLayoutConstraint.activate(newAppLicensePurchased ? withCloseButtonConstraints : withoutCloseButtonConstraints)
     }
 
     @objc
@@ -107,14 +102,14 @@ final class RemoteMigrationInfoView : UIView {
 
     private func setupText() {
         let fontSize = isIpadTrait ? 24.0 : 14.0
-        if closeButtonHidden {
-            textView.attributedText = nil
-            textView.setAttributedTitle(contentType.title, fontSize: fontSize, color: theme.grayTextColor)
-        } else {
+        if newAppLicensePurchased {
             textView.text = nil
-            textView.text = contentType.licenseAcceptedTitle
+            textView.text = contentType.licensePurchasedTitle
             textView.textColor = theme.grayTextColor
             textView.font = .systemFont(ofSize: fontSize, weight: .regular)
+        } else {
+            textView.attributedText = nil
+            textView.setAttributedTitle(contentType.title, fontSize: fontSize, color: theme.grayTextColor)
         }
     }
 }
@@ -157,9 +152,9 @@ extension RemoteMigrationInfoView {
             }
         }
 
-        var licenseAcceptedTitle: String? {
+        var licensePurchasedTitle: String {
             switch self {
-                case .infoDialog: return nil
+                case .infoDialog: return ""
                 case .legacyAppDialog:
                     let canDelete = String.localizedString("remote_migration_info_view_can_delete")
                     let formatted = String(format: titleCommonString, canDelete)

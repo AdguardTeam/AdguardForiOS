@@ -162,6 +162,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private var safariUpdateEnded = true
     private var dnsUpdateEnded = true
 
+    private var remoteMigrationInfoViewShown = false
+
 
     // MARK: - Services
 
@@ -1054,8 +1056,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private func  addRemoteMigrationInfoViewIfNeeded() {
         let newAppDetectLegacyApp = UIApplication.shared.legacyAppDetected
         let legacyAppWithNeedingMigration =  remoteMigrationService.isNeedRemoteMigration && !UIApplication.shared.aslApp
+        let needToShowRemoteMigrationInfoView = !remoteMigrationInfoViewShown && (newAppDetectLegacyApp || legacyAppWithNeedingMigration)
 
-        guard newAppDetectLegacyApp || legacyAppWithNeedingMigration else {
+        guard needToShowRemoteMigrationInfoView else {
             resetRemoteMigrationInfoViewIfNeeded()
             resetChartViewIfNeeded()
             return
@@ -1112,7 +1115,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             return infoView
         }
 
-        remoteMigrationInfoView = RemoteMigrationInfoView(contentType: UIApplication.shared.aslApp ? .legacyAppDialog : .infoDialog, closeButtonHidden: !proStatus)
+        remoteMigrationInfoView = RemoteMigrationInfoView(contentType: UIApplication.shared.aslApp ? .legacyAppDialog : .infoDialog)
         remoteMigrationInfoView?.updateTheme()
         remoteMigrationInfoView?.delegate = self
 
@@ -1273,5 +1276,7 @@ extension MainPageController : RemoteMigrationInfoViewDelegate {
 
     func closeButtonTapped() {
         resetRemoteMigrationInfoViewIfNeeded()
+        resetChartViewIfNeeded()
+        remoteMigrationInfoViewShown = true
     }
 }
