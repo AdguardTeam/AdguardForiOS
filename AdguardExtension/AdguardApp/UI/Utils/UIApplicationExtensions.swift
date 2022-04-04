@@ -35,7 +35,7 @@ extension UIApplication {
             return false
         }
 
-        return UIApplication.shared.canOpenURL(url)
+        return canOpenURL(url)
     }
 
     /// An enum representation of a legacy app installed

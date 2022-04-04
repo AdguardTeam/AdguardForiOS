@@ -677,11 +677,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
 
         // We need to check if user install / deinstall legacy apps and change UI
-        if UIApplication.shared.legacyAppDetected {
-            addRemoteMigrationInfoViewIfNeeded()
-        } else {
-            resetRemoteMigrationInfoView()
-        }
+        addRemoteMigrationInfoViewIfNeeded()
 
         systemProtectionButton.buttonIsOn = complexProtection.systemProtectionEnabled
     }
@@ -1059,8 +1055,13 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         let newAppDetectLegacyApp = UIApplication.shared.legacyAppDetected
         let legacyAppWithNeedingMigration =  remoteMigrationService.isNeedRemoteMigration && !UIApplication.shared.aslApp
 
-        guard newAppDetectLegacyApp || legacyAppWithNeedingMigration else { return }
-        remoteMigrationInfoView?.removeFromSuperview()
+        guard newAppDetectLegacyApp || legacyAppWithNeedingMigration else {
+            resetRemoteMigrationInfoViewIfNeeded()
+            resetChartViewIfNeeded()
+            return
+        }
+
+        resetRemoteMigrationInfoViewIfNeeded()
 
         if isIpadTrait {
             setupIpadRemoteMigrationInfoViewConstraints()
@@ -1111,7 +1112,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             return infoView
         }
 
-        remoteMigrationInfoView = RemoteMigrationInfoView(textType: UIApplication.shared.aslApp ? .legacyAppDialog : .infoDialog)
+        remoteMigrationInfoView = RemoteMigrationInfoView(contentType: UIApplication.shared.aslApp ? .legacyAppDialog : .infoDialog, closeButtonHidden: !proStatus)
         remoteMigrationInfoView?.updateTheme()
         remoteMigrationInfoView?.delegate = self
 
@@ -1131,23 +1132,25 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         chartView.removeFromSuperview()
     }
 
+
     /// Removes remote migration info view and returns back chart view
-    private func resetRemoteMigrationInfoView() {
-        if let infoView = remoteMigrationInfoView {
-            statisticsStackView.removeArrangedSubview(infoView)
-            infoView.removeFromSuperview()
-        }
+    private func resetRemoteMigrationInfoViewIfNeeded() {
+        guard let infoView = remoteMigrationInfoView else { return }
+        statisticsStackView.removeArrangedSubview(infoView)
+        infoView.removeFromSuperview()
+        remoteMigrationInfoView = nil
+    }
 
-        if let stabView = self.stabView {
-            statisticsStackView.removeArrangedSubview(stabView)
-            stabView.removeFromSuperview()
-            self.stabView = nil
+    private func resetChartViewIfNeeded() {
+        guard let stabView = self.stabView else { return }
+        statisticsStackView.removeArrangedSubview(stabView)
+        stabView.removeFromSuperview()
+        self.stabView = nil
 
-            if let dateButtonContainerIndex = statisticsStackView.arrangedSubviews.index(of: changeStatisticsDatesButtonContainer) {
-                let insertIndex = dateButtonContainerIndex + 1
-                guard statisticsStackView.arrangedSubviews.count >= insertIndex else { return }
-                statisticsStackView.insertArrangedSubview(chartView, at: insertIndex)
-            }
+        if let dateButtonContainerIndex = statisticsStackView.arrangedSubviews.index(of: changeStatisticsDatesButtonContainer) {
+            let insertIndex = dateButtonContainerIndex + 1
+            guard statisticsStackView.arrangedSubviews.count >= insertIndex else { return }
+            statisticsStackView.insertArrangedSubview(chartView, at: insertIndex)
         }
     }
 }
@@ -1254,7 +1257,7 @@ fileprivate extension MainPageController {
 }
 
 extension MainPageController : RemoteMigrationInfoViewDelegate {
-    func linkTapped(for type: RemoteMigrationInfoView.TextType) {
+    func linkTapped(for type: RemoteMigrationInfoView.ContentType) {
         let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
         let vc: UIViewController
         switch type {
@@ -1266,5 +1269,9 @@ extension MainPageController : RemoteMigrationInfoViewDelegate {
         }
 
         present(vc, animated: true)
+    }
+
+    func closeButtonTapped() {
+        resetRemoteMigrationInfoViewIfNeeded()
     }
 }

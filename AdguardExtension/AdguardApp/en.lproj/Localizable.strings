@@ -1264,7 +1264,13 @@
 "license_was_binded_dialog_button_title" = "It’s done. I’m ready to log in";
 
 /* (RemoteMigrationInfoView) Old app detected message; Disclaimer: This functionality may not be implemented in future */
-"remote_migration_info_view_old_app_detected" = "The old AdGuard app is also installed on this device. <a href=%@>Delete it?</a>";
+"remote_migration_info_view_old_app_detected" = "The old AdGuard app is also installed on this device. %@";
+
+/* (RemoteMigrationInfoView) Learn more message; Disclaimer: This functionality may not be implemented in future */
+"remote_migration_info_view_learn_more" = "<a href=%@>Learn more.</a>";
+
+/* (RemoteMigrationInfoView) Can delete message; Disclaimer: This functionality may not be implemented in future */
+"remote_migration_info_view_can_delete" = "You can delete it.";
 
 /* (RemoteMigrationInfoView) Need migration message; Disclaimer: This functionality may not be implemented in future */
 "remote_migration_info_view_need_migration" = "Please replace this obsolete app with our new app. <a href=%@>Why?</a>";

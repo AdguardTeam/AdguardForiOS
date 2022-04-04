@@ -1,14 +1,25 @@
 import UIKit
 
 protocol RemoteMigrationInfoViewDelegate : AnyObject {
-    func linkTapped(for type: RemoteMigrationInfoView.TextType)
+    func linkTapped(for type: RemoteMigrationInfoView.ContentType)
+    func closeButtonTapped()
 }
 
 final class RemoteMigrationInfoView : UIView {
 
     weak var delegate: RemoteMigrationInfoViewDelegate?
 
-    var textType: TextType = .infoDialog
+    private var contentType: ContentType = .infoDialog
+
+    private var closeButtonHidden: Bool = true {
+        didSet {
+            closeButton.isHidden = closeButtonHidden
+            switchConstraints()
+        }
+    }
+
+    private var withoutCloseButtonConstraints: [NSLayoutConstraint] = []
+    private var withCloseButtonConstraints: [NSLayoutConstraint] = []
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
@@ -19,14 +30,22 @@ final class RemoteMigrationInfoView : UIView {
         textView.isEditable = false
         textView.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 14.0, weight: .regular)
         textView.linkTextAttributes = [
-            .foregroundColor: UIColor.AdGuardColor.red,
+            .foregroundColor: contentType.linkColor,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         return textView
     }()
 
-    init(textType: TextType) {
-        self.textType = textType
+    private lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "cross_original"), for: .normal)
+        return button
+    }()
+
+    init(contentType: ContentType, closeButtonHidden: Bool) {
+        self.contentType = contentType
+        self.closeButtonHidden = closeButtonHidden
         super.init(frame: .zero)
         configureUI()
     }
@@ -36,41 +55,75 @@ final class RemoteMigrationInfoView : UIView {
         configureUI()
     }
 
-    func setAttributedString(_ title: String?) {
-        if let title = title {
-            let fontSize = isIpadTrait ? 24.0 : 16.0
-            textView.setAttributedTitle(title, fontSize: fontSize, color: theme.blackTextColor)
-            return
-        }
-        textView.attributedText = nil
-    }
-
 
 
     private func configureUI() {
-        addSubview(textView)
+        prepareConstraints()
         textView.delegate = self
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        closeButton.isHidden = closeButtonHidden
+        updateTheme()
+    }
+
+    private func prepareConstraints() {
+        addSubview(textView)
+        addSubview(closeButton)
 
         let topBottomConst = 8.0
         let leadingTrailingConst = 16.0
+        let heightWidthConst = isIpadTrait ? 32.0 : 24.0
 
+        withoutCloseButtonConstraints = [
+            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -leadingTrailingConst),
+        ]
+
+        withCloseButtonConstraints = [
+            closeButton.leadingAnchor.constraint(equalTo: textView.trailingAnchor, constant: leadingTrailingConst),
+            closeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -leadingTrailingConst),
+            closeButton.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
+            closeButton.heightAnchor.constraint(equalToConstant: heightWidthConst),
+            closeButton.widthAnchor.constraint(equalToConstant: heightWidthConst)
+        ]
+
+        /// Activate common constraints
         NSLayoutConstraint.activate([
-
             textView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomConst),
             textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingTrailingConst),
-            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -leadingTrailingConst),
             textView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomConst)
         ])
 
-        textView.setAttributedTitle(textType.title, fontSize: isIpadTrait ? 24.0 : 14.0, color: theme.backgroundColor)
+        switchConstraints()
+    }
+
+    private func switchConstraints() {
+        NSLayoutConstraint.deactivate(closeButtonHidden ? withCloseButtonConstraints : withoutCloseButtonConstraints)
+        NSLayoutConstraint.activate(closeButtonHidden ? withoutCloseButtonConstraints : withCloseButtonConstraints)
+    }
+
+    @objc
+    private func closeButtonTapped() {
+        delegate?.closeButtonTapped()
+    }
+
+    private func setupText() {
+        let fontSize = isIpadTrait ? 24.0 : 14.0
+        if closeButtonHidden {
+            textView.attributedText = nil
+            textView.setAttributedTitle(contentType.title, fontSize: fontSize, color: theme.grayTextColor)
+        } else {
+            textView.text = nil
+            textView.text = contentType.licenseAcceptedTitle
+            textView.textColor = theme.grayTextColor
+            textView.font = .systemFont(ofSize: fontSize, weight: .regular)
+        }
     }
 }
 
 extension RemoteMigrationInfoView : UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        if URL.absoluteString == TextType.infoDialog.link {
+        if URL.absoluteString == ContentType.infoDialog.link {
             delegate?.linkTapped(for: .infoDialog)
-        } else if URL.absoluteString == TextType.legacyAppDialog.link {
+        } else if URL.absoluteString == ContentType.legacyAppDialog.link {
             delegate?.linkTapped(for: .legacyAppDialog)
         }
 
@@ -83,23 +136,33 @@ extension RemoteMigrationInfoView : ThemableProtocol {
         backgroundColor = theme.notificationWindowColor
         layer.cornerRadius = 8.0
         textView.backgroundColor = .clear
-        textView.setAttributedTitle(textType.title, fontSize: isIpadTrait ? 24.0 : 14.0, color: theme.lightGrayTextColor)
-        textView.textColor = theme.grayTextColor
+        setupText()
     }
 }
 
 extension RemoteMigrationInfoView {
-    enum TextType {
+    enum ContentType {
         case infoDialog
         case legacyAppDialog
 
         var title: String {
             switch self {
                 case .infoDialog:
-                    let formatted = String(format: String.localizedString("remote_migration_info_view_need_migration"), link)
+                    let formatted = String(format: titleCommonString, link)
                     return formatted
                 case .legacyAppDialog:
-                    let formatted = String(format: String.localizedString("remote_migration_info_view_old_app_detected"), link)
+                    let formattedLink = String(format: String.localizedString("remote_migration_info_view_learn_more"), link)
+                    let formatted = String(format: titleCommonString, formattedLink)
+                    return formatted
+            }
+        }
+
+        var licenseAcceptedTitle: String? {
+            switch self {
+                case .infoDialog: return nil
+                case .legacyAppDialog:
+                    let canDelete = String.localizedString("remote_migration_info_view_can_delete")
+                    let formatted = String(format: titleCommonString, canDelete)
                     return formatted
             }
         }
@@ -109,6 +172,20 @@ extension RemoteMigrationInfoView {
             switch self {
                 case .infoDialog: return "\(scheme)://RemoteMigrationDialog"
                 case .legacyAppDialog: return "\(scheme)://LegacyAppDialog"
+            }
+        }
+
+        var linkColor: UIColor {
+            switch self {
+                case .infoDialog: return UIColor.AdGuardColor.red
+                case .legacyAppDialog: return UIColor.AdGuardColor.green
+            }
+        }
+
+        private var titleCommonString: String {
+            switch self {
+                case .infoDialog: return String.localizedString("remote_migration_info_view_need_migration")
+                case .legacyAppDialog: return String.localizedString("remote_migration_info_view_old_app_detected")
             }
         }
     }
