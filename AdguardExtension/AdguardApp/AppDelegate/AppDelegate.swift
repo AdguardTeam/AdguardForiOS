@@ -396,16 +396,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        mainPageController.onReady = { [weak self] in
-            // request permission for user notifications posting
-            self?.userNotificationService.requestPermissions { _ in }
-
-            // Show rate app dialog when main page is initialized
-            if self?.remoteMigrationService.isNeedRemoteMigration == false {
-                self?.showRateAppDialogIfNedeed()
-            }
-        }
-
         guard let dnsLogContainerVC = getDnsLogContainerController() else {
             DDLogError("dnsLogContainerVC is nil")
             return
@@ -424,16 +414,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
         let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]
         userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
-    }
-
-    private func showRateAppDialogIfNedeed() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
-            guard let self = self else { return }
-            if self.rateService.shouldShowRateAppDialog {
-                AppDelegate.shared.presentRateAppController()
-                self.resources.rateAppShown = true
-            }
-        }
     }
 
     private func addPurchaseStatusObserver() {
