@@ -1227,7 +1227,7 @@
 "remote_migration_dialog_details_button_title" = "Why is it happening?";
 
 /* (AdGuardProFoundDialog) title; Disclaimer: This functionality may not be implemented in future */
-"adguard_pro_found_title" = "AdGuard Pro is installed on this device";
+"adguard_pro_found_title" = "AdGuard Pro is detected on this device";
 
 /* (AdGuardProFoundDialog) description; Disclaimer: This functionality may not be implemented in future */
 "adguard_pro_found_description" = "This AdGuard Pro app is obsolete and no longer needed. Instead, activate premium features here. Then you can safely uninstall AdGuard Pro.";
@@ -1236,7 +1236,7 @@
 "adguard_pro_found_primary_button_title" = "Activate premium features";
 
 /* (AdGuardFoundDialog) title; Disclaimer: This functionality may not be implemented in future */
-"adguard_found_title" = "The old AdGuard app is also installed on this device";
+"adguard_found_title" = "The old AdGuard app is detected on this device";
 
 /* (AdGuardFoundDialog) description; Disclaimer: This functionality may not be implemented in future */
 "adguard_found_description" = "This app is obsolete. Before deleting it, please check: have you got a paid subscription or a purchased license key for it?";
@@ -1264,7 +1264,7 @@
 "license_was_binded_dialog_button_title" = "It’s done. I’m ready to log in";
 
 /* (RemoteMigrationInfoView) Old app detected message; Disclaimer: This functionality may not be implemented in future */
-"remote_migration_info_view_old_app_detected" = "The old AdGuard app is also installed on this device. %@";
+"remote_migration_info_view_old_app_detected" = "The old AdGuard app is detected on this device. %@";
 
 /* (RemoteMigrationInfoView) Learn more message; Disclaimer: This functionality may not be implemented in future */
 "remote_migration_info_view_learn_more" = "<a href=%@>Learn more.</a>";
