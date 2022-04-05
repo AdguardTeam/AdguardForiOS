@@ -665,7 +665,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
                 changeStatisticsDatesButton.isHidden = false
             }
         } else {
-            getProView.isHidden = remoteMigrationService.isNeedRemoteMigration || UIApplication.shared.legacyAppDetected
+            let isNeedToHide = !remoteMigrationInfoViewClosedByUser && (remoteMigrationService.isNeedRemoteMigration || UIApplication.shared.legacyAppDetected)
+            getProView.isHidden = isNeedToHide
         }
 
         // We need to check if user install / deinstall legacy apps and change UI
@@ -1096,7 +1097,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
                 if proStatus {
                     constraint = infoView.bottomAnchor.constraint(equalTo: changeStatisticsDatesButton.topAnchor)
                 } else {
-                    constraint = infoView.centerYAnchor.constraint(equalTo: getProView.centerYAnchor)
+                    constraint = infoView.bottomAnchor.constraint(equalTo: contentBlockerViewIphone.topAnchor, constant: -16.0)
                 }
             case .native:
                 constraint = infoView.bottomAnchor.constraint(equalTo: nativeDnsTitleLabel.topAnchor, constant: -4.0)
@@ -1277,8 +1278,7 @@ extension MainPageController : RemoteMigrationInfoViewDelegate {
     }
 
     func closeButtonTapped() {
-        resetRemoteMigrationInfoViewIfNeeded()
-        resetChartViewIfNeeded()
         remoteMigrationInfoViewClosedByUser = true
+        processState()
     }
 }

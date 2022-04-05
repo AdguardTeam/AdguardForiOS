@@ -11,9 +11,6 @@ final class RemoteMigrationInfoView : UIView {
 
     private var contentType: ContentType = .infoDialog
 
-    private var withoutCloseButtonConstraints: [NSLayoutConstraint] = []
-    private var withCloseButtonConstraints: [NSLayoutConstraint] = []
-
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
 
@@ -56,7 +53,6 @@ final class RemoteMigrationInfoView : UIView {
         prepareConstraints()
         textView.delegate = self
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        closeButton.isHidden = !newAppLicensePurchased
         updateTheme()
     }
 
@@ -68,31 +64,18 @@ final class RemoteMigrationInfoView : UIView {
         let leadingTrailingConst = 16.0
         let heightWidthConst = isIpadTrait ? 32.0 : 24.0
 
-        withoutCloseButtonConstraints = [
-            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -leadingTrailingConst),
-        ]
+        /// Activate common constraints
+        NSLayoutConstraint.activate([
+            textView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomConst),
+            textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingTrailingConst),
+            textView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomConst),
 
-        withCloseButtonConstraints = [
             closeButton.leadingAnchor.constraint(equalTo: textView.trailingAnchor, constant: leadingTrailingConst),
             closeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -leadingTrailingConst),
             closeButton.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
             closeButton.heightAnchor.constraint(equalToConstant: heightWidthConst),
             closeButton.widthAnchor.constraint(equalToConstant: heightWidthConst)
-        ]
-
-        /// Activate common constraints
-        NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomConst),
-            textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingTrailingConst),
-            textView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomConst)
         ])
-
-        switchConstraints()
-    }
-
-    private func switchConstraints() {
-        NSLayoutConstraint.deactivate(newAppLicensePurchased ? withoutCloseButtonConstraints : withCloseButtonConstraints)
-        NSLayoutConstraint.activate(newAppLicensePurchased ? withCloseButtonConstraints : withoutCloseButtonConstraints)
     }
 
     @objc
