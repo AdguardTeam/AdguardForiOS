@@ -81,4 +81,13 @@ class PurchaseServiceMock: PurchaseServiceProtocol {
     func generateAuthURL(state: String, socialProvider: SocialProvider) -> URL? {
         return nil
     }
+
+    var purchasedThroughInApp: Bool = false
+
+    var licenseKey: String? = nil
+
+    // TODO: Add tests
+    func getInAppPurchaseReceiptBase64() -> String? {
+        return nil
+    }
 }

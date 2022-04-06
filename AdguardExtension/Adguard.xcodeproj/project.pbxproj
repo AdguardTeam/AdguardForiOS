@@ -397,7 +397,6 @@
 		336FA53053FE020099E49B6B /* RemoteMigrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */; };
 		336FA53BA666A24D5A3EBE22 /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA798A2A44B9C00BFDC38 /* RemoteMigrationDialog.swift */; };
 		336FA5841A871CE99CAB3301 /* OpenUrlInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAFB08A5C3E15F180E7F2 /* OpenUrlInfo.swift */; };
-		336FA592CA7C999FE63D432C /* AdGuardFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEEFFB5105B8EBCEB757 /* AdGuardFoundDialog.swift */; };
 		336FA5CD3C1AE2EEF6B8964A /* InAppPurchaseReceiptHashRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAF2DAB08991B97469388 /* InAppPurchaseReceiptHashRequest.swift */; };
 		336FA61DF4C18F24DA7DF688 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FA628474190C8ECEAAAD0 /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
@@ -419,7 +418,6 @@
 		336FA8F839A81448709D8561 /* RemoteMigrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */; };
 		336FA903815BED6E1DE50238 /* RemoteMigrationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAE60668A3405353894A6 /* RemoteMigrationInfoView.swift */; };
 		336FA921CFA57AB6FA466733 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
-		336FA93F4B1CE7F5FF6F6DD9 /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEE1744F0D0D8DC23F6F /* AdGuardProFoundDialog.swift */; };
 		336FA9546BF3529A417CD493 /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEE1744F0D0D8DC23F6F /* AdGuardProFoundDialog.swift */; };
 		336FA9B1EFA8C55794845AE4 /* RemoteMigrationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAE60668A3405353894A6 /* RemoteMigrationInfoView.swift */; };
 		336FA9FE4AC403FEE40A9364 /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
@@ -9372,10 +9370,10 @@
 			mainGroup = 65F398081B7B684700ABCD39;
 			packageReferences = (
 				7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */,
-				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */,
+				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */,
+				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
-				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */,
+				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				7EF5C55E26C269D6001851D6 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
@@ -11541,8 +11539,6 @@
 				336FA24287C5B8C97EB461A5 /* RemoteMigrationRequestParser.swift in Sources */,
 				336FAE4FDB8BEC482B0EE14A /* HttpRequestServiceProtocolRemoteMigrationExtension.swift in Sources */,
 				336FA3408151DF8342BD11C3 /* UIApplicationExtensions.swift in Sources */,
-				336FA592CA7C999FE63D432C /* AdGuardFoundDialog.swift in Sources */,
-				336FA93F4B1CE7F5FF6F6DD9 /* AdGuardProFoundDialog.swift in Sources */,
 				336FA30C95C5A839A0600825 /* RemoteMigrationOpenUrlInfo.swift in Sources */,
 				336FA7DD700F1A78D3584B48 /* OpenUrlInfo.swift in Sources */,
 				336FA7C44F9CC33047F6A427 /* InAppPurchaseReceiptHashParser.swift in Sources */,
@@ -17666,7 +17662,7 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
+		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -17698,7 +17694,7 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		B2AED10C27F485AE00FDE212 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */ = {
+		B2AED10C27F485AE00FDE212 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
 			requirement = {
@@ -17730,7 +17726,7 @@
 				version = 7.5.3;
 			};
 		};
-		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */ = {
+		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
 			requirement = {
@@ -17738,7 +17734,7 @@
 				minimumVersion = 0.0.3;
 			};
 		};
-		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */ = {
+		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
@@ -17791,7 +17787,7 @@
 		};
 		B2AED10B27F485AE00FDE212 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B2AED10C27F485AE00FDE212 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = B2AED10C27F485AE00FDE212 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		B2AED10D27F485AE00FDE212 /* Sentry */ = {
@@ -17811,7 +17807,7 @@
 		};
 		B2C8E9A32716FDF500ACDED8 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		B2FB24CC27E55338005E8645 /* Sentry */ = {
@@ -17821,17 +17817,17 @@
 		};
 		D024973D25714928000EED34 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D093AA5F25344B4E0015351F /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D09E271A2541D00B002D6BC0 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D0B546032435D740002F0AEC /* Lottie */ = {
