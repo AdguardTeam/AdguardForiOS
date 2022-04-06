@@ -42,7 +42,7 @@ extension Bundle {
     }
 
     var hostAppBundleId: String {
-        Bundle.main.isPro ? "com.adguard.AdguardPro" : "com.adguard.AdguardExtension"
+        Bundle.main.isPro ? "com.adguard.AdguardPro" : Bundle.main.isAslApp ? "com.adguard.AdGuardApp" : "com.adguard.AdguardExtension"
     }
 
     /// We use different app schemes for pro and normal adguard
