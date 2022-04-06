@@ -11,6 +11,9 @@ final class RemoteMigrationDialog : BottomAlertController {
     @IBOutlet weak var detailsButton: UIButton!
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
+    private let keychainService: KeychainServiceProtocol = ServiceLocator.shared.getService()!
+    private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,20 +37,32 @@ final class RemoteMigrationDialog : BottomAlertController {
 
     @IBAction
     private func onAcceptTapped(_ sender: UIButton) {
-        let url = URL(string: "https://adguard.com") // FIXME: Add correct URL
-        let sfSafariViewController = SFSafariViewController(url: url!)
+        guard let appId = keychainService.appId,
+              let buildVersion = productInfo.buildVersion()
+            else { return }
+
+
+        guard let url = RemoteMigrationOpenUrlInfo(
+            action: "remote_migration",
+            from: "\(RemoteMigrationDialog.self)",
+            buildVersion: buildVersion,
+            appId: appId,
+            appName: LoginService.APP_NAME_VALUE,
+            license: purchaseService.licenseKey,
+            receipt: purchaseService.getInAppPurchaseReceiptBase64()
+        ).getUrlWithQueryItems() else { return }
+
+
+        let sfSafariViewController = SFSafariViewController(url: url)
         sfSafariViewController.delegate = self
-        let parent = self.presentingViewController
         present(sfSafariViewController, animated: true)
     }
 
     @IBAction
     private func onDetailsTapped(_ sender: UIButton) {
         // FIXME: Redirect to about remote migration page
-        UIApplication.shared.openAdguardUrl(action: "", from: "", buildVersion: "")
-        dismiss(animated: true) { [weak self] in
-            self?.onDismissCompletion?()
-        }
+        UIApplication.shared.openAdguardUrl(action: "about_migration", from: "RemoteMigrationDialog", buildVersion: productInfo.buildVersion())
+        dismiss(animated: true)
     }
 }
 

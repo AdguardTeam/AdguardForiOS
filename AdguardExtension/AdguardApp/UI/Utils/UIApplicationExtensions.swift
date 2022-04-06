@@ -39,7 +39,7 @@ extension UIApplication {
     }
 
     /// An enum representation of a legacy app installed
-    enum LegacyAppType {
+    enum LegacyAppType : String {
         // Regular AdGuard
         case adguard
 

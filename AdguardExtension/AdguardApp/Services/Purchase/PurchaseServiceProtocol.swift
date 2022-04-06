@@ -52,6 +52,9 @@ protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
      */
     var products: [Product] { get }
 
+    /// Return license key if it exists
+    var licenseKey: String? { get }
+
     /*  login on backend server and check license information
         the results will be posted through notification center
 
@@ -95,5 +98,8 @@ protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
 
     /** generate URL for OAUTH */
     func generateAuthURL(state: String, socialProvider: SocialProvider) -> URL?
+
+    /// Return in app purchase receipt in base64 or nil if nothing was purchased
+    func getInAppPurchaseReceiptBase64() -> String?
 
 }

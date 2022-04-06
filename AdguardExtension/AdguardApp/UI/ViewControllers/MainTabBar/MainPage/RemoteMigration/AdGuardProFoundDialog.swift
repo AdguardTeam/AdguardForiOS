@@ -7,6 +7,7 @@ final class AdGuardProFoundDialog: BottomAlertController {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let purchaseService: PurchaseService = ServiceLocator.shared.getService()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,7 @@ final class AdGuardProFoundDialog: BottomAlertController {
 
 
     @IBAction func primaryButtonTapped(_ sender: UIButton) {
-
+        // FIXME: Subscribe user with in app lifetime purchase for zero price
     }
 }
 

@@ -31,6 +31,8 @@ protocol LoginServiceProtocol {
 
     var hasActiveLicense: Bool { get }
 
+    var licenseKey: String? { get }
+
     func checkStatus(attributionRecords: String?, callback: @escaping (Error?)->Void )
     func logout()->Bool
 
@@ -104,6 +106,8 @@ final class LoginService: LoginServiceProtocol {
 
     var active: Bool { resources.licenseIsActive }
 
+    var licenseKey: String? { keychain.loadLicenseKey(server: LICENSE_KEY_SERVER) }
+
     // errors
     static let loginErrorDomain = "loginErrorDomain"
 
@@ -128,6 +132,8 @@ final class LoginService: LoginServiceProtocol {
     // MARK: - Private variables
 
     // keychain constants
+    private let LICENSE_KEY_SERVER = "com.adguard.ios.adguard.licensekey"
+
     private let LOGIN_SERVER = "https://mobile-api.adguard.com"
 
     private let AUTH_SERVER = "https://auth.adguard.com"
@@ -193,6 +199,9 @@ final class LoginService: LoginServiceProtocol {
         // for logged in 3.0.0 users
         _ = keychain.deleteAuth(server: LOGIN_SERVER)
         _ = keychain.deleteLicenseKey(server: LOGIN_SERVER)
+
+        // In 4.3 version we store licence key for remote migration to new app
+        _ = keychain.deleteLicenseKey(server: LICENSE_KEY_SERVER)
 
         resetLicense() { _ in }
 
@@ -362,7 +371,7 @@ final class LoginService: LoginServiceProtocol {
         let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
 
         network.data(with: request) { [weak self] (dataOrNil, response, error) in
-            guard let sSelf = self else { return }
+            guard let self = self else { return }
 
             guard error == nil else {
                 DDLogError("(LoginService) checkStatus - got error \(error!.localizedDescription)")
@@ -376,7 +385,7 @@ final class LoginService: LoginServiceProtocol {
                 return
             }
 
-            let (premium, expirationDate, error) = sSelf.loginResponseParser.processStatusResponse(data: data)
+            let (premium, expirationDate, licenseKey, error) = self.loginResponseParser.processStatusResponse(data: data)
 
             DDLogInfo("(LoginService) checkStatus - processStatusResponse: premium = \(premium) " + (expirationDate == nil ? "" : "expirationDate = \(expirationDate!)"))
 
@@ -387,9 +396,13 @@ final class LoginService: LoginServiceProtocol {
                 return
             }
 
-            sSelf.expirationDate = expirationDate
-            sSelf.hasPremiumLicense = premium
-            sSelf.loggedIn = premium && sSelf.active
+            self.expirationDate = expirationDate
+            self.hasPremiumLicense = premium
+            self.loggedIn = premium && self.active
+
+            if let licenseKey = licenseKey {
+                self.keychain.saveLicenseKey(server: self.LICENSE_KEY_SERVER, key: licenseKey)
+            }
 
             callback(nil)
         }

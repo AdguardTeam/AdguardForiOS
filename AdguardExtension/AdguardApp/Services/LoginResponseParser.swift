@@ -19,11 +19,11 @@
 import Foundation
 
 protocol LoginResponseParserProtocol {
-    func processLoginResponse(data: Data)->(loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?)
+    func processLoginResponse(data: Data) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?)
 
-    func processStatusResponse(data: Data)->(premium: Bool,expirationDate: Date?, NSError?)
+    func processStatusResponse(data: Data) -> (premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?)
 
-    func processOauthTokenResponse(data: Data)->(accessToken: String?, expirationDate: Date?, error: NSError?)
+    func processOauthTokenResponse(data: Data) -> (accessToken: String?, expirationDate: Date?, error: NSError?)
 }
 
 
@@ -89,7 +89,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
     }
 
-    func processStatusResponse(data: Data) -> (premium: Bool, expirationDate: Date?, NSError?) {
+    func processStatusResponse(data: Data) -> (premium: Bool, expirationDate: Date?, licenseKey: String?, NSError?) {
 
         do {
             let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
@@ -100,7 +100,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
             let responseString = String(data: data, encoding: .utf8)
             DDLogError("(LoginResponseParser) error. Wrong json: \(responseString ?? "")")
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
-            return (false, nil, error)
+            return (false, nil, nil, error)
         }
     }
 
@@ -167,12 +167,12 @@ class LoginResponseParser: LoginResponseParserProtocol {
     }
 
 
-    private func processStatusResponseJson(json: [String: Any]) -> (premium: Bool,expirationDate: Date?, NSError?) {
+    private func processStatusResponseJson(json: [String: Any]) -> (premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?) {
 
         guard let status = json[STATUS_RESPONSE_STATUS_PARAM] as? String else {
             DDLogInfo("(LoginService) processStatusResponseJson error - json does not contain status" )
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
-            return (false, nil, error)
+            return (false, nil, nil, error)
         }
 
         if status == STATUS_RESPONSE_STATUS_ERROR {
@@ -188,7 +188,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
             if licenseKeyStatus == AUTH_MAX_COMPUTERS_EXCEEDED {
                 error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginMaxComputersExceeded, userInfo: nil)
             }
-            return (false, nil, error)
+            return (false, nil, nil, error)
         }
 
         let expirationTimestampAny = json[STATUS_RESPONSE_EXPIRATION_DATE_PARAM]
@@ -208,7 +208,9 @@ class LoginResponseParser: LoginResponseParserProtocol {
 
         let premium = status == STATUS_RESPONSE_STATUS_PREMIUM
 
-        return (premium, expirationDate, nil)
+        let licenseKey = json[STATUS_RESPONSE_KEY_PARAM] as? String
+
+        return (premium, expirationDate, licenseKey, nil)
     }
 
     private func processOauthResponseJson(_ json : [String: Any])->(accessToken: String?, expirationDate: Date?, NSError?) {

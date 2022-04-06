@@ -135,6 +135,8 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     var purchasedThroughLogin: Bool { loginService.loggedIn }
 
+    var licenseKey: String? { loginService.licenseKey }
+
     var purchasedThroughSetapp: Bool { resources.purchasedThroughSetapp }
 
     var standardProduct: Product? {
@@ -282,17 +284,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     func validateReceipt(onComplete complete:@escaping ((Error?)->Void)){
         // get receipt
-        guard
-            let receiptUrlStr = Bundle.main.appStoreReceiptURL,
-            FileManager.default.fileExists(atPath: receiptUrlStr.path),
-            let data = try? Data(contentsOf: receiptUrlStr)
-        else {
+        guard let base64Str = getInAppPurchaseReceiptBase64() else {
             complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: nil))
             return
         }
-
-        let base64Str = data.base64EncodedString()
-
         // post receipt to our backend
 
         guard let appId = keychain.appId else {
@@ -407,6 +402,14 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         guard let urlString = params.constructLink(url: authUrl) else { return nil }
         guard let url = URL(string: urlString) else { return nil }
         return url
+    }
+
+    func getInAppPurchaseReceiptBase64() -> String? {
+        guard let receiptUrlStr = Bundle.main.appStoreReceiptURL,
+              FileManager.default.fileExists(atPath: receiptUrlStr.path),
+              let data = try? Data(contentsOf: receiptUrlStr) else { return nil }
+
+        return data.base64EncodedString()
     }
 
     // MARK: - private methods
