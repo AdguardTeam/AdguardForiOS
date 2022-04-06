@@ -1078,24 +1078,20 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     private func setupIpadRemoteMigrationInfoViewConstraints() {
         let infoView = createRemoteMigrationInfoViewAndAddToHierarchy()
-        
-        NSLayoutConstraint.activate([
+
+        let constraints = [
             infoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8.0),
-            infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8.0)
-        ])
-        
+            infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8.0),
+            infoView.bottomAnchor.constraint(equalTo: contentBlockerViewIpad.topAnchor, constant: -4.0)
+        ]
+
         // We need to activate this specific bottom constraint asyncronously in iOS 12.4 and below, and only on iPad, to prevent
         // the app from crashing
         if #available(iOS 13, *) {
-            NSLayoutConstraint.activate([
-                infoView.bottomAnchor.constraint(equalTo: contentBlockerViewIpad.topAnchor, constant: -4.0)
-            ])
+            NSLayoutConstraint.activate(constraints)
         } else {
-            DispatchQueue.main.async { [self] in
-                NSLayoutConstraint.activate([
-                    infoView.bottomAnchor.constraint(equalTo: contentBlockerViewIpad.topAnchor, constant: -4.0)
-                ])
-            }
+            // Lets schedule constraint activation task to end of queue
+            DispatchQueue.main.async { NSLayoutConstraint.activate(constraints) }
         }
 
         removeChartViewIfNeeded()

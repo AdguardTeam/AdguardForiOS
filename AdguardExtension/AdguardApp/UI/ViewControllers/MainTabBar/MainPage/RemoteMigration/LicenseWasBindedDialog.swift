@@ -1,6 +1,6 @@
 import Foundation
 
-/// ASL account dialog
+/// Dialog that inform user about remote migration and sugest to proceed log in
 final class LicenseWasBindedDialog : BottomAlertController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!

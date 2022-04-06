@@ -37,6 +37,9 @@ protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
      */
     var purchasedThroughSetapp: Bool {get}
 
+    /// Returns true if user purchase license through in-app purchases
+    var purchasedThoughInApp: Bool { get }
+
     /**
      returns true if premium expired. It works both for in-app purchases and for adguard licenses
      */

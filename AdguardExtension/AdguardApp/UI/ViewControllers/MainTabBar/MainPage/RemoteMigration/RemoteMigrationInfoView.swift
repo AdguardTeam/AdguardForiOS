@@ -5,6 +5,7 @@ protocol RemoteMigrationInfoViewDelegate : AnyObject {
     func closeButtonTapped()
 }
 
+/// View that inform user about remote migration in old and new AdGuard Apps
 final class RemoteMigrationInfoView : UIView {
 
     weak var delegate: RemoteMigrationInfoViewDelegate?

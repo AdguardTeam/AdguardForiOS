@@ -53,7 +53,9 @@ final class StartupService : NSObject {
         let productInfo: ADProductInfoProtocol = ADProductInfo()
         locator.addService(service: productInfo)
 
-        let httpRequestService = HttpRequestService()
+        let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
+        locator.addService(service: httpRequestService)
+
         let adServiceWrapper = AdServicesWrapper()
         let adClientWrapper = AdClientWrapper()
 

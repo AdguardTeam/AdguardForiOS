@@ -128,6 +128,7 @@ final class LoginService: LoginServiceProtocol {
     static let errorDescription = "error_description"
 
     static let APP_NAME_VALUE =  Bundle.main.isPro ? "adguard_ios_pro" : "adguard_ios"
+    static let APP_TYPE_VALUE = Bundle.main.isPro ? "ADGUARD_FOR_IOS_PRO" : "ADGUARD_FOR_IOS"
 
     // MARK: - Private variables
 
@@ -401,7 +402,13 @@ final class LoginService: LoginServiceProtocol {
             self.loggedIn = premium && self.active
 
             if let licenseKey = licenseKey {
-                self.keychain.saveLicenseKey(server: self.LICENSE_KEY_SERVER, key: licenseKey)
+                DDLogInfo("(LoginService) - on request status; License received, start saving it to keychain")
+                let result = self.keychain.saveLicenseKey(server: self.LICENSE_KEY_SERVER, key: licenseKey)
+                DDLogInfo("(LoginService) - on request status; License saving into keychain result=\(result)")
+            } else {
+                DDLogInfo("(LoginService) - on request status; License missed, start deleting old license key from keychain")
+                let result = self.keychain.deleteLicenseKey(server: self.LICENSE_KEY_SERVER)
+                DDLogInfo("(LoginService) - on request status; License deleting from keychain result=\(result)")
             }
 
             callback(nil)

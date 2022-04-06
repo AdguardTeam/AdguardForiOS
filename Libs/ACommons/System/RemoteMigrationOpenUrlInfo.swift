@@ -1,15 +1,16 @@
 import Foundation
 
+/// Object that generate TDS url
 struct RemoteMigrationOpenUrlInfo : OpenUrlInfo {
     let action: String
     let from: String
     let buildVersion: String
 
     let appId: String
-    let appName: String
+    let appType: String
     let license: String?
-    let receipt: String?
 
+    /// Returns TDS url or nil if TDS url not valid
     func getUrlWithQueryItems() -> URL? {
         let items = getURLQueryItems()
         return UIApplication.shared.adguardUrl(with: items)
@@ -22,14 +23,10 @@ struct RemoteMigrationOpenUrlInfo : OpenUrlInfo {
         result.append(URLQueryItem(name: "from", value: from))
         result.append(URLQueryItem(name: "v", value: from))
         result.append(URLQueryItem(name: "app_id", value: appId))
-        result.append(URLQueryItem(name: "app_name", value: appName))
+        result.append(URLQueryItem(name: "app_type", value: appType))
 
         if let license = license {
             result.append(URLQueryItem(name: "license", value: license))
-        }
-
-        if let receipt = receipt {
-            result.append(URLQueryItem(name: "receipt_data", value: receipt))
         }
 
         return result
