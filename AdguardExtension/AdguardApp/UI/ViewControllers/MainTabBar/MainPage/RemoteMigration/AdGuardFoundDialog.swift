@@ -32,7 +32,6 @@ final class AdGuardFoundDialog : BottomAlertController {
         presentDialog(vc)
     }
 
-
     private func createMainPageDialog(_ controllerIdentifier: String) -> UIViewController {
         let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: controllerIdentifier)

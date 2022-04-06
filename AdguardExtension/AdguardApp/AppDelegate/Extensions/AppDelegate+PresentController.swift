@@ -702,8 +702,8 @@ extension AppDelegate {
         return controller
     }
 
-    /* Presenting loading alert */
-    func presentLoadingAlert() {
+    /// Returns loading alert controller
+    func getLoadingAlert() -> UIAlertController {
         let alert = UIAlertController(title: nil, message: String.localizedString("loading_message"), preferredStyle: .alert)
 
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -711,6 +711,12 @@ extension AppDelegate {
         loadingIndicator.startAnimating();
 
         alert.view.addSubview(loadingIndicator)
+        return alert
+    }
+
+    /* Presenting loading alert */
+    func presentLoadingAlert() {
+        let alert = getLoadingAlert()
         window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 
