@@ -539,7 +539,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func checkRemoteMigration() {
         // No needs to perform extra check if 'remote migration' status has been checked via background fetch
-        guard !UIApplication.shared.aslApp,
+        guard !Bundle.main.isAslApp,
               !resources.backgroundFetchRemoteMigrationRequestResult else {
             DDLogInfo("(AppDelegate) Remote migration check result has been received in background fetch earlier")
             return
@@ -553,7 +553,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func checkRemoteMigrationInBackgroundFetch() {
         guard UIApplication.shared.applicationState == .background,
-              !UIApplication.shared.aslApp else {
+              !Bundle.main.isAslApp else {
             DDLogWarn("(AppDelegate) No need to check remote migration state. It is not old app")
             return
         }

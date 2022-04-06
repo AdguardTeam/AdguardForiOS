@@ -1,10 +1,6 @@
 import Foundation
 
 extension UIApplication {
-    /// Returns true if app is belong to ASL dev account
-    var aslApp: Bool {
-        return Bundle.main.bundleIdentifier == "com.adguard.AdGuardApp"
-    }
 
     /// Returns true if legacy app was detected.
     /// - Warning: True may be returned only if this computed property called from ASL app
@@ -20,7 +16,7 @@ extension UIApplication {
     /// - Returns: Legacy app type or nil if legacy app was not found.
     /// - Warning: Legacy type will be returned only if ASL app call this function
     func detectLegacyAppInstalled() -> LegacyAppType? {
-        let isASL = aslApp
+        let isASL = Bundle.main.isAslApp
         if canOpenUrl(scheme: "transfer-scheme-adguard-pro:"), isASL {
             return .adguardPro
         } else if canOpenUrl(scheme: "transfer-scheme-adguard:"), isASL {

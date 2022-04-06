@@ -54,4 +54,7 @@ extension Bundle {
     /// And this scheme is used to communicate between of our app's extensions
     /// This variable  is used to get an app scheme without filling plist files
     var inAppScheme: String { isPro ? "in-app-adguard-pro-url-scheme" : "in-app-adguard-url-scheme" }
+
+    /// Flag meaning that this app belongs to AdGuard Software Limited developer account
+    var isAslApp: Bool { Bundle.main.bundleIdentifier == "com.adguard.AdGuardApp" }
 }

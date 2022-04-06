@@ -15,7 +15,7 @@ final class RemoteMigrationInfoView : UIView {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
 
-    private var newAppLicensePurchased: Bool { configuration.proStatus && UIApplication.shared.aslApp }
+    private var newAppLicensePurchased: Bool { configuration.proStatus && Bundle.main.isAslApp }
 
     private lazy var textView: UITextView = {
         let textView = UITextView()

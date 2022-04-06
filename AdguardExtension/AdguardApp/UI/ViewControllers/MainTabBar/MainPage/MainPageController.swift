@@ -597,7 +597,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
 
         // Add observer only if it is not ASL app
-        if UIApplication.shared.aslApp { return }
+        if Bundle.main.isAslApp { return }
 
         remoteMigrationObserver = NotificationCenter.default.observe(name: .needForMigration, object: nil, queue: .main) { [weak self] _ in
             self?.processNeedForMigrationObserver()
@@ -865,7 +865,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         let notification: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
         notification.requestPermissions { _ in
             DispatchQueue.main.async { [weak self] in
-                if UIApplication.shared.aslApp {
+                if Bundle.main.isAslApp {
                     self?.processPresentingLegacyAppDialogIfNeeded()
                 } else {
                     self?.processPresentingRemoteMigrationDialogIfNeeded()
@@ -1056,7 +1056,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     private func  addRemoteMigrationInfoViewIfNeeded() {
         let newAppDetectLegacyApp = UIApplication.shared.legacyAppDetected
-        let legacyAppWithNeedingMigration =  remoteMigrationService.isNeedRemoteMigration && !UIApplication.shared.aslApp
+        let legacyAppWithNeedingMigration =  remoteMigrationService.isNeedRemoteMigration && !Bundle.main.isAslApp
         let needToShowRemoteMigrationInfoView = !remoteMigrationInfoViewClosedByUser && (newAppDetectLegacyApp || legacyAppWithNeedingMigration)
 
         guard needToShowRemoteMigrationInfoView else {
@@ -1125,7 +1125,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             return infoView
         }
 
-        remoteMigrationInfoView = RemoteMigrationInfoView(contentType: UIApplication.shared.aslApp ? .legacyAppDialog : .infoDialog)
+        remoteMigrationInfoView = RemoteMigrationInfoView(contentType: Bundle.main.isAslApp ? .legacyAppDialog : .infoDialog)
         remoteMigrationInfoView?.updateTheme()
         remoteMigrationInfoView?.delegate = self
 

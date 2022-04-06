@@ -69,9 +69,6 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     // product id for 'free' non-consumable in app purchase. We use it for AdGuard Pro license migration
     private let migrationProductID = "com.adguard.AdGuardApp.nonconsumable.free"
 
-    // Flag meaning that this app belongs to AdGuard Software Limited developer account
-    private let isAslApp = Bundle.main.bundleIdentifier == "com.adguard.AdGuardApp"
-
     private lazy var allProducts: Set<String> = { [annualSubscriptionProductID, monthlySubscriptionProductID, lifetimeProductID, lifetimeAlternateProductID, migrationProductID] }()
 
     // ios_validate_receipt request
@@ -320,7 +317,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         """
 
         // The url to validate the receipt is different for different targets
-        let backendUrl = isAslApp ? VALIDATE_NON_CONSUMABLE_FREE_RECEIPT_URL : VALIDATE_RECEIPT_URL
+        let backendUrl = Bundle.main.isAslApp ? VALIDATE_NON_CONSUMABLE_FREE_RECEIPT_URL : VALIDATE_RECEIPT_URL
         guard let url = URL(string: backendUrl) else  {
 
             DDLogError("(PurchaseService) validateReceipt error. Can not make URL from String \(VALIDATE_RECEIPT_URL)")
