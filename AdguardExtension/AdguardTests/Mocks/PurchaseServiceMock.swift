@@ -69,6 +69,9 @@ class PurchaseServiceMock: PurchaseServiceProtocol {
     func requestPurchase(productId: String) {
     }
 
+    func requestNonConsumableFreePurchase() {
+    }
+
     func requestRestore() {
     }
 

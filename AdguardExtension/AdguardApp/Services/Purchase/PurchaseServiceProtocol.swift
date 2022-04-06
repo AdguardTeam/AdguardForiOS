@@ -86,6 +86,11 @@ protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
     func requestPurchase(productId: String)
 
     /**
+     requests a con-consumable free purchase
+     */
+    func requestNonConsumableFreePurchase()
+
+    /**
      requests restore in-app purchases
      */
     func requestRestore()

@@ -66,7 +66,13 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     // product id for alternate non-consumable in app purchase. We use it for rub or uah currency
     private let lifetimeAlternateProductID = "com.adguard.lifetimeAlternate"
 
-    private lazy var allProducts: Set<String> = { [annualSubscriptionProductID, monthlySubscriptionProductID, lifetimeProductID, lifetimeAlternateProductID] }()
+    // product id for 'free' non-consumable in app purchase. We use it for AdGuard Pro license migration
+    private let migrationProductID = "com.adguard.AdGuardApp.nonconsumable.free"
+
+    // Flag meaning that this app belongs to AdGuard Software Limited developer account
+    private let isAslApp = Bundle.main.bundleIdentifier == "com.adguard.AdGuardApp"
+
+    private lazy var allProducts: Set<String> = { [annualSubscriptionProductID, monthlySubscriptionProductID, lifetimeProductID, lifetimeAlternateProductID, migrationProductID] }()
 
     // ios_validate_receipt request
 
@@ -75,6 +81,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     private let APP_VERSION_PARAM = "app_version"
     private let APP_NAME_PARAM = "app_name"
     private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com/api/1.0/ios_validate_receipt"
+    private let VALIDATE_NON_CONSUMABLE_FREE_RECEIPT_URL = "https://testmobile.adtidy.org/api/1.0/ios_validate_receipt" // FIXME replace with the real URL when it's ready
 
     // premium values
     private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
@@ -109,6 +116,9 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     @Atomic private var atomicProductsToPurchase: [SKProduct] = []
     private var nonConsumableProduct: SKProduct?
     private var refreshRequest: SKReceiptRefreshRequest?
+
+    private var freeLifeTimeSubscription: SKProduct? { _atomicFreeLifeTimeSubscription.wrappedValue }
+    @Atomic private var atomicFreeLifeTimeSubscription: SKProduct? = nil
 
     private var loginService: LoginServiceProtocol
 
@@ -201,6 +211,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                 return
             }
         }
+    }
+
+    func requestNonConsumableFreePurchase() {
+        requestPurchase(product: freeLifeTimeSubscription)
     }
 
     func reset(completion: @escaping () -> Void) {
@@ -305,7 +319,9 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         }
         """
 
-        guard let url = URL(string: VALIDATE_RECEIPT_URL) else  {
+        // The url to validate the receipt is different for different targets
+        let backendUrl = isAslApp ? VALIDATE_NON_CONSUMABLE_FREE_RECEIPT_URL : VALIDATE_RECEIPT_URL
+        guard let url = URL(string: backendUrl) else  {
 
             DDLogError("(PurchaseService) validateReceipt error. Can not make URL from String \(VALIDATE_RECEIPT_URL)")
             return
@@ -522,6 +538,8 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                 if isDiscountCurrencyLocale(locale: product.priceLocale.identifier) {
                     _atomicProductsToPurchase.mutate { $0.append(product) }
                 }
+            case migrationProductID:
+                _atomicFreeLifeTimeSubscription.mutate { $0 = product }
             default:
                 DDLogError("(PurchaseService) productsRequest didReceive error. Unknown productId \(product.productIdentifier)")
                 assertionFailure("Unknown productId \(product.productIdentifier)")
@@ -629,7 +647,9 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                         let date = Date(timeIntervalSince1970: expirationDate! / 1000)
                         resources.sharedDefaults().set(date, forKey: AEDefaultsRenewableSubscriptionExpirationDate)
                     }
-                case lifetimeProductID, lifetimeAlternateProductID:
+
+                    // FIXME check this part when backend is ready
+                case lifetimeProductID, lifetimeAlternateProductID, migrationProductID:
                     resources.sharedDefaults().set(true, forKey: AEDefaultsNonConsumableItemPurchased)
 
                 default:
