@@ -155,7 +155,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     private var remoteMigrationInfoViewClosedByUser = false
 
-
     // MARK: - Services
 
     private lazy var configuration: ConfigurationServiceProtocol = { ServiceLocator.shared.getService()! }()
@@ -166,8 +165,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var safariProtection: SafariProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProtection: DnsProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProvidersManager: DnsProvidersManagerProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var dnsConfigAssistant: DnsConfigManagerAssistantProtocol = {
-        ServiceLocator.shared.getService()! }()
+    private lazy var dnsConfigAssistant: DnsConfigManagerAssistantProtocol = {ServiceLocator.shared.getService()! }()
     private lazy var remoteMigrationService: RemoteMigrationService = { ServiceLocator.shared.getService()! }()
 
     // MARK: - View models
@@ -1270,6 +1268,8 @@ fileprivate extension MainPageController {
         return button
     }
 }
+
+
 
 extension MainPageController : RemoteMigrationInfoViewDelegate {
     func linkTapped(for type: RemoteMigrationInfoView.ContentType) {

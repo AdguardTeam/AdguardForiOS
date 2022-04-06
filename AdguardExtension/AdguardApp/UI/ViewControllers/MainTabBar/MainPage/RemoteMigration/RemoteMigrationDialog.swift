@@ -1,7 +1,7 @@
 import UIKit
 import SafariServices
 
-/// Dialog that provide remote migration to new AdGuard App
+/// Dialog that provides a remote migration to new AdGuard App
 final class RemoteMigrationDialog : BottomAlertController {
 
     @IBOutlet weak var titleLabel: ThemableLabel!
@@ -52,7 +52,7 @@ final class RemoteMigrationDialog : BottomAlertController {
               let buildVersion = productInfo.buildVersion()
             else { return }
 
-        if purchaseService.purchasedThoughInApp {
+        if purchaseService.purchasedThroughInApp {
             // Initiate remote migration for in-app purchased app
             initRemoteMigrationWithInAppPurchase(appId: appId, buildVersion: buildVersion)
         } else if purchaseService.purchasedThroughLogin {

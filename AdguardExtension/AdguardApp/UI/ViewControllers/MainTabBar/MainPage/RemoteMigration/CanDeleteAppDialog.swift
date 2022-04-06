@@ -1,6 +1,6 @@
 import UIKit
 
-/// Dialog that inform user that old app can be deleted
+/// Dialog that informs a user that old app can be deleted
 final class CanDeleteAppDialog : BottomAlertController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var positiveButton: UIButton!

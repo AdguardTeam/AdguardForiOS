@@ -1,6 +1,6 @@
 import UIKit
 
-/// Dialog that inform user that old AdGuard app was detected
+/// Dialog that informs a user that old AdGuard app was detected
 final class AdGuardFoundDialog : BottomAlertController {
     @IBOutlet weak var primaryButton: UIButton!
     @IBOutlet weak var neutralButton: UIButton!

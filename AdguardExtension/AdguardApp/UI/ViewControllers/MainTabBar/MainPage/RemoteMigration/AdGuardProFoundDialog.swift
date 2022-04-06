@@ -1,6 +1,6 @@
 import UIKit
 
-/// Dialog that inform user that old AdGuardPRO app was detected on device
+/// Dialog that informs a user that old AdGuardPRO app was detected on device
 final class AdGuardProFoundDialog: BottomAlertController {
     @IBOutlet weak var primaryButton: UIButton!
     @IBOutlet weak var titleLabel: ThemableLabel!

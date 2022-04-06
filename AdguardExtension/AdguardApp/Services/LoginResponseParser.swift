@@ -19,7 +19,7 @@
 import Foundation
 
 protocol LoginResponseParserProtocol {
-    func processLoginResponse(data: Data) -> (loggedIn: Bool, premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?)
+    func processLoginResponse(data: Data) -> (loggedIn: Bool, premium: Bool, expirationDate: Date?, licenseKey: String?, NSError?)
 
     func processStatusResponse(data: Data) -> (premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?)
 
@@ -167,7 +167,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
     }
 
 
-    private func processStatusResponseJson(json: [String: Any]) -> (premium: Bool,expirationDate: Date?, licenseKey: String?, NSError?) {
+    private func processStatusResponseJson(json: [String: Any]) -> (premium: Bool, expirationDate: Date?, licenseKey: String?, NSError?) {
 
         guard let status = json[STATUS_RESPONSE_STATUS_PARAM] as? String else {
             DDLogInfo("(LoginService) processStatusResponseJson error - json does not contain status" )

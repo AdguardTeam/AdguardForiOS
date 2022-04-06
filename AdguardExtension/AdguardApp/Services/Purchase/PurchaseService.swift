@@ -149,7 +149,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     var purchasedThroughSetapp: Bool { resources.purchasedThroughSetapp }
 
-    var purchasedThoughInApp: Bool { purchasedThroughInApp }
+    var purchasedThroughInApp: Bool { purchasedThroughInApp }
 
     var standardProduct: Product? {
         let pr = products.first(where: { $0.productId == annualSubscriptionProductID })
