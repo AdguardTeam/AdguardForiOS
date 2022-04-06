@@ -122,15 +122,6 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     private var loginService: LoginServiceProtocol
 
-    private var purchasedThroughInApp: Bool {
-        get {
-            return resources.purchasedThroughInApp
-        }
-        set {
-            resources.purchasedThroughInApp = newValue
-        }
-    }
-
     private var standardPeriod: Period = (unit: PurchasePeriod.day, numberOfUnits: 7)
 
     private let reachability = Reachability.forInternetConnection()
@@ -149,7 +140,14 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     var purchasedThroughSetapp: Bool { resources.purchasedThroughSetapp }
 
-    var purchasedThroughInApp: Bool { purchasedThroughInApp }
+    var purchasedThroughInApp: Bool {
+        get {
+            return resources.purchasedThroughInApp
+        }
+        set {
+            resources.purchasedThroughInApp = newValue
+        }
+    }
 
     var standardProduct: Product? {
         let pr = products.first(where: { $0.productId == annualSubscriptionProductID })
