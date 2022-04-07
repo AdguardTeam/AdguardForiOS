@@ -1214,64 +1214,183 @@
 /* (AppDelegate) Remote migration local push notification body; Disclaimer: This functionality may not be implemented in the future */
 "remote_migration_notification_body" = "Please install our new app. It’s free.";
 
-/* (RemoteMigrationDialog) title; Disclaimer: This functionality may not be implemented in the future */
-"remote_migration_dialog_title" = "Obsolete AdGuard version";
+/*
+ (RemoteMigrationDialog) title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
+"remote_migration_dialog_title" = "This app is obsolete";
 
-/* (RemoteMigrationDialog) description; Disclaimer: This functionality may not be implemented in the future */
-"remote_migration_dialog_description" = "This app is out of date and will no longer receive updates. Please replace it with our new AdGuard app for iOS. It's free. ";
+/*
+ (RemoteMigrationDialog) description
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+/*
+"remote_migration_dialog_description" = "It will no longer receive updates. Please replace it with our new free app.";
 
-/* (RemoteMigrationDialog) accept button title; Disclaimer: This functionality may not be implemented in the future */
+/*
+ (RemoteMigrationDialog) accept button title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
 "remote_migration_dialog_accept_button_title" = "Proceed";
 
-/* (RemoteMigrationDialog) details button title; Disclaimer: This functionality may not be implemented in the future */
+/*
+ (RemoteMigrationDialog) details button title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
 "remote_migration_dialog_details_button_title" = "Why is it happening?";
 
-/* (AdGuardProFoundDialog) title; Disclaimer: This functionality may not be implemented in the future */
-"adguard_pro_found_title" = "AdGuard Pro is detected on this device";
+/*
+ (AdGuardProFoundDialog) title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
+"adguard_pro_found_title" = "We detected AdGuard Pro on this device";
 
-/* (AdGuardProFoundDialog) description; Disclaimer: This functionality may not be implemented in the future */
-"adguard_pro_found_description" = "This AdGuard Pro app is obsolete and no longer needed. Instead, activate premium features here. Then you can safely uninstall AdGuard Pro.";
+/*
+ (AdGuardProFoundDialog) description
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
+"adguard_pro_found_description" = "We’ve replaced it with a new app. Please transfer your AdGuard Pro license to it. Then you may safely delete the old app.";
 
-/* (AdGuardProFoundDialog) primary button title; Disclaimer: This functionality may not be implemented in the future */
-"adguard_pro_found_primary_button_title" = "Activate premium features";
+/*
+ (AdGuardProFoundDialog) primary button title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
+"adguard_pro_found_primary_button_title" = "Transfer license";
 
-/* (AdGuardFoundDialog) title; Disclaimer: This functionality may not be implemented in the future */
-"adguard_found_title" = "The old AdGuard app is detected on this device";
+/*
+ (AdGuardFoundDialog) title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
+"adguard_found_title" = "An old AdGuard app is detected on this device";
 
-/* (AdGuardFoundDialog) description; Disclaimer: This functionality may not be implemented in the future */
-"adguard_found_description" = "This app is obsolete. Before deleting it, please check: have you got a paid subscription or a purchased license key for it?";
+/*
+ (AdGuardFoundDialog) description
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
+"adguard_found_description" = "If you have a paid subscription, please transfer the license to the new app. Then you may delete the old app.";
 
-/* (AdGuardFoundDialog) primary button title; Disclaimer: This functionality may not be implemented in the future */
-"adguard_found_primary_button_title" = "Yes";
+/*
+ (AdGuardFoundDialog) primary button title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
+"adguard_found_primary_button_title" = "I have a paid subscription";
 
-/* (AdGuardFoundDialog) neutral button title; Disclaimer: This functionality may not be implemented in the future */
-"adguard_found_neutral_button_title" = "No";
+/*
+ (AdGuardFoundDialog) neutral button title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
+"adguard_found_neutral_button_title" = "No paid subscription";
 
-/* (CanDeleteAppDialog) title; Disclaimer: This functionality may not be implemented in the future */
+/*
+ (CanDeleteAppDialog) title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
 "can_delete_app_dialog_title" = "You can delete the old AdGuard app.";
 
-/* (CanDeleteAppDialog) button title; Disclaimer: This functionality may not be implemented in the future */
+/*
+ (CanDeleteAppDialog) button title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
 "can_delete_app_dialog_button_title" = "Ok";
 
-/* (LicenseWasBindedDialog) title; Disclaimer: This functionality may not be implemented in the future */
+/*
+ (LicenseWasBindedDialog) title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
 "license_was_binded_dialog_title" = "Have you bound the license to your AdGuard account?";
 
-/* (LicenseWasBindedDialog) description; Disclaimer: This functionality may not be implemented in the future */
-"license_was_binded_dialog_description" = "You need to create an AdGuard account and bind your license
- to it. Open the old app and follow the instructions there.";
+/*
+ (LicenseWasBindedDialog) description
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
+"license_was_binded_dialog_description" = "You need to create an AdGuard account and bind your license to it. Open the old app and follow the instructions there.";
 
-/* (LicenseWasBindedDialog) button title; Disclaimer: This functionality may not be implemented in the future */
+/*
+ (LicenseWasBindedDialog) button title
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
 "license_was_binded_dialog_button_title" = "It’s done. I’m ready to log in";
 
-/* (RemoteMigrationInfoView) Old app detected message; Disclaimer: This functionality may not be implemented in the future */
+/*
+ (RemoteMigrationInfoView) Old app detected message
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
 "remote_migration_info_view_old_app_detected" = "The old AdGuard app is detected on this device. %@";
 
-/* (RemoteMigrationInfoView) Learn more message; Disclaimer: This functionality may not be implemented in the future */
+/*
+ (RemoteMigrationInfoView) Learn more message
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
 "remote_migration_info_view_learn_more" = "<a href=%@>Learn more.</a>";
 
-/* (RemoteMigrationInfoView) Can delete message; Disclaimer: This functionality may not be implemented in the future */
-"remote_migration_info_view_can_delete" = "You can delete it.";
+/*
+ (RemoteMigrationInfoView) Delete old app suggestion
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
+"remote_migration_info_view_delete_suggestion" = "An old AdGuard app is detected on this device. Would you like to delete it?";
 
-/* (RemoteMigrationInfoView) Need migration message; Disclaimer: This functionality may not be implemented in the future */
+/*
+ (RemoteMigrationInfoView) Need migration message
+ Disclaimer:
+ We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
+ Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
+ This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
+*/
 "remote_migration_info_view_need_migration" = "Please replace this obsolete app with our new app. <a href=%@>Why?</a>";
 
