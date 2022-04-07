@@ -28,8 +28,8 @@ final class AdGuardProFoundDialog: BottomAlertController {
     }
 
     @IBAction func primaryButtonTapped(_ sender: UIButton) {
-        presentLoadingAlertAbovePresented()
         // FIXME: Uncomment when ready to test in-app purchase
+//        presentLoadingAlertAbovePresented()
 //        purchaseService.requestNonConsumableFreePurchase()
 
     }
@@ -51,11 +51,9 @@ final class AdGuardProFoundDialog: BottomAlertController {
             case PurchaseAssistant.kPSNotificationPurchaseFailure:
                 dismissLoadingAlertAndPresent(message: String.localizedString("purchase_failure_message"))
             case PurchaseAssistant.kPSNotificationCanceled:
-                dismissLoadingAlertIfNeeded {
-                    self.dismiss(animated: true)
-                }
+                dismissLoadingAlertIfNeeded { self.dismiss(animated: true) }
             default:
-                break
+                dismissLoadingAlertIfNeeded { self.dismiss(animated: true) }
         }
     }
 

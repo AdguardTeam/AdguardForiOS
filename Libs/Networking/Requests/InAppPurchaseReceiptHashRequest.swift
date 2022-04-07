@@ -1,6 +1,7 @@
 import Foundation
 
 /// Object that generate URL request for fetching in-app purchase receipt hash value
+/// WARNING: Use this request only for AdGuard Pro app
 final class InAppPurchaseReceiptHashRequest : RequestProtocol {
     // FIXME replace with prod backend when ready
     private static let BACKEND_DOMAIN = "https://testmobile.adtidy.org"
@@ -24,7 +25,7 @@ final class InAppPurchaseReceiptHashRequest : RequestProtocol {
 
         var queryItems = [
             "app_id": appId,
-            "license": inAppPurchaseBase64Receipt,
+            "receipt": inAppPurchaseBase64Receipt,
         ]
 
         let signatureConstructor = SignatureConstructor()

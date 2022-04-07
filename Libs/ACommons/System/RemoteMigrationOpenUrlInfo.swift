@@ -21,7 +21,7 @@ struct RemoteMigrationOpenUrlInfo : OpenUrlInfo {
         result.append(URLQueryItem(name: "app", value: "ios"))
         result.append(URLQueryItem(name: "action", value: action))
         result.append(URLQueryItem(name: "from", value: from))
-        result.append(URLQueryItem(name: "v", value: from))
+        result.append(URLQueryItem(name: "v", value: buildVersion))
         result.append(URLQueryItem(name: "app_id", value: appId))
         result.append(URLQueryItem(name: "app_type", value: appType))
 
