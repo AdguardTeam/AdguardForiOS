@@ -245,6 +245,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
+        chartView.layoutIfNeeded()
         chartModel.chartViewSizeChanged(frame: chartView.frame)
 
         if isIphoneSeLike {
@@ -1083,9 +1084,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             infoView.bottomAnchor.constraint(equalTo: contentBlockerViewIpad.topAnchor, constant: -4.0)
         ]
 
-        // We need to activate this specific bottom constraint asyncronously in iOS 12.4 and below, and only on iPad, to prevent
+        // We need to asynchronously activate this specific bottom constraint in iOS below 13.0 and only on iPad, to prevent
         // the app from crashing
-        if #available(iOS 13, *) {
+        if #available(iOS 13.0, *) {
             NSLayoutConstraint.activate(constraints)
         } else {
             // Lets schedule constraint activation task to end of queue
