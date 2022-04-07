@@ -500,17 +500,25 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         }
 
         if purchased || restored {
-            validateReceipt { [weak self](error) in
-                guard let sSelf = self else { return }
+            validateReceipt { [weak self] error in
+                guard let self = self else { return }
 
-                if error == nil && sSelf.purchasedThroughInApp {
-                    let result = purchased ? PurchaseAssistant.kPSNotificationPurchaseSuccess : PurchaseAssistant.kPSNotificationRestorePurchaseSuccess
-
-                    sSelf.postNotification(result)
+                if let error = error {
+                    let pushType = purchased ? PurchaseAssistant.kPSNotificationPurchaseFailure : PurchaseAssistant.kPSNotificationRestorePurchaseFailure
+                    self.postNotification(pushType)
+                    DDLogError("(PurchaseService) - Failed to validate in-app purchase receipt in purchasing or restoring phase. Error: \(error)")
+                    return
                 }
 
-                if error == nil && !sSelf.purchasedThroughInApp {
-                    sSelf.postNotification(PurchaseAssistant.kPSNotificationRestorePurchaseNothingToRestore)
+                if self.purchasedThroughInApp {
+                    let result = purchased ? PurchaseAssistant.kPSNotificationPurchaseSuccess : PurchaseAssistant.kPSNotificationRestorePurchaseSuccess
+                    self.postNotification(result)
+                    DDLogInfo("(PurchaseService) - Successfully validate in-app purchase in purchasing or restoring phase")
+                }
+
+                if !self.purchasedThroughInApp {
+                    self.postNotification(PurchaseAssistant.kPSNotificationRestorePurchaseNothingToRestore)
+                    DDLogInfo("(PurchaseService) - No in-app purchase for restoring")
                 }
             }
         }

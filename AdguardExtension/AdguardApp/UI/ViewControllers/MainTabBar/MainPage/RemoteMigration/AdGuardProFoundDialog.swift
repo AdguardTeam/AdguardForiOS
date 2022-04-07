@@ -28,10 +28,8 @@ final class AdGuardProFoundDialog: BottomAlertController {
     }
 
     @IBAction func primaryButtonTapped(_ sender: UIButton) {
-        // FIXME: Uncomment when ready to test in-app purchase
-//        presentLoadingAlertAbovePresented()
-//        purchaseService.requestNonConsumableFreePurchase()
-
+        presentLoadingAlertAbovePresented()
+        purchaseService.requestNonConsumableFreePurchase()
     }
 
     private func subscribeToNotification() {
