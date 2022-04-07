@@ -59,8 +59,9 @@ final class RemoteMigrationDialog : BottomAlertController {
             // Initiate remote migration for app with license key
             initRemoteMigrationWithLicenseKey(appId: appId, buildVersion: buildVersion)
         } else {
-            // Initiate remote migration for FREE or AdGuard Pro app. AdGuard Pro doesn't have license key so we need to set app_type for TDS link with value `ADGUARD_FOR_IOS_PRO`
-            initRemoteMigrationWithoutLicense(appId: appId, buildVersion: buildVersion)
+            // Initiate remote migration for FREE or AdGuard Pro app.
+            // AdGuard Pro doesn't have license key so we need to set app_type for TDS link with value `ADGUARD_FOR_IOS_PRO`
+            initRemoteMigrationWithoutLicenseKey(appId: appId, buildVersion: buildVersion)
         }
     }
 
@@ -92,7 +93,7 @@ final class RemoteMigrationDialog : BottomAlertController {
         prepareForPresent(url: url)
     }
 
-    private func initRemoteMigrationWithoutLicense(appId: String, buildVersion: String) {
+    private func initRemoteMigrationWithoutLicenseKey(appId: String, buildVersion: String) {
         guard let url = getTDSUrl(with: appId, buildVersion, nil) else {
             DDLogError("(RemoteMigrationDialog) - Missing TDS url for FREE or AdGuard Pro app migration")
             return
