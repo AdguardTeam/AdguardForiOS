@@ -1030,10 +1030,10 @@
             </objects>
             <point key="canvasLocation" x="619" y="-923"/>
         </scene>
-        <!--Remote Migration Dialog-->
+        <!--Whats New Bottom Alert Controller-->
         <scene sceneID="uBc-5L-Gbz">
             <objects>
-                <viewController storyboardIdentifier="RemoteMigrationDialog" id="pxv-Jf-U7n" customClass="RemoteMigrationDialog" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WhatsNewBottomAlertController" id="pxv-Jf-U7n" customClass="WhatsNewBottomAlertController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l5r-kL-Gh2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1053,8 +1053,8 @@
                                             </constraint>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDV-cq-ZDm" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="21" y="34" width="372" height="0.0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New AdGuard features in iOS 15" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDV-cq-ZDm" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="21" y="112" width="372" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1065,8 +1065,8 @@
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0IU-PO-Xeh" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="50" width="366" height="0.0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard uses iOS 15 Safari Extensions to remove ads more effectively. Now it takes just one tap to block YouTube ads in Safari." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0IU-PO-Xeh" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="157" width="366" height="50.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1086,48 +1086,41 @@
                                             </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Continue"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         </variation>
                                         <connections>
-                                            <action selector="onAcceptTapped:" destination="pxv-Jf-U7n" eventType="touchUpInside" id="Aop-bo-oIw"/>
+                                            <action selector="continueButtonTapped:" destination="pxv-Jf-U7n" eventType="touchUpInside" id="vvS-Vm-Z0T"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cas-Ga-b6h" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="130" width="382" height="40"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t3I-5W-XWu">
+                                        <rect key="frame" x="170" y="18" width="74" height="74"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="usK-Tk-isz">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
-                                            </constraint>
+                                            <constraint firstAttribute="width" constant="74" id="R3E-4P-cdt"/>
+                                            <constraint firstAttribute="height" constant="74" id="aLU-yO-Qiv"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="onDetailsTapped:" destination="pxv-Jf-U7n" eventType="touchUpInside" id="az7-az-6Fi"/>
-                                        </connections>
-                                    </button>
+                                        <imageReference key="image" image="safari_big_icon"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Cas-Ga-b6h" firstAttribute="top" secondItem="7SB-2j-FAc" secondAttribute="bottom" constant="24" id="4xe-d1-RAz"/>
+                                    <constraint firstItem="t3I-5W-XWu" firstAttribute="centerX" secondItem="fqS-eX-cxs" secondAttribute="centerX" id="7Fk-kX-dek"/>
                                     <constraint firstItem="7SB-2j-FAc" firstAttribute="top" secondItem="0IU-PO-Xeh" secondAttribute="bottom" constant="16" id="CFB-GV-1AF"/>
                                     <constraint firstAttribute="trailing" secondItem="7SB-2j-FAc" secondAttribute="trailing" constant="16" id="M79-f2-xp0"/>
                                     <constraint firstItem="7SB-2j-FAc" firstAttribute="width" secondItem="fqS-eX-cxs" secondAttribute="width" multiplier="0.4" id="MBE-eb-G6p"/>
-                                    <constraint firstAttribute="bottom" secondItem="Cas-Ga-b6h" secondAttribute="bottom" constant="40" id="MgZ-dE-X0f"/>
-                                    <constraint firstItem="gDV-cq-ZDm" firstAttribute="top" secondItem="NQK-bQ-CVl" secondAttribute="bottom" constant="24" id="Mub-mW-Uu2"/>
+                                    <constraint firstItem="gDV-cq-ZDm" firstAttribute="top" secondItem="t3I-5W-XWu" secondAttribute="bottom" constant="20" id="Mub-mW-Uu2"/>
                                     <constraint firstItem="0IU-PO-Xeh" firstAttribute="top" secondItem="gDV-cq-ZDm" secondAttribute="bottom" constant="16" id="Mwe-a1-Wg6"/>
                                     <constraint firstAttribute="trailing" secondItem="0IU-PO-Xeh" secondAttribute="trailing" constant="24" id="QDK-3p-fKa"/>
                                     <constraint firstItem="7SB-2j-FAc" firstAttribute="centerX" secondItem="fqS-eX-cxs" secondAttribute="centerX" id="RQ7-C9-OZe"/>
                                     <constraint firstItem="0IU-PO-Xeh" firstAttribute="leading" secondItem="fqS-eX-cxs" secondAttribute="leading" constant="24" id="RW1-ow-QHS"/>
                                     <constraint firstItem="7SB-2j-FAc" firstAttribute="leading" secondItem="fqS-eX-cxs" secondAttribute="leading" constant="16" id="RiF-yi-jMT"/>
+                                    <constraint firstAttribute="bottom" secondItem="7SB-2j-FAc" secondAttribute="bottom" constant="40" id="XF6-TY-CjN"/>
                                     <constraint firstItem="NQK-bQ-CVl" firstAttribute="top" secondItem="fqS-eX-cxs" secondAttribute="top" constant="8" id="XqP-eu-wlN"/>
-                                    <constraint firstItem="Cas-Ga-b6h" firstAttribute="leading" secondItem="7SB-2j-FAc" secondAttribute="leading" id="h6G-UY-txx"/>
+                                    <constraint firstItem="t3I-5W-XWu" firstAttribute="top" secondItem="NQK-bQ-CVl" secondAttribute="bottom" constant="8" symbolic="YES" id="dNr-VF-PGt"/>
                                     <constraint firstItem="gDV-cq-ZDm" firstAttribute="leading" secondItem="fqS-eX-cxs" secondAttribute="leading" constant="21" id="hx8-yF-xbu"/>
                                     <constraint firstItem="NQK-bQ-CVl" firstAttribute="centerX" secondItem="fqS-eX-cxs" secondAttribute="centerX" id="iqb-uD-F7r"/>
                                     <constraint firstAttribute="trailing" secondItem="gDV-cq-ZDm" secondAttribute="trailing" constant="21" id="pOe-Ya-EF1"/>
-                                    <constraint firstItem="Cas-Ga-b6h" firstAttribute="trailing" secondItem="7SB-2j-FAc" secondAttribute="trailing" id="uOf-0d-OvH"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1155,28 +1148,27 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="acceptButton" destination="7SB-2j-FAc" id="wov-OE-Pv2"/>
                         <outlet property="contentView" destination="fqS-eX-cxs" id="jgD-Dl-VL0"/>
-                        <outlet property="descriptionLabel" destination="0IU-PO-Xeh" id="D3u-Qa-9nf"/>
-                        <outlet property="detailsButton" destination="Cas-Ga-b6h" id="Sgd-nh-8Xg"/>
-                        <outlet property="keyboardHeightLayoutConstraint" destination="Ct8-0t-hcZ" id="TyJ-1q-X2I"/>
-                        <outlet property="titleLabel" destination="gDV-cq-ZDm" id="B78-F1-pkz"/>
+                        <outlet property="continueButton" destination="7SB-2j-FAc" id="krn-lN-UeD"/>
+                        <outlet property="keyboardHeightLayoutConstraint" destination="Ct8-0t-hcZ" id="zIM-gt-2RA"/>
+                        <outletCollection property="themableLabels" destination="gDV-cq-ZDm" collectionClass="NSMutableArray" id="yeU-gO-aQK"/>
+                        <outletCollection property="themableLabels" destination="0IU-PO-Xeh" collectionClass="NSMutableArray" id="4fV-zx-xqZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOy-Q9-wnt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3170" y="1370"/>
+            <point key="canvasLocation" x="3170" y="616"/>
         </scene>
-        <!--Whats New Bottom Alert Controller-->
+        <!--Remote Migration Dialog-->
         <scene sceneID="FmY-5w-2Pq">
             <objects>
-                <viewController storyboardIdentifier="WhatsNewBottomAlertController" id="Pml-ba-ehO" customClass="WhatsNewBottomAlertController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RemoteMigrationDialog" id="Pml-ba-ehO" customClass="RemoteMigrationDialog" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FZA-7O-rzk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggt-rw-R8U">
-                                <rect key="frame" x="0.0" y="579.5" width="414" height="316.5"/>
+                                <rect key="frame" x="0.0" y="686" width="414" height="210"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrW-Zk-RRW">
                                         <rect key="frame" x="191" y="8" width="32" height="2"/>
@@ -1190,16 +1182,8 @@
                                             </constraint>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nu4-Su-18m">
-                                        <rect key="frame" x="170" y="32" width="74" height="74"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="74" id="ElR-Vc-Xfb"/>
-                                            <constraint firstAttribute="height" constant="74" id="OF2-HT-TbD"/>
-                                        </constraints>
-                                        <imageReference key="image" image="safari_big_icon"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New AdGuard features in iOS 15" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIB-C9-Yvd" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="21" y="125" width="372" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIB-C9-Yvd" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="21" y="34" width="372" height="0.0"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1210,8 +1194,8 @@
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard uses iOS 15 Safari Extensions to remove ads more effectively. Now it takes just one tap to block YouTube ads in Safari." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtA-aF-LN4" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="170" width="366" height="50.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtA-aF-LN4" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="50" width="366" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1231,12 +1215,26 @@
                                             </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Continue"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         </variation>
                                         <connections>
-                                            <action selector="continueButtonTapped:" destination="Pml-ba-ehO" eventType="touchUpInside" id="a3A-L2-bgh"/>
+                                            <action selector="onAcceptTapped:" destination="Pml-ba-ehO" eventType="touchUpInside" id="zcH-GW-qNJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPo-hn-5Mh" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="130" width="382" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="dNW-lf-Vdy">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="onDetailsTapped:" destination="Pml-ba-ehO" eventType="touchUpInside" id="cEp-to-vdr"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1249,15 +1247,16 @@
                                     <constraint firstItem="LtA-aF-LN4" firstAttribute="top" secondItem="TIB-C9-Yvd" secondAttribute="bottom" constant="16" id="Ohf-Cl-Xx0"/>
                                     <constraint firstItem="LtA-aF-LN4" firstAttribute="leading" secondItem="ggt-rw-R8U" secondAttribute="leading" constant="24" id="PEg-GX-E4t"/>
                                     <constraint firstItem="nrW-Zk-RRW" firstAttribute="centerX" secondItem="ggt-rw-R8U" secondAttribute="centerX" id="PwY-bE-acC"/>
-                                    <constraint firstItem="GKf-0M-4Z9" firstAttribute="top" secondItem="LtA-aF-LN4" secondAttribute="bottom" constant="16" id="RZy-Qs-7tt"/>
-                                    <constraint firstItem="TIB-C9-Yvd" firstAttribute="top" secondItem="nu4-Su-18m" secondAttribute="bottom" constant="19" id="UkW-6n-epg"/>
+                                    <constraint firstItem="GKf-0M-4Z9" firstAttribute="top" secondItem="LtA-aF-LN4" secondAttribute="bottom" constant="24" id="RZy-Qs-7tt"/>
+                                    <constraint firstItem="KPo-hn-5Mh" firstAttribute="trailing" secondItem="GKf-0M-4Z9" secondAttribute="trailing" id="Y2D-KG-ULT"/>
                                     <constraint firstAttribute="trailing" secondItem="TIB-C9-Yvd" secondAttribute="trailing" constant="21" id="aO7-uD-WGc"/>
                                     <constraint firstItem="GKf-0M-4Z9" firstAttribute="width" secondItem="ggt-rw-R8U" secondAttribute="width" multiplier="0.4" id="d4B-1D-l1a"/>
-                                    <constraint firstAttribute="bottom" secondItem="GKf-0M-4Z9" secondAttribute="bottom" constant="40" id="fyl-nc-Z8A"/>
                                     <constraint firstItem="GKf-0M-4Z9" firstAttribute="leading" secondItem="ggt-rw-R8U" secondAttribute="leading" constant="16" id="hDA-EX-Gxi"/>
+                                    <constraint firstItem="TIB-C9-Yvd" firstAttribute="top" secondItem="nrW-Zk-RRW" secondAttribute="bottom" constant="24" id="hPt-vk-U2R"/>
                                     <constraint firstItem="TIB-C9-Yvd" firstAttribute="leading" secondItem="ggt-rw-R8U" secondAttribute="leading" constant="21" id="jPu-b4-Y13"/>
-                                    <constraint firstItem="nu4-Su-18m" firstAttribute="top" secondItem="nrW-Zk-RRW" secondAttribute="top" constant="24" id="kyF-UN-bKP"/>
-                                    <constraint firstItem="nu4-Su-18m" firstAttribute="centerX" secondItem="ggt-rw-R8U" secondAttribute="centerX" id="sTA-Cl-UuR"/>
+                                    <constraint firstAttribute="bottom" secondItem="KPo-hn-5Mh" secondAttribute="bottom" constant="40" id="jlb-uk-F08"/>
+                                    <constraint firstItem="KPo-hn-5Mh" firstAttribute="leading" secondItem="GKf-0M-4Z9" secondAttribute="leading" id="mA0-yZ-gSf"/>
+                                    <constraint firstItem="KPo-hn-5Mh" firstAttribute="top" secondItem="GKf-0M-4Z9" secondAttribute="bottom" constant="16" id="nL9-QY-ANe"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1285,16 +1284,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acceptButton" destination="GKf-0M-4Z9" id="9RZ-yC-H1S"/>
                         <outlet property="contentView" destination="ggt-rw-R8U" id="Cbp-Kq-zAd"/>
-                        <outlet property="continueButton" destination="GKf-0M-4Z9" id="bvK-0t-i2P"/>
-                        <outlet property="keyboardHeightLayoutConstraint" destination="Rgy-TO-hzC" id="P18-Sb-Ja3"/>
-                        <outletCollection property="themableLabels" destination="TIB-C9-Yvd" collectionClass="NSMutableArray" id="Vja-d4-JEW"/>
-                        <outletCollection property="themableLabels" destination="LtA-aF-LN4" collectionClass="NSMutableArray" id="lwW-gu-Qnd"/>
+                        <outlet property="descriptionLabel" destination="LtA-aF-LN4" id="OKh-53-7uE"/>
+                        <outlet property="detailsButton" destination="KPo-hn-5Mh" id="edL-QN-yYk"/>
+                        <outlet property="keyboardHeightLayoutConstraint" destination="Rgy-TO-hzC" id="0ch-DE-4tF"/>
+                        <outlet property="titleLabel" destination="TIB-C9-Yvd" id="mh2-zA-YZg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1we-En-Iyk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3169.921875" y="643.92386530014642"/>
+            <point key="canvasLocation" x="3170" y="1356"/>
         </scene>
         <!--Ad Guard Pro Found Dialog-->
         <scene sceneID="39B-Pb-Rd2">
