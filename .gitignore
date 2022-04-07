@@ -71,6 +71,7 @@ Adguard.ipa
 ## Build generated
 build/
 build_pro/
+build_app/
 DerivedData/
 
 ## Various settings
