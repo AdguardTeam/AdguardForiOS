@@ -1426,7 +1426,7 @@
 
  There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
 */
-"remote_migration_info_view_learn_more" = "<a href=%@>Learn more.</a>";
+"remote_migration_info_view_learn_more" = "<a href=%@>Learn more</a>";
 
 /*
  (RemoteMigrationInfoView) Delete old app suggestion
