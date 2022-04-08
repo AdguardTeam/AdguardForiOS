@@ -1229,7 +1229,7 @@
  We are going to migrate ad-blocking apps to the Adguard Software Ltd. account.
  Unfortunately, we can’t automate this process due to Apple-related technical problems, so the only way is to re-download the app to the new account.
  This prevents automatic migration of users’ purchases, so we are developing a separate mechanism for this purpose. These lines are part of that mechanism.
-/*
+*/
 "remote_migration_dialog_description" = "It will no longer receive updates. Please replace it with our new free app.";
 
 /*
