@@ -42,7 +42,6 @@ final class RemoteMigrationDialog : BottomAlertController {
 
     @IBAction
     private func onDetailsTapped(_ sender: UIButton) {
-        // FIXME: Redirect to about remote migration page
         UIApplication.shared.openAdguardUrl(action: "about_migration", from: "RemoteMigrationDialog", buildVersion: productInfo.buildVersion())
         dismiss(animated: true)
     }
