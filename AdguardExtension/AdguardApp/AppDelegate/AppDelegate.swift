@@ -545,15 +545,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        DDLogInfo("(AppDelegate) Start checking if remote migration is needed")
+        DDLogInfo("(AppDelegate) - Start checking if remote migration is needed")
         remoteMigrationService.checkRemoteMigration { result in
-            self.resources.backgroundFetchRemoteMigrationRequestResult = result
+            DDLogInfo("(AppDelegate) - Remote migration check result = \(result)")
         }
     }
 
     private func checkRemoteMigrationInBackgroundFetch() {
-        guard UIApplication.shared.applicationState == .background,
-              !Bundle.main.isAslApp else {
+        guard !Bundle.main.isAslApp else {
             DDLogWarn("(AppDelegate) No need to check remote migration state. It is not old app")
             return
         }
