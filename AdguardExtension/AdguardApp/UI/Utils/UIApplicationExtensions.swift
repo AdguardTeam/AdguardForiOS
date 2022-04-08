@@ -16,10 +16,10 @@ extension UIApplication {
     /// - Returns: Legacy app type or nil if legacy app was not found.
     /// - Warning: Legacy type will be returned only if ASL app call this function
     func detectLegacyAppInstalled() -> LegacyAppType? {
-        let isASL = Bundle.main.isAslApp
-        if canOpenUrl(scheme: "transfer-scheme-adguard-pro:"), isASL {
+        guard Bundle.main.isAslApp else { return nil }
+        if canOpenUrl(scheme: "transfer-scheme-adguard-pro:") {
             return .adguardPro
-        } else if canOpenUrl(scheme: "transfer-scheme-adguard:"), isASL {
+        } else if canOpenUrl(scheme: "transfer-scheme-adguard:") {
             return .adguard
         }
         return nil
@@ -35,7 +35,7 @@ extension UIApplication {
     }
 
     /// An enum representation of a legacy app installed
-    enum LegacyAppType : String {
+    enum LegacyAppType {
         // Regular AdGuard
         case adguard
 

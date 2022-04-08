@@ -559,7 +559,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         remoteMigrationService.checkRemoteMigration { isNeedMigration in
-            // isNeedMigration = true // FOR DEBUG ONLY
             self.resources.backgroundFetchRemoteMigrationRequestResult = isNeedMigration
             guard isNeedMigration else {
                 DDLogDebug("(AppDelegate) - Do not post remote migration local push notification, no needs for remote migration")
