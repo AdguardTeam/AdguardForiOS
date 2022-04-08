@@ -71,7 +71,7 @@ final class AdGuardProFoundDialog: BottomAlertController {
     }
 }
 
-extension AdGuardProFoundDialog: ThemableProtocol {
+extension AdGuardProFoundDialog : ThemableProtocol {
     func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels([titleLabel, descriptionLabel])

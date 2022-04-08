@@ -9,8 +9,7 @@ final class InAppPurchaseReceiptHashRequest : RequestProtocol {
     let appId: String
     let inAppPurchaseBase64Receipt: String
 
-    init(appId: String,
-         inAppPurchaseBase64Receipt: String) {
+    init(appId: String, inAppPurchaseBase64Receipt: String) {
         self.appId = appId
         self.inAppPurchaseBase64Receipt = inAppPurchaseBase64Receipt
     }

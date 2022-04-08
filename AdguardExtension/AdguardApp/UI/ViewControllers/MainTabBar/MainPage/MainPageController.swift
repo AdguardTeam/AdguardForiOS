@@ -165,7 +165,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var safariProtection: SafariProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProtection: DnsProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProvidersManager: DnsProvidersManagerProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var dnsConfigAssistant: DnsConfigManagerAssistantProtocol = {ServiceLocator.shared.getService()! }()
+    private lazy var dnsConfigAssistant: DnsConfigManagerAssistantProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var remoteMigrationService: RemoteMigrationService = { ServiceLocator.shared.getService()! }()
 
     // MARK: - View models
@@ -1061,7 +1061,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     /// Functions to work with migration info view
 
-    private func  addRemoteMigrationInfoViewIfNeeded() {
+    private func addRemoteMigrationInfoViewIfNeeded() {
         let newAppDetectLegacyApp = UIApplication.shared.legacyAppDetected
         let legacyAppWithNeedingMigration =  remoteMigrationService.isNeedRemoteMigration && !Bundle.main.isAslApp
         let needToShowRemoteMigrationInfoView = !remoteMigrationInfoViewClosedByUser && (newAppDetectLegacyApp || legacyAppWithNeedingMigration)

@@ -16,7 +16,7 @@ enum SignatureConstructorError : Error, CustomDebugStringConvertible {
 /// Object that generate signature for backend API requests
 struct SignatureConstructor {
 
-    // TODO: Replace this MOCK secret with real
+    // FIXME: Replace this MOCK secret with real
     private let secret = "SUPER_SECRET_VALUE"
 
     func getSignature(items: [String: String]) throws -> String {

@@ -148,7 +148,7 @@ extension RemoteMigrationDialog : ThemableProtocol {
     }
 }
 
-extension RemoteMigrationDialog: SFSafariViewControllerDelegate {
+extension RemoteMigrationDialog : SFSafariViewControllerDelegate {
     public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         dismiss(animated: true) { [weak self] in
             self?.onDismissCompletion?()
