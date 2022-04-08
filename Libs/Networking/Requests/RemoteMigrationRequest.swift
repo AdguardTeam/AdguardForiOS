@@ -2,9 +2,7 @@ import Foundation
 
 /// Object thant generate URL request for remote migration
 final class RemoteMigrationRequest : RequestProtocol {
-
-    // FIXME replace with prod backend when ready
-    private static let BACKEND_DOMAIN = "https://testmobile.adtidy.org"
+    private static let BACKEND_DOMAIN = "https://mobile.adtidy.org"
     private static let MIGRATION_URL = "/api/1.0/ios_migration/\(LoginService.APP_TYPE_VALUE)/status"
 
     private let appId: String

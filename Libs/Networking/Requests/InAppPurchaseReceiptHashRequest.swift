@@ -3,8 +3,7 @@ import Foundation
 /// Object that generate URL request for fetching in-app purchase receipt hash value
 /// WARNING: Use this request only for AdGuard Pro app
 final class InAppPurchaseReceiptHashRequest : RequestProtocol {
-    // FIXME replace with prod backend when ready
-    private static let BACKEND_DOMAIN = "https://testmobile.adtidy.org"
+    private static let BACKEND_DOMAIN = "https://mobile.adtidy.org"
     private static let API_URL = "/api/1.0/ios_migration/\(LoginService.APP_TYPE_VALUE)/store_receipt"
 
     let appId: String
