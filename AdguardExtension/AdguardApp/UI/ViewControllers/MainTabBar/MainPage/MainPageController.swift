@@ -969,6 +969,12 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     private func processPresentingLegacyAppDialogIfNeeded() {
+        if proStatus {
+            DDLogInfo("(MainPageController) Legacy app dialog was not presented, current app have PRO status")
+            processPresentingsRateAppDialog()
+            return
+        }
+
         if resources.legacyAppDetectedDialogShown {
             DDLogInfo("(MainPageController) Legacy app dialog already has been shown")
             processPresentingsRateAppDialog()
