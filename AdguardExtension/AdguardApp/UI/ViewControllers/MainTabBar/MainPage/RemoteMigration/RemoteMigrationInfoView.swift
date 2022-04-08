@@ -140,7 +140,9 @@ extension RemoteMigrationInfoView {
             switch self {
                 case .infoDialog: return ""
                 case .legacyAppDialog:
-                    return String.localizedString("remote_migration_info_view_delete_suggestion")
+                    let canDelete = String.localizedString("remote_migration_info_view_delete_suggestion")
+                    let formatted = String(format: titleCommonString, canDelete)
+                    return formatted
             }
         }
 

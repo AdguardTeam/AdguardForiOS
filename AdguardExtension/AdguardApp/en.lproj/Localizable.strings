@@ -1415,7 +1415,7 @@
 
  There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
 */
-"remote_migration_info_view_old_app_detected" = "The old AdGuard app is detected on this device. %@";
+"remote_migration_info_view_old_app_detected" = "An old AdGuard app is detected on this device. %@";
 
 /*
  (RemoteMigrationInfoView) Learn more message
@@ -1426,7 +1426,7 @@
 
  There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
 */
-"remote_migration_info_view_learn_more" = "<a href=%@>Learn more.</a>";
+"remote_migration_info_view_learn_more" = "<a href=%@>Learn more</a>";
 
 /*
  (RemoteMigrationInfoView) Delete old app suggestion
@@ -1437,7 +1437,7 @@
 
  There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
 */
-"remote_migration_info_view_delete_suggestion" = "An old AdGuard app is detected on this device. Would you like to delete it?";
+"remote_migration_info_view_delete_suggestion" = "Would you like to delete it?";
 
 /*
  (RemoteMigrationInfoView) Need migration message
@@ -1449,4 +1449,3 @@
  There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
 */
 "remote_migration_info_view_need_migration" = "Please replace this obsolete app with our new app. <a href=%@>Why?</a>";
-

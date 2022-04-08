@@ -16,8 +16,8 @@
 /* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "Log in";
 
-/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
-"fxK-6y-LB6.text" = "Sign in";
+/* Class = "UILabel"; text = "Log in"; ObjectID = "fxK-6y-LB6"; */
+"fxK-6y-LB6.text" = "Log in";
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "Confirm";
