@@ -11,18 +11,7 @@ final class RemoteMigrationServiceImpl : RemoteMigrationService {
     private let completionQueue = DispatchQueue(label: "\(RemoteMigrationServiceImpl.self).completionQueue")
     private let syncQueue = DispatchQueue(label: "\(RemoteMigrationServiceImpl.self).syncQueue")
 
-    private var _remoteMigrationShowed = false
     private var _isNeedRemoteMigration: Bool = false
-
-    /// Flag meaning that 'need for remote migration' dialog has been shown
-    var remoteMigrationDialogShown: Bool {
-        get {
-            syncQueue.sync { _remoteMigrationShowed }
-        }
-        set {
-            syncQueue.sync { _remoteMigrationShowed = newValue }
-        }
-    }
 
     /// Flag meaning that backend has triggered remote migration
     var isNeedRemoteMigration: Bool {

@@ -20,7 +20,7 @@ import UIKit
 
 extension UIViewController {
     /// Presents Alert with provided title and message
-    func presentSimpleAlert(title: String?, message: String?, onOkButtonTapped: (() -> Void)? = nil) {
+    func presentSimpleAlert(title: String?, message: String?, presentOn: UIViewController? = nil, onOkButtonTapped: (() -> Void)? = nil) {
         DispatchQueue.asyncSafeMain { [weak self] in
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
@@ -28,6 +28,11 @@ extension UIViewController {
                 onOkButtonTapped?()
             }
             alert.addAction(okAction)
+
+            if let presentOn = presentOn {
+                presentOn.present(alert, animated: true)
+                return
+            }
 
             self?.present(alert, animated: true, completion: nil)
         }

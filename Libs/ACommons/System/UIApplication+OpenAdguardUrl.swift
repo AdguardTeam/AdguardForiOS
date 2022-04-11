@@ -46,6 +46,13 @@ extension UIApplication {
         return UIApplication.adguardUrl + "?" + paramsString
     }
 
+    /// Returns AdGuard TDS url or nil if TDS url not valid
+    func adguardUrl(with queryItems: [URLQueryItem]) -> URL? {
+        guard var components = URLComponents(string: UIApplication.adguardUrl) else { return nil }
+        components.queryItems = queryItems
+        return components.url
+    }
+
     func openAppStoreToRateApp() {
         if let writeReviewURL = URL(string: Bundle.main.isPro ? UIApplication.rateAdGuardProAppUrl : UIApplication.rateAdGuardAppUrl) {
             UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)

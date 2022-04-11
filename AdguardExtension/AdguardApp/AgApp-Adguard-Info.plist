@@ -87,6 +87,8 @@
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>transfer-scheme-adguard-pro</string>
+		<string>transfer-scheme-adguard</string>
 		<string>youtube</string>
 		<string>adguard-vpn</string>
 	</array>

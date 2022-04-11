@@ -117,6 +117,7 @@ platform :ios do
     clean()
     prepare_key()
 
+    match(type: "adhoc", readonly: true)
     if !options[:ignore_match]
       match(type: "appstore")
     end

@@ -13,4 +13,10 @@ extension HttpRequestServiceProtocol {
         let config = RequestFactory.remoteMigrationConfig(appId)
         requestSender.send(requestConfig: config, completionHandler: completion)
     }
+
+    /// Returns in-app purchase receipt hash value
+    func getInAppPurchaseReceiptHash(_ appId: String, inAppPurchaseBase64Receipt: String, completion: @escaping (_ result: Result<String, Error>) -> Void) {
+        let config = RequestFactory.inAppPurchaseReceiptHashConfig(appId, inAppPurchaseBase64Receipt: inAppPurchaseBase64Receipt)
+        requestSender.send(requestConfig: config, completionHandler: completion)
+    }
 }

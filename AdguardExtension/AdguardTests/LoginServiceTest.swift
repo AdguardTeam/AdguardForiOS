@@ -200,7 +200,7 @@ class LoginServiceTest: XCTestCase {
             expectation.fulfill()
         }
 
-        parser.statusResults = [(false, Date(timeIntervalSinceNow: -1), nil), (false, Date(timeIntervalSinceNow: -1), nil)]
+        parser.statusResults = [(false, Date(timeIntervalSinceNow: -1), nil, nil), (false, Date(timeIntervalSinceNow: -1), nil, nil)]
 
         loginService.checkStatus(attributionRecords: "records") { (error) in
         }
@@ -276,11 +276,11 @@ class KeychainMock: KeychainServiceProtocol {
 
 class ParserMock: LoginResponseParser {
 
-    var statusResults: [(premium: Bool, expirationDate: Date?, NSError?)] = [(true, nil, nil)]
+    var statusResults: [(premium: Bool, expirationDate: Date?, licenseKey: String?, NSError?)] = [(true, nil, nil, nil)]
     var loginResult: (loggedIn: Bool, premium: Bool, expirationDate: Date?, licenseKey: String?, NSError?) = (true, true, nil, nil, nil)
     var currentStatusResultIndex = 0
 
-    override func processStatusResponse(data: Data) -> (premium: Bool, expirationDate: Date?, NSError?) {
+    override func processStatusResponse(data: Data) -> (premium: Bool, expirationDate: Date?, licenseKey: String?, NSError?) {
 
         let result = statusResults[currentStatusResultIndex]
         currentStatusResultIndex += 1;
