@@ -77,19 +77,24 @@ final class RemoteMigrationDialog : BottomAlertController {
         httpRequestService.getInAppPurchaseReceiptHash(appId, inAppPurchaseBase64Receipt: receipt) { result in
             DispatchQueue.main.async { [weak self] in
                 self?.acceptButton.stopIndicator()
-                self?.processRequest(appId: appId, buildVersion: buildVersion, result: result)
+                self?.processInAppPurchaseRespond(appId: appId, buildVersion: buildVersion, result: result)
             }
         }
     }
 
     private func initRemoteMigrationWithLicenseKey(appId: String, buildVersion: String) {
-        guard let licenseKey = purchaseService.licenseKey,
-              let url = getTDSUrl(with: appId, buildVersion, licenseKey) else {
-            DDLogError("(RemoteMigrationDialog) - Missing TDS url for license key purchase migration")
-            return
+        acceptButton.startIndicator()
+        if let licenseKey = purchaseService.licenseKey {
+            acceptButton.stopIndicator()
+            prepareForPresentLicenseMigration(appId: appId, buildVersion: buildVersion, licenseKey: licenseKey)
+        } else {
+            purchaseService.checkLicenseStatus { error in
+                DispatchQueue.main.async { [weak self] in
+                    self?.acceptButton.stopIndicator()
+                    self?.processLicenseStatus(appId, buildVersion, error)
+                }
+            }
         }
-
-        prepareForPresent(url: url)
     }
 
     private func initRemoteMigrationWithoutLicenseKey(appId: String, buildVersion: String) {
@@ -101,7 +106,7 @@ final class RemoteMigrationDialog : BottomAlertController {
         prepareForPresent(url: url)
     }
 
-    private func processRequest(appId: String, buildVersion: String, result: Result<String, Error>) {
+    private func processInAppPurchaseRespond(appId: String, buildVersion: String, result: Result<String, Error>) {
         switch result {
             case .success(let hash):
                 DDLogInfo("(RemoteMigrationDialog) - Successfully get in-app purchase receipt hash value from our backend")
@@ -110,6 +115,32 @@ final class RemoteMigrationDialog : BottomAlertController {
                 DDLogError("(RemoteMigrationDialog) - Failure to get in-app purchase receipt hash value from our backend. Error: \(error)")
                 showUnknownErrorAlert()
         }
+    }
+
+    private func processLicenseStatus(_ appId: String, _ buildVersion: String, _ error: Error?) {
+        if let error = error {
+            DDLogError("(RemoteMigrationDialog) - On checking license status error occurred: \(error)")
+            showUnknownErrorAlert()
+            return
+        }
+
+        guard let licenseKey = purchaseService.licenseKey else {
+            DDLogError("(RemoteMigrationDialog) - Missing license key")
+            showUnknownErrorAlert()
+            return
+        }
+
+        prepareForPresentLicenseMigration(appId: appId, buildVersion: buildVersion, licenseKey: licenseKey)
+    }
+
+    private func prepareForPresentLicenseMigration(appId: String, buildVersion: String, licenseKey: String) {
+        guard let url = getTDSUrl(with: appId, buildVersion, licenseKey) else {
+            DDLogError("(RemoteMigrationDialog) - Missing TDS url for license key purchase migration")
+            showUnknownErrorAlert()
+            return
+        }
+
+        prepareForPresent(url: url)
     }
 
     private func processReceiptHash(appId: String, buildVersion: String, hash: String) {
