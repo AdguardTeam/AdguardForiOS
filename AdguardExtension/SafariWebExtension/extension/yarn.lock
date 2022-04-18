@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@adguard/assistant/-/assistant-4.3.51.tgz#836ae2d1abf6334e091ba509d12a1f2c23ccac2e"
   integrity sha512-LS01LaahRnjcdjYczUu7nEpWW27t8TSP22J4om2dXyWHvl3HkYRfHkJ8kyuuwGMzE0l3bPLs2uT0lWYYq/LRTQ==
 
-"@adguard/scriptlets@^1.6.8":
-  version "1.6.8"
-  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.6.8.tgz#9eb3b6a62b774ee5d08768549c177ed2225ad82b"
-  integrity sha512-8UcxXc3YifqBdUJzlXVnrK/gVJbTZN7jpFydisAOwFas/C+sE+AffQtfzA+hc+4gtXddw3w/qMK50uuaLwElXg==
+"@adguard/scriptlets@^1.4.4":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.4.4.tgz#959cef45458ec01e7d89360a90b0e9bd31db20da"
+  integrity sha512-ZH4yzIAqlTA4HNtZQHipPbRmXWcNBtgKP/N1GbKe2hjskPc742iA0AHn01ko0rfcUe4tmT6Ua0IHKJKHpymLng==
   dependencies:
     "@babel/runtime" "^7.7.2"
     js-yaml "^3.13.1"
@@ -20,22 +20,25 @@
   resolved "https://registry.yarnpkg.com/@adguard/translate/-/translate-0.2.3.tgz#f30ef9000a3073ea0c24860cd0bf685b16de063b"
   integrity sha512-I0XcTSKrrRryD1PGd8kPKHB5SIY45+gTEAMqhpo2lDyUNMkW9MdhrNeAuoejJ+BuqU2TT+jK7KCNe33r7IsSjw==
 
-"@adguard/tsurlfilter@^0.7.76":
-  version "0.7.76"
-  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-0.7.76.tgz#1aef34feafda3f51119531e8daf54b82d0e663a0"
-  integrity sha512-HFHs/AdWRcYfIcwrkt7C+7d08G3X/THSB0NscDbnUKNCrug/CJZ6oDYjx/VpmP8LLcwcP/XOg/kUtXOS1vZUNw==
+"@adguard/tsurlfilter@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-0.7.1.tgz#42b4903be2a3f3415dea5de308b6c49c42e527d8"
+  integrity sha512-vTgCKMoQWbiQsC3lIUzL3Yx/PL3pyHhUIzLlSWjokqRaI0b0/3nwN+SbPvWS7V0qTJSVMF3+oGjGFFzx6ZMrcA==
   dependencies:
-    "@adguard/scriptlets" "^1.6.8"
-    extended-css "git+https://github.com/AdguardTeam/ExtendedCss.git#v1.3.14"
+    "@adguard/scriptlets" "^1.4.4"
+    "@types/ip6addr" "^0.2.3"
+    "@types/netmask" "^1.0.30"
+    "@types/punycode" "^2.1.0"
+    consola "^2.12.2"
+    extended-css "git+https://github.com/AdguardTeam/ExtendedCss.git#v1.3.13"
     ip6addr "^0.2.3"
     is-cidr "^4.0.2"
     is-ip "^3.1.0"
     lru_map "^0.4.1"
     netmask "^2.0.2"
     punycode "^2.1.1"
-    text-encoding "git+https://github.com/AdguardTeam/text-encoding.git#v0.7.2"
+    text-encoding "git+https://github.com/AdguardTeam/text-encoding.git#v0.7.1"
     tldts "^5.6.45"
-    webextension-polyfill "^0.8.0"
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"
@@ -1624,6 +1627,11 @@
   resolved "https://registry.yarnpkg.com/@types/html-minifier-terser/-/html-minifier-terser-5.1.2.tgz#693b316ad323ea97eed6b38ed1a3cc02b1672b57"
   integrity sha512-h4lTMgMJctJybDp8CQrxTUiiYmedihHWkjnF/8Pxseu2S6Nlfcy8kwboQ8yejh456rP2yWoEVm1sS/FVsfM48w==
 
+"@types/ip6addr@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@types/ip6addr/-/ip6addr-0.2.3.tgz#9318f51591d76d20222ebe407a2323fccdcc6e7c"
+  integrity sha512-oe7hzc+P9DU6+gql8+bLKuUf4WL4aakyCSXZMZq2cjhhGK75qYwH1zJ4s94XOlnb4cAhrGKwnbrmMBaqDK8+Ww==
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.3.tgz#4ba8ddb720221f432e443bd5f9117fd22cfd4762"
@@ -1684,6 +1692,11 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.4.tgz#f0ec25dbf2f0e4b18647313ac031134ca5b24b21"
   integrity sha512-1z8k4wzFnNjVK/tlxvrWuK5WMt6mydWWP7+zvH5eFep4oj+UkrfiJTRtjCeBXNpwaA/FYqqtb4/QS4ianFpIRA==
 
+"@types/netmask@^1.0.30":
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/@types/netmask/-/netmask-1.0.30.tgz#b68005e3e3c19f517ced4610bb69dce2e0c5babb"
+  integrity sha512-Kl1xAICLv1Y7/WsNXkPKldRMz3QmXUYMIzr3rMXnIBDy9c4/sYG7V6P6u7Ja3w+uNtNQrRudJduqVoYX/DxfZg==
+
 "@types/node@*":
   version "15.12.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.4.tgz#e1cf817d70a1e118e81922c4ff6683ce9d422e26"
@@ -1703,6 +1716,11 @@
   version "15.7.4"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
+
+"@types/punycode@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@types/punycode/-/punycode-2.1.0.tgz#89e4f3d09b3f92e87a80505af19be7e0c31d4e83"
+  integrity sha512-PG5aLpW6PJOeV2fHRslP4IOMWn+G+Uq8CfnyJ+PDS8ndCbU+soO+fB3NKCKo0p/Jh2Y4aPaiQZsrOXFdzpcA6g==
 
 "@types/q@^1.5.1":
   version "1.5.5"
@@ -2675,6 +2693,11 @@ confusing-browser-globals@^1.0.10:
   resolved "https://registry.yarnpkg.com/confusing-browser-globals/-/confusing-browser-globals-1.0.10.tgz#30d1e7f3d1b882b25ec4933d1d1adac353d20a59"
   integrity sha512-gNld/3lySHwuhaVluJUKLePYirM3QNCKzVxqAdhJII9/WXKVX5PURzMVJspS1jTslSqjeuG4KMVTSouit5YPHA==
 
+consola@^2.12.2:
+  version "2.15.3"
+  resolved "https://registry.yarnpkg.com/consola/-/consola-2.15.3.tgz#2e11f98d6a4be71ff72e0bdf07bd23e12cb61550"
+  integrity sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==
+
 convert-source-map@^1.4.0, convert-source-map@^1.6.0, convert-source-map@^1.7.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.8.0.tgz#f3373c32d21b4d780dd8004514684fb791ca4369"
@@ -3490,9 +3513,9 @@ expect@^27.0.6:
     jest-message-util "^27.0.6"
     jest-regex-util "^27.0.6"
 
-"extended-css@git+https://github.com/AdguardTeam/ExtendedCss.git#v1.3.14":
-  version "1.3.14"
-  resolved "git+https://github.com/AdguardTeam/ExtendedCss.git#e8e2b1d1a732d3043b2227b4bd5511300b33ea3d"
+"extended-css@git+https://github.com/AdguardTeam/ExtendedCss.git#v1.3.13":
+  version "1.3.13"
+  resolved "git+https://github.com/AdguardTeam/ExtendedCss.git#66c6c9a390f53325876e54e3de486338b2535a2c"
 
 "extended-css@https://github.com/AdguardTeam/ExtendedCss":
   version "1.3.12"
@@ -6641,9 +6664,9 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
-"text-encoding@git+https://github.com/AdguardTeam/text-encoding.git#v0.7.2":
-  version "0.7.2"
-  resolved "git+https://github.com/AdguardTeam/text-encoding.git#4268d6b7dc0e15f57134545ae1c8c59e9c5ced70"
+"text-encoding@git+https://github.com/AdguardTeam/text-encoding.git#v0.7.1":
+  version "0.7.0"
+  resolved "git+https://github.com/AdguardTeam/text-encoding.git#80dbd7df2b17858e8e9e2da00e9134d4ca63d8ad"
 
 text-table@^0.2.0:
   version "0.2.0"
