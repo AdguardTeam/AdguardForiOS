@@ -26,15 +26,6 @@ final class InAppPurchaseReceiptHashRequest : RequestProtocol {
             "receipt": inAppPurchaseBase64Receipt,
         ]
 
-        let signatureConstructor = SignatureConstructor()
-        do {
-            let signature = try signatureConstructor.getSignature(items: queryItems)
-            queryItems["signature"] = signature
-        } catch {
-            DDLogError("(InAppPurchaseReceiptHashRequest) - Failed to get signature, error: \(error)")
-            return nil
-        }
-
         if let url = components.url,
            let httpBody = queryItems.percentEncoded() {
             var request = URLRequest(url: url)

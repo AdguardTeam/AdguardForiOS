@@ -57,4 +57,24 @@ extension Bundle {
 
     /// Flag meaning that this app belongs to AdGuard Software Limited developer account
     var isAslApp: Bool { Bundle.main.bundleIdentifier == "com.adguard.AdGuardApp" }
+
+
+    /// Returns name of current context.
+    /// If current context is extension - returns `ADG_EXT`
+    /// If current context is app - returns `ADG_APP`
+    var contextName: String {
+        if isExtensionContext {
+            return "ADG_EXT"
+        }
+        return "ADG_APP"
+    }
+
+    /// Returns true if current context is Extension
+    var isExtensionContext: Bool {
+        #if APP_EXTENSION
+            return true
+        #else
+            return false
+        #endif
+    }
 }

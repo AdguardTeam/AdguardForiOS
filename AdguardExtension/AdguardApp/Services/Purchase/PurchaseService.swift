@@ -77,9 +77,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     private let APP_ID_PARAM = "app_id"
     private let APP_VERSION_PARAM = "app_version"
     private let APP_NAME_PARAM = "app_name"
-    private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com/api/1.0/ios_validate_receipt"
-    private let VALIDATE_NON_CONSUMABLE_FREE_RECEIPT_URL = "https://testmobile.adtidy.org/api/1.0/ios_validate_receipt" // FIXME replace with the real URL when it's ready
-
+    private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com//api/2.0/ios_validate_receipt/\(Bundle.main.contextName)"
     // premium values
     private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
     private let PREMIUM_STATUS_FREE = "FREE"
@@ -316,10 +314,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         }
         """
 
-        // The url to validate the receipt is different for different targets
-        let backendUrl = Bundle.main.isAslApp ? VALIDATE_NON_CONSUMABLE_FREE_RECEIPT_URL : VALIDATE_RECEIPT_URL
-        guard let url = URL(string: backendUrl) else  {
-
+        guard let url = URL(string: VALIDATE_RECEIPT_URL) else  {
             DDLogError("(PurchaseService) validateReceipt error. Can not make URL from String \(VALIDATE_RECEIPT_URL)")
             return
         }

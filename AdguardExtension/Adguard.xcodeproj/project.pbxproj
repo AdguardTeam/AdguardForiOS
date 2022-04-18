@@ -374,12 +374,10 @@
 		336FA17ABC6FE00FAEE36169 /* RemoteMigrationOpenUrlInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD3F4286F34380700197 /* RemoteMigrationOpenUrlInfo.swift */; };
 		336FA1824F0922F0D89AB510 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FA1C513658B9551CE4E56 /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
-		336FA210497F5E391D837816 /* SignatureConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */; };
 		336FA212B632E84AE9519E22 /* InAppPurchaseReceiptHashParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA459C44D15466CD0DC8E /* InAppPurchaseReceiptHashParser.swift */; };
 		336FA24287C5B8C97EB461A5 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FA2637797399BEF224627 /* InAppPurchaseReceiptHashRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAF2DAB08991B97469388 /* InAppPurchaseReceiptHashRequest.swift */; };
 		336FA28B765FFD115941BC29 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
-		336FA29997B340E6A75D8D54 /* SignatureConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */; };
 		336FA2D5B05A27DDFA8320D3 /* OpenUrlInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAFB08A5C3E15F180E7F2 /* OpenUrlInfo.swift */; };
 		336FA2EA3A65DC4129E6891C /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA798A2A44B9C00BFDC38 /* RemoteMigrationDialog.swift */; };
 		336FA30C95C5A839A0600825 /* RemoteMigrationOpenUrlInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD3F4286F34380700197 /* RemoteMigrationOpenUrlInfo.swift */; };
@@ -405,12 +403,9 @@
 		336FA69C52A731B5F7AD61B0 /* InAppPurchaseReceiptHashParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA459C44D15466CD0DC8E /* InAppPurchaseReceiptHashParser.swift */; };
 		336FA7122C152BF9778E43AA /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FA71FB3A4F7B22E62DC9E /* InAppPurchaseReceiptHashParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA459C44D15466CD0DC8E /* InAppPurchaseReceiptHashParser.swift */; };
-		336FA744B6F095C9DFD03065 /* SignatureConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */; };
 		336FA7A14A62AB50DB3F39B0 /* InAppPurchaseReceiptHashParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA459C44D15466CD0DC8E /* InAppPurchaseReceiptHashParser.swift */; };
 		336FA7C44F9CC33047F6A427 /* InAppPurchaseReceiptHashParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA459C44D15466CD0DC8E /* InAppPurchaseReceiptHashParser.swift */; };
-		336FA7D3710926F9F098E3B4 /* SignatureConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */; };
 		336FA7DD700F1A78D3584B48 /* OpenUrlInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAFB08A5C3E15F180E7F2 /* OpenUrlInfo.swift */; };
-		336FA815FC5090BD9EF8F47A /* SignatureConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */; };
 		336FA858D4DC23A43D84E4E9 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FA859E781483BC78FF099 /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEE1744F0D0D8DC23F6F /* AdGuardProFoundDialog.swift */; };
 		336FA85DF44F68482B3F840D /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
@@ -421,10 +416,8 @@
 		336FA9546BF3529A417CD493 /* AdGuardProFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEE1744F0D0D8DC23F6F /* AdGuardProFoundDialog.swift */; };
 		336FA9B1EFA8C55794845AE4 /* RemoteMigrationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAE60668A3405353894A6 /* RemoteMigrationInfoView.swift */; };
 		336FA9FE4AC403FEE40A9364 /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
-		336FAA041127DBD610A4F74E /* SignatureConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */; };
 		336FAA2078B4A3689ED9DD32 /* RemoteMigrationRequestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */; };
 		336FAAAF6DE7BDD41A8BBFB8 /* AdGuardFoundDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAEEFFB5105B8EBCEB757 /* AdGuardFoundDialog.swift */; };
-		336FAABFC171B0CE681BBDBC /* SignatureConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */; };
 		336FAAE2FF6E4D822E5FCF38 /* InAppPurchaseReceiptHashRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAF2DAB08991B97469388 /* InAppPurchaseReceiptHashRequest.swift */; };
 		336FAB694C086D71BF1258D8 /* InAppPurchaseReceiptHashRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAF2DAB08991B97469388 /* InAppPurchaseReceiptHashRequest.swift */; };
 		336FAB6B3BE2B3ED131A1CED /* RemoteMigrationServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA0FDA8FBA63AEEF5294A /* RemoteMigrationServiceImpl.swift */; };
@@ -438,7 +431,6 @@
 		336FAC8BA941CE742A3E0D75 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */; };
 		336FAD3B3F8883DC05F02DD1 /* CanDeleteAppDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA3D5458BFE72AFA24FEC /* CanDeleteAppDialog.swift */; };
 		336FAD3E7CD479FD93C194EB /* InAppPurchaseReceiptHashRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAF2DAB08991B97469388 /* InAppPurchaseReceiptHashRequest.swift */; };
-		336FAD41DFEEAB69458BFD24 /* SignatureConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */; };
 		336FAD5243E159584F76BFC2 /* RemoteMigrationOpenUrlInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD3F4286F34380700197 /* RemoteMigrationOpenUrlInfo.swift */; };
 		336FAD63B08330A891F0474B /* InAppPurchaseReceiptHashParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA459C44D15466CD0DC8E /* InAppPurchaseReceiptHashParser.swift */; };
 		336FADA4C2354403E13A6CDB /* RemoteMigrationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA798A2A44B9C00BFDC38 /* RemoteMigrationDialog.swift */; };
@@ -455,9 +447,7 @@
 		336FAED3A8A14038DA17143E /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
 		336FAED6F21BA72FFB6394C9 /* InAppPurchaseReceiptHashParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA459C44D15466CD0DC8E /* InAppPurchaseReceiptHashParser.swift */; };
 		336FAF1FC2C15A491353DB1F /* RemoteMigrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */; };
-		336FAF42EA348E6BBCFE0459 /* SignatureConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */; };
 		336FAF481CB6FB0BE4F9B7F4 /* RemoteMigrationSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FAD278C4735EC7556A254 /* RemoteMigrationSerivce.swift */; };
-		336FAF8067549A37B3B0ED50 /* SignatureConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */; };
 		4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4020A90022C3C863009C188F /* MainNavigationController.swift */; };
 		494E0BBA26E7AF49005C21C4 /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
 		494E0BBB26E7AF4A005C21C4 /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
@@ -4026,7 +4016,6 @@
 		336FA3D5458BFE72AFA24FEC /* CanDeleteAppDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanDeleteAppDialog.swift; sourceTree = "<group>"; };
 		336FA459C44D15466CD0DC8E /* InAppPurchaseReceiptHashParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppPurchaseReceiptHashParser.swift; sourceTree = "<group>"; };
 		336FA4CF26E895F47AB8FD73 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
-		336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureConstructor.swift; sourceTree = "<group>"; };
 		336FA798A2A44B9C00BFDC38 /* RemoteMigrationDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationDialog.swift; sourceTree = "<group>"; };
 		336FA8EFCF9B76E864B5773A /* RemoteMigrationRequestParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationRequestParser.swift; sourceTree = "<group>"; };
 		336FA939A6D8ECF818840903 /* RemoteMigrationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteMigrationRequest.swift; sourceTree = "<group>"; };
@@ -7649,7 +7638,6 @@
 				7EB2F95923F2C56200F9A544 /* HttpRequestService.swift */,
 				D07D343E2612207700213A5A /* HttpRequestServiceProtocol+sendFeedback.swift */,
 				336FABC45A3B418DBE68D1CE /* HttpRequestServiceProtocolRemoteMigrationExtension.swift */,
-				336FA6D40DE609EAA0F017B4 /* SignatureConstructor.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -10813,7 +10801,6 @@
 				336FA5841A871CE99CAB3301 /* OpenUrlInfo.swift in Sources */,
 				336FA69C52A731B5F7AD61B0 /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FABBA68FEDE84B0764298 /* InAppPurchaseReceiptHashRequest.swift in Sources */,
-				336FAF8067549A37B3B0ED50 /* SignatureConstructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10939,7 +10926,6 @@
 				336FABC3341ACC4A76EC1BE8 /* RemoteMigrationRequestParser.swift in Sources */,
 				336FA0F09E3062D412A6C5F8 /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FA2637797399BEF224627 /* InAppPurchaseReceiptHashRequest.swift in Sources */,
-				336FAD41DFEEAB69458BFD24 /* SignatureConstructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11335,7 +11321,6 @@
 				336FA6456B0E5BC0B376A15B /* OpenUrlInfo.swift in Sources */,
 				336FAD63B08330A891F0474B /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FAB694C086D71BF1258D8 /* InAppPurchaseReceiptHashRequest.swift in Sources */,
-				336FAA041127DBD610A4F74E /* SignatureConstructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11543,7 +11528,6 @@
 				336FA7DD700F1A78D3584B48 /* OpenUrlInfo.swift in Sources */,
 				336FA7C44F9CC33047F6A427 /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FA5CD3C1AE2EEF6B8964A /* InAppPurchaseReceiptHashRequest.swift in Sources */,
-				336FA744B6F095C9DFD03065 /* SignatureConstructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11797,7 +11781,6 @@
 				336FA28B765FFD115941BC29 /* RemoteMigrationRequestParser.swift in Sources */,
 				336FA71FB3A4F7B22E62DC9E /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FA3B0A912F61EAC070D6A /* InAppPurchaseReceiptHashRequest.swift in Sources */,
-				336FA815FC5090BD9EF8F47A /* SignatureConstructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12297,7 +12280,6 @@
 				336FA2D5B05A27DDFA8320D3 /* OpenUrlInfo.swift in Sources */,
 				336FA7A14A62AB50DB3F39B0 /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FAD3E7CD479FD93C194EB /* InAppPurchaseReceiptHashRequest.swift in Sources */,
-				336FAF42EA348E6BBCFE0459 /* SignatureConstructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12712,7 +12694,6 @@
 				336FA7122C152BF9778E43AA /* RemoteMigrationRequest.swift in Sources */,
 				336FA10F7418D383E0BF396F /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FA3BB043C4A7BF2FD1681 /* InAppPurchaseReceiptHashRequest.swift in Sources */,
-				336FA210497F5E391D837816 /* SignatureConstructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12838,7 +12819,6 @@
 				336FA61DF4C18F24DA7DF688 /* RemoteMigrationRequest.swift in Sources */,
 				336FA212B632E84AE9519E22 /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FAEC3327C6C2500F2F479 /* InAppPurchaseReceiptHashRequest.swift in Sources */,
-				336FAABFC171B0CE681BBDBC /* SignatureConstructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13571,7 +13551,6 @@
 				336FA4CB8A6358A5C045839C /* RemoteMigrationRequestParser.swift in Sources */,
 				336FAED6F21BA72FFB6394C9 /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FAAE2FF6E4D822E5FCF38 /* InAppPurchaseReceiptHashRequest.swift in Sources */,
-				336FA29997B340E6A75D8D54 /* SignatureConstructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13695,7 +13674,6 @@
 				336FA858D4DC23A43D84E4E9 /* RemoteMigrationRequestParser.swift in Sources */,
 				336FABD9BA5D8F3C700210C0 /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FA4B27D072A17268610DD /* InAppPurchaseReceiptHashRequest.swift in Sources */,
-				336FA7D3710926F9F098E3B4 /* SignatureConstructor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
