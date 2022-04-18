@@ -76,7 +76,7 @@ protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
     /**
      checks the status of adguard license
      */
-    func checkLicenseStatus()
+    func checkLicenseStatus(completion: ((_ error: Error?) -> Void)?)
 
     /**
      deletes all login information
