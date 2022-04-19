@@ -117,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if application.applicationState != .background {
             migrationService.migrateIfNeeded()
         }
-        purchaseService.checkLicenseStatus()
+        purchaseService.checkLicenseStatus(completion: nil)
 
         activateWithOpenUrl = false
 
@@ -332,7 +332,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func backgroundFetch() -> UIBackgroundFetchResult {
         addPurchaseStatusObserver()
-        purchaseService.checkLicenseStatus()
+        purchaseService.checkLicenseStatus(completion: nil)
 
         checkRemoteMigrationInBackgroundFetch()
 

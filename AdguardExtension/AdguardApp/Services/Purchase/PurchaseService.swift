@@ -77,7 +77,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     private let APP_ID_PARAM = "app_id"
     private let APP_VERSION_PARAM = "app_version"
     private let APP_NAME_PARAM = "app_name"
-    private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com//api/2.0/ios_validate_receipt/\(Bundle.main.contextName)"
+    private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com/api/2.0/ios_validate_receipt/\(Bundle.main.backendBundleId)"
     // premium values
     private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
     private let PREMIUM_STATUS_FREE = "FREE"
@@ -239,9 +239,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         requestProducts()
     }
 
-    func checkLicenseStatus() {
+    func checkLicenseStatus(completion: ((_ error: Error?) -> Void)?) {
         checkStatusInternal { [weak self] error in
             self?.processLoginResult(error)
+            completion?(error)
         }
     }
 

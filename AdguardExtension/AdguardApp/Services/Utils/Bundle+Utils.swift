@@ -59,22 +59,8 @@ extension Bundle {
     var isAslApp: Bool { Bundle.main.bundleIdentifier == "com.adguard.AdGuardApp" }
 
 
-    /// Returns name of current context.
-    /// If current context is extension - returns `ADG_EXT`
-    /// If current context is app - returns `ADG_APP`
-    var contextName: String {
-        if isExtensionContext {
-            return "ADG_EXT"
-        }
-        return "ADG_APP"
-    }
-
-    /// Returns true if current context is Extension
-    var isExtensionContext: Bool {
-        #if APP_EXTENSION
-            return true
-        #else
-            return false
-        #endif
-    }
+    /// Returns bundle id for backend.
+    /// Use it only for backend requests
+    /// TODO: Need some BackendDomain service in future
+    var backendBundleId: String { isAslApp ? "ADG_APP" : "ADG_EXT" }
 }
