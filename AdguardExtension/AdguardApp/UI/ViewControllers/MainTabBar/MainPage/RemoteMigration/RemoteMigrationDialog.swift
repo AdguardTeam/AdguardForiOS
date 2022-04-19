@@ -121,7 +121,7 @@ final class RemoteMigrationDialog : BottomAlertController {
 
     private func processLicenseStatus(_ appId: String, _ buildVersion: String, _ error: Error?) {
         if let error = error {
-            DDLogError("(RemoteMigrationDialog) - On checking license status error occurred: \(error)")
+            DDLogError("(RemoteMigrationDialog) - Error occurred on checking license status : \(error)")
             showUnknownErrorAlert()
             return
         }
