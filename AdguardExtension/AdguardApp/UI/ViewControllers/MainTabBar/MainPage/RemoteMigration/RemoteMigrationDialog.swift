@@ -85,9 +85,11 @@ final class RemoteMigrationDialog : BottomAlertController {
     private func initRemoteMigrationWithLicenseKey(appId: String, buildVersion: String) {
         acceptButton.startIndicator()
         if let licenseKey = purchaseService.licenseKey {
+            DDLogInfo("(RemoteMigrationDialog) - Successfully get license key for migration with license key")
             acceptButton.stopIndicator()
             prepareForPresentLicenseMigration(appId: appId, buildVersion: buildVersion, licenseKey: licenseKey)
         } else {
+            DDLogWarn("(RemoteMigrationDialog) - License key is missing for migration with license key; Starts checking license from backend")
             purchaseService.checkLicenseStatus { error in
                 DispatchQueue.main.async { [weak self] in
                     self?.acceptButton.stopIndicator()
