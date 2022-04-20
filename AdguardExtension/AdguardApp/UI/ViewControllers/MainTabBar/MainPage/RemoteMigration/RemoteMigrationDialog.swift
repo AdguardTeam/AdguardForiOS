@@ -100,7 +100,8 @@ final class RemoteMigrationDialog : BottomAlertController {
     }
 
     private func initRemoteMigrationWithoutLicenseKey(appId: String, buildVersion: String) {
-        guard let url = getTDSUrl(with: appId, buildVersion, nil) else {
+        let licenseParameter = Bundle.main.isPro ? nil : "FREE"
+        guard let url = getTDSUrl(with: appId, buildVersion, licenseParameter) else {
             DDLogError("(RemoteMigrationDialog) - Missing TDS url for FREE or AdGuard Pro app migration")
             return
         }

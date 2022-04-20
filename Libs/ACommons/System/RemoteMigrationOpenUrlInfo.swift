@@ -17,14 +17,19 @@ struct RemoteMigrationOpenUrlInfo : OpenUrlInfo {
     }
 
     private func getURLQueryItems() -> [URLQueryItem] {
-        return [
+        var result = [
             URLQueryItem(name: "app", value: "ios"),
             URLQueryItem(name: "action", value: action),
             URLQueryItem(name: "from", value: from),
             URLQueryItem(name: "v", value: buildVersion),
             URLQueryItem(name: "app_id", value: appId),
             URLQueryItem(name: "app_type", value: appType),
-            URLQueryItem(name: "license", value: license ?? "null")
         ]
+
+        if let license = license {
+            result.append(URLQueryItem(name: "license", value: license))
+        }
+
+        return result
     }
 }
