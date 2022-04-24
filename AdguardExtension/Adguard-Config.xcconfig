@@ -27,6 +27,9 @@ ADGUARD_URL_SCHEME = adguard
 // URL scheme for receiving in app messages from different targets
 INN_APP_ADGUARD_URL_SCHEME = in-app-adguard-url-scheme
 
+// URL scheme for legacy app migration
+APP_TRANSFER_ADGUARD_URL_SCHEME = transfer-scheme-adguard
+
 // VPN Tunnel provider bundle identifier
 ADGUARD_TUNNEL_BUNDLE_ID = $(ADGUARD_BUNDLE_ID).tunnel
 

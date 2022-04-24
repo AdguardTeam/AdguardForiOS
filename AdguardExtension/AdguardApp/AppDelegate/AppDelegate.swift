@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let complexProtection: ComplexProtectionServiceProtocol
     private let themeService: ThemeServiceProtocol
     private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
+    private let remoteMigrationService: RemoteMigrationService
 
     // MARK: - Application init
 
@@ -96,6 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.themeService = ServiceLocator.shared.getService()!
         self.dnsProtection = ServiceLocator.shared.getService()!
         self.dnsConfigAssistant = ServiceLocator.shared.getService()!
+        self.remoteMigrationService = ServiceLocator.shared.getService()!
 
         super.init()
 
@@ -115,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if application.applicationState != .background {
             migrationService.migrateIfNeeded()
         }
-        purchaseService.checkLicenseStatus()
+        purchaseService.checkLicenseStatus(completion: nil)
 
         activateWithOpenUrl = false
 
@@ -126,6 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if application.applicationState != .background {
             purchaseService.checkPremiumStatusChanged()
+            checkRemoteMigration()
         }
 
         return true
@@ -329,7 +332,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func backgroundFetch() -> UIBackgroundFetchResult {
         addPurchaseStatusObserver()
-        purchaseService.checkLicenseStatus()
+        purchaseService.checkLicenseStatus(completion: nil)
+
+        checkRemoteMigrationInBackgroundFetch()
 
         func shouldUpdateFilters() -> Bool {
             if !resources.wifiOnlyUpdates {
@@ -391,14 +396,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        mainPageController.onReady = { [weak self] in
-            // request permission for user notifications posting
-            self?.userNotificationService.requestPermissions()
-
-            // Show rate app dialog when main page is initialized
-            self?.showRateAppDialogIfNedeed()
-        }
-
         guard let dnsLogContainerVC = getDnsLogContainerController() else {
             DDLogError("dnsLogContainerVC is nil")
             return
@@ -417,16 +414,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
         let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]
         userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
-    }
-
-    private func showRateAppDialogIfNedeed() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
-            guard let self = self else { return }
-            if self.rateService.shouldShowRateAppDialog {
-                AppDelegate.shared.presentRateAppController()
-                self.resources.rateAppShown = true
-            }
-        }
     }
 
     private func addPurchaseStatusObserver() {
@@ -547,6 +534,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
 
             DDLogInfo("(AppDelegate) - updateSafariProtectionMeta; Successfully reload CB")
+        }
+    }
+
+    private func checkRemoteMigration() {
+        // No needs to perform extra check if 'remote migration' status has been checked via background fetch
+        guard !Bundle.main.isAslApp,
+              !resources.backgroundFetchRemoteMigrationRequestResult else {
+            DDLogInfo("(AppDelegate) Remote migration check result has been received in background fetch earlier")
+            return
+        }
+
+        DDLogInfo("(AppDelegate) - Start checking if remote migration is needed")
+        remoteMigrationService.checkRemoteMigration { result in
+            DDLogInfo("(AppDelegate) - Remote migration check result = \(result)")
+        }
+    }
+
+    private func checkRemoteMigrationInBackgroundFetch() {
+        guard !Bundle.main.isAslApp else {
+            DDLogWarn("(AppDelegate) No need to check remote migration state. It is not old app")
+            return
+        }
+
+        remoteMigrationService.checkRemoteMigration { isNeedMigration in
+            self.resources.backgroundFetchRemoteMigrationRequestResult = isNeedMigration
+            guard isNeedMigration else {
+                DDLogDebug("(AppDelegate) - Do not post remote migration local push notification, no needs for remote migration")
+                return
+            }
+
+            DDLogDebug("(AppDelegate) - Start posting remote migration local push notification")
+            let title = String.localizedString("remote_migration_notification_title")
+            let body = String.localizedString("remote_migration_notification_body")
+            self.userNotificationService.postNotification(title: title, body: body, userInfo: nil)
         }
     }
 }

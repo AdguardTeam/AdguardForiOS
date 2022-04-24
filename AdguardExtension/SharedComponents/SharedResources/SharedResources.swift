@@ -352,6 +352,34 @@ extension AESharedResourcesProtocol {
         }
     }
 
+    var backgroundFetchRemoteMigrationRequestResult: Bool {
+        get {
+            sharedDefaults().bool(forKey: backgroundFetchRemoteMigrationRequestResultKey)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: backgroundFetchRemoteMigrationRequestResultKey)
+        }
+    }
+
+    /// Flag meaning that remote migration information dialog has been shown
+    var remoteMigrationDialogShown: Bool {
+        get {
+            sharedDefaults().bool(forKey: remoteMigrationDialogShownKey)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: remoteMigrationDialogShownKey)
+        }
+    }
+
+    var legacyAppDetectedDialogShown: Bool {
+        get {
+            sharedDefaults().bool(forKey: legacyAppDetectedDialogShownKey)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: legacyAppDetectedDialogShownKey)
+        }
+    }
+
     var isMigrationTo4_3Passed: Bool {
         get {
             return sharedDefaults().bool(forKey: migrationTo4_3PassedKey)
@@ -377,6 +405,9 @@ fileprivate extension AESharedResourcesProtocol {
     var advancedProtectionPermissionsGrantedKey: String { "advancedProtectionPermissionsGrantedKey" }
     var safariWebExtensionIsOnKey: String { "safariWebExtensionIsOnKey" }
     var whatsNewScreenShownKey: String { "whatsNewScreenShownKey" }
+    var backgroundFetchRemoteMigrationRequestResultKey: String { "backgroundFetchRemoteMigrationRequestResultKey" }
+    var remoteMigrationDialogShownKey: String { "remoteMigrationDialogShownKey" }
+    var legacyAppDetectedDialogShownKey: String { "legacyAppDetectedDialogShownKey" }
 
     // Migration keys
     var migrationTo4_3PassedKey: String { "isMigrationTo4_3PassedKey" }

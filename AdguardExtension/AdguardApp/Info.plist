@@ -78,6 +78,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>$(INN_APP_ADGUARD_URL_SCHEME)</string>
+				<string>$(APP_TRANSFER_ADGUARD_URL_SCHEME)</string>
 			</array>
 		</dict>
 	</array>

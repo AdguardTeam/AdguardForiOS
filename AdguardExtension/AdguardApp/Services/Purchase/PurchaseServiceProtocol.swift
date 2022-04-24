@@ -37,6 +37,9 @@ protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
      */
     var purchasedThroughSetapp: Bool {get}
 
+    /// Returns true if user purchase license through in-app purchases
+    var purchasedThroughInApp: Bool { get }
+
     /**
      returns true if premium expired. It works both for in-app purchases and for adguard licenses
      */
@@ -51,6 +54,9 @@ protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
      return array of products
      */
     var products: [Product] { get }
+
+    /// Return license key if it exists
+    var licenseKey: String? { get }
 
     /*  login on backend server and check license information
         the results will be posted through notification center
@@ -70,7 +76,7 @@ protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
     /**
      checks the status of adguard license
      */
-    func checkLicenseStatus()
+    func checkLicenseStatus(completion: ((_ error: Error?) -> Void)?)
 
     /**
      deletes all login information
@@ -81,6 +87,11 @@ protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
      requests an renewable or non-consumable subscription purchase
      */
     func requestPurchase(productId: String)
+
+    /**
+     requests a con-consumable free purchase
+     */
+    func requestNonConsumableFreePurchase()
 
     /**
      requests restore in-app purchases
@@ -95,5 +106,8 @@ protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
 
     /** generate URL for OAUTH */
     func generateAuthURL(state: String, socialProvider: SocialProvider) -> URL?
+
+    /// Return in app purchase receipt in base64 or nil if nothing was purchased
+    func getInAppPurchaseReceiptBase64() -> String?
 
 }

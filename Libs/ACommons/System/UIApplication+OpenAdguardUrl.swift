@@ -21,7 +21,7 @@ import Foundation
 extension UIApplication {
 
     static let adguardSigninURL = "https://my.adguard.com"
-    static let adguardUrl = "https://adguard.com/forward.html"
+    static let adguardUrl = "https://dev.adguard.com/forward.html"
     static let rateAdGuardAppUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
     static let rateAdGuardProAppUrl = "https://itunes.apple.com/app/id1126386264?action=write-review"
 
@@ -44,6 +44,13 @@ extension UIApplication {
         let paramsString = ABECRequest.createString(fromParameters: params)
 
         return UIApplication.adguardUrl + "?" + paramsString
+    }
+
+    /// Returns AdGuard TDS url or nil if TDS url not valid
+    func adguardUrl(with queryItems: [URLQueryItem]) -> URL? {
+        guard var components = URLComponents(string: UIApplication.adguardUrl) else { return nil }
+        components.queryItems = queryItems
+        return components.url
     }
 
     func openAppStoreToRateApp() {

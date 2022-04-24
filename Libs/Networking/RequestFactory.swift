@@ -31,4 +31,19 @@ public struct RequestFactory {
             parser: AdServicesAttributionRecordsParser()
         )
     }
+
+    /// Returns remote migration request config
+    static func remoteMigrationConfig(_ appId: String) -> RequestConfig<RemoteMigrationRequestParser> {
+        return RequestConfig<RemoteMigrationRequestParser>(
+            request: RemoteMigrationRequest(appId),
+            parser: RemoteMigrationRequestParser()
+        )
+    }
+
+    /// Returns in-app purchase receipt hash request config
+    static func inAppPurchaseReceiptHashConfig(_ appId: String, inAppPurchaseBase64Receipt: String) -> RequestConfig<InAppPurchaseReceiptHashParser> {
+        return RequestConfig<InAppPurchaseReceiptHashParser>(
+            request: InAppPurchaseReceiptHashRequest(appId: appId, inAppPurchaseBase64Receipt: inAppPurchaseBase64Receipt),
+            parser: InAppPurchaseReceiptHashParser())
+    }
 }

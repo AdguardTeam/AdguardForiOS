@@ -66,7 +66,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     // product id for alternate non-consumable in app purchase. We use it for rub or uah currency
     private let lifetimeAlternateProductID = "com.adguard.lifetimeAlternate"
 
-    private lazy var allProducts: Set<String> = { [annualSubscriptionProductID, monthlySubscriptionProductID, lifetimeProductID, lifetimeAlternateProductID] }()
+    // product id for 'free' non-consumable in app purchase. We use it for AdGuard Pro license migration
+    private let migrationProductID = "com.adguard.AdGuardApp.nonconsumable.free"
+
+    private lazy var allProducts: Set<String> = { [annualSubscriptionProductID, monthlySubscriptionProductID, lifetimeProductID, lifetimeAlternateProductID, migrationProductID] }()
 
     // ios_validate_receipt request
 
@@ -74,8 +77,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     private let APP_ID_PARAM = "app_id"
     private let APP_VERSION_PARAM = "app_version"
     private let APP_NAME_PARAM = "app_name"
-    private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com/api/1.0/ios_validate_receipt"
-
+    private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com/api/2.0/ios_validate_receipt/\(Bundle.main.backendBundleId)"
     // premium values
     private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
     private let PREMIUM_STATUS_FREE = "FREE"
@@ -110,16 +112,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     private var nonConsumableProduct: SKProduct?
     private var refreshRequest: SKReceiptRefreshRequest?
 
-    private var loginService: LoginServiceProtocol
+    private var freeLifeTimeSubscription: SKProduct? { _atomicFreeLifeTimeSubscription.wrappedValue }
+    @Atomic private var atomicFreeLifeTimeSubscription: SKProduct? = nil
 
-    private var purchasedThroughInApp: Bool {
-        get {
-            return resources.purchasedThroughInApp
-        }
-        set {
-            resources.purchasedThroughInApp = newValue
-        }
-    }
+    private var loginService: LoginServiceProtocol
 
     private var standardPeriod: Period = (unit: PurchasePeriod.day, numberOfUnits: 7)
 
@@ -135,7 +131,18 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     var purchasedThroughLogin: Bool { loginService.loggedIn }
 
+    var licenseKey: String? { loginService.licenseKey }
+
     var purchasedThroughSetapp: Bool { resources.purchasedThroughSetapp }
+
+    var purchasedThroughInApp: Bool {
+        get {
+            return resources.purchasedThroughInApp
+        }
+        set {
+            resources.purchasedThroughInApp = newValue
+        }
+    }
 
     var standardProduct: Product? {
         let pr = products.first(where: { $0.productId == annualSubscriptionProductID })
@@ -201,6 +208,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         }
     }
 
+    func requestNonConsumableFreePurchase() {
+        requestPurchase(product: freeLifeTimeSubscription)
+    }
+
     func reset(completion: @escaping () -> Void) {
         loginService.reset(completion: completion)
     }
@@ -228,9 +239,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         requestProducts()
     }
 
-    func checkLicenseStatus() {
+    func checkLicenseStatus(completion: ((_ error: Error?) -> Void)?) {
         checkStatusInternal { [weak self] error in
             self?.processLoginResult(error)
+            completion?(error)
         }
     }
 
@@ -282,17 +294,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     func validateReceipt(onComplete complete:@escaping ((Error?)->Void)){
         // get receipt
-        guard
-            let receiptUrlStr = Bundle.main.appStoreReceiptURL,
-            FileManager.default.fileExists(atPath: receiptUrlStr.path),
-            let data = try? Data(contentsOf: receiptUrlStr)
-        else {
+        guard let base64Str = getInAppPurchaseReceiptBase64() else {
             complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: nil))
             return
         }
-
-        let base64Str = data.base64EncodedString()
-
         // post receipt to our backend
 
         guard let appId = keychain.appId else {
@@ -311,7 +316,6 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         """
 
         guard let url = URL(string: VALIDATE_RECEIPT_URL) else  {
-
             DDLogError("(PurchaseService) validateReceipt error. Can not make URL from String \(VALIDATE_RECEIPT_URL)")
             return
         }
@@ -409,6 +413,14 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         return url
     }
 
+    func getInAppPurchaseReceiptBase64() -> String? {
+        guard let receiptUrlStr = Bundle.main.appStoreReceiptURL,
+              FileManager.default.fileExists(atPath: receiptUrlStr.path),
+              let data = try? Data(contentsOf: receiptUrlStr) else { return nil }
+
+        return data.base64EncodedString()
+    }
+
     // MARK: - private methods
     // MARK: storekit
     private func setObserver() {
@@ -484,17 +496,25 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         }
 
         if purchased || restored {
-            validateReceipt { [weak self](error) in
-                guard let sSelf = self else { return }
+            validateReceipt { [weak self] error in
+                guard let self = self else { return }
 
-                if error == nil && sSelf.purchasedThroughInApp {
-                    let result = purchased ? PurchaseAssistant.kPSNotificationPurchaseSuccess : PurchaseAssistant.kPSNotificationRestorePurchaseSuccess
-
-                    sSelf.postNotification(result)
+                if let error = error {
+                    let pushType = purchased ? PurchaseAssistant.kPSNotificationPurchaseFailure : PurchaseAssistant.kPSNotificationRestorePurchaseFailure
+                    self.postNotification(pushType)
+                    DDLogError("(PurchaseService) - Failed to validate in-app purchase receipt in purchasing or restoring phase. Error: \(error)")
+                    return
                 }
 
-                if error == nil && !sSelf.purchasedThroughInApp {
-                    sSelf.postNotification(PurchaseAssistant.kPSNotificationRestorePurchaseNothingToRestore)
+                if self.purchasedThroughInApp {
+                    let result = purchased ? PurchaseAssistant.kPSNotificationPurchaseSuccess : PurchaseAssistant.kPSNotificationRestorePurchaseSuccess
+                    self.postNotification(result)
+                    DDLogInfo("(PurchaseService) - Successfully validate in-app purchase in purchasing or restoring phase")
+                }
+
+                if !self.purchasedThroughInApp {
+                    self.postNotification(PurchaseAssistant.kPSNotificationRestorePurchaseNothingToRestore)
+                    DDLogInfo("(PurchaseService) - No in-app purchase for restoring")
                 }
             }
         }
@@ -519,6 +539,8 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                 if isDiscountCurrencyLocale(locale: product.priceLocale.identifier) {
                     _atomicProductsToPurchase.mutate { $0.append(product) }
                 }
+            case migrationProductID:
+                _atomicFreeLifeTimeSubscription.mutate { $0 = product }
             default:
                 DDLogError("(PurchaseService) productsRequest didReceive error. Unknown productId \(product.productIdentifier)")
                 assertionFailure("Unknown productId \(product.productIdentifier)")
@@ -626,7 +648,9 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                         let date = Date(timeIntervalSince1970: expirationDate! / 1000)
                         resources.sharedDefaults().set(date, forKey: AEDefaultsRenewableSubscriptionExpirationDate)
                     }
-                case lifetimeProductID, lifetimeAlternateProductID:
+
+                    // FIXME check this part when backend is ready
+                case lifetimeProductID, lifetimeAlternateProductID, migrationProductID:
                     resources.sharedDefaults().set(true, forKey: AEDefaultsNonConsumableItemPurchased)
 
                 default:

@@ -44,7 +44,7 @@ class LoginResponseParserTest: XCTestCase {
 
         guard let data = responseString.data(using: .utf8) else { return XCTFail() }
 
-        let (premium, _, error) = parser.processStatusResponse(data: data)
+        let (premium, _, _, error) = parser.processStatusResponse(data: data)
 
         XCTAssertFalse(premium)
         XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)

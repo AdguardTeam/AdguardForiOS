@@ -1207,3 +1207,245 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Something went wrong";
+
+/*
+ (AppDelegate) Remote migration local push notification title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_notification_title" = "Obsolete AdGuard app";
+
+/*
+ (AppDelegate) Remote migration local push notification body
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_notification_body" = "Please install our new app. It’s free.";
+
+/*
+ (RemoteMigrationDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_title" = "This app is obsolete";
+
+/*
+ (RemoteMigrationDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+ */
+"remote_migration_dialog_description" = "It will no longer receive updates. Please replace it with our new free app.";
+
+/*
+ (RemoteMigrationDialog) accept button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_accept_button_title" = "Proceed";
+
+/*
+ (RemoteMigrationDialog) details button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_details_button_title" = "Why is it happening?";
+
+/*
+ (AdGuardProFoundDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_title" = "We detected AdGuard Pro on this device";
+
+/*
+ (AdGuardProFoundDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_description" = "We’ve replaced it with a new app. Please transfer your AdGuard Pro license to it. Then you may safely delete the old app.";
+
+/*
+ (AdGuardProFoundDialog) primary button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_primary_button_title" = "Transfer license";
+
+/*
+ (AdGuardFoundDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_title" = "An old AdGuard app is detected on this device";
+
+/*
+ (AdGuardFoundDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_description" = "If you have a paid subscription, please transfer the license to the new app. Then you may delete the old app.";
+
+/*
+ (AdGuardFoundDialog) primary button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_primary_button_title" = "I have a paid subscription";
+
+/*
+ (AdGuardFoundDialog) neutral button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_neutral_button_title" = "No paid subscription";
+
+/*
+ (CanDeleteAppDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"can_delete_app_dialog_title" = "You can delete the old AdGuard app.";
+
+/*
+ (CanDeleteAppDialog) button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"can_delete_app_dialog_button_title" = "Ok";
+
+/*
+ (LicenseWasBindedDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_title" = "Have you bound the license to your AdGuard account?";
+
+/*
+ (LicenseWasBindedDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_description" = "You need to create an AdGuard account and bind your license to it. Open the old app and follow the instructions there.";
+
+/*
+ (LicenseWasBindedDialog) button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_button_title" = "It’s done. I’m ready to log in";
+
+/*
+ (RemoteMigrationInfoView) Old app detected message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_old_app_detected" = "An old AdGuard app is detected on this device. %@";
+
+/*
+ (RemoteMigrationInfoView) Learn more message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_learn_more" = "<a href=%@>Learn more</a>";
+
+/*
+ (RemoteMigrationInfoView) Delete old app suggestion
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_delete_suggestion" = "Would you like to delete it?";
+
+/*
+ (RemoteMigrationInfoView) Need migration message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_need_migration" = "Please replace this obsolete app with our new app. <a href=%@>Why?</a>";

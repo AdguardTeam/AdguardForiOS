@@ -29,6 +29,9 @@ ADGUARD_URL_SCHEME = adguard-pro
 // URL scheme for receiving in app messages from different targets
 INN_APP_ADGUARD_URL_SCHEME = in-app-adguard-pro-url-scheme
 
+// URL scheme for legacy app migration
+APP_TRANSFER_ADGUARD_URL_SCHEME = transfer-scheme-adguard-pro
+
 #include "project.xcconfig"
 #include "../macro-definitions.xcconfig"
 

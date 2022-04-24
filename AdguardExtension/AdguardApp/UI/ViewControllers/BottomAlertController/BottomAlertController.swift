@@ -121,6 +121,19 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         processPanGesture(sender)
     }
 
+    func presentLoadingAlertAbovePresented() {
+        let alert = AppDelegate.shared.getLoadingAlert()
+        present(alert, animated: true)
+    }
+
+    func dismissLoadingAlertIfNeeded(completion: (() -> Void)?) {
+        guard let alert = presentedViewController as? UIAlertController else {
+            completion?()
+            return
+        }
+        dismiss(animated: true, completion: completion)
+    }
+
     // MARK: - Private methods
 
     private func makeRoundCorners(){

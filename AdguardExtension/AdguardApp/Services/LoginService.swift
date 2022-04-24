@@ -31,6 +31,8 @@ protocol LoginServiceProtocol {
 
     var hasActiveLicense: Bool { get }
 
+    var licenseKey: String? { get }
+
     func checkStatus(attributionRecords: String?, callback: @escaping (Error?)->Void )
     func logout()->Bool
 
@@ -104,6 +106,8 @@ final class LoginService: LoginServiceProtocol {
 
     var active: Bool { resources.licenseIsActive }
 
+    var licenseKey: String? = nil
+
     // errors
     static let loginErrorDomain = "loginErrorDomain"
 
@@ -124,6 +128,7 @@ final class LoginService: LoginServiceProtocol {
     static let errorDescription = "error_description"
 
     static let APP_NAME_VALUE =  Bundle.main.isPro ? "adguard_ios_pro" : "adguard_ios"
+    static let APP_TYPE_VALUE = Bundle.main.isPro ? "ADGUARD_FOR_IOS_PRO" : "ADGUARD_FOR_IOS"
 
     // MARK: - Private variables
 
@@ -362,7 +367,7 @@ final class LoginService: LoginServiceProtocol {
         let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: nil)
 
         network.data(with: request) { [weak self] (dataOrNil, response, error) in
-            guard let sSelf = self else { return }
+            guard let self = self else { return }
 
             guard error == nil else {
                 DDLogError("(LoginService) checkStatus - got error \(error!.localizedDescription)")
@@ -376,7 +381,7 @@ final class LoginService: LoginServiceProtocol {
                 return
             }
 
-            let (premium, expirationDate, error) = sSelf.loginResponseParser.processStatusResponse(data: data)
+            let (premium, expirationDate, licenseKey, error) = self.loginResponseParser.processStatusResponse(data: data)
 
             DDLogInfo("(LoginService) checkStatus - processStatusResponse: premium = \(premium) " + (expirationDate == nil ? "" : "expirationDate = \(expirationDate!)"))
 
@@ -387,9 +392,10 @@ final class LoginService: LoginServiceProtocol {
                 return
             }
 
-            sSelf.expirationDate = expirationDate
-            sSelf.hasPremiumLicense = premium
-            sSelf.loggedIn = premium && sSelf.active
+            self.expirationDate = expirationDate
+            self.hasPremiumLicense = premium
+            self.loggedIn = premium && self.active
+            self.licenseKey = licenseKey
 
             callback(nil)
         }
