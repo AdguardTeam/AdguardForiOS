@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(AG_VERSION)</string>
+	<string>$(AG_ASL_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>$(AG_BUILD)</string>
+	<string>$(AG_ASL_BUILD)</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>
