@@ -1,106 +1,103 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "AGDnsProxy",
-        "repositoryURL": "https://github.com/AdguardTeam/DnsLibs",
-        "state": {
-          "branch": null,
-          "revision": "f15e1231893d648c79650e7e48fb1585bd77a302",
-          "version": "1.7.11"
-        }
-      },
-      {
-        "package": "Lottie",
-        "repositoryURL": "https://github.com/airbnb/lottie-ios",
-        "state": {
-          "branch": null,
-          "revision": "79a0b70547f7c40ea54c67487f935fa2f2eaaadc",
-          "version": "3.2.3"
-        }
-      },
-      {
-        "package": "Punycode",
-        "repositoryURL": "https://github.com/gumob/PunycodeSwift.git",
-        "state": {
-          "branch": null,
-          "revision": "4356ec54e073741449640d3d50a1fd24fd1e1b8b",
-          "version": "2.1.0"
-        }
-      },
-      {
-        "package": "Reachability",
-        "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
-        "state": {
-          "branch": null,
-          "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
-          "version": "5.1.0"
-        }
-      },
-      {
-        "package": "ContentBlockerConverter",
-        "repositoryURL": "https://github.com/AdguardTeam/SafariConverterLib",
-        "state": {
-          "branch": null,
-          "revision": "1903d4c291d83920d180c72178c1f9a24de8be6a",
-          "version": "2.0.24"
-        }
-      },
-      {
-        "package": "Sentry",
-        "repositoryURL": "https://github.com/getsentry/sentry-cocoa",
-        "state": {
-          "branch": null,
-          "revision": "d7f02ac0ebd9f8f3ddb1f9a2176a5399c5021e12",
-          "version": "7.5.3"
-        }
-      },
-      {
-        "package": "Setapp",
-        "repositoryURL": "https://github.com/MacPaw/Setapp-framework.git",
-        "state": {
-          "branch": null,
-          "revision": "afcde544e849e27993a6d2aef8d7534c5bf94b8c",
-          "version": "0.2.1"
-        }
-      },
-      {
-        "package": "SQLite.swift",
-        "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
-        "state": {
-          "branch": null,
-          "revision": "9af51e2edf491c0ea632e369a6566e09b65aa333",
-          "version": "0.13.0"
-        }
-      },
-      {
-        "package": "swift-argument-parser",
-        "repositoryURL": "https://github.com/apple/swift-argument-parser",
-        "state": {
-          "branch": null,
-          "revision": "6b2aa2748a7881eebb9f84fb10c01293e15b52ca",
-          "version": "0.5.0"
-        }
-      },
-      {
-        "package": "swift-collections",
-        "repositoryURL": "https://github.com/apple/swift-collections.git",
-        "state": {
-          "branch": null,
-          "revision": "2d33a0ea89c961dcb2b3da2157963d9c0370347e",
-          "version": "1.0.1"
-        }
-      },
-      {
-        "package": "Zip",
-        "repositoryURL": "https://github.com/marmelroy/Zip.git",
-        "state": {
-          "branch": null,
-          "revision": "059e7346082d02de16220cd79df7db18ddeba8c3",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "dnslibs",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AdguardTeam/DnsLibs",
+      "state" : {
+        "revision" : "02eec1dca771567eea53fb7a81fbcdcec5777592",
+        "version" : "1.7.28"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios",
+      "state" : {
+        "revision" : "79a0b70547f7c40ea54c67487f935fa2f2eaaadc",
+        "version" : "3.2.3"
+      }
+    },
+    {
+      "identity" : "punycodeswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gumob/PunycodeSwift.git",
+      "state" : {
+        "revision" : "4356ec54e073741449640d3d50a1fd24fd1e1b8b",
+        "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "reachability.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ashleymills/Reachability.swift",
+      "state" : {
+        "revision" : "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
+        "version" : "5.1.0"
+      }
+    },
+    {
+      "identity" : "safariconverterlib",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AdguardTeam/SafariConverterLib",
+      "state" : {
+        "revision" : "1903d4c291d83920d180c72178c1f9a24de8be6a",
+        "version" : "2.0.24"
+      }
+    },
+    {
+      "identity" : "sentry-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/getsentry/sentry-cocoa",
+      "state" : {
+        "revision" : "d7f02ac0ebd9f8f3ddb1f9a2176a5399c5021e12",
+        "version" : "7.5.3"
+      }
+    },
+    {
+      "identity" : "setapp-framework",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MacPaw/Setapp-framework.git",
+      "state" : {
+        "revision" : "afcde544e849e27993a6d2aef8d7534c5bf94b8c",
+        "version" : "0.2.1"
+      }
+    },
+    {
+      "identity" : "sqlite.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stephencelis/SQLite.swift.git",
+      "state" : {
+        "revision" : "9af51e2edf491c0ea632e369a6566e09b65aa333",
+        "version" : "0.13.0"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "6b2aa2748a7881eebb9f84fb10c01293e15b52ca",
+        "version" : "0.5.0"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "2d33a0ea89c961dcb2b3da2157963d9c0370347e",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "zip",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/marmelroy/Zip.git",
+      "state" : {
+        "revision" : "059e7346082d02de16220cd79df7db18ddeba8c3"
+      }
+    }
+  ],
+  "version" : 2
 }

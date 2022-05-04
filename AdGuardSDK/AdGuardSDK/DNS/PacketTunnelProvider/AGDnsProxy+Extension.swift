@@ -148,6 +148,11 @@ extension AGDnsProxyConfig {
             optimisticCache: defaultConfig.optimisticCache,
             enableDNSSECOK: defaultConfig.enableDNSSECOK,
             enableRetransmissionHandling: defaultConfig.enableRetransmissionHandling,
+            // This feature has initially been added to solve the incompatibility issue with Windscribe VPN:
+            // https://github.com/AdguardTeam/AdguardForiOS/issues/1707
+            // Unfortunately, it appears to be really unstable and causing issues with the current implementation.
+            // We should revive it later when we change the way the network extension handles network change.
+            enableRouteResolver: false,
             helperPath: defaultConfig.helperPath
         )
     }
@@ -172,6 +177,7 @@ extension AGDnsProxyConfig {
                optimisticCache: \(optimisticCache)
                enableDNSSECOK: \(enableDNSSECOK)
                enableRetransmissionHandling: \(enableRetransmissionHandling)
+               enableRouteResolver: \(enableRouteResolver)
                helperPath: \(helperPath ?? "nil")
                """
     }

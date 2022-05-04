@@ -17661,7 +17661,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
 				kind = exactVersion;
-				version = 1.7.11;
+				version = 1.7.28;
 			};
 		};
 		B2AED10A27F485AE00FDE212 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
