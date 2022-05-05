@@ -20,10 +20,10 @@
   resolved "https://registry.yarnpkg.com/@adguard/translate/-/translate-0.2.3.tgz#f30ef9000a3073ea0c24860cd0bf685b16de063b"
   integrity sha512-I0XcTSKrrRryD1PGd8kPKHB5SIY45+gTEAMqhpo2lDyUNMkW9MdhrNeAuoejJ+BuqU2TT+jK7KCNe33r7IsSjw==
 
-"@adguard/tsurlfilter@^0.7.76":
-  version "0.7.76"
-  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-0.7.76.tgz#1aef34feafda3f51119531e8daf54b82d0e663a0"
-  integrity sha512-HFHs/AdWRcYfIcwrkt7C+7d08G3X/THSB0NscDbnUKNCrug/CJZ6oDYjx/VpmP8LLcwcP/XOg/kUtXOS1vZUNw==
+"@adguard/tsurlfilter@^0.7.78":
+  version "0.7.78"
+  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-0.7.78.tgz#66b73bfb95f9bd8df389dbe7f6bea09a1cb409cc"
+  integrity sha512-0H2kRkg8BK17BDf1lGLsWQqWNHI7488WCM/B0Q7Nx/NYjKfG9XbEIIAEiUr5g7rGHPFBxDmD9oiavp0GkCS0Gg==
   dependencies:
     "@adguard/scriptlets" "^1.6.8"
     extended-css "git+https://github.com/AdguardTeam/ExtendedCss.git#v1.3.14"
