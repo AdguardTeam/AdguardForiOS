@@ -15,7 +15,7 @@
   "dependencies": {
     "@adguard/assistant": "^4.3.51",
     "@adguard/translate": "^0.2.3",
-    "@adguard/tsurlfilter": "^0.7.76",
+    "@adguard/tsurlfilter": "^0.7.78",
     "@babel/runtime": "^7.14.6",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
