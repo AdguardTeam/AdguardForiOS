@@ -20,7 +20,7 @@
 #import "ADomain/ADomain.h"
 #import "NSString+Utils.h"
 
-#define URL_TEMPLATE                                @"https://cdn.adguard.org/public/Adguard/iOS/videotutorial/4.0/%@/%@.mp4"
+#define URL_TEMPLATE                                @"https://cdn.adtidy.org/public/Adguard/iOS/videotutorial/4.0/%@/%@.mp4"
 
 #define DEFAULT_TUTORIAL_VIDEO                      @"ManageContentBlocker"
 #define DEFAULT_TUTORIAL_VIDEO_SINCE_IOS_15         @"ManageContentBlockerSinceIOS15"
