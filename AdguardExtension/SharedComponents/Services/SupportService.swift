@@ -18,6 +18,7 @@
 
 import Foundation
 
+// FIXME remove this file
 @objc
 protocol SupportServiceProtocol {
     func proFeaturesStatus()->String

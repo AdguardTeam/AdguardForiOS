@@ -211,7 +211,8 @@ final class ActionExtensionTableController: UITableViewController {
     /// Constructs report URL and opens our special WEB page for reporting
     private func reportProblem() {
         let safariProtection = ServicesInitializer.shared.safariProtection
-        let reporter = ActionExtensionWebReporter(url: model.url, safariProtection: safariProtection)
+        let productInfo: ADProductInfoProtocol = ServicesInitializer.shared.productInfo
+        let reporter = ActionExtensionWebReporter(url: model.url, safariProtection: safariProtection, productInfo: productInfo)
         let url = reporter.createUrl()
         openWithUrl(url)
         extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)

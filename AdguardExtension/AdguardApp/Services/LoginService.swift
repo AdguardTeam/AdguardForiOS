@@ -133,9 +133,9 @@ final class LoginService: LoginServiceProtocol {
     // MARK: - Private variables
 
     // keychain constants
-    private let LOGIN_SERVER = "https://mobile-api.adguard.com"
+    private let LOGIN_SERVER = "https://mobile-api.adguard.org"
 
-    private let AUTH_SERVER = "https://auth.adguard.com"
+    private let AUTH_SERVER = "https://auth.adguard.org"
 
     // login request
     lazy private var STATUS_URL = { "\(LOGIN_SERVER)/api/1.0/status.html" }()

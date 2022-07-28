@@ -24,10 +24,12 @@ final class Services {
     let resources: AESharedResourcesProtocol
     let urlsStorage: SharedStorageUrlsProtocol
     let processor: SafariWebExtensionMessageProcessorProtocol
+    let productInfo: ADProductInfoProtocol
 
     init() {
         self.resources = AESharedResources()
         self.urlsStorage = SharedStorageUrls()
-        self.processor = SafariWebExtensionMessageProcessor(resources: resources)
+        self.productInfo = ADProductInfo()
+        self.processor = SafariWebExtensionMessageProcessor(resources: resources, productInfo: productInfo)
     }
 }

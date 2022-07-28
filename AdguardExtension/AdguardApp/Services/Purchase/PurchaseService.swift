@@ -77,7 +77,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     private let APP_ID_PARAM = "app_id"
     private let APP_VERSION_PARAM = "app_version"
     private let APP_NAME_PARAM = "app_name"
-    private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.com/api/2.0/ios_validate_receipt/\(Bundle.main.backendBundleId)"
+    private let VALIDATE_RECEIPT_URL = "https://mobile-api.adguard.org/api/2.0/ios_validate_receipt/\(Bundle.main.backendBundleId)"
     // premium values
     private let PREMIUM_STATUS_ACTIVE = "ACTIVE"
     private let PREMIUM_STATUS_FREE = "FREE"
@@ -97,7 +97,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     private let AUTH_SOCIAL_PROVIDER = "social_provider"
     private let AUTH_REG_MODE = "reg_mode"
 
-    private let authUrl = "https://auth.adguard.com/oauth/authorize"
+    private let authUrl = "https://auth.adguard.org/oauth/authorize"
 
     // MARK: - private properties
     private let network: ACNNetworkingProtocol
