@@ -24,13 +24,14 @@ final class ApplicationWebReporter: WebReporterProtocol {
     // MARK: - Private properties
 
     private let safariFiltersWrapper: WebReporterWrapperProtocol
+    private let productInfo: ADProductInfoProtocol
     private let dnsProtectionWrapper = WebReporterDnsProtectionWrapper()
-    private let reportUrl = "https://reports.adguard.com/new_issue.html"
 
     // MARK: - Init
 
     init() {
         let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
+        self.productInfo = ServiceLocator.shared.getService()!
         self.safariFiltersWrapper = WebReporterSafariFiltersWrapper(safariProtection: safariProtection)
     }
 
@@ -39,7 +40,7 @@ final class ApplicationWebReporter: WebReporterProtocol {
     func createUrl() -> URL {
         var params: [String: String] = [
             "product_type": "iOS",
-            "product_version": ADProductInfo().version(),
+            "product_version": productInfo.version(),
             "browser": "Safari"
         ]
 
@@ -50,7 +51,8 @@ final class ApplicationWebReporter: WebReporterProtocol {
         assembleParams(result: &params, params: dnsProtectionParams)
 
         let paramString = ABECRequest.createString(fromParameters: params)
-        let url = "\(reportUrl)?\(paramString)"
+
+        let url = "\(UIApplication.shared.adguardUrl(action: "report", from: "web_reporter", buildVersion: productInfo.buildVersion()))&\(paramString)"
 
         return URL(string: url)!
     }

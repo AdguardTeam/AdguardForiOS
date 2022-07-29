@@ -21,17 +21,20 @@ import SafariAdGuardSDK
 /// Action extension web reporter
 final class ActionExtensionWebReporter: WebReporterProtocol {
 
+    private static let adguardUrl = "https://link.adtidy.org/forward.html"
+
     // MARK: - Private properties
 
     private let url: URL
     private let webReporterSafariFiltersWrapper: WebReporterWrapperProtocol
-    private let reportUrl = "https://reports.adguard.com/new_issue.html"
+    private let productInfo: ADProductInfoProtocol
 
     // MARK: - Init
 
-    init(url: URL, safariProtection: SafariProtectionProtocol) {
+    init(url: URL, safariProtection: SafariProtectionProtocol, productInfo: ADProductInfoProtocol) {
         self.url = url
         self.webReporterSafariFiltersWrapper = WebReporterSafariFiltersWrapper(safariProtection: safariProtection)
+        self.productInfo = productInfo
     }
 
     // MARK: - Public methods
@@ -40,7 +43,7 @@ final class ActionExtensionWebReporter: WebReporterProtocol {
         var params: [String: String] = [
             "url": url.absoluteString,
             "product_type": "iOS",
-            "product_version": ADProductInfo().version(),
+            "product_version": productInfo.version(),
             "browser": "Safari"
         ]
 
@@ -48,7 +51,7 @@ final class ActionExtensionWebReporter: WebReporterProtocol {
         assembleParams(result: &params, params: safariFiltersParams)
 
         let paramString = ABECRequest.createString(fromParameters: params)
-        let url = "\(reportUrl)?\(paramString)"
+        let url = "\(adguardUrl(action: "report", from: "action_extension", buildVersion: productInfo.buildVersion()))&\(paramString)"
 
         return URL(string: url)!
     }
@@ -61,5 +64,18 @@ final class ActionExtensionWebReporter: WebReporterProtocol {
                 result[key] = param
             }
         }
+    }
+
+    private func adguardUrl(action: String, from: String, buildVersion: String)->String {
+        var params: Dictionary<String, String> = [:]
+
+        params["app"] = "ios"
+        params["v"] = buildVersion
+        params["action"] = action
+        params["from"] = from
+
+        let paramsString = ABECRequest.createString(fromParameters: params)
+
+        return ActionExtensionWebReporter.adguardUrl + "?" + paramsString
     }
 }

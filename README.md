@@ -115,6 +115,9 @@ Register your device:
 
 ### Codesigning
 
+Note, that by default these commands will only work for AdGuard, not AdGuard Pro.
+For AdGuard Pro you need to run them with `--env pro`.
+
 Run this command to get proper codesigning certificates:
 
 - `bundle exec fastlane prepare`

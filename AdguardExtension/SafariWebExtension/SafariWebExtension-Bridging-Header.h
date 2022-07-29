@@ -24,5 +24,6 @@
 #import "ACLLogger.h"
 #import "NSString+Utils.h"
 #import "ADProductInfo.h"
+#import "ABECRequest.h"
 
 #endif /* SafariWebExtension_Bridging_Header_h */
