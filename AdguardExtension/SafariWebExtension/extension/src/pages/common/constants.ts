@@ -31,7 +31,7 @@ export enum AppearanceTheme {
 
 export const APPEARANCE_THEME_DEFAULT = AppearanceTheme.System;
 
-export const WEB_EXTENSION_MORE_URL = 'https://adguard.com/forward.html?action=web_extension_more&from=popup&app=ios';
+export const WEB_EXTENSION_MORE_URL = 'https://link.adtidy.org/forward.html?action=web_extension_more&from=popup&app=ios';
 
 export enum Platform {
     IPad = 'ipad',
