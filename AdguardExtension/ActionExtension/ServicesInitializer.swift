@@ -29,6 +29,7 @@ final class ServicesInitializer {
     let themeService: ThemeServiceProtocol
     let configuration: ConfigurationServiceProtocol
     let migrationVersionProvider: MigrationServiceVersionProviderProtocol
+    let productInfo: ADProductInfoProtocol
 
     init() throws {
         self.resources = AESharedResources()
@@ -50,7 +51,7 @@ final class ServicesInitializer {
         }
 
         let networkService = ACNNetworking()
-        let productInfo = ADProductInfo()
+        productInfo = ADProductInfo()
         let purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
         let sharedUrls = SharedStorageUrls()
         let preloadedFilesManager = PreloadedFilesManager(sharedStorageUrls: sharedUrls, bundle: bundle)

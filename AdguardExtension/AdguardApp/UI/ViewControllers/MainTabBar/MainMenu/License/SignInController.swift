@@ -134,7 +134,7 @@ class SignInController: UIViewController {
     }
 
     private func userNotFound() {
-        let message = String(format: String.localizedString("user_not_found_message"), UIApplication.adguardSigninURL)
+        let message = String(format: String.localizedString("user_not_found_message"), "https://my.adguard.com") // This link is not active and should not be processed via forwarder
         dismiss(animated: true) { [weak self] in
             self?.notificationService.postNotificationInForeground(body: message, title: "")
         }

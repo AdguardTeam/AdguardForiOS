@@ -24,6 +24,8 @@ protocol SafariWebExtensionMessageProcessorProtocol {
 
 final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorProtocol {
 
+    private static let adguardForwarderUrl = "https://link.adtidy.org/forward.html"
+
     // TODO: - This is a temporary workaround; Should be fixed later
     private var shouldUpdateAdvancedRules: Bool {
         get {
@@ -37,9 +39,11 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
     private var fileReader: ChunkFileReader?
 
     private let resources: AESharedResourcesProtocol
+    private let productInfo: ADProductInfoProtocol
 
-    init(resources: AESharedResourcesProtocol) {
+    init(resources: AESharedResourcesProtocol, productInfo: ADProductInfoProtocol) {
         self.resources = resources
+        self.productInfo = productInfo
     }
 
     func process(message: Message) -> [String: Any?]  {
@@ -148,16 +152,29 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         return isAllowlistInverted ? isDomainInRules : !isDomainInRules
     }
 
+    // TODO pass more params (filters and so on)
     private func constructReportLink(_ problemUrl: String) -> String {
-        let url = "https://reports.adguard.com/new_issue.html"
         let params: [String: String] = [
             "product_type": "iOS",
-            "product_version": ADProductInfo().version() ?? "0",
+            "product_version": productInfo.version() ?? "0",
             "browser": "Safari",
             "url": problemUrl
         ]
-        let paramsString = params.constructLink(url: url)
-        return paramsString ?? ""
+        let paramString = ABECRequest.createString(fromParameters: params)
+        return "\(adguardUrl(action: "report", from: "safari_web_extension", buildVersion: productInfo.buildVersion()))&\(paramString)"
+    }
+
+    private func adguardUrl(action: String, from: String, buildVersion: String)->String {
+        var params: Dictionary<String, String> = [:]
+
+        params["app"] = "ios"
+        params["v"] = buildVersion
+        params["action"] = action
+        params["from"] = from
+
+        let paramsString = ABECRequest.createString(fromParameters: params)
+
+        return SafariWebExtensionMessageProcessor.adguardForwarderUrl + "?" + paramsString
     }
 }
 

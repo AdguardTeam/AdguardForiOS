@@ -2,51 +2,32 @@ git_url("ssh://git@bit.adguard.com:7999/adguard-ios/certificates.git")
 storage_mode("git")
 type("development")
 
-
-
-if ENV['TEAM_ID'] == "N33TQXN8C7"
-    app_identifier([
-        "com.adguard.AdguardExtension",
-        "com.adguard.AdguardExtension.extension",
-        "com.adguard.AdguardExtension.extensionPrivacy",
-        "com.adguard.AdguardExtension.extensionAnnoyances",
-        "com.adguard.AdguardExtension.extensionOther",
-        "com.adguard.AdguardExtension.extensionCustom",
-        "com.adguard.AdguardExtension.extensionSecurity",
-        "com.adguard.AdguardExtension.ActionExtension",
-        "com.adguard.AdguardExtension.tunnel",
-        "com.adguard.AdguardExtension.todayExtension",
-        "com.adguard.AdguardExtension.YouTubeAdsActionExtension",
-        "com.adguard.AdguardExtension.SafariWebExtension",
-        "com.adguard.AdguardPro",
-        "com.adguard.AdguardPro.extension",
-        "com.adguard.AdguardPro.extensionPrivacy",
-        "com.adguard.AdguardPro.extensionAnnoyances",
-        "com.adguard.AdguardPro.extensionOther",
-        "com.adguard.AdguardPro.extensionCustom",
-        "com.adguard.AdguardPro.extensionSecurity",
-        "com.adguard.AdguardPro.todayExtension",
-        "com.adguard.AdguardPro.ActionExtension",
-        "com.adguard.AdguardPro.tunnel",
-        "com.adguard.AdguardPro.ProYouTubeAdsActionExtension"
-    ])
-else
-    git_branch("vpn")
-    app_identifier([
-        "com.adguard.AdGuardApp",
-        "com.adguard.AdGuardApp.extension",
-        "com.adguard.AdGuardApp.extensionPrivacy",
-        "com.adguard.AdGuardApp.extensionAnnoyances",
-        "com.adguard.AdGuardApp.extensionOther",
-        "com.adguard.AdGuardApp.extensionCustom",
-        "com.adguard.AdGuardApp.extensionSecurity",
-        "com.adguard.AdGuardApp.todayExtension",
-        "com.adguard.AdGuardApp.ActionExtension",
-        "com.adguard.AdGuardApp.tunnel",
-        "com.adguard.AdGuardApp.YouTubeAdsActionExtension",
-        "com.adguard.AdGuardApp.SafariWebExtension"
-    ])
-end
+app_identifier([
+    "com.adguard.AdguardExtension",
+    "com.adguard.AdguardExtension.extension",
+    "com.adguard.AdguardExtension.extensionPrivacy",
+    "com.adguard.AdguardExtension.extensionAnnoyances",
+    "com.adguard.AdguardExtension.extensionOther",
+    "com.adguard.AdguardExtension.extensionCustom",
+    "com.adguard.AdguardExtension.extensionSecurity",
+    "com.adguard.AdguardExtension.ActionExtension",
+    "com.adguard.AdguardExtension.tunnel",
+    "com.adguard.AdguardExtension.todayExtension",
+    "com.adguard.AdguardExtension.YouTubeAdsActionExtension",
+    "com.adguard.AdguardExtension.SafariWebExtension",
+    "com.adguard.AdguardPro",
+    "com.adguard.AdguardPro.extension",
+    "com.adguard.AdguardPro.extensionPrivacy",
+    "com.adguard.AdguardPro.extensionAnnoyances",
+    "com.adguard.AdguardPro.extensionOther",
+    "com.adguard.AdguardPro.extensionCustom",
+    "com.adguard.AdguardPro.extensionSecurity",
+    "com.adguard.AdguardPro.todayExtension",
+    "com.adguard.AdguardPro.ActionExtension",
+    "com.adguard.AdguardPro.tunnel",
+    "com.adguard.AdguardPro.ProYouTubeAdsActionExtension",
+    "com.adguard.AdguardPro.ProSafariWebExtension",
+])
 
 username("apple-dev@adguard.com")
 team_id(ENV['TEAM_ID'])
