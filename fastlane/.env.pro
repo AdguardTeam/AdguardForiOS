@@ -1,6 +1,6 @@
 APPLE_ID="apple-dev@adguard.com"
-TEAM_ID="N33TQXN8C7"
-ITC_TEAM_ID="31050800"
+TEAM_ID="TC3Q7MAJXF"
+ITC_TEAM_ID="119112205"
 BUILD_SCHEME="AdguardPro"
 OUTPUT_DIRECTORY="./build_pro"
 XCCONFIG_PATH="AdguardExtension/AdguardPro/Adguard-Pro-Config.xcconfig"
