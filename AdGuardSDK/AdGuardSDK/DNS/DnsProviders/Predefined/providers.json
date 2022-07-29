@@ -98,7 +98,7 @@
             ],
             "providerId": 10001,
             "logo": "adguard_dns_logo",
-            "homepage": "https://adguard.com/adguard-dns/overview.html",
+            "homepage": "https://adguard-dns.io/",
             "description": "Removes ads and protects your device from malware"
         },
         {
@@ -192,7 +192,7 @@
             ],
             "providerId": 10005,
             "logo": "adguard_dns_family_logo",
-            "homepage": "https://adguard.com/adguard-dns/overview.html",
+            "homepage": "https://adguard-dns.io/",
             "description": "AdGuard DNS + SafeSearch and adult content blocking"
         },
         {
@@ -266,7 +266,7 @@
             ],
             "providerId": 10028,
             "logo": "adguard_dns_unfiltered_logo",
-            "homepage": "https://adguard.com/adguard-dns/overview.html",
+            "homepage": "https://adguard-dns.io/",
             "description": "Provides a secure and reliable connection, but doesn't filter anything"
         },
         {
