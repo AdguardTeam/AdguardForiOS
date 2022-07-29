@@ -58,7 +58,7 @@
                         "encryption"
                     ],
                     "upstreams": [
-                        "https://dns.adguard.com/dns-query"
+                        "https://dns.adguard-dns.com/dns-query"
                     ],
                     "providerId": 10001,
                     "type": "doh",
@@ -73,7 +73,7 @@
                         "encryption"
                     ],
                     "upstreams": [
-                        "tls://dns.adguard.com"
+                        "tls://dns.adguard-dns.com"
                     ],
                     "providerId": 10001,
                     "type": "dot",
@@ -88,7 +88,7 @@
                         "encryption"
                     ],
                     "upstreams": [
-                        "quic://dns.adguard.com"
+                        "quic://dns.adguard-dns.com"
                     ],
                     "providerId": 10001,
                     "type": "doq",
@@ -148,7 +148,7 @@
                         "safe_search"
                     ],
                     "upstreams": [
-                        "https://dns-family.adguard.com/dns-query"
+                        "https://family.adguard-dns.com/dns-query"
                     ],
                     "providerId": 10005,
                     "type": "doh",
@@ -165,7 +165,7 @@
                         "safe_search"
                     ],
                     "upstreams": [
-                        "tls://dns-family.adguard.com"
+                        "tls://family.adguard-dns.com"
                     ],
                     "providerId": 10005,
                     "type": "dot",
@@ -182,7 +182,7 @@
                         "safe_search"
                     ],
                     "upstreams": [
-                        "quic://dns-family.adguard.com"
+                        "quic://family.adguard-dns.com"
                     ],
                     "providerId": 10005,
                     "type": "doq",
@@ -230,7 +230,7 @@
                         "encryption"
                     ],
                     "upstreams": [
-                        "https://dns-unfiltered.adguard.com/dns-query"
+                        "https://unfiltered.adguard-dns.com/dns-query"
                     ],
                     "providerId": 10028,
                     "type": "doh",
@@ -243,7 +243,7 @@
                         "encryption"
                     ],
                     "upstreams": [
-                        "tls://dns-unfiltered.adguard.com"
+                        "tls://unfiltered.adguard-dns.com"
                     ],
                     "providerId": 10028,
                     "type": "dot",
@@ -256,7 +256,7 @@
                         "encryption"
                     ],
                     "upstreams": [
-                        "quic://dns-unfiltered.adguard.com"
+                        "quic://unfiltered.adguard-dns.com"
                     ],
                     "providerId": 10028,
                     "type": "doq",
