@@ -21,7 +21,7 @@ import SafariAdGuardSDK
 /// Action extension web reporter
 final class ActionExtensionWebReporter: WebReporterProtocol {
 
-    private static let adguardUrl = "https://link.adtidy.org/forward.html"
+    private static let adguardForwarderUrl = "https://link.adtidy.org/forward.html"
 
     // MARK: - Private properties
 
@@ -76,6 +76,6 @@ final class ActionExtensionWebReporter: WebReporterProtocol {
 
         let paramsString = ABECRequest.createString(fromParameters: params)
 
-        return ActionExtensionWebReporter.adguardUrl + "?" + paramsString
+        return ActionExtensionWebReporter.adguardForwarderUrl + "?" + paramsString
     }
 }

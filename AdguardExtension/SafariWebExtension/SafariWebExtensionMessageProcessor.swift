@@ -24,7 +24,7 @@ protocol SafariWebExtensionMessageProcessorProtocol {
 
 final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorProtocol {
 
-    private static let adguardUrl = "https://link.adtidy.org/forward.html"
+    private static let adguardForwarderUrl = "https://link.adtidy.org/forward.html"
 
     // TODO: - This is a temporary workaround; Should be fixed later
     private var shouldUpdateAdvancedRules: Bool {
@@ -152,6 +152,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         return isAllowlistInverted ? isDomainInRules : !isDomainInRules
     }
 
+    // TODO pass more params (filters and so on)
     private func constructReportLink(_ problemUrl: String) -> String {
         let params: [String: String] = [
             "product_type": "iOS",
@@ -173,7 +174,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
 
         let paramsString = ABECRequest.createString(fromParameters: params)
 
-        return SafariWebExtensionMessageProcessor.adguardUrl + "?" + paramsString
+        return SafariWebExtensionMessageProcessor.adguardForwarderUrl + "?" + paramsString
     }
 }
 
