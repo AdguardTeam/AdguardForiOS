@@ -51,9 +51,9 @@ end
 def prepare_key()
   # https://docs.fastlane.tools/app-store-connect-api/#using-an-app-store-connect-api-key
   app_store_connect_api_key(
-    key_id: getCertId(),
-    issuer_id: getIssuerId(),
-    key_filepath: getAuthKey(),
+    key_id: "696F7D6QK5",
+    issuer_id: "b7f9918a-6dca-4ef0-ae88-b5038d3c239b",
+    key_filepath: "fastlane/AuthKey.p8",
     # see the issue here: https://github.com/fastlane/fastlane/issues/19072
     # TODO: remove when the issue is fixed in Fastlane and we update.
     duration: 500, # optional
