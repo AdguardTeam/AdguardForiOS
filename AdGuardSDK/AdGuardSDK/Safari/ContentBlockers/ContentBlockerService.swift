@@ -126,9 +126,9 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
      */
     private func updateContentBlockersSync() -> Error? {
         var resultError: Error?
-        let group = DispatchGroup()
 
         for cb in ContentBlockerType.allCases {
+            let group = DispatchGroup()
             group.enter()
             reloadContentBlocker(for: cb) { error in
                 if let error = error {
@@ -136,8 +136,8 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
                 }
                 group.leave()
             }
+            group.wait()
         }
-        group.wait()
 
         return resultError
     }
