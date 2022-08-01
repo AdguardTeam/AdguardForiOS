@@ -19,6 +19,3 @@
 AG_VERSION = 4.4.1
 AG_BUILD = 955
 
-// TODO clean this part
-AG_ASL_VERSION = 4.5.0
-AG_ASL_BUILD = 954

@@ -3,6 +3,7 @@ storage_mode("git")
 type("development")
 
 app_identifier([
+    # AdGuard for iOS
     "com.adguard.AdguardExtension",
     "com.adguard.AdguardExtension.extension",
     "com.adguard.AdguardExtension.extensionPrivacy",
@@ -15,6 +16,8 @@ app_identifier([
     "com.adguard.AdguardExtension.todayExtension",
     "com.adguard.AdguardExtension.YouTubeAdsActionExtension",
     "com.adguard.AdguardExtension.SafariWebExtension",
+
+    # AdGuard Pro for iOS
     "com.adguard.AdguardPro",
     "com.adguard.AdguardPro.extension",
     "com.adguard.AdguardPro.extensionPrivacy",
@@ -22,9 +25,9 @@ app_identifier([
     "com.adguard.AdguardPro.extensionOther",
     "com.adguard.AdguardPro.extensionCustom",
     "com.adguard.AdguardPro.extensionSecurity",
-    "com.adguard.AdguardPro.todayExtension",
     "com.adguard.AdguardPro.ActionExtension",
     "com.adguard.AdguardPro.tunnel",
+    "com.adguard.AdguardPro.todayExtension",
     "com.adguard.AdguardPro.ProYouTubeAdsActionExtension",
     "com.adguard.AdguardPro.ProSafariWebExtension",
 ])
