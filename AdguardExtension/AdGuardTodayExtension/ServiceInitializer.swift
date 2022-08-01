@@ -27,6 +27,7 @@ protocol ServiceInitializerProtocol  {
     var complexProtection: ComplexProtectionServiceProtocol { get }
     var dnsProvidersManager: DnsProvidersManagerProtocol { get }
     var activityStatistics: ActivityStatisticsProtocol { get }
+    var devAccountMigrationHelper: DevAccountMigrationHelper { get }
 }
 
 final class ServiceInitializer: ServiceInitializerProtocol {
@@ -37,6 +38,7 @@ final class ServiceInitializer: ServiceInitializerProtocol {
     let complexProtection: ComplexProtectionServiceProtocol
     let dnsProvidersManager: DnsProvidersManagerProtocol
     let activityStatistics: ActivityStatisticsProtocol
+    let devAccountMigrationHelper: DevAccountMigrationHelper
 
     init(resources: AESharedResourcesProtocol) throws {
         DDLogInfo("(TodayViewController) - init services start")
@@ -94,6 +96,8 @@ final class ServiceInitializer: ServiceInitializerProtocol {
             nativeDnsSettingsManager: nativeDnsSettingsManager,
             safariProtection: safariProtection
         )
+
+        self.devAccountMigrationHelper = DevAccountMigrationHelper(fromExtension: true, resources, productInfo, UserNotificationService())
 
         // MARK: - ActivityStatistics
 

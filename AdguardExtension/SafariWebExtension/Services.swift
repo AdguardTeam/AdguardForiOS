@@ -25,11 +25,13 @@ final class Services {
     let urlsStorage: SharedStorageUrlsProtocol
     let processor: SafariWebExtensionMessageProcessorProtocol
     let productInfo: ADProductInfoProtocol
+    let devAccountMigrationHelper: DevAccountMigrationHelper
 
     init() {
         self.resources = AESharedResources()
         self.urlsStorage = SharedStorageUrls()
         self.productInfo = ADProductInfo()
         self.processor = SafariWebExtensionMessageProcessor(resources: resources, productInfo: productInfo)
+        self.devAccountMigrationHelper = DevAccountMigrationHelper(fromExtension: true, resources, productInfo, UserNotificationService())
     }
 }

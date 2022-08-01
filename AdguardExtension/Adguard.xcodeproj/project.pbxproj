@@ -453,6 +453,30 @@
 		6089DFC427A8432C00536667 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BA2E326F9D3D600B44D4A /* UIViewController+Alert.swift */; };
 		6089DFC627A846C200536667 /* ProInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6089DFC527A846C200536667 /* ProInfo.plist */; };
 		6089DFC727A846C200536667 /* ProInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6089DFC527A846C200536667 /* ProInfo.plist */; };
+		60C5961F289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */; };
+		60C59620289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */; };
+		60C59621289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */; };
+		60C59622289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */; };
+		60C59623289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */; };
+		60C59624289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */; };
+		60C59625289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */; };
+		60C59626289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */; };
+		60C59627289813DA00424CB6 /* DevAccountMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */; };
+		60C59628289813DA00424CB6 /* DevAccountMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */; };
+		60C59629289813FD00424CB6 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C56E26C26D3A001851D6 /* UserNotificationService.swift */; };
+		60C5962A289813FE00424CB6 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C56E26C26D3A001851D6 /* UserNotificationService.swift */; };
+		60C5962B289813FF00424CB6 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C56E26C26D3A001851D6 /* UserNotificationService.swift */; };
+		60C5962C2898140200424CB6 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C56E26C26D3A001851D6 /* UserNotificationService.swift */; };
+		60C5962D2898140400424CB6 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C56E26C26D3A001851D6 /* UserNotificationService.swift */; };
+		60C5962E2898140500424CB6 /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C56E26C26D3A001851D6 /* UserNotificationService.swift */; };
+		60C596302898149A00424CB6 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; };
+		60C596312898149A00424CB6 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		60C59633289815A500424CB6 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; };
+		60C59634289815A500424CB6 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		60C59636289817BD00424CB6 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		60C59637289817C000424CB6 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		60C59638289817D000424CB6 /* String+NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244419832614C1BC009555F3 /* String+NSRange.swift */; };
+		60C59639289817D100424CB6 /* String+NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244419832614C1BC009555F3 /* String+NSRange.swift */; };
 		60DB6EC427AC266C00C2CFC4 /* userscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 60DB6EC327AC266C00C2CFC4 /* userscript.js */; };
 		60DB6EC527AC266C00C2CFC4 /* userscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 60DB6EC327AC266C00C2CFC4 /* userscript.js */; };
 		60DB6EC627AC266C00C2CFC4 /* userscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 60DB6EC327AC266C00C2CFC4 /* userscript.js */; };
@@ -1431,27 +1455,37 @@
 		B2C8E9902716ECA100ACDED8 /* PurchaseAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */; };
 		B2C8E9A42716FDF500ACDED8 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9A32716FDF500ACDED8 /* Setapp */; };
 		B2C8E9A52716FECB00ACDED8 /* AdGuardDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		C230008F30675255C14BCC41 /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
+		C23032179D836CE21967D1C2 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
 		C2306B5EBD6E32E284E334C9 /* YouTubeShareLinkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23EEA92DDBC526C3FA37E2F /* YouTubeShareLinkResult.swift */; };
+		C23094C3C9CBD65313F19A1D /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
 		C231E086502F0395EC2EE947 /* YoutubePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C231D3CF4A743835726A0C26 /* YoutubePlayerController.swift */; };
+		C232011552D6AB02F9CE6C2F /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
 		C2326FC77E493BF8F83DB91E /* YouTubeShareLinkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23EEA92DDBC526C3FA37E2F /* YouTubeShareLinkResult.swift */; };
 		C232DDD053E035F5575DC231 /* YouTubeAdsJsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2325E02A9A9579A8947440B /* YouTubeAdsJsResult.swift */; };
 		C232DE371FC6B1E899089CF0 /* YoutubePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C231D3CF4A743835726A0C26 /* YoutubePlayerController.swift */; };
 		C23303B86068EA6736767662 /* filter.json in Resources */ = {isa = PBXBuildFile; fileRef = C23386887409D1DD26F5D582 /* filter.json */; };
+		C2334F1307FCE50CBE3BD88C /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
 		C23440501FAFDF3FB74002E1 /* YoutubeHtmlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C235A1604901DD066185FBC8 /* YoutubeHtmlBuilder.swift */; };
+		C234D10FD2B7660FFF0C39C8 /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
 		C234FE61928E718C0E9D61A6 /* filter.json in Resources */ = {isa = PBXBuildFile; fileRef = C23386887409D1DD26F5D582 /* filter.json */; };
 		C23534F111B8C189F7DE02FE /* ABECRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D0CAFC268B058100AD427E /* ABECRequest.m */; };
+		C2353CAB0014D4E140FDBEE4 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C51026C261AF001851D6 /* SharedResources.swift */; };
 		C23752C536495C1B3D940B7C /* YouTubeAdsJsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2325E02A9A9579A8947440B /* YouTubeAdsJsResult.swift */; };
+		C2383BFC97DDE82A55EE6F73 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
 		C238422C27A6151FD839079B /* filter.json in Resources */ = {isa = PBXBuildFile; fileRef = C23386887409D1DD26F5D582 /* filter.json */; };
 		C2388C44531DDE0F29CA73A0 /* ABECRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D0CAFC268B058100AD427E /* ABECRequest.m */; };
 		C238EFE71373DEE85CA488FF /* YouTubeAdsJsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2325E02A9A9579A8947440B /* YouTubeAdsJsResult.swift */; };
 		C23932418213BF73AC1E5BAD /* YoutubeHtmlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C235A1604901DD066185FBC8 /* YoutubeHtmlBuilder.swift */; };
 		C239B55BEA3047C1EFC54AE8 /* YoutubeHtmlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C235A1604901DD066185FBC8 /* YoutubeHtmlBuilder.swift */; };
 		C23A0500C2A25775A0AB15DC /* filter.json in Resources */ = {isa = PBXBuildFile; fileRef = C23386887409D1DD26F5D582 /* filter.json */; };
+		C23ABE368E2EE1B4C6B913FF /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C51026C261AF001851D6 /* SharedResources.swift */; };
 		C23AE1CF5A6E9A0B6D3440E8 /* YoutubePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C231D3CF4A743835726A0C26 /* YoutubePlayerController.swift */; };
 		C23BD82E0F30A2B578BF8D4A /* YouTubeShareLinkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23EEA92DDBC526C3FA37E2F /* YouTubeShareLinkResult.swift */; };
 		C23C36EFEC43C4267DF350F8 /* YouTubeAdsJsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2325E02A9A9579A8947440B /* YouTubeAdsJsResult.swift */; };
 		C23C7CC726EF4E648BA10BF0 /* YoutubePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C231D3CF4A743835726A0C26 /* YoutubePlayerController.swift */; };
 		C23EC6A1A6FBA67B3E1A7E80 /* YouTubeShareLinkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23EEA92DDBC526C3FA37E2F /* YouTubeShareLinkResult.swift */; };
+		C23F49A7FB0AD347B3993C86 /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
 		C23F7795678B947257A70C8F /* YoutubeHtmlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C235A1604901DD066185FBC8 /* YoutubeHtmlBuilder.swift */; };
 		C73374372746D2FF00989447 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		C73374382746D30000989447 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
@@ -2569,6 +2603,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		60C596322898149A00424CB6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				60C596312898149A00424CB6 /* SafariAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60C59635289815A500424CB6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				60C59634289815A500424CB6 /* SafariAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		659886B31CF74DE9003ECD1C /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2954,6 +3010,7 @@
 		4982C1AC26D78F2A00CACBBE /* log.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.ts; sourceTree = "<group>"; };
 		4982C1AD26D78F2A00CACBBE /* logNative.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = logNative.ts; sourceTree = "<group>"; };
 		6089DFC527A846C200536667 /* ProInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProInfo.plist; sourceTree = "<group>"; };
+		60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevAccountMigrationHelper.swift; sourceTree = "<group>"; };
 		60DB6EC327AC266C00C2CFC4 /* userscript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = userscript.js; sourceTree = "<group>"; };
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
 		65163CBD1BE7BA01000A3575 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -4179,6 +4236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60C596302898149A00424CB6 /* SafariAdGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4186,6 +4244,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60C59633289815A500424CB6 /* SafariAdGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6418,6 +6477,7 @@
 		B2673DB327173DFD00E04747 /* Migrations */ = {
 			isa = PBXGroup;
 			children = (
+				60C5961E289813D900424CB6 /* DevAccountMigrationHelper.swift */,
 				B2673DB427173DFD00E04747 /* MigrationToSDKv4.3 */,
 				24CE2B83271DA4E700E169E7 /* NetworkSettingsMigration.swift */,
 				B2673DC127173DFD00E04747 /* MigrationService.swift */,
@@ -7190,6 +7250,7 @@
 				7E60819726D55BCD00D778F4 /* Sources */,
 				7E60819826D55BCD00D778F4 /* Frameworks */,
 				7E60819926D55BCD00D778F4 /* Resources */,
+				60C596322898149A00424CB6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -7207,6 +7268,7 @@
 				7E6081DA26D55C6A00D778F4 /* Sources */,
 				7E6081DB26D55C6A00D778F4 /* Frameworks */,
 				7E6081DC26D55C6A00D778F4 /* Resources */,
+				60C59635289815A500424CB6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -7689,10 +7751,10 @@
 			mainGroup = 65F398081B7B684700ABCD39;
 			packageReferences = (
 				7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */,
-				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
+				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */,
+				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */,
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
-				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */,
 				7EF5C55E26C269D6001851D6 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
@@ -8748,6 +8810,7 @@
 				659886941CF74DE9003ECD1C /* ACSSystemUtils.m in Sources */,
 				C7DD465A27550B9F006E1E6C /* FreeLicenseStateTableViewModel.swift in Sources */,
 				242A07B226C677D900181D35 /* AdvancedProtectionController.swift in Sources */,
+				60C59624289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */,
 				D09E2A9C254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				7E3FEFBB26CE9E2F0080EC03 /* FilterDetailsViewController.swift in Sources */,
 				7E2D93FA26F4879700534DC5 /* Constants+LocalDnsAddresses.swift in Sources */,
@@ -8823,6 +8886,7 @@
 				24ED98C8259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D031A14D219EFC99002C17D9 /* DDLog.m in Sources */,
 				B2C8E98F2716EC0700ACDED8 /* PurchaseStatusProtocol.swift in Sources */,
+				60C59621289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */,
 				2408A8AA2747ED5200D2D1DE /* RequestSenderProtocol.swift in Sources */,
 				655A024E1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				2490F6462700685D00B1514D /* ActionExtensionWebReporter.swift in Sources */,
@@ -8856,6 +8920,7 @@
 				D031A0DD219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				7E2BA2E926F9D5AD00B44D4A /* ActionExtensionUserRulesHelper.swift in Sources */,
 				655A02271C6B7686000F00D7 /* ACIOStream.m in Sources */,
+				60C5962A289813FE00424CB6 /* UserNotificationService.swift in Sources */,
 				D06E9BF1269064DC00E5AB5C /* ABECRequest.m in Sources */,
 				7EF5C52A26C261E5001851D6 /* SharedResources.swift in Sources */,
 				7E6EFA3526F88C9D002EED38 /* PreloadedFilesManager.swift in Sources */,
@@ -9137,6 +9202,7 @@
 				7EA7DCBE26C674FE0032AD5C /* SafariProtectionGroupCell.swift in Sources */,
 				B2673DDF2717406900E04747 /* DnsRequestDetailsViewModel.swift in Sources */,
 				24ED98C6259B78DF00A73B17 /* Array+Utils.swift in Sources */,
+				60C5961F289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */,
 				24A6021426FCB0AE0049A329 /* AdvancedYouTubeBlockingController.swift in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				C7DD466227553187006E1E6C /* LicenseProductButton.swift in Sources */,
@@ -9641,27 +9707,34 @@
 				7EC8A40626E78D77005244CF /* Bundle+Utils.swift in Sources */,
 				7EBDD98926D6A2E9009531FA /* DDLog.m in Sources */,
 				7E85A82626F3928F0059BB33 /* ADProductInfo.m in Sources */,
+				60C59638289817D000424CB6 /* String+NSRange.swift in Sources */,
 				7EBDD98226D6A1F2009531FA /* Message.swift in Sources */,
 				7EBDD98E26D6A318009531FA /* ACLFileLocker.m in Sources */,
 				7E18443626F773470085CDE3 /* SharedResources+Theme.swift in Sources */,
 				7EBDD99326D6A351009531FA /* ACLFileLogger.m in Sources */,
 				494E0BBB26E7AF4A005C21C4 /* SharedStorageUrls.swift in Sources */,
 				7E497E1A26E202E90072BDE1 /* ChunkFileReader.swift in Sources */,
+				60C59629289813FD00424CB6 /* UserNotificationService.swift in Sources */,
 				7EBDD98C26D6A2FA009531FA /* ACLLogger.m in Sources */,
 				7EC8A41026E7998F005244CF /* Services.swift in Sources */,
 				7EBDD98626D6A26C009531FA /* CocoaLumberjack.swift in Sources */,
 				7EBDD99726D6A37D009531FA /* DDTTYLogger.m in Sources */,
+				60C59636289817BD00424CB6 /* UIColor+Utils.swift in Sources */,
 				7E9EBDD926EAA6EA00B5FEC3 /* SharedResources+DebugLogs.swift in Sources */,
 				7EBDD99526D6A36C009531FA /* DDLoggerNames.m in Sources */,
 				7EBDD97D26D6A1D0009531FA /* SafariWebExtensionMessageProcessor.swift in Sources */,
 				7EC3368E26FB9B9E002AF24A /* URL+Utils.swift in Sources */,
 				7EBDD97F26D6A1D0009531FA /* SafariWebExtensionHandler.swift in Sources */,
 				7EDACF8F26ED2B4C00C7EE63 /* SharedResources.swift in Sources */,
+				60C59623289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */,
 				7EC8A40D26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */,
 				7EBDD99126D6A344009531FA /* DDOSLogger.m in Sources */,
 				7EBDD99026D6A32F009531FA /* DDFileLogger.m in Sources */,
 				7EBDD98826D6A2E2009531FA /* AESharedResources.m in Sources */,
 				C23534F111B8C189F7DE02FE /* ABECRequest.m in Sources */,
+				C2383BFC97DDE82A55EE6F73 /* String+Utils.swift in Sources */,
+				C230008F30675255C14BCC41 /* UIColorUtils.swift in Sources */,
+				C23094C3C9CBD65313F19A1D /* NSString+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9673,27 +9746,34 @@
 				7EC8A40526E78D76005244CF /* Bundle+Utils.swift in Sources */,
 				7EBDD98A26D6A2EA009531FA /* DDLog.m in Sources */,
 				7E85A82526F3928E0059BB33 /* ADProductInfo.m in Sources */,
+				60C59639289817D100424CB6 /* String+NSRange.swift in Sources */,
 				7EBDD98326D6A1F2009531FA /* Message.swift in Sources */,
 				7EBDD98D26D6A318009531FA /* ACLFileLocker.m in Sources */,
 				7E18443826F773470085CDE3 /* SharedResources+Theme.swift in Sources */,
 				7EBDD99426D6A352009531FA /* ACLFileLogger.m in Sources */,
 				494E0BBA26E7AF49005C21C4 /* SharedStorageUrls.swift in Sources */,
 				7E497E1B26E202E90072BDE1 /* ChunkFileReader.swift in Sources */,
+				60C5962C2898140200424CB6 /* UserNotificationService.swift in Sources */,
 				7EBDD98B26D6A2FA009531FA /* ACLLogger.m in Sources */,
 				7EC8A41126E7998F005244CF /* Services.swift in Sources */,
 				7EBDD98526D6A26B009531FA /* CocoaLumberjack.swift in Sources */,
 				7EBDD99826D6A37E009531FA /* DDTTYLogger.m in Sources */,
+				60C59637289817C000424CB6 /* UIColor+Utils.swift in Sources */,
 				7E9EBDDA26EAA6EB00B5FEC3 /* SharedResources+DebugLogs.swift in Sources */,
 				7EBDD99626D6A36C009531FA /* DDLoggerNames.m in Sources */,
 				7EBDD97E26D6A1D0009531FA /* SafariWebExtensionMessageProcessor.swift in Sources */,
 				7EC3368D26FB9B9C002AF24A /* URL+Utils.swift in Sources */,
 				7EBDD98026D6A1D0009531FA /* SafariWebExtensionHandler.swift in Sources */,
 				7EDACF8E26ED2B4A00C7EE63 /* SharedResources.swift in Sources */,
+				60C59628289813DA00424CB6 /* DevAccountMigrationHelper.swift in Sources */,
 				7EC8A40E26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */,
 				7EBDD99226D6A345009531FA /* DDOSLogger.m in Sources */,
 				7EBDD98F26D6A32F009531FA /* DDFileLogger.m in Sources */,
 				7EBDD98726D6A2E2009531FA /* AESharedResources.m in Sources */,
 				C2388C44531DDE0F29CA73A0 /* ABECRequest.m in Sources */,
+				C23032179D836CE21967D1C2 /* String+Utils.swift in Sources */,
+				C234D10FD2B7660FFF0C39C8 /* UIColorUtils.swift in Sources */,
+				C232011552D6AB02F9CE6C2F /* NSString+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9722,6 +9802,7 @@
 				D083AD6327301CAB00A8F96E /* MigrationServiceVersionProvider.swift in Sources */,
 				B2C8E9802716E91200ACDED8 /* ADLocales.m in Sources */,
 				B2C8E9872716E99700ACDED8 /* DDLoggerNames.m in Sources */,
+				60C59620289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */,
 				B2C19E682716BE1000331109 /* VpnConfigurationStatus.swift in Sources */,
 				B2C8E97F2716E90100ACDED8 /* DDFileLogger.m in Sources */,
 				B2C8E9892716E9FF00ACDED8 /* NSString+Utils.m in Sources */,
@@ -9743,6 +9824,7 @@
 				2408A8992747E6A900D2D1DE /* SupportService+Feedback.swift in Sources */,
 				B2C8E9812716E91A00ACDED8 /* ADProductInfo.m in Sources */,
 				B2C19E6E2716BE9000331109 /* SharedResources+DebugLogs.swift in Sources */,
+				60C5962B289813FF00424CB6 /* UserNotificationService.swift in Sources */,
 				B2C19E6C2716BE5800331109 /* NetworkSettingsService.swift in Sources */,
 				B2C19E6D2716BE7100331109 /* Bundle+Utils.swift in Sources */,
 				B2C19E722716BEE700331109 /* DispatchQueue+Utils.swift in Sources */,
@@ -9784,6 +9866,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60C59622289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */,
 				6089DFC327A83D0600536667 /* DispatchQueue+Utils.swift in Sources */,
 				605E813027A82E6400AFC107 /* UIViewController+Alert.swift in Sources */,
 				605E812E27A7F38E00AFC107 /* URL+Utils.swift in Sources */,
@@ -9811,6 +9894,8 @@
 				C232DDD053E035F5575DC231 /* YouTubeAdsJsResult.swift in Sources */,
 				C23932418213BF73AC1E5BAD /* YoutubeHtmlBuilder.swift in Sources */,
 				C231E086502F0395EC2EE947 /* YoutubePlayerController.swift in Sources */,
+				C2353CAB0014D4E140FDBEE4 /* SharedResources.swift in Sources */,
+				C2334F1307FCE50CBE3BD88C /* ADProductInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9818,6 +9903,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60C59627289813DA00424CB6 /* DevAccountMigrationHelper.swift in Sources */,
 				6089DFC427A8432C00536667 /* UIViewController+Alert.swift in Sources */,
 				6089DFC227A83CFF00536667 /* DispatchQueue+Utils.swift in Sources */,
 				605E812F27A7F39600AFC107 /* URL+Utils.swift in Sources */,
@@ -9845,6 +9931,8 @@
 				C238EFE71373DEE85CA488FF /* YouTubeAdsJsResult.swift in Sources */,
 				C239B55BEA3047C1EFC54AE8 /* YoutubeHtmlBuilder.swift in Sources */,
 				C23AE1CF5A6E9A0B6D3440E8 /* YoutubePlayerController.swift in Sources */,
+				C23ABE368E2EE1B4C6B913FF /* SharedResources.swift in Sources */,
+				C23F49A7FB0AD347B3993C86 /* ADProductInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10464,6 +10552,7 @@
 				2408A8C32747F3F100D2D1DE /* RequestSender.swift in Sources */,
 				B2673DF5271750BC00E04747 /* ADLocales.m in Sources */,
 				B2673DFB271750D500E04747 /* NotificationCenter+Utils.swift in Sources */,
+				60C59625289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */,
 				B2673DF12717508500E04747 /* ComplexProtectionService.swift in Sources */,
 				B2673DFA271750D200E04747 /* ACLLogger.m in Sources */,
 				7E6AD3A1271F15FC00BCEA7F /* Reachability.m in Sources */,
@@ -10485,6 +10574,7 @@
 				B2673E0B2717512B00E04747 /* ConfigurationServiceProtocol.swift in Sources */,
 				D083AD6C27301CAB00A8F96E /* MigrationServiceVersionProvider.swift in Sources */,
 				2408A8CA2747F44500D2D1DE /* SupportService+Feedback.swift in Sources */,
+				60C5962E2898140500424CB6 /* UserNotificationService.swift in Sources */,
 				2408A8D52747F48A00D2D1DE /* AdServicesAttributionRecordsRequest.swift in Sources */,
 				B2673E04271750FA00E04747 /* SharedResources+DebugLogs.swift in Sources */,
 				B2673DEA2717505400E04747 /* TodayViewController.swift in Sources */,
@@ -10565,6 +10655,7 @@
 				B2673E632717542A00E04747 /* DDLoggerNames.m in Sources */,
 				B2673E2D271752C700E04747 /* DDAbstractDatabaseLogger.m in Sources */,
 				B2673E50271753D000E04747 /* ContextProvider.swift in Sources */,
+				60C5962D2898140400424CB6 /* UserNotificationService.swift in Sources */,
 				2483F7E8277B041600BE0A13 /* DnsMigration4_3_1.swift in Sources */,
 				B2673E6A2717544100E04747 /* NotificationCenter+Utils.swift in Sources */,
 				B2673E2B271752BF00E04747 /* RoundRectButton.swift in Sources */,
@@ -10572,6 +10663,7 @@
 				B2673E332717532500E04747 /* FavIconService.swift in Sources */,
 				B2673E612717542400E04747 /* UIViewController+Alert.swift in Sources */,
 				D083ADAF2732BC3500A8F96E /* MigrationStateManager.swift in Sources */,
+				60C59626289813D900424CB6 /* DevAccountMigrationHelper.swift in Sources */,
 				2408A8D42747F48900D2D1DE /* AdServicesAttributionRecordsRequest.swift in Sources */,
 				B2673E672717543900E04747 /* ADLocations.m in Sources */,
 				B2673E23271752A300E04747 /* ACIOUtils.m in Sources */,
@@ -13732,7 +13824,7 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -13756,7 +13848,7 @@
 				version = 1.7.28;
 			};
 		};
-		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
+		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
 			requirement = {
@@ -13764,7 +13856,7 @@
 				minimumVersion = 0.0.3;
 			};
 		};
-		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
@@ -13817,22 +13909,22 @@
 		};
 		B2C8E9A32716FDF500ACDED8 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D024973D25714928000EED34 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D093AA5F25344B4E0015351F /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D09E271A2541D00B002D6BC0 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D0B546032435D740002F0AEC /* Lottie */ = {

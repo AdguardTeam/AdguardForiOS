@@ -325,6 +325,16 @@ extension AESharedResourcesProtocol {
         }
     }
 
+    /* Flag meaning that 'Safari content blockers are disabled after dev team migration' notification was shown */
+    var safariContentBlockersAreDisabledAfterDevTeamMigrationNotificationShown: Bool {
+        get {
+            sharedDefaults().bool(forKey: safariContentBlockersAreDisabledAfterDevTeamMigrationNotificationShownKey)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: safariContentBlockersAreDisabledAfterDevTeamMigrationNotificationShownKey)
+        }
+    }
+
     /* Advanced protection state */
     var advancedProtection: Bool {
         get {
@@ -425,6 +435,7 @@ fileprivate extension AESharedResourcesProtocol {
 
     // Performiks to ASL dev account migration keys
     var pretendPremiumAfterKeychainLossKey: String { "pretendPremiumAfterKeychainLoss" }
+    var safariContentBlockersAreDisabledAfterDevTeamMigrationNotificationShownKey: String { "safariContentBlockersAreDisabledAfterDevTeamMigrationNotificationShown" }
 }
 
 extension Notification.Name {

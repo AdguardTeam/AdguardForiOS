@@ -83,6 +83,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
         super.init(coder: coder)
 
+        // Let's check if we need to process dev account migration
+        serviceInitializer
+            .devAccountMigrationHelper
+            .processDevAccountMigrationIfNeeded()
+
         DDLogInfo("(TodayViewController) - init end")
     }
 
