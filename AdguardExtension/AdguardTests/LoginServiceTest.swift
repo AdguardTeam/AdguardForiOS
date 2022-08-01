@@ -240,6 +240,7 @@ class NetworkMock: ACNNetworkingProtocol {
 class KeychainMock: KeychainServiceProtocol {
 
     var appId: String? = "123"
+    var keychainLost: Bool = false
     var licenseKey: String?
 
     var auth: (String, String)?

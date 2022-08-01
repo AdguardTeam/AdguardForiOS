@@ -67,6 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let themeService: ThemeServiceProtocol
     private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
     private let remoteMigrationService: RemoteMigrationService
+    private var keychain: KeychainServiceProtocol
 
     // MARK: - Application init
 
@@ -98,6 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.dnsProtection = ServiceLocator.shared.getService()!
         self.dnsConfigAssistant = ServiceLocator.shared.getService()!
         self.remoteMigrationService = ServiceLocator.shared.getService()!
+        self.keychain = ServiceLocator.shared.getService()!
 
         super.init()
 
@@ -117,6 +119,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if application.applicationState != .background {
             migrationService.migrateIfNeeded()
         }
+
+        // This part checks if the user has installed a new version of the application with a new Team ID.
+        // When transferring an app to another developer account, the keychain from the old application becomes invalid.
+        // This leads to the fact that the appId is no longer available and the user logged in with the key becomes a 'free' user.
+        // Fortunately, the information about the previous login is stored in resources protected from Apple's terror.
+        // Thus, we consider that hat the simultaneous absence of the keychain and the 'logedIn' flag set to 'true' means
+        // that the user has installed a new version of the application on top of the one activated with the key.
+        _ = keychain.appId
+        if keychain.keychainLost && resources.loggedIn {
+            DDLogInfo("(AppDelegate) Set pretendPremiumAfterKeychainLoss flag to 'true'")
+            resources.pretendPremiumAfterKeychainLoss = true
+        }
+
         purchaseService.checkLicenseStatus(completion: nil)
 
         activateWithOpenUrl = false
