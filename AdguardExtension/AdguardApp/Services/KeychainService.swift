@@ -21,6 +21,7 @@ import Foundation
 protocol KeychainServiceProtocol {
 
     var appId: String? { get }
+    var keychainLost: Bool { get }
     func loadAuth(server: String) -> (login: String, password: String)?
     func saveAuth(server: String, login: String, password: String) -> Bool
     func deleteAuth(server: String) -> Bool
@@ -34,6 +35,7 @@ protocol KeychainServiceProtocol {
 
 class KeychainService : KeychainServiceProtocol {
 
+    var keychainLost: Bool
     let appIdService = "deviceInfo"
     let appIdKey = "AppId"
     let licenseKeyLogin = "license"
@@ -42,6 +44,7 @@ class KeychainService : KeychainServiceProtocol {
 
     init(resources: AESharedResourcesProtocol) {
         self.resources = resources
+        keychainLost = false
     }
 
     var appId: String? {
@@ -59,6 +62,8 @@ class KeychainService : KeychainServiceProtocol {
             // other errors
             if !notFound {
                 _ = deleteAppId()
+            } else {
+                keychainLost = true
             }
 
             let newAppId = generateAppId()

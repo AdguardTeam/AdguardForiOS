@@ -41,6 +41,9 @@ class YouTubeAdsRequestHandler : UINavigationController {
         let isDebugLogs = resources.isDebugLogs
         DDLogInfo("(YouTubeAdsRequestHandler) Start with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+
+        // Let's check if we need to process dev account migration
+        DevAccountMigrationHelper(fromExtension: true, resources, ADProductInfo(), notifications).processDevAccountMigrationIfNeeded()
     }
 
     override func beginRequest(with context: NSExtensionContext) {

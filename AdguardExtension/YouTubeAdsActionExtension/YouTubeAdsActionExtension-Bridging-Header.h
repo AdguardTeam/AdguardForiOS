@@ -23,5 +23,6 @@
 #import "DDLogMacros.h"
 #import "ACLLogger.h"
 #import "NSString+Utils.h"
+#import "ADProductInfo.h"
 
 #endif /* YouTubeAdsActionExtension_Bridging_Header_h */

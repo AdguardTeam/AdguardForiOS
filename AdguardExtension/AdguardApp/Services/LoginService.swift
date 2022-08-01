@@ -193,6 +193,7 @@ final class LoginService: LoginServiceProtocol {
     func logout()->Bool {
 
         loggedIn = false
+        resources.pretendPremiumAfterKeychainLoss = false
         expirationDate = nil
 
         // for logged in 3.0.0 users
@@ -392,10 +393,15 @@ final class LoginService: LoginServiceProtocol {
                 return
             }
 
-            self.expirationDate = expirationDate
-            self.hasPremiumLicense = premium
-            self.loggedIn = premium && self.active
-            self.licenseKey = licenseKey
+            // Ignore the result of status check if application is pretending to be premium after the keychain loss
+            if !self.resources.pretendPremiumAfterKeychainLoss {
+                self.expirationDate = expirationDate
+                self.hasPremiumLicense = premium
+                self.loggedIn = premium && self.active
+                self.licenseKey = licenseKey
+            } else {
+                DDLogDebug("(LoginService) No needs to handle the result of status check: application status is 'quasi-lifetime premium'")
+            }
 
             callback(nil)
         }

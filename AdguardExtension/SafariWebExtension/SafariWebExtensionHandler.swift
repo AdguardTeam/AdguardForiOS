@@ -26,6 +26,11 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     override init() {
         super.init()
         setupLogger()
+
+        // Let's check if we need to process dev account migration
+        Services.shared
+            .devAccountMigrationHelper
+            .processDevAccountMigrationIfNeeded()
     }
 
     func beginRequest(with context: NSExtensionContext) {

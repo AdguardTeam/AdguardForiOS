@@ -315,6 +315,26 @@ extension AESharedResourcesProtocol {
         return false
     }
 
+    /* Quasi-lifetime premium state that is achieved when updating an activated application with the loss of a chain */
+    var pretendPremiumAfterKeychainLoss: Bool {
+        get {
+            sharedDefaults().bool(forKey: pretendPremiumAfterKeychainLossKey)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: pretendPremiumAfterKeychainLossKey)
+        }
+    }
+
+    /* Flag meaning that 'Safari content blockers are disabled after dev team migration' notification was shown */
+    var safariContentBlockersAreDisabledAfterDevTeamMigrationNotificationShown: Bool {
+        get {
+            sharedDefaults().bool(forKey: safariContentBlockersAreDisabledAfterDevTeamMigrationNotificationShownKey)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: safariContentBlockersAreDisabledAfterDevTeamMigrationNotificationShownKey)
+        }
+    }
+
     /* Advanced protection state */
     var advancedProtection: Bool {
         get {
@@ -412,6 +432,10 @@ fileprivate extension AESharedResourcesProtocol {
     // Migration keys
     var migrationTo4_3PassedKey: String { "isMigrationTo4_3PassedKey" }
     var migrationTo4_3_1PassedKey: String { "isMigrationTo4_3_1PassedKey" }
+
+    // Performiks to ASL dev account migration keys
+    var pretendPremiumAfterKeychainLossKey: String { "pretendPremiumAfterKeychainLoss" }
+    var safariContentBlockersAreDisabledAfterDevTeamMigrationNotificationShownKey: String { "safariContentBlockersAreDisabledAfterDevTeamMigrationNotificationShown" }
 }
 
 extension Notification.Name {

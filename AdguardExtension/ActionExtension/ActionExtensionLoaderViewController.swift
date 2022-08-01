@@ -42,6 +42,11 @@ final class ActionExtensionLoaderViewController: UIViewController {
 
         activityIndicator.startAnimating()
 
+        // Let's check if we need to process dev account migration
+        ServicesInitializer.shared
+            .devAccountMigrationHelper
+            .processDevAccountMigrationIfNeeded()
+
         // FIXME: do not stop ui thread. 
         migrateIfNeeded()
 
