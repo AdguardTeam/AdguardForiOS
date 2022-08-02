@@ -10,13 +10,13 @@
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "비밀번호:";
 
-/* Class = "UILabel"; text = "Log in with your AdGuard account or with social networks"; ObjectID = "ZuM-Nn-uXv"; */
+/* Class = "UILabel"; text = "Log in with your AdGuard account or use social login"; ObjectID = "ZuM-Nn-uXv"; */
 "ZuM-Nn-uXv.text" = "SNS 또는 AdGuard 계정으로 로그인하십시오";
 
 /* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "로그인";
 
-/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
+/* Class = "UILabel"; text = "Log in"; ObjectID = "fxK-6y-LB6"; */
 "fxK-6y-LB6.text" = "로그인";
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */

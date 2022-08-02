@@ -116,13 +116,13 @@
 "sign_in_via_adguard_title" = "AdGuard hesabını kullan";
 
 /* (SignInController) SignIn via Apple account title */
-"sign_in_via_apple_title" = "Apple ile devam edin";
+"sign_in_via_apple_title" = "Apple ile devam et";
 
 /* (SignInController) SignIn via Google account title */
-"sign_in_via_google_title" = "Google ile devam edin";
+"sign_in_via_google_title" = "Google ile devam et";
 
 /* (SignInController) SignIn via Facebook account title */
-"sign_in_via_facebook_title" = "Facebook ile devam edin";
+"sign_in_via_facebook_title" = "Facebook ile devam et";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Premium hesabınızın süresi sona erdi";
@@ -131,7 +131,7 @@
 "premium_expired_title" = "Dikkat";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü etkinleştirmenize izin veren lisans anahtarı yok.";
+"not_premium_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak Premium sürümü etkinleştirmenize izin veren lisans anahtarı yok.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
 "login_success_message" = "AdGuard hesabınıza başarıyla giriş yaptınız! iOS için AdGuard Premium sürümü etkinleştirildi.";
@@ -170,7 +170,7 @@
 "whitelist_text" = "AdGuard'ın filtrelemesini istemediğiniz alan adlarını buraya girin. Bu liste diğer ayarlara göre önceliklidir.";
 
 /* (UserFilterController) inverted whitelist description */
-"inverted_whitelist_text" = "Alan adlarını buraya girin. AdGuard yalnızca bu web siteleri için Safari’de filtrelemeyi etkinleştirir.";
+"inverted_whitelist_text" = "Alan adlarını buraya girin. AdGuard, yalnızca bu siteler için Safari'de filtrelemeyi etkinleştirir.";
 
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Buraya satır sonları ile ayrılmış alan adlarını girin. AdGuard, bu alan adlarına tüm bağlantılara izin verecektir.";
@@ -203,7 +203,7 @@
 "add_whitelist_domain_caption" = "Alan adı:";
 
 /* (UserFilterController) add wifi name caption */
-"add_wifi_name_caption" = "İsim:";
+"add_wifi_name_caption" = "Ad:";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Hata raporu gönderilemiyor. Cihazınızda e-posta yapılandırılmamış olabilir.";
@@ -236,7 +236,7 @@
 "native_dns_implementation_title" = "Yerel";
 
 /* MainMenuController - filters menu description */
-"filters_description_format" = "%2$d Filtreden %1$d etkin";
+"filters_description_format" = "%2$d filtreden %1$d filtre etkin";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "Normal";
@@ -275,10 +275,10 @@
 "privacy_policy_action" = "Gizlilik Politikası";
 
 /* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_confirm_title" = "Bir VPN oluşturulacak";
+"vpn_confirm_title" = "Bir VPN oluşturulacaktır";
 
 /* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_confirm_message" = "Özel DNS ayarlarını kurmak için VPN gerekmektedir. Oluşturulan VPN yereldir, yani trafiğiniz herhangi bir sunucu üzerinden yönlendirilmez. Bu VPN profilini kullandığınızda herhangi bir veri toplamayız.";
+"vpn_confirm_message" = "Özel DNS ayarlarını kurmak için VPN gerekmektedir. Oluşturulan VPN yereldir, yani trafiğiniz herhangi bir sunucu üzerinden yönlendirilmeyecektir. Bu VPN profilini kullandığınızda herhangi bir veri toplamayız.";
 
 /* this message is shown during the login on the license screen */
 "loading_message" = "Lütfen bekleyin...";
@@ -311,7 +311,7 @@
 "reset_stat_title" = "İstatistikleri sıfırla";
 
 /* (AdvancedSettingsController) Reset statistics description */
-"reset_stat_descr" = "Tüm istatistikler temizlenecek!";
+"reset_stat_descr" = "Tüm istatistikler temizlenecektir!";
 
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Sıfırla";
@@ -353,19 +353,19 @@
 "login_max_computers_exceeded" = "Bu lisans, çok fazla cihazda etkinleştirildi.\nLisansın kullanılmayan cihazlarla olan bağlantısını sitedeki kişisel hesabınızda kaldırabilirsiniz: adguard.com";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
-"action_extension_no_configuration_message_format" = "Bu işlem eklentisini kullanabilmeniz için önce, %1$@ ilk yapılandırmayı gerçekleştirmek zorundadır. Bunu yapmak için ana %2$@ uygulamasını başlatın.";
+"action_extension_no_configuration_message_format" = "Bu işlem uzantısını kullanabilmeniz için önce, %1$@ ilk yapılandırmayı gerçekleştirmek zorundadır. Bunu yapmak için ana %2$@ uygulamasını başlatın.";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "İçerik engelleyicinin devre dışı bırakıldığını unutmayın. Bu, reklamların AdGuard ayarlarına bakılmaksızın filtrelenmeyeceği anlamına gelir. Filtrelemeye başlamak için lütfen Safari ayarlarından AdGuard İçerik Engelleyiciyi etkinleştirin.";
 
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
-"hostname_obtaining_error" = "Ana bilgisayar adı temin edilemedi. Sayfa henüz yüklenmemiş olabilir.";
+"hostname_obtaining_error" = "Ana makine adı temin edilemedi. Sayfa henüz yüklenmemiş olabilir.";
 
 /* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
 "assistant_launching_unable" = "Bu sitenin güvenlik politikası AdGuard Asistanı başlatmanıza izin vermiyor.";
 
 /* (Action Extension - ActionViewController) Some errors when starting. */
-"support_error_safari_extension" = "Safari işlem eklentisi başlatılırken beklenmeyen bir hata oluştu. Bu tekrar olursa lütfen AdGuard Destek ile iletişime geçin.";
+"support_error_safari_extension" = "Safari işlem uzantısı başlatılırken beklenmeyen bir hata oluştu. Bu tekrar olursa lütfen AdGuard Destek ile iletişime geçin.";
 
 /* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
 "common_warning_title" = "Uyarı";
@@ -395,7 +395,7 @@
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nTüm hakları saklıdır. AdGuard.com";
 
 /* (LicensePageViewController) Login title */
-"common_login" = "GİRİŞ YAP";
+"common_login" = "Giriş yap";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Çıkış";
@@ -419,7 +419,7 @@
 "wifi_exceptions_title" = "Wi-Fi istisnaları";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Aşağıda listelenen Wi-Fi ağlarında DNS koruması çalışmayacak";
+"wifi_exceptions_description" = "DNS koruması, aşağıda listelenen Wi-Fi ağları için çalışmaz";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "İstisna ekle";
@@ -518,7 +518,7 @@
 "essential" = "Temel";
 
 /*(LogCategory) site_analytics category*/
-"site_analytics" = "Site analitikleri";
+"site_analytics" = "Site analizleri";
 
 /*(LogCategory) social media category*/
 "social_media" = "Sosyal medya";
@@ -530,7 +530,7 @@
 "cdn" = "CDN";
 
 /*(LogCategory) mobile analytics category*/
-"mobile_analytics" = "Mobil analitikleri";
+"mobile_analytics" = "Mobil analizleri";
 
 /*(LogCategory) hosting category*/
 "hosting" = "Barındırma";
@@ -539,7 +539,7 @@
 "unknown" = "Bilinmeyen";
 
 /*(LogCategory) extensions category*/
-"extensions" = "Eklentiler";
+"extensions" = "Uzantılar";
 
 /*(ListOfRules) Select title */
 "common_select" = "Seç";
@@ -653,7 +653,7 @@
 "system_enabled" = "DNS koruması";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d istek, %2$d şifreli";
+"widget_statistics" = "%1$d istek, %2$d şifrelenmiş";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Bu bilgi WhoTrackMe.com hizmetinden yüklendi";
@@ -710,16 +710,16 @@
 "onboarding_second_step_text" = "<b>Safari'ye</b> dokunun, aşağı kaydırın ve <b>İçerik engelleyiciler'e</b> dokunun.";
 
 /* (OnboardingController) second step with advanced protection text */
-"advanced_protection_onboarding_second_step_text" = "<b>Safari > Eklentiler'e</b> gidin.";
+"advanced_protection_onboarding_second_step_text" = "<b>Safari > Uzantılar</b> öğesine gidin.";
 
 /* (OnboardingController) third step text */
-"onboarding_third_step_text" = "Tüm AdGuard eklentilerini <b>etkinleştirin</b>.";
+"onboarding_third_step_text" = "Tüm AdGuard uzantılarını <b>etkinleştirin</b>.";
 
 /* (OnboardingController) third step with advanced protection text */
 "advanced_protection_onboarding_third_step_text" = "Tüm AdGuard geçişlerini <b>açık</b> olarak ayarlayın. Başlayabilirsiniz!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "<b>Gelişmiş</b> koruma için Safari'yi açın, URL alanının sol tarafındaki <b>aA</b> simgesine dokunun,<br><br> %@ <br><br>sonra <b>Eklentileri yönet'e</b> dokunun ve <b>AdGuard</b> geçişini açın.";
+"onboarding_fours_step_text" = "<b>Gelişmiş</b> koruma için Safari'yi açın, URL alanının sol tarafındaki <b>aA</b> simgesine dokunun,<br><br> %@ <br><br>sonra <b>Uzantıları yönet</b> öğesine dokunun ve <b>AdGuard</b> geçişini açın.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "İsteği engelle";
@@ -728,7 +728,7 @@
 "whitelist_request" = "İzin listesine alan adı ekle";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
-"video_tutorial_title" = "Eğitim Videosu";
+"video_tutorial_title" = "Video Eğitimi";
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Geçersiz üst sunucu girdiniz";
@@ -785,7 +785,7 @@
 "category_title" = "Kategori";
 
 /* (DnsRequestDetailsController) "Name" title for cell */
-"name_title" = "İsim";
+"name_title" = "Ad";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "Site";
@@ -833,10 +833,10 @@
 "empty_dns_answer" = "Boş";
 
 /* (BugReportController) Message when bug report failed */
-"bug_report_failed_message" = "Hata bildiriminiz gönderilemedi, lütfen tekrar deneyin";
+"bug_report_failed_message" = "Hata raporu gönderilemedi, lütfen tekrar deneyin";
 
 /* (BugReportController) Message when bug report successed */
-"bug_report_successed_message" = "Hata bildiriminiz başarıyla gönderildi!";
+"bug_report_successed_message" = "Hata raporunuz başarıyla gönderildi!";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "AdGuard'ın <a href=%2$@>SKLS</a> ve <a href=%1$@>Gizlilik Politikasını</a> kabul ediyorum.";
@@ -845,7 +845,7 @@
 "requests_info_alert_title" = "İstekler";
 
 /* (ActivityViewController) - Requests alert message */
-"requests_info_alert_message" = "Bir web sayfasını her ziyaret ettiğinizde, bir istek gönderilir. Web sayfaları gizli istekler gönderebilir ve kişisel veri sızdırıyor olabilirler. Bu sorunun kapsamını fark edebilmek için toplam istek sayısını bilmek faydalıdır.";
+"requests_info_alert_message" = "Bir siteyi her ziyaret ettiğinizde, bir istek gönderilir. Siteler gizli istekler gönderebilir ve kişisel verileri sızdırabilir. Bu sorunun kapsamını gerçekleştirmek için toplam istek sayısını bilmek yararlıdır.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Şifrelenmiş istekler";
@@ -902,7 +902,7 @@
 "detailed_filter_info_version_subtitle" = "Sürüm";
 
 /* (FilterDetailsViewController) Updated subtitle for detailed filter info */
-"detailed_filter_info_updated_subtitle" = "Güncellenme tarihi";
+"detailed_filter_info_updated_subtitle" = "Güncellendi";
 
 /* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
 "detailed_filter_info_rules_count_subtitle" = "Kural sayısı";
@@ -1062,7 +1062,7 @@
 "low_level_beta_link" = "Harika yeni AdGuard özellikleriyle ilgileniyor musunuz? <a href=\"%@\">Beta kanalımızı</a> deneyin.";
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
-"low_level_bootstraps_placeholder" = "DOH/DOT ana bilgisayar adlarını (varsa) çözmek için kullanılacak düz DNS sunucularının listesi";
+"low_level_bootstraps_placeholder" = "DOH/DOT ana makine adlarını (varsa) çözmek için kullanılacak düz DNS sunucularının listesi";
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Yapılandırılmış sunucu mevcut olmadığında kullanılacak olan bir DNS çözümleyicisi. Boş bırakırsanız, yedek olarak sistem DNS'sini kullanmak anlamına gelir. \"Yok\" ifadesi, hiçbir şekilde geri dönüş olmadığı anlamına gelir.";
@@ -1100,27 +1100,27 @@
 "setapp_device_limit_reached" = "Setapp hesabınıza maksimum sayıda cihaz bağladınız.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_safari" = "YouTube'un size daha fazla reklam göstermek için algoritmasını değiştirdiğini biliyor muydunuz?<br><br>Şimdi onları engellemek için yapmanız gerekenler:<br><br>1. <a href=\"%@\">Safari'yi</a> açın.<br><br>2. youtube.com'u açın.<br><br>3. %@ Paylaş düğmesine dokunun.<br><br>4. \"YouTube Reklamlarını Engelle (AdGuard tarafından)\" seçeneğine dokunun.";
+"block_youtube_ads_instructions_safari" = "YouTube'un size daha fazla reklam göstermek için algoritmasını değiştirdiğini biliyor muydunuz?<br><br>Şimdi onları engellemek için yapmanız gerekenler:<br><br>1. <a href=\"%@\">Safari'yi</a> açın.<br><br>2. youtube.com'u açın.<br><br>3. %@ Paylaş düğmesine dokunun.<br><br>4. \"YouTube Reklamlarını Engelle (AdGuard tarafından)\" öğesine dokunun.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
-"block_youtube_ads_instructions" = "YouTube'un size daha fazla reklam göstermek için algoritmasını değiştirdiğini biliyor muydunuz?<br><br>Şimdi onları engellemek için yapmanız gerekenler:<br><br>1. Safari'de <a href=\"%@\">youtube.com'u</a> açın.<br><br>2. %@ Paylaş düğmesine dokunun.<br><br>3. \"YouTube Reklamlarını Engelle (AdGuard tarafından)\" seçeneğine dokunun.";
+"block_youtube_ads_instructions" = "YouTube'un size daha fazla reklam göstermek için algoritmasını değiştirdiğini biliyor muydunuz?<br><br>Şimdi onları engellemek için yapmanız gerekenler:<br><br>1. Safari'de <a href=\"%@\">youtube.com'u</a> açın.<br><br>2. %@ Paylaş düğmesine dokunun.<br><br>3. \"YouTube Reklamlarını Engelle (AdGuard tarafından)\" öğesine dokunun.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_done_text_safari" = "Bitti! Artık YouTube'u reklamsız izleyebilirsiniz.\n\nEklenti etkinleştirildiğinde, YouTube logosunun yanında \"AdGuard ile\" bir başlık görüntülenir.<br><br><b>Sayfayı yeniden yüklerseniz 3. ve 4. adımları yeniden yapmanız gerekir.</b>";
+"block_youtube_ads_instructions_done_text_safari" = "Bitti! Artık YouTube'u reklamsız izleyebilirsiniz.\n\nUzantı etkinleştirildiğinde, YouTube logosunun yanında \"AdGuard ile\" bir başlık görüntülenir.<br><br><b>Sayfayı yeniden yüklerseniz 3. ve 4. adımları yeniden yapmanız gerekir.</b>";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
-"block_youtube_ads_instructions_done_text" = "Bitti! Artık YouTube'u reklamsız izleyebilirsiniz.\n\nEklenti etkinleştirildiğinde, YouTube logosunun yanında \"AdGuard ile\" bir başlık görüntülenir.<br><br><b>Sayfayı yeniden yüklerseniz 2. ve 3. adımları yeniden yapmanız gerekir.</b>";
+"block_youtube_ads_instructions_done_text" = "Bitti! Artık YouTube'u reklamsız izleyebilirsiniz.\n\nUzantı etkinleştirildiğinde, YouTube logosunun yanında \"AdGuard ile\" bir başlık görüntülenir.<br><br><b>Sayfayı yeniden yüklerseniz 2. ve 3. adımları yeniden yapmanız gerekir.</b>";
 
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
 
-"youtube_script_success_title" = "YouTube artık reklamsız! Sayfayı her yeniden yüklediğinizde bu eklentiyi yeniden çalıştırmanız gerekecek.";
+"youtube_script_success_title" = "YouTube artık reklamsız! Sayfayı her yeniden yüklediğinizde bu uzantıyı yeniden çalıştırmanız gerekecek.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
-"youtube_script_wrong_domain_title" = "Bu eklenti yalnızca YouTube için çalışır.";
+"youtube_script_wrong_domain_title" = "Bu uzantı yalnızca YouTube için çalışır.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
-"youtube_script_already_executed_title" = "Eklenti zaten yürütüldü";
+"youtube_script_already_executed_title" = "Uzantı zaten yürütüldü";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "YouTube reklamları kaldırılırken bilinmeyen bir hata oluştu";
@@ -1128,10 +1128,10 @@
 // MARK: - ActionExtensionMainController
 /* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
 
-"action_extension_obsolete_info" = "Bu eylem eklentisi güncel değil ancak yeni AdGuard Web Safari eklentisi aA menüsünde mevcut. Yeni eklentiyi kullanmaya başlamak için aA menüsünü açın, Eklentileri Yönet'e dokunun ve AdGuard düğmesini açın.";
+"action_extension_obsolete_info" = "Bu eylem uzantısı güncel değil ancak yeni AdGuard Web Safari eklentisi aA menüsünde mevcut. Yeni uzantıyı kullanmaya başlamak için aA menüsünü açın, Uzantıları Yönet'e dokunun ve AdGuard düğmesini açın.";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
-"action_extension_new_version_info" = "Bu eklentinin yeni bir sürümü iOS 15 için mevcut. Daha fazla özelliğe ve geliştirilmiş bir kullanıcı arayüzüne sahiptir. Güncellemeyi unutmayın!";
+"action_extension_new_version_info" = "Bu uzantının yeni bir sürümü iOS 15 için mevcut. Daha fazla özelliğe ve geliştirilmiş bir kullanıcı arayüzüne sahiptir. Güncellemeyi unutmayın!";
 
 /* (BackgroundFetchController) - Background app refresh default title */
 "background_fetch_default_period" = "Varsayılan süre";
@@ -1158,7 +1158,7 @@
 "dns_provider_controller_title" = "DNS sunucusu";
 
 /* (DnsProvidersController) - Header description */
-"dns_provider_controller_description" = "DNS akışını şifreleyerek çevrimiçi gizliliğinizi artırabilirsiniz. Bunu yapmak için önerilen DNS sağlayıcılarından birini seçin.";
+"dns_provider_controller_description" = "DNS trafiğini şifreleyerek çevrimiçi gizliliğinizi artırabilirsiniz. Bunu yapmak için tavsiye edilen DNS sağlayıcılarından birini seçin.";
 
 /* (DnsProviderDetailsController) Server title */
 "server_title" = "Sunucu";
@@ -1207,3 +1207,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Bir şeyler ters gitti";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard içerik engelleyicileri, Safari ayarlarında devre dışı bırakılmış. Reklamları ve izleyicileri engellememize izin vermek için etkinleştirin.";

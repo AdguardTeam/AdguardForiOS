@@ -5,10 +5,10 @@
 "6WB-a0-8YE.text" = "Safari koruması";
 
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
-"Cyn-cw-Zrm.text" = "İsim:";
+"Cyn-cw-Zrm.text" = "Ad:";
 
 /* Class = "UILabel"; text = "AdGuard is disabled for the websites from this list"; ObjectID = "Gg8-4u-qvU"; */
-"Gg8-4u-qvU.text" = "AdGuard bu listedeki sitelerde çalışmıyor";
+"Gg8-4u-qvU.text" = "AdGuard bu listedeki siteler için devre dışı bırakıldı";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
 "Lq2-mi-McV.text" = "Filtreler";
@@ -20,7 +20,7 @@
 "OpB-AR-Og7.normalTitle" = "İptal";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "Safari'de açılan web sitelerindeki reklamları ve izleyicileri engeller";
+"QHZ-sJ-wTL.text" = "Safari'de açılan sitelerdeki reklamları ve izleyicileri engeller";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Kural sayısı:";

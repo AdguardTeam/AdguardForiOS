@@ -71,7 +71,7 @@
 "permanent_subscription_title" = "Permanen";
 
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "Pembelian";
+"upgrade_lifetime_button_title" = "Beli";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Kehilangan kata sandi?";

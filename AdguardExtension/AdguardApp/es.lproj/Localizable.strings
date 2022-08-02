@@ -131,13 +131,13 @@
 "premium_expired_title" = "Atención";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "Has iniciado sesión correctamente en tu cuenta de AdGuard, pero no hay claves de licencia que te permitan activar la versión premium.";
+"not_premium_message" = "Has iniciado sesión correctamente en tu cuenta AdGuard, pero no hay claves de licencia que te permitan activar la versión premium.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
-"login_success_message" = "Has iniciado sesión correctamente en tu cuenta de AdGuard. La versión premium de AdGuard para iOS ha sido activada.";
+"login_success_message" = "Has iniciado sesión correctamente en tu cuenta AdGuard. La versión premium de AdGuard para iOS ha sido activada.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "Has iniciado sesión correctamente en tu cuenta de AdGuard, pero las claves de licencia que te permiten activar la versión premium han expirado.";
+"login_premium_expired_message" = "Has iniciado sesión correctamente en tu cuenta AdGuard, pero las claves de licencia que te permiten activar la versión premium han expirado.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Se ha producido un error al intentar restaurar la compra.";
@@ -1207,3 +1207,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Algo salió mal";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "Los bloqueadores de contenido de AdGuard están deshabilitados en la configuración de Safari. Habilítalos para permitirnos bloquear anuncios y rastreadores.";

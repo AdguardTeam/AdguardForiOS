@@ -80,7 +80,7 @@
 "qDy-4e-MsZ.text" = "送信方法を選んで、AdGuardログをエクスポートできます。";
 
 /* Class = "UILabel"; text = "Your email address:"; ObjectID = "rHj-Ne-4zA"; */
-"rHj-Ne-4zA.text" = "メールアドレス（任意）:";
+"rHj-Ne-4zA.text" = "メールアドレス:";
 
 /* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
 "rlh-5H-fPk.text" = "AdGuardについて話し合う";

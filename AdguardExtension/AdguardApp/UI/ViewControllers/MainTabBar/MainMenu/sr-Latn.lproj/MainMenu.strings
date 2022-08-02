@@ -1,3 +1,5 @@
+/* Class = "UILabel"; text = "Email address is incorrect"; ObjectID = "5dK-DT-TDt"; */
+"5dK-DT-TDt.text" = "Adresa elektronske pošte nije tačna";
 
 /* Class = "UILabel"; text = "Description:"; ObjectID = "5nl-wn-tlv"; */
 "5nl-wn-tlv.text" = "Opis:";
@@ -21,7 +23,7 @@
 "F6u-LX-1dd.text" = "Ostavite povratne informacije";
 
 /* Class = "UILabel"; text = "Leave feedback"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
-"GA6-E3-BcJ.text" = "Ostavite povratne informacije";
+"GA6-E3-BcJ.text" = "Prijavi grešku";
 
 /* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
 "L2l-pO-K3q.text" = "Opšte";
@@ -34,6 +36,12 @@
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "Postavke";
+
+/* Class = "UILabel"; text = "Attach application logs"; ObjectID = "V7E-QE-uIA"; */
+"V7E-QE-uIA.text" = "Priloži dnevnike aplikacije";
+
+/* Class = "UILabel"; text = "Discuss on our forum, in social networks, or on GitHub"; ObjectID = "W6h-Gt-MMt"; */
+"W6h-Gt-MMt.text" = "Imate li odličnu ideju?";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Postavke";
@@ -53,8 +61,17 @@
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
 "gap-Uy-5ka.placeholder" = "Adresa elektronske pošte";
 
+/* Class = "UIButton"; normalTitle = "Submit a report"; ObjectID = "in9-YT-8ra"; */
+"in9-YT-8ra.normalTitle" = "Pošalji izveštaj";
+
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Kako da blokiram reklame sa AdGuard-om";
+
+/* Class = "UILabel"; text = "Report a bug or submit a feature request"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "Pomozite nam da poboljšamo našu aplikaciju";
+
+/* Class = "UILabel"; text = "If you've run into a problem or have a suggestion on how to improve AdGuard, tell us about it"; ObjectID = "pJU-2c-JHy"; */
+"pJU-2c-JHy.text" = "Ako ste naišli na problem ili imate predlog kako da poboljšamo AdGuard, recite nam o tome";
 
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
 "q9f-Zw-7sc.text" = "Prijavi pogrešno blokiranje";
@@ -62,8 +79,11 @@
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
 "qDy-4e-MsZ.text" = "Možete izvesti dnevnike i poslati ih nam na vama prigodan način";
 
+/* Class = "UILabel"; text = "Your email address:"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "Vaš email:";
+
 /* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
-"rlh-5H-fPk.text" = "Forum programa";
+"rlh-5H-fPk.text" = "Zahtevanje nove mogućnosti";
 
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
 "se6-jk-4Az.text" = "Pretplate i nalog";

@@ -62,7 +62,7 @@
 "IvJ-Oi-vGF.text" = "Низькорівневі параметри";
 
 /* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
-"JQH-8J-wY8.text" = "Bootstrap сервери";
+"JQH-8J-wY8.text" = "Bootstrap-сервери";
 
 /* Class = "UILabel"; text = "This will delete your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "Ця дія видалить ваш VPN-профіль і вимкне DNS-захист";
@@ -83,7 +83,7 @@
 "Rmq-30-7hJ.text" = "Блокувати AAAA-запити";
 
 /* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
-"TX9-Md-Qzr.text" = "Системні налаштування";
+"TX9-Md-Qzr.text" = "Системна";
 
 /* Class = "UILabel"; text = "This option will reset all your settings"; ObjectID = "Twq-5a-kOB"; */
 "Twq-5a-kOB.text" = "Цей параметр скине всі ваші налаштування";
@@ -134,7 +134,7 @@
 "jmQ-ze-hFG.text" = "В режимі Split-Tunnel, AdGuard сумісний із так-званими «Personal VPN» програмами. Недоліком цього режиму є те, що він може бути заміщений системою у випадку поганої якості з'єднання.";
 
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
-"k0U-fn-m9X.text" = "Fallback сервери";
+"k0U-fn-m9X.text" = "Fallback-сервери";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Інше";
@@ -149,28 +149,28 @@
 "qxo-YS-JWL.text" = "Показувати панель стану";
 
 /* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA)"; ObjectID = "rDk-OP-kAS"; */
-"rDk-OP-kAS.text" = "Відповідати з нульовою IP-адресою (0.0.0.0 для A; :: для AAAA)";
+"rDk-OP-kAS.text" = "Відповідати нульовою IP-адресою («0.0.0.0» для A, «::» для AAAA)";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
-"reQ-4X-84i.text" = "Низькорівневі параметри";
+"reQ-4X-84i.text" = "Низькорівневі налаштування";
 
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "sNF-Hy-NdB"; */
 "sNF-Hy-NdB.normalTitle" = "Зберегти";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
-"sc6-Tw-xnL.text" = "Параметри";
+"sc6-Tw-xnL.text" = "Налаштування";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
-"tTY-BW-QcN.text" = "Якщо цей параметр увімкнено, AdGuard використовуватиме лише Wi-Fi для фонового оновлення фільтрів";
+"tTY-BW-QcN.text" = "Якщо увімкнено, задля фонового оновлення фільтрів AdGuard буде використовувати лише Wi-Fi";
 
-/* Class = "UILabel"; text = "Blocked Response TTL"; ObjectID = "uRk-qq-TJH"; */
+/* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "uRk-qq-TJH"; */
 "uRk-qq-TJH.text" = "Заблокована відповідь TTL";
 
 /* Class = "UILabel"; text = "Are you a developer?"; ObjectID = "wPe-ae-X0G"; */
 "wPe-ae-X0G.text" = "Ви розробник?";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
-"wYq-g0-5k6.text" = "Ця опція зітре усі статистичні дані, наприклад, кількість запитів та ін.";
+"wYq-g0-5k6.text" = "Буде стерто усі статистичні дані, наприклад, кількість запитів тощо.";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Розблокувати рекламу всюди, окрім вебсайтів з цього списку";

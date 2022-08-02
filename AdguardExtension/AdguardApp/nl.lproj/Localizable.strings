@@ -296,7 +296,7 @@
 "cb_screen_content_blockers_title" = "Inhoudsblokkeringen";
 
 /* (AdvancedSettingsController) Restart when network changes error */
-"general_settings_restart_tunnel_error" = "Je moet VPN eerst inschakelen";
+"general_settings_restart_tunnel_error" = "Je moet eerst VPN inschakelen";
 
 /* (AdvancedSettingsController) Reset statistics title */
 "reset_stat_title" = "Herstel statistieken";
@@ -1198,3 +1198,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Er is iets verkeerd gegaan";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard-inhoudblokkeerders zijn uitgeschakeld in de Safari-instellingen. Schakel ze in zodat we advertenties en volgers kunnen blokkeren.";

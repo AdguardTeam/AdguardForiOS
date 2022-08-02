@@ -1,6 +1,35 @@
+/* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "3ju-B8-UIZ"; */
+"3ju-B8-UIZ.normalTitle" = "Pogledajte video sa uputstvima";
+
+/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "E6C-TE-ZI6"; */
+"E6C-TE-ZI6.text" = "Uslovi korišćenja";
+
+/* Class = "UILabel"; text = "Enable AdGuard for Safari"; ObjectID = "F7O-MB-LHu"; */
+"F7O-MB-LHu.text" = "Da biste koristili AdGuard u Safariju, ispratite nekoliko jednostavnih koraka:";
+
+/* Class = "UILabel"; text = "Block Trackers"; ObjectID = "FDG-As-HDY"; */
+"FDG-As-HDY.text" = "DNS zaštita";
+
+/* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "GOu-4j-RcN"; */
+"GOu-4j-RcN.normalTitle" = "Pogledaj ručno";
+
+/* Class = "UILabel"; text = "Stop thousands of corporations from tracking your every move. Regain control of your online privacy."; ObjectID = "Mzf-WJ-CpC"; Note = "String must be less or equal 4 lines"; */
+"Mzf-WJ-CpC.text" = "AdGuard se bori protiv hiljada korporacija koje prate svaki vaš klik i čini vašu privatnost sigurnom.";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "cMV-qC-ZdE"; */
-"cMV-qC-ZdE.normalTitle" = "Nastavi";
+"cMV-qC-ZdE.normalTitle" = "Dalje";
+
+/* Class = "UILabel"; text = "Block Ads"; ObjectID = "hXU-wD-fbI"; */
+"hXU-wD-fbI.text" = "Safari zaštita";
+
+/* Class = "UILabel"; text = "Block Annoyances"; ObjectID = "hf9-6r-TUk"; */
+"hf9-6r-TUk.text" = "Safari zaštita";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "q8l-xM-B5q"; */
-"q8l-xM-B5q.normalTitle" = "Nastavi";
+"q8l-xM-B5q.normalTitle" = "Dalje";
+
+/* Class = "UILabel"; text = "AdGuard blocks ads in Safari on most websites. Enjoy faster web surfing without ads!"; ObjectID = "r3n-Il-Qe8"; Note = "String must be less or equal 4 lines"; */
+"r3n-Il-Qe8.text" = "AdGuard je odličan u blokiranju reklama na svim sajtovima u Safariju, pa možete pregledati brzo i bez reklama.";
+
+/* Class = "UILabel"; text = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way."; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
+"thP-lV-BhN.text" = "AdGuard može filtrirati sve vrste sadržaja a filtriranje možete podesiti prema vašim potrebama.";

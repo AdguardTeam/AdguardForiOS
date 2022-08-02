@@ -1207,3 +1207,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "すみません、なにか不具合が生じたようです。";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuardコンテンツブロッカーはSafariの設定で無効になっています。広告とトラッキングをブロックするには、有効にしてください。";

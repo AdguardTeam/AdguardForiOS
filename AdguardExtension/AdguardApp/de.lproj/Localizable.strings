@@ -29,13 +29,13 @@
 "safari_filters_loading_error" = "Filter konnten nicht in Safari geladen werden. Ihre letzten Änderungen wurden nicht übernommen.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filter konnten nicht in Safari geladen werden. Versuchen Sie, Ihre Regeln und die Freigabeliste zu löschen, oder ändern die verwendeten Filter.";
+"load_to_safari_error" = "Filter konnten nicht in Safari geladen werden. Versuchen Sie, Ihre Regeln und die Positivliste zu löschen, oder ändern die verwendeten Filter.";
 
 /* NO Button caption in alert */
 "common_action_no" = "Nein";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Freigabeliste (invertiert)";
+"inverted_whitelist_title" = "Positivliste (invertiert)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Änderungen werden übernommen …";
@@ -167,7 +167,7 @@
 "blacklist_text_format" = "Geben Sie Ihre eigenen Regeln hier ein.<br>Lesen Sie diesen <a href=\"%@\">Hinweis über die Regel-Syntax</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard wird dort keine Werbung filtern und alle anderen Einstellungen ignorieren.";
+"whitelist_text" = "Bitte Domainnamen hier eingeben. AdGuard wird dort keine Werbung filtern und alle anderen Einstellungen ignorieren.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard aktiviert die Filterung in Safari nur für diese Websites.";
@@ -221,7 +221,7 @@
 "filter_version_format" = "Version %@";
 
 /* (DnsSettingController) split tunel mode description */
-"tunnel_mode_split_description" = "„Getrennter Tunnel”, kompatibel mit „Personal VPN”-Apps";
+"tunnel_mode_split_description" = "„Split-Tunnel”, kompatibel mit „Personal VPN”-Apps";
 
 /* (DnsSettingController) Full tunel mode description */
 "tunnel_mode_full_description" = "Full-Tunnel, inkompatibel mit anderen VPN-Apps";
@@ -437,10 +437,10 @@
 "wifi_data_description" = "DNS-Schutz im WLAN-Modus";
 
 /* (ListOfRulesModel) title for dns allowlist */
-"allowlist_title" = "Freigabeliste";
+"allowlist_title" = "Positivliste";
 
 /* (ListOfRulesModel) title safari Allowlist */
-"whitelist_title" = "Freigabeliste";
+"whitelist_title" = "Positivliste";
 
 /* (ListOfRulesModel) title for dns block list */
 "dns_blacklist_title" = "Sperrliste";
@@ -458,13 +458,13 @@
 "editor_safari_user_rules_description" = "Safari-Benutzerregeln hinzufügen";
 
 /* (UserRulesTableController) - description for allowlist rules in editor  */
-"editor_allowlist_rules_description" = "Benutzerdefinierte Freigabelistenregeln hinzufügen";
+"editor_allowlist_rules_description" = "Benutzerdefinierte Positivlistenregeln hinzufügen";
 
 /* (UserRulesTableController) - description for inverted allowlist rules in editor  */
-"editor_inverted_allowlist_rules_description" = "Benutzerdefinierte Regeln zur invertierten Freigabeliste hinzufügen";
+"editor_inverted_allowlist_rules_description" = "Benutzerdefinierte Regeln zur invertierten Positivliste hinzufügen";
 
 /* (UserRulesTableController) - description for DNS allowlist rules in editor  */
-"editor_dns_allowlist_rules_description" = "Benutzerdefinierte Regeln zur DNS-Freigabeliste hinzufügen";
+"editor_dns_allowlist_rules_description" = "Benutzerdefinierte Regeln zur DNS-Positivliste hinzufügen";
 
 /* (UserRulesTableController) - description for DNS blocklist rules in editor  */
 "editor_dns_blocklist_rules_description" = "Benutzerdefinierte Regeln zur DNS-Sperrliste hinzufügen";
@@ -482,13 +482,13 @@
 "disabled" = "Deaktiviert";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Aus Freigabeliste entfernen";
+"remove_from_whitelist" = "Aus Positivliste entfernen";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
 "remove_from_blacklist" = "Aus Sperrliste entfernen";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "Zur Freigabeliste hinzufügen";
+"add_to_whitelist" = "Zur Positivliste hinzufügen";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
 "add_to_blacklist" = "Zur Sperrliste hinzufügen";
@@ -689,13 +689,13 @@
 "dns_request_status_allowlisted" = "Zugelassen";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "zu Freigabeliste hinzugefügt";
+"dns_request_user_status_added_to_whitelist" = "zu Positivliste hinzugefügt";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_blacklist" = "zu Sperrliste hinzugefügt";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "aus Freigabeliste entfernt";
+"dns_request_user_status_removed_from_whitelist" = "aus Positivliste entfernt";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "aus Sperrliste entfernt";
@@ -725,7 +725,7 @@
 "block_request" = "Anfrage sperren";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Domain zur Freigabeliste hinzufügen";
+"whitelist_request" = "Domain zur Positivliste hinzufügen";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Video-Anleitung";
@@ -767,7 +767,7 @@
 "system_blacklist" = "System-Sperrliste";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "System-Freigabeliste";
+"system_whitelist" = "System-Positivliste";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "Details";
@@ -890,7 +890,7 @@
 "native_dns_setup_description" = "Um natives DNS zu aktivieren, öffnen Sie die <b>„Systemeinstellungen“ ➜ „Allgemein“ ➜ „VPN & Netzwerk“ ➜ „DNS“</b> und wählen dort <b>%@</b>.";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
-"native_dns_setup_description_ios15" = "Um natives DNS zu verwenden, öffnen Sie die <b>„Systemeinstellungen” ➜ „Allgemein” ➜ „VPN und Geräteverwaltung” ➜ „DNS”</b> und wählen Sie dort <b>%@</b>.";
+"native_dns_setup_description_ios15" = "Um das native DNS zu verwenden, öffnen Sie <b>„Systemeinstellungen” > „Allgemein” > „VPN und Geräteverwaltung” > „DNS”</b> und wählen Sie dort <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Wie würden Sie Ihre Erfahrung mit AdGuard beschreiben?";
@@ -925,10 +925,10 @@
 "user_rules_processing_descr" = "Einen Moment bitte ...";
 
 /* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
-"user_rules_allowlist_rule_removed" = "wurde aus der <u style=color:%@>Freigabeliste</u> entfernt";
+"user_rules_allowlist_rule_removed" = "wurde aus der <u style=color:%@>Positivliste</u> entfernt";
 
 /* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
-"user_rules_allowlist_rule_added" = "wurde der <u style=color:%@>Freigabeliste</u> hinzugefügt";
+"user_rules_allowlist_rule_added" = "wurde der <u style=color:%@>Positivliste</u> hinzugefügt";
 
 /* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
 "user_rules_blocklist_rule_added" = "hat eine neue Sperrregel in <u style=color:%@>Benutzerregeln</u>";
@@ -1128,7 +1128,7 @@
 // MARK: - ActionExtensionMainController
 /* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
 
-"action_extension_obsolete_info" = "Diese Erweiterung ist veraltet, aber die neue AdGuard-Erweiterung für Safari ist im aA-Menü verfügbar. Um sie zu verwenden, öffnen Sie das aA-Menü, tippen Sie auf „Erweiterungen verwalten“ und schalten AdGuard ein.";
+"action_extension_obsolete_info" = "Diese Erweiterung ist veraltet, aber die neue AdGuard-Erweiterung für Safari ist im aA-Menü der Adresszeile verfügbar. Um die neue Erweiterung zu verwenden, öffnen Sie das aA-Menü, tippen Sie auf „Erweiterungen verwalten“ und aktivieren dort den Schalter für AdGuard ein.";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "Eine neue Version dieser Erweiterung ist für iOS 15 verfügbar. Sie bietet mehr Funktionen und eine verbesserte Benutzeroberfläche. Denken Sie daran, zu aktualisieren!";
@@ -1166,11 +1166,47 @@
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Website";
 
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Ungültige URL";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Bitte geben Sie einen Link zu YouTube an";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Fehler beim Filtern";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Zusammenstellen der Sperrliste fehlgeschlagen";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Benutzerskript-Fehler";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Benutzerskript konnte nicht erstellt werden";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Keine Adresse angegeben";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Übergeben Sie YouTube-Videos an AdGuard, um diese ohne Werbung wiederzugeben";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Ungültige URL";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Übergeben Sie YouTube-Videos an AdGuard, um diese ohne Werbung wiederzugeben";
+
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_error_title" = "Interner Fehler";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Der Link konnte nicht an AdGuard übergeben werden";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_unknown_error_title" = "Unbekannter Fehler";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Ein Problem ist aufgetreten";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard-Inhaltsblocker sind in den Safari-Einstellungen deaktiviert. Aktivieren Sie sie, damit Werbung und Tracker blockiert werden können.";

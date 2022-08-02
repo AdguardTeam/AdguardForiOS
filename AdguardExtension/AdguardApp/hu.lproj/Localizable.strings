@@ -1160,8 +1160,41 @@
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Weboldal";
 
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Érvénytelen URL";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Kérjük, adjon meg egy YouTube linket";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Szűrési hiba";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Nem sikerült összeállítani a tiltólistát";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Userscript hiba";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Nem sikerült létrehozni a userscript-et";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Nincs megadva URL";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Ossza meg a YouTube videókat az AdGuarddal, hogy hirdetések nélkül tudja megnézni őket";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Érvénytelen URL";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Ossza meg a YouTube videókat az AdGuarddal, hogy hirdetések nélkül tudja megnézni őket";
+
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_error_title" = "Belső hiba";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Nem sikerült megosztani a linket az AdGuarddal";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_unknown_error_title" = "Ismeretlen hiba";

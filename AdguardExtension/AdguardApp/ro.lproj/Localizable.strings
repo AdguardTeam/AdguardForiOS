@@ -1065,7 +1065,7 @@
 "low_level_bootstraps_placeholder" = "Lista de servere DNS simple, de utilizat pentru a rezolva numele de gazdă DOH/DOT (dacă există)";
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Un resolver DNS de rezervă care va fi utilizat atunci când serverul configurat nu este disponibil. Un șir gol înseamnă utilizarea DNS-ului sistemului ca rezervă. Iar un șir \"none\" înseamnă că nu există nicio rezervă.";
+"low_level_fallbacks_placeholder" = "Un rezolvator DNS de rezervă care va fi utilizat atunci când serverul configurat nu este disponibil. Un șir gol înseamnă utilizarea DNS-ului sistemului ca rezervă. Iar un șir „none” înseamnă că nu există nicio rezervă.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Servere Bootstrap";
 

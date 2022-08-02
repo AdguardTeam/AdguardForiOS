@@ -1044,7 +1044,7 @@
 "import_unseccuessful" = "Mal sucedido";
 
 /* (ImportSettingsController) select dns title */
-"import_dns_settings_format" = "Selecione o servidor DNS %@";
+"import_dns_settings_format" = "Selecionar servidor DNS %@";
 
 /* (ImportSettingsController) activate license format */
 "import_license_format" = "Ativar recursos premium com a chave de licença %@";

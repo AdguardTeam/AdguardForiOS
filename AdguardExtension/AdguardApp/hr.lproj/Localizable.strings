@@ -1166,11 +1166,47 @@
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Web stranica";
 
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Neispravna URL adresa";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Navedite vezu na YouTube";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Pogreška filtriranja";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Kompiliranje popisa blokova nije uspjelo";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Pogreška korisničkog indeksa";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Stvaranje korisničkog indeksa nije uspjelo";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Nije naveden URL";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Podijelite YouTube videozapise s AdGuardom da biste ih gledali bez oglasa";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Neispravna URL adresa";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Podijelite YouTube videozapise s AdGuardom da biste ih gledali bez oglasa";
+
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_error_title" = "Interna pogreška";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Zajedničko korištenje veze s AdGuardom nije uspjelo";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_unknown_error_title" = "Nepoznata pogreška";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Nešto je pošlo po zlu";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard blokatori sadržaja onemogućeni su u postavkama Safarija. Omogućite ih kako biste nam omogućili blokiranje oglasa i programa za praćenje.";

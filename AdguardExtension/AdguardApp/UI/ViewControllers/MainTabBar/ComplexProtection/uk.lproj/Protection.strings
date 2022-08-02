@@ -44,7 +44,7 @@
 "kDM-2d-bRK.text" = "Розширене блокування реклами на YouTube";
 
 /* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
-"l1g-hs-4EK.text" = "безкоштовно";
+"l1g-hs-4EK.text" = "безплатно";
 
 /* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
 "pv0-hE-9gb.normalTitle" = "Придбати ліцензію";
@@ -65,7 +65,7 @@
 "vNo-hV-l4c.text" = "Не встановлено";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Блокує рекламу й стеження на вебсайтах в Safari";
+"vlx-BS-A2y.text" = "Блокує рекламу та стеження на вебсайтах в Safari";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Захист";

@@ -13,13 +13,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Начните с пробного периода на один день</string>
+        <string>Подпишитесь и получите пробный период на один день</string>
         <key>few</key>
-        <string>Начните с пробного периода на %d дня</string>
+        <string>Подпишитесь и получите пробный период на %d дня</string>
         <key>many</key>
-        <string>Начните с пробного периода на %d дней</string>
+        <string>Подпишитесь и получите пробный период на %d дней</string>
         <key>other</key>
-        <string>Начните с пробного периода на %d дней</string>
+        <string>Подпишитесь и получите пробный период на %d дней</string>
       </dict>
     </dict>
     <key>trial_description_weeks</key>

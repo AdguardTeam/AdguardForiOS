@@ -62,7 +62,7 @@
 "native_dns_working" = "本地 DNS 正在运行";
 
 /* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "本地 DNS 不在运行";
+"native_dns_not_working" = "本地 DNS 未在运行";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "用户过滤器";
@@ -617,7 +617,7 @@
 "loading_filters" = "过滤器加载中...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "规则已反转...";
+"converting_rules" = "规则正在转换...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "新建自定义过滤器";
@@ -719,7 +719,7 @@
 "advanced_protection_onboarding_third_step_text" = "将所有 AdGuard 的开关设置为<b>开</b>。现在可以开始了！";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "以启用<b>高级</b>保护，请打开 Safari 浏览器，点击网址字段左侧的 <b>大小</b> 图标，<br><br>%@<br><br>然后点击<b>管理扩展程序</b> ，启用 <b>AdGuard</b> 切换。";
+"onboarding_fours_step_text" = "以启用<b>高级</b>保护，请打开 Safari 浏览器，点击网址字段左侧的 <b>大小</b> 图标，<br><br>%@<br><br>然后点击<b>管理扩展程序</b> ，启用 <b>AdGuard</b> 开关。";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "拦截请求";
@@ -1109,7 +1109,7 @@
 "block_youtube_ads_instructions_done_text_safari" = "完成！现在，您可以观看没有广告的 YouTube。\n\n启用扩展后，YouTube 徽标旁边会显示“使用 AdGuard”标题。<br><br><b>如果您重新加载页面，则需要再次执行第 3 步和第 4 步。</b>";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
-"block_youtube_ads_instructions_done_text" = "完成！现在，您可以观看没有广告的 YouTube。\n\n启用扩展后，YouTube 徽标旁边会显示标题“使用 AdGuard”。<br><br><b>如果您重新加载页面，则需要再次执行第 2 步和第 3 步。</b>";
+"block_youtube_ads_instructions_done_text" = "完成！现在，您可以观看没有广告的 YouTube。\n\n启用扩展后，YouTube 徽标旁边会显示标题「使用 AdGuard」。<br><br><b>如果您重新加载页面，则需要再次执行第 2 步和第 3 步。</b>";
 
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
@@ -1187,8 +1187,14 @@
 /* (YouTubeAdsRequestHandler) 'no url error' alert title */
 "youtube_share_extension_no_url_title" = "未提供 URL";
 
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "共享 YouTube 视频到 AdGuard 以无广告观看";
+
 /* (YouTubeAdsRequestHandler) 'bad url error' alert title */
 "youtube_share_extension_bad_url_title" = "无效的 URL";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "共享 YouTube 视频到 AdGuard 以无广告观看";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_error_title" = "内部错误";
@@ -1201,3 +1207,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "发生错误";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard 内容拦截程序在 Safari 设置中被禁用。启用内容拦截程序以允许我们拦截广告和跟踪器。";

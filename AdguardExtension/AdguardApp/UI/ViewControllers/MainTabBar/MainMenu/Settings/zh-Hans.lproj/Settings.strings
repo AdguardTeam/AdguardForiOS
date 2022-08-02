@@ -56,7 +56,7 @@
 "GGp-kp-YJI.text" = "半隧道";
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
-"H3Q-H6-YV0.text" = "若在运行AdGuard时遇到网络连接问题，请启用此选项";
+"H3Q-H6-YV0.text" = "若在运行 AdGuard 时遇到网络连接问题，请启用此选项";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "IvJ-Oi-vGF"; */
 "IvJ-Oi-vGF.text" = "低级设置";
@@ -163,7 +163,7 @@
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "如果启用此设置，AdGuard 将仅使用 Wi-Fi 进行后台过滤器更新";
 
-/* Class = "UILabel"; text = "Blocked Response TTL"; ObjectID = "uRk-qq-TJH"; */
+/* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "uRk-qq-TJH"; */
 "uRk-qq-TJH.text" = "屏蔽的 TTL 应答";
 
 /* Class = "UILabel"; text = "Are you a developer?"; ObjectID = "wPe-ae-X0G"; */

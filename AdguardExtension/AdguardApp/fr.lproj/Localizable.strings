@@ -1207,3 +1207,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Quelque chose s'est mal passé";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "Les bloqueurs de contenu AdGuard sont désactivés dans les paramètres de Safari. Activez-les pour nous permettre de bloquer les publicités et les traqueurs.";

@@ -8,7 +8,7 @@
 "3zG-B5-jE5.text" = "Hata ayıklama günlükleri";
 
 /* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "7nl-3p-BP2"; */
-"7nl-3p-BP2.text" = "Engellenen TTL yanıtı";
+"7nl-3p-BP2.text" = "Engellenen yanıt kullanım süresi";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "İzin listesini ters çevir";
@@ -50,7 +50,7 @@
 "GBd-dx-t46.text" = "Ne yaptığınızı bilmiyorsanız bunları değiştirmeyin.";
 
 /* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
-"GFO-xu-Bir.text" = "AdGuard günlük dosyasına daha fazla bilgi yazacak. Bir hatayı bulmanız gerekmedikçe etkinleştirmeyin";
+"GFO-xu-Bir.text" = "AdGuard günlük dosyasına daha fazla ayrıntı yazacaktır. Bir hatayı bulmanız gerekmedikçe etkinleştirmeyin";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Bölünmüş Tünel";
@@ -163,8 +163,8 @@
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "Bu seçenek etkinleştirilirse, AdGuard arka plan filtre güncellemeleri için yalnızca Wi-Fi kullanır";
 
-/* Class = "UILabel"; text = "Blocked Response TTL"; ObjectID = "uRk-qq-TJH"; */
-"uRk-qq-TJH.text" = "Engellenen TTL Yanıtı";
+/* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "uRk-qq-TJH"; */
+"uRk-qq-TJH.text" = "Engellenen yanıt kullanım süresi";
 
 /* Class = "UILabel"; text = "Are you a developer?"; ObjectID = "wPe-ae-X0G"; */
 "wPe-ae-X0G.text" = "Bir geliştirici misiniz?";
@@ -173,4 +173,4 @@
 "wYq-g0-5k6.text" = "Bu seçenek, istek sayısı, vb. gibi tüm istatistiksel verileri temizleyecektir.";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
-"yBG-d2-ebt.text" = "Bu listedeki web siteleri dışında her yerde reklamların engelini kaldırın";
+"yBG-d2-ebt.text" = "Bu listedeki siteler dışında her yerde reklamların engelini kaldırın";

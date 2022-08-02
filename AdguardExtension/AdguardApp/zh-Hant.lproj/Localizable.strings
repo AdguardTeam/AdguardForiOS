@@ -707,7 +707,7 @@
 "advanced_protection_onboarding_first_step_text" = "開啟<b>設定</b>。";
 
 /* (OnboardingController) second step text */
-"onboarding_second_step_text" = "輕觸 <b>Safari</b>、向下滑動並輕觸<b>內容阻擋器</b>。";
+"onboarding_second_step_text" = "輕觸 <b>Safari</b>，向下滑動並輕觸<b>內容阻擋器</b>。";
 
 /* (OnboardingController) second step with advanced protection text */
 "advanced_protection_onboarding_second_step_text" = "前往 <b>Safari > 延伸功能</b>。";
@@ -743,7 +743,7 @@
 "invalid_dns_protocol_message" = "%@ 尚未被 iOS 支援。嘗試新增不同的上游。";
 
 /*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
-"custom_dns_server_exists" = "您已嘗試新增一個重複的 DNS 伺服器。具有指定上遊的伺服器已在該清單中";
+"custom_dns_server_exists" = "您已嘗試新增一個重複的 DNS 伺服器。具有指定上游的伺服器已在該清單中";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "儲存並選擇";
@@ -1128,7 +1128,7 @@
 // MARK: - ActionExtensionMainController
 /* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
 
-"action_extension_obsolete_info" = "此動作延伸功能為過時的，而新的 AdGuard Safari 網路延伸功能在大小選單中為可用的。為了開始使用新的延伸功能，開啟大小選單、輕觸管理延伸功能並打開該 AdGuard 切換。";
+"action_extension_obsolete_info" = "此動作延伸功能為過時的，而新的 AdGuard Safari 網路延伸功能在大小選單中為可用的。為了開始使用新的延伸功能，開啟大小選單，輕觸管理延伸功能並打開該 AdGuard 切換。";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "此延伸功能的新版本對 iOS 15 為可用的。它有更多的功能和改進的使用者介面。記得去更新！";
@@ -1207,3 +1207,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "某事物出現問題";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard 內容阻擋器在 Safari 設定中被禁用。啟用它們以允許我們封鎖廣告和追蹤器。";

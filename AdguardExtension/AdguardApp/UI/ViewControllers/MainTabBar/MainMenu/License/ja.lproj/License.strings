@@ -10,13 +10,13 @@
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "パスワード：";
 
-/* Class = "UILabel"; text = "Log in with your AdGuard account or with social networks"; ObjectID = "ZuM-Nn-uXv"; */
+/* Class = "UILabel"; text = "Log in with your AdGuard account or use social login"; ObjectID = "ZuM-Nn-uXv"; */
 "ZuM-Nn-uXv.text" = "お持ちのAdGuardアカウントやSNSアカウントでログイン";
 
 /* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "ログイン";
 
-/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
+/* Class = "UILabel"; text = "Log in"; ObjectID = "fxK-6y-LB6"; */
 "fxK-6y-LB6.text" = "ログイン";
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */

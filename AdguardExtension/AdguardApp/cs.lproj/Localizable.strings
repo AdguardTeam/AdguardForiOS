@@ -1207,3 +1207,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Něco se pokazilo";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "Blokátory obsahu AdGuard jsou v nastavení Safari zakázány. Povolte je, abyste umožnili blokovat reklamy a slídiče.";

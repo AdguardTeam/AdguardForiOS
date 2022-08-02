@@ -1207,3 +1207,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "무엇인가 잘못되었습니다!";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard 콘텐츠 차단기는 Safari 설정에서 비활성화되어 있습니다. 콘텐츠 차단기를 활성화하여 광고 및 추적기를 차단합니다.";

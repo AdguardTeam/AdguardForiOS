@@ -8,7 +8,7 @@
 "EH6-Zr-YRP.text" = "Izmeni";
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "Izbriši";
+"Tei-uI-6Gr.normalTitle" = "Ukloni";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "UGP-Xr-H1p"; */
 "UGP-Xr-H1p.normalTitle" = "Otkaži";

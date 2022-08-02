@@ -116,13 +116,13 @@
 "sign_in_via_adguard_title" = "Использовать учетную запись AdGuard";
 
 /* (SignInController) SignIn via Apple account title */
-"sign_in_via_apple_title" = "Продолжить с Apple";
+"sign_in_via_apple_title" = "Войти через Apple";
 
 /* (SignInController) SignIn via Google account title */
-"sign_in_via_google_title" = "Продолжить с Google";
+"sign_in_via_google_title" = "Войти через Google";
 
 /* (SignInController) SignIn via Facebook account title */
-"sign_in_via_facebook_title" = "Продолжить с Facebook";
+"sign_in_via_facebook_title" = "Войти через Facebook";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Срок действия Премиум-аккаунта истек";
@@ -380,7 +380,7 @@
 "off_state" = "Отключено";
 
 /* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Домашняя страница:";
+"homepage_title" = "Сайт: ";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Удалить фильтр";
@@ -890,7 +890,7 @@
 "native_dns_setup_description" = "Чтобы использовать нативный DNS, выберите <b>%@</b> в <b>Системных настройках > Основные > VPN и сеть > DNS</b>.";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
-"native_dns_setup_description_ios15" = "Чтобы использовать нативный DNS, выберите <b>%@</b> в <b>Системных настройках > Основные > VPN и управление устройством > DNS</b>.";
+"native_dns_setup_description_ios15" = "Чтобы использовать нативный DNS, откройте <b>Системные настройки > Основные > VPN и управление устройством > DNS</b> и выберите <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Расскажите нам, довольны ли вы блокировкой рекламы";
@@ -1169,6 +1169,9 @@
 /* (YoutubePlayerController) 'bad url' alert title */
 "youtube_player_controller_bad_url_title" = "Недействительный URL";
 
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Пожалуйста, введите ссылку на YouTube";
+
 /* (YoutubePlayerController) 'content blocking list error' alert title */
 "youtube_player_controller_content_blocking_list_error_title" = "Ошибка фильтрации";
 
@@ -1204,3 +1207,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Что-то пошло не так";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "Блокировщики контента AdGuard отключены. Чтобы блокировать рекламу и трекеры, активируйте их в настройках Safari.";

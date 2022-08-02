@@ -17,7 +17,7 @@
 "VSR-Wf-7c8.normalTitle" = "無効にする";
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "WEk-KB-xeG"; */
-"WEk-KB-xeG.normalTitle" = "削除";
+"WEk-KB-xeG.normalTitle" = "削除する";
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "追加する";
