@@ -1451,4 +1451,4 @@
 "remote_migration_info_view_need_migration" = "請用我們的新應用程式取代這款過時的應用程式。<a href=%@>為什麼？</a>";
 
 /* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
-"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard 內容封鎖器在 Safari 設定中被停用。啟用它們以允許我們阻擋廣告和追蹤器。";
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard 內容阻擋器在 Safari 設定中被禁用。啟用它們以允許我們封鎖廣告和追蹤器。";
