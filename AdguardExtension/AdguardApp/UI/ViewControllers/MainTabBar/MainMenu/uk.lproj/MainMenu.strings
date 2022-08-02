@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Email address is incorrect"; ObjectID = "5dK-DT-TDt"; */
-"5dK-DT-TDt.text" = "Адреса е-пошти неправильна";
+"5dK-DT-TDt.text" = "Недійсна електронна адреса";
 
 /* Class = "UILabel"; text = "Description:"; ObjectID = "5nl-wn-tlv"; */
 "5nl-wn-tlv.text" = "Опис:";
@@ -59,7 +59,7 @@
 "dNj-vb-TQe.text" = "Розв'язання відомих проблем";
 
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
-"gap-Uy-5ka.placeholder" = "Адреса е-пошти";
+"gap-Uy-5ka.placeholder" = "Електронна адреса";
 
 /* Class = "UIButton"; normalTitle = "Submit a report"; ObjectID = "in9-YT-8ra"; */
 "in9-YT-8ra.normalTitle" = "Надіслати звіт";
@@ -86,7 +86,7 @@
 "rlh-5H-fPk.text" = "Обговорення";
 
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
-"se6-jk-4Az.text" = "Обліковий запис та підписки";
+"se6-jk-4Az.text" = "Обліковий запис та передплати";
 
 /* Class = "UILabel"; text = "Message"; ObjectID = "srJ-sd-sZF"; */
 "srJ-sd-sZF.text" = "Повідомлення";

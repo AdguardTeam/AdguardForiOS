@@ -4,14 +4,44 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Safari zaštita";
 
+/* Class = "UILabel"; text = "Enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "9wg-p1-Dh8"; */
+"9wg-p1-Dh8.text" = "Poboljšano funkcionisanje za blokiranje reklama i filtriranje sadržaja";
+
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
+"AZY-QZ-8d9.text" = "YouTube blokiranje reklama";
+
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
+
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "Lsa-74-hd5"; */
+"Lsa-74-hd5.text" = "Napredna zaštita";
+
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "OxY-0X-J4W"; */
+"OxY-0X-J4W.text" = "Napredna zaštita";
 
 /* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
+/* Class = "UILabel"; text = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Ovo Safari proširenje uklanja reklame i ostatke reklama, i oživljava funkciju automatske reprodukcije na YouTube-u";
+
+/* Class = "UILabel"; text = "Uses enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "WOG-Hk-11z"; */
+"WOG-Hk-11z.text" = "Poboljšano funkcionisanje za blokiranje reklama i filtriranje sadržaja";
+
+/* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
+"XXP-EO-M4h.text" = "Blokiraj Youtube reklame (od AdGuard)";
+
+/* Class = "UILabel"; text = "Blocks ads even on the websites that try to circumvent ad blocking"; ObjectID = "ZgQ-6Q-ytX"; */
+"ZgQ-6Q-ytX.text" = "Blokira reklame čak i na sajtovima koji pokušavaju da zaobiđu blokiranje reklama";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "Sistemska zaštita";
+
+/* Class = "UILabel"; text = "Requires access to web pages' contents but uses it only for ad blocking"; ObjectID = "i0Z-fi-Rc0"; */
+"i0Z-fi-Rc0.text" = "Zahteva pristup sadržaju Web stranica, ali ga koristi samo za blokiranje reklama";
+
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "YouTube blokiranje reklama";
 
 /* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "besplatno";
@@ -19,8 +49,23 @@
 /* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
 "pv0-hE-9gb.normalTitle" = "Kupi licencu";
 
+/* Class = "UILabel"; text = "Blocks complex ads, such as YouTube ads in Safari"; ObjectID = "rm0-Ip-riS"; */
+"rm0-Ip-riS.text" = "Blokira kompleksne reklame, kao što su YouTube reklame u Safariju";
+
+/* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
+"rr4-ic-Pg8.text" = "Koristi sofisticirana višestepena pravila filtriranja";
+
+/* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+"tKQ-Yn-fgL.text" = "Radi zajedno sa AdGuard blokatorom reklama";
+
+/* Class = "UILabel"; text = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Ovaj podprogram vas štiti od praćenja u čitavom sistemu. On šifruje vaše DNS unose i blokira domene praćenja u svim aplikacijama, ne samo u Safariju";
+
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Nije instalirano";
+
+/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Ovaj podprogram blokira reklame i praćenja na sajtovima otvorenim u Safariju. Možete izabrati između više različitih filter lista u AdGuard postavkama";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Zaštita";

@@ -1207,3 +1207,248 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "무엇인가 잘못되었습니다!";
+
+/*
+ (AppDelegate) Remote migration local push notification title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_notification_title" = "사용되지 않는 AdGuard 앱";
+
+/*
+ (AppDelegate) Remote migration local push notification body
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_notification_body" = "새로운 앱을 설치해 주세요. 무료입니다.";
+
+/*
+ (RemoteMigrationDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_title" = "사용되지 않는 앱입니다";
+
+/*
+ (RemoteMigrationDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+ */
+"remote_migration_dialog_description" = "이 앱은 이제부터 업데이트되지 않습니다. 대신 새로운 무료 앱을 다운로드해 주세요.";
+
+/*
+ (RemoteMigrationDialog) accept button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_accept_button_title" = "다음";
+
+/*
+ (RemoteMigrationDialog) details button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_details_button_title" = "앱을 새 앱으로 교체한 이유는 무엇인가요?";
+
+/*
+ (AdGuardProFoundDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_title" = "이 기기에서 AdGuard Pro가 감지되었습니다";
+
+/*
+ (AdGuardProFoundDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_description" = "이 앱은 새로운 앱으로 대체되었습니다. 기존 AdGuard Pro 라이선스를 새 앱으로 이전해 주세요. 이전한 후 옛날 AdGuard Pro 앱을 삭제할 수 있습니다.";
+
+/*
+ (AdGuardProFoundDialog) primary button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_primary_button_title" = "라이선스 이전";
+
+/*
+ (AdGuardFoundDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_title" = "이 기기에서 이전 AdGuard 앱이 감지되었습니다";
+
+/*
+ (AdGuardFoundDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_description" = "유료 버전을 사용하는 경우, 라이선스를 새로운 앱으로 이전해 주세요. 그다음에는 이전 앱을 삭제할 수 있습니다.";
+
+/*
+ (AdGuardFoundDialog) primary button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_primary_button_title" = "​​유료 버전을 사용합니다";
+
+/*
+ (AdGuardFoundDialog) neutral button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_neutral_button_title" = "무료 버전을 사용합니다";
+
+/*
+ (CanDeleteAppDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"can_delete_app_dialog_title" = "이전 AdGuard 앱을 삭제할 수 있습니다.";
+
+/*
+ (CanDeleteAppDialog) button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"can_delete_app_dialog_button_title" = "확인";
+
+/*
+ (LicenseWasBindedDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_title" = "라이선스를 AdGuard 계정에 연결했나요?";
+
+/*
+ (LicenseWasBindedDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_description" = "라이선스를 AdGuard 계정에 연결하려면 AdGuard 계정을 만들어야 합니다. 이전 앱을 열고 거기에 있는 지침을 따르세요.";
+
+/*
+ (LicenseWasBindedDialog) button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_button_title" = "연결하였습니다. 로그인할 준비가 되었습니다";
+
+/*
+ (RemoteMigrationInfoView) Old app detected message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_old_app_detected" = "이 기기에서 이전 AdGuard 앱이 감지되었습니다. %@";
+
+/*
+ (RemoteMigrationInfoView) Learn more message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_learn_more" = "<a href=%@>자세히 알아보기</a>";
+
+/*
+ (RemoteMigrationInfoView) Delete old app suggestion
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_delete_suggestion" = "이 기기에서 이전 AdGuard 앱이 감지되었습니다. 삭제하시겠습니까?";
+
+/*
+ (RemoteMigrationInfoView) Need migration message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_need_migration" = "이전 앱을 새로운 앱으로 대체하세요. <a href=%@>그 이유는 무엇인가요?</a>";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard 콘텐츠 차단기는 Safari 설정에서 비활성화되어 있습니다. 콘텐츠 차단기를 활성화하여 광고 및 추적기를 차단합니다.";

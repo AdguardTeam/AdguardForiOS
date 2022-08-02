@@ -163,7 +163,7 @@
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "Keď je toto nastavenie zapnuté, AdGuard bude používať pre aktualizáciu filtrov na pozadí len Wi-Fi";
 
-/* Class = "UILabel"; text = "Blocked Response TTL"; ObjectID = "uRk-qq-TJH"; */
+/* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "uRk-qq-TJH"; */
 "uRk-qq-TJH.text" = "Blokovaná odozva TTL";
 
 /* Class = "UILabel"; text = "Are you a developer?"; ObjectID = "wPe-ae-X0G"; */

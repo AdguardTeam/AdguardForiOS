@@ -1166,11 +1166,289 @@
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Web stranica";
 
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Neispravna URL adresa";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Navedite vezu na YouTube";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Pogreška filtriranja";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Kompiliranje popisa blokova nije uspjelo";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Pogreška korisničkog indeksa";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Stvaranje korisničkog indeksa nije uspjelo";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Nije naveden URL";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Podijelite YouTube videozapise s AdGuardom da biste ih gledali bez oglasa";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Neispravna URL adresa";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Podijelite YouTube videozapise s AdGuardom da biste ih gledali bez oglasa";
+
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_error_title" = "Interna pogreška";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Zajedničko korištenje veze s AdGuardom nije uspjelo";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_unknown_error_title" = "Nepoznata pogreška";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Nešto je pošlo po zlu";
+
+/*
+ (AppDelegate) Remote migration local push notification title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_notification_title" = "Zastarjela aplikacija AdGuard";
+
+/*
+ (AppDelegate) Remote migration local push notification body
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_notification_body" = "Instalirajte našu novu aplikaciju.";
+
+/*
+ (RemoteMigrationDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_title" = "Ova aplikacija je zastarjela";
+
+/*
+ (RemoteMigrationDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+ */
+"remote_migration_dialog_description" = "Više neće primati ažuriranja. Zamijenite ga našom novom besplatnom aplikacijom.";
+
+/*
+ (RemoteMigrationDialog) accept button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_accept_button_title" = "Nastavi";
+
+/*
+ (RemoteMigrationDialog) details button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_details_button_title" = "Zašto se to događa?";
+
+/*
+ (AdGuardProFoundDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_title" = "Otkrili smo AdGuard Pro na ovom uređaju";
+
+/*
+ (AdGuardProFoundDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_description" = "Zamijenili smo ga novom aplikacijom. Prenesite na nju svoju AdGuard Pro licencu. Tada možete sigurno izbrisati staru aplikaciju.";
+
+/*
+ (AdGuardProFoundDialog) primary button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_primary_button_title" = "Dozvola za prijenos";
+
+/*
+ (AdGuardFoundDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_title" = "Na ovom uređaju otkrivena je stara AdGuard aplikacija";
+
+/*
+ (AdGuardFoundDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_description" = "Ako imate plaćenu pretplatu, prenesite licencu u novu aplikaciju. Tada možete izbrisati staru aplikaciju.";
+
+/*
+ (AdGuardFoundDialog) primary button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_primary_button_title" = "Imam plaćenu pretplatu";
+
+/*
+ (AdGuardFoundDialog) neutral button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_neutral_button_title" = "Nema plaćene pretplate";
+
+/*
+ (CanDeleteAppDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"can_delete_app_dialog_title" = "Možete izbrisati staru aplikaciju AdGuard.";
+
+/*
+ (CanDeleteAppDialog) button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"can_delete_app_dialog_button_title" = "U redu";
+
+/*
+ (LicenseWasBindedDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_title" = "Jeste li vezali licencu za svoj AdGuard račun?";
+
+/*
+ (LicenseWasBindedDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_description" = "Morate stvoriti AdGuard račun i vezati licencu za njega. Otvorite staru aplikaciju i slijedite upute tamo.";
+
+/*
+ (LicenseWasBindedDialog) button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_button_title" = "Gotovo je. Spreman sam za prijavu";
+
+/*
+ (RemoteMigrationInfoView) Old app detected message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_old_app_detected" = "Na ovom uređaju otkrivena je stara AdGuard aplikacija. % @";
+
+/*
+ (RemoteMigrationInfoView) Learn more message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_learn_more" = "<a href=\"%@\">Uči više</a>";
+
+/*
+ (RemoteMigrationInfoView) Delete old app suggestion
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_delete_suggestion" = "Želite li ga izbrisati?";
+
+/*
+ (RemoteMigrationInfoView) Need migration message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_need_migration" = "Ovu zastarjelu aplikaciju zamijenite našom novom aplikacijom <a href=\"%@\">.</a>";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard blokatori sadržaja onemogućeni su u postavkama Safarija. Omogućite ih kako biste nam omogućili blokiranje oglasa i programa za praćenje.";

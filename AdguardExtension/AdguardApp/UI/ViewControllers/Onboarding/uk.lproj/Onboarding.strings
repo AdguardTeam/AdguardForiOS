@@ -20,10 +20,10 @@
 "cMV-qC-ZdE.normalTitle" = "Продовжити";
 
 /* Class = "UILabel"; text = "Block Ads"; ObjectID = "hXU-wD-fbI"; */
-"hXU-wD-fbI.text" = "Блокування реклами";
+"hXU-wD-fbI.text" = "Блокувати рекламу";
 
 /* Class = "UILabel"; text = "Block Annoyances"; ObjectID = "hf9-6r-TUk"; */
-"hf9-6r-TUk.text" = "Захист від подразників";
+"hf9-6r-TUk.text" = "Блокувати подразники";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "q8l-xM-B5q"; */
 "q8l-xM-B5q.normalTitle" = "Продовжити";

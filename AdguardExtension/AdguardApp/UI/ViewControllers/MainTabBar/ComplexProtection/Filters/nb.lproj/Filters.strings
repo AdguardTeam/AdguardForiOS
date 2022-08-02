@@ -20,7 +20,7 @@
 "OpB-AR-Og7.normalTitle" = "Avbryt";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
-"RJU-32-r8h.text" = "Antall oppføringer: ";
+"RJU-32-r8h.text" = "Antall oppfÃ¸ringer: ";
 
 /* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
 "VCK-db-aeg.text" = "Brukerfiltre";

@@ -11,7 +11,7 @@
 "eVN-fj-ATQ.text" = "Uključi na ovoj stranici";
 
 /* Class = "UIButton"; normalTitle = "Close"; ObjectID = "fxW-Cr-iPW"; */
-"fxW-Cr-iPW.normalTitle" = "zatvori";
+"fxW-Cr-iPW.normalTitle" = "Zatvori";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
 "kuu-kI-Ott.text" = "Prijavi poteškoću na ovoj stranici";

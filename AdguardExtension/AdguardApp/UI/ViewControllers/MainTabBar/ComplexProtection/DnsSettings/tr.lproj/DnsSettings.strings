@@ -8,10 +8,10 @@
 "7H8-Df-Igr.text" = "Nasıl ayarlanır?";
 
 /* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
-"84p-U2-sd8.text" = "AdGuard bu listedeki alan adlarını engellemeyecek";
+"84p-U2-sd8.text" = "AdGuard, bu listedeki alan adlarını engellemez";
 
 /* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
-"AOm-kV-l4z.text" = "AdGuard bu listeden alan adlarını engelleyecek";
+"AOm-kV-l4z.text" = "AdGuard, bu listedeki alan adlarını engeller";
 
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Gelişmiş ağ ayarları";
@@ -62,7 +62,7 @@
 "pC4-RU-DaD.text" = "DNS filtreleme";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
-"pY3-X6-fFy.text" = "Güvenlik filtreleri, DNS gizliliği, özel filtreler, vs.";
+"pY3-X6-fFy.text" = "Güvenlik filtreleri, DNS gizliliği, özel filtreler, vb.";
 
 /* Class = "UILabel"; text = "DNS filters"; ObjectID = "plc-eu-aXh"; */
 "plc-eu-aXh.text" = "DNS filtreleri";

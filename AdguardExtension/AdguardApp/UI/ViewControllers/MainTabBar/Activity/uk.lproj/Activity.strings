@@ -1,5 +1,5 @@
 /* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
-"1A6-DD-78f.normalTitle" = "Перемкнути режим";
+"1A6-DD-78f.normalTitle" = "Змінити режим";
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "Додати";
@@ -50,7 +50,7 @@
 "a0E-KM-oA3.text" = "AdGuard не може бачити DNS-запити в цьому режимі. Якщо ви хочете бачити DNS-активність вашого пристрою, використовуйте режим AdGuard.";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
-"ae4-WL-0pQ.text" = "Фільтри безпеки, DNS-приватність, власні фільтри та ін.";
+"ae4-WL-0pQ.text" = "Фільтри безпеки, DNS-захист, власні фільтри тощо.";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "baH-YE-AMw"; */
 "baH-YE-AMw.text" = "Сервер";
@@ -80,13 +80,13 @@
 "lKJ-8V-GJi.normalTitle" = "запитів";
 
 /* Class = "UILabel"; text = "Native DNS"; ObjectID = "mSj-Zz-Gm9"; */
-"mSj-Zz-Gm9.text" = "Вбудований DNS";
+"mSj-Zz-Gm9.text" = "Native DNS";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
 "qPQ-vV-fXm.normalTitle" = "запитів";
 
 /* Class = "UILabel"; text = "Choose the domain level:"; ObjectID = "uj0-U3-Qfx"; */
-"uj0-U3-Qfx.text" = "Оберіть рівень домену:";
+"uj0-U3-Qfx.text" = "Виберіть рівень домену:";
 
 /* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
 "uni-H6-XNc.text" = "Подробиці запиту";

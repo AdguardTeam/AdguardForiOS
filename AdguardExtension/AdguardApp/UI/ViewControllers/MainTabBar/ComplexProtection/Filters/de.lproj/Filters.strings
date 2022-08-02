@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
-"3WM-jW-br8.text" = "Filter hinzufügen";
+"3WM-jW-br8.text" = "Neue Filterliste hinzufügen";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
 "6WB-a0-8YE.text" = "Schutz in Safari";
@@ -32,7 +32,7 @@
 "Z16-OR-tjl.text" = "Filter-URL:";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
-"f3z-Yh-zY2.text" = "Freigabeliste";
+"f3z-Yh-zY2.text" = "Positivliste";
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "Hinzufügen";

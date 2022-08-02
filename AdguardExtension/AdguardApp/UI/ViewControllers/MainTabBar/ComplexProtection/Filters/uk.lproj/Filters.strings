@@ -23,13 +23,13 @@
 "QHZ-sJ-wTL.text" = "Блокує рекламу та стеження на вебсайтах в Safari";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
-"RJU-32-r8h.text" = "Лічильник правил: ";
+"RJU-32-r8h.text" = "Кількість правил: ";
 
 /* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
 "VCK-db-aeg.text" = "Правила користувача";
 
 /* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
-"Z16-OR-tjl.text" = "Фільтр URL:";
+"Z16-OR-tjl.text" = "URL-адреса фільтра:";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
 "f3z-Yh-zY2.text" = "Список дозволів";
@@ -47,4 +47,4 @@
 "t8x-PU-hFK.text" = "Домашня сторінка: ";
 
 /* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
-"zcB-eh-Ou4.placeholder" = "Введіть назву фільтру:";
+"zcB-eh-Ou4.placeholder" = "Введіть назву фільтра:";

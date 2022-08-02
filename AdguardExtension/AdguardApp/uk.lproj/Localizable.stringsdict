@@ -93,13 +93,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Увімкнено 1 правило</string>
+        <string>1 правило увімкнено</string>
         <key>few</key>
-        <string>Увімкнено %d правила</string>
+        <string>%d правила увімкнено</string>
         <key>many</key>
-        <string>Увімкнено %d правил</string>
+        <string>%d правил увімкнено</string>
         <key>other</key>
-        <string>Увімкнено %d правил</string>
+        <string>%d правил увімкнено</string>
       </dict>
     </dict>
     <key>safari_filters_format</key>
@@ -113,13 +113,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Увімкнено 1 фільтр</string>
+        <string>1 фільтр увімкнено</string>
         <key>few</key>
-        <string>Увімкнено %d фільтри</string>
+        <string>%d фільтра увімкнено</string>
         <key>many</key>
-        <string>Увімкнено %d фільтрів</string>
+        <string>%d фільтрів увімкнено</string>
         <key>other</key>
-        <string>Увімкнено %d фільтрів</string>
+        <string>%d фільтрів увімкнено</string>
       </dict>
     </dict>
     <key>getPro_full_access_days</key>
@@ -133,13 +133,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Безкоштовний повний доступ на 1 день</string>
+        <string>Безплатний повний доступ на 1 день</string>
         <key>few</key>
-        <string>Безкоштовний повний доступ на %d дні</string>
+        <string>Безплатний повний доступ на %d дні</string>
         <key>many</key>
-        <string>Безкоштовний повний доступ на %d днів</string>
+        <string>Безплатний повний доступ на %d днів</string>
         <key>other</key>
-        <string>Безкоштовний повний доступ на %d днів</string>
+        <string>Безплатний повний доступ на %d днів</string>
       </dict>
     </dict>
     <key>getPro_full_access_weeks</key>
@@ -153,13 +153,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Безкоштовний повний доступ на 1 тиждень</string>
+        <string>Безплатний повний доступ на 1 тиждень</string>
         <key>few</key>
-        <string>Безкоштовний повний доступ на %d тижні</string>
+        <string>Безплатний повний доступ на %d тижні</string>
         <key>many</key>
-        <string>Безкоштовний повний доступ на %d тижнів</string>
+        <string>Безплатний повний доступ на %d тижнів</string>
         <key>other</key>
-        <string>Безкоштовний повний доступ на %d тижнів</string>
+        <string>Безплатний повний доступ на %d тижнів</string>
       </dict>
     </dict>
     <key>getPro_full_access_months</key>
@@ -173,13 +173,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Безкоштовний повний доступ на 1 місяць</string>
+        <string>Безплатний повний доступ на 1 місяць</string>
         <key>few</key>
-        <string>Безкоштовний повний доступ на %d місяці</string>
+        <string>Безплатний повний доступ на %d місяці</string>
         <key>many</key>
-        <string>Безкоштовний повний доступ на %d місяців</string>
+        <string>Безплатний повний доступ на %d місяців</string>
         <key>other</key>
-        <string>Безкоштовний повний доступ на %d місяців</string>
+        <string>Безплатний повний доступ на %d місяців</string>
       </dict>
     </dict>
     <key>getPro_full_access_years</key>
@@ -193,13 +193,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Безкоштовний повний доступ на 1 рік</string>
+        <string>Безплатний повний доступ на 1 рік</string>
         <key>few</key>
-        <string>Безкоштовний повний доступ на %d роки</string>
+        <string>Безплатний повний доступ на %d роки</string>
         <key>many</key>
-        <string>Безкоштовний повний доступ на %d років</string>
+        <string>Безплатний повний доступ на %d років</string>
         <key>other</key>
-        <string>Безкоштовний повний доступ на %d років</string>
+        <string>Безплатний повний доступ на %d років</string>
       </dict>
     </dict>
   </dict>

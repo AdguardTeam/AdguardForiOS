@@ -10,14 +10,11 @@
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Heslo:";
 
-/* Class = "UILabel"; text = "Log in with your AdGuard account or with social networks"; ObjectID = "ZuM-Nn-uXv"; */
-"ZuM-Nn-uXv.text" = "Prihláste sa pomocou svojho AdGuard účtu alebo pomocou sociálnych sietí";
-
 /* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "Prihlásenie";
 
-/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
-"fxK-6y-LB6.text" = "Prihlásiť sa";
+/* Class = "UILabel"; text = "Log in"; ObjectID = "fxK-6y-LB6"; */
+"fxK-6y-LB6.text" = "Prihlásenie";
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "Potvrdiť";

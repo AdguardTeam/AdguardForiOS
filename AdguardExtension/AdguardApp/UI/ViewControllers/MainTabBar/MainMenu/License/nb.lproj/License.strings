@@ -6,6 +6,3 @@
 
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Passord:";
-
-/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
-"fxK-6y-LB6.text" = "Logg på";

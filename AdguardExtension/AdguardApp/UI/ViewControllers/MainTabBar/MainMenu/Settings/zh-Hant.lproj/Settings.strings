@@ -8,7 +8,7 @@
 "3zG-B5-jE5.text" = "偵錯記錄";
 
 /* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "7nl-3p-BP2"; */
-"7nl-3p-BP2.text" = "已封鎖的存活時間（TTL）回應";
+"7nl-3p-BP2.text" = "已封鎖的回應之存活時間（TTL）";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "反向允許清單";
@@ -163,8 +163,8 @@
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "如果此設定被啟用，AdGuard 於背景過濾器更新將只使用 Wi-Fi";
 
-/* Class = "UILabel"; text = "Blocked Response TTL"; ObjectID = "uRk-qq-TJH"; */
-"uRk-qq-TJH.text" = "已封鎖的存活時間（TTL）回應";
+/* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "uRk-qq-TJH"; */
+"uRk-qq-TJH.text" = "已封鎖的回應之存活時間（TTL）";
 
 /* Class = "UILabel"; text = "Are you a developer?"; ObjectID = "wPe-ae-X0G"; */
 "wPe-ae-X0G.text" = "您是開發者嗎？";

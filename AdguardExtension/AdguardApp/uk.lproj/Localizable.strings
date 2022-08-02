@@ -1,8 +1,8 @@
 /* (AEService) The default message for an unknown error. */
-"support_unexpected_error" = "Сталася неочікувана помилка. Будь ласка, зверніться в службу підтримки.";
+"support_unexpected_error" = "Сталася неочікувана помилка. Будь ласка, зверніться до служби підтримки.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "Неможливо конвертувати правила. Сталася неочікувана помилка. Будь ласка, зв'яжіться з командою підтримки.";
+"support_rule_converting_error" = "Неможливо конвертувати правила. Сталася неочікувана помилка. Будь ласка, зверніться до служби підтримки.";
 
 /* (AEService) Service errors descriptions */
 "json_converting_error" = "Неможливо ініціалізувати конвертер у формат JSON.";
@@ -104,25 +104,25 @@
 "upgrade_lifetime_button_title" = "Придбати";
 
 /* (GetProTableController) missing purchase alert message */
-"upgrade_missing_purchase_message" = "Підписки недоступні. Будь ласка, перевірте з'єднання з інтернетом та спробуйте ще раз.";
+"upgrade_missing_purchase_message" = "Передплати недоступні. Будь ласка, перевірте з'єднання з інтернетом та спробуйте ще раз.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Забули пароль?";
 
 /* (SignInController) user not found message */
-"user_not_found_message" = "Не знайдено користувача з такою адресою е-пошти. Спочатку зареєструйтесь на %@.";
+"user_not_found_message" = "Не знайдено користувача з такою електронною адресою. Спочатку зареєструйтесь на %@.";
 
 /* (SignInController) SignIn via AdGuard account title */
 "sign_in_via_adguard_title" = "Обліковий запис AdGuard";
 
 /* (SignInController) SignIn via Apple account title */
-"sign_in_via_apple_title" = "Продовжити з Apple";
+"sign_in_via_apple_title" = "Увійти через Apple";
 
 /* (SignInController) SignIn via Google account title */
-"sign_in_via_google_title" = "Продовжити з Google";
+"sign_in_via_google_title" = "Увійти через Google";
 
 /* (SignInController) SignIn via Facebook account title */
-"sign_in_via_facebook_title" = "Продовжити з Facebook";
+"sign_in_via_facebook_title" = "Увійти через Facebook";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Термін дії Преміум завершився";
@@ -131,25 +131,25 @@
 "premium_expired_title" = "Увага";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "Ви успішно увійшли до облікового запису AdGuard, але там немає ліцензійних ключів, що дозволяють вам активувати преміум-версію.";
+"not_premium_message" = "Ви успішно увійшли в облікового запису AdGuard, проте у вас немає ліцензійних ключів, які можуть активувати преміум-версію.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
-"login_success_message" = "Ви успішно увійшли в обліковий запис AdGuard! Преміум-версію AdGuard для iOS було активовано.";
+"login_success_message" = "Ви успішно увійшли в обліковий запис AdGuard! Преміум-версію AdGuard для iOS активовано.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "Ви успішно увійшли в обліковий запис AdGuard, але термін дії ліцензійних ключів, що дозволили б активувати преміум-версію, завершився.";
+"login_premium_expired_message" = "Ви успішно увійшли в обліковий запис AdGuard, але завершився термін дії ліцензійних ключів, які б дозволили активувати преміум-версію.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Під час відновлення покупки сталася помилка.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Покупку успішно відновлено! Преміум-версію AdGuard для iOS активовано.";
+"restore_success_message" = "Придбання успішно відновлено! Преміум-версію AdGuard для iOS активовано.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Немає покупок для відновлення";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Покупку успішно завершено! Преміум-версію AdGuard для iOS активовано.";
+"purchase_success_message" = "Купівлю успішно завершено! Преміум-версію AdGuard для iOS активовано.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Під час обробки вашої покупки сталася помилка.";
@@ -164,13 +164,13 @@
 "filter_date_format" = "Фільтри оновлено: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Тут ви можете додавати власні правила.<br>Ознайомтеся з <a href=\"%@\">примітками про синтаксис правил</a>.";
+"blacklist_text_format" = "Ви можете додавати свої правила.<br>Ознайомтеся з <a href=\"%@\">документацією щодо синтаксису правил</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Вводьте тут назви доменів, якщо бажаєте, щоб AdGuard їх не фільтрував. Цей список буде застосовано, як пріоритетний.";
+"whitelist_text" = "Додавайте домени, якщо бажаєте, щоб AdGuard їх не фільтрував. Цей список буде застосовано, як пріоритетний.";
 
 /* (UserFilterController) inverted whitelist description */
-"inverted_whitelist_text" = "Вводьте тут назви доменів. AdGuard увімкне фільтрування в Safari лише для цих вебсайтів.";
+"inverted_whitelist_text" = "Додавайте домени тут. AdGuard увімкне фільтрування в Safari лише для цих вебсайтів.";
 
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "AdGuard дозволить всі з'єднання для доменів з цього списку.";
@@ -200,7 +200,7 @@
 "add_wifi_name_caption" = "Назва:";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
-"bug_report_sending_error" = "Неможливо надіслати звіт про помилку. Ймовірно, ви не налаштували електронну адресу.";
+"bug_report_sending_error" = "Неможливо надіслати звіт про помилку. Схоже, ви не налаштували електронну пошту на вашому пристрої.";
 
 /* (MainController) Error on check filter uspdates */
 "filter_updates_error" = "Помилка оновлення фільтрів";
@@ -218,10 +218,10 @@
 "tunnel_mode_split_description" = "Split-Tunnel. Сумісний з «Personal VPN» програмами";
 
 /* (DnsSettingController) Full tunel mode description */
-"tunnel_mode_full_description" = "Full-Tunnel. Несумісний з іншими VPN-програмами";
+"tunnel_mode_full_description" = "Full-Tunnel, несумісний з іншими VPN-додатками";
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
-"tunnel_mode_full_without_icon_description" = "Full-Tunnel (без піктограми VPN). Несумісний з іншими VPN-програмами, менш стабільний";
+"tunnel_mode_full_without_icon_description" = "Full-Tunnel (без піктограми VPN), несумісний з іншими VPN-додатками, менш стабільний";
 
 /* (DnsSettingController) AdGuard DNS implementation title */
 "adguard_dns_implementation_title" = "AdGuard";
@@ -251,22 +251,22 @@
 "confirm_logout_text" = "Ви впевнені, що хочете вийти?";
 
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
-"support_vpn_configuration_problem" = "Проблема з конфігурацією VPN. Будь ласка, зв'яжіться з нашою службою підтримки.";
+"support_vpn_configuration_problem" = "Проблема з VPN-налаштуванням. Будь ласка, зверніться до нашої служби підтримки.";
 
 /* login error message */
 "login_error_message" = "Під час входу сталася помилка";
 
 /* purchase secription format */
-"purchase_description_format" = "Умови підписки AdGuard:<br><br>• Платіж буде стягнуто з вашого облікового запису iTunes під час підтвердження купівлі.<br><br>• Передплата автоматично продовжується, доки не буде вимкнена принаймні за 24 години до завершення поточного періоду.<br><br>• Оплата за продовження буде стягнута впродовж 24 годин до завершення поточного періоду.<br><br>Ви можете керувати своїми передплатами та вимкнути автоматичне продовження в налаштуваннях свого облікового запису iTunes після придбання передплати.<br><br><a href=%2$@>Ліцензійна угода</a> та <a href=%1$@>Політика приватності</a> AdGuard";
+"purchase_description_format" = "Умови передплати AdGuard:<br><br>• Платіж буде стягнуто з вашого облікового запису iTunes під час підтвердження купівлі.<br><br>• Передплата автоматично продовжується, доки не буде вимкнена принаймні за 24 години до завершення поточного періоду.<br><br>• Оплата за продовження буде стягнута впродовж 24 годин до завершення поточного періоду.<br><br>Ви можете керувати своїми передплатами та вимкнути автоматичне продовження в налаштуваннях свого облікового запису iTunes після придбання передплати.<br><br><a href=%2$@>Ліцензійна угода</a> та <a href=%1$@>Політика конфіденційності </a> AdGuard";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Ліцензійна угода</a> та <a href=%1$@>Політика приватності</a> AdGuard";
+"lifetime_purchase_description_format" = "<a href=%2$@>Ліцензійна угода</a> та <a href=%1$@>Політика конфіденційності</a> AdGuard";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Добре";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"privacy_policy_action" = "Політика приватності";
+"privacy_policy_action" = "Політика конфіденційності";
 
 /* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
 "vpn_confirm_title" = "Буде створено VPN";
@@ -353,13 +353,13 @@
 "content_blocker_disabled_format" = "Зверніть увагу, що блокувальник вмісту вимкнено. Це означає, що реклама не буде фільтруватися незалежно від налаштувань AdGuard. Щоб почати фільтрування, увімкніть блокувальник вмісту для AdGuard в налаштуваннях Safari.";
 
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
-"hostname_obtaining_error" = "Ім'я домену не отримано. Можливо, ця сторінка ще не була завантажена.";
+"hostname_obtaining_error" = "Ім'я домену не отримано. Можливо, цю сторінку ще не завантажено.";
 
 /* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
 "assistant_launching_unable" = "Політика безпеки цього сайту не дозволяє запускати помічника AdGuard.";
 
 /* (Action Extension - ActionViewController) Some errors when starting. */
-"support_error_safari_extension" = "Сталася неочікувана помилка під час ініціалізації розширення Safari. Зв'яжіться зі службою підтримки AdGuard, якщо це повториться.";
+"support_error_safari_extension" = "Сталася неочікувана помилка під час ініціалізації розширення Safari. Зверніться до служби підтримки AdGuard, якщо це повториться.";
 
 /* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
 "common_warning_title" = "Попередження";
@@ -536,7 +536,7 @@
 "extensions" = "Розширення";
 
 /*(ListOfRules) Select title */
-"common_select" = "Обрати";
+"common_select" = "Вибрати";
 
 /*(ListOfRules) Edit title */
 "common_edit" = "Редагувати";
@@ -545,7 +545,7 @@
 "common_delete" = "Видалити";
 
 /*(ListOfRules) Select all title */
-"common_select_all" = "Обрати все";
+"common_select_all" = "Вибрати все";
 
 /*(ListOfRules) Add domain title */
 "add_domain" = "Додати домен";
@@ -740,7 +740,7 @@
 "custom_dns_server_exists" = "Ви спробували додати дублікат DNS-сервера. Сервер з такою адресою уже в списку";
 
 /* (NewDnsServerController) save and select button title */
-"save_and_select_button_title" = "Зберегти та обрати";
+"save_and_select_button_title" = "Зберегти та вибрати";
 
 /* (NewDnsServerController) save button title */
 "save_button_title" = "Зберегти";
@@ -806,7 +806,7 @@
 "type_title" = "Тип";
 
 /* (DnsRequestDetailsController) "DNS status" title for cell */
-"dns_status_title" = "Стан DNS";
+"dns_status_title" = "DNS-статус";
 
 /* (DnsRequestDetailsController) "DNS upstream" title for cell */
 "dns_upstream_title" = "DNS upstream";
@@ -821,7 +821,7 @@
 "matched_rule_title" = "Відповідне правило";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
-"original_answer_title" = "Оригінальна відповідь";
+"original_answer_title" = "Початкова відповідь";
 
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Порожньо";
@@ -833,7 +833,7 @@
 "bug_report_successed_message" = "Ваш звіт про помилку успішно надіслано!";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Я приймаю <a href=%2$@>Ліцензійну угоду</a> та <a href=%1$@>Політику приватності</a> AdGuard.";
+"introduction_license_agreement" = "Я приймаю <a href=%2$@>Ліцензійну угоду</a> та <a href=%1$@>Політику конфіденційності</a> AdGuard.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Запити";
@@ -905,7 +905,7 @@
 "detailed_filter_info_website_subtitle" = "Вебсайт";
 
 /* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
-"detailed_filter_info_subscription_subtitle" = "URL-адреса підписки";
+"detailed_filter_info_subscription_subtitle" = "URL-адреса фільтра";
 
 /* (AddRuleController) Error description when adding rule that already exists */
 "user_rule_exists_error" = "Ви намагаєтесь додати правило, яке уже в списку";
@@ -942,7 +942,7 @@
 "dns_privacy_feature_name" = "DNS-приватність";
 
 /* (PremiumFeature) - Custom filters premium feature name */
-"custom_filters_feature_name" = "Спеціальні фільтри";
+"custom_filters_feature_name" = "Власні фільтри";
 
 /* (PremiumFeature) - Advanced protection premium feature description */
 "advanced_protection_feature_description" = "Підтримка користувацьких скриптів, блокування реклами на YouTube в Safari тощо";
@@ -1011,12 +1011,12 @@
 // MARK: - GetProTableController
 /* (GetProTableController) Choose your subscription type for VoiceOver*/
 
-"choose_sub_voiceover" = "Оберіть тип передплати";
+"choose_sub_voiceover" = "Виберіть тип передплати";
 
 // MARK: - LoginController
 /* (LoginController) Enter your email here title for VoiceOver*/
 
-"enter_email_voiceover" = "Введіть свою е-пошту";
+"enter_email_voiceover" = "Введіть свою електронну адресу";
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Введіть свій пароль";
@@ -1038,7 +1038,7 @@
 "import_unseccuessful" = "Безуспішно";
 
 /* (ImportSettingsController) select dns title */
-"import_dns_settings_format" = "Обрати DNS-сервер: %@";
+"import_dns_settings_format" = "Вибрати DNS-сервер: %@";
 
 /* (ImportSettingsController) activate license format */
 "import_license_format" = "Активувати преміум-функції ліцензійним ключем %@";
@@ -1056,12 +1056,12 @@
 "low_level_beta_link" = "Вас цікавлять нові функції AdGuard? Спробуйте наш <a href=\"%@\">канал бета</a>.";
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
-"low_level_bootstraps_placeholder" = "Список DNS-серверів для розв'язання вузлів DOH/DOT (якщо такі є)";
+"low_level_bootstraps_placeholder" = "Список DNS-серверів для визначення вузлів DOH/DOT (якщо такі є)";
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Резервний DNS-сервер, який буде використовуватись, якщо налаштований сервер недоступний. Порожній рядок означає, що системний DNS-сервер буде використовуватись в якості резервного. Рядок «none» означає, що резервний DNS-сервер не потрібно використовати взагалі.";
+"low_level_fallbacks_placeholder" = "Резервний DNS-сервер, який буде використано, якщо налаштований сервер недоступний. Порожній рядок означає, що системний DNS-сервер буде використовуватись в якості резервного. Рядок «none» означає, що резервний DNS-сервер не потрібно використовати взагалі.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstrap сервери";
+"upstreams_bootstraps_title" = "Bootstrap-сервери";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP-адреса";
@@ -1070,7 +1070,7 @@
 "upstreams_description" = "Upstream-адреса";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallback сервери";
+"upstreams_fallbacks_title" = "Fallback-сервери";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Додати власну IP-адресу";
@@ -1079,7 +1079,7 @@
 "upstreams_custom_address_description" = "IP-адреса";
 
 /* (BlockingModeController) Custom ip description text */
-"custom_ip_description" = "Відповідати з встановленою вручну IP-адресою";
+"custom_ip_description" = "Відповідати IP-адресою, встановленою самостійно";
 
 /* (FiltersMasterController) Header Filters title */
 "navigation_item_filters_title" = "Фільтри";
@@ -1094,10 +1094,10 @@
 "setapp_device_limit_reached" = "Ви досягли обмеження кількості під'єднаних пристроїв для свого облікового запису.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_safari" = "А ви знали, що YouTube змінив свої алгоритми, щоб показувати більше реклами?<br><br>І тепер, щоб блокувати її, вам треба:<br><br>1. Відкрити <a href=\"%@\">Safari</a>.<br><br>2. Open youtube.com.<br><br> Натиснути %@ «Поділитись».<br><br>3. Обрати «Блокувати рекламу YouTube (з AdGuard)».";
+"block_youtube_ads_instructions_safari" = "А ви знали, що YouTube змінив свої алгоритми, щоб показувати більше реклами?<br><br>І тепер, щоб блокувати її, вам треба:<br><br>1. Відкрити <a href=\"%@\">Safari</a>.<br><br>2. Open youtube.com.<br><br> Натиснути %@ «Поділитись».<br><br>3. Натиснути «Блокувати рекламу YouTube (з AdGuard)».";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
-"block_youtube_ads_instructions" = "А ви знали, що YouTube змінив свої алгоритми, щоб показувати більше реклами?<br><br>І тепер, щоб блокувати її, вам треба:<br><br>1. Відкрити <a href=\"%@\">youtube.com</a> у Safari.<br><br>2. Натиснути %@ «Поділитись».<br><br>3. Обрати «Блокувати рекламу YouTube (з AdGuard)».";
+"block_youtube_ads_instructions" = "А ви знали, що YouTube змінив свої алгоритми, щоб показувати більше реклами?<br><br>І тепер, щоб блокувати її, вам треба:<br><br>1. Відкрити <a href=\"%@\">youtube.com</a> у Safari.<br><br>2. Натиснути %@ «Поділитись».<br><br>3. Натиснути «Блокувати рекламу YouTube (з AdGuard)».";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
 "block_youtube_ads_instructions_done_text_safari" = "Готово! Тепер вы можете дивитись YouTube без реклами.\n\nКоли розширення увімкнено, поруч з логотипом YouTube буде «з AdGuard».<br><br><b>Якщо ви перезавантажите сторінку, необхідно повторити кроки 3 та 4 знову.</b>";
@@ -1160,11 +1160,289 @@
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Вебсайт";
 
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Недійсна URL-адреса";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Введіть, будь ласка, посилання на YouTube";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Помилка фільтрування";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Не вдалось скомпілювати список блокування";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Помилка користувацького скрипту";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Не вдалось створити користувацький скрипт";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Не вказано URL-адресу";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Поділіться відео з YouTube до AdGuard, щоб дивитись його без реклами";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Недійсна URL-адреса";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Поділіться відео з YouTube до AdGuard, щоб дивитись його без реклами";
+
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_error_title" = "Внутрішня помилка";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Не вдалось поділитись посиланням до AdGuard";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_unknown_error_title" = "Невідома помилка";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Щось пішло не так";
+
+/*
+ (AppDelegate) Remote migration local push notification title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_notification_title" = "Застаріла програма AdGuard";
+
+/*
+ (AppDelegate) Remote migration local push notification body
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_notification_body" = "Встановіть, будь ласка, нашу нову програму. Вона безплатна.";
+
+/*
+ (RemoteMigrationDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_title" = "Ця програма застаріла";
+
+/*
+ (RemoteMigrationDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+ */
+"remote_migration_dialog_description" = "Вона більше не буде отримувати оновлення. Замініть її нашою новою програмою.";
+
+/*
+ (RemoteMigrationDialog) accept button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_accept_button_title" = "Продовжити";
+
+/*
+ (RemoteMigrationDialog) details button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_dialog_details_button_title" = "Чому це трапилось?";
+
+/*
+ (AdGuardProFoundDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_title" = "Ми виявили AdGuard Pro на цьому пристрої";
+
+/*
+ (AdGuardProFoundDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_description" = "Ми замінили її новою програмою. Будь ласка, перенесіть туди свою ліцензію. Потім ви можете спокійно видаляти стару програму.";
+
+/*
+ (AdGuardProFoundDialog) primary button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_pro_found_primary_button_title" = "Перенести ліцензію";
+
+/*
+ (AdGuardFoundDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_title" = "Стару програму AdGuard виявлено на цьому пристрої";
+
+/*
+ (AdGuardFoundDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_description" = "Якщо у вас є оплачена передплата, будь ласка, перенесіть ліцензію у нову програму. Потім можете спокійно видаляти стару програму.";
+
+/*
+ (AdGuardFoundDialog) primary button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_primary_button_title" = "Я маю оплачену передплату";
+
+/*
+ (AdGuardFoundDialog) neutral button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"adguard_found_neutral_button_title" = "Немає оплаченої передплати";
+
+/*
+ (CanDeleteAppDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"can_delete_app_dialog_title" = "Ви можете видалити стару програму AdGuard.";
+
+/*
+ (CanDeleteAppDialog) button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"can_delete_app_dialog_button_title" = "Ok";
+
+/*
+ (LicenseWasBindedDialog) title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_title" = "Ви вже прив'язали ліцензію до свого облікового запису AdGuard?";
+
+/*
+ (LicenseWasBindedDialog) description
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_description" = "Вам необхідно створити обліковий запис AdGuard та прив'язати свою ліцензію там. Відкрийте стару програму та виконайте там певні дії.";
+
+/*
+ (LicenseWasBindedDialog) button title
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"license_was_binded_dialog_button_title" = "Все готово. Можу увійти";
+
+/*
+ (RemoteMigrationInfoView) Old app detected message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_old_app_detected" = "Стару програму AdGuard виявлено на цьому пристрої. %@";
+
+/*
+ (RemoteMigrationInfoView) Learn more message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_learn_more" = "<a href=%@>Докладніше</a>";
+
+/*
+ (RemoteMigrationInfoView) Delete old app suggestion
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_delete_suggestion" = "Чи бажаєте видалити програму?";
+
+/*
+ (RemoteMigrationInfoView) Need migration message
+ Disclaimer:
+ We may need to migrate ad-blocking apps to the Adguard Software Ltd. developer account.
+
+ Due to App Store technical limitations it is not possible to transfer the apps with the in-app purchases automatically, and the only way for us is to re-upload the app to a new developer account.
+
+ There's still a chance that we'll be able to avoid this migration. But in case this is not possible, we are developing a separate mechanism for this purpose. These strings are part of that mechanism.
+*/
+"remote_migration_info_view_need_migration" = "Будь ласка, замініть стару програму новою. <a href=%@>Чому?</a>";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "Блокувальники вмісту AdGuard вимкнено в Параметрах — Safari. Увімкніть їх, щоб блокувати рекламу та стеження.";

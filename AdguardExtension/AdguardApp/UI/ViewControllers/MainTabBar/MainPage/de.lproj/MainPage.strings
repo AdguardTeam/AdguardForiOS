@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "AdGuard uses iOS 15 Safari Extensions to remove ads more effectively. Now it takes just one tap to block YouTube ads in Safari."; ObjectID = "0IU-PO-Xeh"; */
-"0IU-PO-Xeh.text" = "AdGuard nutzt Erweiterungen für Safari von iOS 15, um Werbung noch effektiver zu entfernen. Jetzt genügt ein Fingertipp, um YouTube-Werbung in Safari zu sperren.";
+"0IU-PO-Xeh.text" = "AdGuard nutzt das Erweiterungen-System von Safari unter iOS 15, um Werbung noch effektiver zu entfernen. Jetzt genügt ein Fingertipp, um YouTube-Werbung in Safari zu sperren.";
 
 /* Class = "UILabel"; text = "Get stronger with Premium!"; ObjectID = "3qN-uj-pOb"; */
 "3qN-uj-pOb.text" = "Werden Sie stärker durch Premium!";
@@ -14,7 +14,7 @@
 "5pX-mg-2fq.text" = "Zeitraum";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "7SB-2j-FAc"; */
-"7SB-2j-FAc.normalTitle" = "Fortsetzen";
+"7SB-2j-FAc.normalTitle" = "Weiter";
 
 /* Class = "UILabel"; text = "Using native DNS"; ObjectID = "8Z0-0U-Hfk"; */
 "8Z0-0U-Hfk.text" = "Natives DNS funktioniert";

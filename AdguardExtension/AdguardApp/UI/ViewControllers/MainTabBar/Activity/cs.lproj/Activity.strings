@@ -89,7 +89,7 @@
 "uj0-U3-Qfx.text" = "Vyberte blokování na úrovni domény:";
 
 /* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
-"uni-H6-XNc.text" = "Požadovat detaily";
+"uni-H6-XNc.text" = "Detaily požadavku";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
 "wt5-4Q-CTq.normalTitle" = "šifrováno";

@@ -7,8 +7,5 @@
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Kata sandi:";
 
-/* Class = "UILabel"; text = "Log in with your AdGuard account or with social networks"; ObjectID = "ZuM-Nn-uXv"; */
-"ZuM-Nn-uXv.text" = "Masuk dengan akun AdGuard anda atau dengan Jejaring Sosial";
-
-/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
-"fxK-6y-LB6.text" = "Masuk";
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "Konfirmasi";

@@ -50,7 +50,7 @@
 "a0E-KM-oA3.text" = "AdGuard, bu modda DNS sorgularını göremez. Cihazınızın DNS etkinliğini görmek istiyorsanız, AdGuard uygulamasını kullanın.";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
-"ae4-WL-0pQ.text" = "Güvenlik filtreleri, DNS gizliliği, özel filtreler, vs.";
+"ae4-WL-0pQ.text" = "Güvenlik filtreleri, DNS gizliliği, özel filtreler, vb.";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "baH-YE-AMw"; */
 "baH-YE-AMw.text" = "Sunucu";

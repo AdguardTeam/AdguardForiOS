@@ -1,22 +1,22 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
-"53G-qY-SZ5.text" = "Код з програми авторизації:";
+"53G-qY-SZ5.text" = "Код з програми аутентифікації:";
 
 /* Class = "UILabel"; text = "Log in"; ObjectID = "J8s-sG-FKu"; */
 "J8s-sG-FKu.text" = "Увійти";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
-"LJj-cc-Ko5.text" = "Е-пошта:";
+"LJj-cc-Ko5.text" = "Електронна адреса:";
 
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Пароль:";
 
-/* Class = "UILabel"; text = "Log in with your AdGuard account or with social networks"; ObjectID = "ZuM-Nn-uXv"; */
-"ZuM-Nn-uXv.text" = "Увійдіть зі своїм обліковим записом AdGuard або через пов'язані соціальні мережі";
+/* Class = "UILabel"; text = "Log in with your AdGuard account or use social login"; ObjectID = "ZuM-Nn-uXv"; */
+"ZuM-Nn-uXv.text" = "Увійти з обліковим записом AdGuard або через соцмережі";
 
 /* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "Увійти";
 
-/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
+/* Class = "UILabel"; text = "Log in"; ObjectID = "fxK-6y-LB6"; */
 "fxK-6y-LB6.text" = "Увійти";
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */

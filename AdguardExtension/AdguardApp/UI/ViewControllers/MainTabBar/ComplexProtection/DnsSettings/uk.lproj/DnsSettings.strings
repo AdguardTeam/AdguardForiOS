@@ -59,10 +59,10 @@
 "o1z-O6-Bk9.normalTitle" = "Добре";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
-"pC4-RU-DaD.text" = "DNS-фільтрування";
+"pC4-RU-DaD.text" = "DNS-захист";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
-"pY3-X6-fFy.text" = "Фільтри безпеки, DNS-приватність, власні фільтри та ін.";
+"pY3-X6-fFy.text" = "Фільтри безпеки, DNS-захист, власні фільтри тощо.";
 
 /* Class = "UILabel"; text = "DNS filters"; ObjectID = "plc-eu-aXh"; */
 "plc-eu-aXh.text" = "DNS-фільтри";
@@ -77,10 +77,10 @@
 "sQQ-5p-EfW.text" = "Вбудований";
 
 /* Class = "UIBarButtonItem"; title = "Select"; ObjectID = "uCw-Mi-HiJ"; */
-"uCw-Mi-HiJ.title" = "Обрати";
+"uCw-Mi-HiJ.title" = "Вибрати";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
-"vDF-5j-uJn.text" = "DNS-фільтрування";
+"vDF-5j-uJn.text" = "DNS-захист";
 
 /* Class = "UILabel"; text = "Protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Протокол";

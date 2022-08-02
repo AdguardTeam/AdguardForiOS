@@ -23,7 +23,7 @@
 "P9C-72-GAw.text" = "premium";
 
 /* Class = "UILabel"; text = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube"; ObjectID = "Sry-3f-FQj"; */
-"Sry-3f-FQj.text" = "Bu Safari eklentisi, reklamları, reklam artıklarını kaldırır ve YouTube'daki Otomatik Oynat özelliğini yeniden etkinleştirir";
+"Sry-3f-FQj.text" = "Bu Safari uzantısı, reklamları, reklam artıklarını kaldırır ve YouTube'daki Otomatik Oynat özelliğini yeniden etkinleştirir";
 
 /* Class = "UILabel"; text = "Uses enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "WOG-Hk-11z"; */
 "WOG-Hk-11z.text" = "Üst düzey reklam engelleme ve içerik filtreleme için gelişmiş işlevsellik kullanır";
@@ -65,7 +65,7 @@
 "vNo-hV-l4c.text" = "Yüklü değil";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Safari'de açılan web sitelerindeki reklamları ve izleyicileri engeller";
+"vlx-BS-A2y.text" = "Safari'de açılan sitelerdeki reklamları ve izleyicileri engeller";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Koruma";
