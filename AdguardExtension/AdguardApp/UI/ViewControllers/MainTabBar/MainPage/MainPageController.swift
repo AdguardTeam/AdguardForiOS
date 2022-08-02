@@ -264,17 +264,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         return theme.statusbarStyle()
     }
 
-    private func processContentBlockersHelper() {
-        if #available(iOS 15.0, *), !resources.whatsNewScreenShown {
-            showWhatsNewWithAdvancedProtectionInfo { [weak self] in
-                self?.showContentBlockersHelperIfNeeded()
-            }
-            resources.whatsNewScreenShown = true
-        } else {
-            showContentBlockersHelperIfNeeded()
-        }
-    }
-
     // MARK: - Actions
 
 
@@ -747,7 +736,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
                 configuration.showStatusBar = false
                 showOnboarding()
             } else {
-                processContentBlockersHelper()
+                showContentBlockersHelperIfNeeded()
             }
         }
     }
