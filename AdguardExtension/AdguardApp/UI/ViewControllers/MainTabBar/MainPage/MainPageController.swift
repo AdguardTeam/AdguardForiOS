@@ -132,7 +132,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     // MARK: - Variables
 
     private var iconButton: UIButton? = nil
-    private var remoteMigrationInfoView: RemoteMigrationInfoView?
+
     private let getProSegueId = "getProSegue"
 
     private var proStatus: Bool { configuration.proStatus }
@@ -153,8 +153,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private var safariUpdateEnded = true
     private var dnsUpdateEnded = true
 
-    private var remoteMigrationInfoViewClosedByUser = false
-
     // MARK: - Services
 
     private lazy var configuration: ConfigurationServiceProtocol = { ServiceLocator.shared.getService()! }()
@@ -166,7 +164,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var dnsProtection: DnsProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProvidersManager: DnsProvidersManagerProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsConfigAssistant: DnsConfigManagerAssistantProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var remoteMigrationService: RemoteMigrationService = { ServiceLocator.shared.getService()! }()
 
     // MARK: - View models
     private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(safariProtection: safariProtection, dnsProtection: dnsProtection, dnsConfigAssistant: dnsConfigAssistant) }()
@@ -179,7 +176,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private var dnsImplementationObserver: NotificationToken?
     private var currentDnsServerObserver: NotificationToken?
     private var proStatusObserver: NotificationToken?
-    private var remoteMigrationObserver: NotificationToken?
 
     // MARK: - View Controller life cycle
 
@@ -418,7 +414,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         resources.sharedDefaults().set(true, forKey: OnboardingWasShown)
         configuration.showStatusBar = true
         onBoardingIsInProcess = false
-        processPresentingDialogs()
     }
 
     // MARK: - LicensePageViewControllerDelegate delegate
@@ -585,14 +580,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
             self?.processDnsServerChange()
         }
-
-        // Add observer only if it is not ASL app
-        if Bundle.main.isAslApp { return }
-
-        remoteMigrationObserver = NotificationCenter.default.observe(name: .needForMigration, object: nil, queue: .main) { [weak self] _ in
-            self?.processNeedForMigrationObserver()
-            self?.processState()
-        }
     }
 
     /**
@@ -653,13 +640,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
                 changeStatisticsDatesButton.isHidden = false
             }
         } else {
-            let isNeedToHide = !remoteMigrationInfoViewClosedByUser && (remoteMigrationService.isNeedRemoteMigration || UIApplication.shared.legacyAppDetected)
-            getProView.isHidden = isNeedToHide
+            getProView.isHidden = false
         }
-
-        // We need to check if user install / deinstall legacy apps and change UI
-        addRemoteMigrationInfoViewIfNeeded()
-
         systemProtectionButton.buttonIsOn = complexProtection.systemProtectionEnabled
     }
 
@@ -851,19 +833,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
     }
 
-    private func processPresentingDialogs() {
-        let notification: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
-        notification.requestPermissions { _ in
-            DispatchQueue.main.async { [weak self] in
-                if Bundle.main.isAslApp {
-                    self?.processPresentingLegacyAppDialogIfNeeded()
-                } else {
-                    self?.processPresentingRemoteMigrationDialogIfNeeded()
-                }
-            }
-        }
-    }
-
     /**
      As iPhone SE screen is very small we need different constraints for it
      */
@@ -931,8 +900,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         if !configuration.someContentBlockersEnabled && !contentBlockerHelperWasShown {
             showContentBlockersHelper()
             contentBlockerHelperWasShown = true
-        } else {
-            processPresentingDialogs()
         }
     }
 
@@ -944,94 +911,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         chartModel.delegate = self
     }
 
-    private func processNeedForMigrationObserver() {
-        let isNeedRemoteMigration = remoteMigrationService.isNeedRemoteMigration
-        let remoteMigrationDialogShown = resources.remoteMigrationDialogShown
-
-        if isNeedRemoteMigration, !remoteMigrationDialogShown {
-            DDLogInfo("(MainPageController) Start presenting remote migration dialog from observer")
-            presentRemoteMigrationDialog()
-            return
-        }
-
-        DDLogWarn("(MainPageController) Remote migration dialog not presented. Is needed for remote migration = \(isNeedRemoteMigration), remote migration dialog has already been shown = \(remoteMigrationDialogShown)")
-    }
-
-    private func processPresentingLegacyAppDialogIfNeeded() {
-        if proStatus {
-            DDLogInfo("(MainPageController) Legacy app dialog was not presented, current app have PRO status")
-            processPresentingsRateAppDialog()
-            return
-        }
-
-        if resources.legacyAppDetectedDialogShown {
-            DDLogInfo("(MainPageController) Legacy app dialog already has been shown")
-            processPresentingsRateAppDialog()
-            return
-        }
-
-        guard let legacyApp = UIApplication.shared.detectLegacyAppInstalled() else {
-            DDLogInfo("(MainPageController) Legacy app dialog was not presented, legacy apps wasn't detected")
-            processPresentingsRateAppDialog()
-            return
-        }
-
-        presentLegacyAppDetectedDialog(legacyApp)
-    }
-
-    private func processPresentingRemoteMigrationDialogIfNeeded() {
-        // We need to check if we need to inform the user that migration is necessary on each 'ready' shot
-        let isNeedRemoteMigration = remoteMigrationService.isNeedRemoteMigration
-        let remoteMigrationDialogShown = resources.remoteMigrationDialogShown
-
-        guard isNeedRemoteMigration, !remoteMigrationDialogShown else {
-            DDLogInfo("(MainPageController) Remote migration dialog was not presented. Is need migration = \(isNeedRemoteMigration), is remote migration dialog has been shown = \(remoteMigrationDialogShown)")
-            processPresentingsRateAppDialog()
-            return
-        }
-
-        DDLogInfo("(MainPageController) Present remote migration dialog on callOnReady")
-        presentRemoteMigrationDialog()
-    }
-
-    private func presentRemoteMigrationDialog() {
-        let presentOn = lastPresentedController
-        if presentOn is RemoteMigrationDialog {
-            DDLogWarn("(MainPageController) \(RemoteMigrationDialog.self) already presented")
-            return
-        }
-
-        let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
-        let dialog = storyboard.instantiateViewController(withIdentifier: "\(RemoteMigrationDialog.self)")
-
-        DDLogInfo("(MainPageController) Start presenting remote migration dialog")
-
-        presentOn.present(dialog, animated: true) { [weak self] in
-            // Reset all the flags to avoid duplicates
-            self?.resources.remoteMigrationDialogShown = true
-            self?.resources.backgroundFetchRemoteMigrationRequestResult = false
-        }
-    }
-
-    private func presentLegacyAppDetectedDialog(_ legacy: UIApplication.LegacyAppType) {
-        let presentOn = lastPresentedController
-        if presentOn is AdGuardProFoundDialog || presentOn is AdGuardFoundDialog {
-            DDLogWarn("(MainPageController) LegacyAppDialog already presented")
-            return
-        }
-
-        let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
-        let dialog = storyboard.instantiateViewController(withIdentifier: legacy == .adguard ? "\(AdGuardFoundDialog.self)" : "\(AdGuardProFoundDialog.self)")
-        presentOn.present(dialog, animated: true) {
-            self.resources.legacyAppDetectedDialogShown = true
-        }
-    }
-
     private func processPresentingsRateAppDialog() {
-        // Show rate app dialog when main page is initialized
-        if !remoteMigrationService.isNeedRemoteMigration {
-            showRateAppDialogIfNeeded()
-        }
+        showRateAppDialogIfNeeded()
     }
 
     private func showRateAppDialogIfNeeded() {
@@ -1044,92 +925,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
     }
 
-
-
-
-
-    /// Functions to work with migration info view
-
-    private func addRemoteMigrationInfoViewIfNeeded() {
-        let newAppDetectLegacyApp = UIApplication.shared.legacyAppDetected
-        let legacyAppWithNeedingMigration =  remoteMigrationService.isNeedRemoteMigration && !Bundle.main.isAslApp
-        let needToShowRemoteMigrationInfoView = !remoteMigrationInfoViewClosedByUser && (newAppDetectLegacyApp || legacyAppWithNeedingMigration)
-
-        guard needToShowRemoteMigrationInfoView else {
-            resetRemoteMigrationInfoViewIfNeeded()
-            resetChartViewIfNeeded()
-            return
-        }
-
-        resetRemoteMigrationInfoViewIfNeeded()
-
-        if isIpadTrait {
-            setupIpadRemoteMigrationInfoViewConstraints()
-        } else {
-            setupIphoneRemoteMigrationInfoViewConstraints()
-        }
-    }
-
-    private func setupIpadRemoteMigrationInfoViewConstraints() {
-        let infoView = createRemoteMigrationInfoViewAndAddToHierarchy()
-
-        let constraints = [
-            infoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8.0),
-            infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8.0),
-            infoView.bottomAnchor.constraint(equalTo: contentBlockerViewIpad.topAnchor, constant: -4.0)
-        ]
-
-        // We need to asynchronously activate this specific bottom constraint in iOS below 13.0 and only on iPad, to prevent
-        // the app from crashing
-        if #available(iOS 13.0, *) {
-            NSLayoutConstraint.activate(constraints)
-        } else {
-            // Lets schedule constraint activation task to end of queue
-            DispatchQueue.main.async { NSLayoutConstraint.activate(constraints) }
-        }
-
-        removeChartViewIfNeeded()
-    }
-
-    private func setupIphoneRemoteMigrationInfoViewConstraints() {
-        let infoView = createRemoteMigrationInfoViewAndAddToHierarchy()
-
-        let constraint: NSLayoutConstraint
-        switch resources.dnsImplementation {
-            case .adGuard:
-                if proStatus {
-                    constraint = infoView.bottomAnchor.constraint(equalTo: changeStatisticsDatesButton.topAnchor)
-                } else {
-                    constraint = infoView.bottomAnchor.constraint(equalTo: contentBlockerViewIphone.topAnchor, constant: -16.0)
-                }
-            case .native:
-                constraint = infoView.bottomAnchor.constraint(equalTo: nativeDnsTitleLabel.topAnchor, constant: -4.0)
-        }
-
-        NSLayoutConstraint.activate([
-            infoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8.0),
-            infoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8.0),
-            constraint
-        ])
-
-        removeChartViewIfNeeded()
-    }
-
-    private func createRemoteMigrationInfoViewAndAddToHierarchy() -> UIView {
-        if let infoView = remoteMigrationInfoView {
-            view.addSubview(infoView)
-            return infoView
-        }
-
-        remoteMigrationInfoView = RemoteMigrationInfoView(contentType: Bundle.main.isAslApp ? .legacyAppDialog : .infoDialog)
-        remoteMigrationInfoView?.updateTheme()
-        remoteMigrationInfoView?.delegate = self
-
-        view.addSubview(remoteMigrationInfoView!)
-        remoteMigrationInfoView?.translatesAutoresizingMaskIntoConstraints = false
-        return remoteMigrationInfoView!
-    }
-
     private func removeChartViewIfNeeded() {
         guard statisticsStackView.arrangedSubviews.contains(chartView) else { return }
 
@@ -1139,15 +934,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         statisticsStackView.insertArrangedSubview(stabView, at: 0)
         statisticsStackView.removeArrangedSubview(chartView)
         chartView.removeFromSuperview()
-    }
-
-
-    /// Removes remote migration info view and returns back chart view
-    private func resetRemoteMigrationInfoViewIfNeeded() {
-        guard let infoView = remoteMigrationInfoView else { return }
-        statisticsStackView.removeArrangedSubview(infoView)
-        infoView.removeFromSuperview()
-        remoteMigrationInfoView = nil
     }
 
     private func resetChartViewIfNeeded() {
@@ -1173,7 +959,6 @@ extension MainPageController: ThemableProtocol {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         getProView.backgroundColor = theme.backgroundColor
-        remoteMigrationInfoView?.updateTheme()
 
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
         contentBlockerViewIpad.backgroundColor = UIColor.AdGuardColor.lightGray6
@@ -1262,28 +1047,5 @@ fileprivate extension MainPageController {
             button.heightAnchor.constraint(equalToConstant: side)
         ])
         return button
-    }
-}
-
-
-
-extension MainPageController : RemoteMigrationInfoViewDelegate {
-    func linkTapped(for type: RemoteMigrationInfoView.ContentType) {
-        let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
-        let vc: UIViewController
-        switch type {
-            case .infoDialog:
-                vc = storyboard.instantiateViewController(withIdentifier: "\(RemoteMigrationDialog.self)")
-            case .legacyAppDialog:
-                guard let detected = UIApplication.shared.detectLegacyAppInstalled() else { return }
-                vc = storyboard.instantiateViewController(withIdentifier: detected == .adguard ? "\(AdGuardFoundDialog.self)" : "\(AdGuardProFoundDialog.self)")
-        }
-
-        present(vc, animated: true)
-    }
-
-    func closeButtonTapped() {
-        remoteMigrationInfoViewClosedByUser = true
-        processState()
     }
 }
