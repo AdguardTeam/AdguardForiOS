@@ -42,7 +42,7 @@ extension Bundle {
     }
 
     var hostAppBundleId: String {
-        Bundle.main.isPro ? "com.adguard.AdguardPro" : Bundle.main.isAslApp ? "com.adguard.AdGuardApp" : "com.adguard.AdguardExtension"
+        Bundle.main.isPro ? "com.adguard.AdguardPro" : "com.adguard.AdguardExtension"
     }
 
     /// We use different app schemes for pro and normal adguard
@@ -55,12 +55,9 @@ extension Bundle {
     /// This variable  is used to get an app scheme without filling plist files
     var inAppScheme: String { isPro ? "in-app-adguard-pro-url-scheme" : "in-app-adguard-url-scheme" }
 
-    /// Flag meaning that this app belongs to AdGuard Software Limited developer account
-    var isAslApp: Bool { Bundle.main.bundleIdentifier == "com.adguard.AdGuardApp" }
-
 
     /// Returns bundle id for backend.
     /// Use it only for backend requests
     /// TODO: Need some BackendDomain service in future
-    var backendBundleId: String { isAslApp ? "ADG_APP" : "ADG_EXT" }
+    var backendBundleId: String { "ADG_EXT" }
 }

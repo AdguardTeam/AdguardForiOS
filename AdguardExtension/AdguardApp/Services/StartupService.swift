@@ -200,13 +200,5 @@ final class StartupService : NSObject {
             dnsProtection: dnsProtection
         )
         locator.addService(service: migrationService)
-
-        let remoteMigrationService: RemoteMigrationService = RemoteMigrationServiceImpl(
-            httpRequestService: httpRequestService,
-            userNotificationCenter: userNotificationService,
-            keyChainService: keyChainService,
-            resources: sharedResources
-        )
-        locator.addService(service: remoteMigrationService)
     }
 }
