@@ -62,7 +62,7 @@
 "teo-vm-NRJ.text" = "Hiermee kunt u aangepaste DNS-servers gebruiken en uw privacy verbeteren door uw DNS-query's te versleutelen";
 
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
-"vNo-hV-l4c.text" = "Niet geÃ¯nstalleerd";
+"vNo-hV-l4c.text" = "Niet geïnstalleerd";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
 "vlx-BS-A2y.text" = "Blokkeert advertenties en volgers op websites die in Safari zijn geopend";

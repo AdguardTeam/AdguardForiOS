@@ -2,7 +2,7 @@
 "EFE-OP-v8S.normalTitle" = "IMPORTAR";
 
 /* Class = "UILabel"; text = "Import settings"; ObjectID = "fry-VW-ub3"; */
-"fry-VW-ub3.text" = "Importar configuraciÃ³n";
+"fry-VW-ub3.text" = "Importar configuración";
 
 /* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "ktl-xf-pyK"; */
 "ktl-xf-pyK.normalTitle" = "Aceptar";

@@ -11,7 +11,7 @@
 "Fwl-LI-5Fu.placeholder" = "https://esempio.it";
 
 /* Class = "UILabel"; text = "AdGuard is disabled for the websites from this list"; ObjectID = "Gg8-4u-qvU"; */
-"Gg8-4u-qvU.text" = "AdGuard Ã¨ disattivato sui siti web di questo elenco";
+"Gg8-4u-qvU.text" = "AdGuard è disattivato sui siti web di questo elenco";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
 "Lq2-mi-McV.text" = "Filtri";

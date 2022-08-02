@@ -1451,4 +1451,4 @@
 "remote_migration_info_view_need_migration" = "Bitte ersetzen Sie diese veraltete App durch unsere neue App. <a href=%@>Warum?</a>";
 
 /* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
-"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard-Inhaltsblocker sind in den Safari-Einstellungen deaktiviert. Aktivieren Sie sie, damit wir Werbung und Tracker blockieren können.";
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard-Inhaltsblocker sind in den Safari-Einstellungen deaktiviert. Aktivieren Sie sie, damit Werbung und Tracker blockiert werden können.";
