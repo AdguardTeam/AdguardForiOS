@@ -78,6 +78,9 @@ class PurchaseServiceMock: PurchaseServiceProtocol {
     func reset(completion: @escaping () -> Void) {
     }
 
+    func checkLicenseStatus(completion: ((Error?) -> ())?) {
+    }
+
     func generateAuthURL(state: String, socialProvider: SocialProvider) -> URL? {
         return nil
     }
