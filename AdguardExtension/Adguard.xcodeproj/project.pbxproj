@@ -12021,7 +12021,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariWebExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "AdGuard Safari Web Extension";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12069,7 +12069,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariWebExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "AdGuard Safari Web Extension";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12120,7 +12120,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariWebExtension/ProSafariWebExtensionInfo.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "AdGuard Pro Safari Web Extension";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12168,7 +12168,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariWebExtension/ProSafariWebExtensionInfo.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "AdGuard Pro Safari Web Extension";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12298,7 +12298,7 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = YouTubeAdsActionExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = YouTubeAdsActionExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -12343,7 +12343,7 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = YouTubeAdsActionExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = YouTubeAdsActionExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -12392,7 +12392,7 @@
 				INFOPLIST_FILE = YouTubeAdsActionExtension/ProInfo.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = YouTube;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -12439,7 +12439,7 @@
 				INFOPLIST_FILE = YouTubeAdsActionExtension/ProInfo.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = YouTube;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -12547,7 +12547,7 @@
 					"$(inherited)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12594,7 +12594,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

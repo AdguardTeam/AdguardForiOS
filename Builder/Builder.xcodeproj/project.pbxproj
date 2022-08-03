@@ -151,7 +151,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
-				ORGANIZATIONNAME = Performiks;
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					65DAE6DA1B8B68EA0020BC3C = {
 						CreatedOnToolsVersion = 7.0;
