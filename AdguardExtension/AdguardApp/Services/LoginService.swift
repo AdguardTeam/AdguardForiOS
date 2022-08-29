@@ -151,6 +151,7 @@ final class LoginService: LoginServiceProtocol {
     private let LOGIN_APP_VERSION_PARAM = "app_version"
     private let STATUS_DEVICE_NAME_PARAM = "device_name"
     private let STATUS_ATTRIBUTION_RECORDS_PARAM = "iad_metadata" // Param for Apple Search Ads
+    private let STATUS_NOOP_PARAM = "noop" // Param to identify users with lost keychain
 
     private let resources: AESharedResourcesProtocol
     private var network: ACNNetworkingProtocol
@@ -352,6 +353,12 @@ final class LoginService: LoginServiceProtocol {
                       ]
         if licenseKey != nil {
             params[LOGIN_LICENSE_KEY_PARAM] = licenseKey
+        }
+
+        // This part allows the backend to identify users whose keychain has been lost
+        // https://jira.adguard.com/browse/AG-16180
+        if resources.pretendPremiumAfterKeychainLoss {
+            params[STATUS_NOOP_PARAM] = "1"
         }
 
         if let attributionRecords = attributionRecords {
