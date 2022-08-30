@@ -76,8 +76,13 @@ const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts>
     const scriptRules = cosmeticResult.getScriptRules();
 
     const debug = false;
-    const scripts = scriptRules
-        .map((scriptRule) => scriptRule.getScript(debug))
+    const scripts: string[] = scriptRules
+        .map((scriptRule) => scriptRule.getScript({
+            debug,
+            request: {
+                domain: url,
+            },
+        }))
         .filter((script): script is string => script !== null);
 
     // remove repeating scripts
