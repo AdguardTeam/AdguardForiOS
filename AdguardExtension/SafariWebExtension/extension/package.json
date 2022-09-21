@@ -15,11 +15,11 @@
   "dependencies": {
     "@adguard/assistant": "4.3.63",
     "@adguard/translate": "0.3.0",
-    "@adguard/tsurlfilter": "1.0.38",
+    "@adguard/tsurlfilter": "1.0.41",
     "@babel/runtime": "^7.14.6",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
-    "extended-css": "https://github.com/AdguardTeam/ExtendedCss",
+    "extended-css": "git+https://github.com/AdguardTeam/ExtendedCss.git#v1.3.16",
     "mobx": "^6.3.3",
     "mobx-react": "^7.2.0",
     "react": "^17.0.2",
