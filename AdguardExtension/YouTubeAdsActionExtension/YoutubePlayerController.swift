@@ -51,7 +51,7 @@ class YoutubePlayerController : UIViewController {
 
 
     private func setUpCloseButton() {
-        navigationController?.navigationBar.backgroundColor = .black
+        navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.setNavigationBarHidden(false, animated: false)
         let image = UIImage(named: "cross_original")
         let buttonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(close))

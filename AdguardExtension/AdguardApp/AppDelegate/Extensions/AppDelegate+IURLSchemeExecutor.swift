@@ -76,4 +76,9 @@ extension AppDelegate: IURLSchemeExecutor {
         DDLogInfo("(AppDelegate) - open openAdvancedProtectionController; enabledAdvancedProtection = \(enabledState)")
         return self.presentAdvancedProtectionController(enableAdvancedProtection: enableAdvancedProtection)
     }
+
+    func openYouTubePlayerController(videoId: String) -> Bool {
+        DDLogInfo("(AppDelegate) - open openYouTubePlayerController; videoId = \(videoId)")
+        return self.presentYouTubePlayerController(videoId: videoId)
+    }
 }

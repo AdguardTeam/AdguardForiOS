@@ -26,6 +26,7 @@ import MobileCoreServices
 /// In this case we should start in-app youtube player
 class YouTubeAdsRequestHandler : UINavigationController {
 
+    private let appURL = "\(Bundle.main.inAppScheme)://watch_youtube_video?video_id="
     private lazy var notifications: UserNotificationServiceProtocol = { UserNotificationService() }()
 
     override func viewDidLoad() {
@@ -66,10 +67,15 @@ class YouTubeAdsRequestHandler : UINavigationController {
                 return
             }
 
-            DispatchQueue.main.async {
-                let playerController = YoutubePlayerController(videoId: videoId)
-                self?.viewControllers.append(playerController)
+            guard let appURL = self?.appURL,
+                  let url = URL(string: "\(appURL + videoId)") else {
+                DDLogInfo("(YouTubeAdsRequestHandler) Missing redirect to app URL")
+                self?.finish(withError: .badUrl)
+                return
             }
+
+            self?.openURL(url)
+
         } ?? DDLogInfo("(YouTubeAdsRequestHandler) Failed to access extensionContext")
     }
 
@@ -78,6 +84,7 @@ class YouTubeAdsRequestHandler : UINavigationController {
         while responder != nil {
             if let application = responder as? UIApplication {
                 application.perform(#selector(openURL(_:)), with: url)
+                extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
             }
             responder = responder?.next
         }
