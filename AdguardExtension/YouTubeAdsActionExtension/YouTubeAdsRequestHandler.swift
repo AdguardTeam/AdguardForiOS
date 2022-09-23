@@ -26,6 +26,7 @@ import MobileCoreServices
 /// In this case we should start in-app youtube player
 class YouTubeAdsRequestHandler : UINavigationController {
 
+    private let appURL = "\(Bundle.main.inAppScheme)://watch_youtube_video?video_id="
     private lazy var notifications: UserNotificationServiceProtocol = { UserNotificationService() }()
 
     override func viewDidLoad() {
@@ -50,6 +51,8 @@ class YouTubeAdsRequestHandler : UINavigationController {
         super.beginRequest(with: context)
 
         extensionContext?.handleInputItem({ [weak self] jsResult in
+            // This closure used for case when user activate extension not from YouTube app. We just injected JS code to Safari Browser to remove ads from YouTube web page.
+
             if let result = jsResult {
                 self?.notifications.postNotificationWithoutBadge(title: nil, body: result.status.title, onNotificationSent: {
                     DDLogInfo("(YouTubeAdsRequestHandler) js finished with result: \(result)")
@@ -60,16 +63,28 @@ class YouTubeAdsRequestHandler : UINavigationController {
                 self?.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
             }
         }) { [weak self] youTubeShareLinkResult in
+
+            // This closure used for case when we get YouTube video URL and start redirecting to app.
+            // Before iOS 16.0 we show YouTubePlayerController with WebView,
+            // but in iOS 16.0 Apple changed something in WebKit or in Action Extension (or maybe it`s a bug) and Safari Player always stop video after starting.
+            // But what is more interesting in-app WebView working fine and nothing stops after start playing video.
+            // Thats why we decide to redirect users to our app and show YouTubePlayerController inside app.
+
             DDLogInfo("(YouTubeAdsRequestHandler) result of youtube app share link handling: \(youTubeShareLinkResult.messageForLog)")
             guard let videoId = youTubeShareLinkResult.videoId else {
                 self?.finish(withError: youTubeShareLinkResult.sharingLinkError)
                 return
             }
 
-            DispatchQueue.main.async {
-                let playerController = YoutubePlayerController(videoId: videoId)
-                self?.viewControllers.append(playerController)
+            guard let appURL = self?.appURL,
+                  let url = URL(string: "\(appURL + videoId)") else {
+                DDLogInfo("(YouTubeAdsRequestHandler) Missing redirect to app URL")
+                self?.finish(withError: .badUrl)
+                return
             }
+
+            self?.openURL(url)
+
         } ?? DDLogInfo("(YouTubeAdsRequestHandler) Failed to access extensionContext")
     }
 
@@ -78,6 +93,7 @@ class YouTubeAdsRequestHandler : UINavigationController {
         while responder != nil {
             if let application = responder as? UIApplication {
                 application.perform(#selector(openURL(_:)), with: url)
+                extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
             }
             responder = responder?.next
         }

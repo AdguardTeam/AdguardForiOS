@@ -686,6 +686,37 @@ extension AppDelegate {
         return true
     }
 
+    func presentYouTubePlayerController(videoId: String) -> Bool {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+
+        guard let navController = getNavigationController(for: .mainTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+
+        let youtubePlayerController = YoutubePlayerController(videoId: videoId)
+        guard let mainPageController = getMainPageController() else {
+            DDLogError("MainPageController is nil")
+            return false
+        }
+
+
+        tabBar.selectedViewController = navController
+        window?.rootViewController = tabBar
+
+        let youTubeNavController = UINavigationController(rootViewController: youtubePlayerController)
+        youTubeNavController.modalPresentationStyle = .fullScreen
+        // Set background color for this navController to .clear to avoid color blinking in presenting stage
+        youTubeNavController.view.backgroundColor = .clear
+
+        mainPageController.presentControllerWithoutOnboarding(youTubeNavController)
+
+        return true
+    }
+
     // Returns top view controller for controller
     static func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {

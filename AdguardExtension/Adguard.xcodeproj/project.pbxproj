@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		24037B0625874F7000C4F195 /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
 		24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
+		240718EA28DDC6FC00BFC6C8 /* OpenYouTubePlayerControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240718E928DDC6FC00BFC6C8 /* OpenYouTubePlayerControllerParser.swift */; };
+		240718EB28DDC6FD00BFC6C8 /* OpenYouTubePlayerControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240718E928DDC6FC00BFC6C8 /* OpenYouTubePlayerControllerParser.swift */; };
+		240718EC28DDC6FD00BFC6C8 /* OpenYouTubePlayerControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240718E928DDC6FC00BFC6C8 /* OpenYouTubePlayerControllerParser.swift */; };
 		2408A87427478F9B00D2D1DE /* AdServicesHelperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2408A87327478F9B00D2D1DE /* AdServicesHelperMock.swift */; };
 		2408A8762747901B00D2D1DE /* IAdFrameworkHelperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2408A8752747901B00D2D1DE /* IAdFrameworkHelperMock.swift */; };
 		2408A8782747917400D2D1DE /* AdServicesHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2408A8772747917400D2D1DE /* AdServicesHelperTest.swift */; };
@@ -2667,6 +2670,7 @@
 
 /* Begin PBXFileReference section */
 		24037B0525874F7000C4F195 /* DNSSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSettings.swift; sourceTree = "<group>"; };
+		240718E928DDC6FC00BFC6C8 /* OpenYouTubePlayerControllerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenYouTubePlayerControllerParser.swift; sourceTree = "<group>"; };
 		2408A87327478F9B00D2D1DE /* AdServicesHelperMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdServicesHelperMock.swift; sourceTree = "<group>"; };
 		2408A8752747901B00D2D1DE /* IAdFrameworkHelperMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAdFrameworkHelperMock.swift; sourceTree = "<group>"; };
 		2408A8772747917400D2D1DE /* AdServicesHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdServicesHelperTest.swift; sourceTree = "<group>"; };
@@ -4400,6 +4404,7 @@
 				24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */,
 				7E85A82226F37FBD0059BB33 /* OpenLicenseControllerParser.swift */,
 				7E9AE47D26FB8C4B00F6A953 /* OpenAdvancedProtectionParser.swift */,
+				240718E928DDC6FC00BFC6C8 /* OpenYouTubePlayerControllerParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -7510,7 +7515,7 @@
 		65F398091B7B684700ABCD39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
@@ -7655,10 +7660,10 @@
 			mainGroup = 65F398081B7B684700ABCD39;
 			packageReferences = (
 				7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */,
-				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */,
+				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */,
+				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
-				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */,
+				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				7EF5C55E26C269D6001851D6 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
@@ -8672,6 +8677,7 @@
 				24B3DAF626F8C51900A66C0F /* DnsProviderFeatureCell.swift in Sources */,
 				241346CD26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */,
 				D0D7E5E224444D81001801A5 /* BasicRulesParser.swift in Sources */,
+				240718EB28DDC6FD00BFC6C8 /* OpenYouTubePlayerControllerParser.swift in Sources */,
 				240C3ADB27464B7C00CD10B3 /* AppleSearchAdsService.swift in Sources */,
 				7E4CC0532577E8C1005ADBCA /* HideKeyboardTapGestureRecognizer.swift in Sources */,
 				D0B545852435D62A002F0AEC /* ComplexProtectionService.swift in Sources */,
@@ -9062,6 +9068,7 @@
 				D083ADB2273946C700A8F96E /* DnsMigration4_3.swift in Sources */,
 				2490F652270097E500B1514D /* RequestSender.swift in Sources */,
 				7E3FEFAE26CD33F80080EC03 /* AGTextField.swift in Sources */,
+				240718EA28DDC6FC00BFC6C8 /* OpenYouTubePlayerControllerParser.swift in Sources */,
 				7E0B226125DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */,
 				D0319FA021947808002C17D9 /* BottomAlertController.swift in Sources */,
 				7E51DBC62425077700594708 /* CompanyDetailedController.swift in Sources */,
@@ -9395,6 +9402,7 @@
 				240C3B322746AA6C00CD10B3 /* RequestSenderProtocol.swift in Sources */,
 				B26B929E2719DEA100F1D482 /* ABECRequest.m in Sources */,
 				D0249585256BD1FD000EED34 /* PurchaseServiceMock.swift in Sources */,
+				240718EC28DDC6FD00BFC6C8 /* OpenYouTubePlayerControllerParser.swift in Sources */,
 				65C54D891B94A69800CABF0F /* AESharedResources.m in Sources */,
 				D0288F382306985000A4EBEF /* ACNCidrRange.m in Sources */,
 				240C3B382746AB0900CD10B3 /* AdServicesAttributionRecordsParser.swift in Sources */,
@@ -13690,7 +13698,7 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
+		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -13714,7 +13722,7 @@
 				version = 1.7.28;
 			};
 		};
-		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */ = {
+		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
 			requirement = {
@@ -13722,7 +13730,7 @@
 				minimumVersion = 0.0.3;
 			};
 		};
-		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */ = {
+		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
@@ -13775,22 +13783,22 @@
 		};
 		B2C8E9A32716FDF500ACDED8 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D024973D25714928000EED34 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D093AA5F25344B4E0015351F /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D09E271A2541D00B002D6BC0 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D0B546032435D740002F0AEC /* Lottie */ = {

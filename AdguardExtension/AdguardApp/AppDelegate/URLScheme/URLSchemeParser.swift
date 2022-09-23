@@ -36,6 +36,7 @@
  11. <inAppUrlScheme>://upgradeApp                                   <--- Open License screen
  12. <inAppUrlScheme>://enableAdvancedProtection                     <--- Open Advanced protection screen
  13. <adguardScheme>://add_dns_server?address:<upstream>&name:<name> <--- Adding custom DNS server
+ 14. <inAppUrlScheme>watch_youtube_video?video_id=<VIDEO_ID>"        <--- Open YouTubePlayerController
  */
 
 protocol IURLSchemeParser {
@@ -58,6 +59,7 @@ fileprivate enum StringConstants: String {
     case upgradeApp = "upgradeApp"
     case enableAdvancedProtection = "enableAdvancedProtection"
     case addDnsServer = "add_dns_server"
+    case openYouTubeController = "watch_youtube_video"
 
     static func getStringConstant(string: String?) -> StringConstants? {
         guard let string = string else { return nil }
@@ -169,6 +171,12 @@ struct URLSchemeParser: IURLSchemeParser {
         case (.inAppUrlScheme, .enableAdvancedProtection):
             DDLogInfo("(URLSchemeParser) openurl - open advanced protection screen; proStatus=\(configurationService.proStatus)")
             let processor = OpenAdvancedProtectionParser(executor: executor)
+            return processor.parse(url)
+
+        // Open YouTubePlayerController
+        case (.inAppUrlScheme, .openYouTubeController):
+            DDLogInfo("(URLSchemeParser) openurl - open YouTubePlayerController screen")
+            let processor = OpenYouTubePlayerControllerParser(executor: executor)
             return processor.parse(url)
 
         default: return false

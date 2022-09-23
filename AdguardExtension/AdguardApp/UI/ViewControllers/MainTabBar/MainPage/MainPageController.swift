@@ -948,6 +948,13 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             statisticsStackView.insertArrangedSubview(chartView, at: insertIndex)
         }
     }
+
+    func presentControllerWithoutOnboarding(_ controller: UIViewController) {
+        presentedViewController?.dismiss(animated: false) // Dismiss if some controller already presented
+        onBoardingIsInProcess = true // Skip onboarding presentation stage
+        present(controller, animated: false)
+        onBoardingIsInProcess = false
+    }
 }
 
 extension MainPageController: ThemableProtocol {
