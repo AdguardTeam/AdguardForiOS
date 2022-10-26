@@ -22,8 +22,8 @@ CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 #
 # Configuration
 #
-API_UPLOAD_URL = "https://twosky.adtidy.org/api/v1/upload"
-API_DOWNLOAD_URL = "https://twosky.adtidy.org/api/v1/download"
+API_UPLOAD_URL = "https://twosky.int.agrd.dev/api/v1/upload"
+API_DOWNLOAD_URL = "https://twosky.int.agrd.dev/api/v1/download"
 # Root directory of the project files (relative to this script)
 BASE_PATH = "../"
 
