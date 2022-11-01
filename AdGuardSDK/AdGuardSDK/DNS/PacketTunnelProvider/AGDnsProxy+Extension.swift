@@ -153,6 +153,7 @@ extension AGDnsProxyConfig {
             // Unfortunately, it appears to be really unstable and causing issues with the current implementation.
             // We should revive it later when we change the way the network extension handles network change.
             enableRouteResolver: false,
+            blockEch: false,
             helperPath: defaultConfig.helperPath
         )
     }
@@ -178,6 +179,7 @@ extension AGDnsProxyConfig {
                enableDNSSECOK: \(enableDNSSECOK)
                enableRetransmissionHandling: \(enableRetransmissionHandling)
                enableRouteResolver: \(enableRouteResolver)
+               blockEch: \(blockEch)
                helperPath: \(helperPath ?? "nil")
                """
     }

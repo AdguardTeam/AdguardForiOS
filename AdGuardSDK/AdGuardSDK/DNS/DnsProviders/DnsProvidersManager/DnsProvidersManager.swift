@@ -64,7 +64,7 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
      - Throws:  Throws an error if custom provider with the specified **id** is not in the storage
                  or another custom dns provider with the same upstream exists
      */
-    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool) throws
+    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool, isMigration: Bool) throws
 
     /**
      Removes custom provider by its **id** from storage
@@ -186,7 +186,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Added custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
     }
 
-    public func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool) throws {
+    public func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool, isMigration: Bool) throws {
         Logger.logInfo("(DnsProvidersManager) - updateCustomProvider; Trying to update custom provider with id=\(id) name=\(newName), upstreams=\(newUpstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
 
         // check another server with given upstream exists
@@ -202,7 +202,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
             throw DnsProviderError.dnsProviderExists(upstreams: newUpstreams)
         }
 
-        try customProvidersStorage.updateCustomProvider(withId: id, newName: newName, newUpstreams: newUpstreams)
+        try customProvidersStorage.updateCustomProvider(withId: id, newName: newName, newUpstreams: newUpstreams, isMigration: isMigration)
         if selectAsCurrent, let provider = customProviders.first(where: { $0.providerId == id }) {
             userDefaults.activeDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: provider.providerId, serverId: provider.server.id)
         }

@@ -1,4 +1,8 @@
 class URLSchemeExecutorMock: IURLSchemeExecutor {
+    func openYouTubePlayerController(videoId: String) -> Bool {
+        true
+    }
+
     func openDnsProvidersController(showLaunchScreen: Bool, upstream: String, title: String?) -> Bool {
         true
     }

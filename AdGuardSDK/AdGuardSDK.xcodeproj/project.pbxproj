@@ -3192,7 +3192,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
 				kind = exactVersion;
-				version = 1.7.28;
+				version = 2.0.36;
 			};
 		};
 		D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */ = {

@@ -77,4 +77,58 @@ class StringUtilsTest: XCTestCase {
             XCTAssertEqual(testCase.discardPortFromIpAddress(), result)
         }
     }
+
+    func testSubstringAfter_1() {
+        XCTAssertEqual("", "".substringAfter(":" as Character))
+        XCTAssertEqual("", ":".substringAfter(":" as Character))
+        XCTAssertEqual("foo", "foo".substringAfter(":" as Character))
+        XCTAssertEqual("", "foo:".substringAfter(":" as Character))
+        XCTAssertEqual("bar:qwerty:", "foo:bar:qwerty:".substringAfter(":" as Character ))
+    }
+
+    func testSubstringAfter_2() {
+        XCTAssertEqual("", "".substringAfter(":"))
+        XCTAssertEqual("", ":".substringAfter(":"))
+        XCTAssertEqual("foo", "foo".substringAfter(":"))
+        XCTAssertEqual("", "foo:".substringAfter(":"))
+        XCTAssertEqual("bar:qwerty:", "foo:bar:qwerty:".substringAfter(":"))
+        XCTAssertEqual("qwerty:", "foo:bar:qwerty:".substringAfter("foo:bar:"))
+        XCTAssertEqual("", "foo:bar:qwerty:".substringAfter("foo:bar:qwerty:"))
+        XCTAssertEqual(":", "foo:bar:qwerty:".substringAfter("bar:qwerty"))
+        XCTAssertEqual("", "foo:bar:qwerty:".substringAfter("bar:qwerty:"))
+    }
+
+    func testSubstringAfter_3() {
+        XCTAssertEqual("foo", "foo".substringAfter("T" as Character))
+        XCTAssertEqual("foo", "foo".substringAfter("bar"))
+        XCTAssertEqual("qwerty", "foo".substringAfter("bar", "qwerty"))
+    }
+
+
+
+    func testSubstringBeforeLast_1() {
+        XCTAssertEqual("", "".substringBeforeLast(":" as Character))
+        XCTAssertEqual("", ":".substringBeforeLast(":" as Character))
+        XCTAssertEqual("foo", "foo".substringBeforeLast(":" as Character))
+        XCTAssertEqual("foo", "foo:".substringBeforeLast(":" as Character))
+        XCTAssertEqual("foo:bar:qwerty", "foo:bar:qwerty:".substringBeforeLast(":" as Character))
+    }
+
+    func testSubstringBeforeLast_2() {
+        XCTAssertEqual("", "".substringBeforeLast(":"))
+        XCTAssertEqual("", ":".substringBeforeLast(":"))
+        XCTAssertEqual("foo", "foo".substringBeforeLast(":"))
+        XCTAssertEqual("foo", "foo:".substringBeforeLast(":"))
+        XCTAssertEqual("foo:bar:qwerty", "foo:bar:qwerty:".substringBeforeLast(":"))
+        XCTAssertEqual("", "foo:bar:qwerty:".substringBeforeLast("foo:bar:"))
+        XCTAssertEqual("foo:", "foo:bar:qwerty:".substringBeforeLast("bar:qwerty"))
+        XCTAssertEqual("foo:", "foo:bar:qwerty:".substringBeforeLast("bar:qwerty:"))
+        XCTAssertEqual("", "foo:bar:qwerty:".substringBeforeLast("foo:bar:qwerty:"))
+    }
+
+    func testSubstringBeforeLast_4() {
+        XCTAssertEqual("foo", "foo".substringBeforeLast("T" as Character))
+        XCTAssertEqual("foo", "foo".substringBeforeLast("bar"))
+        XCTAssertEqual("qwerty", "foo".substringBeforeLast("bar", "qwerty"))
+    }
 }

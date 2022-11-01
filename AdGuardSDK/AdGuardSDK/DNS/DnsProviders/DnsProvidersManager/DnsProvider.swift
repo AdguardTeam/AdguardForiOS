@@ -144,7 +144,7 @@ public struct CustomDnsProvider: CustomDnsProviderProtocol, Codable, Equatable {
     public let providerId: Int
     public var isEnabled: Bool
 
-    init(name: String, server: CustomDnsServer, providerId: Int, isEnabled: Bool) {
+    public init(name: String, server: CustomDnsServer, providerId: Int, isEnabled: Bool) {
         self.name = name
         self.server = server
         self.providerId = providerId
@@ -161,7 +161,7 @@ public struct CustomDnsServer: DnsServerMetaProtocol, Codable, Equatable {
     public let id: Int
     public var isEnabled: Bool
 
-    init(upstreams: [DnsUpstream], providerId: Int, type: DnsProtocol, id: Int, isEnabled: Bool) {
+    public init(upstreams: [DnsUpstream], providerId: Int, type: DnsProtocol, id: Int, isEnabled: Bool) {
         self.upstreams = upstreams
         self.providerId = providerId
         self.type = type

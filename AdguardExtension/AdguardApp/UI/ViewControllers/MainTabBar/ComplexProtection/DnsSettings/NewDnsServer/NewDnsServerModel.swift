@@ -61,7 +61,7 @@ final class NewDnsServerModel {
     /// Function to update custom provider
     func updateCustomProvider(newName: String, newUpstream: String, provider: DnsProviderMetaProtocol) throws {
         let providerId = provider.providerId
-        try dnsProvidersManager.updateCustomProvider(withId: providerId, newName: newName, newUpstreams: [newUpstream], selectAsCurrent: false)
+        try dnsProvidersManager.updateCustomProvider(withId: providerId, newName: newName, newUpstreams: [newUpstream], selectAsCurrent: false, isMigration: false)
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
     }
 
