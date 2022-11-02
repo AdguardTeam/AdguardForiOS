@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "dnslibs",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AdguardTeam/DnsLibs",
+      "state" : {
+        "revision" : "9c4892f209410f86986b1f3cc3178b2628ca82ec",
+        "version" : "2.0.38"
+      }
+    },
+    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios",
@@ -32,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AdguardTeam/SafariConverterLib",
       "state" : {
-        "revision" : "c04404209d4db7b28b26b0f92f89f56d950d2736",
-        "version" : "2.0.27"
+        "revision" : "eabd10ced6506000617e48efa13acd57298215fd",
+        "version" : "2.0.29"
       }
     },
     {
