@@ -29,6 +29,7 @@ struct DnsLibsFrom1_7_28To2_0_34MigrationHelper {
     }
 
 
+
     private func adaptDnsDoQUpstreamIfNeeded(_ upstreams: [String]) -> [String] {
         upstreams.map { getMigrationUpstream($0) }
     }

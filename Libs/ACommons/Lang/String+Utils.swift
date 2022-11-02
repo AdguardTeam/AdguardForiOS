@@ -363,7 +363,6 @@ extension String {
     /// If the string does not contain the delimiter, returns the original string.
     func substringBeforeLast(_ delimiter: String) -> String { substringBeforeLast(delimiter, self) }
 
-
     /// Returns a substring after the first occurrence of `delimiter`.
     /// If the string does not contain the delimiter, returns `missingDelimiterValue`.
     func substringAfter(_ delimiter: Character, _ missingDelimiterValue: String) -> String {
@@ -378,6 +377,7 @@ extension String {
     /// If the string does not contain the delimiter, returns `missingDelimiterValue`.
     func substringAfter(_ delimiter: String, _ missingDelimiterValue: String) -> String {
         guard let range = range(of: delimiter) else { return missingDelimiterValue }
+        
         return String(self[range.upperBound..<endIndex])
     }
     

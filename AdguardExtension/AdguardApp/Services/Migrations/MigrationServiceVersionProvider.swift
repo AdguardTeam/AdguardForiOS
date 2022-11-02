@@ -45,7 +45,7 @@ class MigrationServiceVersionProvider: MigrationServiceVersionProviderProtocol {
 
     var isNeedMigrationForDnsLibsUpdateFrom_1_7_28to2_0_34: Bool {
         let lastBuildVersion = resources.buildVersion
-        return lastBuildVersion >= 965 && lastBuildVersion <= 968 && !resources.isMigrationAfterUpdateDnsLibsFrom1_7_28To2_0_34Passed
+        return lastBuildVersion >= 965 && !resources.isMigrationAfterUpdateDnsLibsFrom1_7_28To2_0_34Passed
     }
 
     private let resources: AESharedResourcesProtocol
