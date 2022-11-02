@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "dnslibs",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/AdguardTeam/DnsLibs",
-      "state" : {
-        "revision" : "c3576668f30a5486f38743b3cf3e90ee87be0591",
-        "version" : "2.0.36"
-      }
-    },
-    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios",
