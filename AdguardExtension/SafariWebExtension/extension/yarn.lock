@@ -7,6 +7,11 @@
   resolved "https://registry.yarnpkg.com/@adguard/assistant/-/assistant-4.3.63.tgz#8aec029dc5b0037c9901caf93369a2ffbad0f3fc"
   integrity sha512-vfBytLuU4SzqyoaTnZgVP/ZVKUuK+NdDmiDWkQ2wUNdpI9sOq4X1iEiJLbUoprdwYCQia9Eyh1HfwNCs3LtUnA==
 
+"@adguard/extended-css@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@adguard/extended-css/-/extended-css-2.0.2.tgz#8f9d50fbc0264638ad3c63247d610cb2ef919318"
+  integrity sha512-IIKbrQaHX7NoRkQNAraPTGK6E5Vxm5vhPGgqlwKdRxzbFMFYbzSaZ59lzWj3UFS3L+zdM2ZReaQueMpYDIH3gA==
+
 "@adguard/scriptlets@^1.6.51":
   version "1.6.51"
   resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.6.51.tgz#60519b1ba7543f9e48c6ba74f853a82d0ab6372d"
