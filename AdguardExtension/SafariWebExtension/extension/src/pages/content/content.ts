@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import browser from 'webextension-polyfill';
-import ExtendedCss from 'extended-css';
+import { ExtendedCss } from '@adguard/extended-css';
 
 import { MessagesToBackgroundPage } from '../common/constants';
 import { SelectorsAndScripts } from '../common/interfaces';
@@ -168,14 +168,14 @@ const applyExtendedCss = (extendedCss: string[], verbose: boolean) => {
     }
 
     logMessage(verbose, `extended css length: ${extendedCss.length}`);
-    const extcss = new ExtendedCss({
+    const extCss = new ExtendedCss({
         styleSheet: extendedCss
             .filter((s) => s.length > 0)
             .map((s) => s.trim())
             .map((s) => (s[s.length - 1] !== '}' ? `${s} {display:none!important;}` : s))
             .join('\n'),
     });
-    extcss.apply();
+    extCss.apply();
 };
 
 /**
