@@ -153,18 +153,6 @@ final class MigrationService: MigrationServiceProtocol {
             DDLogInfo("(MigrationService) - Successfully migrate dns rules from 4.3.0 to 4.3.1")
         }
 
-        if versionProvider.isNeedMigrationForDnsLibsUpdateFrom_1_7_28to2_0_34 {
-            DDLogInfo("(MigrationService) - Starting migration from DnsLibs v1.7.28 to v2.0.34")
-            let migrationHelper = DnsLibsFrom1_7_28To2_0_34MigrationHelper(dnsProvider: dnsProvidersManager)
-            do {
-                try migrationHelper.migrate()
-                DDLogInfo("(MigrationService) - Migration from DnsLibs v1.7.28 to v2.0.34 successfully passed")
-                resources.isMigrationAfterUpdateDnsLibsFrom1_7_28To2_0_34Passed = true
-            } catch {
-                DDLogError("(MigrationService) - Migration from DnsLibs v1.7.28 to v2.0.34 over with error:\(error)")
-            }
-        }
-
         let currentBuildVersion = Int(productInfo.buildNumber())
         resources.buildVersion = currentBuildVersion ?? 0
         resources.isMigrationTo4_3Passed = true
