@@ -72,7 +72,7 @@ class DnsProvidersManagerMock : DnsProvidersManagerProtocol {
     var updateCustomProviderCalled = false
     var updateCustomProviderCalledNumber = 0
     var updateCustomProviderError: Error?
-    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool, isMigration: Bool) throws {
+    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool) throws {
         updateCustomProviderCalled = true
         updateCustomProviderCalledNumber += 1
         if let error = updateCustomProviderError { throw error }

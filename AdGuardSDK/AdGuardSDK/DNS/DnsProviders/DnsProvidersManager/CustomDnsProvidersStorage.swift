@@ -38,7 +38,7 @@ protocol CustomDnsProvidersStorageProtocol: ResetableSyncProtocol {
      - Parameter newUpstreams: New upstreams of provider to update
      - Throws: Throws an error if custom provider with the specified **id** is not in the storage
      */
-    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], isMigration: Bool) throws
+    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String]) throws
 
     /**
      Removes custom provider by its **id** from storage
@@ -132,14 +132,14 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
         return (ids.providerId, ids.serverId)
     }
 
-    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], isMigration: Bool) throws {
+    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String]) throws {
         // Make sure that provider exists
         guard let providerIndex = userDefaults.customProviders.firstIndex(where: { $0.providerId == id }) else {
             throw CustomDnsProvidersStorageError.providerAbsent(providerId: id)
         }
 
         let oldProvider = userDefaults.customProviders[providerIndex]
-        let newDnsProtocol = try checkProviderInfo(name: newName, upstreams: newUpstreams, isMigration: isMigration)
+        let newDnsProtocol = try checkProviderInfo(name: newName, upstreams: newUpstreams)
         try checkDnsImplementation(dnsProtocol: newDnsProtocol)
         let newDnsUpstreams = newUpstreams.map { DnsUpstream(upstream: $0, protocol: newDnsProtocol) }
 

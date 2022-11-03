@@ -102,7 +102,7 @@ final class InAppDnsProvidersManagerMock: DnsProvidersManagerProtocol {
     var invokedUpdateCustomProviderParametersList = [(id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool)]()
     var stubbedUpdateCustomProviderError: Error?
 
-    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool, isMigration: Bool) throws {
+    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool) throws {
         invokedUpdateCustomProvider = true
         invokedUpdateCustomProviderCount += 1
         invokedUpdateCustomProviderParameters = (id, newName, newUpstreams, selectAsCurrent)
