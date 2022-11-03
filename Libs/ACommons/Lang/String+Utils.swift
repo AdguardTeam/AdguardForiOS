@@ -344,4 +344,56 @@ extension String {
 
         return params.count > 0 ? params : nil
     }
+
+
+
+    /// Returns a substring after the first occurrence of `delimiter`.
+    /// If the string does not contain the delimiter, returns the original string.
+    func substringAfter(_ delimiter: Character) -> String { substringAfter(delimiter, self) }
+
+    /// Returns a substring after the first occurrence of `delimiter`.
+    /// If the string does not contain the delimiter, returns the original string.
+    func substringAfter(_ delimiter: String) -> String { substringAfter(delimiter, self) }
+
+    /// Returns a substring before the last occurrence of `delimiter`.
+    /// If the string does not contain the delimiter, returns the original string.
+    func substringBeforeLast(_ delimiter: Character) -> String { substringBeforeLast(delimiter, self) }
+
+    /// Returns a substring before the last occurrence of `delimiter`.
+    /// If the string does not contain the delimiter, returns the original string.
+    func substringBeforeLast(_ delimiter: String) -> String { substringBeforeLast(delimiter, self) }
+
+    /// Returns a substring after the first occurrence of `delimiter`.
+    /// If the string does not contain the delimiter, returns `missingDelimiterValue`.
+    func substringAfter(_ delimiter: Character, _ missingDelimiterValue: String) -> String {
+        guard let first = firstIndex(of: delimiter),
+              let afterDelimiterIndex = index(first, offsetBy: 1, limitedBy: endIndex)
+        else { return missingDelimiterValue }
+
+        return String(self[afterDelimiterIndex..<endIndex])
+    }
+
+    /// Returns a substring after the first occurrence of `delimiter`.
+    /// If the string does not contain the delimiter, returns `missingDelimiterValue`.
+    func substringAfter(_ delimiter: String, _ missingDelimiterValue: String) -> String {
+        guard let range = range(of: delimiter) else { return missingDelimiterValue }
+        
+        return String(self[range.upperBound..<endIndex])
+    }
+    
+    /// Returns a substring before the last occurrence of `delimiter`.
+    /// If the string does not contain the delimiter, returns `missingDelimiterValue`.
+    func substringBeforeLast(_ delimiter: Character, _ missingDelimiterValue: String) -> String {
+        guard let last = lastIndex(of: delimiter) else { return missingDelimiterValue }
+
+        return String(self[startIndex..<last])
+    }
+
+    /// Returns a substring before the last occurrence of `delimiter`.
+    /// If the string does not contain the delimiter, returns `missingDelimiterValue`.
+    func substringBeforeLast(_ delimiter: String, _ missingDelimiterValue: String) -> String {
+        guard let range = range(of: delimiter, options: .backwards) else { return missingDelimiterValue }
+
+        return String(self[startIndex..<range.lowerBound])
+    }
 }

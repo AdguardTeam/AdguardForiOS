@@ -69,8 +69,7 @@ final class DnsProxy: DnsProxyProtocol {
 
     func resolve(dnsRequest: Data, onRequestResolved: @escaping (Data?) -> Void) {
         resolveQueue.async { [weak self] in
-            let reply = self?.proxy?.handlePacket(dnsRequest)
-            onRequestResolved(reply)
+            self?.proxy?.handlePacket(dnsRequest, completionHandler: onRequestResolved)
         }
     }
 
