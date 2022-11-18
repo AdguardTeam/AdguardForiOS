@@ -3192,7 +3192,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
 				kind = exactVersion;
-				version = 2.0.38;
+				version = 2.0.58;
 			};
 		};
 		D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */ = {
@@ -3208,7 +3208,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
 			requirement = {
 				kind = exactVersion;
-				version = 2.0.29;
+				version = 2.0.31;
 			};
 		};
 		D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */ = {

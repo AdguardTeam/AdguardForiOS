@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AdguardTeam/DnsLibs",
       "state" : {
-        "revision" : "9c4892f209410f86986b1f3cc3178b2628ca82ec",
-        "version" : "2.0.38"
+        "revision" : "db590e113335ef3523e5aacc71131660a828af4e",
+        "version" : "2.0.58"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AdguardTeam/SafariConverterLib",
       "state" : {
-        "revision" : "eabd10ced6506000617e48efa13acd57298215fd",
-        "version" : "2.0.29"
+        "revision" : "eb0ea1c55898c455442cdead456e048644c2e5e5",
+        "version" : "2.0.31"
       }
     },
     {
