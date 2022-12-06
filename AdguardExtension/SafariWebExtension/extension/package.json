@@ -13,7 +13,7 @@
     "locales": "ts-node tools/locales"
   },
   "dependencies": {
-    "@adguard/assistant": "4.3.63",
+    "@adguard/assistant": "4.3.67",
     "@adguard/extended-css": "^2.0.10",
     "@adguard/translate": "0.3.0",
     "@adguard/tsurlfilter": "1.0.50",
