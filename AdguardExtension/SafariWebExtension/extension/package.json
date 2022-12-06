@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "@adguard/assistant": "4.3.67",
-    "@adguard/extended-css": "^2.0.10",
+    "@adguard/extended-css": "^2.0.24",
     "@adguard/translate": "0.3.0",
-    "@adguard/tsurlfilter": "1.0.50",
+    "@adguard/tsurlfilter": "1.0.57",
     "@babel/runtime": "^7.14.6",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
