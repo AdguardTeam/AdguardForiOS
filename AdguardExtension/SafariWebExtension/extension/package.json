@@ -41,7 +41,6 @@
     "@types/copy-webpack-plugin": "^8.0.1",
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.172",
-    "@types/node": "^18.11.13",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "@types/webextension-polyfill": "^0.8.0",
