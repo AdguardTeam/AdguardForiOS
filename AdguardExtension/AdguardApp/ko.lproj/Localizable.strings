@@ -251,7 +251,7 @@
 "dot_protocol" = "DNS-over-TLS";
 
 /* DnsProviderDetailsController - dns over quic rotocol */
-"doq_protocol" = "DNS-over-QUIC (실험용)";
+"doq_protocol" = "DNS-over-QUIC";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "정말 로그아웃 하시겠습니까?";

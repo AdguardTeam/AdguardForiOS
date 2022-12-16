@@ -251,7 +251,7 @@
 "dot_protocol" = "DNS mediante TLS";
 
 /* DnsProviderDetailsController - dns over quic rotocol */
-"doq_protocol" = "DNS mediante QUIC (experimental)";
+"doq_protocol" = "DNS mediante QUIC";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "¿Estás seguro de que deseas cerrar sesión?";

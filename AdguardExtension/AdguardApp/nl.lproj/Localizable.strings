@@ -242,7 +242,7 @@
 "dot_protocol" = "DNS-via-TLS";
 
 /* DnsProviderDetailsController - dns over quic rotocol */
-"doq_protocol" = "DNS-via-QUIC (experimenteel)";
+"doq_protocol" = "DNS-via-QUIC";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Weet u zeker dat u wilt uit loggen?";

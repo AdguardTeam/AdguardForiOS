@@ -251,7 +251,7 @@
 "dot_protocol" = "DNS skrze TLS";
 
 /* DnsProviderDetailsController - dns over quic rotocol */
-"doq_protocol" = "DNS skrze QUIC (experimentální)";
+"doq_protocol" = "DNS skrze QUIC";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Opravdu se chcete odhlásit?";
