@@ -251,7 +251,7 @@
 "dot_protocol" = "DNS-over-TLS";
 
 /* DnsProviderDetailsController - dns over quic rotocol */
-"doq_protocol" = "DNS-over-Quic (eksperimentel)";
+"doq_protocol" = "DNS-over-QUIC";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Sikker på, at du vil logge ud?";
