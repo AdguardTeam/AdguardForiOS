@@ -30,10 +30,10 @@
   resolved "https://registry.yarnpkg.com/@adguard/translate/-/translate-0.3.0.tgz#a7a06d1d4847b57a1692ab079fd40939f8b9baff"
   integrity sha512-MP74O2BFjW8ez3W+jJQyGNs3e1FTfIYijBHRwmZ/J/IrjCsrYGqER4TnNo7eL9j4Ffpth00ME+wtvsyCCNkRfg==
 
-"@adguard/tsurlfilter@1.0.70":
-  version "1.0.70"
-  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-1.0.70.tgz#e149c7f4a1edf8ff307c1861e75cc159fa5eff69"
-  integrity sha512-89yl7gIyRSOSQQRLNmRF9ZfXG022zL7TG4BKdT71Kr/q41HX7gLGTXwI1ckfaMxtVr2mT9Y8Suxza8PFebceGQ==
+"@adguard/tsurlfilter@1.0.72":
+  version "1.0.72"
+  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-1.0.72.tgz#258b7767944dbe4cc281e132058e77a590278fe0"
+  integrity sha512-nILloUiaHxLBy3rwPAT9kzwRxwh65gTGxUmqYvzboTZoMNM6MBfOg11saga4eMG4WFdRrNKLhh5bi5fXDFbcNg==
   dependencies:
     "@adguard/extended-css" "^2.0.33"
     "@adguard/scriptlets" "^1.8.2"
