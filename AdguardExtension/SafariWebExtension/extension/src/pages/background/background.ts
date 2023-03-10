@@ -3,16 +3,14 @@ import browser from 'webextension-polyfill';
 import * as TSUrlFilter from '@adguard/tsurlfilter';
 
 import {
+    ADVANCED_RULES_STORAGE_KEY,
     MessagesToBackgroundPage,
     MessagesToContentScript,
 } from '../common/constants';
 import { permissions } from './permissions';
 import { log } from '../common/log';
 import { app } from './app';
-import { Engine } from './engine';
-import { getDomain } from '../common/utils/url';
-import { buildStyleSheet } from './css-service';
-import { SelectorsAndScripts } from '../common/interfaces';
+import { storage } from './storage';
 import { adguard } from './adguard';
 
 interface Message {
@@ -20,91 +18,11 @@ interface Message {
     data?: any,
 }
 
-const getEngine = (() => {
-    const engine = new Engine();
-    let startPromise: Promise<Engine>;
-
-    const start = async () => {
-        const rulesText = await adguard.nativeHost.getAdvancedRulesText();
-
-        const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
-        await engine.start(convertedRulesText);
-
-        return engine;
-    };
-
-    return (shouldUpdateAdvancedRules: boolean) => {
-        if (!startPromise || shouldUpdateAdvancedRules) {
-            startPromise = start();
-        }
-        return startPromise;
-    };
-})();
-
-const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts> => {
-    const shouldUpdateAdvancedRules = await adguard.nativeHost.shouldUpdateAdvancedRules();
-
-    const engine = await getEngine(shouldUpdateAdvancedRules);
-
-    const hostname = getDomain(url);
-
-    const cosmeticOption = engine.getCosmeticOption(url);
-    const cosmeticResult = engine.getCosmeticResult(hostname, cosmeticOption);
-
-    const injectCssRules = [
-        ...cosmeticResult.CSS.generic,
-        ...cosmeticResult.CSS.specific,
-    ];
-
-    const elementHidingExtCssRules = [
-        ...cosmeticResult.elementHiding.genericExtCss,
-        ...cosmeticResult.elementHiding.specificExtCss,
-    ];
-
-    const injectExtCssRules = [
-        ...cosmeticResult.CSS.genericExtCss,
-        ...cosmeticResult.CSS.specificExtCss,
-    ];
-
-    const cssInject = buildStyleSheet([], injectCssRules, true);
-    const cssExtended = buildStyleSheet(
-        elementHidingExtCssRules,
-        injectExtCssRules,
-        false,
-    );
-
-    const scriptRules = cosmeticResult.getScriptRules();
-
-    const debug = false;
-    const scripts: string[] = scriptRules
-        .map((scriptRule) => scriptRule.getScript({
-            debug,
-            request: {
-                domain: url,
-            },
-        }))
-        .filter((script): script is string => script !== null);
-
-    // remove repeating scripts
-    const uniqueScripts = [...new Set(scripts)];
-
-    return {
-        scripts: uniqueScripts,
-        cssInject,
-        cssExtended,
-    };
-};
-
 const handleMessages = () => {
     browser.runtime.onMessage.addListener(async (message: Message) => {
         const { type, data } = message;
 
         switch (type) {
-            case MessagesToBackgroundPage.GetScriptsAndSelectors: {
-                const { url } = data;
-                const scriptsAndSelectors = await getScriptsAndSelectors(url);
-                return scriptsAndSelectors as SelectorsAndScripts;
-            }
             case MessagesToBackgroundPage.AddRule: {
                 await adguard.nativeHost.addToUserRules(data.ruleText);
                 break;
@@ -193,11 +111,22 @@ const handleMessages = () => {
                 await adguard.nativeHost.removeUserRulesBySite(url);
                 break;
             }
+            case MessagesToBackgroundPage.WakeUp: {
+                // do nothing
+            }
             default:
                 break;
         }
     });
 };
+
+const setAdvancedRulesToStorage = async () => {
+    const rulesText = await adguard.nativeHost.getAdvancedRulesText();
+    const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
+    await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
+}
+
+setAdvancedRulesToStorage();
 
 export const background = () => {
     // Message listener should be on the upper level to wake up background page

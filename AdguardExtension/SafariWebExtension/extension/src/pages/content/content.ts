@@ -1,9 +1,18 @@
 /* eslint-disable no-console */
 import browser from 'webextension-polyfill';
+import * as TSUrlFilter from '@adguard/tsurlfilter';
 import { ExtendedCss } from '@adguard/extended-css';
 
-import { MessagesToBackgroundPage } from '../common/constants';
+// FIXME: move to common or content-script directory
+import { storage } from '../background/storage';
+// FIXME: move to common or content-script directory
+import { buildStyleSheet } from '../background/css-service';
+// FIXME: move to common or content-script directory
+import { EngineSync, getCosmeticOption, getCosmeticResult } from '../background/engine/Engine';
+
 import { SelectorsAndScripts } from '../common/interfaces';
+import { getDomain } from '../common/utils/url';
+import { ADVANCED_RULES_STORAGE_KEY, MessagesToBackgroundPage } from '../common/constants';
 
 /**
  * Logs a message if verbose is true
@@ -15,22 +24,6 @@ const logMessage = (verbose: boolean, message: string) => {
     if (verbose) {
         console.log(`(AG) ${message}`);
     }
-};
-
-const getSelectorsAndScripts = async (): Promise<SelectorsAndScripts | null> => {
-    const response = await browser.runtime.sendMessage({
-        type: MessagesToBackgroundPage.GetScriptsAndSelectors,
-        data: {
-            url: window.location.href,
-        },
-    });
-
-    if (response === null) {
-        console.log('AG: no scripts and selectors received');
-        return null;
-    }
-
-    return response as SelectorsAndScripts;
 };
 
 /**
@@ -195,13 +188,89 @@ const applyAdvancedBlockingData = (selectorsAndScripts: SelectorsAndScripts, ver
     logMessage(verbose, 'Applying scripts and css - done');
 };
 
+const getEngine = (() => {
+    const engine = new EngineSync();
+
+    const start = (convertedRulesText: string): EngineSync => {
+        engine.start(convertedRulesText);
+        return engine;
+    };
+
+    return (convertedRulesText: string): TSUrlFilter.Engine | undefined => start(convertedRulesText).engine;
+})();
+
+const getScriptsAndSelectors = (url: string, convertedRulesText: string): SelectorsAndScripts => {
+    const engine = getEngine(convertedRulesText);
+    const hostname = getDomain(url);
+    const cosmeticOption = getCosmeticOption(url, engine);
+
+    const cosmeticResult = getCosmeticResult(hostname, cosmeticOption, engine);
+
+    const injectCssRules = [
+        ...cosmeticResult.CSS.generic,
+        ...cosmeticResult.CSS.specific,
+    ];
+
+    const elementHidingExtCssRules = [
+        ...cosmeticResult.elementHiding.genericExtCss,
+        ...cosmeticResult.elementHiding.specificExtCss,
+    ];
+
+    const injectExtCssRules = [
+        ...cosmeticResult.CSS.genericExtCss,
+        ...cosmeticResult.CSS.specificExtCss,
+    ];
+
+    const cssInject = buildStyleSheet([], injectCssRules, true);
+    const cssExtended = buildStyleSheet(
+        elementHidingExtCssRules,
+        injectExtCssRules,
+        false,
+    );
+
+    const scriptRules = cosmeticResult.getScriptRules();
+
+    const debug = false;
+    const scripts: string[] = scriptRules
+        .map((scriptRule) => scriptRule.getScript({
+            debug,
+            request: {
+                domain: url,
+            },
+        }))
+        .filter((script): script is string => script !== null);
+
+    // remove repeating scripts
+    const uniqueScripts = [...new Set(scripts)];
+
+    return {
+        scripts: uniqueScripts,
+        cssInject,
+        cssExtended,
+    };
+};
+
+const wakeBackgroundPage = async (): Promise<void> => {
+    await browser.runtime.sendMessage({
+        type: MessagesToBackgroundPage.WakeUp,
+        data: {},
+    });
+};
+
 const init = async () => {
     if (document instanceof HTMLDocument) {
         if (window.location.href && window.location.href.indexOf('http') === 0) {
+            // send message to background page
+            // just to wake it up
+            // IMPORTANT: if should not be 'await wakeBackgroundPage()'
+            wakeBackgroundPage();
+
+            const convertedRulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;
+
             const startGettingScripts = Date.now();
             let selectorsAndScripts;
             try {
-                selectorsAndScripts = await getSelectorsAndScripts();
+                selectorsAndScripts = getScriptsAndSelectors(window.location.href, convertedRulesText);
             } catch (e) {
                 console.log(e);
             }
