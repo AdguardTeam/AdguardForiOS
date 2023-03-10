@@ -3,6 +3,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
 const BUILD_PATH = path.resolve(__dirname, '../../build');
 
@@ -12,7 +13,7 @@ const ASSISTANT_PATH = path.resolve(__dirname, '../../src/targets/assistant');
 const POPUP_PATH = path.resolve(__dirname, '../../src/targets/popup');
 
 export const config = {
-    mode: 'development',
+    mode: 'production',
     devtool: 'inline-source-map',
     entry: {
         background: BACKGROUND_PATH,
@@ -26,6 +27,13 @@ export const config = {
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
+    },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+            }),
+        ],
     },
     module: {
         rules: [
