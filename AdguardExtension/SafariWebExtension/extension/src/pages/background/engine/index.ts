@@ -1,1 +1,1 @@
-export { Engine } from './Engine';
+export { EngineSync } from './Engine';
