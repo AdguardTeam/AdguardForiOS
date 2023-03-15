@@ -1,1 +1,1 @@
-export { EngineSync } from './Engine';
+export { EngineSync, getCosmeticOption, getCosmeticResult } from './Engine';

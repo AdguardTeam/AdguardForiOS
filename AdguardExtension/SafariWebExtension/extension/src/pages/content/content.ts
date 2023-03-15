@@ -4,7 +4,7 @@ import * as TSUrlFilter from '@adguard/tsurlfilter';
 import { ExtendedCss } from '@adguard/extended-css';
 
 // FIXME: move to common or content-script directory
-import { EngineSync, getCosmeticOption, getCosmeticResult } from './engine/Engine';
+import { EngineSync, getCosmeticOption, getCosmeticResult } from './engine';
 import { buildStyleSheet } from './css-service';
 
 import { storage } from '../common/storage';
