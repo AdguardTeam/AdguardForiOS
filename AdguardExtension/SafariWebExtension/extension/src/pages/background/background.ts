@@ -113,6 +113,7 @@ const handleMessages = () => {
             }
             case MessagesToBackgroundPage.WakeUp: {
                 // do nothing
+                break;
             }
             default:
                 break;
@@ -124,7 +125,7 @@ const setAdvancedRulesToStorage = async () => {
     const rulesText = await adguard.nativeHost.getAdvancedRulesText();
     const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
     await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
-}
+};
 
 setAdvancedRulesToStorage();
 

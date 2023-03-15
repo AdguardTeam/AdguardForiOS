@@ -203,15 +203,12 @@ const init = async () => {
                 return;
             }
 
-            const startGettingScripts = Date.now();
             let selectorsAndScripts;
             try {
                 selectorsAndScripts = getAdvancedRulesData(window.location.href, convertedRulesText);
             } catch (e) {
                 console.log(e);
             }
-
-            console.log(`Time to get selectors and scripts from native page to content script: ${Date.now() - startGettingScripts} ms`);
 
             if (selectorsAndScripts) {
                 applyAdvancedBlockingData(selectorsAndScripts, false);

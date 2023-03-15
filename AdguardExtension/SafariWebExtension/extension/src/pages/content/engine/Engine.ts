@@ -60,7 +60,7 @@ const getMatchingResult = (url: string, engine: TSUrlFilter.Engine | undefined) 
 export const getCosmeticOption = (url: string, engine: TSUrlFilter.Engine | undefined) => {
     const matchingResult = getMatchingResult(url, engine);
     return matchingResult.getCosmeticOption();
-}
+};
 
 export const getCosmeticResult = (
     hostname: string,

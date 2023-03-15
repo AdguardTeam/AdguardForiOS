@@ -15,6 +15,7 @@ export type IconId =
     'arrow' |
     'network';
 
+/* eslint-disable max-len */
 export const Icons = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="icons">
         <symbol id="delete" viewBox="0 0 24 24" fill="none">
@@ -172,3 +173,4 @@ export const Icons = () => (
         </symbol>
     </svg>
 );
+/* eslint-enable max-len */
