@@ -17,7 +17,7 @@ const getEngine = (() => {
     return (convertedRulesText: string): TSUrlFilter.Engine | undefined => start(convertedRulesText).engine;
 })();
 
-export const getAdvancedData = (url: string, convertedRulesText: string): SelectorsAndScripts => {
+export const getAdvancedRulesData = (url: string, convertedRulesText: string): SelectorsAndScripts => {
     const engine = getEngine(convertedRulesText);
     const hostname = getDomain(url);
     const cosmeticOption = getCosmeticOption(url, engine);

@@ -2,7 +2,7 @@
 import browser from 'webextension-polyfill';
 import { ExtendedCss } from '@adguard/extended-css';
 
-import { getAdvancedData } from './get-advanced-data';
+import { getAdvancedRulesData } from './get-advanced-rules-data';
 
 import { storage } from '../common/storage';
 import { SelectorsAndScripts } from '../common/interfaces';
@@ -206,7 +206,7 @@ const init = async () => {
             const startGettingScripts = Date.now();
             let selectorsAndScripts;
             try {
-                selectorsAndScripts = getAdvancedData(window.location.href, convertedRulesText);
+                selectorsAndScripts = getAdvancedRulesData(window.location.href, convertedRulesText);
             } catch (e) {
                 console.log(e);
             }
