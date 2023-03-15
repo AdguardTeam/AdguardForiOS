@@ -10,7 +10,7 @@ import {
 import { permissions } from './permissions';
 import { log } from '../common/log';
 import { app } from './app';
-import { storage } from './storage';
+import { storage } from '../common/storage';
 import { adguard } from './adguard';
 
 interface Message {

@@ -1,5 +1,5 @@
 /* eslint-disable no-console,class-methods-use-this */
-import { storage } from '../storage';
+import { storage } from '../../common/storage';
 import { APPEARANCE_THEME_DEFAULT, AppearanceTheme } from '../../common/constants';
 import { ActionLinks, NativeHostInitData, NativeHostInterface } from './NativeHost';
 

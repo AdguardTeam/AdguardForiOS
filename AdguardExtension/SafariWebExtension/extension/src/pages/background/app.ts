@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import browser from 'webextension-polyfill';
 
-import { storage } from './storage';
+import { storage } from '../common/storage';
 
 class App {
     PERMISSIONS_MODAL_VIEWED = 'permissions_modal_viewed';

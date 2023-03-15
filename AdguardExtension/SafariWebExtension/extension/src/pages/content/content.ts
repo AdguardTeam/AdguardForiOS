@@ -4,11 +4,10 @@ import * as TSUrlFilter from '@adguard/tsurlfilter';
 import { ExtendedCss } from '@adguard/extended-css';
 
 // FIXME: move to common or content-script directory
-import { storage } from '../background/storage';
-// FIXME: move to common or content-script directory
 import { buildStyleSheet } from '../background/css-service';
 import { EngineSync, getCosmeticOption, getCosmeticResult } from './engine/Engine';
 
+import { storage } from '../common/storage';
 import { SelectorsAndScripts } from '../common/interfaces';
 import { getDomain } from '../common/utils/url';
 import { ADVANCED_RULES_STORAGE_KEY, MessagesToBackgroundPage } from '../common/constants';
