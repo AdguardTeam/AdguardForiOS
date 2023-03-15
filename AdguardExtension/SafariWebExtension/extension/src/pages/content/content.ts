@@ -182,6 +182,11 @@ const applyAdvancedBlockingData = (selectorsAndScripts: SelectorsAndScripts, ver
     logMessage(verbose, 'Applying scripts and css - done');
 };
 
+/**
+ * Sends empty message to background page just to wake it up.
+ * This is the way to ensure that advanced rules are updated and set to storage there
+ * before getting them from storage.
+ */
 const wakeBackgroundPage = async (): Promise<void> => {
     await browser.runtime.sendMessage({
         type: MessagesToBackgroundPage.WakeUp,
@@ -192,9 +197,8 @@ const wakeBackgroundPage = async (): Promise<void> => {
 const init = async () => {
     if (document instanceof HTMLDocument) {
         if (window.location.href && window.location.href.indexOf('http') === 0) {
-            // send message to background page
-            // just to wake it up
-            // IMPORTANT: if should not be 'await wakeBackgroundPage()'
+            // wake background page to force the advanced rules update from native host
+            // IMPORTANT: it should not be 'await wakeBackgroundPage()'
             wakeBackgroundPage();
 
             const convertedRulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;

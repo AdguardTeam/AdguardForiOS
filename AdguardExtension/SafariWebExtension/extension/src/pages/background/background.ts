@@ -121,6 +121,10 @@ const handleMessages = () => {
     });
 };
 
+/**
+ * Gets advanced rules from native host, converts them,
+ * and sets the converted result to storage.
+ */
 const setAdvancedRulesToStorage = async () => {
     const rulesText = await adguard.nativeHost.getAdvancedRulesText();
     const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
