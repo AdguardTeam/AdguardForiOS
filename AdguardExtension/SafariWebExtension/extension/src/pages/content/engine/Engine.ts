@@ -1,7 +1,7 @@
 import * as TSUrlFilter from '@adguard/tsurlfilter';
 import { CosmeticOption, RequestType } from '@adguard/tsurlfilter';
 
-import { app } from '../app';
+import { app } from '../../background/app';
 
 /**
  * Sync engine.

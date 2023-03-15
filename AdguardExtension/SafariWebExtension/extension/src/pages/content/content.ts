@@ -7,8 +7,7 @@ import { ExtendedCss } from '@adguard/extended-css';
 import { storage } from '../background/storage';
 // FIXME: move to common or content-script directory
 import { buildStyleSheet } from '../background/css-service';
-// FIXME: move to common or content-script directory
-import { EngineSync, getCosmeticOption, getCosmeticResult } from '../background/engine/Engine';
+import { EngineSync, getCosmeticOption, getCosmeticResult } from './engine/Engine';
 
 import { SelectorsAndScripts } from '../common/interfaces';
 import { getDomain } from '../common/utils/url';
