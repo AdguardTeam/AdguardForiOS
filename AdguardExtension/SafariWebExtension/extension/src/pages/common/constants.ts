@@ -40,5 +40,3 @@ export enum Platform {
 }
 
 export const ADVANCED_RULES_STORAGE_KEY = 'AdvancedRulesStorageKey';
-
-export const ENGINE_STORAGE_KEY = 'EngineStorageKey';
