@@ -1,5 +1,5 @@
 import { CosmeticRule } from '@adguard/tsurlfilter';
-import { buildStyleSheet } from '../../../src/pages/background/css-service';
+import { buildStyleSheet } from '../../../src/pages/content/css-service';
 
 describe('css-service', () => {
     it('returns one css rule in one array element for inject rules', () => {
