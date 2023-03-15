@@ -1,14 +1,11 @@
 /* eslint-disable no-console */
 import browser from 'webextension-polyfill';
-import * as TSUrlFilter from '@adguard/tsurlfilter';
 import { ExtendedCss } from '@adguard/extended-css';
 
-import { EngineSync, getCosmeticOption, getCosmeticResult } from './engine';
-import { buildStyleSheet } from './css-service';
+import { getAdvancedData } from './get-advanced-data';
 
 import { storage } from '../common/storage';
 import { SelectorsAndScripts } from '../common/interfaces';
-import { getDomain } from '../common/utils/url';
 import { ADVANCED_RULES_STORAGE_KEY, MessagesToBackgroundPage } from '../common/constants';
 
 /**
@@ -185,68 +182,6 @@ const applyAdvancedBlockingData = (selectorsAndScripts: SelectorsAndScripts, ver
     logMessage(verbose, 'Applying scripts and css - done');
 };
 
-const getEngine = (() => {
-    const engine = new EngineSync();
-
-    const start = (convertedRulesText: string): EngineSync => {
-        engine.start(convertedRulesText);
-        return engine;
-    };
-
-    return (convertedRulesText: string): TSUrlFilter.Engine | undefined => start(convertedRulesText).engine;
-})();
-
-const getScriptsAndSelectors = (url: string, convertedRulesText: string): SelectorsAndScripts => {
-    const engine = getEngine(convertedRulesText);
-    const hostname = getDomain(url);
-    const cosmeticOption = getCosmeticOption(url, engine);
-
-    const cosmeticResult = getCosmeticResult(hostname, cosmeticOption, engine);
-
-    const injectCssRules = [
-        ...cosmeticResult.CSS.generic,
-        ...cosmeticResult.CSS.specific,
-    ];
-
-    const elementHidingExtCssRules = [
-        ...cosmeticResult.elementHiding.genericExtCss,
-        ...cosmeticResult.elementHiding.specificExtCss,
-    ];
-
-    const injectExtCssRules = [
-        ...cosmeticResult.CSS.genericExtCss,
-        ...cosmeticResult.CSS.specificExtCss,
-    ];
-
-    const cssInject = buildStyleSheet([], injectCssRules, true);
-    const cssExtended = buildStyleSheet(
-        elementHidingExtCssRules,
-        injectExtCssRules,
-        false,
-    );
-
-    const scriptRules = cosmeticResult.getScriptRules();
-
-    const debug = false;
-    const scripts: string[] = scriptRules
-        .map((scriptRule) => scriptRule.getScript({
-            debug,
-            request: {
-                domain: url,
-            },
-        }))
-        .filter((script): script is string => script !== null);
-
-    // remove repeating scripts
-    const uniqueScripts = [...new Set(scripts)];
-
-    return {
-        scripts: uniqueScripts,
-        cssInject,
-        cssExtended,
-    };
-};
-
 const wakeBackgroundPage = async (): Promise<void> => {
     await browser.runtime.sendMessage({
         type: MessagesToBackgroundPage.WakeUp,
@@ -271,7 +206,7 @@ const init = async () => {
             const startGettingScripts = Date.now();
             let selectorsAndScripts;
             try {
-                selectorsAndScripts = getScriptsAndSelectors(window.location.href, convertedRulesText);
+                selectorsAndScripts = getAdvancedData(window.location.href, convertedRulesText);
             } catch (e) {
                 console.log(e);
             }
