@@ -263,6 +263,10 @@ const init = async () => {
             wakeBackgroundPage();
 
             const convertedRulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;
+            if (!convertedRulesText) {
+                console.log('AG: no advanced rules received');
+                return;
+            }
 
             const startGettingScripts = Date.now();
             let selectorsAndScripts;
