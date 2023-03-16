@@ -6,16 +6,11 @@ import { buildStyleSheet } from './css-service';
 import { getDomain } from '../common/utils/url';
 import { SelectorsAndScripts } from '../common/interfaces';
 
-const getEngine = (() => {
-    const engine = new EngineSync();
-
-    const start = (convertedRulesText: string): EngineSync => {
-        engine.start(convertedRulesText);
-        return engine;
-    };
-
-    return (convertedRulesText: string): TSUrlFilter.Engine | undefined => start(convertedRulesText).engine;
-})();
+const getEngine = (convertedRulesText: string) => {
+    const engineSync = new EngineSync();
+    engineSync.start(convertedRulesText)
+    return engineSync.engine;
+};
 
 export const getAdvancedRulesData = (url: string, convertedRulesText: string): SelectorsAndScripts => {
     const engine = getEngine(convertedRulesText);
