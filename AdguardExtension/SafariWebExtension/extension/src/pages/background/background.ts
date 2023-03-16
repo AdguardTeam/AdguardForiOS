@@ -124,11 +124,17 @@ const handleMessages = () => {
 /**
  * Gets advanced rules from native host, converts them,
  * and sets the converted result to storage.
+ * Does it only if Native Host's `shouldUpdateAdvancedRules()` returns true.
  */
 const setAdvancedRulesToStorage = async () => {
-    const rulesText = await adguard.nativeHost.getAdvancedRulesText();
-    const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
-    await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
+    // check whether the advanced rules should be updated in storage
+    // to avoid their update on every background page awakening
+    const shouldUpdateAdvancedRules = await adguard.nativeHost.shouldUpdateAdvancedRules();
+    if (shouldUpdateAdvancedRules) {
+        const rulesText = await adguard.nativeHost.getAdvancedRulesText();
+        const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
+        await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
+    }
 };
 
 setAdvancedRulesToStorage();
