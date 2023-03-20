@@ -13,6 +13,7 @@ declare global {
 }
 
 export const initAssistant = () => {
+    // @ts-ignore
     if (global.assistantStarted) {
         return;
     }
@@ -68,6 +69,7 @@ export const initAssistant = () => {
     });
 
     // do not start assistant twice
+    // @ts-ignore
     global.assistantStarted = true;
 };
 

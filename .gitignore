@@ -18,6 +18,9 @@ Adguard.ipa
 # scan temporary files
 **/fastlane/test_output
 
+# app store api
+**/fastlane/AppStoreApiInfo.json
+
 # vscode config
 .vscode
 

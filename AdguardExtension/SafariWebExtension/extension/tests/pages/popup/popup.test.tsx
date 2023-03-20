@@ -9,6 +9,7 @@ import { DeleteUserRules } from '../../../src/pages/popup/components/Actions/Del
 
 jest.mock('webextension-polyfill', () => {
     return {
+        // @ts-ignore
         ...global.chrome,
         tabs: {
             query: jest.fn(async () => { return [{ url: 'https://example.org' }]; }),
