@@ -75,14 +75,14 @@ class AboutViewController: UIViewController {
         var versionFormat = String.localizedString("about_version_format")
 
         if showFullVersion {
-            // TODO: Make it more convinient, not manual
-            // Sciprtlets version place in yarn.lock file
-            // Extended CSS version place in yarn.lock file, take it not from `tsurlfilter` dependencies
+            // TODO: Make it more convenient, not manual
+            // Scriptlets version place in yarn.lock file
+            // ExtendedCss version place in yarn.lock file, take it not from `tsurlfilter` dependencies
             versionFormat += """
 
                             SafariConverterLib v2.0.34
                             Scriptlets v1.9.1
-                            Extended CSS v2.0.51
+                            ExtendedCss v2.0.51
                             """
         }
 
