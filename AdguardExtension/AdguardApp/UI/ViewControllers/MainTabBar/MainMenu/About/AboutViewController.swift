@@ -35,9 +35,14 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupLabels()
+        setUpVersionLabel()
+        setUpCopyrightLabel()
         updateTheme()
         setupBackButton()
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showFullVersion))
+        versionLabel.isUserInteractionEnabled = true
+        versionLabel.addGestureRecognizer(tapGesture)
     }
 
     // MARK: - Actions
@@ -58,12 +63,33 @@ class AboutViewController: UIViewController {
         UIApplication.shared.openAdguardUrl(action: "privacy", from: "about", buildVersion: productInfo.buildVersion())
     }
 
-    // MARK: - private methods
-    private func setupLabels() {
-        let version = productInfo.versionWithBuildNumber() ?? ""
-        let versionFormat = String.localizedString("about_version_format")
-        versionLabel.text = String(format: versionFormat, version)
 
+
+    @objc
+    private func showFullVersion() {
+        setUpVersionLabel(showFullVersion: true)
+    }
+
+    private func setUpVersionLabel(showFullVersion: Bool = false) {
+        let version = productInfo.versionWithBuildNumber() ?? ""
+        var versionFormat = String.localizedString("about_version_format")
+
+        if showFullVersion {
+            // TODO: Make it more convinient, not manual
+            // Sciprtlets version place in yarn.lock file
+            // Extended CSS version place in yarn.lock file, take it not from `tsurlfilter` dependencies
+            versionFormat += """
+
+                            SafariConverterLib v2.0.34
+                            Sciprtlets v1.9.1
+                            Extended CSS v2.0.51
+                            """
+        }
+
+        versionLabel.text = String(format: versionFormat, version)
+    }
+
+    private func setUpCopyrightLabel() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
         let currentYearString = dateFormatter.string(from: Date())
