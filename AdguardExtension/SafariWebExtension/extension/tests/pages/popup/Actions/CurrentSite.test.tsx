@@ -12,6 +12,7 @@ import { Popup } from '../../../../src/pages/popup/components/Popup';
 
 jest.mock('webextension-polyfill', () => {
     return {
+        // @ts-ignore
         ...global.chrome,
         tabs: {
             query: jest.fn(async () => { return [{ url: 'https://example.org' }]; }),

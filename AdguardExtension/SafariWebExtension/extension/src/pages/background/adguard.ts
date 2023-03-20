@@ -22,4 +22,5 @@ declare global {
     }
 }
 
+// @ts-ignore
 global.adguard = adguard;
