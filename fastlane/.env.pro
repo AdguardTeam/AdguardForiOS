@@ -9,6 +9,7 @@ IPA_NAME="AdguardPro.ipa"
 ARCHIVE_NAME="AdguardPro.xcarchive"
 DSYM_NAME="AdguardPro.app.dSYM.zip"
 APP_IDENTIFIER="com.adguard.AdguardPro"
+APP_STORE_CONNECT_API_KEY_PATH = "fastlane/AppStoreApiInfo.json"
 APP_IDENTIFIERS_TO_MATCH="
     com.adguard.AdguardPro,                                 com.adguard.AdguardPro.extension,
     com.adguard.AdguardPro.extensionPrivacy,                com.adguard.AdguardPro.extensionAnnoyances,
