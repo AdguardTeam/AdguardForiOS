@@ -145,6 +145,7 @@ public enum DnsFeatureType: String, Codable, Equatable {
     case noLogs = "no_logs"
     case safeSearch = "safe_search"
     case secure = "secure"
+    case unecryptedDns = "unencrypted_dns"
 }
 
 // MARK: - PredefinedDnsServer
