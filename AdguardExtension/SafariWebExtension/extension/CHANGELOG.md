@@ -10,8 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 0.0.2
 
 ## Added
+
 - optimization to resources build config — reduces size and minifies
 
 ### Changed
+
 - make engine sync and use it in content-script instead of background page
 - update AdvanceRules on background page, convert the rules and save the converted result to the storage; do it only if advanced rules should be updated — received flag from NativeHost
