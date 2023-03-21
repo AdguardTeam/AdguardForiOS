@@ -221,7 +221,7 @@
 "filter_version_format" = "Version %@";
 
 /* (DnsSettingController) split tunel mode description */
-"tunnel_mode_split_description" = "„Split-Tunnel”, kompatibel mit „Personal VPN”-Apps";
+"tunnel_mode_split_description" = "„Split-Tunnel“, kompatibel mit „Personal VPN“-Apps";
 
 /* (DnsSettingController) Full tunel mode description */
 "tunnel_mode_full_description" = "Full-Tunnel, inkompatibel mit anderen VPN-Apps";
@@ -569,10 +569,10 @@
 "privacy_filters_group_description" = "Filterlisten, die Tracking unterbinden";
 
 /* (OneSafariGroupFiltersModel) Social Widgets filters group description */
-"social_widgets_filters_group_description" = "Filterlisten, die Elemente sozialer Medien ausblenden („Gefällt mir”-Schaltflächen usw.)";
+"social_widgets_filters_group_description" = "Filterlisten, die Elemente sozialer Medien ausblenden („Gefällt mir“-Schaltflächen usw.)";
 
 /* (OneSafariGroupFiltersModel) Annoyances filters group description */
-"annoyances_filters_group_description" = "Filterlisten, die störende Elemente auf Websites sperren. Die Definition von „störend” kann subjektiv sein und hängt vom Autor der Liste ab";
+"annoyances_filters_group_description" = "Filterlisten, die störende Elemente auf Websites sperren. Die Definition von „störend“ kann subjektiv sein und hängt vom Autor der Liste ab";
 
 /* (OneSafariGroupFiltersModel) Security filters group description */
 "security_filters_group_description" = "Filterlisten, die bekannte Online-Bedrohungen sperren";
@@ -719,7 +719,7 @@
 "advanced_protection_onboarding_third_step_text" = "Setzen Sie alle AdGuard-Schalter auf <b>Ein</b>. Sie können jetzt loslegen!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "Für den <b>Erweiterten</b> Schutz öffnen Sie Safari, tippen Sie auf das <b>aA</b>-Symbol auf der linken Seite des Adressleiste,<br><br> %@ <br><br>dann tippen Sie auf „Erweiterungen verwalten” und aktivieren dort <b>AdGuard</b>.";
+"onboarding_fours_step_text" = "Für den <b>Erweiterten</b> Schutz öffnen Sie Safari, tippen Sie auf das <b>aA</b>-Symbol auf der linken Seite des Adressleiste,<br><br> %@ <br><br>dann tippen Sie auf „Erweiterungen verwalten“ und aktivieren dort <b>AdGuard</b>.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Anfrage sperren";
@@ -890,13 +890,13 @@
 "native_dns_setup_description" = "Um natives DNS zu aktivieren, öffnen Sie die <b>„Systemeinstellungen“ ➜ „Allgemein“ ➜ „VPN & Netzwerk“ ➜ „DNS“</b> und wählen dort <b>%@</b>.";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
-"native_dns_setup_description_ios15" = "Um das native DNS zu verwenden, öffnen Sie <b>„Systemeinstellungen” > „Allgemein” > „VPN und Geräteverwaltung” > „DNS”</b> und wählen Sie dort <b>%@</b>.";
+"native_dns_setup_description_ios15" = "Um natives DNS zu verwenden, öffnen Sie die <b>„Systemeinstellungen“ ➜ „Allgemein“ ➜ „VPN und Geräteverwaltung“ ➜ „DNS“</b> und wählen Sie dort <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Wie würden Sie Ihre Erfahrung mit AdGuard beschreiben?";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
-"rate_app_problem_description" = "Stellen Sie sicher, dass Sie den Browser <b>Safari</b> verwenden.<br> Derzeit ist es technisch nicht möglich, Inhalte in anderen Browsern zu sperren.<br> Öffnen Sie die „Einstellungen” ➜ „Safari” ➜ „Allgemein” ➜ „Inhaltsblocker” und aktivieren Sie dort alle benötigten Filterlisten.<br> Starten Sie die App „Safari” neu: Beenden und erneut öffnen.";
+"rate_app_problem_description" = "Stellen Sie sicher, dass Sie den Browser <b>Safari</b> verwenden.<br> Derzeit ist es technisch nicht möglich, Inhalte in anderen Browsern zu sperren.<br> Öffnen Sie die „Einstellungen“ ➜ „Safari“ ➜ „Allgemein“ ➜ „Inhaltsblocker“ und aktivieren Sie dort alle benötigten Filterlisten.<br> Starten Sie die App „Safari“ neu: Beenden und erneut öffnen.";
 
 /* (FilterDetailsViewController) Version subtitle for detailed filter info */
 "detailed_filter_info_version_subtitle" = "Version";
@@ -1062,10 +1062,13 @@
 "low_level_beta_link" = "Interessieren Sie sich für neue Funktionen von AdGuard? Besuchen Sie unseren <a href=\"%@\">Beta-Kanal</a>.";
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
-"low_level_bootstraps_placeholder" = "Liste unverschlüsselter DNS-Server, die für die Auflösung der „DNS über HTTPS”/„DNS über TLS” verwendet werden sollen (falls vorhanden)";
+"low_level_bootstraps_placeholder" = "Liste unverschlüsselter DNS-Server, die für die Auflösung der „DNS über HTTPS“/„DNS über TLS“ verwendet werden sollen (falls vorhanden)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Ein Fallback-DNS-Resolver, der verwendet wird, wenn der konfigurierte Server nicht verfügbar ist. Eine leere Zeile bedeutet, dass das Standard-DNS des Systems als Fallback verwendet wird. Eine Zeile „Keine“ bedeutet überhaupt keinen Fallback.";
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "Ein Fallback-DNS-Resolver für den Fall, dass der konfigurierte Server nicht verfügbar ist. Bei einer leeren Zeile wird der System-DNS als Fallback verwendet. Bei der Zeile „none“ wird kein Fallback verwendet.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
@@ -1100,7 +1103,7 @@
 "setapp_device_limit_reached" = "Sie haben die maximale Anzahl von Geräten mit Ihrem Setapp-Konto verbunden.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_safari" = "Wussten Sie, dass YouTube seine Algorithmen geändert hat, um Ihnen mehr Werbung zu zeigen?<br><br>Um diese zu sperren, gehen Sie wie folgt vor:<br><br>1. Starten Sie <a href=\"%@\">Safari</a><br><br>2. Öffnen Sie youtube.com<br><br>3. Tippen Sie auf %@ Teilen.<br><br>4. Tippen Sie auf „Werbung in YouTube sperren (AdGuard)”.";
+"block_youtube_ads_instructions_safari" = "Wussten Sie, dass YouTube seine Algorithmen geändert hat, um Ihnen mehr Werbung zu zeigen?<br><br>Um diese zu sperren, gehen Sie wie folgt vor:<br><br>1. Starten Sie <a href=\"%@\">Safari</a><br><br>2. Öffnen Sie youtube.com<br><br>3. Tippen Sie auf %@ Teilen.<br><br>4. Tippen Sie auf „Werbung in YouTube sperren (AdGuard)“.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "Wussten Sie, dass YouTube seine Algorithmen geändert hat, um Ihnen mehr Werbung zu zeigen?<br><br>Um diese zu sperren, gehen Sie wie folgt vor:<br><br>1. Öffnen Sie <a href=\"%@\">youtube.com</a> in Safari.<br><br>2. Tippen Sie %@ auf Teilen.<br><br>3. Klicken Sie auf „Youtube-Werbung sperren (mit AdGuard)“.";

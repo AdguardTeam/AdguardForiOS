@@ -8,7 +8,7 @@
 "6Z2-0N-PSp.text" = "Destek";
 
 /* Class = "UILabel"; text = "Rate app"; ObjectID = "B4f-Bt-0w6"; Note = "(Main Menu) Advanced Settings caption"; */
-"B4f-Bt-0w6.text" = "Uygulamayı değerlendir";
+"B4f-Bt-0w6.text" = "Uygulamayı derecelendir";
 
 /* Class = "UILabel"; text = "Missed ads or broken sites"; ObjectID = "Con-9Z-LDc"; */
 "Con-9Z-LDc.text" = "Kaçan reklam veya bozuk siteler";

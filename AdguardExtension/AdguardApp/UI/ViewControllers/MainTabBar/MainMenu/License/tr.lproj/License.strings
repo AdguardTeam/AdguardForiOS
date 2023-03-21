@@ -14,10 +14,10 @@
 "ZuM-Nn-uXv.text" = "AdGuard hesabınızla giriş yapın veya sosyal girişi kullanın";
 
 /* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
-"bUa-fF-AXO.normalTitle" = "Giriş Yap";
+"bUa-fF-AXO.normalTitle" = "Giriş yap";
 
 /* Class = "UILabel"; text = "Log in"; ObjectID = "fxK-6y-LB6"; */
 "fxK-6y-LB6.text" = "Giriş yap";
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
-"rrj-Gm-LCJ.normalTitle" = "Onayla";
+"rrj-Gm-LCJ.normalTitle" = "Doğrula";

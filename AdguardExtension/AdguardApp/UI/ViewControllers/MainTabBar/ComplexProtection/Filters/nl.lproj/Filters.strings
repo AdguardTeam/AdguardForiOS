@@ -32,7 +32,7 @@
 "Z16-OR-tjl.text" = "Filter URL:";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
-"f3z-Yh-zY2.text" = "Toestemmingslijst";
+"f3z-Yh-zY2.text" = "Toelatingslijst";
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "Toevoegen";

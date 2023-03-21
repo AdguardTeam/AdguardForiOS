@@ -104,7 +104,7 @@
 "upgrade_lifetime_button_title" = "Zakoupit";
 
 /* (GetProTableController) missing purchase alert message */
-"upgrade_missing_purchase_message" = "Plány předplatného nejsou k dispozici. Zkontrolujte prosím své internetové připojení a zkuste to znovu.";
+"upgrade_missing_purchase_message" = "Předplatné tarifů nejsou k dispozici. Zkontrolujte prosím své internetové připojení a zkuste to znovu.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Zapomněli jste heslo?";
@@ -1059,13 +1059,16 @@
 "low_level_description" = "<b style=color:#c23814ff>VAROVÁNÍ!</b> Povolení těchto funkcí může narušit připojení k Internetu nebo ohrozit vaše zabezpečení a soukromí.";
 
 /* (LowLevelSettingsController) Low level settings beta channel link */
-"low_level_beta_link" = "Máte zájem o nové skvělé funkce AdGuardu? Vykoušejte<a href=\"%@\">kanál beta.</a>.";
+"low_level_beta_link" = "Máte zájem o nové skvělé funkce AdGuardu? Vykoušejte <a href=\"%@\">kanál beta</a>.";
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Seznam jednoduchých DNS serverů, které se mají použít k rozlišení názvů hostitelů DOH/DOT (pokud existují)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Záložní DNS, který se použije, když není k dispozici nakonfigurovaný server. Prázdný řetězec znamená, použití DNS ze systému. Řetězec \"žádný\" neznamená vůbec žádnou hodnotu.";
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "Záložní DNS, který se použije, když není k dispozici nakonfigurovaný server. Prázdný řetězec znamená, použití DNS ze systému. Řetězec \"none\" neznamená vůbec žádnou hodnotu.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap servery";
 

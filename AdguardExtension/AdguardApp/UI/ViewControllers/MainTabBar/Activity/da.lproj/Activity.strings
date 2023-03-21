@@ -20,10 +20,10 @@
 "Asq-k8-hi1.text" = "Mest aktive virksomheder";
 
 /* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
-"DCy-so-G1C.text" = "Ingen nylige aktiviteter sporet (vi gemmer kun de seneste 1.500 forespørgsler)";
+"DCy-so-G1C.text" = "Ingen nylige aktiviteter sporet (kun de seneste 1.500 forespørgsler gemmes)";
 
 /* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
-"Epn-q1-BdL.text" = "Ingen nylige aktiviteter sporet (vi gemmer kun de seneste 1.500 forespørgsler)";
+"Epn-q1-BdL.text" = "Ingen nylige aktiviteter sporet (kun de seneste 1.500 forespørgsler gemmes)";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
 "Hbu-Bm-HWZ.text" = "Aktivitet";

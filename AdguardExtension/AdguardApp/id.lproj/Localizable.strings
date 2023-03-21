@@ -181,6 +181,9 @@
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
 
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC";
+
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Apakah Anda yakin ingin keluar?";
 
@@ -752,6 +755,12 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Tambah Aturan DNS Pengguna";
+
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "Penyelesai DNS cadangan yang akan digunakan saat server yang dikonfigurasi tidak tersedia. String kosong berarti menggunakan DNS sistem sebagai fallback. String \"none\" berarti tidak ada cadangan sama sekali.";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "Alamat IP";

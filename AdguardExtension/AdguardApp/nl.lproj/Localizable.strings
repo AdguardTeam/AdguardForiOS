@@ -26,13 +26,13 @@
 "safari_filters_loading_error" = "Filters kunnen niet in Safari ingelezen worden. Je recente wijzigingen zijn daarom niet toegepast.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filters kunnen niet in Safari ingelezen worden. Probeer de regels en de toestemmingslijst te wissen of pas de gebruikte filters aan.";
+"load_to_safari_error" = "Filters kunnen niet in Safari ingelezen worden. Probeer de regels en de toelatingslijst te wissen of pas de gebruikte filters aan.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NEE";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Toestemmingslijst (geïnverteerd)";
+"inverted_whitelist_title" = "Toelatingslijst (omgekeerd)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Aanpassingen verwerken...";
@@ -428,10 +428,10 @@
 "wifi_data_description" = "DNS bescherming wanneer je op een wifi netwerk bent";
 
 /* (ListOfRulesModel) title for dns allowlist */
-"allowlist_title" = "Toestemmingslijst";
+"allowlist_title" = "Toelatingslijst";
 
 /* (ListOfRulesModel) title safari Allowlist */
-"whitelist_title" = "Toestemmingslijst";
+"whitelist_title" = "Toelatingslijst";
 
 /* (ListOfRulesModel) title for dns block list */
 "dns_blacklist_title" = "Lijst met blokkeringen";
@@ -473,13 +473,13 @@
 "disabled" = "Uitgeschakeld";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Verwijderen uit toestemmingslijst";
+"remove_from_whitelist" = "Verwijderen van toelatingslijst";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
 "remove_from_blacklist" = "Verwijderen uit blokkeringslijst";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "Toevoegen aan toestemmingslijst";
+"add_to_whitelist" = "Toevoegen aan toelatingslijst";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
 "add_to_blacklist" = "Toevoegen aan blokkeringslijst";
@@ -680,13 +680,13 @@
 "dns_request_status_allowlisted" = "Toegestaan";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "aan de toestemmingslijst toegevoegd";
+"dns_request_user_status_added_to_whitelist" = "toegevoegd aan de toelatingslijst";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_blacklist" = "aan de blokkeerlijst toegevoegd";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "van de toestemmingslijst verwijderd";
+"dns_request_user_status_removed_from_whitelist" = "verwijderd van de toelatingslijst";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "van de blokkeerlijst verwijderd";
@@ -716,7 +716,7 @@
 "block_request" = "Verzoek blokkeren";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Voeg domein toe aan de Toestemmingslijst";
+"whitelist_request" = "Domein toevoegen aan de toelatingslijst";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Video zelfstudie";
@@ -758,7 +758,7 @@
 "system_blacklist" = "Systeem blokkeerlijst";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "Systeem toestemmingslijst";
+"system_whitelist" = "Systeemtoelatingslijst";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "Details";
@@ -919,7 +919,7 @@
 "user_rules_allowlist_rule_removed" = "is verwijderd van <u style=color:%@>toelatingslijst</u>";
 
 /* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
-"user_rules_allowlist_rule_added" = "was toegevoegd aan<u style=color:%@>toestemmingslijst</u>";
+"user_rules_allowlist_rule_added" = "is toegevoegd aan <u style=color:%@>toelatingslijst</u>";
 
 /* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
 "user_rules_blocklist_rule_added" = "heeft een nieuwe blokkeringsregel in <u style=color:%@>gebruikersregels</u>";
@@ -948,7 +948,7 @@
 "security_filters_feature_description" = "Phishing, malware en verdachte inhoud blokkeren";
 
 /* (PremiumFeature) - DNS privacy premium feature description */
-"dns_privacy_feature_description" = "DNS-verzoeken lokaal versleutelen en je privacy beheren";
+"dns_privacy_feature_description" = "DNS-aanvragen lokaal versleutelen en je privacy beheren";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Filters van derden gebruiken of je eigen filters maken";
@@ -1055,8 +1055,11 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Lijst met gewone DNS-servers die moeten worden gebruikt om DOH/DOT-hostnamen om te zetten (indien aanwezig)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Een reserve DNS-oplossing die zal worden gebruikt als de geconfigureerde server niet beschikbaar is. Een lege string betekent het gebruik van de DNS van je systeem als reserve. Een \"geen\" string betekent geen fallback.";
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "Een reserve DNS-oplossing die zal worden gebruikt als de geconfigureerde server niet beschikbaar is. Een lege string betekent het gebruik van de DNS van je systeem als reserve. Een \"none\" string betekent geen fallback.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap servers";
 

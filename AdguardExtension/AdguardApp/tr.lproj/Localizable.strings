@@ -173,10 +173,10 @@
 "inverted_whitelist_text" = "Alan adlarını buraya girin. AdGuard, yalnızca bu siteler için Safari'de filtrelemeyi etkinleştirir.";
 
 /* (UserFilterController) dns whitelist description */
-"dns_whitelist_text" = "Buraya satır sonları ile ayrılmış alan adlarını girin. AdGuard, bu alan adlarına tüm bağlantılara izin verecektir.";
+"dns_whitelist_text" = "Buraya satır sonları ile ayrılmış alan adlarını girin. AdGuard, bu alan adlarına tüm bağlantılara izin verir.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "Bu Engel Listesi <a href=\"%@\">AdGuard'ın DNS söz dizimini</a> destekler. Buraya satır sonları ile ayrılmış kuralları girin. AdGuard, bu kurallara uyan alan adlarına yapılan tüm bağlantıları engeller.";
+"dns_blacklist_text_format" = "Bu Engel listesi <a href=\"%@\">AdGuard'ın DNS söz dizimini</a> destekler. Buraya satır sonları ile ayrılmış kuralları girin. AdGuard, bu kurallara uyan alan adlarına yapılan tüm bağlantıları engeller.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Güncelleniyor...";
@@ -260,7 +260,7 @@
 "support_vpn_configuration_problem" = "VPN yapılandırması ile ilgili bir sorun var, lütfen destek ekibimizle iletişime geçin.";
 
 /* login error message */
-"login_error_message" = "Giriş yaparken bir hata oluştu";
+"login_error_message" = "Giriş yapılırken bir hata oluştu";
 
 /* purchase secription format */
 "purchase_description_format" = "AdGuard Aboneliği Şartları<br><br>• Ödeme, satın alma onayı ile iTunes Hesabınızdan tahsil edilecektir.<br><br>• Abonelik, geçerli sürenin bitiminden en az 24 saat önce otomatik yenileme kapatılmadığı sürece otomatik olarak yenilenir.<br><br>• Abonelik yenileme ücreti, geçerli sürenin bitiminden itibaren 24 saat içinde iTunes Hesabınızdan tahsil edilecektir.<br><br>• Satın aldıktan sonra Hesap Ayarlarınıza giderek aboneliğinizi yönetebilir ve otomatik yenilemeyi kapatabilirsiniz.<br><br>AdGuard <a href=%2$@>SKLS</a> ve <a href=%1$@>Gizlilik politikası</a>";
@@ -1064,8 +1064,11 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "DOH/DOT ana makine adlarını (varsa) çözmek için kullanılacak düz DNS sunucularının listesi";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Yapılandırılmış sunucu mevcut olmadığında kullanılacak olan bir DNS çözümleyicisi. Boş bırakırsanız, yedek olarak sistem DNS'sini kullanmak anlamına gelir. \"Yok\" ifadesi, hiçbir şekilde geri dönüş olmadığı anlamına gelir.";
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "Yapılandırılmış sunucu mevcut olmadığında kullanılacak olan bir DNS çözümleyicisi. Boş bırakırsanız, yedek olarak sistem DNS'sini kullanmak anlamına gelir. \"none\" ifadesi, hiçbir şekilde geri dönüş olmadığı anlamına gelir.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Önyükleme sunucuları";
 
@@ -1079,7 +1082,7 @@
 "upstreams_fallbacks_title" = "Yedek sunucular";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Özel bir IP ekle";
+"upstreams_custom_address_title" = "Özel IP ekle";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP adresi";

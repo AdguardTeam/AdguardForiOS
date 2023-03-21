@@ -29,6 +29,15 @@
 /* Class = "UILabel"; text = "Support"; ObjectID = "cOi-GX-KAC"; */
 "cOi-GX-KAC.text" = "پشتيباني";
 
+/* Class = "UILabel"; text = "Export logs"; ObjectID = "cWE-CY-2xl"; Note = "(Main Menu) Advanced Settings caption"; */
+"cWE-CY-2xl.text" = "خروجیگیری وقایع";
+
+/* Class = "UILabel"; text = "Frequently asked questions"; ObjectID = "dNj-vb-TQe"; */
+"dNj-vb-TQe.text" = "سوالات متداول";
+
+/* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
+"q9f-Zw-7sc.text" = "گزارش مسدودسازی اشتباه";
+
 /* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
 "rlh-5H-fPk.text" = "انجمن برنامه";
 

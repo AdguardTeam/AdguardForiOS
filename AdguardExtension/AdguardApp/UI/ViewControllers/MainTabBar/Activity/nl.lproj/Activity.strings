@@ -47,7 +47,7 @@
 "Xj3-X8-fnq.normalTitle" = "bedrijven";
 
 /* Class = "UILabel"; text = "AdGuard can’t see DNS queries in this mode. If you want to see DNS activity of your device, use AdGuard implementation."; ObjectID = "a0E-KM-oA3"; */
-"a0E-KM-oA3.text" = "AdGuard kan in deze modus geen DNS-verzoeken zien. Gebruik de AdGuard-implementatie als je de DNS-activiteit van je apparaat wilt zien.";
+"a0E-KM-oA3.text" = "AdGuard kan in deze modus geen DNS-aanvragen zien. Gebruik de AdGuard-implementatie als je de DNS-activiteit van je apparaat wilt zien.";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Beveiligingsfilters, DNS privacy, gebruikersfilters, enz.";

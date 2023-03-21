@@ -53,7 +53,7 @@
 "ihd-7R-RfE.text" = "Sperrliste";
 
 /* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
-"lEg-oH-oxd.text" = "Funktioniert wie ein lokales „Pseudo”-VPN. Unterstützt jedes DNS-Protokoll und ermöglicht es Ihnen, die DNS-Aktivität Ihres Geräts zu überprüfen.";
+"lEg-oH-oxd.text" = "Funktioniert wie ein lokales „Pseudo“-VPN. Unterstützt jedes DNS-Protokoll und ermöglicht es Ihnen, die DNS-Aktivität Ihres Geräts zu überprüfen.";
 
 /* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "o1z-O6-Bk9"; */
 "o1z-O6-Bk9.normalTitle" = "Ok";

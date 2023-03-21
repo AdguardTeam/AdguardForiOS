@@ -1064,7 +1064,10 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Lista de servere DNS simple, de utilizat pentru a rezolva numele de gazdă DOH/DOT (dacă există)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
 "low_level_fallbacks_placeholder" = "Un rezolvator DNS de rezervă care va fi utilizat atunci când serverul configurat nu este disponibil. Un șir gol înseamnă utilizarea DNS-ului sistemului ca rezervă. Iar un șir „none” înseamnă că nu există nicio rezervă.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Servere Bootstrap";
@@ -1207,3 +1210,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Ceva nu a mers bine";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "Blocantele de conținut AdGuard sunt dezactivate în setările Safari. Activați-le pentru a ne permite să blocăm reclamele și urmăritorii.";
