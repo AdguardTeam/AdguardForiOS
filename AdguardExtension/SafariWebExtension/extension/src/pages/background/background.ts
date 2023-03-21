@@ -115,6 +115,10 @@ const handleMessages = () => {
                 // do nothing
                 break;
             }
+            case MessagesToBackgroundPage.EnsureAdvancedRulesSet: {
+                await setAdvancedRulesPromise;
+                return true;
+            }
             default:
                 break;
         }
@@ -124,19 +128,35 @@ const handleMessages = () => {
 /**
  * Gets advanced rules from native host, converts them,
  * and sets the converted result to storage.
- * Does it only if Native Host's `shouldUpdateAdvancedRules()` returns true.
+ */
+const forceUpdateAdvancedRules = async () => {
+    const rulesText = await adguard.nativeHost.getAdvancedRulesText();
+    const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
+    await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
+};
+
+/**
+ * Sometimes we need to be sure that advanced rules are already set in storage on the background page
+ * so they can be retrieved in the content-script.
+ * It can happen just after the app installation on the very first browser start without browser or tabs reload.
+ */
+const setAdvancedRulesPromise = forceUpdateAdvancedRules();
+
+/**
+ * Asks the Native Host whether the advanced rules should be updated.
+ * If so, then gets advanced rules from native host, converts them,
+ * and sets the converted result to storage.
  */
 const setAdvancedRulesToStorage = async () => {
     // check whether the advanced rules should be updated in storage
     // to avoid their update on every background page awakening
     const shouldUpdateAdvancedRules = await adguard.nativeHost.shouldUpdateAdvancedRules();
     if (shouldUpdateAdvancedRules) {
-        const rulesText = await adguard.nativeHost.getAdvancedRulesText();
-        const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
-        await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
+        forceUpdateAdvancedRules()
     }
 };
 
+// set advanced rules to storage on the background page start
 setAdvancedRulesToStorage();
 
 export const background = () => {

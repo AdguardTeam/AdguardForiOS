@@ -16,7 +16,8 @@ export enum MessagesToBackgroundPage {
     UpgradeClicked = 'upgrade_clicked',
     EnableAdvancedBlocking = 'enable_advanced_blocking',
     EnableSafariProtection = 'enable_safari_protection',
-    WakeUp = 'wake_up',
+    WakeUp = 'WakeUp',
+    EnsureAdvancedRulesSet = 'EnsureAdvancedRulesSet',
 }
 
 export enum MessagesToContentScript {

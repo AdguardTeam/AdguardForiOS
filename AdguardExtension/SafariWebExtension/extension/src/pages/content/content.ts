@@ -201,10 +201,30 @@ const init = async () => {
             // IMPORTANT: it should not be 'await wakeBackgroundPage()'
             wakeBackgroundPage();
 
-            const convertedRulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;
-            if (!convertedRulesText) {
-                console.log('AG: no advanced rules received');
-                return;
+            let convertedRulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;
+            // it might happen that the advanced rules are not set in storage yet
+            // so the type of the variable should be checked in this case.
+            // because if advanced rules are set but their length is 0, empty string will be returned
+            if (typeof convertedRulesText === 'undefined') {
+                // we need to be sure that advanced rules are already set in storage and can be retrieved.
+                // it can happen just after the app installation
+                // on the very first browser start without browser or tabs reload
+                const response = await browser.runtime.sendMessage({
+                    type: MessagesToBackgroundPage.EnsureAdvancedRulesSet,
+                    data: {},
+                });
+
+                if (response !== true) {
+                    console.log('AG: scripts and selectors were not set to storage');
+                    return;
+                }
+
+                // get the advanced rules from storage again
+                convertedRulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;
+                if (!convertedRulesText) {
+                    console.log('AG: no scripts and selectors received');
+                    return;
+                }
             }
 
             let selectorsAndScripts;
