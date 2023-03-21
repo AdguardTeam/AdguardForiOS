@@ -1,14 +1,27 @@
 import * as TSUrlFilter from '@adguard/tsurlfilter';
-import { CosmeticOption, RequestType } from '@adguard/tsurlfilter';
+import {
+    RequestType,
+    MatchingResult,
+    CosmeticOption,
+    CosmeticResult,
+} from '@adguard/tsurlfilter';
 
 import { app } from '../../background/app';
 
 /**
- * Sync engine.
+ * Class for filtering engine with all the loaded advanced rules.
+ * Rules are loaded into the engine synchronously.
  */
 export class EngineSync {
     engine: TSUrlFilter.Engine | undefined;
 
+    /**
+     * Starts the filtering engine with rules parsed from `rulesText`.
+     *
+     * @param rulesText Converted advanced rules joined into string.
+     *
+     * @returns Instance of engine.
+     */
     start(rulesText: string): TSUrlFilter.Engine {
         const FILTER_ID = 1;
 
@@ -40,7 +53,15 @@ export class EngineSync {
     }
 }
 
-const getMatchingResult = (url: string, engine: TSUrlFilter.Engine | undefined) => {
+/**
+ * Returns MatchingResult for the given `url`.
+ *
+ * @param url Page url.
+ * @param engine Instance of engine.
+ *
+ * @returns TSUrlFilter's MatchingResult.
+ */
+const getMatchingResult = (url: string, engine: TSUrlFilter.Engine | undefined): MatchingResult => {
     if (!engine) {
         return new TSUrlFilter.MatchingResult([], null);
     }
@@ -57,16 +78,32 @@ const getMatchingResult = (url: string, engine: TSUrlFilter.Engine | undefined) 
     return engine.matchRequest(request, frameRule);
 };
 
-export const getCosmeticOption = (url: string, engine: TSUrlFilter.Engine | undefined) => {
+/**
+ * Returns CosmeticOption for the given `url`.
+ * @param url Page url.
+ * @param engine Instance of engine.
+ *
+ * @returns TSUrlFilter's CosmeticOption.
+ */
+export const getCosmeticOption = (url: string, engine: TSUrlFilter.Engine | undefined): CosmeticOption => {
     const matchingResult = getMatchingResult(url, engine);
     return matchingResult.getCosmeticOption();
 };
 
+/**
+ * Returns CosmeticResult for the given `hostname`.
+ *
+ * @param hostname Hostname of the page.
+ * @param cosmeticOption TSUrlFilter's CosmeticOption.
+ * @param engine Instance of engine.
+ *
+ * @returns TSUrlFilter's CosmeticResult.
+ */
 export const getCosmeticResult = (
     hostname: string,
     cosmeticOption: CosmeticOption,
     engine: TSUrlFilter.Engine | undefined,
-) => {
+): CosmeticResult => {
     if (!engine) {
         return new TSUrlFilter.CosmeticResult();
     }

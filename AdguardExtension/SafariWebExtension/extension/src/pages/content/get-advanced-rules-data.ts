@@ -4,12 +4,27 @@ import { buildStyleSheet } from './css-service';
 import { getDomain } from '../common/utils/url';
 import { SelectorsAndScripts } from '../common/interfaces';
 
+/**
+ * Returns the instance of started sync engine.
+ *
+ * @param convertedRulesText Converted advanced rules joined into string.
+ *
+ * @returns Instance of engine.
+ */
 const getEngine = (convertedRulesText: string) => {
     const engineSync = new EngineSync();
     engineSync.start(convertedRulesText);
     return engineSync.engine;
 };
 
+/**
+ * Returns advanced rules data into needed format.
+ *
+ * @param url Page url.
+ * @param convertedRulesText Converted advanced rules joined into string.
+ *
+ * @returns Properly sorted selectors and scripts.
+ */
 export const getAdvancedRulesData = (url: string, convertedRulesText: string): SelectorsAndScripts => {
     const engine = getEngine(convertedRulesText);
     const hostname = getDomain(url);
