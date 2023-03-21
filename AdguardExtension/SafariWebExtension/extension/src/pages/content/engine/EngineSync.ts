@@ -9,14 +9,14 @@ import {
 import { app } from '../../background/app';
 
 /**
- * Class for filtering engine with all the loaded advanced rules.
+ * Class for filtering engine with all loaded advanced rules.
  * Rules are loaded into the engine synchronously.
  */
 export class EngineSync {
     engine: TSUrlFilter.Engine | undefined;
 
     /**
-     * Starts the filtering engine with rules parsed from `rulesText`.
+     * Starts the filtering engine with passed `rulesText`.
      *
      * @param rulesText Converted advanced rules joined into string.
      *
