@@ -54,6 +54,8 @@ public enum CustomDnsProvidersStorageError: Error, CustomDebugStringConvertible 
     case differentDnsProtocols(upstreams: [String])
     case emptyUpstreams
     case notSupportedProtocol(dnsProtocol: DnsProtocol, implementation: DnsImplementation)
+    case dnsProviderExists(upstreams: [String])
+
 
     public var debugDescription: String {
         switch self {
@@ -62,6 +64,7 @@ public enum CustomDnsProvidersStorageError: Error, CustomDebugStringConvertible 
         case .differentDnsProtocols(let upstreams): return "Upstreams with different protocols are forbidden; Upstreams: \(upstreams.joined(separator: "; "))"
         case .emptyUpstreams: return "Upstreams list is empty"
         case .notSupportedProtocol(let dnsProtocol, let implementation): return "Protocol \(dnsProtocol) not supported for implementation \(implementation)"
+        case .dnsProviderExists(let upstreams): return "Dns provider with upstreams=\(upstreams) exists"
         }
     }
 }
@@ -123,6 +126,17 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
         if !isMigration {
             try checkDnsImplementation(dnsProtocol: dnsProtocol)
         }
+
+        // check server exists
+        let exists = providers.map { $0.server }.contains { server in
+            let serverUpstreams = server.upstreams.map { $0.upstream }
+            return serverUpstreams == upstreams
+        }
+
+        if exists {
+            throw CustomDnsProvidersStorageError.dnsProviderExists(upstreams: upstreams)
+        }
+
         let dnsUpstreams = upstreams.map { DnsUpstream(upstream: $0, protocol: dnsProtocol) }
 
         let ids = nextCustomIds
@@ -138,9 +152,25 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
             throw CustomDnsProvidersStorageError.providerAbsent(providerId: id)
         }
 
-        let oldProvider = userDefaults.customProviders[providerIndex]
         let newDnsProtocol = try checkProviderInfo(name: newName, upstreams: newUpstreams)
         try checkDnsImplementation(dnsProtocol: newDnsProtocol)
+
+        // check another server with given upstream exists
+        let servers = providers.compactMap {
+            return $0.providerId == id ? nil : $0.server
+        }
+
+        let exists = servers.contains { server in
+            let serverUpstreams = server.upstreams.map { $0.upstream }
+            return serverUpstreams == newUpstreams
+        }
+
+        if exists {
+            throw CustomDnsProvidersStorageError.dnsProviderExists(upstreams: newUpstreams)
+        }
+
+        let oldProvider = userDefaults.customProviders[providerIndex]
+
         let newDnsUpstreams = newUpstreams.map { DnsUpstream(upstream: $0, protocol: newDnsProtocol) }
 
         let customServer = CustomDnsServer(upstreams: newDnsUpstreams,

@@ -166,16 +166,6 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
     public func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool, isMigration: Bool) throws {
         Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Trying to add custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
 
-        // check server exists
-        let servers = customProvidersStorage.providers.map { $0.server }
-        let exists = servers.contains { server in
-            let serverUpstreams = server.upstreams.map { $0.upstream }
-            return serverUpstreams == upstreams
-        }
-        if exists {
-            throw DnsProviderError.dnsProviderExists(upstreams: upstreams)
-        }
-
         let ids = try customProvidersStorage.addCustomProvider(name: name, upstreams: upstreams, isMigration: isMigration)
         if selectAsCurrent {
             userDefaults.activeDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: ids.providerId, serverId: ids.serverId)
@@ -188,19 +178,6 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
 
     public func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool) throws {
         Logger.logInfo("(DnsProvidersManager) - updateCustomProvider; Trying to update custom provider with id=\(id) name=\(newName), upstreams=\(newUpstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
-
-        // check another server with given upstream exists
-        let servers = customProvidersStorage.providers.compactMap {
-            return $0.providerId == id ? nil : $0.server
-        }
-        let exists = servers.contains { server in
-            let serverUpstreams = server.upstreams.map { $0.upstream }
-            return serverUpstreams == newUpstreams
-        }
-
-        if exists {
-            throw DnsProviderError.dnsProviderExists(upstreams: newUpstreams)
-        }
 
         try customProvidersStorage.updateCustomProvider(withId: id, newName: newName, newUpstreams: newUpstreams)
         if selectAsCurrent, let provider = customProviders.first(where: { $0.providerId == id }) {
@@ -266,14 +243,12 @@ extension DnsProvidersManager {
         case invalidProvider(providerId: Int)
         case invalidCombination(providerId: Int, serverId: Int)
         case unsupportedProtocol(prot: DnsProtocol)
-        case dnsProviderExists(upstreams: [String])
 
         public var debugDescription: String {
             switch self {
             case .invalidProvider(let providerId): return "DNS provider with id=\(providerId) doesn't exist"
             case .invalidCombination(let providerId, let serverId): return "DNS provider with id=\(providerId) doesn't have server with id=\(serverId)"
             case .unsupportedProtocol(let prot): return "Native DNS implementation doesn't support \(prot.rawValue)"
-            case .dnsProviderExists(let upstreams): return "Dns provider with upstreams=\(upstreams) exists"
             }
         }
     }

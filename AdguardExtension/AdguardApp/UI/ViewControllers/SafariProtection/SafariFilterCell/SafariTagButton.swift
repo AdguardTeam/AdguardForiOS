@@ -67,7 +67,10 @@ final class SafariTagButton: UIButton {
         "cs":"cz",
         "sv":"se",
         "ar":"sa",
-        "et":"ee"
+        "et":"ee",
+        "uk":"ua",
+        "ps":"pk",
+        "hi":"in"
     ]
 
     // MARK: - Initialization
@@ -118,6 +121,8 @@ final class SafariTagButton: UIButton {
 
         layer.cornerRadius = tagCornerRadius
         layer.masksToBounds = true
+        layer.borderWidth = 0.25
+        layer.borderColor = UIColor.AdGuardColor.lightGray5.cgColor
 
         alpha = model.isSelected ? 1.0 : 0.3
 

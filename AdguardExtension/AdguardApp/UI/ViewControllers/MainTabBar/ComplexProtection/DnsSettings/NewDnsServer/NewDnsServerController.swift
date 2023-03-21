@@ -317,28 +317,25 @@ final class NewDnsServerController: BottomAlertController {
 
     private func processError(error: CustomDnsProvidersStorageError) {
         switch error {
-        case .providerAbsent(let providerId): break
+        case .providerAbsent(_): break
             //TODO: Show alert
-        case .invalidUpstream(let upstream):
+        case .invalidUpstream(_):
             presentSimpleAlert(title: String.localizedString("common_error_title"), message: String.localizedString("invalid_upstream_message"))
-        case .differentDnsProtocols(let upstreams): break
+        case .differentDnsProtocols(_): break
             //TODO: Show alert
         case .emptyUpstreams: break
             //TODO: Show alert
         case .notSupportedProtocol(let dnsProtocol, _):
             showWrongProtocolAlert(dnsProtocol: dnsProtocol)
+        case .dnsProviderExists(_):
+            showServerExistsAlert()
+            upstreamsField.borderState = .error
         }
         upstreamsField.borderState = .error
     }
 
     private func processError(error: DnsProvidersManager.DnsProviderError) {
-        switch error {
-        case .dnsProviderExists(_):
-            showServerExistsAlert()
-            upstreamsField.borderState = .error
-        default:
-            showUnknownErrorAlert()
-        }
+        showUnknownErrorAlert()
     }
 
     @objc private func textFieldEditingChanged(_ sender: UITextField) {
