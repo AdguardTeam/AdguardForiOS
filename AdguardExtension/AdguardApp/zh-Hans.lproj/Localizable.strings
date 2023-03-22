@@ -719,7 +719,7 @@
 "advanced_protection_onboarding_third_step_text" = "将所有 AdGuard 的开关设置为<b>开</b>。现在可以开始了！";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "以启用<b>高级</b>保护，请打开 Safari 浏览器，点击网址字段左侧的 <b>大小</b> 图标，<br><br>%@<br><br>然后点击<b>管理扩展程序</b> ，启用 <b>AdGuard</b> 开关。";
+"onboarding_fours_step_text" = "如要启用<b>高级</b>保护，请打开 Safari 浏览器，点击网址字段左侧的<b>大小</b>图标，<br><br>%@<br><br>然后点击<b>管理扩展</b> ，启用 <b>AdGuard</b> 开关。";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "拦截请求";
@@ -1064,7 +1064,10 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "用于解析 DOH/DOT 主机名字（如有的话）的本机 DNS 服务器列表";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
 "low_level_fallbacks_placeholder" = "后备 DNS 解析器是在配置的服务器不可用时被使用。空字符串表示系统的 DNS 将作为后备。“none” 字符串即表示无后备。";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap 服务器";

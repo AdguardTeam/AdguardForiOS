@@ -4,17 +4,44 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Bảo vệ Safari";
 
+/* Class = "UILabel"; text = "Enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "9wg-p1-Dh8"; */
+"9wg-p1-Dh8.text" = "Nhiều công cụ chặn quảng cáo tiên tiến để lọc quảng cáo tốt hơn";
+
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
 "AZY-QZ-8d9.text" = "Chặn quảng cáo trên YouTube";
 
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
 
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "Lsa-74-hd5"; */
+"Lsa-74-hd5.text" = "Bảo vệ nâng cao";
+
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "OxY-0X-J4W"; */
+"OxY-0X-J4W.text" = "Bảo vệ nâng cao";
+
 /* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "cao cấp";
 
+/* Class = "UILabel"; text = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Tiện tích Safari chặn gỡ bỏ quảng cáo và tàn dư quảng cáo và đưa trở lại tính năng Tự Động Phát trên YouTube";
+
+/* Class = "UILabel"; text = "Uses enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "WOG-Hk-11z"; */
+"WOG-Hk-11z.text" = "Chặn những quảng cáo khó gỡ, bao gồm cả quảng cáo YouTube trong Safari";
+
+/* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
+"XXP-EO-M4h.text" = "Chặn quảng cáo YouTube (bởi AdGuard)";
+
+/* Class = "UILabel"; text = "Blocks ads even on the websites that try to circumvent ad blocking"; ObjectID = "ZgQ-6Q-ytX"; */
+"ZgQ-6Q-ytX.text" = "Chặn những quảng cáo khó gỡ, bao gồm cả quảng cáo YouTube trong Safari";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "Bảo Vệ Theo Dõi";
+
+/* Class = "UILabel"; text = "Requires access to web pages' contents but uses it only for ad blocking"; ObjectID = "i0Z-fi-Rc0"; */
+"i0Z-fi-Rc0.text" = "Yêu cầu thêm quyền truy cập và sử dụng chúng một cách nghiêm ngặt để chặn quảng cáo";
+
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "Chặn quảng cáo YouTube";
 
 /* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "miễn phí";
@@ -22,8 +49,23 @@
 /* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
 "pv0-hE-9gb.normalTitle" = "Mua bản quyền";
 
+/* Class = "UILabel"; text = "Blocks complex ads, such as YouTube ads in Safari"; ObjectID = "rm0-Ip-riS"; */
+"rm0-Ip-riS.text" = "Hoạt động trên cả những website có thể phát hiện và vượt qua việc chặn quảng cáo thông thường";
+
+/* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
+"rr4-ic-Pg8.text" = "Sử dụng các quy tắc lọc đa cấp tinh vi";
+
+/* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+"tKQ-Yn-fgL.text" = "Cùng Adguard chặn hoạt động quảng cáo";
+
+/* Class = "UILabel"; text = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Mô-đun này cho phép bạn sử dụng máy chủ DNS tùy chỉnh và nâng cao quyền riêng tư của bạn bằng cách mã hóa các truy vấn DNS của bạn";
+
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
-"vNo-hV-l4c.text" = "Chưa cài đặt";
+"vNo-hV-l4c.text" = "Chưa được cài đặt";
+
+/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Chặn quảng cáo và trình theo dõi trên các trang web được mở trong Safari";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Sự bảo vệ";

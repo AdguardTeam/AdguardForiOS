@@ -1064,7 +1064,10 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "DOH/DOT 호스트 이름 확인에 사용할 일반 DNS 서버 목록입니다 (존재하는 경우 표시됨)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
 "low_level_fallbacks_placeholder" = "구성된 서버를 사용할 수 없는 경우 대체 DNS 리졸버가 사용됩니다. 빈 문자열은 시스템 기본 DNS를 폴백으로 사용하는 것을 의미합니다. 'none'라는 문자열은 대체가 없다는 것을 의미합니다.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap servers";

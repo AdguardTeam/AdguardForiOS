@@ -19,6 +19,15 @@
 /* Something went wrong title for unknown error */
 "something_went_wrong_title" = "Something went wrong";
 
+/* Unknown error desription */
+"unknown_error_description" = "Vui lòng báo cáo lỗi này tới bộ phận hỗ trợ.";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Bộ lọc không thể tải vào Safari. Vì vậy, những thay đổi gần đây của bạn không được áp dụng.";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Bộ lọc không thể tải vào Safari. Hãy thử xóa các quy tắc của bạn và danh sách cho phép, hoặc thay đổi những bộ lọc đã dùng.";
+
 /* NO Button caption in alert */
 "common_action_no" = "Không";
 
@@ -46,6 +55,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "DNS gốc đang hoạt động";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "DNS gốc hiện không hoạt động";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Quy tắc người dùng";
 
@@ -56,7 +71,13 @@
 "common_action_yes" = "Đồng ý";
 
 /* (MainController) login status caption on main screen */
+"protection_enabled_caption" = "Bảo vệ đã được kích hoạt";
+
+/* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Một vài bộ chặn thành phần bị vô hiệu hóa";
+
+/* (MainController) login status caption on main screen */
+"protection_disabled_caption" = "Bảo vệ bị vô hiệu hóa";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Đăng ký";
@@ -64,11 +85,23 @@
 /* (LicenseProductChoiceCell) restore purchase button title */
 "restore_purchase_button_title" = "Khôi phục mua hàng";
 
+/* (FreeLicenseStateTableViewModel) One month subscription title */
+"one_month_subscription_title" = "Gói tháng";
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */
+"one_year_subscription_title" = "Gói năm";
+
 /* (FreeLicenseStateTableViewModel) title for permanent subscription */
 "permanent_subscription_title" = "Trọn đời";
 
+/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
+"go_to_my_account_title" = "Đi tới tài khoản của tôi";
+
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "Mua";
+"upgrade_lifetime_button_title" = "Trả phí";
+
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "Gói đăng kí hiện không khả dụng. Vui lòng kiểm tra kết nối Internet của bạn và thử lại.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Mất mật khẩu?";
@@ -106,8 +139,14 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Một lỗi đã xảy ra khi đang khôi phục lại mua sắm.";
 
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */
+"restore_success_message" = "Mua sắm đã được khôi phục! Phiên bản AdGuard cao cấp cho iOS đã được kích hoạt.";
+
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Không có mua sắm nào để khôi phục";
+
+/* (AEUIGetProViewController) message that appears when the purchase is successful */
+"purchase_success_message" = "Mua sắm đã hoàn tất! Phiên bản AdGuard cao cấp cho iOS đã được kích hoạt.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Đã xảy ra lỗi khi tiến hành thanh toán cho bạn.";
@@ -123,6 +162,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Bạn có thể thêm quy tắc của bạn tại đây <br>Đọc <a href=\"%@\"> ghi chú này về cú pháp quy tắc</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Nhập tên miền tại đây. AdGuard sẽ không chặn kết nối tới những tên miền này bất chấp các cài đặt khác.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Nhập tên miền tại đây. AdGuard sẽ áp dụng lọc chỉ những trang web này trong Safari.";
@@ -166,6 +208,9 @@
 /* (MainController) Message on main screen during update - count of updated filters */
 "filters_updated_format" = "bộ lọc được cập nhật:%lu ";
 
+/* (FiltersController) Filter Version format */
+"filter_version_format" = "phiên bản %@";
+
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, tương thích với các ứng dụng \"VPN cá nhân\"";
 
@@ -208,8 +253,14 @@
 /* login error message */
 "login_error_message" = "Một lỗi đã xảy ra trong khi đăng nhập";
 
+/* purchase secription format */
+"purchase_description_format" = "Về việc đăng ký sử dụng AdGuard:<br><br>• Khoản phí sẽ được tính cho tài khoản iTunes của bạn khi xác nhận thanh toán.<br><br>• Đăng ký được tự động gia hạn trừ khi chế độ tự động gia hạn được tắt ít nhất 24 giờ trước khi kết thúc thời hạn sử dụng.<br><br>• Phí gia hạn đăng ký sẽ được tính trong vòng 24 giờ trước khi kết thúc thời hạn sử dụng.<br><br>Đăng ký của bạn có thể được quản lý và chế độ tự động gia hạn có thể tắt trong phần Cài đặt tài khoản iTunes của bạn sau sau khi mua đăng ký.<br><br><a href=%2$@>Điều khoản và Điều kiện</a> và <a href=%1$@>Chính sách quyền riêng tư</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%2$@>Điều khoản và Điều kiện</a> và <a href=%1$@>Chính sách quyền riêng tư</a>";
+
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "Ok";
+"common_action_ok" = "OK";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Chính sách bảo mật";
@@ -229,8 +280,20 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Khác";
 
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_common" = "6 trình chặn nội dung, mỗi trình lên tới 50.000 quy tắc";
+
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_advanced_protection" = "6 trình chặn nội dung, mỗi trình lên tới 150.000 quy tắc, đi kèm với Bảo vệ nâng cao";
+
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Bộ lọc:";
+
+/* (ContentBlockersTableController) - Advanced protection title */
+"cb_screen_advanced_protection_title" = "Bảo vệ nâng cao";
+
+/* (ContentBlockersTableController) - Content Blockers title */
+"cb_screen_content_blockers_title" = "Trình chặn nội dung";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Bạn cần mở VPN trước";
@@ -264,6 +327,9 @@
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Tắt trong cài đặt Safari";
+
+/* (ContentBlockerStateCell) Description for advanced protection disabled state */
+"disabled_current_state_advanced_protection" = "Vô hiệu hoá trong Cài đặt bảo vệ";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "Safari đang tải...";
@@ -299,10 +365,13 @@
 "filter_rules_maximum" = "Bạn đã vượt quá số lượng quy tắc lọc tối đa.";
 
 /* (FiltersController) Enabled state in groups section */
-"on_state" = "Đã kích hoạt";
+"on_state" = "Đang bật";
 
 /* (FiltersController) Disabled state in groups section */
-"off_state" = "Đã vô hiệu";
+"off_state" = "Đang tắt";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Trang chủ:";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Xóa bộ lọc";
@@ -315,6 +384,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009–%@. Adguard Software Ltd.\nĐã đăng ký Bản quyền. AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "Đăng nhập";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Đăng xuất";
@@ -372,6 +444,21 @@
 
 /* (UserRulesTableController) - title for editing user rules option  */
 "open_user_rules_editor" = "Mở trình chỉnh sửa";
+
+/* (UserRulesTableController) - description for Safari user rules in editor  */
+"editor_safari_user_rules_description" = "Thêm quy tắc người dùng Safari";
+
+/* (UserRulesTableController) - description for allowlist rules in editor  */
+"editor_allowlist_rules_description" = "Thêm quy tắc danh sách cho phép tuỳ chỉnh";
+
+/* (UserRulesTableController) - description for inverted allowlist rules in editor  */
+"editor_inverted_allowlist_rules_description" = "Thêm quy tắc danh sách cho phép đảo ngược tuỳ chỉnh";
+
+/* (UserRulesTableController) - description for DNS allowlist rules in editor  */
+"editor_dns_allowlist_rules_description" = "Thêm quy tắc danh sách cho phép DNS tuỳ chỉnh";
+
+/* (UserRulesTableController) - description for DNS blocklist rules in editor  */
+"editor_dns_blocklist_rules_description" = "Thêm quy tắc danh sách chặn DNS tuỳ chỉnh";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Xoá";
@@ -466,6 +553,30 @@
 /* (OneSafariGroupFiltersModel) Add new filter title */
 "add_new_filter" = "Thêm bộ lọc";
 
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "Danh sách bộ lọc loại bỏ quảng cáo";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "Danh sách bộ lọc ngăn chặn theo dõi";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "Danh sách bộ lọc ẩn tiện ích mạng xã hội (Các nút \"Thích\" và tương tự)";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "Danh sách bộ lọc ngăn các yếu tố gây khó chịu trên các trang web. Định nghĩa \"khó chịu\" có thể chủ quan và dựa theo tác giả của danh sách";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "Danh sách bộ lọc ngăn chặn các mối đe doạ trực tuyến đã được xác định";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "Danh sách bộ lọc hỗn hợp dùng cho các mục đích khác nhau";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "Danh sách bộ lọc nhắm vào các trang web với các ngôn ngữ cụ thể";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "Danh sách bộ lọc mà bạn thêm thủ công";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "Tất cả các cài đặt, bao gồm quy tắc người dùng, bảo vệ DNS, cài đặt giao diện và ủy quyền, sẽ được đặt lại. Hoạt động này không thể được hoàn tác. Đặt lại cài đặt?";
 
@@ -490,17 +601,44 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Mọi lúc";
 
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Trình chặn nội dung đang được cập nhật...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Đang mở bộ lọc ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Các quy tắc đang được chuyển đổi...";
+
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Bộ lọc tuỳ chỉnh mới";
 
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Bộ lọc DNS mới";
 
+/* (NewCustomFilterDetailsController) Error message when adding custom filter fails */
+"add_custom_filter_error_message" = "Đã xảy ra lỗi, hoặc định dạng của tệp với bộ lọc tuỳ chỉnh không chính xác";
+
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "Chỉnh sửa bộ lọc tuỳ chỉnh";
 
 /*(NewCustomFilterDetailsController) add button title */
 "common_add" = "Thêm";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "Bảo vệ bị vô hiệu";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "Bảo vệ được kích hoạt";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Bảo vệ Safari và DNS";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Bộ chặn nội dung của Safari";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Các mô đun bảo vệ bị tắt";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS phòng vệ";
@@ -544,6 +682,36 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "đã thêm vào danh sách cho phép";
 
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "đã thêm vào danh sách chặn";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "xóa khỏi danh sách cho phép";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "xóa khỏi danh sách chặn";
+
+/* (OnboardingController) first step text*/
+"onboarding_first_step_text" = "Mở <b>cài đặt</b>";
+
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "Nhấn vào <b>Cài đặt</b>.";
+
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "Nhấn vào <b>Safari</b> và chọn <b> \"Bộ chặn thành phần\"</b> mục bảng chọn";
+
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "Đi tới <b>Safari > Tiện ích mở rộng</b>.";
+
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "<b>Mở tất cả bộ chặn thành phần</b> và trở lại với ứng dụng của chúng tôi!";
+
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "Đặt các tuỳ chọn của AdGuard về trạng thái <b>Bật</b>. Vậy là xong!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Với bảo vệ <b>Nâng Cao</b>, mở Safari, chọn biểu tượng <b>aA</b> ở góc bên trái của thanh URL, <br><br>%@<br><br> sau đó chọn Quản lý tiện ích mở rộng và kích hoạt công tắc của <b>AdGuard</b>.";
+
 /* (BlockRequestController) Block request title */
 "block_request" = "Chặn yêu cầu";
 
@@ -564,6 +732,9 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ chưa được iOS hỗ trợ. Hãy thêm địa chỉ ngược dòng khác.";
+
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "Bạn vừa cố gắng thêm một máy chủ DNS trùng lặp. Máy chủ với đường truyền ngược tuyến cụ thể đã có trong danh sách";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "Lưu và chọn";
@@ -658,6 +829,9 @@
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Báo cáo lỗi của bạn đã được gửi thành công!";
 
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Bằng cách tiếp tục sử dụng, bạn chấp nhận <br /><a href=%2$@>Điều khoản và điều kiện</a> và <a href=%1$@>Chính sách quyền riêng tư</a>";
+
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Yêu cầu";
 
@@ -700,6 +874,15 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d yêu cầu";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Vui lòng bật %@ trong cài đặt DNS hệ thống";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Để bật DNS gốc, bạn cần mở <b> Cài đặt hệ thống </b>, đi tới <b> Chung> VPN & Mạng> DNS </b> và chọn <b>%@</b>.";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "Để sử dụng DNS gốc, chọn <b>%@</b> trong <b>Cài đặt hệ thống > Chung > VPN & Quản lý thiết bị > DNS</b>.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Cho chúng tôi biết liệu bạn có hài lòng với trải nghiệm chặn quảng cáo cho đến nay hay không";
 
@@ -721,8 +904,54 @@
 /* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
 "detailed_filter_info_subscription_subtitle" = "URL đăng ký";
 
+/* (AddRuleController) Error description when adding rule that already exists */
+"user_rule_exists_error" = "Bạn đang cố gắng thêm một quy tắc đã có trong danh sách";
+
+// MARK: - Strings for UserRulesRedirectController
+/* (UserRulesRedirectController) - Processing state title */
+
+"user_rules_processing_title" = "Đang xử lý...";
+
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Vui lòng đợt trong giây lát...";
+
+/* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_removed" = "đã được loại bỏ khỏi <u style=color:%@>danh sách cho phép</u>";
+
+/* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_added" = "đã được thêm vào <u style=color:%@>danh sách cho phép</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
+"user_rules_blocklist_rule_added" = "đã có quy tắc chặn mới trong <u style=color:%@>quy tắc của người dùng</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rules are removed */
+"user_rules_blocklist_rules_removed" = "không còn quy tắc người dùng nào khác";
+
+// MARK: - Strings for license screen
+/* (PremiumFeature) - Advanced protection premium feature name */
+
+"advanced_protection_feature_name" = "Bảo vệ nâng cao";
+
+/* (PremiumFeature) -  Security filters premium feature name */
+"security_filters_feature_name" = "Bộ lọc bảo mật ";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "DNS riêng tư";
+
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Bộ lọc tuỳ chỉnh";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Hỗ trợ Userscript, chặn quảng cáo YouTube trong Safari và hơn thế nữa";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Ngăn chặn lừa đảo & phần mềm độc hại";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Kiểm soát dữ liệu cá nhân của bạn";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Tự đặt quy tắc riêng của bạn";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -826,7 +1055,10 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Danh sách máy chủ DNS thuần túy sẽ được sử dụng để phân giải tên máy chủ DOH/DOT (nếu có)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
 "low_level_fallbacks_placeholder" = "Trình phân giải DNS dự phòng sẽ được sử dụng khi máy chủ đã định cấu hình không khả dụng. Một chuỗi trống có nghĩa là sử dụng DNS hệ thống làm dự phòng. Một chuỗi \"none\" có nghĩa là không có dự phòng nào cả.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Máy chủ Bootstrap";
@@ -861,8 +1093,57 @@
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Bạn đã có tối đa số lượng thiết bị được kết nối hãy tới cài đặt tài khoản của bạn.";
 
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Bạn có biết rằng YouTube đã thay đổi thuật toán để bạn sẽ nhiều quảng cáo hơn không?<br><br>Bây giờ, để chặn những quảng cáo đó bạn chỉ cần phải:<br><br>1. Mở <a href=\"%@\">Safari</a><br><br>2. Truy cập vào youtube.com<br><br>3. Nhấp vào %@ Chia sẻ.<br><br>4. Nhấp vào \"Chặn quảng cáo YouTube (bởi AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Bạn có biết rằng YouTube đã thay đổi thuật toán để bạn sẽ nhiều quảng cáo hơn không?<br><br>Bây giờ, để chặn những quảng cáo đó bạn chỉ cần phải:<br><br>1. Truy cập <a href=\"%@\">youtube.com</a> trong Safari.<br><br>2. Nhấp vào %@ Chia sẻ.<br><br>3. Nhấp vào \"Chặn quảng cáo YouTube (bởi AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Khi tiện tích kích hoạt, dòng tiêu đề \"với AdGaurd\" sẽ hiện thị cạnh biểu tượng YouTube.<br><br><b> Nếu bạn tải lại trang, bạn sẽ cần phải thực hiện bước 3 và 4 lần nữa.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Khi tiện tích kích hoạt, dòng tiêu đề \"với AdGaurd\" sẽ hiện thị cạnh biểu tượng YouTube.<br><br><b> Nếu bạn tải lại trang, bạn sẽ cần phải thực hiện bước 2 và 3 lần nữa.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube hiện không có quảng cáo! Xin lưu ý rằng bạn cần chạy lại tiện ích mở rộng này nếu bạn tải lại trang";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Tiện ích mở rộng này dự định chỉ chạy trên YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Phần mở rộng đã được thực thi";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Đã xảy ra lỗi không xác định khi xóa quảng cáo YouTube";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Tiện ích mở rộng AdGuard này đã hết hạn. Kiểm tra mục Tiện ích mở rộng trong menu để nhận miễn phí một Tiện ích mở rộng AdGuard đã được cập nhật với giao diện cải tiến và các công cụ chặn quảng cáo.";
+
+/* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
+"action_extension_new_version_info" = "Một phiên bản mới của tiện ích mở rộng này đã khả dụng cho iOS 15. Nó có nhiều khả năng hơn và một giao diện cải tiến. Hãy nhớ cập nhật!";
+
+/* (BackgroundFetchController) - Background app refresh default title */
+"background_fetch_default_period" = "Khoảng thời gian mặc định";
+
 /* (BackgroundFetchController) - Background app refresh every 1 hour title */
 "background_fetch_hour_period" = "Mỗi giờ";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "Mỗi 3 giờ";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "Mỗi 12 giờ";
+
+/* (BackgroundFetchController) - Background app refresh every 24 hours title */
+"background_fetch_twenty_four_hours_period" = "Mỗi 24 giờ";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "Thời gian làm mới ứng dụng nền";
 
 /* (DnsProvidersController) - add new dns server title */
 "add_custom_dns_server_title" = "Thêm máy chủ DNS người dùng";
@@ -870,17 +1151,56 @@
 /* (DnsProvidersController) - Header title */
 "dns_provider_controller_title" = "Máy chủ";
 
+/* (DnsProvidersController) - Header description */
+"dns_provider_controller_description" = "Bạn có thể cải thiện sự riêng tự trực tuyến bằng cách mã hoá lưu thông DNS. Để làm việc này, hãy chọn một trong số những nhà cung cấp được đề nghị.";
+
 /* (DnsProviderDetailsController) Server title */
 "server_title" = "Máy chủ";
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Trang web";
 
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "URL không hợp lệ";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Vui lòng cung cấp một địa chỉ đến Youtube";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Lỗi bộ lọc";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Không biên dịch được danh sách chặn";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Lỗi tập lệnh người dùng";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Không tạo được tập lệnh người dùng";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Không có URL nào được cung cấp";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Chia sẻ video YouTube với AdGuard để xem mà không có quảng cáo";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "URL không hợp lệ";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Chia sẻ video YouTube với AdGuard để xem mà không có quảng cáo";
+
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_error_title" = "Lỗi kết nối!";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Không chia sẻ được liên kết cho AdGuard";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert title */
 "youtube_share_extension_item_provider_unknown_error_title" = "Lỗi không xác định";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Đã xảy ra lỗi";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "Trình chặn nội dung AdGuard bị tắt trong cài đặt Safari. Bật chúng để cho phép chúng tôi chặn quảng cáo và trình theo dõi.";

@@ -128,10 +128,10 @@
 "eiP-yl-Xb3.text" = "Full-Tunnel (ohne VPN-Symbol)";
 
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
-"gxl-pG-zh1.text" = "Kompatibel mit \"Personal VPN\"-Apps";
+"gxl-pG-zh1.text" = "Kompatibel mit „Personal VPN”-Apps";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
-"jmQ-ze-hFG.text" = "Im Modus „Split-Tunneling” ist AdGuard mit sogenannten „Personal VPN”-Anwendungen kompatibel. Bei schlechter Internet-Verbindung kann dieser Modus vom System umgangen werden.";
+"jmQ-ze-hFG.text" = "Im Modus „Split-Tunneling“ ist AdGuard mit sogenannten „Personal VPN“-Anwendungen kompatibel. Bei schlechter Internet-Verbindung kann dieser Modus vom System umgangen werden.";
 
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallbacks";

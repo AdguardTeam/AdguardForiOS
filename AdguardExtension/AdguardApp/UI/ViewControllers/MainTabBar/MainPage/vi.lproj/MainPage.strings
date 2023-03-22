@@ -1,15 +1,23 @@
+/* Class = "UILabel"; text = "AdGuard uses iOS 15 Safari Extensions to remove ads more effectively. Now it takes just one tap to block YouTube ads in Safari."; ObjectID = "0IU-PO-Xeh"; */
+"0IU-PO-Xeh.text" = "AdGiard dùng các công cụ ngăn chặn mới trong iOS 15 để chặn nội dung tốt hơn nữa. Ví dụ như bạn có thể chặn quảng cáo của YouTube trong Safari!";
+
+/* Class = "UILabel"; text = "Get stronger with Premium!"; ObjectID = "3qN-uj-pOb"; */
+"3qN-uj-pOb.text" = "Chặn nhiều thứ hơn nữa với phiên bản CAO CẤP!";
 
 /* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "46F-Jh-wHm"; */
-"46F-Jh-wHm.normalTitle" = "Sửa ngay";
+"46F-Jh-wHm.normalTitle" = "SỬA NÓ";
 
 /* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "4Ft-5h-4Jd"; */
-"4Ft-5h-4Jd.normalTitle" = "Thử miễn phí";
+"4Ft-5h-4Jd.normalTitle" = "DÙNG THỬ MIỄN PHÍ";
 
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "Khoảng";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "7SB-2j-FAc"; */
 "7SB-2j-FAc.normalTitle" = "Tiếp tục";
+
+/* Class = "UILabel"; text = "Using native DNS"; ObjectID = "8Z0-0U-Hfk"; */
+"8Z0-0U-Hfk.text" = "DNS gốc đang hoạt động";
 
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
 "Btd-nN-zLO.text" = "yêu cầu";
@@ -29,5 +37,8 @@
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
 "cvv-CS-LMQ.text" = "Một số trình chặn nội dung Safari bị vô hiệu hóa";
 
+/* Class = "UILabel"; text = "New AdGuard features in iOS 15"; ObjectID = "gDV-cq-ZDm"; */
+"gDV-cq-ZDm.text" = "Tính năng mới của AdGuard trong iOS 15";
+
 /* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "oe6-9O-dBB"; */
-"oe6-9O-dBB.normalTitle" = "Sửa ngay";
+"oe6-9O-dBB.normalTitle" = "SỬA NÓ";

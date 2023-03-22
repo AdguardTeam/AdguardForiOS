@@ -11,7 +11,7 @@
 "eVN-fj-ATQ.text" = "Уключыць на гэтай старонцы";
 
 /* Class = "UIButton"; normalTitle = "Close"; ObjectID = "fxW-Cr-iPW"; */
-"fxW-Cr-iPW.normalTitle" = "Зачыніць";
+"fxW-Cr-iPW.normalTitle" = "Закрыць";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
 "kuu-kI-Ott.text" = "Паведаміць аб праблеме на гэтай старонцы";

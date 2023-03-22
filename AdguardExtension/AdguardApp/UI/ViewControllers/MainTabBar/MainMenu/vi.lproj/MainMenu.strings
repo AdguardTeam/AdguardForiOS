@@ -37,6 +37,9 @@
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "Cài đặt";
 
+/* Class = "UILabel"; text = "Attach application logs"; ObjectID = "V7E-QE-uIA"; */
+"V7E-QE-uIA.text" = "Gửi chi tiết về thông tin hệ thống";
+
 /* Class = "UILabel"; text = "Discuss on our forum, in social networks, or on GitHub"; ObjectID = "W6h-Gt-MMt"; */
 "W6h-Gt-MMt.text" = "Có một ý tưởng tuyệt vời?";
 
@@ -63,6 +66,12 @@
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Cách chặn quảng cáo với AdGuard";
+
+/* Class = "UILabel"; text = "Report a bug or submit a feature request"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "Giúp chúng tôi cải thiện ứng dụng";
+
+/* Class = "UILabel"; text = "If you've run into a problem or have a suggestion on how to improve AdGuard, tell us about it"; ObjectID = "pJU-2c-JHy"; */
+"pJU-2c-JHy.text" = "Nếu bạn gặp phải vấn đề hoặc có gợi ý về cách cải thiện AdGuard, hãy cho chúng tôi biết về nó";
 
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
 "q9f-Zw-7sc.text" = "Báo cáo chặn không chính xác";
