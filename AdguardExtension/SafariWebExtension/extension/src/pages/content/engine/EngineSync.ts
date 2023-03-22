@@ -72,7 +72,6 @@ const getMatchingResult = (url: string, engine: TSUrlFilter.Engine | undefined):
         RequestType.Document,
     );
 
-    // TODO: should here to be generated allowlist rule if necessary?
     const frameRule = null;
 
     return engine.matchRequest(request, frameRule);
