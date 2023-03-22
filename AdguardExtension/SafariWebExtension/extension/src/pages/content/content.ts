@@ -188,10 +188,14 @@ const applyAdvancedBlockingData = (selectorsAndScripts: SelectorsAndScripts, ver
  * before getting them from storage.
  */
 const wakeBackgroundPage = async (): Promise<void> => {
-    await browser.runtime.sendMessage({
-        type: MessagesToBackgroundPage.WakeUp,
-        data: {},
-    });
+    try {
+        await browser.runtime.sendMessage({
+            type: MessagesToBackgroundPage.WakeUp,
+            data: {},
+        });
+    } catch (e) {
+        console.log(`Could not wake up background page due to: ${e}`);
+    }
 };
 
 const init = async () => {
