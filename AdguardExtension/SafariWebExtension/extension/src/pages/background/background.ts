@@ -18,6 +18,23 @@ interface Message {
     data?: any,
 }
 
+/**
+ * Gets advanced rules from native host, converts them,
+ * and sets the converted result to storage.
+ */
+const forceUpdateAdvancedRules = async () => {
+    const rulesText = await adguard.nativeHost.getAdvancedRulesText();
+    const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
+    await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
+};
+
+/**
+ * Sometimes we need to be sure that advanced rules are already set in storage on the background page
+ * so they can be retrieved in the content-script.
+ * It can happen just after the app installation on the very first browser start without browser or tabs reload.
+ */
+const setAdvancedRulesPromise = forceUpdateAdvancedRules();
+
 const handleMessages = () => {
     browser.runtime.onMessage.addListener(async (message: Message) => {
         const { type, data } = message;
@@ -126,23 +143,6 @@ const handleMessages = () => {
 };
 
 /**
- * Gets advanced rules from native host, converts them,
- * and sets the converted result to storage.
- */
-const forceUpdateAdvancedRules = async () => {
-    const rulesText = await adguard.nativeHost.getAdvancedRulesText();
-    const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
-    await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
-};
-
-/**
- * Sometimes we need to be sure that advanced rules are already set in storage on the background page
- * so they can be retrieved in the content-script.
- * It can happen just after the app installation on the very first browser start without browser or tabs reload.
- */
-const setAdvancedRulesPromise = forceUpdateAdvancedRules();
-
-/**
  * Asks the Native Host whether the advanced rules should be updated.
  * If so, then gets advanced rules from native host, converts them,
  * and sets the converted result to storage.
@@ -152,7 +152,7 @@ const setAdvancedRulesToStorage = async () => {
     // to avoid their update on every background page awakening
     const shouldUpdateAdvancedRules = await adguard.nativeHost.shouldUpdateAdvancedRules();
     if (shouldUpdateAdvancedRules) {
-        forceUpdateAdvancedRules()
+        forceUpdateAdvancedRules();
     }
 };
 
