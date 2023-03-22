@@ -1,3 +1,4 @@
+import * as TSUrlFilter from '@adguard/tsurlfilter';
 import { EngineSync, getCosmeticOption, getCosmeticResult } from './engine';
 import { buildStyleSheet } from './css-service';
 
@@ -11,7 +12,7 @@ import { SelectorsAndScripts } from '../common/interfaces';
  *
  * @returns Instance of engine.
  */
-const getEngine = (convertedRulesText: string) => {
+const getEngine = (convertedRulesText: string): TSUrlFilter.Engine | undefined => {
     const engineSync = new EngineSync();
     engineSync.start(convertedRulesText);
     return engineSync.engine;
