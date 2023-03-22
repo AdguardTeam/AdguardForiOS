@@ -611,13 +611,13 @@
 "chart_alltime" = "全期間";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "コンテンツブロッカーが更新中…";
+"loading_content_blockers" = "コンテンツブロッカーを更新中…";
 
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "フィルターを読み込み中...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "ルールが変換中...";
+"converting_rules" = "ルールを変換中...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "新規カスタムフィルタ";
@@ -1064,7 +1064,10 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "DOH/DOTホストネーム（あれば）を解決するのに使うべき簡潔なDNSサーバーのリスト";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
 "low_level_fallbacks_placeholder" = "設定されたサーバーが利用できない場合に使用されるフォールバックDNSリゾルバ。空の文字列は、システムデフォルトDNSをフォールバックとして使用することを意味します。 文字列「none」は、フォールバックが一切ないことを意味します。";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap servers";
@@ -1149,7 +1152,7 @@
 "background_fetch_twenty_four_hours_period" = "24時間ごと";
 
 /* Background app refresh time title */
-"background_app_refresh_time_title" = "バックグラウンでのアプリ更新間隔";
+"background_app_refresh_time_title" = "バックグラウンドでのアプリ更新間隔";
 
 /* (DnsProvidersController) - add new dns server title */
 "add_custom_dns_server_title" = "カスタムDNSサーバーを追加する";

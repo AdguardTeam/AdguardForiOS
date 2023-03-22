@@ -145,6 +145,9 @@
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
 
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC";
+
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "آیا واقعا میخواهید خارج شوید؟";
 
@@ -255,6 +258,12 @@
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "افزودن یک استثناء";
+
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "لیست سفید";
+
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "لیست سفید";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "دستورات کاربر سافاری";
@@ -409,6 +418,9 @@
 /* (NewDnsServerController) add dns server alert title */
 "add_dns_server_alert_title" = "افزودن سرور DNS دستی";
 
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "افزودن سرور DNS دلخواه";
+
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "General";
 
@@ -459,6 +471,12 @@
 
 /* (AGSearchView) Placeholder text for search bar */
 "search_view_placeholder" = "جستجو";
+
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "یک حل‌کننده DNS جایگزین که زمانی که سرور پیکربندی‌شده در دسترس نباشد، استفاده می‌شود. رشته خالی به معنای استفاده از DNS سیستم به عنوان جایگزین است. رشته \"none\" به معنای عدم بازگشت مجدد است.";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "آدرس آی پی";

@@ -50,7 +50,7 @@
 "GBd-dx-t46.text" = "Ne yaptığınızı bilmiyorsanız bunları değiştirmeyin.";
 
 /* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
-"GFO-xu-Bir.text" = "AdGuard günlük dosyasına daha fazla ayrıntı yazacaktır. Bir hatayı bulmanız gerekmedikçe etkinleştirmeyin";
+"GFO-xu-Bir.text" = "AdGuard günlük dosyasına daha fazla ayrıntı yazar. Bir hatayı bulmanız gerekmedikçe etkinleştirmeyin";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Bölünmüş Tünel";
@@ -86,7 +86,7 @@
 "TX9-Md-Qzr.text" = "Sistem varsayılanı";
 
 /* Class = "UILabel"; text = "This option will reset all your settings"; ObjectID = "Twq-5a-kOB"; */
-"Twq-5a-kOB.text" = "Bu seçenek tüm ayarlarınızı sıfırlayacaktır";
+"Twq-5a-kOB.text" = "Bu seçenek tüm ayarlarınızı sıfırlar";
 
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Tema";
@@ -161,7 +161,7 @@
 "sc6-Tw-xnL.text" = "Ayarlar";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
-"tTY-BW-QcN.text" = "Bu seçenek etkinleştirilirse, AdGuard arka plan filtre güncellemeleri için yalnızca Wi-Fi kullanır";
+"tTY-BW-QcN.text" = "Bu ayar etkinleştirilirse, AdGuard arka plan filtre güncellemeleri için yalnızca Wi-Fi kullanır";
 
 /* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "uRk-qq-TJH"; */
 "uRk-qq-TJH.text" = "Engellenen yanıt kullanım süresi";
@@ -170,7 +170,7 @@
 "wPe-ae-X0G.text" = "Bir geliştirici misiniz?";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
-"wYq-g0-5k6.text" = "Bu seçenek, istek sayısı, vb. gibi tüm istatistiksel verileri temizleyecektir.";
+"wYq-g0-5k6.text" = "Bu seçenek, istek sayısı, vb. gibi tüm istatistiksel verileri temizler.";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Bu listedeki siteler dışında her yerde reklamların engelini kaldırın";

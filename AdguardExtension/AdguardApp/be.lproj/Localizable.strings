@@ -196,6 +196,9 @@
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
 
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC";
+
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Вы ўпэўнены, што жадаеце выйсці?";
 
@@ -302,7 +305,7 @@
 "delete_filter_title" = "Выдаліць фільтр";
 
 /* (FilterDetailsController) delete filter message */
-"delete_filter_message" = "Вы ўпэўнены, што хочаце выдаліць дадзены фільтр?";
+"delete_filter_message" = "Вы ўпэўнены, што хочаце выдаліць гэты фільтр?";
 
 /* (AboutViewController) current app version format */
 "about_version_format" = "Версія %@";
@@ -338,16 +341,16 @@
 "add_exception_title" = "Даданне вынятку";
 
 /* (NetworkSettingsController) title for "Filter mobile data" */
-"filter_mobile_title" = "Фільтраваць мабільныя дадзеныя";
+"filter_mobile_title" = "Фільтраваць мабільныя даныя";
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Фільтраваць Wi-Fi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "DNS абарона пры перадачы дадзеных праз мабільнае сеціва";
+"mobile_data_description" = "Абарона DNS падчас мабільнай перадачы даных";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "DNS абарона пры перадачы дадзеных праз Wi-Fi";
+"wifi_data_description" = "Абарона DNS пры падключэнні да Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Белы спіс";
@@ -647,7 +650,7 @@
 "requests_info_alert_title" = "Запыты";
 
 /* (ActivityViewController) - Requests alert message */
-"requests_info_alert_message" = "Штораз, калі вы наведваеце вэбсайт, пасылаецца запыт. Сайты могуць адпраўляць утоеныя запыты, з-за якіх выцякаюць асабістыя дадзеныя. Карысна ведаць колькасць такіх запытаў, каб усведамляць маштаб праблемы.";
+"requests_info_alert_message" = "Кожны раз, калі вы наведваеце вэб-сайт, адпраўляецца запыт. Вэб-сайты могуць адпраўляць схаваныя запыты для выкрадання асабістых даных. Каб зразумець маштаб гэтай праблемы, карысна ведаць агульную колькасць запытаў.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Зашыфраваныя запыты";
@@ -776,6 +779,12 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Дадаць карыстацкія правілы DNS";
+
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "Рэзервовы DNS-сервер, які будзе выкарыстоўвацца, калі наладжаны сервер недаступны. Пусты радок азначае выкарыстанне сістэмнага DNS у якасці запаснога варыянту. Радок «none» азначае адсутнасць рэзервовага варыянту наогул.";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP-адрас";

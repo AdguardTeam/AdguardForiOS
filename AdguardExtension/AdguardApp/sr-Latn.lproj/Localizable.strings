@@ -1064,8 +1064,11 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Spisak čistih DNS servera koji će se koristiti za razrešavanje DOH/DOT imena domaćina (ako ih ima)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Rezervni DNS resolver koji će se koristiti kada konfigurisani server nije dostupan. Prazno polje znači korišćenje sistemski podrazumevanog DNS-a kao rezerve.";
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "Povratni DNS razrešivač koji će se koristiti kada konfigurisani server nije dostupan. Prazna niska podrazumeva korišćenje sistemskog DNS-a kao zaoštavanja. Niska \"none\" znači da uopšte nema povratka.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap serveri";
 
@@ -1207,3 +1210,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Nešto je pošlo naopako";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard blokatori sadržaja su onemogućeni u Safari postavkama. Omogućite im da nam dozvole da blokiramo reklame i praćenja.";

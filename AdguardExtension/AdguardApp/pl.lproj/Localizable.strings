@@ -1064,8 +1064,11 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Lista zwykłych serwerów DNS używanych do rozwiązywania nazw hostów DOH/DOT (jeśli istnieją)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Rezerwowy program do rozpoznawania nazw DNS, który będzie używany, gdy skonfigurowany serwer będzie niedostępny. Pusty ciąg oznacza, że ​​domyślny DNS systemu jest używany jako rezerwa. Ścisłe „brak” oznacza w ogóle brak powrotu.";
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "Rezerwowy program do rozpoznawania nazw DNS, który będzie używany, gdy skonfigurowany serwer będzie niedostępny. Pusty ciąg oznacza, że ​​domyślny DNS systemu jest używany jako rezerwa. Ścisłe „none” oznacza w ogóle brak powrotu.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Serwery Bootstrap";
 

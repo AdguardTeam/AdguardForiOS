@@ -1064,7 +1064,10 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Liste des serveurs DNS simples à utiliser pour résoudre les noms d'hôtes DOH/DOT (le cas échéant)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
 "low_level_fallbacks_placeholder" = "Un résolveur DNS de repli, qui sera utilisé au cas ou le serveur préconfiguré n'est pas accessible. Une chaîne vide signifie qu'il faut utiliser le DNS du système comme solution de repli. Une chaine \"none\" signifie qu'il n'y a pas de repli.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap servers";

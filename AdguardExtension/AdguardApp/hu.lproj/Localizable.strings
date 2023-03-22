@@ -1058,7 +1058,10 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "A DOH/DOT hosztnevek feloldásához használható sima DNS kiszolgálók listája (ha vannak)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
 "low_level_fallbacks_placeholder" = "Tartalék DNS feloldó, amelyet akkor használunk, ha a konfigurált kiszolgáló nem érhető el. Az üres szöveg azt jelenti, hogy a rendszer alapértelmezett DNS-ét használja tartalékként. A \"none\" szöveg azt jelenti, hogy nincsen tartalék.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap servers";
@@ -1201,3 +1204,6 @@
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Valami hiba történt";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "Az AdGuard tartalomblokkolók le vannak tiltva a Safari beállításaiban. Engedélyezze őket, hogy blokkoljuk a hirdetéseket és a nyomkövetőket.";

@@ -1064,8 +1064,11 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Popis običnih DNS poslužitelja koji će se koristiti za rješavanje DOH/DOT imena hostova (ako postoje)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Alternativni DNS razrješivač koji će se koristiti kada glavni DNS poslužitelj nije dostupan. Prazan niz znakova znači da će se koristiti DNS poslužitelj određen u sustavn.";
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "Alternativni DNS razrješivač koji će se koristiti kada glavni DNS poslužitelj nije dostupan. Prazan niz znakova znači da će se koristiti DNS poslužitelj određen u sustavn. Niz \"none\" znači da uopće nema zamjene.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap servers";
 

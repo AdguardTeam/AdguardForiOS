@@ -1064,7 +1064,10 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Zoznam štandardných DNS serverov, ktoré sa majú použiť na rozlíšenie názvov DOH/DOT hostiteľov (ak existujú)";
 
-/* (LowLevelSettingsController) Low level fallbacks placeholder */
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
 "low_level_fallbacks_placeholder" = "Záložný DNS prekladač, ktorý sa použije, keď nakonfigurovaný server nie je k dispozícii. Prázdny reťazec znamená použitie systémového DNS ako záložného riešenia. Reťazec \"none“ znamená žiadne záložné riešenie.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap servery";

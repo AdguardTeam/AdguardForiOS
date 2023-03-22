@@ -728,6 +728,12 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Legg til DNS-brukerregler";
+
+/* low_level_fallbacks_placeholder
+(LowLevelSettingsController) Low level fallbacks placeholder
+
+DO NOT TRANSLATE "none" */
+"low_level_fallbacks_placeholder" = "En tilbakefalls-DNS-oppklarer som blir brukt når den oppsatte tjeneren er utilgjengelig. En tom strenge betyr at systemets standard-DNS brukes for tilbakefall. \"none\" betyr ingen tilbakefall i det hele tatt.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap-DNS-tjenere";
 
