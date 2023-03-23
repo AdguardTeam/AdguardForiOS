@@ -1,5 +1,4 @@
-import * as TSUrlFilter from '@adguard/tsurlfilter';
-import { EngineSync, getCosmeticOption, getCosmeticResult } from './engine';
+import { EngineSync } from './engine';
 import { buildStyleSheet } from './css-service';
 
 import { getDomain } from '../common/utils/url';
@@ -12,10 +11,9 @@ import { SelectorsAndScripts } from '../common/interfaces';
  *
  * @returns Instance of engine.
  */
-const getEngine = (convertedRulesText: string): TSUrlFilter.Engine | undefined => {
-    const engineSync = new EngineSync();
-    engineSync.start(convertedRulesText);
-    return engineSync.engine;
+const getEngine = (convertedRulesText: string): EngineSync => {
+    const engineSync = new EngineSync(convertedRulesText);
+    return engineSync;
 };
 
 /**
@@ -28,10 +26,10 @@ const getEngine = (convertedRulesText: string): TSUrlFilter.Engine | undefined =
  */
 export const getAdvancedRulesData = (url: string, convertedRulesText: string): SelectorsAndScripts => {
     const engine = getEngine(convertedRulesText);
-    const hostname = getDomain(url);
-    const cosmeticOption = getCosmeticOption(url, engine);
+    const cosmeticOption = engine.getCosmeticOption(url);
 
-    const cosmeticResult = getCosmeticResult(hostname, cosmeticOption, engine);
+    const hostname = getDomain(url);
+    const cosmeticResult = engine.getCosmeticResult(hostname, cosmeticOption);
 
     const injectCssRules = [
         ...cosmeticResult.CSS.generic,
