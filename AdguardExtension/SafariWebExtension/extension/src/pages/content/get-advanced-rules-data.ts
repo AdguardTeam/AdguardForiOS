@@ -29,6 +29,7 @@ export const getAdvancedRulesData = (url: string, convertedRulesText: string): S
     const cosmeticOption = engine.getCosmeticOption(url);
 
     const hostname = getDomain(url);
+    // FIXME: consider refactoring to getEngineCosmeticResult(convertedRulesText, url);
     const cosmeticResult = engine.getCosmeticResult(hostname, cosmeticOption);
 
     const injectCssRules = [
