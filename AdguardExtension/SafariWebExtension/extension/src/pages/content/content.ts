@@ -201,18 +201,27 @@ const wakeBackgroundPage = async (): Promise<void> => {
 const init = async () => {
     if (document instanceof HTMLDocument) {
         if (window.location.href && window.location.href.indexOf('http') === 0) {
-            // wake background page to force the advanced rules update from native host
-            // IMPORTANT: it should not be 'await wakeBackgroundPage()'
+            /**
+             * Wake background page to force the advanced rules update from native host.
+             *
+             * IMPORTANT: it should not be 'await wakeBackgroundPage()'
+             * because it will postpone the execution of the following code and it is not needed.
+             * We need to apply the rules as soon as possible.
+             */
             wakeBackgroundPage();
 
             let convertedRulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;
-            // it might happen that the advanced rules are not set in storage yet
-            // so the type of the variable should be checked in this case.
-            // because if advanced rules are set but their length is 0, empty string will be returned
+            /**
+             * It might happen that the advanced rules are not set in storage yet.
+             * So the type of the variable should be checked in this case,
+             * because if advanced rules are set but their length is 0, empty string will be returned.
+             */
             if (typeof convertedRulesText === 'undefined') {
-                // we need to be sure that advanced rules are already set in storage and can be retrieved.
-                // it can happen just after the app installation
-                // on the very first browser start without browser or tabs reload
+                /**
+                 * We need to be sure that advanced rules are already set in storage and can be retrieved.
+                 * It can happen just after the app installation
+                 * on the very first browser start without browser or tabs reload.
+                 */
                 const response = await browser.runtime.sendMessage({
                     type: MessagesToBackgroundPage.EnsureAdvancedRulesSet,
                     data: {},
