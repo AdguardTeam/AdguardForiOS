@@ -7,7 +7,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "build": "ts-node tools/bundle",
-    "lint": "eslint . --ext .js,.ts,.tsx",
+    "lint": "eslint . --cache --ext .js,.ts,.tsx",
     "test": "jest",
     "watch": "yarn build --watch",
     "locales": "ts-node tools/locales"
