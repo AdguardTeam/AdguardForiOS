@@ -1,6 +1,3 @@
-import { CosmeticResult } from '@adguard/tsurlfilter';
-
-import { prepareAdvancedRules } from '../prepare/prepare';
 import { applyScripts } from './apply-scripts';
 import { applyCss } from './apply-css';
 import { applyExtendedCss } from './apply-extended-css';

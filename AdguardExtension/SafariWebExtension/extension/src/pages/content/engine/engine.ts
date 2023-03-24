@@ -34,7 +34,7 @@ const createEngine = (rulesText: string) => {
     engine.loadRules();
 
     return engine;
-}
+};
 
 /**
  * Returns MatchingResult for the given `url`.
@@ -65,7 +65,7 @@ const getMatchingResult = (url: string, engine: TSUrlFilter.Engine): TSUrlFilter
 const getCosmeticOption = (url: string, engine: TSUrlFilter.Engine): TSUrlFilter.CosmeticOption => {
     const matchingResult = getMatchingResult(url, engine);
     return matchingResult.getCosmeticOption();
-}
+};
 
 /**
  * Returns CosmeticResult for rules and specified frame url.
