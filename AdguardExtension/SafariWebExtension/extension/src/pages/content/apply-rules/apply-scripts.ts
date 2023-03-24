@@ -1,7 +1,7 @@
 import { log } from '../../common/log';
 
 /**
- * Execute scripts in a page context and cleanup itself when execution completes.
+ * Executes scripts in a page context and removes itself when execution completes.
  *
  * @param scripts Scripts array to execute.
  */

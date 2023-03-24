@@ -2,8 +2,8 @@ import { applyScripts } from './apply-scripts';
 import { applyCss } from './apply-css';
 import { applyExtendedCss } from './apply-extended-css';
 
-import { SelectorsAndScripts } from '../../common/interfaces';
 import { log } from '../../common/log';
+import { SelectorsAndScripts } from '../../common/interfaces';
 
 /**
  * Applies injected script and css.
