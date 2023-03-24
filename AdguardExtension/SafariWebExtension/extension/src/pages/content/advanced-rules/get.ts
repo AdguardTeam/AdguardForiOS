@@ -28,9 +28,8 @@ export const getAdvancedRulesText = async (): Promise<string | null> => {
          * It can happen just after the app installation
          * on the very first browser start without browser or tabs reload.
          */
-        let alternativeRulesText;
         try {
-            alternativeRulesText = await browser.runtime.sendMessage({
+            rulesText = await browser.runtime.sendMessage({
                 type: MessagesToBackgroundPage.GetAdvancedRulesText,
                 data: {},
             });
@@ -40,13 +39,11 @@ export const getAdvancedRulesText = async (): Promise<string | null> => {
             return null;
         }
 
-        if (!alternativeRulesText) {
+        if (!rulesText) {
             // eslint-disable-next-line no-console
             console.log('AG: no scripts and selectors are received from the background page');
             return null;
         }
-
-        rulesText = alternativeRulesText;
     }
 
     return rulesText;
