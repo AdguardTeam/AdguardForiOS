@@ -30,7 +30,11 @@ export const config = {
     },
     optimization: {
         minimize: true,
-        minimizer: [new TerserPlugin()],
+        minimizer: [
+            new TerserPlugin({
+                minify: TerserPlugin.uglifyJsMinify,
+            }),
+        ],
     },
     module: {
         rules: [
