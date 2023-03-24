@@ -13,7 +13,7 @@ import { SelectorsAndScripts } from '../../../common/interfaces';
  */
 export const prepareAdvancedRules = (url: string, convertedRulesText: string): SelectorsAndScripts => {
     const engine = new EngineSync(convertedRulesText);
-    const cosmeticResult = engine.getCosmeticResult(url);
+    const cosmeticResult = EngineSync.getCosmeticResult(url, engine);
 
     const injectCssRules = [
         ...cosmeticResult.CSS.generic,

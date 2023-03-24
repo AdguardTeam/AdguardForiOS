@@ -8,7 +8,7 @@ import { getDomain } from '../../../../common/utils/url';
  * Rules are loaded into the engine synchronously.
  */
 export class EngineSync {
-    engine: TSUrlFilter.Engine | undefined;
+    engine: TSUrlFilter.Engine;
 
     /**
      * Creates an instance of filtering engine with passed `rulesText`.
@@ -45,35 +45,32 @@ export class EngineSync {
      * Returns MatchingResult for the given `url`.
      *
      * @param url Frame url.
+     * @param engineSync EngineSync instance.
      *
      * @returns TSUrlFilter's MatchingResult.
      */
-    private getMatchingResult = (url: string): TSUrlFilter.MatchingResult => {
-        if (!this.engine) {
-            return new TSUrlFilter.MatchingResult([], null);
-        }
-
+    private static getMatchingResult = (url: string, engineSync: EngineSync): TSUrlFilter.MatchingResult => {
         const request = new TSUrlFilter.Request(
             url,
             url,
             TSUrlFilter.RequestType.Document,
         );
 
-        // TODO should here to be generated allowlist rule if necessary?
         const frameRule = null;
 
-        return this.engine.matchRequest(request, frameRule);
+        return engineSync.engine.matchRequest(request, frameRule);
     };
 
     /**
      * Returns CosmeticOption for the given `url`.
      *
      * @param url Frame url.
+     * @param engineSync EngineSync instance.
      *
      * @returns TSUrlFilter's CosmeticOption.
      */
-    private getCosmeticOption(url: string): TSUrlFilter.CosmeticOption {
-        const matchingResult = this.getMatchingResult(url);
+    private static getCosmeticOption(url: string, engineSync: EngineSync): TSUrlFilter.CosmeticOption {
+        const matchingResult = EngineSync.getMatchingResult(url, engineSync);
         return matchingResult.getCosmeticOption();
     }
 
@@ -81,19 +78,16 @@ export class EngineSync {
      * Returns CosmeticResult for the specified `hostname` and cosmetic options.
      *
      * @param url Frame url.
+     * @param engineSync EngineSync instance.
      *
      * @returns TSUrlFilter's CosmeticResult.
      */
-    getCosmeticResult = (url: string): TSUrlFilter.CosmeticResult => {
-        if (!this.engine) {
-            return new TSUrlFilter.CosmeticResult();
-        }
-
+    static getCosmeticResult = (url: string, engineSync: EngineSync): TSUrlFilter.CosmeticResult => {
         const hostname = getDomain(url);
         const request = new TSUrlFilter.Request(hostname, null, TSUrlFilter.RequestType.Document);
 
-        const cosmeticOption = this.getCosmeticOption(url);
+        const cosmeticOption = EngineSync.getCosmeticOption(url, engineSync);
 
-        return this.engine.getCosmeticResult(request, cosmeticOption);
+        return engineSync.engine.getCosmeticResult(request, cosmeticOption);
     };
 }
