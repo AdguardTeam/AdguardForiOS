@@ -2,16 +2,18 @@
 import browser from 'webextension-polyfill';
 import * as TSUrlFilter from '@adguard/tsurlfilter';
 
+import { adguard } from './adguard';
+import { app } from './app';
+import { permissions } from './permissions';
+
+import { storage } from '../common/storage';
+import { log } from '../common/log';
+
 import {
     ADVANCED_RULES_STORAGE_KEY,
     MessagesToBackgroundPage,
     MessagesToContentScript,
 } from '../common/constants';
-import { permissions } from './permissions';
-import { log } from '../common/log';
-import { app } from './app';
-import { storage } from '../common/storage';
-import { adguard } from './adguard';
 
 interface Message {
     type: string,
@@ -122,7 +124,8 @@ const handleMessages = () => {
                 break;
             }
             case MessagesToBackgroundPage.WakeUp: {
-                // do nothing
+                // do nothing as the message is sent by content script
+                // only to wake up background page in order to set advanced rules to storage
                 break;
             }
             case MessagesToBackgroundPage.GetAdvancedRulesText: {
@@ -134,6 +137,12 @@ const handleMessages = () => {
                  * on the very first browser start without browser or tabs reload.
                  */
                 const convertedRulesText = await getAdvancedRulesFromNativeHost();
+                /**
+                 * Received advanced rules should be set to storage.
+                 * IMPORTANT: no 'await' for storage.set()
+                 * as it will postpone the response to the content script which is not needed.
+                 */
+                storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
                 return convertedRulesText;
             }
             default:
@@ -152,7 +161,7 @@ const setAdvancedRulesToStorage = async () => {
     // to avoid their update on every background page awakening
     const shouldUpdateAdvancedRules = await adguard.nativeHost.shouldUpdateAdvancedRules();
     if (shouldUpdateAdvancedRules) {
-        const convertedRulesText = getAdvancedRulesFromNativeHost();
+        const convertedRulesText = await getAdvancedRulesFromNativeHost();
         await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
     }
 };

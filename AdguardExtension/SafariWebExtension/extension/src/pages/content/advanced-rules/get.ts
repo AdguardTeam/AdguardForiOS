@@ -13,21 +13,24 @@ import { ADVANCED_RULES_STORAGE_KEY, MessagesToBackgroundPage } from '../../comm
  * @returns Advanced rules text or `null` for no advanced rules.
  */
 export const getAdvancedRulesText = async (): Promise<string | null> => {
-    let convertedRulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;
+    let rulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;
     /**
      * It might happen that the advanced rules are not set in storage yet.
-     * So the type of the variable should be checked in this case,
+     * In this case the type of the variable should be checked,
      * because if advanced rules are set but their length is 0, empty string will be returned.
+     * So if the type is not 'string', it means that something went wrong
+     * and we need to use an alternative way to get the advanced rules —
+     * directly from the background page.
      */
-    if (typeof convertedRulesText === 'undefined') {
+    if (typeof rulesText !== 'string') {
         /**
          * There may be a situation when the advanced rules are not set in storage yet.
          * It can happen just after the app installation
          * on the very first browser start without browser or tabs reload.
          */
-        let response;
+        let alternativeRulesText;
         try {
-            response = await browser.runtime.sendMessage({
+            alternativeRulesText = await browser.runtime.sendMessage({
                 type: MessagesToBackgroundPage.GetAdvancedRulesText,
                 data: {},
             });
@@ -37,14 +40,14 @@ export const getAdvancedRulesText = async (): Promise<string | null> => {
             return null;
         }
 
-        if (!response) {
+        if (!alternativeRulesText) {
             // eslint-disable-next-line no-console
             console.log('AG: no scripts and selectors are received from the background page');
             return null;
         }
 
-        convertedRulesText = response;
+        rulesText = alternativeRulesText;
     }
 
-    return convertedRulesText;
+    return rulesText;
 };
