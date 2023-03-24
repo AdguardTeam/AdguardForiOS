@@ -3,7 +3,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 
 const BUILD_PATH = path.resolve(__dirname, '../../build');
 
@@ -14,7 +14,7 @@ const POPUP_PATH = path.resolve(__dirname, '../../src/targets/popup');
 
 export const config = {
     mode: 'production',
-    devtool: 'inline-source-map',
+    devtool: false,
     entry: {
         background: BACKGROUND_PATH,
         assistant: ASSISTANT_PATH,
@@ -29,11 +29,8 @@ export const config = {
         extensions: ['.ts', '.tsx', '.js'],
     },
     optimization: {
-        minimizer: [
-            new UglifyJsPlugin({
-                cache: true,
-            }),
-        ],
+        minimize: true,
+        minimizer: [new TerserPlugin()],
     },
     module: {
         rules: [
