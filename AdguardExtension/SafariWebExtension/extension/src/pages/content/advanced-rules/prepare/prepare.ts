@@ -41,15 +41,18 @@ export const prepareAdvancedRules = (url: string, convertedRulesText: string): S
     const scriptRules = cosmeticResult.getScriptRules();
 
     const debug = false;
-    const scripts: string[] = scriptRules
-        // FIXME: use one array method to get scripts
-        .map((scriptRule) => scriptRule.getScript({
+    const scripts: string[] = [];
+    scriptRules.forEach((scriptRule) => {
+        const script = scriptRule.getScript({
             debug,
             request: {
                 domain: url,
             },
-        }))
-        .filter((script): script is string => script !== null);
+        });
+        if (script !== null) {
+            scripts.push(script);
+        }
+    });
 
     // remove repeating scripts
     const uniqueScripts = [...new Set(scripts)];
