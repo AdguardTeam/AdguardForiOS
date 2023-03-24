@@ -1,20 +1,18 @@
-import { EngineSync } from './engine';
+import { CosmeticResult } from '@adguard/tsurlfilter';
+
 import { buildStyleSheet } from './css-service';
 
-import { SelectorsAndScripts } from '../../../common/interfaces';
+import { SelectorsAndScripts } from '../../common/interfaces';
 
 /**
  * Returns advanced rules data in needed format.
  *
+ * @param cosmeticResult TSUrlFilter's CosmeticResult.
  * @param url Frame url.
- * @param convertedRulesText Previously converted advanced rules joined into a string.
  *
  * @returns Properly sorted selectors and scripts.
  */
-export const prepareAdvancedRules = (url: string, convertedRulesText: string): SelectorsAndScripts => {
-    const engine = new EngineSync(convertedRulesText);
-    const cosmeticResult = EngineSync.getCosmeticResult(url, engine);
-
+export const prepareAdvancedRules = (cosmeticResult: CosmeticResult, url: string): SelectorsAndScripts => {
     const injectCssRules = [
         ...cosmeticResult.CSS.generic,
         ...cosmeticResult.CSS.specific,

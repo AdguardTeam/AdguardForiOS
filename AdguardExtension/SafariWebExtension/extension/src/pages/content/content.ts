@@ -1,9 +1,11 @@
 import browser from 'webextension-polyfill';
 
-import { getAdvancedRulesText } from './advanced-rules/get';
-import { applyAdvancedRules } from './advanced-rules/apply';
+import { getAdvancedRulesText } from './rule-storage';
+import { getEngineCosmeticResult } from './engine';
+import { applyAdvancedRules } from './apply-rules';
 
 import { MessagesToBackgroundPage } from '../common/constants';
+import { prepareAdvancedRules } from './prepare/prepare';
 
 /**
  * Sends empty message to background page just to wake it up.
@@ -24,7 +26,8 @@ const wakeBackgroundPage = async (): Promise<void> => {
 
 const init = async () => {
     if (document instanceof HTMLDocument) {
-        if (window.location.href && window.location.href.indexOf('http') === 0) {
+        const frameUrl = window.location.href;
+        if (frameUrl && frameUrl.indexOf('http') === 0) {
             /**
              * Wake background page to force the advanced rules update from native host.
              *
@@ -34,15 +37,17 @@ const init = async () => {
              */
             wakeBackgroundPage();
 
-            const startGettingRulesTime = performance.now();
+            const startTime = performance.now();
             const rulesText = await getAdvancedRulesText();
             if (!rulesText) {
                 return;
             }
-            // eslint-disable-next-line no-console, max-len
-            console.log(`Time to get advanced rules in content script: ${performance.now() - startGettingRulesTime} ms`);
+            // eslint-disable-next-line no-console
+            console.log(`Time to get advanced rules in content script: ${performance.now() - startTime} ms`);
 
-            applyAdvancedRules(window.location.href, rulesText);
+            const cosmeticResult = getEngineCosmeticResult(rulesText, frameUrl);
+            const selectorsAndScripts = prepareAdvancedRules(cosmeticResult, frameUrl);
+            applyAdvancedRules(selectorsAndScripts, frameUrl);
         }
     }
 };
