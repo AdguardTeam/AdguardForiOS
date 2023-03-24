@@ -34,10 +34,13 @@ const init = async () => {
              */
             wakeBackgroundPage();
 
+            const startGettingRulesTime = performance.now();
             const rulesText = await getAdvancedRulesText();
             if (!rulesText) {
                 return;
             }
+            // eslint-disable-next-line no-console, max-len
+            console.log(`Time to get advanced rules in content script: ${performance.now() - startGettingRulesTime} ms`);
 
             applyAdvancedRules(window.location.href, rulesText);
         }
