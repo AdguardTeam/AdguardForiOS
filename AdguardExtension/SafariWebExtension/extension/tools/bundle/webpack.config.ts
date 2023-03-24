@@ -32,7 +32,7 @@ export const config = {
         minimize: true,
         minimizer: [
             new TerserPlugin({
-                minify: TerserPlugin.uglifyJsMinify,
+                minify: TerserPlugin.swcMinify,
             }),
         ],
     },
