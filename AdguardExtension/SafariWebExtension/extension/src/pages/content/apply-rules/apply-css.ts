@@ -1,4 +1,4 @@
-import { logMessage } from './logger';
+import { log } from '../../common/log';
 
 /**
  * Protects specified style element from changes to the current document.
@@ -69,7 +69,7 @@ export const applyCss = (styleSelectors: string[], verbose: boolean): void => {
         return;
     }
 
-    logMessage(verbose, `css length: ${styleSelectors.length}`);
+    log.verboseInfo(verbose, `css length: ${styleSelectors.length}`);
 
     const styleElement = document.createElement('style');
     styleElement.setAttribute('type', 'text/css');
@@ -81,7 +81,7 @@ export const applyCss = (styleSelectors: string[], verbose: boolean): void => {
         try {
             styleElement.sheet?.insertRule(selector);
         } catch (e) {
-            logMessage(verbose, `Was unable to inject selector: ${selector}, due to error: ${e}`);
+            log.verboseInfo(verbose, `Was unable to inject selector: ${selector}, due to error: ${e}`);
         }
     });
 

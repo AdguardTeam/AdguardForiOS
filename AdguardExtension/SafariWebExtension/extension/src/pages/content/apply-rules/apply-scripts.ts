@@ -1,4 +1,4 @@
-import { logMessage } from './logger';
+import { log } from '../../common/log';
 
 /**
  * Execute scripts in a page context and cleanup itself when execution completes.
@@ -34,6 +34,6 @@ export const applyScripts = (scripts: string[], verbose: boolean) => {
         return;
     }
 
-    logMessage(verbose, `scripts length: ${scripts.length}`);
+    log.verboseInfo(verbose, `scripts length: ${scripts.length}`);
     executeScripts(scripts);
 };

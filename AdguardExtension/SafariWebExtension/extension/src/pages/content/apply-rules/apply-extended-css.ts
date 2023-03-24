@@ -1,6 +1,6 @@
 import { ExtendedCss } from '@adguard/extended-css';
 
-import { logMessage } from './logger';
+import { log } from '../../common/log';
 
 /**
  * Applies Extended Css stylesheet.
@@ -13,7 +13,7 @@ export const applyExtendedCss = (extendedCss: string[], verbose: boolean) => {
         return;
     }
 
-    logMessage(verbose, `extended css length: ${extendedCss.length}`);
+    log.verboseInfo(verbose, `extended css length: ${extendedCss.length}`);
     // TODO: use cssRules for ExtendedCss, buildStyleSheet() may be refactored
     // TODO: use one array method for `cssRules` preparing
     const styleSheet = extendedCss
