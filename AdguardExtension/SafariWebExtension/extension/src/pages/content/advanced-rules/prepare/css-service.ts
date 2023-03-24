@@ -1,13 +1,23 @@
-/**
- * Builds stylesheet from rules
- */
 import type { CosmeticRule } from '@adguard/tsurlfilter';
 
+/**
+ * Builds stylesheets from rules.
+ *
+ * @param elemhideRules Element hiding rules
+ * {@see https://adguard.com/kb/general/ad-filtering/create-own-filters/#cosmetic-elemhide-rules}.
+ * @param injectRules CSS rules
+ * {@see https://adguard.com/kb/general/ad-filtering/create-own-filters/#cosmetic-css-rules}.
+ * @param groupElemhideSelectors Flag to group element hiding selectors. If set to true,
+ * elemhide selector are to be combined into selector lists of {@link CSS_SELECTORS_PER_LINE}.
+ *
+ * @returns List of string rules.
+ */
 export const buildStyleSheet = (
     elemhideRules: CosmeticRule[],
     injectRules: CosmeticRule[],
     groupElemhideSelectors: boolean,
-) => {
+): string[] => {
+    // number of selectors in grouped selector list
     const CSS_SELECTORS_PER_LINE = 50;
     const ELEMHIDE_CSS_STYLE = ' { display: none!important; }\r\n';
 

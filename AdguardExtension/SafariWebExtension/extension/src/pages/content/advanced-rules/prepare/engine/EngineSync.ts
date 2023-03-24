@@ -1,16 +1,7 @@
 import * as TSUrlFilter from '@adguard/tsurlfilter';
-import {
-    RequestType,
-    MatchingResult,
-    CosmeticOption,
-    CosmeticResult,
-} from '@adguard/tsurlfilter';
 
-import { app } from '../../background/app';
-
-// interface EngineSyncInterface {
-//     engine: TSUrlFilter.Engine | undefined;
-// }
+import { app } from '../../../../background/app';
+import { getDomain } from '../../../../common/utils/url';
 
 /**
  * Class for filtering engine with all loaded advanced rules.
@@ -23,9 +14,9 @@ export class EngineSync {
      * Creates an instance of filtering engine with passed `rulesText`.
      * Loads rules into the engine synchronously.
      *
-     * @param rulesText Converted advanced rules joined into a string.
+     * @param rulesText Previously converted advanced rules joined into a string.
      */
-    constructor (rulesText: string) {
+    constructor(rulesText: string) {
         const FILTER_ID = 1;
         const rulesList = new TSUrlFilter.StringRuleList(
             FILTER_ID,
@@ -46,19 +37,18 @@ export class EngineSync {
 
         this.engine = new TSUrlFilter.Engine(ruleStorage, true);
 
-        // synchronously load the rules
+        // load the rules synchronously
         this.engine.loadRules();
     }
 
     /**
      * Returns MatchingResult for the given `url`.
      *
-     * @param url Page url.
-     * @param engine Instance of engine.
+     * @param url Frame url.
      *
      * @returns TSUrlFilter's MatchingResult.
      */
-    getMatchingResult = (url: string): MatchingResult => {
+    private getMatchingResult = (url: string): TSUrlFilter.MatchingResult => {
         if (!this.engine) {
             return new TSUrlFilter.MatchingResult([], null);
         }
@@ -66,7 +56,7 @@ export class EngineSync {
         const request = new TSUrlFilter.Request(
             url,
             url,
-            RequestType.Document,
+            TSUrlFilter.RequestType.Document,
         );
 
         // TODO should here to be generated allowlist rule if necessary?
@@ -78,29 +68,32 @@ export class EngineSync {
     /**
      * Returns CosmeticOption for the given `url`.
      *
-     * @param url Page url.
-     * @param engine Instance of engine.
+     * @param url Frame url.
      *
      * @returns TSUrlFilter's CosmeticOption.
      */
-    getCosmeticOption(url: string) {
+    private getCosmeticOption(url: string): TSUrlFilter.CosmeticOption {
         const matchingResult = this.getMatchingResult(url);
         return matchingResult.getCosmeticOption();
     }
 
     /**
-     * Returns CosmeticResult for the specified `hostname` and cosmetic options
-     * @param url Page url.
-     * @param engine Instance of engine.
+     * Returns CosmeticResult for the specified `hostname` and cosmetic options.
+     *
+     * @param url Frame url.
      *
      * @returns TSUrlFilter's CosmeticResult.
      */
-    getCosmeticResult = (hostname: string, cosmeticOption: CosmeticOption) => {
+    getCosmeticResult = (url: string): TSUrlFilter.CosmeticResult => {
         if (!this.engine) {
             return new TSUrlFilter.CosmeticResult();
         }
 
+        const hostname = getDomain(url);
         const request = new TSUrlFilter.Request(hostname, null, TSUrlFilter.RequestType.Document);
+
+        const cosmeticOption = this.getCosmeticOption(url);
+
         return this.engine.getCosmeticResult(request, cosmeticOption);
     };
 }

@@ -1,36 +1,19 @@
 import { EngineSync } from './engine';
 import { buildStyleSheet } from './css-service';
 
-import { getDomain } from '../common/utils/url';
-import { SelectorsAndScripts } from '../common/interfaces';
+import { SelectorsAndScripts } from '../../../common/interfaces';
 
 /**
- * Returns the instance of started sync engine.
+ * Returns advanced rules data in needed format.
  *
- * @param convertedRulesText Converted advanced rules joined into string.
- *
- * @returns Instance of engine.
- */
-const getEngine = (convertedRulesText: string): EngineSync => {
-    const engineSync = new EngineSync(convertedRulesText);
-    return engineSync;
-};
-
-/**
- * Returns advanced rules data into needed format.
- *
- * @param url Page url.
- * @param convertedRulesText Converted advanced rules joined into string.
+ * @param url Frame url.
+ * @param convertedRulesText Previously converted advanced rules joined into a string.
  *
  * @returns Properly sorted selectors and scripts.
  */
-export const getAdvancedRulesData = (url: string, convertedRulesText: string): SelectorsAndScripts => {
-    const engine = getEngine(convertedRulesText);
-    const cosmeticOption = engine.getCosmeticOption(url);
-
-    const hostname = getDomain(url);
-    // FIXME: consider refactoring to getEngineCosmeticResult(convertedRulesText, url);
-    const cosmeticResult = engine.getCosmeticResult(hostname, cosmeticOption);
+export const prepareAdvancedRules = (url: string, convertedRulesText: string): SelectorsAndScripts => {
+    const engine = new EngineSync(convertedRulesText);
+    const cosmeticResult = engine.getCosmeticResult(url);
 
     const injectCssRules = [
         ...cosmeticResult.CSS.generic,
@@ -59,6 +42,7 @@ export const getAdvancedRulesData = (url: string, convertedRulesText: string): S
 
     const debug = false;
     const scripts: string[] = scriptRules
+        // FIXME: use one array method to get scripts
         .map((scriptRule) => scriptRule.getScript({
             debug,
             request: {
