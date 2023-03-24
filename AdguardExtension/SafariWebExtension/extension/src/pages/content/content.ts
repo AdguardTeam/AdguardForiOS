@@ -2,7 +2,7 @@ import browser from 'webextension-polyfill';
 
 import { getAdvancedRulesText } from './rule-storage';
 import { getEngineCosmeticResult } from './engine';
-import { prepareAdvancedRules } from './prepare';
+import { prepareAdvancedRules } from './prepare-rules';
 import { applyAdvancedRules } from './apply-rules';
 
 import { log } from '../common/log';
