@@ -14,14 +14,17 @@ export const applyExtendedCss = (extendedCss: string[], verbose: boolean) => {
     }
 
     logMessage(verbose, `extended css length: ${extendedCss.length}`);
-    const cssRules = extendedCss
+    // TODO: use cssRules for ExtendedCss, buildStyleSheet() may be refactored
+    // TODO: use one array method for `cssRules` preparing
+    const styleSheet = extendedCss
         .filter((s) => s.length > 0)
         .map((s) => s.trim())
         .map((s) => {
             return s[s.length - 1] !== '}'
                 ? `${s} {display:none!important;}`
                 : s;
-        });
-    const extCss = new ExtendedCss({ cssRules });
+        })
+        .join('\n');
+    const extCss = new ExtendedCss({ styleSheet });
     extCss.apply();
 };
