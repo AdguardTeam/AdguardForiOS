@@ -19,21 +19,14 @@ interface Message {
 }
 
 /**
- * Gets advanced rules from native host, converts them,
- * and sets the converted result to storage.
+ * Gets advanced rules from the native host and converts them.
+ *
+ * @returns Converted advanced rules text or `null` for no advanced rules.
  */
-const forceUpdateAdvancedRules = async () => {
+const getAdvancedRulesFromNativeHost = async (): Promise<string | null> => {
     const rulesText = await adguard.nativeHost.getAdvancedRulesText();
-    const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
-    await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
+    return TSUrlFilter.RuleConverter.convertRules(rulesText);
 };
-
-/**
- * Sometimes we need to be sure that advanced rules are already set in storage on the background page
- * so they can be retrieved in the content-script.
- * It can happen just after the app installation on the very first browser start without browser or tabs reload.
- */
-const setAdvancedRulesPromise = forceUpdateAdvancedRules();
 
 const handleMessages = () => {
     browser.runtime.onMessage.addListener(async (message: Message) => {
@@ -132,9 +125,16 @@ const handleMessages = () => {
                 // do nothing
                 break;
             }
-            case MessagesToBackgroundPage.EnsureAdvancedRulesSet: {
-                await setAdvancedRulesPromise;
-                return true;
+            case MessagesToBackgroundPage.GetAdvancedRulesText: {
+                /**
+                 * Sometimes the content script may request the advanced rules
+                 * from the background page instead of getting them from the storage.
+                 * It can happen if advanced rules were not set in storage —
+                 * just after the app installation
+                 * on the very first browser start without browser or tabs reload.
+                 */
+                const convertedRulesText = await getAdvancedRulesFromNativeHost();
+                return convertedRulesText;
             }
             default:
                 break;
@@ -152,7 +152,8 @@ const setAdvancedRulesToStorage = async () => {
     // to avoid their update on every background page awakening
     const shouldUpdateAdvancedRules = await adguard.nativeHost.shouldUpdateAdvancedRules();
     if (shouldUpdateAdvancedRules) {
-        forceUpdateAdvancedRules();
+        const convertedRulesText = getAdvancedRulesFromNativeHost();
+        await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
     }
 };
 
