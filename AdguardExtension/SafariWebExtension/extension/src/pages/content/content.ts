@@ -2,10 +2,11 @@ import browser from 'webextension-polyfill';
 
 import { getAdvancedRulesText } from './rule-storage';
 import { getEngineCosmeticResult } from './engine';
+import { prepareAdvancedRules } from './prepare';
 import { applyAdvancedRules } from './apply-rules';
 
+import { log } from '../common/log';
 import { MessagesToBackgroundPage } from '../common/constants';
-import { prepareAdvancedRules } from './prepare/prepare';
 
 /**
  * Sends empty message to background page just to wake it up.
@@ -19,8 +20,7 @@ const wakeBackgroundPage = async (): Promise<void> => {
             data: {},
         });
     } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(`Could not wake up background page due to: ${e}`);
+        log.info('Could not wake up background page due to', e);
     }
 };
 
@@ -37,13 +37,19 @@ const init = async () => {
              */
             wakeBackgroundPage();
 
+            let rulesText;
             const startTime = performance.now();
-            const rulesText = await getAdvancedRulesText();
+            try {
+                rulesText = await getAdvancedRulesText();
+            } catch (e) {
+                log.error(e);
+            }
             if (!rulesText) {
+                log.info('AG: no scripts and selectors found');
                 return;
             }
-            // eslint-disable-next-line no-console
-            console.log(`Time to get advanced rules in content script: ${performance.now() - startTime} ms`);
+
+            log.info(`Time to get advanced rules in content script: ${performance.now() - startTime} ms`);
 
             const cosmeticResult = getEngineCosmeticResult(rulesText, frameUrl);
             const selectorsAndScripts = prepareAdvancedRules(cosmeticResult, frameUrl);

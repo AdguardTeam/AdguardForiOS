@@ -11,6 +11,9 @@ import { ADVANCED_RULES_STORAGE_KEY, MessagesToBackgroundPage } from '../../comm
  * If they are not set yet, it sends a message to the background page to get them.
  *
  * @returns Advanced rules text or `null` for no advanced rules.
+ *
+ * @throws An error if messaging with the background page failed
+ *
  */
 export const getAdvancedRulesText = async (): Promise<string | null> => {
     let rulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;
@@ -34,15 +37,7 @@ export const getAdvancedRulesText = async (): Promise<string | null> => {
                 data: {},
             });
         } catch (e) {
-            // eslint-disable-next-line no-console
-            console.log(`AG: Could not get advanced rules text from the background page due to: ${e}`);
-            return null;
-        }
-
-        if (!rulesText) {
-            // eslint-disable-next-line no-console
-            console.log('AG: no scripts and selectors are received from the background page');
-            return null;
+            throw new Error(`AG: Could not get advanced rules text from the background page due to: ${e}`);
         }
     }
 
