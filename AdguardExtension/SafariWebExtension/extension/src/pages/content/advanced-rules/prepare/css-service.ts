@@ -1,5 +1,8 @@
 import type { CosmeticRule } from '@adguard/tsurlfilter';
 
+// number of selectors in grouped selector list
+const CSS_SELECTORS_PER_LINE = 50;
+
 /**
  * Builds stylesheets from rules.
  *
@@ -17,8 +20,6 @@ export const buildStyleSheet = (
     injectRules: CosmeticRule[],
     groupElemhideSelectors: boolean,
 ): string[] => {
-    // number of selectors in grouped selector list
-    const CSS_SELECTORS_PER_LINE = 50;
     const ELEMHIDE_CSS_STYLE = ' { display: none!important; }\r\n';
 
     const elemhideSelectors = [];
