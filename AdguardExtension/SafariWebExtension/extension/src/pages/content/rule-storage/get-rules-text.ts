@@ -16,7 +16,7 @@ import { ADVANCED_RULES_STORAGE_KEY, MessagesToBackgroundPage } from '../../comm
  *
  */
 export const getAdvancedRulesText = async (): Promise<string | null> => {
-    let rulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY) as string;
+    let rulesText = await storage.get(ADVANCED_RULES_STORAGE_KEY);
     /**
      * It might happen that the advanced rules are not set in storage yet.
      * In this case the type of the variable should be checked,
@@ -34,11 +34,16 @@ export const getAdvancedRulesText = async (): Promise<string | null> => {
         try {
             rulesText = await browser.runtime.sendMessage({
                 type: MessagesToBackgroundPage.GetAdvancedRulesText,
-            });
+            }) as string | null;
         } catch (e) {
             throw new Error(`AG: Could not get advanced rules text from the background page due to: ${e}`);
         }
     }
 
-    return rulesText;
+    if (typeof rulesText === 'string') {
+        return rulesText;
+    }
+
+    return null;
+
 };
