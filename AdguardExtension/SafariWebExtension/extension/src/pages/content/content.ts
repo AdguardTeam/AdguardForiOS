@@ -17,7 +17,6 @@ const wakeBackgroundPage = async (): Promise<void> => {
     try {
         await browser.runtime.sendMessage({
             type: MessagesToBackgroundPage.WakeUp,
-            data: {},
         });
     } catch (e) {
         log.info('Could not wake up background page due to', e);

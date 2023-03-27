@@ -34,7 +34,6 @@ export const getAdvancedRulesText = async (): Promise<string | null> => {
         try {
             rulesText = await browser.runtime.sendMessage({
                 type: MessagesToBackgroundPage.GetAdvancedRulesText,
-                data: {},
             });
         } catch (e) {
             throw new Error(`AG: Could not get advanced rules text from the background page due to: ${e}`);
