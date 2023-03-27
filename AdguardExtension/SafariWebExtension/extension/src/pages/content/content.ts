@@ -19,7 +19,7 @@ const wakeBackgroundPage = async (): Promise<void> => {
             type: MessagesToBackgroundPage.WakeUp,
         });
     } catch (e) {
-        log.info('Could not wake up background page due to', e);
+        log.info('Could not wake up background page due to error:', e);
     }
 };
 

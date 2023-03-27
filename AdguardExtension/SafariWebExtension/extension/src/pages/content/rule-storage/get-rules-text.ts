@@ -36,7 +36,7 @@ export const getAdvancedRulesText = async (): Promise<string | null> => {
                 type: MessagesToBackgroundPage.GetAdvancedRulesText,
             }) as string | null;
         } catch (e) {
-            throw new Error(`AG: Could not get advanced rules text from the background page due to: ${e}`);
+            throw new Error(`AG: Could not get advanced rules text from the background page due to error: ${e}`);
         }
     }
 
@@ -45,5 +45,4 @@ export const getAdvancedRulesText = async (): Promise<string | null> => {
     }
 
     return null;
-
 };
