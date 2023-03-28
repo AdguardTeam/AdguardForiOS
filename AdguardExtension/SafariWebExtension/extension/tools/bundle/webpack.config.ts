@@ -33,6 +33,8 @@ export const config = {
         minimizer: [
             new TerserPlugin({
                 extractComments: false,
+                // do not use TerserPlugin.swcMinify for minification
+                // as it can generate broken background.js
                 minify: TerserPlugin.uglifyJsMinify,
             }),
         ],
