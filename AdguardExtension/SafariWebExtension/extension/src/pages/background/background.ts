@@ -39,10 +39,10 @@ const getAdvancedRulesFromNativeHost = async (): Promise<string | null> => {
 /**
  * Handles messages which are sent to the background page.
  *
- * @param message
- * @returns FIXME: describe
+ * @param message Message with type as {@link MessagesToBackgroundPage} and optional data object.
+ * @returns Promise.
  */
-const messageHandler = async (message: Message) => {
+const messageHandler = async (message: Message): Promise<void | string | null | PopupData> => {
     const { type, data } = message;
 
     switch (type) {
