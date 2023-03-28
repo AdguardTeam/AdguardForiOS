@@ -45,6 +45,11 @@ const createEngine = (rulesText: string) => {
  * @returns TSUrlFilter's MatchingResult.
  */
 const getMatchingResult = (url: string, engine: TSUrlFilter.Engine): TSUrlFilter.MatchingResult => {
+    /**
+     * We do not need to pass real referrer to `matchRequest()`
+     * when selecting cosmetic rules for the current page,
+     * cosmetic rules do not depend on where the user navigated from.
+     */
     const FRAME_URL = null;
     const request = new TSUrlFilter.Request(
         url,

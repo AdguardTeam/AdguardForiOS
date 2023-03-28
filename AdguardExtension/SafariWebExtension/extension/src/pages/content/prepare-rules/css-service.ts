@@ -4,7 +4,7 @@ import type { CosmeticRule } from '@adguard/tsurlfilter';
 const CSS_SELECTORS_PER_LINE = 50;
 
 /**
- * Builds stylesheets from rules.
+ * Builds stylesheets from cosmetic rules.
  *
  * @param elemhideRules Element hiding rules
  * {@see https://adguard.com/kb/general/ad-filtering/create-own-filters/#cosmetic-elemhide-rules}.

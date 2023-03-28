@@ -14,8 +14,14 @@ export const applyExtendedCss = (extendedCss: string[], verbose: boolean) => {
     }
 
     log.verboseInfo(verbose, `extended css length: ${extendedCss.length}`);
-    // TODO: use cssRules for ExtendedCss, buildStyleSheet() may be refactored
-    // TODO: use one array method for `cssRules` preparing
+    /**
+     * TODO: use `cssRules` ExtendedCss config property for array of rules instead of `styleSheet`
+     * {@see https://github.com/AdguardTeam/ExtendedCss/#ext-css-configuration-interface};
+     * buildStyleSheet() may be refactored during this task.
+     *
+     * TODO: instead of `extendedCss.filter().map().map().join()` use `forEach()` loop
+     * so the array will be traversed only once.
+     */
     const styleSheet = extendedCss
         .filter((s) => s.length > 0)
         .map((s) => s.trim())
