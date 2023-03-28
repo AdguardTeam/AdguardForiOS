@@ -55,19 +55,6 @@ const getMatchingResult = (url: string, engine: TSUrlFilter.Engine): TSUrlFilter
 };
 
 /**
- * Returns CosmeticOption for the given `url`.
- *
- * @param url Frame url.
- * @param engine Engine instance.
- *
- * @returns TSUrlFilter's CosmeticOption.
- */
-const getCosmeticOption = (url: string, engine: TSUrlFilter.Engine): TSUrlFilter.CosmeticOption => {
-    const matchingResult = getMatchingResult(url, engine);
-    return matchingResult.getCosmeticOption();
-};
-
-/**
  * Returns CosmeticResult for rules and specified frame url.
  *
  * @param rulesText Previously converted advanced rules joined into a string.
@@ -80,7 +67,8 @@ export const getEngineCosmeticResult = (rulesText: string, url: string): TSUrlFi
     const request = new TSUrlFilter.Request(hostname, null, TSUrlFilter.RequestType.Document);
 
     const engine = createEngine(rulesText);
-    const cosmeticOption = getCosmeticOption(url, engine);
+    const matchingResult = getMatchingResult(url, engine);
+    const cosmeticOption = matchingResult.getCosmeticOption();
 
     return engine.getCosmeticResult(request, cosmeticOption);
 };
