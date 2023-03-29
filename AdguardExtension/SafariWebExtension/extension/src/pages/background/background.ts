@@ -130,9 +130,11 @@ const handleMessages = () => {
                 break;
             }
             case MessagesToBackgroundPage.WakeUp: {
-                // do nothing as the message is sent by content script
-                // only to wake up background page in order to set advanced rules to storage
-                break;
+                // this message is sent by content script
+                // only to wake up background page in order to set advanced rules to storage.
+                // return anything, otherwise the block is empty,
+                // so here we just trying to avoid unexpected compiler optimization of an empty block
+                return null;
             }
             case MessagesToBackgroundPage.GetAdvancedRulesText: {
                 /**
