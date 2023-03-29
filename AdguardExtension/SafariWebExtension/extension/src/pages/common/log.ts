@@ -47,14 +47,10 @@ class Log {
     }
 
     /**
-     * Switches logging level to `DEBUG` if `shouldEnable` is true.
-     *
-     * @param shouldEnable Flag to enable debug logging level.
+     * Sets logging level `DEBUG`.
      */
-    enableDebugLevel(shouldEnable: boolean) {
-        if (shouldEnable) {
-            this.currentLevel = 'DEBUG';
-        }
+    setLevelDebug() {
+        this.currentLevel = 'DEBUG';
     }
 
     /**
