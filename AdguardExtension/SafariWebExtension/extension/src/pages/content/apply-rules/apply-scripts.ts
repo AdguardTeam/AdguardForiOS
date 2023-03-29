@@ -34,6 +34,8 @@ export const applyScripts = (scripts: string[], verbose: boolean) => {
         return;
     }
 
-    log.verboseInfo(verbose, `scripts length: ${scripts.length}`);
+    if (verbose) {
+        log.debug(verbose, `scripts length: ${scripts.length}`);
+    }
     executeScripts(scripts);
 };

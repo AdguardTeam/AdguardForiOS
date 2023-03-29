@@ -69,7 +69,9 @@ export const applyCss = (styleSelectors: string[], verbose: boolean): void => {
         return;
     }
 
-    log.verboseInfo(verbose, `css length: ${styleSelectors.length}`);
+    if (verbose) {
+        log.debug(`css length: ${styleSelectors.length}`);
+    }
 
     const styleElement = document.createElement('style');
     styleElement.setAttribute('type', 'text/css');
@@ -81,7 +83,9 @@ export const applyCss = (styleSelectors: string[], verbose: boolean): void => {
         try {
             styleElement.sheet?.insertRule(selector);
         } catch (e) {
-            log.verboseInfo(verbose, `Was unable to inject selector: ${selector}, due to error: ${e}`);
+            if (verbose) {
+                log.debug(`Was unable to inject selector: ${selector}, due to error: ${e}`);
+            }
         }
     });
 

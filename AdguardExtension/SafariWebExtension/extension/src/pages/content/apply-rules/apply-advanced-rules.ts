@@ -12,13 +12,17 @@ import { SelectorsAndScripts } from '../../common/interfaces';
  * @param url Frame url.
  * @param verbose Flag to enable logging.
  */
-export const applyAdvancedRules = (selectorsAndScripts: SelectorsAndScripts, url: string, verbose = true): void => {
-    log.verboseInfo(verbose, 'Applying scripts and css...');
-    log.verboseInfo(verbose, `Frame url: ${url}`);
+export const applyAdvancedRules = (selectorsAndScripts: SelectorsAndScripts, url: string, verbose: boolean): void => {
+    if (verbose) {
+        log.debug(verbose, 'Applying scripts and css...');
+        log.debug(verbose, `Frame url: ${url}`);
+    }
 
     applyScripts(selectorsAndScripts.scripts, verbose);
     applyCss(selectorsAndScripts.cssInject, verbose);
     applyExtendedCss(selectorsAndScripts.cssExtended, verbose);
 
-    log.verboseInfo(verbose, 'Applying scripts and css - done');
+    if (verbose) {
+        log.debug(verbose, 'Applying scripts and css - done');
+    }
 };

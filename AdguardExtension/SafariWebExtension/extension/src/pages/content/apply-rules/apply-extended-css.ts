@@ -13,7 +13,9 @@ export const applyExtendedCss = (extendedCss: string[], verbose: boolean) => {
         return;
     }
 
-    log.verboseInfo(verbose, `extended css length: ${extendedCss.length}`);
+    if (verbose) {
+        log.debug(`extended css length: ${extendedCss.length}`);
+    }
     /**
      * TODO: use `cssRules` ExtendedCss config property for array of rules instead of `styleSheet`
      * {@see https://github.com/AdguardTeam/ExtendedCss/#ext-css-configuration-interface};

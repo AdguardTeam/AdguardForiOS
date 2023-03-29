@@ -84,12 +84,6 @@ class Log {
         this.print('INFO', 'info', args);
     }
 
-    verboseInfo(verbose: boolean, ...args: any[]) {
-        if (verbose) {
-            this.info(args);
-        }
-    }
-
     error(...args: any[]) {
         this.print('ERROR', 'error', args);
     }
