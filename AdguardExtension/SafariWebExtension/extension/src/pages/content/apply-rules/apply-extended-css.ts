@@ -19,7 +19,7 @@ export const applyExtendedCss = (extendedCss: string[], verbose: boolean) => {
     /**
      * TODO: use `cssRules` ExtendedCss config property for array of rules instead of `styleSheet`
      * {@see https://github.com/AdguardTeam/ExtendedCss/#ext-css-configuration-interface};
-     * buildStyleSheet() may be refactored during this task.
+     * buildStyleSheet() may be refactored during this task. AG-20907.
      *
      * TODO: instead of `extendedCss.filter().map().map().join()` use `forEach()` loop
      * so the array will be traversed only once.
