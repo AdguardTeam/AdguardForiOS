@@ -6,7 +6,7 @@ import { log } from '../../common/log';
  *
  * @param protectStyleEl Protected style element.
  */
-const protectStyleElementContent = (protectStyleEl: Node) => {
+const protectStyleElementContent = (protectStyleEl: HTMLStyleElement) => {
     // @ts-ignore
     const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     if (!MutationObserver) {
@@ -16,14 +16,11 @@ const protectStyleElementContent = (protectStyleEl: Node) => {
     const innerObserver = new MutationObserver(((mutations) => {
         for (let i = 0; i < mutations.length; i += 1) {
             const m = mutations[i];
-            // @ts-ignore
             if (protectStyleEl.hasAttribute('mod') && protectStyleEl.getAttribute('mod') === 'inner') {
-                // @ts-ignore
                 protectStyleEl.removeAttribute('mod');
                 break;
             }
 
-            // @ts-ignore
             protectStyleEl.setAttribute('mod', 'inner');
             let isProtectStyleElModified = false;
 
@@ -44,7 +41,6 @@ const protectStyleElementContent = (protectStyleEl: Node) => {
             }
 
             if (!isProtectStyleElModified) {
-                // @ts-ignore
                 protectStyleEl.removeAttribute('mod');
             }
         }
@@ -73,7 +69,7 @@ export const applyCss = (styleSelectors: string[], verbose: boolean): void => {
         log.debug(`css length: ${styleSelectors.length}`);
     }
 
-    const styleElement = document.createElement('style');
+    const styleElement: HTMLStyleElement = document.createElement('style');
     styleElement.setAttribute('type', 'text/css');
     (document.head || document.documentElement).appendChild(styleElement);
 
