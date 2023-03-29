@@ -1,3 +1,23 @@
+/**
+ * @file
+ *
+ * Earlier the engine was created once on the background page
+ * for advanced rules conversion (1) into a string
+ * and preparation (2) into {@link SelectorsAndScripts} data format —
+ * the engine is needed for the _preparation_.
+ * And content script requested this data by messaging and applied it.
+ *
+ * The main problem was that the messaging from content script to background page and back
+ * took too much time comparing to storage access.
+ * So we decided to avoid the messaging when it is possible
+ * and create an engine instance in content script.
+ *
+ * Now the advanced rules are previously converted into a string (1)
+ * and set to the storage on the background page,
+ * and later in the content script we get the string from the storage,
+ * create an engine instance for advanced rule preparation (2), and apply them.
+ */
+
 import browser from 'webextension-polyfill';
 
 import { getAdvancedRulesText } from './rule-storage';
