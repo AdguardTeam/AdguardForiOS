@@ -48,7 +48,8 @@ const init = async () => {
         const frameUrl = window.location.href;
         if (frameUrl && frameUrl.indexOf('http') === 0) {
             // TODO: Pass logging level via storage from the background page / native host
-            const VERBOSE = false;
+            const ENABLE_DEBUG_LOGGING = true;
+            log.enableDebugLevel(ENABLE_DEBUG_LOGGING);
 
             /**
              * Wake background page to force the advanced rules update from native host.
@@ -75,9 +76,9 @@ const init = async () => {
 
             const cosmeticResult = getEngineCosmeticResult(rulesText, frameUrl);
 
-            const selectorsAndScripts = prepareAdvancedRules(cosmeticResult, frameUrl, VERBOSE);
+            const selectorsAndScripts = prepareAdvancedRules(cosmeticResult, frameUrl);
 
-            applyAdvancedRules(selectorsAndScripts, frameUrl, VERBOSE);
+            applyAdvancedRules(selectorsAndScripts, frameUrl);
         }
     }
 };

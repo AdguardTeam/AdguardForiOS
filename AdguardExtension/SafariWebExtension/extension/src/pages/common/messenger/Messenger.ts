@@ -17,15 +17,13 @@ export class Messenger {
             message.data = data;
         }
 
-        const VERBOSE = true;
-
-        log.debug(VERBOSE, 'Request message:', message);
+        log.debug('Request message:', message);
 
         const response = await browser.runtime.sendMessage(message);
 
         if (response) {
-            log.debug(VERBOSE, 'On message:', message);
-            log.debug(VERBOSE, 'Received response:', response);
+            log.debug('On message:', message);
+            log.debug('Received response:', response);
         }
 
         return response;

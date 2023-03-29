@@ -6,16 +6,13 @@ import { log } from '../../common/log';
  * Applies Extended Css stylesheet.
  *
  * @param extendedCss Array with ExtendedCss stylesheets.
- * @param verbose Flag to enable logging.
  */
-export const applyExtendedCss = (extendedCss: string[], verbose: boolean) => {
+export const applyExtendedCss = (extendedCss: string[]) => {
     if (!extendedCss || !extendedCss.length) {
         return;
     }
 
-    if (verbose) {
-        log.debug(`extended css length: ${extendedCss.length}`);
-    }
+    log.debug(`extended css length: ${extendedCss.length}`);
     /**
      * TODO: use `cssRules` ExtendedCss config property for array of rules instead of `styleSheet`
      * {@see https://github.com/AdguardTeam/ExtendedCss/#ext-css-configuration-interface};

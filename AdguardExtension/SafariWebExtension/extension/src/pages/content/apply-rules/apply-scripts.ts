@@ -28,15 +28,12 @@ const executeScripts = (scripts: string[]) => {
  * Applies JS injections.
  *
  * @param scripts Array with JS scripts.
- * @param verbose Flag to enable logging.
  */
-export const applyScripts = (scripts: string[], verbose: boolean) => {
+export const applyScripts = (scripts: string[]) => {
     if (!scripts || scripts.length === 0) {
         return;
     }
 
-    if (verbose) {
-        log.debug(verbose, `scripts length: ${scripts.length}`);
-    }
+    log.debug(`scripts length: ${scripts.length}`);
     executeScripts(scripts);
 };

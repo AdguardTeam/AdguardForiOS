@@ -58,16 +58,13 @@ const protectStyleElementContent = (protectStyleEl: HTMLStyleElement) => {
  * Applies css stylesheet.
  *
  * @param styleSelectors Array of stylesheets or selectors.
- * @param verbose Flag to enable logging.
  */
-export const applyCss = (styleSelectors: string[], verbose: boolean): void => {
+export const applyCss = (styleSelectors: string[]): void => {
     if (!styleSelectors || !styleSelectors.length) {
         return;
     }
 
-    if (verbose) {
-        log.debug(`css length: ${styleSelectors.length}`);
-    }
+    log.debug(`css length: ${styleSelectors.length}`);
 
     const styleElement: HTMLStyleElement = document.createElement('style');
     styleElement.setAttribute('type', 'text/css');
@@ -79,9 +76,7 @@ export const applyCss = (styleSelectors: string[], verbose: boolean): void => {
         try {
             styleElement.sheet?.insertRule(selector);
         } catch (e) {
-            if (verbose) {
-                log.debug(`Was unable to inject selector: ${selector}, due to error: ${e}`);
-            }
+            log.debug(`Was unable to inject selector: ${selector}, due to error: ${e}`);
         }
     });
 

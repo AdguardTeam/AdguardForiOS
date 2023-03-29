@@ -9,14 +9,15 @@ import { SelectorsAndScripts } from '../../common/interfaces';
  *
  * @param cosmeticResult TSUrlFilter's CosmeticResult.
  * @param url Frame url.
- * @param [verbose=false] Flag to enable logging.
+ * @param [debug=false] Flag to enable debug logging for script rules.
+ * // TODO: in the future we should also use it to count element hiding rules hits.
  *
  * @returns Properly sorted selectors and scripts.
  */
 export const prepareAdvancedRules = (
     cosmeticResult: CosmeticResult,
     url: string,
-    verbose = false,
+    debug = false,
 ): SelectorsAndScripts => {
     const injectCssRules = [
         ...cosmeticResult.CSS.generic,
@@ -46,7 +47,7 @@ export const prepareAdvancedRules = (
     const scripts: string[] = [];
     scriptRules.forEach((scriptRule) => {
         const script = scriptRule.getScript({
-            debug: verbose,
+            debug,
             request: {
                 domain: url,
             },
