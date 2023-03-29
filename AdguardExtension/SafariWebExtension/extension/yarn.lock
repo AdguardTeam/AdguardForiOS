@@ -7,7 +7,7 @@
   resolved "https://registry.yarnpkg.com/@adguard/assistant/-/assistant-4.3.68.tgz#4a85019274fcc8eaf1a59acfbd52e40636663d5d"
   integrity sha512-dwFdCU/359YPiD4MZZYLSz8rK1o78aABg0rKICCAjwRUOFmAwwS9/dje1S2s3Xjl+ap5cAtJPu1GgWwIK81lCw==
 
-"@adguard/extended-css@^2.0.51":
+"@adguard/extended-css@2.0.51", "@adguard/extended-css@^2.0.51":
   version "2.0.51"
   resolved "https://registry.yarnpkg.com/@adguard/extended-css/-/extended-css-2.0.51.tgz#fa1a19113020bf3df717ec16f470eec5b091f733"
   integrity sha512-+9qm2IyUg2JuITZbFtghYhNoDWbLBHAFFwhOShr/ORT9MV+4WrtUAZnc9VwzZEWbK0n54z1TqBCfSwhhpVPu0g==

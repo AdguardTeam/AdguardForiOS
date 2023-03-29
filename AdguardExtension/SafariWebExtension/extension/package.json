@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@adguard/assistant": "4.3.68",
-    "@adguard/extended-css": "^2.0.51",
+    "@adguard/extended-css": "2.0.51",
     "@adguard/translate": "0.3.0",
     "@adguard/tsurlfilter": "1.0.78",
     "@babel/runtime": "^7.14.6",
