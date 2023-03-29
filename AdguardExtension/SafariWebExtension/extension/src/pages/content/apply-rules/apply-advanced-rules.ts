@@ -10,9 +10,9 @@ import { SelectorsAndScripts } from '../../common/interfaces';
  *
  * @param selectorsAndScripts Prepared advanced rules data.
  * @param url Frame url.
- * @param verbose Flag to enable logging.
+ * @param [verbose=false] Flag to enable logging.
  */
-export const applyAdvancedRules = (selectorsAndScripts: SelectorsAndScripts, url: string, verbose: boolean): void => {
+export const applyAdvancedRules = (selectorsAndScripts: SelectorsAndScripts, url: string, verbose = false): void => {
     if (verbose) {
         log.debug(verbose, 'Applying scripts and css...');
         log.debug(verbose, `Frame url: ${url}`);

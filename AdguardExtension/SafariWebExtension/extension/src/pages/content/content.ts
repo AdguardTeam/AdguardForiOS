@@ -27,6 +27,9 @@ const init = async () => {
     if (document instanceof HTMLDocument) {
         const frameUrl = window.location.href;
         if (frameUrl && frameUrl.indexOf('http') === 0) {
+            // TODO: Pass logging level via storage from the background page / native host
+            const VERBOSE = false;
+
             /**
              * Wake background page to force the advanced rules update from native host.
              *
@@ -51,8 +54,10 @@ const init = async () => {
             log.info(`Time to get advanced rules in content script: ${performance.now() - startTime} ms`);
 
             const cosmeticResult = getEngineCosmeticResult(rulesText, frameUrl);
-            const selectorsAndScripts = prepareAdvancedRules(cosmeticResult, frameUrl);
-            applyAdvancedRules(selectorsAndScripts, frameUrl);
+
+            const selectorsAndScripts = prepareAdvancedRules(cosmeticResult, frameUrl, VERBOSE);
+
+            applyAdvancedRules(selectorsAndScripts, frameUrl, VERBOSE);
         }
     }
 };

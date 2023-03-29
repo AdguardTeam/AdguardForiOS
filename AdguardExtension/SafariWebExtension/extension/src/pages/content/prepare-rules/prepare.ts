@@ -9,10 +9,15 @@ import { SelectorsAndScripts } from '../../common/interfaces';
  *
  * @param cosmeticResult TSUrlFilter's CosmeticResult.
  * @param url Frame url.
+ * @param [verbose=false] Flag to enable logging.
  *
  * @returns Properly sorted selectors and scripts.
  */
-export const prepareAdvancedRules = (cosmeticResult: CosmeticResult, url: string): SelectorsAndScripts => {
+export const prepareAdvancedRules = (
+    cosmeticResult: CosmeticResult,
+    url: string,
+    verbose = false,
+): SelectorsAndScripts => {
     const injectCssRules = [
         ...cosmeticResult.CSS.generic,
         ...cosmeticResult.CSS.specific,
@@ -38,11 +43,10 @@ export const prepareAdvancedRules = (cosmeticResult: CosmeticResult, url: string
 
     const scriptRules = cosmeticResult.getScriptRules();
 
-    const debug = false;
     const scripts: string[] = [];
     scriptRules.forEach((scriptRule) => {
         const script = scriptRule.getScript({
-            debug,
+            debug: verbose,
             request: {
                 domain: url,
             },
