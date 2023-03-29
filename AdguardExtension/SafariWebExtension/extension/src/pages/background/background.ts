@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import browser from 'webextension-polyfill';
-import * as TSUrlFilter from '@adguard/tsurlfilter';
+import { RuleConverter } from '@adguard/tsurlfilter';
 
 import { adguard } from './adguard';
 import { app } from './app';
@@ -33,7 +33,7 @@ type PopupData = NativeHostInitData & {
  */
 const getAdvancedRulesFromNativeHost = async (): Promise<string | null> => {
     const rulesText = await adguard.nativeHost.getAdvancedRulesText();
-    return TSUrlFilter.RuleConverter.convertRules(rulesText);
+    return RuleConverter.convertRules(rulesText);
 };
 
 const handleMessages = () => {

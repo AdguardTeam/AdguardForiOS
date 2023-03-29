@@ -1,6 +1,17 @@
-import * as TSUrlFilter from '@adguard/tsurlfilter';
+import {
+    StringRuleList,
+    RuleStorage,
+    CompatibilityTypes,
+    setConfiguration,
+    Engine,
+    Request,
+    RequestType,
+    MatchingResult,
+    CosmeticResult,
+} from '@adguard/tsurlfilter';
 
 import { app } from '../../background/app';
+
 import { getDomain } from '../../common/utils/url';
 
 /**
@@ -11,24 +22,24 @@ import { getDomain } from '../../common/utils/url';
  */
 const createEngine = (rulesText: string) => {
     const FILTER_ID = 1;
-    const rulesList = new TSUrlFilter.StringRuleList(
+    const rulesList = new StringRuleList(
         FILTER_ID,
         rulesText,
         false,
         false,
         false,
     );
-    const ruleStorage = new TSUrlFilter.RuleStorage([rulesList]);
+    const ruleStorage = new RuleStorage([rulesList]);
 
     const config = {
         engine: 'extension',
         version: app.version,
         verbose: true,
-        compatibility: TSUrlFilter.CompatibilityTypes.extension,
+        compatibility: CompatibilityTypes.extension,
     };
-    TSUrlFilter.setConfiguration(config);
+    setConfiguration(config);
 
-    const engine = new TSUrlFilter.Engine(ruleStorage, true);
+    const engine = new Engine(ruleStorage, true);
 
     // load the rules synchronously
     engine.loadRules();
@@ -44,17 +55,17 @@ const createEngine = (rulesText: string) => {
  *
  * @returns TSUrlFilter's MatchingResult.
  */
-const getMatchingResult = (url: string, engine: TSUrlFilter.Engine): TSUrlFilter.MatchingResult => {
+const getMatchingResult = (url: string, engine: Engine): MatchingResult => {
     /**
      * We do not need to pass real referrer to `matchRequest()`
      * when selecting cosmetic rules for the current page,
      * cosmetic rules do not depend on where the user navigated from.
      */
     const FRAME_URL = null;
-    const request = new TSUrlFilter.Request(
+    const request = new Request(
         url,
         url,
-        TSUrlFilter.RequestType.Document,
+        RequestType.Document,
     );
     return engine.matchRequest(request, FRAME_URL);
 };
@@ -67,9 +78,9 @@ const getMatchingResult = (url: string, engine: TSUrlFilter.Engine): TSUrlFilter
  *
  * @returns TSUrlFilter's CosmeticResult.
  */
-export const getEngineCosmeticResult = (rulesText: string, url: string): TSUrlFilter.CosmeticResult => {
+export const getEngineCosmeticResult = (rulesText: string, url: string): CosmeticResult => {
     const hostname = getDomain(url);
-    const request = new TSUrlFilter.Request(hostname, null, TSUrlFilter.RequestType.Document);
+    const request = new Request(hostname, null, RequestType.Document);
 
     const engine = createEngine(rulesText);
     const matchingResult = getMatchingResult(url, engine);
