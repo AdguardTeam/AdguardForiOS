@@ -14,6 +14,7 @@ const executeScripts = (scripts: string[]) => {
 
     const scriptTag = document.createElement('script');
     scriptTag.setAttribute('type', 'text/javascript');
+    // TODO: check if `;` is needed in the separator for join()
     scriptTag.textContent = updated.join('\r\n');
 
     const parent = document.head || document.documentElement;
