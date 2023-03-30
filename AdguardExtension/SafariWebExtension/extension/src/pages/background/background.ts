@@ -38,7 +38,7 @@ const getAdvancedRulesFromNativeHost = async (): Promise<string | null> => {
 
 // since the message from content script can be sent multiple times (from multiple tabs)
 // this variable should not be local to the `setAdvancedRulesToStorage()` function
-let lastNativeHostShouldUpdateRulesCall = 0;
+let lastNativeHostShouldUpdateCallTime = 0;
 
 /**
  * Asks the Native Host whether the advanced rules should be updated.
@@ -61,10 +61,10 @@ const setAdvancedRulesToStorage = async () => {
         let currentTime = performance.now();
 
         // if the last call was less than THROTTLE_DELAY ago, return false
-        if (currentTime - lastNativeHostShouldUpdateRulesCall < THROTTLE_DELAY_MS) {
+        if (currentTime - lastNativeHostShouldUpdateCallTime < THROTTLE_DELAY_MS) {
             return Promise.resolve(false);
         }
-        lastNativeHostShouldUpdateRulesCall = currentTime;
+        lastNativeHostShouldUpdateCallTime = currentTime;
 
         const shouldUpdate = await adguard.nativeHost.shouldUpdateAdvancedRules();
         return shouldUpdate;
