@@ -54,15 +54,15 @@ const setAdvancedRulesToStorage = async () => {
     /**
      * Throttled version of `adguard.nativeHost.shouldUpdateAdvancedRules()`.
      *
-     * @returns Promise that resolves to `false` if the last call was less than {@link THROTTLE_DELAY_MS} ago,
-     * of result of `adguard.nativeHost.shouldUpdateAdvancedRules()` otherwise.
+     * @returns `false` if the last call was less than {@link THROTTLE_DELAY_MS} ago,
+     * or result of `adguard.nativeHost.shouldUpdateAdvancedRules()` otherwise.
      */
     const throttledShouldUpdate = async () => {
         let currentTime = performance.now();
 
         // if the last call was less than THROTTLE_DELAY ago, return false
         if (currentTime - lastNativeHostShouldUpdateCallTime < THROTTLE_DELAY_MS) {
-            return Promise.resolve(false);
+            return false;
         }
         lastNativeHostShouldUpdateCallTime = currentTime;
 
