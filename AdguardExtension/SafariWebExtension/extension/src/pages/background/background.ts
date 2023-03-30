@@ -36,6 +36,52 @@ const getAdvancedRulesFromNativeHost = async (): Promise<string | null> => {
     return RuleConverter.convertRules(rulesText);
 };
 
+// since the message from content script can be sent multiple times (from multiple tabs)
+// this variable should not be local to the `setAdvancedRulesToStorage()` function
+let lastNativeHostShouldUpdateRulesCall = 0;
+
+/**
+ * Asks the Native Host whether the advanced rules should be updated.
+ * If so, then gets advanced rules from native host, converts them,
+ * and sets the converted result to storage.
+ *
+ * Native Host checking is throttled to avoid frequent calls.
+ */
+const setAdvancedRulesToStorage = async () => {
+    // time to wait before the next call to native host
+    const THROTTLE_DELAY = 5 * 1000;
+
+    /**
+     * Throttled version of `adguard.nativeHost.shouldUpdateAdvancedRules()`.
+     *
+     * @returns Promise that resolves to `false` if the last call was less than {@link THROTTLE_DELAY} ago,
+     * of result of `adguard.nativeHost.shouldUpdateAdvancedRules()` otherwise.
+     */
+    const throttledShouldUpdate = async () => {
+        let currentTime = performance.now();
+
+        // if the last call was less than THROTTLE_DELAY ago, return false
+        if (currentTime - lastNativeHostShouldUpdateRulesCall < THROTTLE_DELAY) {
+            return Promise.resolve(false);
+        }
+        lastNativeHostShouldUpdateRulesCall = currentTime;
+
+        const shouldUpdate = await adguard.nativeHost.shouldUpdateAdvancedRules();
+        return shouldUpdate;
+    };
+
+    /**
+     * Check whether the advanced rules should be updated in storage
+     * to avoid their update on every background page awakening
+     * or every message {@link MessagesToBackgroundPage.CheckAdvancedRulesUpdate}.
+     */
+    const shouldUpdateAdvancedRules = await throttledShouldUpdate();
+    if (shouldUpdateAdvancedRules) {
+        const convertedRulesText = await getAdvancedRulesFromNativeHost();
+        await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
+    }
+};
+
 const handleMessages = () => {
     browser.runtime.onMessage.addListener(async (message: Message): Promise<void | string | null | PopupData> => {
         const { type, data } = message;
@@ -129,12 +175,12 @@ const handleMessages = () => {
                 await adguard.nativeHost.removeUserRulesBySite(url);
                 break;
             }
-            case MessagesToBackgroundPage.WakeUp: {
-                // this message is sent by content script
-                // only to wake up background page in order to set advanced rules to storage.
-                // return anything, otherwise the block is empty,
-                // so here we just trying to avoid unexpected compiler optimization of an empty block
-                return null;
+            case MessagesToBackgroundPage.CheckAdvancedRulesUpdate: {
+                /**
+                 * This message is sent by content script to background page
+                 * to check if advanced rules should be updated in storage.
+                 */
+                await setAdvancedRulesToStorage();
             }
             case MessagesToBackgroundPage.GetAdvancedRulesText: {
                 /**
@@ -158,24 +204,6 @@ const handleMessages = () => {
         }
     });
 };
-
-/**
- * Asks the Native Host whether the advanced rules should be updated.
- * If so, then gets advanced rules from native host, converts them,
- * and sets the converted result to storage.
- */
-const setAdvancedRulesToStorage = async () => {
-    // check whether the advanced rules should be updated in storage
-    // to avoid their update on every background page awakening
-    const shouldUpdateAdvancedRules = await adguard.nativeHost.shouldUpdateAdvancedRules();
-    if (shouldUpdateAdvancedRules) {
-        const convertedRulesText = await getAdvancedRulesFromNativeHost();
-        await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
-    }
-};
-
-// set advanced rules to storage on the background page start
-setAdvancedRulesToStorage();
 
 export const background = () => {
     // Message listener should be on the upper level to wake up background page

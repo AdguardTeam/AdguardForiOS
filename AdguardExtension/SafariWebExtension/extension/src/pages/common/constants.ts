@@ -16,7 +16,7 @@ export enum MessagesToBackgroundPage {
     UpgradeClicked = 'upgrade_clicked',
     EnableAdvancedBlocking = 'enable_advanced_blocking',
     EnableSafariProtection = 'enable_safari_protection',
-    WakeUp = 'WakeUp',
+    CheckAdvancedRulesUpdate = 'CheckAdvancedRulesUpdate',
     GetAdvancedRulesText = 'GetAdvancedRulesText',
 }
 
