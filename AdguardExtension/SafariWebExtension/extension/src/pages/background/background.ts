@@ -49,7 +49,7 @@ let lastNativeHostShouldUpdateCallTime = 0;
  */
 const setAdvancedRulesToStorage = async () => {
     // time to wait before the next call to native host
-    const THROTTLE_DELAY_MS = 5 * 1000;
+    const THROTTLE_DELAY_MS = 1 * 1000;
 
     /**
      * Throttled version of `adguard.nativeHost.shouldUpdateAdvancedRules()`.
