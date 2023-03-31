@@ -16,8 +16,13 @@ import {
     MessagesToContentScript,
 } from '../common/constants';
 
-// time to wait before the next nativeHost.shouldUpdateAdvancedRules() call
-// FIXME: describe why 1 second
+/**
+ * Time to wait before the next nativeHost.shouldUpdateAdvancedRules() call.
+ *
+ * The request to the native host takes 50-100ms, so 1 second is enough to receive the response.
+ * Also 1 second is not enough time for a user to update the page several times in a row,
+ * e.g. full loading of example.org takes 1.2 seconds.
+ */
 const SHOULD_UPDATE_THROTTLE_DELAY_MS = 1000;
 
 interface Message {
