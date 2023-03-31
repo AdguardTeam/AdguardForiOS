@@ -16,6 +16,10 @@ import {
     MessagesToContentScript,
 } from '../common/constants';
 
+// time to wait before the next nativeHost.shouldUpdateAdvancedRules() call
+// FIXME: describe why 1 second
+const SHOULD_UPDATE_THROTTLE_DELAY_MS = 1000;
+
 interface Message {
     type: string,
     data?: any,
@@ -37,8 +41,27 @@ const getAdvancedRulesFromNativeHost = async (): Promise<string | null> => {
 };
 
 // since the message from content script can be sent multiple times (from multiple tabs)
-// this variable should not be local to the `setAdvancedRulesToStorage()` function
+// this variable should not be local to the `throttledShouldUpdate()` function
 let lastNativeHostShouldUpdateCallTime = 0;
+
+/**
+ * Throttled version of `adguard.nativeHost.shouldUpdateAdvancedRules()`.
+ *
+ * @returns `false` if the last call was less than {@link SHOULD_UPDATE_THROTTLE_DELAY_MS} ago,
+ * or result of `adguard.nativeHost.shouldUpdateAdvancedRules()` otherwise.
+ */
+const throttledShouldUpdate = async () => {
+    const currentTime = performance.now();
+
+    // if the last call was less than THROTTLE_DELAY ago, return false
+    if (currentTime - lastNativeHostShouldUpdateCallTime < SHOULD_UPDATE_THROTTLE_DELAY_MS) {
+        return false;
+    }
+    lastNativeHostShouldUpdateCallTime = currentTime;
+
+    const shouldUpdate = await adguard.nativeHost.shouldUpdateAdvancedRules();
+    return shouldUpdate;
+};
 
 /**
  * Asks the Native Host whether the advanced rules should be updated.
@@ -48,28 +71,6 @@ let lastNativeHostShouldUpdateCallTime = 0;
  * Native Host checking is throttled to avoid frequent calls.
  */
 const setAdvancedRulesToStorage = async () => {
-    // time to wait before the next call to native host
-    const THROTTLE_DELAY_MS = 1 * 1000;
-
-    /**
-     * Throttled version of `adguard.nativeHost.shouldUpdateAdvancedRules()`.
-     *
-     * @returns `false` if the last call was less than {@link THROTTLE_DELAY_MS} ago,
-     * or result of `adguard.nativeHost.shouldUpdateAdvancedRules()` otherwise.
-     */
-    const throttledShouldUpdate = async () => {
-        let currentTime = performance.now();
-
-        // if the last call was less than THROTTLE_DELAY ago, return false
-        if (currentTime - lastNativeHostShouldUpdateCallTime < THROTTLE_DELAY_MS) {
-            return false;
-        }
-        lastNativeHostShouldUpdateCallTime = currentTime;
-
-        const shouldUpdate = await adguard.nativeHost.shouldUpdateAdvancedRules();
-        return shouldUpdate;
-    };
-
     /**
      * Check whether the advanced rules should be updated in storage
      * to avoid their update on every background page awakening
@@ -181,6 +182,7 @@ const handleMessages = () => {
                  * to check if advanced rules should be updated in storage.
                  */
                 await setAdvancedRulesToStorage();
+                break;
             }
             case MessagesToBackgroundPage.GetAdvancedRulesText: {
                 /**
