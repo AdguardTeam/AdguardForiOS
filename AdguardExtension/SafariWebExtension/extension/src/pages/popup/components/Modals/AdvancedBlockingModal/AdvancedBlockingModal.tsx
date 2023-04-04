@@ -39,6 +39,7 @@ export const AdvancedBlockingModal = observer(() => {
     return (
         <Modal
             title={translator.getMessage('popup_modal_advanced_blocking_disabled_title')}
+            // eslint-disable-next-line max-len
             description={reactTranslator.getMessage('popup_modal_advanced_blocking_disabled_description', { a: ReadMoreLink })}
             close={handleClose}
         >

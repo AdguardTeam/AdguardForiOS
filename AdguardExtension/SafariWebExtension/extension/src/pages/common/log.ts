@@ -1,9 +1,10 @@
 /* eslint-disable class-methods-use-this,no-console */
 
+// TODO: add enum for levels 'INFO', 'DEBUG', 'ERROR'
 /**
  * Redefine if you need it
- */
-const CURRENT_LEVEL: Level = 'DEBUG';
+*/
+const DEFAULT_LEVEL: Level = 'INFO';
 
 type Level = keyof typeof LEVELS;
 
@@ -25,6 +26,8 @@ const LEVELS = {
  * Simple logger with log levels
  */
 class Log {
+    currentLevel: Level = DEFAULT_LEVEL;
+
     /**
      * Pretty-print javascript error
      */
@@ -44,11 +47,18 @@ class Log {
     }
 
     /**
+     * Sets logging level `DEBUG`.
+     */
+    setLevelDebug() {
+        this.currentLevel = 'DEBUG';
+    }
+
+    /**
      * Prints log message
      */
     print(level: Level, method: ConsoleMethod, args: any[]) {
         // check log level
-        if (LEVELS[CURRENT_LEVEL] < LEVELS[level]) {
+        if (LEVELS[this.currentLevel] < LEVELS[level]) {
             return;
         }
         if (!args || args.length === 0 || !args[0]) {

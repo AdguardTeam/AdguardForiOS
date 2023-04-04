@@ -26,6 +26,7 @@ export const getFaviconDataUrl = async (url?: string): Promise<string | null> =>
         return null;
     }
 
+    // eslint-disable-next-line max-len
     const ADGUARD_FAVICON_SERVICE_URL = `https://icons.adguard.org/icon?fallback_icon_color=${FALLBACK_ICON_COLOR}&domain=`;
     const favIconUrl = `${ADGUARD_FAVICON_SERVICE_URL}${domain}`;
 

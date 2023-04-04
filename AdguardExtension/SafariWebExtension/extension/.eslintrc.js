@@ -4,6 +4,10 @@ module.exports = {
         project: 'tsconfig.json',
     },
     rules: {
+        'max-len': ['error', {
+            code: 120,
+            ignoreStrings: true,
+        }],
         'indent': ['error', 4, { SwitchCase: 1 }],
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],

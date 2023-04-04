@@ -10,6 +10,7 @@ import { Support } from '../Support';
 import { Loader } from '../Loader';
 import { ExpandButton } from '../ExpandButton';
 import { useFullscreen } from '../../hooks/useFullscreen';
+import { log } from '../../../common/log';
 
 import './popup.pcss';
 
@@ -17,7 +18,13 @@ export const Popup = observer(() => {
     const store = useContext(popupStore);
 
     useEffect(() => {
-        store.getPopupData();
+        (async () => {
+            try {
+                await store.getPopupData();
+            } catch (e) {
+                log.error(e);
+            }
+        })();
     }, []);
 
     useAppearanceTheme(store.appearanceTheme);

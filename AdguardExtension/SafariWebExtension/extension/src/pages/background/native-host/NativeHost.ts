@@ -3,7 +3,7 @@ import browser from 'webextension-polyfill';
 
 import { MessagesToNativeApp, Platform } from '../../common/constants';
 import { getDomain } from '../../common/utils/url';
-import { storage } from '../storage';
+import { storage } from '../../common/storage';
 
 interface NativeHostMessage {
     type: MessagesToNativeApp,

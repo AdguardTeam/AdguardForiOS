@@ -1,110 +1,98 @@
 /* eslint-disable consistent-return */
 import browser from 'webextension-polyfill';
-import * as TSUrlFilter from '@adguard/tsurlfilter';
+import { RuleConverter } from '@adguard/tsurlfilter';
+
+import { adguard } from './adguard';
+import { app } from './app';
+import { permissions } from './permissions';
+import type { NativeHostInitData } from './native-host';
+
+import { storage } from '../common/storage';
+import { log } from '../common/log';
 
 import {
+    ADVANCED_RULES_STORAGE_KEY,
     MessagesToBackgroundPage,
     MessagesToContentScript,
 } from '../common/constants';
-import { permissions } from './permissions';
-import { log } from '../common/log';
-import { app } from './app';
-import { Engine } from './engine';
-import { getDomain } from '../common/utils/url';
-import { buildStyleSheet } from './css-service';
-import { SelectorsAndScripts } from '../common/interfaces';
-import { adguard } from './adguard';
+
+/**
+ * Time to wait before the next nativeHost.shouldUpdateAdvancedRules() call.
+ *
+ * The request to the native host takes 50-100ms, so 1 second is enough to receive the response.
+ * Also 1 second is not enough time for a user to update the page several times in a row,
+ * e.g. full loading of example.org takes 1.2 seconds.
+ */
+const SHOULD_UPDATE_THROTTLE_DELAY_MS = 1000;
 
 interface Message {
     type: string,
     data?: any,
 }
 
-const getEngine = (() => {
-    const engine = new Engine();
-    let startPromise: Promise<Engine>;
+type PopupData = NativeHostInitData & {
+    allSitesAllowed: boolean,
+    permissionsModalViewed: boolean,
+};
 
-    const start = async () => {
-        const rulesText = await adguard.nativeHost.getAdvancedRulesText();
+/**
+ * Gets advanced rules from the native host and converts them.
+ *
+ * @returns Converted advanced rules text or `null` for no advanced rules.
+ */
+const getAdvancedRulesFromNativeHost = async (): Promise<string | null> => {
+    const rulesText = await adguard.nativeHost.getAdvancedRulesText();
+    return RuleConverter.convertRules(rulesText);
+};
 
-        const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
-        await engine.start(convertedRulesText);
+// since the message from content script can be sent multiple times (from multiple tabs)
+// this variable should not be local to the `throttledShouldUpdate()` function
+let lastNativeHostShouldUpdateCallTime = 0;
 
-        return engine;
-    };
+/**
+ * Throttled version of `adguard.nativeHost.shouldUpdateAdvancedRules()`.
+ *
+ * @returns `false` if the last call was less than {@link SHOULD_UPDATE_THROTTLE_DELAY_MS} ago,
+ * or result of `adguard.nativeHost.shouldUpdateAdvancedRules()` otherwise.
+ */
+const throttledShouldUpdate = async () => {
+    const currentTime = performance.now();
 
-    return (shouldUpdateAdvancedRules: boolean) => {
-        if (!startPromise || shouldUpdateAdvancedRules) {
-            startPromise = start();
-        }
-        return startPromise;
-    };
-})();
+    // if the last call was less than THROTTLE_DELAY ago, return false
+    if (currentTime - lastNativeHostShouldUpdateCallTime < SHOULD_UPDATE_THROTTLE_DELAY_MS) {
+        return false;
+    }
+    lastNativeHostShouldUpdateCallTime = currentTime;
 
-const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts> => {
-    const shouldUpdateAdvancedRules = await adguard.nativeHost.shouldUpdateAdvancedRules();
+    const shouldUpdate = await adguard.nativeHost.shouldUpdateAdvancedRules();
+    return shouldUpdate;
+};
 
-    const engine = await getEngine(shouldUpdateAdvancedRules);
-
-    const hostname = getDomain(url);
-
-    const cosmeticOption = engine.getCosmeticOption(url);
-    const cosmeticResult = engine.getCosmeticResult(hostname, cosmeticOption);
-
-    const injectCssRules = [
-        ...cosmeticResult.CSS.generic,
-        ...cosmeticResult.CSS.specific,
-    ];
-
-    const elementHidingExtCssRules = [
-        ...cosmeticResult.elementHiding.genericExtCss,
-        ...cosmeticResult.elementHiding.specificExtCss,
-    ];
-
-    const injectExtCssRules = [
-        ...cosmeticResult.CSS.genericExtCss,
-        ...cosmeticResult.CSS.specificExtCss,
-    ];
-
-    const cssInject = buildStyleSheet([], injectCssRules, true);
-    const cssExtended = buildStyleSheet(
-        elementHidingExtCssRules,
-        injectExtCssRules,
-        false,
-    );
-
-    const scriptRules = cosmeticResult.getScriptRules();
-
-    const debug = false;
-    const scripts: string[] = scriptRules
-        .map((scriptRule) => scriptRule.getScript({
-            debug,
-            request: {
-                domain: url,
-            },
-        }))
-        .filter((script): script is string => script !== null);
-
-    // remove repeating scripts
-    const uniqueScripts = [...new Set(scripts)];
-
-    return {
-        scripts: uniqueScripts,
-        cssInject,
-        cssExtended,
-    };
+/**
+ * Asks the Native Host whether the advanced rules should be updated.
+ * If so, then gets advanced rules from native host, converts them,
+ * and sets the converted result to storage.
+ *
+ * Native Host checking is throttled to avoid frequent calls.
+ */
+const setAdvancedRulesToStorage = async () => {
+    /**
+     * Check whether the advanced rules should be updated in storage
+     * to avoid their update on every background page awakening
+     * or every message {@link MessagesToBackgroundPage.CheckAdvancedRulesUpdate}.
+     */
+    const shouldUpdateAdvancedRules = await throttledShouldUpdate();
+    if (shouldUpdateAdvancedRules) {
+        const convertedRulesText = await getAdvancedRulesFromNativeHost();
+        await storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
+    }
 };
 
 const handleMessages = () => {
-    browser.runtime.onMessage.addListener(async (message: Message) => {
+    browser.runtime.onMessage.addListener(async (message: Message): Promise<void | string | null | PopupData> => {
         const { type, data } = message;
 
         switch (type) {
-            case MessagesToBackgroundPage.GetScriptsAndSelectors: {
-                const { url } = data;
-                const scriptsAndSelectors = await getScriptsAndSelectors(url);
-                return scriptsAndSelectors as SelectorsAndScripts;
-            }
             case MessagesToBackgroundPage.AddRule: {
                 await adguard.nativeHost.addToUserRules(data.ruleText);
                 break;
@@ -192,6 +180,31 @@ const handleMessages = () => {
                 const { url } = data;
                 await adguard.nativeHost.removeUserRulesBySite(url);
                 break;
+            }
+            case MessagesToBackgroundPage.CheckAdvancedRulesUpdate: {
+                /**
+                 * This message is sent by content script to background page
+                 * to check if advanced rules should be updated in storage.
+                 */
+                await setAdvancedRulesToStorage();
+                break;
+            }
+            case MessagesToBackgroundPage.GetAdvancedRulesText: {
+                /**
+                 * Sometimes the content script may request the advanced rules
+                 * from the background page instead of getting them from the storage.
+                 * It can happen if advanced rules were not set in storage —
+                 * just after the app installation
+                 * on the very first browser start without browser or tabs reload.
+                 */
+                const convertedRulesText = await getAdvancedRulesFromNativeHost();
+                /**
+                 * Received advanced rules should be set to storage.
+                 * IMPORTANT: no 'await' for storage.set()
+                 * as it will postpone the response to the content script which is not needed.
+                 */
+                storage.set(ADVANCED_RULES_STORAGE_KEY, convertedRulesText);
+                return convertedRulesText;
             }
             default:
                 break;

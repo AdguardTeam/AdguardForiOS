@@ -7,7 +7,6 @@ export enum MessagesToNativeApp {
 
 export enum MessagesToBackgroundPage {
     OpenAssistant = 'open_assistant',
-    GetScriptsAndSelectors = 'get_scripts_and_selectors',
     AddRule = 'add_rule',
     GetPopupData = 'get_popup_data',
     SetPermissionsModalViewed = 'set_permissions_modal_viewed',
@@ -17,6 +16,8 @@ export enum MessagesToBackgroundPage {
     UpgradeClicked = 'upgrade_clicked',
     EnableAdvancedBlocking = 'enable_advanced_blocking',
     EnableSafariProtection = 'enable_safari_protection',
+    CheckAdvancedRulesUpdate = 'CheckAdvancedRulesUpdate',
+    GetAdvancedRulesText = 'GetAdvancedRulesText',
 }
 
 export enum MessagesToContentScript {
@@ -37,3 +38,5 @@ export enum Platform {
     IPad = 'ipad',
     IPhone = 'iphone',
 }
+
+export const ADVANCED_RULES_STORAGE_KEY = 'AdvancedRulesStorageKey';

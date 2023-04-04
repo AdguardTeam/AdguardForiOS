@@ -1,5 +1,5 @@
 /* eslint-disable no-console,class-methods-use-this */
-import { storage } from '../storage';
+import { storage } from '../../common/storage';
 import { APPEARANCE_THEME_DEFAULT, AppearanceTheme } from '../../common/constants';
 import { ActionLinks, NativeHostInitData, NativeHostInterface } from './NativeHost';
 
@@ -109,6 +109,7 @@ class NativeHostMock implements NativeHostInterface {
         await this.setState('appearanceTheme', value);
     };
 
+    /* eslint-disable max-len */
     getAdvancedRulesText = async () => {
         const rulesText = `
 !
@@ -153,6 +154,7 @@ testcases.adguard.com,surge.sh#?##case28 > :is(.case28, #main, footer, span):con
         `;
         return this.withSleep(rulesText);
     };
+    /* eslint-enable max-len */
 
     setLinks(links: ActionLinks) {
         this.links = links;
