@@ -23,4 +23,12 @@ extension UIDevice {
         let versions = systemVersion.split(separator: ".")
         return Int(versions[0]) ?? 0
     }
+
+    func getIOSVersion() -> Double {
+        let splited = systemVersion.split(separator: ".")
+
+        guard 2...3 ~= splited.count else { return 0.0 }
+
+        return Double("\(splited[0]).\(splited[1])") ?? 0.0
+    }
 }

@@ -21,7 +21,7 @@ import SharedAdGuardSDK
 // MARK: - ConfigurationProtocol
 
 public protocol SafariConfigurationProtocol: ConfigurationProtocol {
-    var iosVersion: Int { get set } // iOS version is used in SafariConverter lib, it can be obtained with UIDevice.current.systemVersion
+    var iosVersion: Double { get set } // iOS version is used in SafariConverter lib, it can be obtained with UIDevice.current.systemVersion
     var safariProtectionEnabled: Bool { get set }
     var advancedBlockingIsEnabled: Bool { get set } // Feature is available since iOS 15
     var blocklistIsEnabled: Bool { get set }
@@ -38,7 +38,7 @@ public protocol SafariConfigurationProtocol: ConfigurationProtocol {
 // MARK: - Configuration
 
 public final class SafariConfiguration: SafariConfigurationProtocol {
-    public var iosVersion: Int
+    public var iosVersion: Double
     public var currentLocale: Locale
     public var proStatus: Bool
     public var safariProtectionEnabled: Bool
@@ -53,7 +53,7 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
     public var cid: String
 
     public init(
-        iosVersion: Int,
+        iosVersion: Double,
         currentLocale: Locale,
         proStatus: Bool,
         safariProtectionEnabled: Bool,

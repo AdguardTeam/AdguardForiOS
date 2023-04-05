@@ -80,7 +80,7 @@ class AboutViewController: UIViewController {
             // ExtendedCss version place in yarn.lock file, take it not from `tsurlfilter` dependencies
             versionFormat += """
 
-                            SafariConverterLib v2.0.38
+                            SafariConverterLib v2.0.39
                             Scriptlets v1.9.1
                             ExtendedCss v2.0.51
                             """
