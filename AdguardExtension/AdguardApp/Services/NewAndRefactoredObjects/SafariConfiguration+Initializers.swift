@@ -22,7 +22,7 @@ import SafariAdGuardSDK
 /// This extension adds methods which constuct `SafariConfiguration` objects from inner services
 extension SafariConfiguration {
     convenience init(bundle: Bundle = .main, currentLocale: Locale = .current, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
-        self.init(iosVersion: UIDevice.current.iosVersion,
+        self.init(iosVersion: UIDevice.current.getIOSVersion(),
                   currentLocale: currentLocale,
                   proStatus: bundle.isPro ? true : isProPurchased,
                   safariProtectionEnabled: resources.safariProtectionEnabled,
@@ -40,7 +40,7 @@ extension SafariConfiguration {
     /// All the parameters are set as if the app starts for the first time
     static func defaultConfiguration(bundle: Bundle = .main, currentLocale: Locale = Locale.current) -> SafariConfiguration {
         return SafariConfiguration(
-            iosVersion: UIDevice.current.iosVersion,
+            iosVersion: UIDevice.current.getIOSVersion(),
             currentLocale: currentLocale,
             proStatus: bundle.isPro,
             safariProtectionEnabled: true,

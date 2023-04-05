@@ -86,7 +86,7 @@ final class FiltersConverter: FiltersConverterProtocol {
      */
     private lazy var emptyRuleJsonResult: ConversionResult = {
         let converter = ContentBlockerConverterWrapper()
-        let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
+        let safariVersion = SafariVersion(configuration.iosVersion)
         return converter.convertArray(rules: [], safariVersion: safariVersion, optimize: false, advancedBlocking: false)
     }()
 
@@ -177,7 +177,7 @@ final class FiltersConverter: FiltersConverterProtocol {
     private func convert(filters: [ContentBlockerType: [String]]) -> [FiltersConverterResult] {
         Logger.logInfo("(FiltersConverter) - convertFilters; Safari rules conversion started")
 
-        let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
+        let safariVersion = SafariVersion(configuration.iosVersion)
         let conversionResult: [FiltersConverterResult] = filters.concurrentMap { [unowned self] cbType, rules -> FiltersConverterResult in
 
             Logger.logInfo("(FiltersConverter) - convertFilters; Start converting \(cbType)")

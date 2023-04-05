@@ -1,7 +1,7 @@
 import Foundation
 
 final class SafariConfigurationMock: SafariConfigurationProtocol {
-    var iosVersion: Int = 11
+    var iosVersion: Double = 11
 
     var advancedBlockingIsEnabled: Bool = false
 
