@@ -2,7 +2,10 @@
 "support_unexpected_error" = "Một lỗi không xác định đã xảy ra. Vui lòng liên hệ bộ phận hỗ trợ.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "Không thể đảo luật do một lỗi không xác định. Vui lòng liên hệ bộ phận hỗ trợ.";
+"support_rule_converting_error" = "Không thể chuyển đổi các quy tắc do có lỗi không mong đợi. Vui lòng liên hệ với đội hỗ trợ.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "Không thể khởi tạo bộ chuyển đổi sang định dạng JSON.";
 
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
 "common_action_cancel" = "Hủy";
@@ -17,7 +20,7 @@
 "common_error_title" = "Lỗi";
 
 /* Something went wrong title for unknown error */
-"something_went_wrong_title" = "Something went wrong";
+"something_went_wrong_title" = "Đã xảy ra sự cố";
 
 /* NO Button caption in alert */
 "common_action_no" = "Không";
