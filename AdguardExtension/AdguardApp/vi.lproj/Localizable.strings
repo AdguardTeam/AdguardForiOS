@@ -22,6 +22,15 @@
 /* Something went wrong title for unknown error */
 "something_went_wrong_title" = "Đã xảy ra sự cố";
 
+/* Unknown error desription */	
+"unknown_error_description" = "Vui lòng báo cáo lỗi này cho bộ phận hỗ trợ.";	
+
+/* (AEService) Service errors descriptions */	
+"safari_filters_loading_error" = "Bộ lọc không thể được tải vào Safari, vì vậy các thay đổi gần đây của bạn không được áp dụng.";	
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */	
+"load_to_safari_error" = "Bộ lọc không thể được tải vào Safari. Hãy thử xóa các quy tắc và danh sách cho phép hoặc thay đổi bộ lọc được sử dụng.";
+
 /* NO Button caption in alert */
 "common_action_no" = "Không";
 
@@ -49,6 +58,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */	
+"native_dns_working" = "DNS cục bộ đang hoạt động";	
+
+/* (MainPageController) Native DNS is not working title */	
+"native_dns_not_working" = "DNS cục bộ không hoạt động";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Quy tắc người dùng";
 
@@ -61,17 +76,36 @@
 /* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Một vài bộ chặn thành phần bị vô hiệu hóa";
 
+	
+/* (MainController) login status caption on main screen */	
+"protection_enabled_caption" = "Chế độ bảo vệ đang được bật";
+
+	/* (MainController) login status caption on main screen */	
+"protection_disabled_caption" = "Chế độ bảo vệ đang tắt";
+
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Đăng ký";
 
 /* (LicenseProductChoiceCell) restore purchase button title */
 "restore_purchase_button_title" = "Khôi phục mua hàng";
 
+/* (FreeLicenseStateTableViewModel) One month subscription title */	
+"one_month_subscription_title" = "Hằng tháng";	
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */	
+"one_year_subscription_title" = "Hằng năm";
+
 /* (FreeLicenseStateTableViewModel) title for permanent subscription */
 "permanent_subscription_title" = "Trọn đời";
 
+	/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */	
+"go_to_my_account_title" = "Đi đến tài khoản của tôi";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Mua";
+
+	/* (GetProTableController) missing purchase alert message */	
+"upgrade_missing_purchase_message" = "Các gói đăng ký không khả dụng. Vui lòng kiểm tra kết nối Internet của bạn và thử lại.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Mất mật khẩu?";
@@ -109,8 +143,15 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Một lỗi đã xảy ra khi đang khôi phục lại mua sắm.";
 
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */	
+"restore_success_message" = "Phục hồi mua hàng thành công! Phiên bản Premium của AdGuard cho iOS đã được kích hoạt.";
+
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Không có mua sắm nào để khôi phục";
+
+		
+/* (AEUIGetProViewController) message that appears when the purchase is successful */	
+"purchase_success_message" = "Mua hàng đã hoàn tất thành công! Phiên bản Premium của AdGuard cho iOS đã được kích hoạt.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Đã xảy ra lỗi khi tiến hành thanh toán cho bạn.";
@@ -126,6 +167,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Bạn có thể thêm quy tắc của bạn tại đây <br>Đọc <a href=\"%@\"> ghi chú này về cú pháp quy tắc</a>.";
+
+/* (UserFilterController) whitelist description */	
+"whitelist_text" = "Nhập vào đây các tên miền mà bạn không muốn AdGuard lọc. Danh sách này được ưu tiên hơn các thiết lập khác.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Nhập tên miền tại đây. AdGuard sẽ áp dụng lọc chỉ những trang web này trong Safari.";
@@ -144,6 +188,12 @@
 
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "Nhập tên miền";
+
+/* (UserFilterController) add blacklist rule placeholder */	
+"add_blacklist_rule_placeholder" = "||vidu.org^";	
+
+/* (UserFilterController) add whitelist domain placeholder */	
+"add_whitelist_domain_placeholder" = "vidu.org";
 
 /* (UserFilterController) add wifi name placeholder */
 "add_wifi_name_placeholder" = "Tên Wi-Fi của bạn";
@@ -168,6 +218,9 @@
 
 /* (MainController) Message on main screen during update - count of updated filters */
 "filters_updated_format" = "bộ lọc được cập nhật:%lu ";
+
+	/* (FiltersController) Filter Version format */	
+"filter_version_format" = "Phiên bản %@";
 
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, tương thích với các ứng dụng \"VPN cá nhân\"";
@@ -211,6 +264,12 @@
 /* login error message */
 "login_error_message" = "Một lỗi đã xảy ra trong khi đăng nhập";
 
+/* purchase secription format */	
+"purchase_description_format" = "Điều khoản Đăng ký AdGuard<br><br>• Thanh toán sẽ được tính vào tài khoản iTunes của bạn khi xác nhận mua hàng.<br><br>• Đăng ký sẽ tự động gia hạn trừ khi tắt tính năng tự động gia hạn ít nhất 24 giờ trước khi kết thúc thời kỳ hiện tại.<br><br>• Phí gia hạn đăng ký sẽ được tính vào tài khoản iTunes của bạn trong vòng 24 giờ sau khi kết thúc thời kỳ hiện tại.<br><br>• Bạn có thể quản lý đăng ký và tắt tính năng tự động gia hạn bằng cách vào Cài đặt Tài khoản sau khi đã mua hàng.<br><br><a href=%1$@>Chính sách bảo mật</a> và <a href=%2$@>Điều khoản sử dụng</a> của AdGuard";	
+
+/* lifetime purchase secription format */	
+"lifetime_purchase_description_format" = "<a href=%2$@>Điều khoản sử dụng</a> và <a href=%1$@>Chính sách bảo mật</a> của AdGuard";
+
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Ok";
 
@@ -232,8 +291,20 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Khác";
 
+/* (AdvancedSettingsController) Content blocker description text */	
+"cb_description_common" = "6 trình chặn nội dung, mỗi trình có tối đa 50.000 quy tắc";
+
+/* (AdvancedSettingsController) Content blocker description text */	
+"cb_description_advanced_protection" = "6 trình chặn nội dung, mỗi trình có tối đa 150.000 quy tắc, cộng thêm chế độ bảo vệ Nâng cao";
+
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Bộ lọc:";
+
+/* (ContentBlockersTableController) - Advanced protection title */	
+"cb_screen_advanced_protection_title" = "Bảo vệ Nâng cao";	
+
+/* (ContentBlockersTableController) - Content Blockers title */	
+"cb_screen_content_blockers_title" = "Trình chặn nội dung";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Bạn cần mở VPN trước";
