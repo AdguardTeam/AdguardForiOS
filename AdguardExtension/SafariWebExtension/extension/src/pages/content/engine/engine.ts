@@ -35,7 +35,7 @@ const createEngine = (rulesText: string) => {
         engine: 'extension',
         version: app.version,
         verbose: true,
-        compatibility: CompatibilityTypes.extension,
+        compatibility: CompatibilityTypes.Extension,
     };
     setConfiguration(config);
 

@@ -1,4 +1,4 @@
-import { CosmeticResult } from '@adguard/tsurlfilter';
+import { CosmeticResult, Request, RequestType } from '@adguard/tsurlfilter';
 
 import { buildStyleSheet } from './css-service';
 
@@ -48,9 +48,7 @@ export const prepareAdvancedRules = (
     scriptRules.forEach((scriptRule) => {
         const script = scriptRule.getScript({
             debug,
-            request: {
-                domain: url,
-            },
+            request: new Request(url, null, RequestType.Document),
         });
         if (script !== null) {
             scripts.push(script);
