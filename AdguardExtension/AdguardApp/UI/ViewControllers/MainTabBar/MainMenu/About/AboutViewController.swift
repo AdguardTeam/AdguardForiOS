@@ -76,13 +76,13 @@ class AboutViewController: UIViewController {
 
         if showFullVersion {
             // TODO: Make it more convenient, not manual
-            // Scriptlets version place in yarn.lock file
-            // ExtendedCss version place in yarn.lock file, take it not from `tsurlfilter` dependencies
+            // ExtendedCss version is placed in AdguardExtension/SafariWebExtension/extension/package.json
+            // Scriptlets version is placed in the yarn.lock file as a dependency of `tsurlfilter`
             versionFormat += """
 
                             SafariConverterLib v2.0.39
-                            Scriptlets v1.9.1
-                            ExtendedCss v2.0.51
+                            Scriptlets v1.9.7
+                            ExtendedCss v2.0.52
                             """
         }
 
