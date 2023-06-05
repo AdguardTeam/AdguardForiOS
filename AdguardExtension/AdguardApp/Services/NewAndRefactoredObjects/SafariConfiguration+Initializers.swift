@@ -25,7 +25,7 @@ extension SafariConfiguration {
         self.init(iosVersion: UIDevice.current.getIOSVersion(),
                   currentLocale: currentLocale,
                   proStatus: bundle.isPro ? true : isProPurchased,
-                  safariProtectionEnabled: resources.safariProtectionEnabled,
+                  safariProtectionEnabled: resources.safariProtectionEnabled && resources.complexProtectionEnabled,
                   advancedBlockingIsEnabled: resources.advancedProtection,
                   blocklistIsEnabled: resources.safariUserFilterEnabled,
                   allowlistIsEnabled: resources.safariWhitelistEnabled,
