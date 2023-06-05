@@ -49,7 +49,11 @@ final class ConfigurationService: ConfigurationServiceProtocol {
 
             let command = note.userInfo?[PurchaseAssistant.kPSNotificationTypeKey] as! String
             if  command == PurchaseAssistant.kPSNotificationPremiumStatusChanged {
+                DDLogInfo("Receive event \(PurchaseAssistant.kPSNotificationPremiumStatusChanged)")
+
                 self.safariProtection.update(proStatus: self.proStatus, onCbReloaded: nil)
+
+                DDLogInfo("Current pro status = \(self.proStatus); Complex protection status = \(self.resources.complexProtectionEnabled)")
 
                 let enableAdvancedProtection = self.proStatus && self.resources.complexProtectionEnabled
                 self.safariProtection.update(advancedProtectionEnabled: enableAdvancedProtection)
