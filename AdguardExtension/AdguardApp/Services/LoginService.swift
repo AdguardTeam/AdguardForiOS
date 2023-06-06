@@ -406,7 +406,7 @@ final class LoginService: LoginServiceProtocol {
             if !self.resources.pretendPremiumAfterKeychainLoss {
 
                 DDLogInfo("""
-                    Expirration date: new = \(String(describing: expirationDate)) old = \(String(describing: self.expirationDate))
+                    Expiration date: new = \(String(describing: expirationDate)) old = \(String(describing: self.expirationDate))
                     Has premium license: new = \(premium) old = \(self.hasPremiumLicense)
                     Active = \(self.active)
                     Logged in: new = \(premium && self.active) old = \(self.loggedIn)
