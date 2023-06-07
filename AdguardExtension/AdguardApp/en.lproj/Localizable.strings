@@ -863,7 +863,7 @@
 "blocked_info_alert_title" = "Blocked requests";
 
 /* (ActivityViewController) -  Blocked alret message */
-"blocked_info_alert_message" = "The number of blocked DNS requests. You need to use an encrypted DNS server to have your DNS traffic encrypted.";
+"blocked_info_alert_message" = "AdGuard filters most of your phone's DNS requests, blocking tracking and dangerous ones\n\nHere's the total number of requests blocked by AdGuard for the selected time period";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Encrypted requests";
@@ -878,11 +878,10 @@
 "average_info_alert_message" = "Average time it takes to process a DNS request. The faster DNS server you use, the lower this would be.";
 
 /* (ActivityViewController) -  Data saved alret title */
-"data_saved_info_alert_title" = "Data saved";
+"data_saved_info_alert_title" = "Saved data";
 
-// FIXME: Change text
 /* (ActivityViewController) -  Data saved alret message */
-"data_saved_info_alert_message" = "MOCK TEXT";
+"data_saved_info_alret_message" = "AdGuard doesn’t let your browser load unnecessary page elements, thus reducing your device's data consumption\n\nHere’s the total amount of data saved by AdGuard for the selected time period";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Number of companies";

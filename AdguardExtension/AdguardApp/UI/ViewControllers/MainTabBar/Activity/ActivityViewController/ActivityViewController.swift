@@ -129,7 +129,6 @@ final class ActivityViewController: UITableViewController {
         setupTableView()
         statisticsPeriodChanged(statisticsPeriod: activityModel.period)
         addObservers()
-        filterButton.isHidden = !configuration.advancedMode
         requestsModel?.obtainRecords(for: activityModel.period, domains: nil)
     }
 
@@ -324,7 +323,6 @@ final class ActivityViewController: UITableViewController {
     private func observeAdvancedMode(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            self.filterButton.isHidden = !self.configuration.advancedMode
             self.tableView.reloadData()
         }
     }
