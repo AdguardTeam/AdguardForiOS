@@ -74,16 +74,16 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     @IBOutlet weak var statisticsStackView: UIStackView!
 
     @IBOutlet weak var requestsButton: UIButton!
-    @IBOutlet weak var encryptedButton: UIButton!
-    @IBOutlet weak var elapsedButton: UIButton!
+    @IBOutlet weak var blockedButton: UIButton!
+    @IBOutlet weak var dataSavedButton: UIButton!
 
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
-    @IBOutlet weak var encryptedNumberLabel: ThemableLabel!
-    @IBOutlet weak var elapsedNumberLabel: ThemableLabel!
+    @IBOutlet weak var blockedNumberLabel: ThemableLabel!
+    @IBOutlet weak var dataSavedNumberLabel: ThemableLabel!
 
     @IBOutlet weak var requestsTextLabel: ThemableLabel!
-    @IBOutlet weak var encryptedTextLabel: ThemableLabel!
-    @IBOutlet weak var elapsedTextLabel: ThemableLabel!
+    @IBOutlet weak var blockedTextLabel: ThemableLabel!
+    @IBOutlet weak var dataSavedLabel: ThemableLabel!
 
 
     // MARK: Get Pro elements
@@ -373,12 +373,12 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         chooseRequest()
     }
 
-    @IBAction func encryptedTapped(_ sender: UIButton) {
-        chooseEncrypted()
+    @IBAction func blockedTapped(_ sender: UIButton) {
+        chooseBlocked()
     }
 
-    @IBAction func averageTimeTapped(_ sender: UIButton) {
-        chooseElapsedTime()
+    @IBAction func dataSavedTapped(_ sender: UIButton) {
+        chooseDataSaved()
     }
 
     // MARK: - Content blockers view actions
@@ -473,13 +473,13 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     /**
     Changes number of requests for all buttons
     */
-    private func updateTextForButtons(requestsCount: Int, encryptedCount: Int, averageElapsed: Double){
+    private func updateTextForButtons(requestsCount: Int, blockedCount: Int, dataSaved: Double){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
 
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
-            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
-            self.elapsedNumberLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
+            self.blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: blockedCount))
+            self.dataSavedNumberLabel.text = String.informationUnitFormatter(NSNumber(floatLiteral: dataSaved))
         }
     }
 
@@ -507,37 +507,39 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         chartModel.chartType = .requests
 
         requestsNumberLabel.alpha = 1.0
-        encryptedNumberLabel.alpha = 0.5
+        blockedNumberLabel.alpha = 0.5
 
         requestsTextLabel.alpha = 1.0
-        encryptedTextLabel.alpha = 0.5
+        blockedTextLabel.alpha = 0.5
     }
 
     /**
     Called when "blocked" button tapped
     */
-    private func chooseEncrypted(){
-        if chartModel.chartType == .encrypted {
-            let title = String.localizedString("encrypted_info_alert_title")
-            let message = String.localizedString("encrypted_info_alert_message")
+    private func chooseBlocked(){
+        if chartModel.chartType == .blocked {
+            let title = String.localizedString("blocked_info_alert_title")
+            let message = String.localizedString("blocked_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         } else {
-            chartView.activeChart = .encrypted
-            chartModel.chartType = .encrypted
+            chartView.activeChart = .blocked
+            chartModel.chartType = .blocked
 
             requestsNumberLabel.alpha = 0.5
-            encryptedNumberLabel.alpha = 1.0
+            blockedNumberLabel.alpha = 1.0
 
             requestsTextLabel.alpha = 0.5
-            encryptedTextLabel.alpha = 1.0
+            blockedTextLabel.alpha = 1.0
         }
     }
 
-    /**
-    Called when "data daved" button tapped
-    */
-    private func chooseElapsedTime(){
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("average_info_alert_title"), message: String.localizedString("average_info_alert_message"))
+    /** Called when "data saved" button tapped */
+    private func chooseDataSaved() {
+        ACSSystemUtils.showSimpleAlert(
+            for: self,
+            withTitle: String.localizedString("data_saved_info_alert_title"),
+            message: String.localizedString("data_saved_info_alret_message")
+        )
     }
 
     /**
@@ -853,8 +855,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     private func setupFontsForSmallScreen(){
         requestsTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-        encryptedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-        elapsedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        blockedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        dataSavedLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
     }
 
     private func setupVoiceOverLabels(){
@@ -862,8 +864,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         systemProtectionButton.accessibilityLabel = String.localizedString("system_enabled")
 
         requestsButton.accessibilityLabel = String.localizedString("requests_number_voiceover")
-        encryptedButton.accessibilityLabel = String.localizedString("encrypted_number_voiceover")
-        elapsedButton.accessibilityLabel = String.localizedString("elapsed_time_voiceover")
+        blockedButton.accessibilityLabel = String.localizedString("encrypted_number_voiceover")
+        dataSavedButton.accessibilityLabel = String.localizedString("elapsed_time_voiceover")
 
         safariProtectionButton.onAccessibilityTitle = String.localizedString("safari_protection_enabled_voiceover")
         safariProtectionButton.offAccessibilityTitle = String.localizedString("safari_protection_disabled_voiceover")
@@ -984,14 +986,20 @@ extension MainPageController: WhatsNewBottomAlertControllerDelegate {
 }
 
 extension MainPageController: ChartViewModelDelegate {
-    func numberOfRequestsChanged(with points: (requests: [CGPoint], encrypted: [CGPoint]),
+    func numberOfRequestsChanged(with points: (requests: [CGPoint], encrypted: [CGPoint], blocked: [CGPoint]),
                                  countersStatisticsRecord: CountersStatisticsRecord?,
                                  firstFormattedDate: String,
                                  lastFormattedDate: String,
                                  maxRequests: Int) {
 
         chartView.chartPoints = points
-        updateTextForButtons(requestsCount: countersStatisticsRecord?.requests ?? 0, encryptedCount: countersStatisticsRecord?.encrypted ?? 0, averageElapsed: Double(countersStatisticsRecord?.averageElapsed ?? 0))
+
+        let blocked = countersStatisticsRecord?.blocked ?? 0
+        updateTextForButtons(
+            requestsCount: countersStatisticsRecord?.requests ?? 0,
+            blockedCount: blocked,
+            dataSaved: Double(blocked) * 2_000 // Calculate `Data saved` with 2 kB multiplyer
+        )
 
         chartView.leftDateLabelText = firstFormattedDate
         chartView.rightDateLabelText = lastFormattedDate

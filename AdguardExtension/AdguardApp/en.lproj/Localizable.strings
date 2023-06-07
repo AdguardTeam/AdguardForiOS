@@ -58,6 +58,18 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
+/* Kilobytes infromation unit */
+"kb_unit" = "%@ KB";
+
+/* Megabytes infromation unit */
+"mb_unit" = "%@ MB";
+
+/* Gigabytes infromation unit */
+"gb_unit" = "%@ GB";
+
 /* (MainPageController) Native DNS is working title */
 "native_dns_working" = "Native DNS is operating";
 
@@ -847,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know the total number of requests to realize the scope of this problem.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Blocked requests";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "The number of blocked DNS requests. You need to use an encrypted DNS server to have your DNS traffic encrypted.";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Encrypted requests";
 
@@ -858,6 +876,13 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Average time it takes to process a DNS request. The faster DNS server you use, the lower this would be.";
+
+/* (ActivityViewController) -  Data saved alret title /*
+"data_saved_info_alert_title" = "Data saved";
+
+// FIXME: Change text
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alret_message" = "MOCK TEXT";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Number of companies";

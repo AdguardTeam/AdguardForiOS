@@ -400,7 +400,7 @@
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                                         </variation>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="encrypted" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5U-A8-S8G" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blocked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5U-A8-S8G" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                                         <rect key="frame" x="4" y="44" width="130" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="nPj-4r-pOB">
@@ -435,7 +435,7 @@
                                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <action selector="encryptedTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="pyE-nf-hoe"/>
+                                                                            <action selector="blockedTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="pyE-nf-hoe"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -480,7 +480,7 @@
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                                         </variation>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="avg. time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfe-vu-29O" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="data saved" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfe-vu-29O" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                                         <rect key="frame" x="4" y="44" width="130" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="qdx-xq-uf3">
@@ -515,7 +515,7 @@
                                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <action selector="averageTimeTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="LRL-Mw-1Ib"/>
+                                                                            <action selector="dataSavedTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="LRL-Mw-1Ib"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -759,6 +759,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="adguardManImageView" destination="gM8-pc-xzq" id="laM-dL-fYX"/>
+                        <outlet property="blockedButton" destination="561-fR-2DC" id="28C-6y-DVX"/>
+                        <outlet property="blockedNumberLabel" destination="Kxe-Kt-6aQ" id="adZ-O4-B6C"/>
+                        <outlet property="blockedTextLabel" destination="a5U-A8-S8G" id="vGQ-XU-1Ag"/>
                         <outlet property="changeStatisticsDatesButton" destination="kfe-5H-fB1" id="bpY-pU-sXY"/>
                         <outlet property="changeStatisticsDatesButtonContainer" destination="su3-Wd-237" id="lrC-RD-6bG"/>
                         <outlet property="chartView" destination="aEB-g1-RpB" id="Vwb-3R-zO3"/>
@@ -769,14 +772,11 @@
                         <outlet property="contentBlockerViewConstraint" destination="eSv-Jc-dfo" id="bbd-3y-nVI"/>
                         <outlet property="contentBlockerViewIpad" destination="IU2-ER-A7n" id="t1x-7D-JNM"/>
                         <outlet property="contentBlockerViewIphone" destination="k8E-Jo-8op" id="G7Y-dJ-TYB"/>
+                        <outlet property="dataSavedButton" destination="vwk-XK-u63" id="wpf-Rq-83N"/>
+                        <outlet property="dataSavedLabel" destination="Cfe-vu-29O" id="QrY-hG-vOO"/>
+                        <outlet property="dataSavedNumberLabel" destination="Zbr-WF-bsX" id="dW7-1K-jJS"/>
                         <outlet property="dnsProtocolNameLabel" destination="7df-sN-Luj" id="mrf-9R-aKf"/>
                         <outlet property="dnsProviderNameLabel" destination="QpX-nI-9LE" id="Nay-n6-bdn"/>
-                        <outlet property="elapsedButton" destination="vwk-XK-u63" id="wpf-Rq-83N"/>
-                        <outlet property="elapsedNumberLabel" destination="Zbr-WF-bsX" id="hCA-OE-HiV"/>
-                        <outlet property="elapsedTextLabel" destination="Cfe-vu-29O" id="LEm-f2-4IA"/>
-                        <outlet property="encryptedButton" destination="561-fR-2DC" id="28C-6y-DVX"/>
-                        <outlet property="encryptedNumberLabel" destination="Kxe-Kt-6aQ" id="adZ-O4-B6C"/>
-                        <outlet property="encryptedTextLabel" destination="a5U-A8-S8G" id="vGQ-XU-1Ag"/>
                         <outlet property="fixItIphoneButton" destination="46F-Jh-wHm" id="w6O-vQ-gYa"/>
                         <outlet property="fixItiPadButton" destination="oe6-9O-dBB" id="tI3-vG-QJ0"/>
                         <outlet property="fromButtonsToTopHeight" destination="fsh-Xa-PHF" id="orr-de-A2U"/>
@@ -806,7 +806,6 @@
                         <outletCollection property="themableLabels" destination="Zbr-WF-bsX" collectionClass="NSMutableArray" id="we7-0t-0Uk"/>
                         <outletCollection property="themableLabels" destination="eIf-j0-9oP" collectionClass="NSMutableArray" id="qxd-v1-mtd"/>
                         <outletCollection property="themableLabels" destination="7df-sN-Luj" collectionClass="NSMutableArray" id="Q0G-6b-22U"/>
-                        <outletCollection property="themableLabels" destination="Zbr-WF-bsX" collectionClass="NSMutableArray" id="srl-f9-cM7"/>
                         <segue destination="t6s-y4-WsD" kind="presentation" identifier="showOnboardingSegue" modalPresentationStyle="fullScreen" id="SIK-gU-Bfj"/>
                     </connections>
                 </viewController>
