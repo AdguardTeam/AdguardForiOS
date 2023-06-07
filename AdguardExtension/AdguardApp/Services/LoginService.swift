@@ -97,8 +97,10 @@ final class LoginService: LoginServiceProtocol {
         set {
             let oldValue = resources.loggedIn
             resources.loggedIn = newValue
+            DDLogInfo("Change loggedIn from \(oldValue) to \(newValue)")
 
             if newValue != oldValue, let callback = activeChanged {
+                DDLogInfo("Call `active change` callback on set loggedIn value")
                 callback()
             }
         }
@@ -192,7 +194,7 @@ final class LoginService: LoginServiceProtocol {
     }
 
     func logout()->Bool {
-
+        DDLogInfo("Start log out")
         loggedIn = false
         resources.pretendPremiumAfterKeychainLoss = false
         expirationDate = nil
@@ -402,6 +404,14 @@ final class LoginService: LoginServiceProtocol {
 
             // Ignore the result of status check if application is pretending to be premium after the keychain loss
             if !self.resources.pretendPremiumAfterKeychainLoss {
+
+                DDLogInfo("""
+                    Expiration date: new = \(String(describing: expirationDate)) old = \(String(describing: self.expirationDate))
+                    Has premium license: new = \(premium) old = \(self.hasPremiumLicense)
+                    Active = \(self.active)
+                    Logged in: new = \(premium && self.active) old = \(self.loggedIn)
+                    License key not nil: new \(licenseKey != nil) old \(self.licenseKey != nil)
+                """)
                 self.expirationDate = expirationDate
                 self.hasPremiumLicense = premium
                 self.loggedIn = premium && self.active
@@ -468,6 +478,7 @@ final class LoginService: LoginServiceProtocol {
             DDLogInfo("(LoginService) expiration timer fired")
 
             if let callback = sSelf.activeChanged {
+                DDLogInfo("Call `active change` callback on expiration timer")
                 callback()
             }
             sSelf.timer = nil

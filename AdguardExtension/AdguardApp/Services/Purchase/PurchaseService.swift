@@ -230,6 +230,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         start()
 
         loginService.activeChanged = { [weak self] in
+            DDLogInfo("Post premium status changed event from login service active change")
             self?.postNotification(PurchaseAssistant.kPSNotificationPremiumStatusChanged)
         }
     }
@@ -293,6 +294,8 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     }
 
     func validateReceipt(onComplete complete:@escaping ((Error?)->Void)){
+        DDLogInfo("Start validating receipt")
+
         // get receipt
         guard let base64Str = getInAppPurchaseReceiptBase64() else {
             complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: nil))
@@ -348,7 +351,9 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                 }
 
                 strongSelf.purchasedThroughInApp = strongSelf.isInAppPurchaseActive()
+                DDLogInfo("Purchased through in app = \(strongSelf.purchasedThroughInApp)")
 
+                DDLogInfo("Post notification premium status changed from receipt validation")
                 strongSelf.postNotification(PurchaseAssistant.kPSNotificationPremiumStatusChanged)
                 complete(nil)
             }
