@@ -47,7 +47,7 @@ final class DefaultDnsFilterInstaller: DefaultDnsFilterInstallerProtocol {
             return
         }
 
-        dnsProtection.addFilter(withName: "AdGuard DNS filter", url: defaultFilterUrl, isEnabled: false) { [weak resources] error in
+        dnsProtection.addFilter(withName: "AdGuard DNS filter", url: defaultFilterUrl, isEnabled: true) { [weak resources] error in
             if let error = error {
                 DDLogError("(DefaultDnsFilterInstaller) - installDefaultDnsFilterIfNeeded; Failed to install default DNS filter with error: \(error)")
                 return
