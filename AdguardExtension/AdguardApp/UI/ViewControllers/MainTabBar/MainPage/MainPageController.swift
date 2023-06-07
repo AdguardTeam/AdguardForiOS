@@ -221,6 +221,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         if let domain = domainToEnableProtectionFor, !domain.isEmpty {
             processDomainAndEnableProtection(domain)
         }
+
+        dataSavedNumberLabel.textColor = UIColor.AdGuardColor.lightGreen1
+        dataSavedLabel.textColor = UIColor.AdGuardColor.lightGreen1
     }
 
     override func viewWillAppear(_ animated: Bool) {

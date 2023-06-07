@@ -493,7 +493,7 @@
                                         <constraint firstAttribute="height" constant="22" id="qRV-yh-0iW"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="blocked" image="ad_info">
+                                    <state key="normal" title="blocked" image="ad_info_red">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -581,6 +581,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
+                        <outlet property="blockedButton" destination="wt5-4Q-CTq" id="Ufg-bQ-ANm"/>
                         <outlet property="blockedNumberLabel" destination="3mo-qx-mDo" id="SHF-11-X0V"/>
                         <outlet property="filterButton" destination="eDh-XO-ei7" id="78K-Sp-wlk"/>
                         <outlet property="placeHolderLabel" destination="DCy-so-G1C" id="7A3-UV-JKW"/>
@@ -1545,7 +1546,7 @@
                                     </constraints>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="encrypted" image="ad_info">
+                                    <state key="normal" title="blocked" image="ad_info_red">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -1593,7 +1594,7 @@
                                     </constraints>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="avg. time" image="ad_info">
+                                    <state key="normal" title="data saved" image="ad_info_green">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -1896,9 +1897,11 @@
                     <connections>
                         <outlet property="activityImage" destination="mGN-6M-5iW" id="s6q-YR-UsO"/>
                         <outlet property="activityTitle" destination="5bV-zZ-4dr" id="OsZ-lX-RAr"/>
+                        <outlet property="blockedButton" destination="4IJ-xy-hky" id="9I6-Bs-rXq"/>
                         <outlet property="blockedNumberLabel" destination="iNX-Qd-Hmo" id="a5J-Gh-k13"/>
                         <outlet property="changePeriodTypeButton" destination="NcB-Aq-tH3" id="YzK-7f-91e"/>
                         <outlet property="companiesNumberLabel" destination="Jgb-st-fnO" id="ESb-HV-i8w"/>
+                        <outlet property="dataSavedButton" destination="yio-E8-cQV" id="ilB-2H-6B3"/>
                         <outlet property="dataSavedLabel" destination="w9H-e5-jiH" id="xc1-MF-VaJ"/>
                         <outlet property="filterButton" destination="KhR-jD-8wC" id="5tH-Lq-AEY"/>
                         <outlet property="mostActiveButton" destination="BA0-fw-Cpe" id="zMp-Nq-hmq"/>
@@ -2261,13 +2264,15 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="CZU-Py-Pox"/>
-        <segue reference="Ecv-Kh-Q3v"/>
+        <segue reference="5rO-v2-BPZ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Triangle down" width="20" height="10"/>
         <image name="Triangle up" width="20" height="10"/>
         <image name="activity" width="24" height="25"/>
         <image name="ad_info" width="14" height="14"/>
+        <image name="ad_info_green" width="16" height="16"/>
+        <image name="ad_info_red" width="16" height="16"/>
         <image name="arrow_down" width="24" height="24"/>
         <image name="arrow_right" width="24" height="24"/>
         <image name="bullet" width="24" height="24"/>

@@ -38,6 +38,9 @@ final class ActivityViewController: UITableViewController {
     @IBOutlet weak var dataSavedLabel: UILabel!
     @IBOutlet weak var companiesNumberLabel: ThemableLabel!
 
+    @IBOutlet weak var blockedButton: UIButton!
+    @IBOutlet weak var dataSavedButton: UIButton!
+
     @IBOutlet weak var mostActiveButton: RoundRectButton!
     @IBOutlet weak var mostActiveLabel: ThemableLabel!
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
@@ -130,6 +133,12 @@ final class ActivityViewController: UITableViewController {
         statisticsPeriodChanged(statisticsPeriod: activityModel.period)
         addObservers()
         requestsModel?.obtainRecords(for: activityModel.period, domains: nil)
+
+        blockedNumberLabel.textColor = UIColor.AdGuardColor.orange1
+        dataSavedLabel.textColor = UIColor.AdGuardColor.lightGreen1
+
+        blockedButton.setTitleColor(UIColor.AdGuardColor.orange1, for: .normal)
+        dataSavedButton.setTitleColor(UIColor.AdGuardColor.lightGreen1, for: .normal)
     }
 
     override func viewWillAppear(_ animated: Bool) {

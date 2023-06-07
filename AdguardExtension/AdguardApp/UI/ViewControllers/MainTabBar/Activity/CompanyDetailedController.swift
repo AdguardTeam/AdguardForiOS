@@ -27,6 +27,8 @@ final class CompanyDetailedController: UITableViewController {
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
     @IBOutlet weak var blockedNumberLabel: UILabel!
 
+    @IBOutlet weak var blockedButton: UIButton!
+
     @IBOutlet weak var searchBar: UISearchBar!
 
     @IBOutlet weak var placeHolderLabel: ThemableLabel!
@@ -101,6 +103,9 @@ final class CompanyDetailedController: UITableViewController {
 
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(value: blockedCount))
+
+        blockedNumberLabel.textColor = UIColor.AdGuardColor.orange1
+        blockedButton.setTitleColor(UIColor.AdGuardColor.orange1, for: .normal)
     }
 
     override func viewDidLayoutSubviews() {
@@ -246,7 +251,6 @@ final class CompanyDetailedController: UITableViewController {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
-            self.filterButton.isHidden = !self.configuration.advancedMode
         }
     }
 

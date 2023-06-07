@@ -881,7 +881,7 @@
 "data_saved_info_alert_title" = "Saved data";
 
 /* (ActivityViewController) -  Data saved alret message */
-"data_saved_info_alret_message" = "AdGuard doesn’t let your browser load unnecessary page elements, thus reducing your device's data consumption\n\nHere’s the total amount of data saved by AdGuard for the selected time period";
+"data_saved_info_alert_message" = "AdGuard doesn’t let your browser load unnecessary page elements, thus reducing your device's data consumption\n\nHere’s the total amount of data saved by AdGuard for the selected time period";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Number of companies";

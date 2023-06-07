@@ -69,8 +69,8 @@ final class ChartView: UIView {
     private var requestsLineColor = UIColor.AdGuardColor.lightGreen1
     private var requestsShadowColor = UIColor.AdGuardColor.lightGreen1
 
-    private var blockedLineColor = UIColor.AdGuardColor.lightBlue // FIXME: change color
-    private var blockedShadowColor = UIColor.AdGuardColor.lightBlue // FIXME: change color
+    private var blockedLineColor = UIColor.AdGuardColor.lightBlue
+    private var blockedShadowColor = UIColor.AdGuardColor.lightBlue
 
     private var gridColor = UIColor.AdGuardColor.chartGridColor
 
@@ -120,7 +120,7 @@ final class ChartView: UIView {
 
         requestsLineColor = isEnabled ? requestsColor : offColor
         requestsShadowColor = isEnabled ? requestsColor : offColor
-            blockedLineColor = isEnabled ? blockedColor : offColor
+        blockedLineColor = isEnabled ? blockedColor : offColor
         blockedShadowColor = isEnabled ? blockedColor : offColor
         drawChart()
     }
