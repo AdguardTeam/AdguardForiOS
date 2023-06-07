@@ -508,9 +508,11 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         requestsNumberLabel.alpha = 1.0
         blockedNumberLabel.alpha = 0.5
+        blockedNumberLabel.textColor = UIColor.AdGuardColor.orange1
 
         requestsTextLabel.alpha = 1.0
         blockedTextLabel.alpha = 0.5
+        blockedTextLabel.textColor = UIColor.AdGuardColor.orange1
     }
 
     /**
@@ -527,9 +529,11 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
             requestsNumberLabel.alpha = 0.5
             blockedNumberLabel.alpha = 1.0
+            blockedNumberLabel.textColor = UIColor.AdGuardColor.orange1
 
             requestsTextLabel.alpha = 0.5
             blockedTextLabel.alpha = 1.0
+            blockedNumberLabel.textColor = UIColor.AdGuardColor.orange1
         }
     }
 

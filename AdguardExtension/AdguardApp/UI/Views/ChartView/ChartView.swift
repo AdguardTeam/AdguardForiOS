@@ -115,8 +115,8 @@ final class ChartView: UIView {
     // MARK: - Methods for lines
 
     private func enabledStateChanged() {
-        let requestsColor = theme.grayTextColor
-        let blockedColor = UIColor.AdGuardColor.lightGreen1
+        let requestsColor = UIColor.AdGuardColor.logAllowlistedCellColor
+        let blockedColor = UIColor.AdGuardColor.orange1
 
         requestsLineColor = isEnabled ? requestsColor : offColor
         requestsShadowColor = isEnabled ? requestsColor : offColor
