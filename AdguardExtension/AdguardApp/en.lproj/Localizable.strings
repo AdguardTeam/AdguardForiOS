@@ -945,7 +945,7 @@
 "security_filters_feature_name" = "Security filters ";
 
 /* (PremiumFeature) - DNS privacy premium feature name */
-"dns_privacy_feature_name" = "DNS privacy";
+"dns_privacy_feature_name" = "DNS protection";
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Custom filters";
@@ -957,7 +957,7 @@
 "security_filters_feature_description" = "Block phishing, malware, and suspicious content";
 
 /* (PremiumFeature) - DNS privacy premium feature description */
-"dns_privacy_feature_description" = "Encrypt DNS requests locally and control your privacy";
+"dns_privacy_feature_description" = "Block in-app trackers that silently collect data about you";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Use third-party filters, or create your own";
