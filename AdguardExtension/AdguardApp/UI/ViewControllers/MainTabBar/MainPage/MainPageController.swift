@@ -538,7 +538,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         ACSSystemUtils.showSimpleAlert(
             for: self,
             withTitle: String.localizedString("data_saved_info_alert_title"),
-            message: String.localizedString("data_saved_info_alret_message")
+            message: String.localizedString("data_saved_info_alert_message")
         )
     }
 
@@ -998,7 +998,7 @@ extension MainPageController: ChartViewModelDelegate {
         updateTextForButtons(
             requestsCount: countersStatisticsRecord?.requests ?? 0,
             blockedCount: blocked,
-            dataSaved: Double(blocked) * 2_000 // Calculate `Data saved` with 2 kB multiplyer
+            dataSaved: Double(blocked) * 2_000 // Calculate `Data saved` with 2 KB multiplyer
         )
 
         chartView.leftDateLabelText = firstFormattedDate

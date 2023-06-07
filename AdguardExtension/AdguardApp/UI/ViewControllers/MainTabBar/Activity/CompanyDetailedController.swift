@@ -25,7 +25,7 @@ final class CompanyDetailedController: UITableViewController {
     @IBOutlet weak var titleLabel: ThemableLabel!
 
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
-    @IBOutlet weak var encryptedNumberLabel: UILabel!
+    @IBOutlet weak var blockedNumberLabel: UILabel!
 
     @IBOutlet weak var searchBar: UISearchBar!
 
@@ -97,12 +97,10 @@ final class CompanyDetailedController: UITableViewController {
         }
 
         let requestsCount = record?.requests ?? 0
-        let encryptedCount = record?.encrypted ?? 0
-
-        filterButton.isHidden = !configuration.advancedMode
+        let blockedCount = record?.blocked ?? 0
 
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
-        encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
+        blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(value: blockedCount))
     }
 
     override func viewDidLayoutSubviews() {
@@ -138,8 +136,8 @@ final class CompanyDetailedController: UITableViewController {
             let message = String.localizedString("requests_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         case 1:
-            let title = String.localizedString("encrypted_info_alert_title")
-            let message = String.localizedString("encrypted_info_alert_message")
+            let title = String.localizedString("blocked_info_alert_title")
+            let message = String.localizedString("blocked_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         default:
             return

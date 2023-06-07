@@ -877,12 +877,12 @@
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Average time it takes to process a DNS request. The faster DNS server you use, the lower this would be.";
 
-/* (ActivityViewController) -  Data saved alret title /*
+/* (ActivityViewController) -  Data saved alret title */
 "data_saved_info_alert_title" = "Data saved";
 
 // FIXME: Change text
 /* (ActivityViewController) -  Data saved alret message */
-"data_saved_info_alret_message" = "MOCK TEXT";
+"data_saved_info_alert_message" = "MOCK TEXT";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Number of companies";
@@ -907,6 +907,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d requests";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d blocked";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Enable %@ in your DNS settings";

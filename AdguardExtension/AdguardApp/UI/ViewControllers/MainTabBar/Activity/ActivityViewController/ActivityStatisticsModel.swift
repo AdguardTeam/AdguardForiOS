@@ -23,10 +23,12 @@ struct CompanyRequestsRecord {
     let company: String
     let requests: Int
     let encrypted: Int
+    let blocked: Int
 }
 
 struct CompaniesInfo {
     let mostRequested: [CompanyRequestsRecord]
+    let mostBlocked: [CompanyRequestsRecord]
     let companiesNumber: Int
 }
 
@@ -79,20 +81,42 @@ final class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
             guard let self = self else { return }
 
             guard let statistics = try? self.companiesStatistics.getCompaniesStatistics(for: type) else {
-                let info = CompaniesInfo(mostRequested: [], companiesNumber: 0)
+                let info = CompaniesInfo(mostRequested: [], mostBlocked: [], companiesNumber: 0)
                 completion(info)
                 return
             }
+
+            let blocked = getBlockedCompaniesRecords(statistics)
+
             let records: [CompanyRequestsRecord] = statistics.map {
                 return CompanyRequestsRecord(
                     domains: $0.domains,
                     company: $0.company,
                     requests: $0.counters.requests,
-                    encrypted: $0.counters.encrypted
+                    encrypted: $0.counters.encrypted,
+                    blocked: $0.counters.blocked
                 )
             }
-            let info = CompaniesInfo(mostRequested: records, companiesNumber: records.count)
+            let info = CompaniesInfo(mostRequested: records, mostBlocked: blocked ,companiesNumber: records.count)
             completion(info)
+        }
+    }
+
+
+
+    private func getBlockedCompaniesRecords(_ statistics: [CompaniesStatisticsRecord]) -> [CompanyRequestsRecord] {
+        let blockedCompaniesStatistics = statistics
+            .filter { $0.counters.blocked != 0 }
+            .sorted { $0.counters.blocked > $1.counters.blocked }
+
+        return blockedCompaniesStatistics.map {
+            CompanyRequestsRecord(
+                domains: $0.domains,
+                company: $0.company,
+                requests: $0.counters.requests,
+                encrypted: $0.counters.encrypted,
+                blocked: $0.counters.blocked
+            )
         }
     }
 }

@@ -34,7 +34,7 @@ final class ActivityViewController: UITableViewController {
     @IBOutlet weak var changePeriodTypeButton: UIButton!
 
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
-    @IBOutlet weak var encryptedNumberLabel: UILabel!
+    @IBOutlet weak var blockedNumberLabel: UILabel!
     @IBOutlet weak var dataSavedLabel: UILabel!
     @IBOutlet weak var companiesNumberLabel: ThemableLabel!
 
@@ -42,6 +42,11 @@ final class ActivityViewController: UITableViewController {
     @IBOutlet weak var mostActiveLabel: ThemableLabel!
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
     @IBOutlet weak var rightArrowImageView: UIImageView!
+
+    @IBOutlet weak var mostBlockedButton: RoundRectButton!
+    @IBOutlet weak var mostBlockedLabel: ThemableLabel!
+    @IBOutlet weak var mostBlockedCompany: ThemableLabel!
+    @IBOutlet weak var righArrowMostBlockedImageView: UIImageView!
 
     @IBOutlet weak var recentActivityLabel: ThemableLabel!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -85,9 +90,11 @@ final class ActivityViewController: UITableViewController {
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
     private let showMostActiveCompaniesSegueId = "showMostActiveCompaniesId"
+    private let showMostBlockedCompaniesSegueId = "showMostBlockedCompaniesId"
 
     private var selectedRecord: DnsLogRecord?
     private var mostRequestedCompanies: [CompanyRequestsRecord] = []
+    private var mostBlockedCompanies: [CompanyRequestsRecord] = []
     private var companiesNumber = 0
 
     private var swipedRecord: DnsLogRecord?
@@ -165,6 +172,10 @@ final class ActivityViewController: UITableViewController {
             controller.mostRequestedCompanies = mostRequestedCompanies
             controller.chartDateType = activityModel.period
             controller.activityVC = self
+        } else if segue.identifier == showMostBlockedCompaniesSegueId, let controller = segue.destination as? MostBlockedCompaniesController {
+            controller.mostBlockedCompanies = mostBlockedCompanies
+            controller.chartDateType = activityModel.period
+            controller.activityVC = self
         }
     }
 
@@ -181,12 +192,12 @@ final class ActivityViewController: UITableViewController {
             let message = String.localizedString("requests_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         case 1:
-            let title = String.localizedString("encrypted_info_alert_title")
-            let message = String.localizedString("encrypted_info_alert_message")
+            let title = String.localizedString("blocked_info_alert_title")
+            let message = String.localizedString("blocked_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         case 2:
-            let title = String.localizedString("average_info_alert_title")
-            let message = String.localizedString("average_info_alert_message")
+            let title = String.localizedString("data_saved_info_alert_title")
+            let message = String.localizedString("data_saved_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         case 3:
             let title = String.localizedString("companies_info_alert_title")
@@ -199,6 +210,10 @@ final class ActivityViewController: UITableViewController {
 
     @IBAction func mostActiveTapped(_ sender: UIButton) {
         performSegue(withIdentifier: showMostActiveCompaniesSegueId, sender: self)
+    }
+
+    @IBAction func mostBlockedTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: showMostBlockedCompaniesSegueId, sender: self)
     }
 
     @IBAction func clearActivityLogAction(_ sender: UIButton) {
@@ -545,27 +560,52 @@ extension ActivityViewController: DateTypeChangedProtocol {
 
     private func processCompaniesInfo(_ companiesInfo: CompaniesInfo) {
         DispatchQueue.asyncSafeMain { [weak self] in
-            if !companiesInfo.mostRequested.isEmpty {
-                self?.mostActiveButton.alpha = 1.0
-                self?.mostActiveLabel.alpha = 1.0
-                self?.mostActiveCompany.alpha = 1.0
-                self?.rightArrowImageView.alpha = 1.0
-                self?.mostActiveButton.isEnabled = true
-                let record = companiesInfo.mostRequested[0]
-                self?.mostActiveCompany.text = record.company
-            } else {
-                self?.mostActiveButton.alpha = 0.5
-                self?.mostActiveLabel.alpha = 0.5
-                self?.mostActiveCompany.alpha = 0.5
-                self?.rightArrowImageView.alpha = 0.5
-                self?.mostActiveButton.isEnabled = false
-                self?.mostActiveCompany.text = String.localizedString("none_message")
-            }
+            self?.processRequestedCompaniesInfo(companiesInfo)
+            self?.processBlockedCompaniesInfo(companiesInfo)
 
             self?.companiesNumberLabel.text = "\(companiesInfo.companiesNumber)"
 
             self?.mostRequestedCompanies = companiesInfo.mostRequested
+            self?.mostBlockedCompanies = companiesInfo.mostBlocked
             self?.companiesNumber = companiesInfo.companiesNumber
+        }
+    }
+
+    private func processRequestedCompaniesInfo(_ companiesInfo: CompaniesInfo) {
+        if !companiesInfo.mostRequested.isEmpty {
+            mostActiveButton.alpha = 1.0
+            mostActiveLabel.alpha = 1.0
+            mostActiveCompany.alpha = 1.0
+            rightArrowImageView.alpha = 1.0
+            mostActiveButton.isEnabled = true
+            let record = companiesInfo.mostRequested[0]
+            mostActiveCompany.text = record.company
+        } else {
+            mostActiveButton.alpha = 0.5
+            mostActiveLabel.alpha = 0.5
+            mostActiveCompany.alpha = 0.5
+            rightArrowImageView.alpha = 0.5
+            mostActiveButton.isEnabled = false
+            mostActiveCompany.text = String.localizedString("none_message")
+        }
+    }
+
+    private func processBlockedCompaniesInfo(_ companiesInfo: CompaniesInfo) {
+        if !companiesInfo.mostBlocked.isEmpty {
+            mostBlockedButton.alpha = 1.0
+            mostBlockedLabel.alpha = 1.0
+            mostBlockedCompany.alpha = 1.0
+            righArrowMostBlockedImageView.alpha = 1.0
+            mostBlockedButton.isEnabled = true
+            let record = companiesInfo.mostBlocked[0]
+            mostBlockedCompany.text = record.company
+        } else {
+            mostBlockedButton.alpha = 0.5
+            mostBlockedLabel.alpha = 0.5
+            mostBlockedCompany.alpha = 0.5
+            righArrowMostBlockedImageView.alpha = 0.5
+            mostBlockedButton.isEnabled = false
+            mostBlockedCompany.text = String.localizedString("none_message")
         }
     }
 }
@@ -582,10 +622,11 @@ extension ActivityViewController {
             guard let self = self else { return }
 
             let counters = self.activityModel.counters
+            let dataSaved = counters.blocked * 2_000 // Calculate `Data saved` with 2 KB multiplyer
 
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.requests))
-            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.encrypted))
-            self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(value: counters.averageElapsed))
+            self.blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.blocked))
+            self.dataSavedLabel.text = String.informationUnitFormatter(NSNumber(value: dataSaved))
         }
     }
 }
