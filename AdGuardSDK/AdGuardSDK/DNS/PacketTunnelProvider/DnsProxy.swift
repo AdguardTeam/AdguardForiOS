@@ -85,7 +85,7 @@ final class DnsProxy: DnsProxyProtocol {
         }
         proxySettingsProvider.reset()
         let configuration = proxySettingsProvider.getProxyConfig(systemDnsUpstreams)
-        let agConfig = AGDnsProxyConfig(from: configuration)
+        let agConfig = AGDnsProxyConfig.initialize(from: configuration)
 
         // Processing events config
         let handler: DnsRequestProcessedEventHandlerProtocol

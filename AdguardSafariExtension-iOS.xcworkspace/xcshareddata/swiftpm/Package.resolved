@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AdguardTeam/DnsLibs",
       "state" : {
-        "revision" : "14f934fd342fa314a8abeb376798c9fa7d64272c",
-        "version" : "2.0.75"
+        "revision" : "e960322831ea2e3d7a875b8b4ff0ce34640ab8b1",
+        "version" : "2.2.8"
       }
     },
     {
