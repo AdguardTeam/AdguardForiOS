@@ -58,6 +58,15 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10k";
 
+/* Kilobytes infromation unit */
+"kb_unit" = "%@ KB";
+
+/* Megabytes infromation unit */
+"mb_unit" = "%@ MB";
+
+/* Gigabytes infromation unit */
+"gb_unit" = "%@ GB";
+
 /* (MainPageController) Native DNS is working title */
 "native_dns_working" = "Nativní DNS funguje";
 
@@ -945,7 +954,7 @@
 "security_filters_feature_name" = "Bezpečnostní filtry ";
 
 /* (PremiumFeature) - DNS privacy premium feature name */
-"dns_privacy_feature_name" = "Soukromí DNS";
+"dns_privacy_feature_name" = "DNS ochrana";
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Vlastní filtry";
@@ -955,9 +964,6 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Blokování krádeže identity, zákeřného softwaru a podezřelého obsahu";
-
-/* (PremiumFeature) - DNS privacy premium feature description */
-"dns_privacy_feature_description" = "Šifrujte požadavky DNS lokálně a ovládejte své soukromí";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Použijte filtry třetích stran nebo si vytvořte vlastní";

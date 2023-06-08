@@ -58,9 +58,6 @@
 /* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Radi zajedno sa AdGuard blokatorom reklama";
 
-/* Class = "UILabel"; text = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Ovaj podprogram vas štiti od praćenja u čitavom sistemu. On šifruje vaše DNS unose i blokira domene praćenja u svim aplikacijama, ne samo u Safariju";
-
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Nije instalirano";
 

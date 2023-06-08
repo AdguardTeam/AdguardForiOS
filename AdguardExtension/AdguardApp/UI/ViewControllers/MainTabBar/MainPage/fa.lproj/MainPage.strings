@@ -17,5 +17,9 @@
 /* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
 "YaQ-RE-YZT.title" = "AdGuard";
 
+/* a5U-A8-S8G.text
+Class = &quot;UILabel&quot;; text = &quot;blocked&quot;; ObjectID = &quot;a5U-A8-S8G&quot;; */
+"a5U-A8-S8G.text" = "مسدود شده";
+
 /* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "oe6-9O-dBB"; */
 "oe6-9O-dBB.normalTitle" = "تعمیر کن";

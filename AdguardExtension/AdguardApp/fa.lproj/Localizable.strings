@@ -25,6 +25,15 @@
 /* NO Button caption in alert */
 "common_action_no" = "خیر";
 
+/* Kilobytes infromation unit */
+"kb_unit" = "%@ کیلوبایت";
+
+/* Megabytes infromation unit */
+"mb_unit" = "%@ مگابایت";
+
+/* Gigabytes infromation unit */
+"gb_unit" = "%@ گیگابایت";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "فیلتر کاربر";
 
@@ -498,6 +507,9 @@
 
 /* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
 "detailed_filter_info_subscription_subtitle" = "آدرس اشتراک";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "حفاظت از DNS";
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "فیلترهای دستی";

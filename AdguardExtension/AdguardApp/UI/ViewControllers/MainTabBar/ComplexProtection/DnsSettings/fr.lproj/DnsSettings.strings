@@ -22,9 +22,6 @@
 /* Class = "UILabel"; text = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n"; ObjectID = "Mxf-0w-5MP"; */
 "Mxf-0w-5MP.text" = "Fourni par le système d'exploitation lui-même. L'inspection de l'activité DNS ne sera pas possible dans ce mode.\n\n";
 
-/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Activez ce module pour renforcer la confidentialité de votre navigation en chiffrant vos requêtes DNS.";
-
 /* Class = "UILabel"; text = "AdGuard"; ObjectID = "QD7-ng-Xb6"; */
 "QD7-ng-Xb6.text" = "AdGuard";
 

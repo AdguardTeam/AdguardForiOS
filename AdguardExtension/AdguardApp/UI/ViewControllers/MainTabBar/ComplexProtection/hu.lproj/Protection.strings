@@ -58,9 +58,6 @@
 /* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Az AdGuard hirdetésblokkolóval együtt működik";
 
-/* Class = "UILabel"; text = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Ez a modul lehetővé teszi, hogy egyéni DNS szervert használjon és növelje adatai biztonságát a DNS kérések titkosításával.";
-
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Nincs telepítve";
 
