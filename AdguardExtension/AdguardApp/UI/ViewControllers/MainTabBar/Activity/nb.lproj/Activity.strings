@@ -1,6 +1,9 @@
 /* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
 "1A6-DD-78f.normalTitle" = "Skift modus";
 
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "LEGG TIL";
+
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
 "4IJ-xy-hky.normalTitle" = "kryptert";
 
@@ -60,6 +63,9 @@
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Blokker forespørsel";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "LEGG TIL";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "forespørsler";

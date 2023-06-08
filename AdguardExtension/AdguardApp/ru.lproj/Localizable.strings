@@ -902,7 +902,7 @@
 "detailed_filter_info_version_subtitle" = "Версия";
 
 /* (FilterDetailsViewController) Updated subtitle for detailed filter info */
-"detailed_filter_info_updated_subtitle" = "Обновлен";
+"detailed_filter_info_updated_subtitle" = "Обновлено";
 
 /* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
 "detailed_filter_info_rules_count_subtitle" = "Количество правил:";

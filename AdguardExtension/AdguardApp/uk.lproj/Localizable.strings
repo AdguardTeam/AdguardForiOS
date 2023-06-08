@@ -47,16 +47,16 @@
 "s_unit" = "%@ с";
 
 /* (MainPageController) Text for data units (M) Millions */
-"millions_unit" = "%@млн";
+"millions_unit" = "%@ млн";
 
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
-"thousands_unit" = "%@ тис";
+"thousands_unit" = "%@ тис.";
 
 /* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
-"hundred_millions_unit" = "%@100M";
+"hundred_millions_unit" = "%@100 млн";
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
-"ten_thousands_unit" = "%@10K";
+"ten_thousands_unit" = "%@10 тис.";
 
 /* (MainPageController) Native DNS is working title */
 "native_dns_working" = "Вбудований DNS працює";

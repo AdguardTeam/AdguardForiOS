@@ -5,6 +5,9 @@
 /* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "ويرايش";
 
+/* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
+"X1F-2p-Xpe.text" = "حفاظت DNS غیرفعال شده است";
+
 /* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "XYE-JT-WSH"; */
 "XYE-JT-WSH.normalTitle" = "فعالسازي";
 
@@ -14,11 +17,26 @@
 /* Class = "UILabel"; text = "Status"; ObjectID = "ckn-Oh-2aa"; */
 "ckn-Oh-2aa.text" = "وضعیت";
 
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
+"eye-K9-gbK.text" = "انتخاب پروتکل";
+
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
+"hR9-Pm-Gq0.text" = "فعالیت اخیر";
+
 /* Class = "UIButton"; normalTitle = "Back"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "قبلی";
 
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
+"kX9-ZX-NOu.text" = "فعالیت اخیر";
+
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "افزودن";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
+"lKJ-8V-GJi.normalTitle" = "درخواست ها";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
+"qPQ-vV-fXm.normalTitle" = "درخواست ها";
 
 /* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
 "uni-H6-XNc.text" = "جزئیات درخواست";

@@ -61,5 +61,8 @@
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
 "vDF-5j-uJn.text" = "فیلترکردن DNS";
 
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "vJt-Jd-BI2"; */
+"vJt-Jd-BI2.text" = "انتخاب پروتکل";
+
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "فیلترها و استثناها";

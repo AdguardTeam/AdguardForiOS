@@ -50,7 +50,7 @@
 "millions_unit" = "%@M";
 
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
-"thousands_unit" = "%@K";
+"thousands_unit" = "%@B";
 
 /* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "hundred_millions_unit" = "%@100M";
@@ -608,7 +608,7 @@
 "chart_30days" = "30 gün";
 
 /*(MainScreen) "all time" chart date type */
-"chart_alltime" = "Bütün zamanlar";
+"chart_alltime" = "Her zaman";
 
 /*(SafariService) notification about loading content blockers  */
 "loading_content_blockers" = "İçerik engelleyiciler güncelleniyor...";

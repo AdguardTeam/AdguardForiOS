@@ -7,5 +7,11 @@
 /* Class = "UIButton"; normalTitle = "Acknowledgments"; ObjectID = "htU-yE-FEi"; */
 "htU-yE-FEi.normalTitle" = "Anerkjennelser";
 
+/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "jMW-e4-GbU"; */
+"jMW-e4-GbU.title" = "LOGG INN";
+
+/* Class = "UIButton"; normalTitle = "More info"; ObjectID = "oMX-oj-ZeJ"; */
+"oMX-oj-ZeJ.normalTitle" = "Diskuter AdGuard";
+
 /* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */
 "uyB-mD-gtt.normalTitle" = "EULA";

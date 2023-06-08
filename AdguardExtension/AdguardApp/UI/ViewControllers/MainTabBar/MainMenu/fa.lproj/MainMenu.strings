@@ -5,6 +5,9 @@
 /* Class = "UILabel"; text = "Support"; ObjectID = "6Z2-0N-PSp"; */
 "6Z2-0N-PSp.text" = "ارسال دیدگاه";
 
+/* Class = "UILabel"; text = "Rate app"; ObjectID = "B4f-Bt-0w6"; Note = "(Main Menu) Advanced Settings caption"; */
+"B4f-Bt-0w6.text" = "امتیاز به برنامه";
+
 /* Class = "UILabel"; text = "License"; ObjectID = "Ebc-Lf-9R1"; */
 "Ebc-Lf-9R1.text" = "مجوز";
 

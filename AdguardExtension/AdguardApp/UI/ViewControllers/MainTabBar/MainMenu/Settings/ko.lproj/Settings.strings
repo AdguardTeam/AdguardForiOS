@@ -131,7 +131,7 @@
 "gxl-pG-zh1.text" = "\"개인 VPN\"앱과 호환됩니다";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
-"jmQ-ze-hFG.text" = "분할 터널 모드에서 AdGuard는 \"개인 VPN\"앱과 호환됩니다. 이 모드에서는 연결 불량 시 시스템에 의해 우회될 수 있습니다.";
+"jmQ-ze-hFG.text" = "분할 터널 모드에서 AdGuard는 소위 '개인 VPN' 앱과 호환됩니다. 하지만 이 모드에서는 연결 상태가 불량한 경우 시스템에 의해 우회될 수 있습니다.";
 
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallback servers";

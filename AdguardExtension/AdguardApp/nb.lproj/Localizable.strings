@@ -274,6 +274,9 @@
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAlle rettigheter forbeholdt. AdGuard.com";
 
+/* (LicensePageViewController) Login title */
+"common_login" = "LOGG INN";
+
 /* (AboutViewController) Logout title */
 "common_logout" = "Avlogging";
 

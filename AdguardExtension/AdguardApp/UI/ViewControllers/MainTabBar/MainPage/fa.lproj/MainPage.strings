@@ -8,6 +8,9 @@
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "7SB-2j-FAc"; */
 "7SB-2j-FAc.normalTitle" = "ادامه";
 
+/* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
+"Btd-nN-zLO.text" = "درخواست ها";
+
 /* Class = "UILabel"; text = "Some content blockers are disabled"; ObjectID = "FcP-gP-TsG"; */
 "FcP-gP-TsG.text" = "برخی مسدودسازی های محتوا غیرفعال شده اند";
 
