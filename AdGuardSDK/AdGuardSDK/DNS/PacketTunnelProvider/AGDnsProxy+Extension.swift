@@ -44,22 +44,21 @@ extension AGStampProtoType {
 // MARK: - AGDnsUpstream + DnsProxyUpstream init
 
 extension AGDnsUpstream {
-    convenience init(from upstream: DnsProxyUpstream) {
-        self.init(
-            address: upstream.dnsUpstreamInfo.upstream,
-            bootstrap: upstream.dnsBootstraps.map { $0.upstream },
-            timeoutMs: AGDnsUpstream.defaultTimeoutMs,
-            serverIp: nil,
-            id: upstream.id,
-            outboundInterfaceName: nil
-        )
+    static func initialize(from upstream: DnsProxyUpstream) -> AGDnsUpstream {
+        let dnsUpstream = AGDnsUpstream()
+        dnsUpstream.address = upstream.dnsUpstreamInfo.upstream
+        dnsUpstream.bootstrap = upstream.dnsBootstraps.map { $0.upstream }
+        dnsUpstream.serverIp = nil
+        dnsUpstream.id = upstream.id
+        dnsUpstream.outboundInterfaceName = nil
+
+        return dnsUpstream
     }
 
     var extendedDescription: String {
         return  """
                 address: \(address ?? "nil")
                 bootstrap: \(bootstrap ?? [])
-                timeoutMs: \(timeoutMs)
                 id: \(id)
                 outboundInterfaceName: \(outboundInterfaceName ?? "nil")
                 """
@@ -69,8 +68,8 @@ extension AGDnsUpstream {
 // MARK: - AGDnsFilterParams + DnsProxyFilter init
 
 extension AGDnsFilterParams {
-    convenience init(from filter: DnsProxyFilter) {
 
+    static func initialize(from filter: DnsProxyFilter) -> AGDnsFilterParams{
         let filterId = filter.filterId
         let filterData: String
         let inMemory: Bool
@@ -84,23 +83,25 @@ extension AGDnsFilterParams {
             inMemory = true
         }
 
-        self.init(
-            id: filterId,
-            data: filterData,
-            inMemory: inMemory
-        )
+        let dnsFilterParams = AGDnsFilterParams()
+        dnsFilterParams.id = filterId
+        dnsFilterParams.data = filterData
+        dnsFilterParams.inMemory = inMemory
+
+        return dnsFilterParams
     }
 }
 
 // MARK: - AGDns64Settings + DnsProxy64Settings init
 
 extension AGDns64Settings {
-    convenience init(from upstreams: [DnsProxyUpstream]) {
-        self.init(
-            upstreams: upstreams.map { AGDnsUpstream(from: $0) },
-            maxTries: 2,
-            waitTimeMs: AGDnsUpstream.defaultTimeoutMs
-        )
+    static func initialize(from upstreams: [DnsProxyUpstream]) -> AGDns64Settings {
+        let dns64Settings = AGDns64Settings()
+        dns64Settings.upstreams = upstreams.map { AGDnsUpstream.initialize(from: $0) }
+        dns64Settings.maxTries = 2
+        dns64Settings.waitTimeMs = AGDnsProxyConfig.defaultTimeoutMs
+
+        return dns64Settings
     }
 
     var extendedDescription: String {
@@ -112,50 +113,48 @@ extension AGDns64Settings {
     }
 }
 
-// MARK: - AGDnsUpstream + defaultTimeoutMs
-
-public extension AGDnsUpstream {
-    /// AGDnsProxy Fallback timeout
-    static let defaultTimeoutMs = 60_000
-}
-
 // MARK: - AGDnsProxyConfig + DnsProxyConfiguration
 
 extension AGDnsProxyConfig {
+    /// AGDnsProxy Fallback timeout
+    public static let defaultTimeoutMs = 60_000
+
     /// Initializer for `AGDnsProxyConfig` from `DnsProxyConfiguration`
     /// We use `DnsProxyConfiguration` to be able to test how we configure `AGDnsProxyConfig`
-    convenience init(from configuration: DnsProxyConfiguration) {
+    static func initialize(from configuration: DnsProxyConfiguration) -> AGDnsProxyConfig {
         let defaultConfig = AGDnsProxyConfig.getDefault()!
 
-        self.init(
-            upstreams: configuration.upstreams.map { AGDnsUpstream(from: $0) },
-            fallbacks: configuration.fallbacks.map { AGDnsUpstream(from: $0) },
-            fallbackDomains: defaultConfig.fallbackDomains,
-            detectSearchDomains: defaultConfig.detectSearchDomains,
-            filters: configuration.filters.map { AGDnsFilterParams(from: $0)},
-            filtersMemoryLimitBytes: defaultConfig.filtersMemoryLimitBytes,
-            blockedResponseTtlSecs: configuration.blockedResponseTtlSecs,
-            dns64Settings: AGDns64Settings(from: configuration.dns64Upstreams),
-            listeners: defaultConfig.listeners,
-            outboundProxy: defaultConfig.outboundProxy,
-            ipv6Available: configuration.ipv6Available,
-            blockIpv6: configuration.blockIpv6,
-            adblockRulesBlockingMode: configuration.rulesBlockingMode.agRulesBlockingMode,
-            hostsRulesBlockingMode: configuration.hostsBlockingMode.agHostsRulesBlockingMode,
-            customBlockingIpv4: configuration.customBlockingIpv4 ?? defaultConfig.customBlockingIpv4,
-            customBlockingIpv6: configuration.customBlockingIpv6 ?? defaultConfig.customBlockingIpv6,
-            dnsCacheSize: defaultConfig.dnsCacheSize,
-            optimisticCache: defaultConfig.optimisticCache,
-            enableDNSSECOK: defaultConfig.enableDNSSECOK,
-            enableRetransmissionHandling: defaultConfig.enableRetransmissionHandling,
-            // This feature has initially been added to solve the incompatibility issue with Windscribe VPN:
-            // https://github.com/AdguardTeam/AdguardForiOS/issues/1707
-            // Unfortunately, it appears to be really unstable and causing issues with the current implementation.
-            // We should revive it later when we change the way the network extension handles network change.
-            enableRouteResolver: false,
-            blockEch: false,
-            helperPath: defaultConfig.helperPath
-        )
+        let dnsProxyConfiguration = AGDnsProxyConfig()
+        dnsProxyConfiguration.upstreams = configuration.upstreams.map { AGDnsUpstream.initialize(from: $0) }
+        dnsProxyConfiguration.fallbacks = configuration.fallbacks.map { AGDnsUpstream.initialize(from: $0) }
+        dnsProxyConfiguration.fallbackDomains = defaultConfig.fallbackDomains
+        dnsProxyConfiguration.detectSearchDomains = defaultConfig.detectSearchDomains
+        dnsProxyConfiguration.filters = configuration.filters.map { AGDnsFilterParams.initialize(from: $0) }
+        dnsProxyConfiguration.filtersMemoryLimitBytes = defaultConfig.filtersMemoryLimitBytes
+        dnsProxyConfiguration.blockedResponseTtlSecs = configuration.blockedResponseTtlSecs
+        dnsProxyConfiguration.dns64Settings = AGDns64Settings.initialize(from: configuration.dns64Upstreams)
+        dnsProxyConfiguration.listeners = defaultConfig.listeners
+        dnsProxyConfiguration.outboundProxy = defaultConfig.outboundProxy
+        dnsProxyConfiguration.ipv6Available = configuration.ipv6Available
+        dnsProxyConfiguration.blockIpv6 = configuration.blockIpv6
+        dnsProxyConfiguration.adblockRulesBlockingMode = configuration.rulesBlockingMode.agRulesBlockingMode
+        dnsProxyConfiguration.hostsRulesBlockingMode = configuration.hostsBlockingMode.agHostsRulesBlockingMode
+        dnsProxyConfiguration.customBlockingIpv4 = configuration.customBlockingIpv4 ?? defaultConfig.customBlockingIpv4
+        dnsProxyConfiguration.customBlockingIpv6 = configuration.customBlockingIpv6 ?? defaultConfig.customBlockingIpv6
+        dnsProxyConfiguration.dnsCacheSize = defaultConfig.dnsCacheSize
+        dnsProxyConfiguration.optimisticCache = defaultConfig.optimisticCache
+        dnsProxyConfiguration.enableDNSSECOK = defaultConfig.enableDNSSECOK
+        dnsProxyConfiguration.enableRetransmissionHandling = defaultConfig.enableRetransmissionHandling
+        // This feature has initially been added to solve the incompatibility issue with Windscribe VPN:
+        // https://github.com/AdguardTeam/AdguardForiOS/issues/1707
+        // Unfortunately, it appears to be really unstable and causing issues with the current implementation.
+        // We should revive it later when we change the way the network extension handles network change.
+        dnsProxyConfiguration.enableRouteResolver = false
+        dnsProxyConfiguration.blockEch = false
+        dnsProxyConfiguration.helperPath = defaultConfig.helperPath
+        dnsProxyConfiguration.upstreamTimeoutMs = UInt(AGDnsProxyConfig.defaultTimeoutMs)
+
+        return dnsProxyConfiguration
     }
 
     var extendedDescription: String {
@@ -181,6 +180,7 @@ extension AGDnsProxyConfig {
                enableRouteResolver: \(enableRouteResolver)
                blockEch: \(blockEch)
                helperPath: \(helperPath ?? "nil")
+               upstreamTimeoutMs: \(upstreamTimeoutMs)
                """
     }
 }

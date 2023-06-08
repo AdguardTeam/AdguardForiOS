@@ -168,9 +168,14 @@ public class NetworkUtils: NetworkUtilsProtocol {
     public func upstreamIsValid(_ upstream: String) -> Bool {
         let bootstraps = systemDnsServers
 
-        let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
+        let dnsUpstream = AGDnsUpstream()
+        dnsUpstream.address = upstream
+        dnsUpstream.bootstrap = bootstraps
+        dnsUpstream.serverIp = Data()
+        dnsUpstream.id = 0
+        dnsUpstream.outboundInterfaceName = nil
 
-        if let error = AGDnsUtils.test(dnsUpstream, ipv6Available: isIpv6Available, offline: false) {
+        if let error = AGDnsUtils.test(dnsUpstream, timeoutMs: UInt(AGDnsProxyConfig.defaultTimeoutMs), ipv6Available: isIpv6Available, offline: false) {
             Logger.logError("(NetworkUtils) - upstreamIsValid; Error: \(error)")
             return false
         } else {
