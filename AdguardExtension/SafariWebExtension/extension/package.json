@@ -1,6 +1,6 @@
 {
   "name": "advanced-adblocker-web-extension",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Advanced AdBlocker Web Extension",
   "main": "index.js",
   "author": "AdGuard",
@@ -16,7 +16,7 @@
     "@adguard/assistant": "4.3.68",
     "@adguard/extended-css": "2.0.52",
     "@adguard/translate": "0.3.0",
-    "@adguard/tsurlfilter": "2.0.5",
+    "@adguard/tsurlfilter": "2.0.6",
     "@babel/runtime": "^7.14.6",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
