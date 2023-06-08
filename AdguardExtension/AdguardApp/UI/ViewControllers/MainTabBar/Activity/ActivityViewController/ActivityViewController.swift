@@ -133,12 +133,6 @@ final class ActivityViewController: UITableViewController {
         statisticsPeriodChanged(statisticsPeriod: activityModel.period)
         addObservers()
         requestsModel?.obtainRecords(for: activityModel.period, domains: nil)
-
-        blockedNumberLabel.textColor = UIColor.AdGuardColor.orange1
-        dataSavedLabel.textColor = UIColor.AdGuardColor.lightGreen1
-
-        blockedButton.setTitleColor(UIColor.AdGuardColor.orange1, for: .normal)
-        dataSavedButton.setTitleColor(UIColor.AdGuardColor.lightGreen1, for: .normal)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -435,6 +429,7 @@ final class ActivityViewController: UITableViewController {
         resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.obtainRecords(for: self.activityModel.period)
+            self.statisticsPeriodChanged(statisticsPeriod: self.activityModel.period)
         }
 
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] _ in
@@ -688,6 +683,12 @@ extension ActivityViewController: ThemableProtocol {
         theme.setupButtons(themableButtons)
         mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
         mostActiveButton.customBackgroundColor = theme.backgroundColor
+
+        blockedNumberLabel.textColor = UIColor.AdGuardColor.orange1
+        dataSavedLabel.textColor = UIColor.AdGuardColor.lightGreen1
+
+        blockedButton.setTitleColor(UIColor.AdGuardColor.orange1, for: .normal)
+        dataSavedButton.setTitleColor(UIColor.AdGuardColor.lightGreen1, for: .normal)
     }
 }
 

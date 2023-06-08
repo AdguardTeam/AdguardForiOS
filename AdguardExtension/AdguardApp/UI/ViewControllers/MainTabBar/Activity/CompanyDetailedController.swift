@@ -103,9 +103,6 @@ final class CompanyDetailedController: UITableViewController {
 
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(value: blockedCount))
-
-        blockedNumberLabel.textColor = UIColor.AdGuardColor.orange1
-        blockedButton.setTitleColor(UIColor.AdGuardColor.orange1, for: .normal)
     }
 
     override func viewDidLayoutSubviews() {
@@ -375,5 +372,8 @@ extension CompanyDetailedController: ThemableProtocol {
         theme.setupLabels(themableLabels)
         theme.setupButtons(themableButtons)
         theme.setupLabel(recentActivityLabel)
+
+        blockedNumberLabel.textColor = UIColor.AdGuardColor.orange1
+        blockedButton.setTitleColor(UIColor.AdGuardColor.orange1, for: .normal)
     }
 }

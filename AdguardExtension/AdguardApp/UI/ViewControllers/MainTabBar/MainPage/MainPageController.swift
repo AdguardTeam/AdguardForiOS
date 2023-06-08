@@ -221,9 +221,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         if let domain = domainToEnableProtectionFor, !domain.isEmpty {
             processDomainAndEnableProtection(domain)
         }
-
-        dataSavedNumberLabel.textColor = UIColor.AdGuardColor.lightGreen1
-        dataSavedLabel.textColor = UIColor.AdGuardColor.lightGreen1
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -979,6 +976,12 @@ extension MainPageController: ThemableProtocol {
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
         contentBlockerViewIpad.backgroundColor = UIColor.AdGuardColor.lightGray6
         nativeDnsView.backgroundColor = theme.backgroundColor
+
+        dataSavedNumberLabel.textColor = UIColor.AdGuardColor.lightGreen1
+        dataSavedLabel.textColor = UIColor.AdGuardColor.lightGreen1
+
+        blockedNumberLabel.textColor = UIColor.AdGuardColor.orange1
+        blockedTextLabel.textColor = UIColor.AdGuardColor.orange1
     }
 }
 
