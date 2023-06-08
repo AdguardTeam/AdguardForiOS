@@ -20,7 +20,7 @@ import DnsAdGuardSDK
 import UIKit
 
 protocol ChartViewModelDelegate: AnyObject {
-    func numberOfRequestsChanged(with points: (requests: [CGPoint], encrypted: [CGPoint]),
+    func numberOfRequestsChanged(with points: (requests: [CGPoint], encrypted: [CGPoint], blocked: [CGPoint]),
                                  countersStatisticsRecord: CountersStatisticsRecord?,
                                  firstFormattedDate: String,
                                  lastFormattedDate: String,
@@ -39,6 +39,7 @@ final class ChartViewModel: ChartViewModelProtocol {
     private struct ChartPoints {
         let requestsPoints: [CGPoint]
         let encryptedPoints: [CGPoint]
+        let blockedPoints: [CGPoint]
         let maxXelement: CGFloat
         let maxYelement: CGFloat
     }
@@ -121,10 +122,10 @@ final class ChartViewModel: ChartViewModelProtocol {
             let info = self.statisticsInfo
             let records = self.getChartRecords(for: self.statisticsPeriod)
 
-            let points = self.getPreparedPoints(requestsPoints: records.requests.points, encryptedPoints: records.encrypted.points)
+            let points = self.getPreparedPoints(requestsPoints: records.requests.points, encryptedPoints: records.encrypted.points, blockedPoints: records.blocked.points)
 
             self.delegate?.numberOfRequestsChanged(
-                    with: (points.requestsPoints, points.encryptedPoints),
+                with: (points.requestsPoints, points.encryptedPoints, points.blockedPoints),
                     countersStatisticsRecord: info,
                     firstFormattedDate: self.firstFormattedDate,
                     lastFormattedDate: self.lastFormattedDate,
@@ -133,9 +134,10 @@ final class ChartViewModel: ChartViewModelProtocol {
     }
 
     // Return statistics date from SDK
-    private func getChartRecords(for period: StatisticsPeriod) -> (requests: ChartRecords, encrypted: ChartRecords) {
+    private func getChartRecords(for period: StatisticsPeriod) -> (requests: ChartRecords, encrypted: ChartRecords, blocked: ChartRecords) {
         let resultRequests: ChartRecords!
         let resultEncrypted: ChartRecords!
+        let resultBlocked: ChartRecords!
 
         if let requests = try? chartStatistics.getPoints(for: .requests, for: period, pointsCount: chartPointsCount) {
             resultRequests = requests
@@ -149,9 +151,15 @@ final class ChartViewModel: ChartViewModelProtocol {
             resultEncrypted = ChartRecords(chartType: .encrypted, points: [])
         }
 
+        if let blocked = try? chartStatistics.getPoints(for: .blocked, for: period, pointsCount: chartPointsCount) {
+            resultBlocked = blocked
+        } else {
+            resultBlocked = ChartRecords(chartType: .blocked, points: [])
+        }
+
         let oldestDate = chartStatistics.oldestRecordDate
         prepareDateIntervals(oldestRecordDate: oldestDate)
-        return (resultRequests, resultEncrypted)
+        return (resultRequests, resultEncrypted, resultBlocked)
     }
 
     // Get period borders date
@@ -162,12 +170,66 @@ final class ChartViewModel: ChartViewModelProtocol {
     }
 
     // Return fully prepared points
-    private func getPreparedPoints(requestsPoints: [Point], encryptedPoints: [Point]) -> ChartPoints {
+    private func getPreparedPoints(requestsPoints: [Point], encryptedPoints: [Point], blockedPoints: [Point]) -> ChartPoints {
+        let preparedRequestsPoints = getPreparedReqeustsPoints(requestsPoints: requestsPoints, encryptedPoints: encryptedPoints)
+        let preparedBlockedPoints = getPreparedBlockedPoints(blockedPoints: blockedPoints)
+
+        let maxXelement = max(preparedRequestsPoints.maxXRequestsElement, preparedRequestsPoints.maxXEncryptedElement, preparedBlockedPoints.maxXBlockedElement)
+        let maxYelement = max(preparedRequestsPoints.maxYRequestsElement, preparedRequestsPoints.maxYEncryptedElement, preparedBlockedPoints.maxYBlockedElement)
+        let chartPoints = ChartPoints(
+            requestsPoints: preparedRequestsPoints.requests,
+            encryptedPoints: preparedRequestsPoints.encrypted,
+            blockedPoints: preparedBlockedPoints.blockedPoints,
+            maxXelement: maxXelement,
+            maxYelement: maxYelement
+        )
+
+        return modifyPoints(points: chartPoints)
+    }
+
+    private func getPreparedBlockedPoints(blockedPoints: [Point]) -> (blockedPoints: [CGPoint], maxXBlockedElement: CGFloat, maxYBlockedElement: CGFloat) {
+        guard !blockedPoints.isEmpty else {
+            DDLogWarn("(ChartViewModel) getPreparedBlockedPoints; Number of blocked points is zero")
+            return ([], 0, 0)
+        }
+
+        var blockedResult: [CGPoint] = []
+        blockedResult.reserveCapacity(blockedPoints.count)
+
+        var maxXBlockedElement: CGFloat = 0.0
+        var maxYBlockedElement: CGFloat = 0.0
+
+        for i in 0..<blockedPoints.count {
+            var blockedPointX = blockedPoints[i].x
+            let blockedPointY = blockedPoints[i].y
+
+            //Correcting x coordinates of all points to find chart start position
+            blockedPointX -= blockedPoints[0].x
+
+            let blockedPoint = CGPoint(x: blockedPointX, y: blockedPointY)
+
+            blockedResult.append(blockedPoint)
+
+            //Find max x element for blocked
+            if blockedResult[i].x > maxXBlockedElement {
+                maxXBlockedElement = CGFloat(blockedPointX)
+            }
+            //Find max y element for blocked
+            if blockedResult[i].y > maxYBlockedElement {
+                maxYBlockedElement = CGFloat(blockedPointY)
+            }
+        }
+
+        return (blockedResult, maxXBlockedElement, maxYBlockedElement)
+    }
+
+    private func getPreparedReqeustsPoints(requestsPoints: [Point], encryptedPoints: [Point])
+    -> (requests: [CGPoint], encrypted: [CGPoint], maxXRequestsElement: CGFloat, maxYRequestsElement: CGFloat, maxXEncryptedElement: CGFloat, maxYEncryptedElement: CGFloat) {
         guard requestsPoints.count == encryptedPoints.count,
               !requestsPoints.isEmpty
-                else {
+        else {
             DDLogWarn("(ChartViewModel) findMaxElements; Number of requests points not equal to number of encrypted points or points number is zero")
-            return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
+            return ([], [], 0, 0 ,0 ,0)
         }
 
         var requestsResult: [CGPoint] = []
@@ -218,24 +280,22 @@ final class ChartViewModel: ChartViewModelProtocol {
             }
         }
 
-        let maxXelement = max(maxXRequestsElement, maxXEncryptedElement)
-        let maxYelement = max(maxYRequestsElement, maxYEncryptedElement)
-        let chartPoints = ChartPoints(requestsPoints: requestsResult, encryptedPoints: encryptedResult, maxXelement: maxXelement, maxYelement: maxYelement)
-
-        return modifyPoints(points: chartPoints)
+        return (requestsResult, encryptedResult, maxXRequestsElement, maxYRequestsElement, maxXEncryptedElement, maxYEncryptedElement)
     }
 
     // Return modified points
     private func modifyPoints(points: ChartPoints) -> ChartPoints {
         guard points.requestsPoints.count == points.encryptedPoints.count, !points.requestsPoints.isEmpty else {
             DDLogWarn("(ChartViewModel) modifyCGPoints;  Number of requests points not equal to number of encrypted points or points number is zero")
-            return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
+            return ChartPoints(requestsPoints: [], encryptedPoints: [], blockedPoints: [], maxXelement: 0, maxYelement: 0)
         }
 
         var requestsResult: [CGPoint] = []
         requestsResult.reserveCapacity(points.requestsPoints.count)
         var encryptedResult: [CGPoint] = []
         encryptedResult.reserveCapacity(points.encryptedPoints.count)
+        var blockedResult: [CGPoint] = []
+        blockedResult.reserveCapacity(points.blockedPoints.count)
 
         for i in 0..<points.requestsPoints.count {
 
@@ -245,7 +305,18 @@ final class ChartViewModel: ChartViewModelProtocol {
             requestsResult.append(getModifiedPoint(point: requestsPoint, maxXelement: points.maxXelement, maxYelement: points.maxYelement))
             encryptedResult.append(getModifiedPoint(point: encryptedPoint, maxXelement: points.maxXelement, maxYelement: points.maxYelement))
         }
-        return ChartPoints(requestsPoints: requestsResult, encryptedPoints: encryptedResult, maxXelement: points.maxXelement, maxYelement: points.maxYelement)
+
+        points.blockedPoints.forEach {
+            blockedResult.append(getModifiedPoint(point: $0, maxXelement: points.maxXelement, maxYelement: points.maxYelement))
+        }
+
+        return ChartPoints(
+            requestsPoints: requestsResult,
+            encryptedPoints: encryptedResult,
+            blockedPoints: blockedResult,
+            maxXelement: points.maxXelement,
+            maxYelement: points.maxYelement
+        )
     }
 
     // Return modified point relative to the frame

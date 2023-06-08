@@ -228,6 +228,44 @@ extension String {
         return String(format: String.localizedString("ms_unit"), formatterString)
     }
 
+    static func informationUnitFormatter(_ bytes: NSNumber) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = .current
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 1
+
+        let gBytes = bytes.doubleValue / 1_000_000_000
+
+        if gBytes >= 1 {
+            let formatterString = formatter.string(from: NSNumber(floatLiteral: gBytes)) ?? "\(bytes.intValue)"
+            return String(format: String.localizedString("gb_unit"), formatterString)
+        }
+
+
+
+        let mBytes = bytes.doubleValue / 1_000_000
+
+        if mBytes >= 1 {
+            let formatterString = formatter.string(from: NSNumber(floatLiteral: mBytes)) ?? "\(bytes.intValue)"
+            return String(format: String.localizedString("mb_unit"), formatterString)
+        }
+
+
+
+        let kBytes = bytes.doubleValue / 1_000
+
+        if kBytes >= 1 {
+            let formatterString = formatter.string(from: NSNumber(floatLiteral: kBytes)) ?? "\(bytes.intValue)"
+            return String(format: String.localizedString("kb_unit"), formatterString)
+        }
+
+
+
+        let formatterString = formatter.string(from: bytes) ?? "\(bytes.intValue)"
+        return String(format: String.localizedString("b_unit"), formatterString)
+    }
+
     /*
      Formats a number, devides thousands with separator, depending on current locale
      */

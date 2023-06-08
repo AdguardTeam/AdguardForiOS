@@ -22,8 +22,8 @@
 /* Class = "UILabel"; text = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n"; ObjectID = "Mxf-0w-5MP"; */
 "Mxf-0w-5MP.text" = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n";
 
-/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Enable this module to enhance your privacy by encrypting your DNS traffic.";
+/* Class = "UILabel"; text = "Enhances your privacy by blocking in-app trackers and encrypting your DNS requests"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Enhances your privacy by blocking in-app trackers and encrypting your DNS requests";
 
 /* Class = "UILabel"; text = "AdGuard"; ObjectID = "QD7-ng-Xb6"; */
 "QD7-ng-Xb6.text" = "AdGuard";

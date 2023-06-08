@@ -33,7 +33,7 @@ final class ChartView: UIView {
         }
     }
 
-    var chartPoints: (requests: [CGPoint], encrypted: [CGPoint]) = ([], []) {
+    var chartPoints: (requests: [CGPoint], encrypted: [CGPoint], blocked: [CGPoint]) = ([], [], []) {
         didSet {
             DispatchQueue.asyncSafeMain { [weak self] in
                 self?.drawChart()
@@ -69,8 +69,8 @@ final class ChartView: UIView {
     private var requestsLineColor = UIColor.AdGuardColor.lightGreen1
     private var requestsShadowColor = UIColor.AdGuardColor.lightGreen1
 
-    private var encryptedLineColor = UIColor.AdGuardColor.lightBlue
-    private var encryptedShadowColor = UIColor.AdGuardColor.lightBlue
+    private var blockedLineColor = UIColor.AdGuardColor.lightBlue
+    private var blockedShadowColor = UIColor.AdGuardColor.lightBlue
 
     private var gridColor = UIColor.AdGuardColor.chartGridColor
 
@@ -116,12 +116,12 @@ final class ChartView: UIView {
 
     private func enabledStateChanged() {
         let requestsColor = theme.grayTextColor
-        let encryptedColor = UIColor.AdGuardColor.lightGreen1
+        let blockedColor = UIColor.AdGuardColor.orange1
 
         requestsLineColor = isEnabled ? requestsColor : offColor
         requestsShadowColor = isEnabled ? requestsColor : offColor
-        encryptedLineColor = isEnabled ? encryptedColor : offColor
-        encryptedShadowColor = isEnabled ? encryptedColor : offColor
+        blockedLineColor = isEnabled ? blockedColor : offColor
+        blockedShadowColor = isEnabled ? blockedColor : offColor
         drawChart()
     }
 
@@ -218,17 +218,17 @@ final class ChartView: UIView {
 
     private func drawChart(){
         let requestLineLayer = CAShapeLayer()
-        let encryptedLineLayer = CAShapeLayer()
+        let blockedLineLayer = CAShapeLayer()
 
         let requestPoints = chartPoints.requests
-        let encryptedPoints = chartPoints.encrypted
+        let blockedPoints = chartPoints.blocked
 
         guard let requestsPath = UIBezierPath(quadCurve: requestPoints),
-            let blockedPath = UIBezierPath(quadCurve: encryptedPoints)
+            let blockedPath = UIBezierPath(quadCurve: blockedPoints)
             else { return }
 
         let requestsAlpha: CGFloat = activeChart == .requests ? 1.0 : 0.3
-        let encryptedAlpha: CGFloat = activeChart == .encrypted ? 1.0 : 0.3
+        let blockedAlpha: CGFloat = activeChart == .blocked ? 1.0 : 0.3
 
         requestLineLayer.path = requestsPath.cgPath
         requestLineLayer.fillColor = UIColor.clear.cgColor
@@ -240,15 +240,15 @@ final class ChartView: UIView {
         requestLineLayer.shadowOpacity = 0.5
         requestLineLayer.shadowRadius = 4.0
 
-        encryptedLineLayer.path = blockedPath.cgPath
-        encryptedLineLayer.fillColor = UIColor.clear.cgColor
-        encryptedLineLayer.strokeColor = encryptedLineColor.withAlphaComponent(encryptedAlpha).cgColor
-        encryptedLineLayer.lineWidth = 3.0
+        blockedLineLayer.path = blockedPath.cgPath
+        blockedLineLayer.fillColor = UIColor.clear.cgColor
+        blockedLineLayer.strokeColor = blockedLineColor.withAlphaComponent(blockedAlpha).cgColor
+        blockedLineLayer.lineWidth = 3.0
 
-        encryptedLineLayer.shadowColor = encryptedShadowColor.withAlphaComponent(encryptedAlpha).cgColor
-        encryptedLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
-        encryptedLineLayer.shadowOpacity = 0.5
-        encryptedLineLayer.shadowRadius = 4.0
+        blockedLineLayer.shadowColor = blockedShadowColor.withAlphaComponent(blockedAlpha).cgColor
+        blockedLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
+        blockedLineLayer.shadowOpacity = 0.5
+        blockedLineLayer.shadowRadius = 4.0
 
         layer.sublayers?.forEach({ (sublayer) in
             if sublayer.isKind(of: CAShapeLayer.self) {
@@ -257,11 +257,11 @@ final class ChartView: UIView {
         })
 
         if activeChart == .requests {
-            layer.addSublayer(encryptedLineLayer)
+            layer.addSublayer(blockedLineLayer)
             layer.addSublayer(requestLineLayer)
         } else {
             layer.addSublayer(requestLineLayer)
-            layer.addSublayer(encryptedLineLayer)
+            layer.addSublayer(blockedLineLayer)
         }
     }
 }

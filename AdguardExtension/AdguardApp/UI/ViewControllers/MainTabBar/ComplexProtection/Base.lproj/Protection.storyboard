@@ -213,7 +213,7 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teo-vm-NRJ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enhances your privacy by blocking in-app trackers and encrypting your DNS requests" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teo-vm-NRJ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="42" width="277" height="57.333333333333343"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -1047,38 +1047,24 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="7Gn-B1-mzj"/>
                                                 <exclude reference="hnv-cM-d5r"/>
-                                                <exclude reference="Qyz-BM-h94"/>
-                                                <exclude reference="utY-VK-HTH"/>
                                                 <exclude reference="7Qv-2Q-16l"/>
-                                                <exclude reference="ykk-4J-07E"/>
-                                                <exclude reference="9Tl-6z-0oD"/>
-                                                <exclude reference="dWO-go-xzf"/>
-                                                <exclude reference="snb-ie-gmM"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <mask key="constraints">
                                                 <include reference="Kxf-Pd-SuX"/>
                                                 <include reference="eEj-oe-50b"/>
-                                                <include reference="7Gn-B1-mzj"/>
                                                 <exclude reference="DZM-s1-6SI"/>
                                                 <exclude reference="H3u-Fg-pSw"/>
-                                                <exclude reference="hnv-cM-d5r"/>
-                                                <include reference="Qyz-BM-h94"/>
                                                 <exclude reference="UP6-KC-dZ2"/>
                                                 <exclude reference="ewe-XX-er8"/>
-                                                <include reference="utY-VK-HTH"/>
+                                                <exclude reference="hnv-cM-d5r"/>
                                                 <include reference="7Qv-2Q-16l"/>
                                                 <exclude reference="Nib-M0-NAf"/>
                                                 <exclude reference="HkF-Im-HwA"/>
-                                                <include reference="ykk-4J-07E"/>
-                                                <include reference="9Tl-6z-0oD"/>
                                                 <exclude reference="VbD-Wb-FTZ"/>
-                                                <include reference="dWO-go-xzf"/>
                                                 <exclude reference="n0r-8g-stu"/>
-                                                <include reference="snb-ie-gmM"/>
                                             </mask>
                                         </variation>
                                     </view>

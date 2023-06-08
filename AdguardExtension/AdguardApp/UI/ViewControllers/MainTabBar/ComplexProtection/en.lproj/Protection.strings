@@ -58,8 +58,8 @@
 /* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Works alongside the AdGuard ad blocker";
 
-/* Class = "UILabel"; text = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries";
+/* Class = "UILabel"; text = "Enhances your privacy by blocking in-app trackers and encrypting your DNS requests"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Enhances your privacy by blocking in-app trackers and encrypting your DNS requests";
 
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Not installed";
