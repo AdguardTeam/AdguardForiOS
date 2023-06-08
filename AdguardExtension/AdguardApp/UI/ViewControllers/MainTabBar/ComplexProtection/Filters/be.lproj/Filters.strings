@@ -26,7 +26,7 @@
 "RJU-32-r8h.text" = "Колькасць правілаў: ";
 
 /* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
-"VCK-db-aeg.text" = "Карыстацкія правілы";
+"VCK-db-aeg.text" = "Карыстальніцкія правілы";
 
 /* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
 "Z16-OR-tjl.text" = "URL фільтра:";

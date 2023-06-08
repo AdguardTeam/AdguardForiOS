@@ -58,6 +58,18 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
+/* Kilobytes infromation unit */
+"kb_unit" = "%@ KB";
+
+/* Megabytes infromation unit */
+"mb_unit" = "%@ MB";
+
+/* Gigabytes infromation unit */
+"gb_unit" = "%@ GB";
+
 /* (MainPageController) Native DNS is working title */
 "native_dns_working" = "Yerel DNS çalışıyor";
 
@@ -847,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Bir siteyi her ziyaret ettiğinizde, bir istek gönderilir. Siteler gizli istekler gönderebilir ve kişisel verileri sızdırabilir. Bu sorunun kapsamını gerçekleştirmek için toplam istek sayısını bilmek yararlıdır.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Engellenen istekler";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard, telefonunuzun DNS isteklerinin çoğunu filtreleyerek izleme ve tehlikeli olanları engeller\n\nİşte seçilen zaman aralığı için AdGuard tarafından engellenen toplam istek sayısı";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Şifrelenmiş istekler";
 
@@ -858,6 +876,12 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Bir DNS isteğininin işlenmesi için geçen ortalama süre. Ne kadar hızlı DNS sunucusu kullanırsanız, o kadar düşük olur.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Veri tasarrufu";
+
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "AdGuard, tarayıcınızın gereksiz sayfa öğelerini yüklemesine izin vermez, böylece cihazınızın veri tüketimini azaltır\n\nİşte seçilen zaman aralığı için AdGuard tarafından tasarruf edilen toplam veri miktarı";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Şirket sayısı";
@@ -882,6 +906,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d istek";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d engellendi";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "DNS ayarlarınızda %@ uygulamasını etkinleştirin";
@@ -945,7 +972,7 @@
 "security_filters_feature_name" = "Güvenlik filtreleri ";
 
 /* (PremiumFeature) - DNS privacy premium feature name */
-"dns_privacy_feature_name" = "DNS gizliliği";
+"dns_privacy_feature_name" = "DNS koruması";
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Özel filtreler";
@@ -957,7 +984,7 @@
 "security_filters_feature_description" = "Kimlik avını, kötü amaçlı yazılımları ve şüpheli içeriği engelleyin";
 
 /* (PremiumFeature) - DNS privacy premium feature description */
-"dns_privacy_feature_description" = "DNS isteklerini yerel olarak şifreleyin ve gizliliğinizi kontrol edin";
+"dns_privacy_feature_description" = "Sizin hakkınızda sessizce veri toplayan uygulama içi izleyicileri engelleyin";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Üçüncü taraf filtreleri kullanın veya kendinizinkini oluşturun";

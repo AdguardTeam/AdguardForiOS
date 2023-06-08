@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ KB";
 
@@ -855,6 +858,9 @@
 
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Toda vez que você visita um site, uma solicitação é enviada. Os sites podem enviar solicitações ocultas e vazar dados pessoais. É útil saber o número total de solicitações para perceber o alcance deste problema.";
+
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Solicitações bloqueadas";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Solicitações criptografadas";

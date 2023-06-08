@@ -49,6 +49,15 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10Rb";
 
+/* Kilobytes infromation unit */
+"kb_unit" = "%@ KB";
+
+/* Megabytes infromation unit */
+"mb_unit" = "%@ MB";
+
+/* Gigabytes infromation unit */
+"gb_unit" = "%@ GB";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Penyaring Pengguna";
 
@@ -75,6 +84,15 @@
 
 /* (LoginController) lost password button title */
 "lost_password" = "Kehilangan kata sandi?";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Lanjutkan dengan Apple";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Lanjutkan dengan Google";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Lanjutkan dengan Facebook";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Akun premium Anda telah kedaluwarsa";
@@ -297,6 +315,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 – %@. Adguard Software Ltd.\nSemua hak dilindungi. AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "Masuk";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Keluar";
@@ -679,6 +700,9 @@
 /* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
 "detailed_filter_info_subscription_subtitle" = "URL Berlangganan";
 
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "Proteksi DNS";
+
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Kustom filter";
 
@@ -773,6 +797,12 @@ DO NOT TRANSLATE "none" */
 
 /* (BackgroundFetchController) - Background app refresh every 1 hour title */
 "background_fetch_hour_period" = "Setiap jam";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "Setiap 3 jam";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "Setiap 12 jam";
 
 /* (DnsProvidersController) - add new dns server title */
 "add_custom_dns_server_title" = "Tambah server DNS buatan";
