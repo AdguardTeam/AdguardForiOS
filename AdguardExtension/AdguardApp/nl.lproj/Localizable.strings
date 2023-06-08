@@ -55,6 +55,15 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Kilobytes infromation unit */
+"kb_unit" = "%@ KB";
+
+/* Megabytes infromation unit */
+"mb_unit" = "%@ MB";
+
+/* Gigabytes infromation unit */
+"gb_unit" = "%@ GB";
+
 /* (MainPageController) Native DNS is working title */
 "native_dns_working" = "Systeem-eigen DNS is actief";
 
@@ -936,7 +945,7 @@
 "security_filters_feature_name" = "Beveiligingsfilters ";
 
 /* (PremiumFeature) - DNS privacy premium feature name */
-"dns_privacy_feature_name" = "DNS-privacy";
+"dns_privacy_feature_name" = "DNS bescherming";
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Aangepaste filters";
@@ -946,9 +955,6 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Phishing, malware en verdachte inhoud blokkeren";
-
-/* (PremiumFeature) - DNS privacy premium feature description */
-"dns_privacy_feature_description" = "DNS-aanvragen lokaal versleutelen en je privacy beheren";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Filters van derden gebruiken of je eigen filters maken";

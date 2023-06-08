@@ -58,6 +58,15 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Kilobytes infromation unit */
+"kb_unit" = "%@ Kb";
+
+/* Megabytes infromation unit */
+"mb_unit" = "%@ Mb";
+
+/* Gigabytes infromation unit */
+"gb_unit" = "%@ GB";
+
 /* (MainPageController) Native DNS is working title */
 "native_dns_working" = "Natywny DNS działa";
 
@@ -131,13 +140,13 @@
 "premium_expired_title" = "Uwaga";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "Pomyślnie zalogowałeś się na koncie AdGuard, ale nie ma kluczy licencyjnych, które pozwoliłyby aktywować wersję Premium.";
+"not_premium_message" = "Pomyślnie zalogowano na koncie AdGuard, ale nie ma kluczy licencyjnych, które pozwoliłyby aktywować wersję Premium.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
-"login_success_message" = "Pomyślnie zalogowałeś się na koncie AdGuard! Wersja Premium AdGuard na iOS została aktywowana.";
+"login_success_message" = "Pomyślnie zalogowano na koncie AdGuard! Wersja Premium AdGuard na iOS została aktywowana.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "Pomyślnie zalogowałeś się na koncie AdGuard, ale wygasły wszystkie klucze licencyjne umożliwiające aktywację wersji Premium.";
+"login_premium_expired_message" = "Pomyślnie zalogowano na koncie AdGuard, ale wygasły wszystkie klucze licencyjne umożliwiające aktywację wersji Premium.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Wystąpił błąd podczas próby przywrócenia zakupu.";
@@ -392,7 +401,7 @@
 "about_version_format" = "Wersja %@";
 
 /* (AboutViewController) AdGuard copyright string */
-"copyright_format" = "© 2009–%@. Adguard Software Ltd.\nWszelkie prawa zastrzeżone. AdGuard.com";
+"copyright_format" = "© 2009–%@. AdGuard Software Ltd.\nWszelkie prawa zastrzeżone. AdGuard.com";
 
 /* (LicensePageViewController) Login title */
 "common_login" = "Zaloguj się";
@@ -662,7 +671,7 @@
 "common_action_more" = "Więcej";
 
 /*(DnsFiltersController) action title adding existing filter  */
-"filter_exists" = "Próbowałeś dodać duplikat filtra. Ten filtr jest już na liście";
+"filter_exists" = "Próbowano dodać duplikat filtra. Ten filtr jest już na liście";
 
 /*(DnsFiltersController) DNS filters number title */
 "dns_filters_number_title" = "%@ reguł jest włączonych";
@@ -731,10 +740,10 @@
 "video_tutorial_title" = "Film instruktażowy";
 
 /* (NewDnsServerController) error message text */
-"invalid_upstream_message" = "Wpisałeś nieprawidłowy upstream";
+"invalid_upstream_message" = "Wpisano nieprawidłowy upstream";
 
 /* (UpstreamsController) error message text */
-"invalid_ip_message" = "Podałeś nieprawidłowy adres IP";
+"invalid_ip_message" = "Podano nieprawidłowy adres IP";
 
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Nieprawidłowy protokół DNS";
@@ -945,7 +954,7 @@
 "security_filters_feature_name" = "Filtry bezpieczeństwa ";
 
 /* (PremiumFeature) - DNS privacy premium feature name */
-"dns_privacy_feature_name" = "Prywatność DNS";
+"dns_privacy_feature_name" = "Ochrona DNS";
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Niestandardowe filtry";
@@ -955,9 +964,6 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Blokuj phishing, złośliwe oprogramowanie i podejrzaną zawartość";
-
-/* (PremiumFeature) - DNS privacy premium feature description */
-"dns_privacy_feature_description" = "Szyfruj żądania DNS lokalnie i kontroluj swoją prywatność";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Użyj filtrów innych firm lub utwórz własne";
@@ -1210,3 +1216,6 @@ DO NOT TRANSLATE "none" */
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Coś poszło nie tak";
+
+/* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
+"dev_account_migration_helper_content_blockers_disabled_title" = "Blokery treści AdGuard są wyłączone w ustawieniach Safari. Włącz je, aby umożliwić nam blokowanie reklam i modułów śledzących.";

@@ -58,6 +58,15 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@만";
 
+/* Kilobytes infromation unit */
+"kb_unit" = "%@ KB";
+
+/* Megabytes infromation unit */
+"mb_unit" = "%@ MB";
+
+/* Gigabytes infromation unit */
+"gb_unit" = "%@ GB";
+
 /* (MainPageController) Native DNS is working title */
 "native_dns_working" = "기본 DNS가 작동 중입니다";
 
@@ -955,9 +964,6 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "피싱, 멀웨어 및 수상한 콘텐츠 차단";
-
-/* (PremiumFeature) - DNS privacy premium feature description */
-"dns_privacy_feature_description" = "DNS 요청을 로컬로 암호화하고 개인정보를 통제해 보세요";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "타사 필터를 사용하거나 나만의 필터를 만들어 보세요";

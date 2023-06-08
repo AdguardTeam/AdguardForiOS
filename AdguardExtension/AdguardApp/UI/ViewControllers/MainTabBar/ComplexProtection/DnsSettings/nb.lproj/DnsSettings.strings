@@ -76,6 +76,9 @@
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
 "vDF-5j-uJn.text" = "DNS-filtrering";
 
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "vJt-Jd-BI2"; */
+"vJt-Jd-BI2.text" = "Velg protokoll";
+
 /* Class = "UILabel"; text = "Implementation"; ObjectID = "xgN-x2-EfQ"; */
 "xgN-x2-EfQ.text" = "Implementering";
 

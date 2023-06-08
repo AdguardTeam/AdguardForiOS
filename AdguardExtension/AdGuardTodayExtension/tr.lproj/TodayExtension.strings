@@ -8,7 +8,7 @@
 "box-OA-msa.text" = "DNS koruması";
 
 /* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
-"cva-11-jEA.text" = "Bütün istatistikler:";
+"cva-11-jEA.text" = "Her zamanın istatistikleri:";
 
 /* Class = "UILabel"; text = "avg. time"; ObjectID = "eaJ-er-mJu"; */
 "eaJ-er-mJu.text" = "ort. süre";

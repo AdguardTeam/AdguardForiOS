@@ -4,8 +4,9 @@
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "Ekle";
 
-/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
-"4IJ-xy-hky.normalTitle" = "şifrelenmiş";
+/* 4IJ-xy-hky.normalTitle
+Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quot;4IJ-xy-hky&quot;; */
+"4IJ-xy-hky.normalTitle" = "engellenen";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Etkinlik";
@@ -61,6 +62,9 @@
 /* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
 "eye-K9-gbK.text" = "Protokol";
 
+/* Class = "UILabel"; text = "Most blocked companies"; ObjectID = "fD3-p0-Eek"; */
+"fD3-p0-Eek.text" = "En çok engellenen şirketler";
+
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "Son etkinlikler";
 
@@ -91,8 +95,12 @@
 /* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
 "uni-H6-XNc.text" = "İstek detayları";
 
-/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
-"wt5-4Q-CTq.normalTitle" = "şifrelenmiş";
+/* Class = "UILabel"; text = "Most blocked"; ObjectID = "w2i-mK-dfO"; */
+"w2i-mK-dfO.text" = "En çok engellenen";
+
+/* wt5-4Q-CTq.normalTitle
+Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quot;wt5-4Q-CTq&quot;; */
+"wt5-4Q-CTq.normalTitle" = "engellenen";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "İsteği engelle";
@@ -100,5 +108,6 @@
 /* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
 "yWy-kc-8Zg.text" = "En aktif";
 
-/* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
-"yio-E8-cQV.normalTitle" = "ort. süre";
+/* yio-E8-cQV.normalTitle
+Class = &amp;quot;UIButton&amp;quot;; normalTitle = &amp;quot;data saved&amp;quot;; ObjectID = &amp;quot;yio-E8-cQV&amp;quot;; */
+"yio-E8-cQV.normalTitle" = "veri tasarrufu";

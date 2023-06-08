@@ -1,6 +1,9 @@
 /* Class = "UILabel"; text = "Reset settings"; ObjectID = "0RM-mR-ikS"; */
 "0RM-mR-ikS.text" = "ریست تنظیمات";
 
+/* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "7nl-3p-BP2"; */
+"7nl-3p-BP2.text" = "TTL پاسخ مسدود شده";
+
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "معکوس لیست مجاز";
 
@@ -72,3 +75,6 @@
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "اگر این گزینه فعال شده باشد،AdGuard فقط از وای فای برای بروزرسانی فیلتر در پس زمینه استفاده می کند";
+
+/* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "uRk-qq-TJH"; */
+"uRk-qq-TJH.text" = "TTL پاسخ مسدود شده";

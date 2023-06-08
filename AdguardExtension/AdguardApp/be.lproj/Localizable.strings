@@ -313,6 +313,9 @@
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nУсе правы абаронены. AdGuard.com";
 
+/* (LicensePageViewController) Login title */
+"common_login" = "УВАЙСЦІ";
+
 /* (AboutViewController) Logout title */
 "common_logout" = "Выхад";
 
@@ -362,7 +365,7 @@
 "dns_blacklist_title" = "Чорны спіс";
 
 /* (ListOfRulesModel) title for safari user filter */
-"safari_userfilter_title" = "Карыстацкія правілы Safari";
+"safari_userfilter_title" = "Карыстальніцкія правілы Safari";
 
 /* (ListOfRulesModel) title for export */
 "export" = "Экспарт";
@@ -464,7 +467,7 @@
 "add_new_filter" = "Дадаць фільтр";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "Усе налады, улучаючы карыстацкія правілы, DNS абарону, інтэрфейс і налады аўтарызацыі, будуць скінуты. Гэта дзеянне нельга скасаваць. Скінуць налады?";
+"confirm_reset_text" = "Усе налады, уключаючы карыстальніцкія правілы, DNS абарону, інтэрфейс і налады аўтарызацыі, будуць скінуты. Гэта дзеянне нельга скасаваць. Скінуць налады?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Скінуць лог дзейнасці";
@@ -703,6 +706,9 @@
 /* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
 "detailed_filter_info_subscription_subtitle" = "URL-адрас падпіскі";
 
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "Ахова DNS";
+
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Уласныя фільтры";
 
@@ -775,10 +781,10 @@
 "import_unseccuessful" = "Няўдала";
 
 /* (ImportSettingsController) add user rules title */
-"import_user_rules" = "Дадаць карыстацкія правілы";
+"import_user_rules" = "Дадаць карыстальніцкія правілы";
 
 /* (ImportSettingsController) add dns rules title */
-"import_dns_user_rules" = "Дадаць карыстацкія правілы DNS";
+"import_dns_user_rules" = "Дадаць карыстальніцкія правілы DNS";
 
 /* low_level_fallbacks_placeholder
 (LowLevelSettingsController) Low level fallbacks placeholder

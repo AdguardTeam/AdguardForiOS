@@ -4,7 +4,8 @@
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "Add";
 
-/* Class = "UIButton"; normalTitle = "blocked"; ObjectID = "4IJ-xy-hky"; */
+/* 4IJ-xy-hky.normalTitle
+Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quot;4IJ-xy-hky&quot;; */
 "4IJ-xy-hky.normalTitle" = "blocked";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
@@ -97,7 +98,8 @@
 /* Class = "UILabel"; text = "Most blocked"; ObjectID = "w2i-mK-dfO"; */
 "w2i-mK-dfO.text" = "Most blocked";
 
-/* Class = "UIButton"; normalTitle = "blocked"; ObjectID = "wt5-4Q-CTq"; */
+/* wt5-4Q-CTq.normalTitle
+Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quot;wt5-4Q-CTq&quot;; */
 "wt5-4Q-CTq.normalTitle" = "blocked";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
@@ -106,5 +108,6 @@
 /* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
 "yWy-kc-8Zg.text" = "Most active";
 
-/* Class = "UIButton"; normalTitle = "data saved"; ObjectID = "yio-E8-cQV"; */
+/* yio-E8-cQV.normalTitle
+Class = &amp;quot;UIButton&amp;quot;; normalTitle = &amp;quot;data saved&amp;quot;; ObjectID = &amp;quot;yio-E8-cQV&amp;quot;; */
 "yio-E8-cQV.normalTitle" = "data saved";

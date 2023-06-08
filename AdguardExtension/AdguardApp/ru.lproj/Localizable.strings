@@ -58,6 +58,15 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Kilobytes infromation unit */
+"kb_unit" = "%@ Кб";
+
+/* Megabytes infromation unit */
+"mb_unit" = "%@ Мб";
+
+/* Gigabytes infromation unit */
+"gb_unit" = "%@ Гб";
+
 /* (MainPageController) Native DNS is working title */
 "native_dns_working" = "Нативный DNS работает";
 
@@ -902,7 +911,7 @@
 "detailed_filter_info_version_subtitle" = "Версия";
 
 /* (FilterDetailsViewController) Updated subtitle for detailed filter info */
-"detailed_filter_info_updated_subtitle" = "Обновлен";
+"detailed_filter_info_updated_subtitle" = "Обновлено";
 
 /* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
 "detailed_filter_info_rules_count_subtitle" = "Количество правил:";
@@ -945,7 +954,7 @@
 "security_filters_feature_name" = "Фильтры безопасности ";
 
 /* (PremiumFeature) - DNS privacy premium feature name */
-"dns_privacy_feature_name" = "DNS-приватность";
+"dns_privacy_feature_name" = "DNS-защита";
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Собственные фильтры";
@@ -955,9 +964,6 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Блокируйте фишинговый, вредоносный и другой подозрительный контент";
-
-/* (PremiumFeature) - DNS privacy premium feature description */
-"dns_privacy_feature_description" = "Блокируйте DNS-запросы локально и контролируйте свои личные данные";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Используйте сторонние фильтры или создавайте свои";

@@ -25,6 +25,15 @@
 /* NO Button caption in alert */
 "common_action_no" = "خیر";
 
+/* Kilobytes infromation unit */
+"kb_unit" = "%@ کیلوبایت";
+
+/* Megabytes infromation unit */
+"mb_unit" = "%@ مگابایت";
+
+/* Gigabytes infromation unit */
+"gb_unit" = "%@ گیگابایت";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "فیلتر کاربر";
 
@@ -45,6 +54,15 @@
 
 /* (LoginController) lost password button title */
 "lost_password" = "رمزعبور را گم کرده اید؟";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "با حساب اپل پیش روید";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "با حساب گوگل پیش روید";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "با حساب فیسبوک پیش روید";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "اکانت پریمیوم شما منقضی شده است";
@@ -238,6 +256,9 @@
 /* (FiltersController) Disabled state in groups section */
 "off_state" = "فعال نشده";
 
+/* (LicensePageViewController) Login title */
+"common_login" = "ورود";
+
 /* (AboutViewController) Logout title */
 "common_logout" = "خروج";
 
@@ -424,11 +445,20 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "General";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "فیلترینگ";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
 /* (DnsRequestDetailsController) "Category" title for cell */
 "category_title" = "دسته بندی";
 
 /* (DnsRequestDetailsController) "Name" title for cell */
 "name_title" = "نام";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "وبسایت";
 
 /* (DnsRequestDetailsController) "Domain" title for cell */
 "domain_title" = "دامنه";
@@ -445,8 +475,17 @@
 /* (DnsRequestDetailsController) "Type" title for cell */
 "type_title" = "نوع";
 
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "جریان ارسالی DNS";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "پاسخ اصلی";
+
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "خالی";
+
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "درخواست";
 
 /* (ActivityViewController) - All requests alert action */
 "all_requests_alert_action" = "همه درخواست ها";
@@ -463,11 +502,23 @@
 /* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
 "detailed_filter_info_rules_count_subtitle" = "تعداد دستور";
 
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "وبسایت";
+
 /* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
 "detailed_filter_info_subscription_subtitle" = "آدرس اشتراک";
 
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "حفاظت از DNS";
+
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "فیلترهای دستی";
+
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "حفاظت ردیابی فعال شده";
+
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "حفاظت ردیابی غیرفعال شده";
 
 /* (AGSearchView) Placeholder text for search bar */
 "search_view_placeholder" = "جستجو";
@@ -490,11 +541,20 @@ DO NOT TRANSLATE "none" */
 /* (BackgroundFetchController) - Background app refresh every 1 hour title */
 "background_fetch_hour_period" = "هر ساعت";
 
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "هر 3 ساعت";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "هر 12 ساعت";
+
 /* (DnsProvidersController) - add new dns server title */
 "add_custom_dns_server_title" = "افزودن سرور DNS دستی";
 
 /* (DnsProvidersController) - Header title */
 "dns_provider_controller_title" = "سرور DNS";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "وبسایت";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
 "youtube_share_extension_item_provider_unknown_error_summary" = "مشکلی وجود دارد";
