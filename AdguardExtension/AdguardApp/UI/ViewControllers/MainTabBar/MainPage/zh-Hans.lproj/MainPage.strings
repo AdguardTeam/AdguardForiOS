@@ -28,7 +28,8 @@
 /* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
 "YaQ-RE-YZT.title" = "AdGuard";
 
-/* Class = "UILabel"; text = "blocked"; ObjectID = "a5U-A8-S8G"; */
+/* a5U-A8-S8G.text
+Class = &quot;UILabel&quot;; text = &quot;blocked&quot;; ObjectID = &quot;a5U-A8-S8G&quot;; */
 "a5U-A8-S8G.text" = "已拦截";
 
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
