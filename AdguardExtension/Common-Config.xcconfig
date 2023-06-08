@@ -16,6 +16,6 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-AG_VERSION = 4.4.6
-AG_BUILD = 998
+AG_VERSION = 4.5.0
+AG_BUILD = 1000
 
