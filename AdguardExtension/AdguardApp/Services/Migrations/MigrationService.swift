@@ -153,10 +153,18 @@ final class MigrationService: MigrationServiceProtocol {
             DDLogInfo("(MigrationService) - Successfully migrate dns rules from 4.3.0 to 4.3.1")
         }
 
+        if versionProvider.isMigrationFrom4_3_1_to_4_5_0Needed {
+            DDLogInfo("(MigrationService) - Start migration from build version \(resources.buildVersion) to 4.5.0")
+            let dnsMigration = DnsMigration4_5_0(resources: resources, dnsProtection: dnsProtection)
+
+            dnsMigration.migrate()
+            DDLogInfo("(MigrationService) - Migration for 4.5.0 ended")
+        }
+
         let currentBuildVersion = Int(productInfo.buildNumber())
         resources.buildVersion = currentBuildVersion ?? 0
         resources.isMigrationTo4_3Passed = true
         resources.isMigrationTo4_3_1Passed = true
+        resources.isMigrationTo4_5_0Passed = true
     }
 }
-

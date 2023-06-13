@@ -34,7 +34,7 @@ final class DefaultDnsFilterInstaller: DefaultDnsFilterInstallerProtocol {
     }
 
     func installDefaultDnsFilterIfNeeded() {
-        let defaultFilterUrl = URL(string: "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt")!
+        let defaultFilterUrl = URL(string: "https://filters.adtidy.org/dns/filter_1_ios.txt")!
 
         // Check if filter was already installed
         if resources.defaultDnsFilterWasInstalled {
