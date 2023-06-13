@@ -155,7 +155,7 @@ final class MigrationService: MigrationServiceProtocol {
 
         if versionProvider.isMigrationFrom4_3_1_to_4_5_0Needed {
             DDLogInfo("(MigrationService) - Start migration from build version \(resources.buildVersion) to 4.5.0")
-            let dnsMigration = DnsMigration4_5_0(resources: resources, dnsProtection: dnsProtection)
+            let dnsMigration = DnsMigration4_5_0(resources: resources)
 
             dnsMigration.migrate()
             DDLogInfo("(MigrationService) - Migration for 4.5.0 ended")

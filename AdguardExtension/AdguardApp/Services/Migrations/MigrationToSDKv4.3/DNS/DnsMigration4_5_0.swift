@@ -27,7 +27,7 @@ protocol DnsMigration4_5_0Protocol {
 
 
 final class DnsMigration4_5_0 : DnsMigration4_5_0Protocol {
-    private let dnsProtection: DnsProtectionProtocol
+    private let resources: AESharedResourcesProtocol
     private let stateManager: MigrationStateManagerProtocol
 
     private let oldAdguardDnsFilterUrl = "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt"
@@ -35,8 +35,8 @@ final class DnsMigration4_5_0 : DnsMigration4_5_0Protocol {
 
 
 
-    init(resources: AESharedResourcesProtocol, dnsProtection: DnsProtectionProtocol) {
-        self.dnsProtection = dnsProtection
+    init(resources: AESharedResourcesProtocol) {
+        self.resources = resources
         self.stateManager = MigrationStateManager(resources: resources, migrationKey: "DnsMigration4_5_0Key")
     }
 
@@ -57,9 +57,16 @@ final class DnsMigration4_5_0 : DnsMigration4_5_0Protocol {
         stateManager.start()
 
         do {
-            try migrateAdGuardDnsFilterSync()
-            stateManager.finish()
-            Logger.logInfo("(DnsMigration4_5_0) - onNotStarted; Migration succeeded")
+            let migrated = try migrateAdGuardDnsFilterSync()
+
+            if migrated {
+                stateManager.finish()
+                Logger.logInfo("(DnsMigration4_5_0) - onNotStarted; Migration succeeded")
+            } else {
+                stateManager.failure()
+                Logger.logInfo("(DnsMigration4_5_0) - onNotStarted; Migration failed")
+            }
+
         } catch {
             stateManager.failure()
             Logger.logError("(DnsMigration4_5_0) - onNotStarted; Migration failed: \(error)")
@@ -83,41 +90,48 @@ final class DnsMigration4_5_0 : DnsMigration4_5_0Protocol {
         Logger.logInfo("(DnsMigration4_5_0) - onStarted; The wait is over; waitResult succeeded=\(waitResult == .success)")
     }
 
-    private func migrateAdGuardDnsFilterSync() throws {
-        guard let adguardDnsFilter = dnsProtection.filters.first(where: { $0.subscriptionUrl.absoluteString == oldAdguardDnsFilterUrl }) else {
-            DDLogWarn("(DnsMigration4_5_0) - migrateAdGuardDnsFilter; AdGuard DNS filter not found, nothing to migrate")
-            return
+    private func migrateAdGuardDnsFilterSync() throws -> Bool {
+        guard let filtersData = resources.sharedDefaults().value(forKey: "DnsAdGuardSDK.dnsFiltersKey") as? Data else {
+            DDLogWarn("(DnsMigration4_5_0) - migrateAdGuardDnsFilterSync; No DNS fitlers found to migrate")
+
+            // Returns `true` because the user can manually delete all DNS filters or
+            // if filters have never been saved in `User Defaults` with the DnsAdGuardSDK.dnsFiltersKey key
+            return true
         }
 
-        DDLogInfo("(DnsMigration4_5_0) - migrateAdGuardDnsFilter; Start removing old AdGuard DNS filter")
-        try dnsProtection.removeFilter(withId: adguardDnsFilter.filterId)
-        DDLogInfo("(DnsMigration4_5_0) - migrateAdGuardDnsFilter; Successfully remove old AdGuard DNS filter")
-
-        guard let url = URL(string: newAdGuardDnsFilterUrl) else {
-            DDLogError("(DnsMigration4_5_0) - migrateAdGuardDnsFilter; Can't create URL for string=\(newAdGuardDnsFilterUrl)")
-            return
+        guard let filterUrl = URL(string: newAdGuardDnsFilterUrl) else {
+            DDLogError("(DnsMigration4_5_0) - migrateAdGuardDnsFilterSync; Can't create URL for string=\(newAdGuardDnsFilterUrl)")
+            return false
         }
 
-        let group = DispatchGroup()
-        var _error: Error?
+        let decodedFilters = try JSONDecoder().decode([DnsFilter].self, from: filtersData)
+        DDLogDebug("(DnsMigration4_5_0) - migrateAdGuardDnsFilterSync; Successfully deocde DnsFilters from storage")
 
-        group.enter()
-        dnsProtection.addFilter(
-            withName: adguardDnsFilter.filterName,
-            url: url,
-            isEnabled: adguardDnsFilter.isEnabled
-        ) {
-            _error = $0
-            group.leave()
+        let filtersToSave = decodedFilters.map { filter in
+            let subscriptionUrl = filter.subscriptionUrl.absoluteString == oldAdguardDnsFilterUrl ? filterUrl : filter.subscriptionUrl
+            let filterDownloadPage = filter.subscriptionUrl.absoluteString == oldAdguardDnsFilterUrl ? filterUrl.absoluteString : filter.filterDownloadPage
+
+            return DnsFilter(
+                filterId: filter.filterId,
+                subscriptionUrl: subscriptionUrl,
+                isEnabled: filter.isEnabled,
+                name: filter.name,
+                description: filter.description,
+                version: filter.version,
+                lastUpdateDate: filter.lastUpdateDate,
+                homePage: filter.homePage,
+                licensePage: filter.licensePage,
+                issuesReportPage: filter.issuesReportPage,
+                communityPage: filter.communityPage,
+                filterDownloadPage: filterDownloadPage,
+                rulesCount: filter.rulesCount
+            )
         }
 
-        group.wait()
+        let dataToSave = try JSONEncoder().encode(filtersToSave)
+        DDLogDebug("(DnsMigration4_5_0) - migrateAdGuardDnsFilterSync; Successfully encode \(filtersToSave.count) DnsFilters")
 
-        if let error = _error {
-            DDLogError("(DnsMigration4_5_0) - migrateAdGuardDnsFilter; Error occured while add new AdGuard DNS fitler; Error=\(error)")
-            throw error
-        } else {
-            DDLogInfo("(DnsMigration4_5_0) - migrateAdGuardDnsFilter; Successfully add new AdGuard DNS filter")
-        }
+        resources.sharedDefaults().setValue(dataToSave, forKey: "DnsAdGuardSDK.dnsFiltersKey")
+        return true
     }
 }
