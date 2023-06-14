@@ -389,6 +389,11 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: migrationTo4_3_1PassedKey)
         }
     }
+
+    var isMigrationTo4_5_0Passed: Bool {
+        get { sharedDefaults().bool(forKey: migrationTo4_5_0Passedkey) }
+        set { sharedDefaults().set(newValue, forKey: migrationTo4_5_0Passedkey) }
+    }
 }
 
 fileprivate extension AESharedResourcesProtocol {
@@ -401,6 +406,7 @@ fileprivate extension AESharedResourcesProtocol {
     // Migration keys
     var migrationTo4_3PassedKey: String { "isMigrationTo4_3PassedKey" }
     var migrationTo4_3_1PassedKey: String { "isMigrationTo4_3_1PassedKey" }
+    var migrationTo4_5_0Passedkey: String { "isMigrationTo4_5_0PassedKey" }
 
     // Performiks to ASL dev account migration keys
     var pretendPremiumAfterKeychainLossKey: String { "pretendPremiumAfterKeychainLoss" }

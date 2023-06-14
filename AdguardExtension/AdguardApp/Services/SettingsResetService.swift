@@ -109,6 +109,7 @@ final class SettingsResetService: SettingsResetServiceProtocol {
             self.resources.firstRun = false
             self.resources.isMigrationTo4_3Passed = true
             self.resources.isMigrationTo4_3_1Passed = true
+            self.resources.isMigrationTo4_5_0Passed = true
 
             // Reset safari protection
             let group = DispatchGroup()
