@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@万";
 
+/* Bytes infromation unit */
+"b_unit" = "%@B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ Kb";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "それぞれのWebサイトにアクセスするたびに、リクエストが送信されます。そこで、Webサイトは隠されたリクエストを送信することがあり、個人情報を漏洩する可能性があります。この問題の範囲を把握するには、リクエストの総数を知っておくと便利です。";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "ブロック済みリクエスト数";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard は、お使いのiPhone/iPadのほぼ全てのDNSリクエストをフィルタリングし、トラッキングや危険なものをブロックします。\n\n選択した期間において AdGuard がブロックしたリクエストの総数は以下の通りです。";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "暗号化済みリクエスト数";
 
@@ -867,6 +876,12 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "DNSリクエスト処理にかかる平均時間。使用しているDNSサーバーが高速であるほど、この平均時間は短くなります。";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "節約した通信量";
+
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "AdGuard は、不要なウェブ要素やアプリ内トラッカーの読み込みを防ぐため、iPhone/iPadのデータ通信量を削減します。\n\n選択した期間において AdGuard が節約したデータ通信量の合計は以下の通りです。";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "企業数";
@@ -891,6 +906,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "リクエスト数: %d";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "ブロック済み数: %d";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "iOSのDNS設定で「%@」を有効にしてください。";
@@ -964,6 +982,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "フィッシング詐欺、マルウェア、怪しいコンテンツをブロック";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "個人情報を無断で収集するアプリ内トラッカーをブロック";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "好みの外製フィルタを使用したり、自分のものを作成したり";

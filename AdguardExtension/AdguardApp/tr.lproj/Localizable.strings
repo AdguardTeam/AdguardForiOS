@@ -880,9 +880,6 @@
 /* (ActivityViewController) -  Data saved alret title */
 "data_saved_info_alert_title" = "Veri tasarrufu";
 
-/* (ActivityViewController) -  Data saved alret message */
-"data_saved_info_alert_message" = "AdGuard, tarayıcınızın gereksiz sayfa öğelerini yüklemesine izin vermez, böylece cihazınızın veri tüketimini azaltır\n\nİşte seçilen zaman aralığı için AdGuard tarafından tasarruf edilen toplam veri miktarı";
-
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Şirket sayısı";
 

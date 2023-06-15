@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10k";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ KB";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Při každé návštěvě webové stránky se odešle dotaz. Webové stránky mohou odesílat skryté dotazy a umožnit tak únik osobních údajů. Je užitečné znát celkový počet dotazů, abychom si uvědomili rozsah tohoto problému.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Blokované požadavky";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard filtruje většinu DNS požadavků v telefonu a blokuje sledovací a nebezpečné požadavky\n\nZde je celkový počet požadavků zablokovaných AdGuardem za vybrané časové období";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Šifrované požadavky";
 
@@ -867,6 +876,12 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Průměrný čas potřebný na zpracování DNS dotazu. Čím rychlejší DNS server používáte, tím nižší hodnota by to měla být.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Ušetřená data";
+
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "AdGuard brání zařízení v načítání slídičů v aplikacích, čímž snižuje spotřebu dat vašeho zařízení\n\nZde je celkový objem dat ušetřených AdGuardem za vybrané časové období";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Počet společností";
@@ -891,6 +906,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "Požadavků: %d";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "Zablokováno: %d";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Povolte %@ v nastavení DNS systému";
@@ -964,6 +982,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Blokování krádeže identity, zákeřného softwaru a podezřelého obsahu";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Blokujte slídiče v aplikacích, které o vás tiše shromažďují data";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Použijte filtry třetích stran nebo si vytvořte vlastní";

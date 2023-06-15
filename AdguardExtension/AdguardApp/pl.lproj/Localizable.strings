@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ Kb";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Za każdym razem, gdy odwiedzasz witrynę, wysyłane jest żądanie. Strony internetowe mogą wysyłać ukryte żądania i udostępniać dane osobowe. Warto poznać liczbę takich żądań, aby zrozumieć zakres tego problemu.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Zablokowane żądania";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard filtruje większość żądań DNS telefonu, blokując te śledzące i niebezpieczne\n\nOto całkowita liczba żądań zablokowanych przez AdGuard w wybranym okresie czasu";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Zaszyfrowane żądania";
 
@@ -867,6 +876,9 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Średni czas potrzebny na przetworzenie żądania DNS. Im szybszy serwer DNS, tym jest mniejszy.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Oszczędzone dane";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Liczba firm";
@@ -891,6 +903,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d żądań";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "Zablokowano %d";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Włącz %@ w ustawieniach DNS";
@@ -964,6 +979,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Blokuj phishing, złośliwe oprogramowanie i podejrzaną zawartość";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Blokowanie modułów śledzących w aplikacji, które po cichu zbierają dane o użytkowniku";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Użyj filtrów innych firm lub utwórz własne";

@@ -22,6 +22,9 @@
 /* Class = "UILabel"; text = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n"; ObjectID = "Mxf-0w-5MP"; */
 "Mxf-0w-5MP.text" = "Poskytuje samotný OS. V tomto režime nebude možné kontrolovať aktivitu DNS.\n\n";
 
+/* Class = "UILabel"; text = "Enhances your privacy by blocking in-app trackers and encrypting your DNS requests"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Zlepšuje vaše súkromie blokovaním sledovacích zariadení v aplikáciách a šifrovaním požiadaviek DNS";
+
 /* Class = "UILabel"; text = "AdGuard"; ObjectID = "QD7-ng-Xb6"; */
 "QD7-ng-Xb6.text" = "AdGuard";
 

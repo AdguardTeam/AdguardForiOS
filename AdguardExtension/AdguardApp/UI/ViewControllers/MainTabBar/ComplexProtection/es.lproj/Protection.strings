@@ -58,6 +58,9 @@
 /* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Funciona junto con el bloqueador de anuncios AdGuard";
 
+/* Class = "UILabel"; text = "Enhances your privacy by blocking in-app trackers and encrypting your DNS requests"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Mejora tu privacidad bloqueando el seguimiento en las apps y cifrando tus solicitudes de DNS";
+
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "No instalado";
 

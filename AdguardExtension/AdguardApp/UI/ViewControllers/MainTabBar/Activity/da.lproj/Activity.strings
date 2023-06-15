@@ -62,6 +62,9 @@ Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quo
 /* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
 "eye-K9-gbK.text" = "Protokol";
 
+/* Class = "UILabel"; text = "Most blocked companies"; ObjectID = "fD3-p0-Eek"; */
+"fD3-p0-Eek.text" = "Hyppigst blokerede virksomheder";
+
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "Seneste aktivitet";
 
@@ -92,6 +95,9 @@ Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quo
 /* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
 "uni-H6-XNc.text" = "Forespørgselsdetaljer";
 
+/* Class = "UILabel"; text = "Most blocked"; ObjectID = "w2i-mK-dfO"; */
+"w2i-mK-dfO.text" = "Hyppigst blokerede";
+
 /* wt5-4Q-CTq.normalTitle
 Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quot;wt5-4Q-CTq&quot;; */
 "wt5-4Q-CTq.normalTitle" = "blokeret";
@@ -101,3 +107,7 @@ Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quo
 
 /* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
 "yWy-kc-8Zg.text" = "Mest aktive";
+
+/* yio-E8-cQV.normalTitle
+Class = &amp;quot;UIButton&amp;quot;; normalTitle = &amp;quot;data saved&amp;quot;; ObjectID = &amp;quot;yio-E8-cQV&amp;quot;; */
+"yio-E8-cQV.normalTitle" = "data gemt";

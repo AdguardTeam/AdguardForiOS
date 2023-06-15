@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@만";
 
+/* Bytes infromation unit */
+"b_unit" = "%@B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ KB";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "웹사이트를 방문할 때마다 요청이 전송됩니다. 웹사이트는 숨겨진 요청을 보내고 개인 데이터를 유출할 수 있습니다. 이 문제의 범위를 보기 위해 이러한 요청의 수를 아는 것이 유용합니다.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "차단된 요청";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard는 대부분의 휴대전화 DNS 요청을 필터링해 추적 및 위험 요소를 차단합니다.\n\n선택한 기간 동안 AdGuard가 차단한 총 요청 수입니다.";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "암호화된 요청";
 
@@ -867,6 +876,12 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "DNS 요청을 처리하는 데 걸리는 평균 시간입니다. 사용하는 DNS 서버가 빠를 수록 시간이 덜 걸립니다.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "절약한 데이터";
+
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "AdGuard는 기기의 인앱 트래커 로딩을 방지하여 기기의 데이터 소비를 줄입니다.\n\n다음은 선택한 기간 동안 AdGuard가 절약한 총 데이터 양입니다.";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "기업 수";
@@ -891,6 +906,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d 요청";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d건 차단됨";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "DNS 설정에서 %@을(를) 활성화하세요";
@@ -964,6 +982,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "피싱, 멀웨어 및 수상한 콘텐츠 차단";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "사용자에 대한 데이터를 수집하는 인앱 트래커를 차단하세요.";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "타사 필터를 사용하거나 나만의 필터를 만들어 보세요";

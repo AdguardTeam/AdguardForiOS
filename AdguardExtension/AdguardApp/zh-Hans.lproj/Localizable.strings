@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@万";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ Kb";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "每次访问网站时，都会发送一个请求。网站会发送隐藏请求并泄露个人数据。为了了解这个问题的范围，该知道请求总数。";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "拦截的请求";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard 会过滤手机上的大部分 DNS 请求，阻止跟踪和危险请求\n\n以下是 AdGuard 在选定时间段内拦截的请求总数";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "加密的请求\n";
 
@@ -867,6 +876,12 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "处理DNS请求的平均时间。你用的DNS服务器越快，处理DNS请求的时间越短。";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "节省的数据";
+
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "AdGuard 避免设备加载应用程序内的跟踪器，减少设备的数据消耗\n\n以下是 AdGuard 在选定时间段内节省的数据总量";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "公司总数";
@@ -891,6 +906,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d请求";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "已拦截 %d";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "请在您的 DNS 设置开启 %@";
@@ -954,7 +972,7 @@
 "security_filters_feature_name" = "安全过滤器 ";
 
 /* (PremiumFeature) - DNS privacy premium feature name */
-"dns_privacy_feature_name" = "DNS保护功能";
+"dns_privacy_feature_name" = "DNS 保护";
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "自定义过滤器";
@@ -964,6 +982,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "拦截钓鱼、恶意或其他可疑内容";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "拦截收集用户个人数据的应用程序内的跟踪器";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "使用第三方过滤器或创建自己的";

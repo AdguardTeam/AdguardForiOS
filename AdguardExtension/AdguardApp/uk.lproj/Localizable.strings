@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10 тис.";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ Б";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ КБ";
 
@@ -850,6 +853,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Щоразу при відвідуванні сайту надсилається запит. Вебсайти можуть надсилати приховані запити і викривати особисті дані. Корисно знати кількість таких запитів для розуміння проблеми.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Заблоковані запити";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard фільтрує більшість DNS-запитів вашого телефону, блокуючи стеження та небезпечні запити\n\nОсь загальна кількість запитів, заблокованих AdGuard за обраний проміжок часу";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Зашифровані запити";
 
@@ -861,6 +870,9 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Середній час обробки DNS-запиту. Чим швидший DNS-сервер, тим краще, і тим нижче буде це значення.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Заощаджено трафіку";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Кількість компаній";
@@ -885,6 +897,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d запитів";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d заблоковано";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Увімкніть %@ в системних параметрах DNS";
@@ -958,6 +973,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Блокування фішингу та зловмисних програм";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Блокуйте запити стеження різних програм, які тихо збирають дані про вас";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Використовуйте сторонні фільтри або ж створюйте власні";

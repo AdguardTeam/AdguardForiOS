@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ Б";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ Кб";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Каждый раз, когда вы посещаете вебсайт, посылается запрос. Сайты могут отправлять скрытые запросы, из-за которых утекают личные данные. Полезно знать количество таких запросов, чтобы осознавать масштаб проблемы.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Заблокированные запросы";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard фильтрует большинство DNS-запросов вашего устройства — трекинговые и опасные запросы блокируются\n\nЗдесь показано, сколько запросов заблокировал AdGuard за выбранный период времени";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Зашифрованные запросы";
 
@@ -867,6 +876,12 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Среднее время, которое нужно для обработки DNS-запроса. Чем быстрее DNS-сервер, который вы используете, тем меньше времени ему потребуется.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Сэкономленные данные";
+
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "AdGuard предотвращает загрузку трекеров в приложениях, поэтому ваше устройство тратит меньше данных\n\nЗдесь показано, сколько данных AdGuard сэкономил за выбранный период времени";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Количество компаний";
@@ -891,6 +906,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d запросов";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d заблокировано";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Включите %@ в DNS-настройках";
@@ -964,6 +982,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Блокируйте фишинговый, вредоносный и другой подозрительный контент";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Не позволяйте приложениям собирать и отправлять данные о вас";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Используйте сторонние фильтры или создавайте свои";
