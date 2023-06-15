@@ -862,6 +862,9 @@
 /* (ActivityViewController) -  Blocked alret title */
 "blocked_info_alert_title" = "Solicitações bloqueadas";
 
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "O AdGuard filtra a maioria das solicitações de DNS do seu telefone, bloqueando rastreadores e outras ameaças\n\nAqui está o número total de solicitações bloqueadas pelo AdGuard no período selecionado";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Solicitações criptografadas";
 
@@ -873,6 +876,12 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Tempo médio que leva para processar uma solicitação DNS. Quanto mais rápido o servidor de DNS que você usar, menor será esse tempo.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Dados salvos";
+
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "O AdGuard impede que seu dispositivo carregue rastreadores de aplicativos, reduzindo o uso de dados do seu dispositivo\n\nAqui está a quantidade total de dados economizados pelo AdGuard para o período de tempo selecionado";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Número de empresas";
@@ -897,6 +906,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d solicitações";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d bloqueado";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Ative %@ nas configurações de DNS";
@@ -960,7 +972,7 @@
 "security_filters_feature_name" = "Filtros de segurança ";
 
 /* (PremiumFeature) - DNS privacy premium feature name */
-"dns_privacy_feature_name" = "Proteção de DNS";
+"dns_privacy_feature_name" = "Proteção DNS";
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Filtros personalizados";
@@ -970,6 +982,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Bloqueie phishing, malware e conteúdo suspeito";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Bloqueie rastreadores de aplicativos que coletam dados sobre você silenciosamente";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Use filtros de terceiros ou crie o seu próprio";

@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10 K";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ KB";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Hver gang du besøger et websted, sendes en forespørgsel. Websteder sender muligvis skjulte forespørgsler og lækker personlige data. Det er nyttigt at kende det samlede antal af forespørgsler for at forstå omfanget af dette problem.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Blokerede forespørgsler";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard filtrerer de fleste af din telefons DNS-anmodninger og blokerer sporing og farlige anmodninger\n\nHer er det samlede antal anmodninger blokeret af AdGuard i den valgte tidsperiode";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Krypterede forespørgsler";
 
@@ -867,6 +876,9 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Gns. behandlingstid for en DNS-forespørgsel. Jo hurtigere DNS-server, du bruger, jo kortere behandlingstid.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Sparet data";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Antal virksomheder";
@@ -891,6 +903,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d forespørgsler";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d blokeret";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Aktivér %@ i system DNS-indstillingerne";
@@ -964,6 +979,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Blokér phishing, malware og mistænkeligt indhold";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Bloker in-app-trackere, der lydløst indsamler data om dig";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Benyt tredjepartsfiltre eller opret selv nogle";

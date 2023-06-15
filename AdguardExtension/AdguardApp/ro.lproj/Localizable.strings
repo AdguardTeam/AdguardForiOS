@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ KB";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Oricând vizitați un site web, o cerere este trimisă. Site-urile web pot trimite cereri ascunse și scurge date personale. Este util să știm numărul acestor solicitări pentru a înțelege amploarea problemei.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Solicitări blocate";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard filtrează majoritatea solicitărilor DNS ale telefonului dvs., blocând urmărirea și pe cele periculoase\n\nIată numărul total de solicitări blocate de AdGuard pentru perioada de timp selectată";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Solicitări criptate";
 
@@ -867,6 +876,9 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Timpul mediu necesar procesării unei interogări DNS. El este mai mic la serverele DNS mai rapide.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Date salvate";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Numărul de companii";
@@ -891,6 +903,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d solicitări";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d blocat";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Activați %@ în setările DNS";
@@ -964,6 +979,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Blochează phishing-ul, programele malware și conținutul suspect";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Blocați instrumentele de urmărire în aplicație care colectează în tăcere date despre dvs";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Folosiți filtre de la terți sau creați-vă propriile filtre";

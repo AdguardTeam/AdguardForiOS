@@ -22,6 +22,10 @@
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
 "Btd-nN-zLO.text" = "リクエスト数";
 
+/* Cfe-vu-29O.text
+Class = &amp;amp;quot;UILabel&amp;amp;quot;; text = &amp;amp;quot;data saved&amp;amp;quot;; ObjectID = &amp;amp;quot;Cfe-vu-29O&amp;amp;quot;; */
+"Cfe-vu-29O.text" = "節約したデータ通信量";
+
 /* Class = "UILabel"; text = "Some content blockers are disabled"; ObjectID = "FcP-gP-TsG"; */
 "FcP-gP-TsG.text" = "コンテンツブロッカーが\n一部オフになっています。";
 
@@ -30,7 +34,7 @@
 
 /* a5U-A8-S8G.text
 Class = &quot;UILabel&quot;; text = &quot;blocked&quot;; ObjectID = &quot;a5U-A8-S8G&quot;; */
-"a5U-A8-S8G.text" = "ブロックされています";
+"a5U-A8-S8G.text" = "ブロック済み数";
 
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
 "cvv-CS-LMQ.text" = "コンテンツブロッカーが\n一部オフになっています。";

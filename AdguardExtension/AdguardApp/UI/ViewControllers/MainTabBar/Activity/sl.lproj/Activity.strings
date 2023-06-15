@@ -6,7 +6,7 @@
 
 /* 4IJ-xy-hky.normalTitle
 Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quot;4IJ-xy-hky&quot;; */
-"4IJ-xy-hky.normalTitle" = "onemogočena";
+"4IJ-xy-hky.normalTitle" = "blokirano";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Dejavnost";
@@ -62,6 +62,9 @@ Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quo
 /* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
 "eye-K9-gbK.text" = "Protokol";
 
+/* Class = "UILabel"; text = "Most blocked companies"; ObjectID = "fD3-p0-Eek"; */
+"fD3-p0-Eek.text" = "Večina blokiranih podjetij";
+
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "Nedavna dejavnost";
 
@@ -92,12 +95,19 @@ Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quo
 /* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
 "uni-H6-XNc.text" = "Podrobnosti o zahtevi";
 
+/* Class = "UILabel"; text = "Most blocked"; ObjectID = "w2i-mK-dfO"; */
+"w2i-mK-dfO.text" = "Večina blokiranih";
+
 /* wt5-4Q-CTq.normalTitle
 Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quot;wt5-4Q-CTq&quot;; */
-"wt5-4Q-CTq.normalTitle" = "onemogočena";
+"wt5-4Q-CTq.normalTitle" = "blokirano";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "Onemogoči zahtevo";
 
 /* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
 "yWy-kc-8Zg.text" = "Najbolj aktivno";
+
+/* yio-E8-cQV.normalTitle
+Class = &amp;quot;UIButton&amp;quot;; normalTitle = &amp;quot;data saved&amp;quot;; ObjectID = &amp;quot;yio-E8-cQV&amp;quot;; */
+"yio-E8-cQV.normalTitle" = "shranjeni";

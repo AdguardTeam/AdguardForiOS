@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ KB";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Zakaždým, keď navštívite webovú stránku, pošle sa dopyt. Webové stránky môžu odosielať skryté dopyty a umožniť tak únik osobných údajov. Je užitočné poznať celkový počet takýchto dopytov pre uvedomenie si rozsahu tohto problému.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Zablokované žiadosti";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard filtruje väčšinu požiadaviek DNS Vášho telefónu, blokuje sledovanie a nebezpečné\n\nTu je celkový počet žiadostí zablokovaných programom AdGuard za zvolené časové obdobie";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Šifrované dopyty";
 
@@ -867,6 +876,9 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Priemerný čas potrebný na spracovanie DNS dopytu. Čím rýchlejší DNS server používate, tým nižšia hodnota by to mala byť.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Uložené údaje";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Počet spoločností";
@@ -891,6 +903,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d dopytov";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d zablokované";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Zapnite %@ vo Vašich DNS nastaveniach";
@@ -964,6 +979,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Blokovanie krádeží identity, malvéru a podozrivého obsahu";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Blokujte sledovače v aplikácii, ktoré potichu zhromažďujú údaje o vás";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Používajte filtre tretích strán alebo si vytvorte vlastné";

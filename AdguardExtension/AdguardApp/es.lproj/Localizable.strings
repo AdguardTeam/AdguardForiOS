@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ KB";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Cada vez que se visita un sitio web, se envía una petición. Los sitios web pueden enviar peticiones ocultas y filtrar datos personales. Es útil saber el número total de tales peticiones para comprender el alcance de este problema.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Solicitudes bloqueadas";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard filtra la mayoría de las solicitudes de DNS de tu celular, bloqueando el seguimiento y posibles peligros\n\nEste es el número total de solicitudes bloqueadas por AdGuard durante el período de tiempo seleccionado";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Peticiones cifradas";
 
@@ -867,6 +876,12 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Tiempo promedio que se tarda en procesar una petición DNS. Cuanto más rápido sea el servidor DNS que uses, más bajo será.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Datos guardados";
+
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "AdGuard evita que tu dispositivo cargue rastreadores dentro de las apps, reduciendo el uso de datos\n\nEsta es la cantidad total de datos ahorrados por AdGuard durante el período de tiempo seleccionado";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Número de empresas";
@@ -891,6 +906,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d peticiones";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d bloqueados";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Habilita %@ en la configuración del DNS";
@@ -964,6 +982,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Bloquea phishing, malware y contenido sospechoso";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Bloquea el seguimiento en las apps que recopilan datos sobre ti de forma silenciosa";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Utiliza filtros de terceros o crea los tuyos propios";

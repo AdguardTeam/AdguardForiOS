@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10tis";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ KB";
 
@@ -856,6 +859,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Svaki put kada posjetite web stranicu, šalje se zahtjev. Web stranice mogu slati skrivene zahtjeve i procuriti vaše osobne podatke. Korisno je znati ukupan broj zahtjeva da biste shvatili opseg ovog problema.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Blokirani zahtjevi";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard filtrira većinu DNS zahtjeva vašeg telefona, blokirajući praćenje i opasne\n\nEvo ukupnog broja zahtjeva koje je AdGuard blokirao za odabrano vremensko razdoblje";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Šifrirani zahtjevi";
 
@@ -867,6 +876,9 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Prosječno vrijeme za obradu DNS zahtjeva. Što je brži DNS poslužitelj kojeg koristite, manje vrijeme će biti.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Spremljeni podaci";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Broj tvrtki";
@@ -891,6 +903,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d zahtjeva";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d blokiran";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Molimo omogućite %@ u DNS postavkama sustava";
@@ -964,6 +979,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Blokiraj phishing, štetan softver i sumnjiv sadržaj";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Blokirajte alate za praćenje unutar aplikacije koji tiho prikupljaju podatke o vama";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Koristite filtre trećih strana ili izradite svoje";

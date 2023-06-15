@@ -6,7 +6,7 @@
 
 /* 4IJ-xy-hky.normalTitle
 Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quot;4IJ-xy-hky&quot;; */
-"4IJ-xy-hky.normalTitle" = "tiltva";
+"4IJ-xy-hky.normalTitle" = "letiltva";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Tevékenység";
@@ -62,6 +62,9 @@ Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quo
 /* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
 "eye-K9-gbK.text" = "Protokoll";
 
+/* Class = "UILabel"; text = "Most blocked companies"; ObjectID = "fD3-p0-Eek"; */
+"fD3-p0-Eek.text" = "A legtöbb blokkolt vállalat";
+
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "Legutóbbi tevékenység";
 
@@ -92,12 +95,19 @@ Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quo
 /* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
 "uni-H6-XNc.text" = "Kérés részletei";
 
+/* Class = "UILabel"; text = "Most blocked"; ObjectID = "w2i-mK-dfO"; */
+"w2i-mK-dfO.text" = "Leginkább blokkolva";
+
 /* wt5-4Q-CTq.normalTitle
 Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quot;wt5-4Q-CTq&quot;; */
-"wt5-4Q-CTq.normalTitle" = "tiltva";
+"wt5-4Q-CTq.normalTitle" = "letiltva";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "Kérés blokkolása";
 
 /* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
 "yWy-kc-8Zg.text" = "Leggyakoribb";
+
+/* yio-E8-cQV.normalTitle
+Class = &amp;quot;UIButton&amp;quot;; normalTitle = &amp;quot;data saved&amp;quot;; ObjectID = &amp;quot;yio-E8-cQV&amp;quot;; */
+"yio-E8-cQV.normalTitle" = "megtakarítva";

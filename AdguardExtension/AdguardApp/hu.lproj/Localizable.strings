@@ -58,6 +58,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10E";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ KB";
 
@@ -850,6 +853,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Minden alkalommal, ha meglátogat egy webhelyet, egy kérés kerül elküldésre. Előfordulhat, hogy a webhelyek rejtett kéréseket küldnek és szivároghatnak személyes adatok. Hasznos látni a kérések pontos számát a probléma mértékének felismerése érdekében.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Blokkolt kérések";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "Az AdGuard kiszűri a telefon legtöbb DNS-kérelmét, blokkolja a követést és a veszélyeseket\n\nItt van az AdGuard által blokkolt kérések teljes száma a kiválasztott időszakban";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Titkosított kérések";
 
@@ -861,6 +870,9 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Egy DNS kérés átlagos feldolgozási ideje. Minél gyorsabb DNS-kiszolgálót használ, annál alacsonyabb lesz ez az érték.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Mentett adatok";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Vállalatok száma";
@@ -885,6 +897,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d kérés";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d blokkolva";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Engedélyezze a(z) %@ lehetőséget a DNS beállításokban";
@@ -958,6 +973,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Adathalászat, rosszindulatú programok és gyanús tartalmak blokkolása";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Blokkolja az alkalmazáson belüli nyomkövetőket, amelyek csendben adatokat gyűjtenek Önről";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Használjon harmadik féltől származó szűrőket, vagy hozzon létre sajátot";

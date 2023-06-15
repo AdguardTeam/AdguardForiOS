@@ -55,6 +55,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* Bytes infromation unit */
+"b_unit" = "%@ B";
+
 /* Kilobytes infromation unit */
 "kb_unit" = "%@ KB";
 
@@ -847,6 +850,12 @@
 /* (ActivityViewController) - Requests alert message */
 "requests_info_alert_message" = "Bij ieder website bezoek wordt een verzoek verstuurd. Websites kunnen verborgen verzoeken versturen en persoonlijke gegevens lekken. Het is nuttig om dit aantal verzoeken te kennen om de omvang van dit probleem te beseffen.";
 
+/* (ActivityViewController) -  Blocked alret title */
+"blocked_info_alert_title" = "Geblokkeerde verzoeken";
+
+/* (ActivityViewController) -  Blocked alret message */
+"blocked_info_alert_message" = "AdGuard filtert de meeste DNS-verzoeken van jouw telefoon, blokkeert volgers en gevaarlijke verzoeken\n\nDit is het totale aantal verzoeken dat door AdGuard is geblokkeerd voor de geselecteerde periode";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Versleutelde verzoeken";
 
@@ -858,6 +867,9 @@
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Gemiddelde tijd om een DNS verzoek te verwerken. Hoe sneller de gebruikte DNS server, hoe lager deze waarde.";
+
+/* (ActivityViewController) -  Data saved alret title */
+"data_saved_info_alert_title" = "Bespaarde gegevens";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Aantal bedrijven";
@@ -882,6 +894,9 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d verzoeken";
+
+/* (MostActiveCompaniesController) - Blocked requests number label */
+"blocked_number" = "%d geblokkeerd";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Schakel %@ in je DNS-instellingen in";
@@ -945,7 +960,7 @@
 "security_filters_feature_name" = "Beveiligingsfilters ";
 
 /* (PremiumFeature) - DNS privacy premium feature name */
-"dns_privacy_feature_name" = "DNS bescherming";
+"dns_privacy_feature_name" = "DNS-bescherming";
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Aangepaste filters";
@@ -955,6 +970,9 @@
 
 /* (PremiumFeature) - Security filters premium feature description */
 "security_filters_feature_description" = "Phishing, malware en verdachte inhoud blokkeren";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "In-app-volgers blokkeren die op de achtergrond gegevens over jou verzamelen";
 
 /* (PremiumFeature) - Custom filters premium feature description */
 "custom_filters_feature_description" = "Filters van derden gebruiken of je eigen filters maken";
