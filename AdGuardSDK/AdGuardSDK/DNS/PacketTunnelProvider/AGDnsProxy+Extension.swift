@@ -153,6 +153,7 @@ extension AGDnsProxyConfig {
         dnsProxyConfiguration.blockEch = false
         dnsProxyConfiguration.helperPath = defaultConfig.helperPath
         dnsProxyConfiguration.upstreamTimeoutMs = UInt(AGDnsProxyConfig.defaultTimeoutMs)
+        dnsProxyConfiguration.enableHttp3 = true
 
         return dnsProxyConfiguration
     }

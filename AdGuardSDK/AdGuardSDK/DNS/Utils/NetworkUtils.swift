@@ -151,7 +151,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
             return try getDnsProtocol(from: upstream)
         }
 
-        if upstream.hasPrefix("https://") {
+        if upstream.hasPrefix("https://") || upstream.hasPrefix("h3://") {
             return .doh
         } else if upstream.hasPrefix("tls://") {
             return .dot
