@@ -878,7 +878,7 @@
 "average_info_alert_message" = "So lange wird eine DNS-Anfrage verarbeitet. Je schneller der verwendete DNS-Server antwortet, desto weniger Zeit wird benötigt.";
 
 /* (ActivityViewController) -  Data saved alret title */
-"data_saved_info_alert_title" = "Gespeicherte Daten";
+"data_saved_info_alert_title" = "Eingesparte Daten";
 
 /* (ActivityViewController) -  Data saved alret message */
 "data_saved_info_alert_message" = "AdGuard verhindert, dass Ihr Gerät In-App-Tracker lädt, und reduziert so die Datennutzung Ihres Geräts\n\nHier sehen Sie die Gesamtdatenmenge, die von AdGuard für den ausgewählten Zeitraum gespeichert wurde";

@@ -880,6 +880,9 @@
 /* (ActivityViewController) -  Data saved alret title */
 "data_saved_info_alert_title" = "Sparet data";
 
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "AdGuard forhindrer enheden i at indlæse in-app trackere, hvilket reducerer enhedens dataforbrug\n\nHer er den samlede mængde data, som er blevet sparet med AdGuard i den valgte tidsperiode";
+
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Antal virksomheder";
 

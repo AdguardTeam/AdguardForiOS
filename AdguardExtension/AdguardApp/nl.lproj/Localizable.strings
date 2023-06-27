@@ -871,6 +871,9 @@
 /* (ActivityViewController) -  Data saved alret title */
 "data_saved_info_alert_title" = "Bespaarde gegevens";
 
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "AdGuard voorkomt dat jouw apparaat in-app volgers laadt, waardoor jouw apparaat minder gegevens verbruikt\n\nHier zie je de totale hoeveelheid gegevens die door AdGuard is bespaard voor de geselecteerde tijdsperiode";
+
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Aantal bedrijven";
 
