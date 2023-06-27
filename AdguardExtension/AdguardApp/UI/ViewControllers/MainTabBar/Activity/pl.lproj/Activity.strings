@@ -110,4 +110,4 @@ Class = &quot;UIButton&quot;; normalTitle = &quot;blocked&quot;; ObjectID = &quo
 
 /* yio-E8-cQV.normalTitle
 Class = &amp;quot;UIButton&amp;quot;; normalTitle = &amp;quot;data saved&amp;quot;; ObjectID = &amp;quot;yio-E8-cQV&amp;quot;; */
-"yio-E8-cQV.normalTitle" = "zapisane dane";
+"yio-E8-cQV.normalTitle" = "oszczędz. dane";

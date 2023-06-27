@@ -8,7 +8,7 @@
 "3zG-B5-jE5.text" = "Fehlersuch-Protokolle";
 
 /* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "7nl-3p-BP2"; */
-"7nl-3p-BP2.text" = "Gültigkeitsdauer der Antwort gesperrt";
+"7nl-3p-BP2.text" = "Gültigkeitsdauer der blockierten Antwort";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "Positivliste umkehren";

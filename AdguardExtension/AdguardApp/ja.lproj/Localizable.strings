@@ -878,7 +878,7 @@
 "average_info_alert_message" = "DNSリクエスト処理にかかる平均時間。使用しているDNSサーバーが高速であるほど、この平均時間は短くなります。";
 
 /* (ActivityViewController) -  Data saved alret title */
-"data_saved_info_alert_title" = "節約した通信量";
+"data_saved_info_alert_title" = "節約したデータ通信量";
 
 /* (ActivityViewController) -  Data saved alret message */
 "data_saved_info_alert_message" = "AdGuard は、不要なウェブ要素やアプリ内トラッカーの読み込みを防ぐため、iPhone/iPadのデータ通信量を削減します。\n\n選択した期間において AdGuard が節約したデータ通信量の合計は以下の通りです。";

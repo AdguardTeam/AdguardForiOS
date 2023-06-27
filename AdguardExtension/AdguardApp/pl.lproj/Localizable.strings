@@ -880,6 +880,9 @@
 /* (ActivityViewController) -  Data saved alret title */
 "data_saved_info_alert_title" = "Oszczędzone dane";
 
+/* (ActivityViewController) -  Data saved alret message */
+"data_saved_info_alert_message" = "AdGuard blokuje ładowanie przez Twoje urządzenie wbudowanych modułów śledzących, zmniejszając w ten sposób zużycie danych\n\nOto całkowita ilość oszczędzonych danych dzięki AdGuard w wybranym okresie";
+
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Liczba firm";
 
