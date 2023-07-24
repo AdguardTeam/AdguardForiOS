@@ -12,12 +12,12 @@
   resolved "https://registry.yarnpkg.com/@adguard/extended-css/-/extended-css-2.0.52.tgz#f5e7c3df1796deb96404a1b6441e7a4c729f09ac"
   integrity sha512-T77MnFD/+A3q93MNEq13qPUXPQRBeOUO9LRyqslcaz7jD5qMcikX1nx436u3PXdZXZpa6R0nnwXQ7wwScDmVgw==
 
-"@adguard/scriptlets@^1.9.37":
-  version "1.9.37"
-  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.9.37.tgz#0df8df9ed0b637c4e4dbcd26d7add93443aec95a"
-  integrity sha512-FXsUNaL6f+PyMeXosaXD5kZv2QHiI9iGnfkIDh4N4UQWv0fg5413c+rDdK0x4f34pJUNiSKs5Ol+IE0OWnEFGw==
+"@adguard/scriptlets@^1.9.57":
+  version "1.9.57"
+  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.9.57.tgz#186d611f4ee9315f01588c15a7d2ed11b2e8036e"
+  integrity sha512-CvQmszEnEjgrK68JOJ+cLRf3IFoN8tmF6e7yzJpEnSJvyopZH1e10R8bT8FjE+WtBeUyjrVs8jVMuGGa7RRfGg==
   dependencies:
-    "@babel/runtime" "^7.7.2"
+    "@babel/runtime" "^7.20.13"
     js-yaml "^3.13.1"
 
 "@adguard/translate@0.3.0":
@@ -25,12 +25,12 @@
   resolved "https://registry.yarnpkg.com/@adguard/translate/-/translate-0.3.0.tgz#a7a06d1d4847b57a1692ab079fd40939f8b9baff"
   integrity sha512-MP74O2BFjW8ez3W+jJQyGNs3e1FTfIYijBHRwmZ/J/IrjCsrYGqER4TnNo7eL9j4Ffpth00ME+wtvsyCCNkRfg==
 
-"@adguard/tsurlfilter@2.0.6":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-2.0.6.tgz#fbd47eb38fcd8d2060127412899866d256caa0c9"
-  integrity sha512-p232CjLUGIlRpoPwZmgscTfPLMKkNn/7b5xUsUvi8QkljoL/AnwjEQgsS/frgTgI/A4JHEOAGOiqd2W18xc9Sw==
+"@adguard/tsurlfilter@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-2.1.5.tgz#2d0358ebc5b8eb2e6ca731cf298766031200a441"
+  integrity sha512-POpsstT16BvXlqxogsoK0MsRQRwZFabgrGtLGSocIjB+MnMBA6MmWq55SbPVbSI12qlaJ0kRfFuZxVPHputQZQ==
   dependencies:
-    "@adguard/scriptlets" "^1.9.37"
+    "@adguard/scriptlets" "^1.9.57"
     commander "9.4.1"
     ip6addr "0.2.3"
     is-cidr "4.0.2"
@@ -1094,7 +1094,7 @@
     core-js-pure "^3.15.0"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.14.6", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.14.6", "@babel/runtime@^7.8.4":
   version "7.14.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.6.tgz#535203bc0892efc7dec60bdc27b2ecf6e409062d"
   integrity sha512-/PCB2uJ7oM44tz8YhC4Z/6PeOKXp4K588f+5M3clr1M4zbqztlo0XEfJ2LEzj/FgwfgGcIdl8n7YYjTCI0BYwg==
@@ -1107,6 +1107,13 @@
   integrity sha512-99catp6bHCaxr4sJ/DbTGgHS4+Rs2RVd2g7iOap6SLGPDknRK9ztKNsE/Fg6QhSeh1FGE5f6gHGQmvvn3I3xhw==
   dependencies:
     regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.20.13":
+  version "7.22.6"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.6.tgz#57d64b9ae3cff1d67eb067ae117dac087f5bd438"
+  integrity sha512-wDb5pWm4WDdF6LFUde3Jl8WzPA+3ZbxYqkC6xAXuD3irdEHN1k0NfTRrJD8ZD378SJ61miMLCqIOXYhd8x+AJQ==
+  dependencies:
+    regenerator-runtime "^0.13.11"
 
 "@babel/template@^7.14.5", "@babel/template@^7.3.3":
   version "7.14.5"
@@ -6452,6 +6459,11 @@ regenerate@^1.4.0:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.2.tgz#b9346d8827e8f5a32f7ba29637d398b69014848a"
   integrity sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==
+
+regenerator-runtime@^0.13.11:
+  version "0.13.11"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
+  integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
 
 regenerator-runtime@^0.13.4:
   version "0.13.7"
