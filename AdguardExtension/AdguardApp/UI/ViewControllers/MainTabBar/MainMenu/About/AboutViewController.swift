@@ -81,7 +81,7 @@ class AboutViewController: UIViewController {
             versionFormat += """
 
                             SafariConverterLib v2.0.39
-                            Scriptlets v1.9.62
+                            Scriptlets v1.9.70
                             ExtendedCss v2.0.52
                             """
         }
