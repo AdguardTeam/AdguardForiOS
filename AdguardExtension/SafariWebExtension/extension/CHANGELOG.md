@@ -12,8 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated Scriptlets to v1.9.70
-- Updated TSUrlFilter to v2.1.10
+- Updated Scriptlets to v1.9.72
+- Updated TSUrlFilter to v2.1.11
 
 
 ## 0.0.4
