@@ -36,19 +36,19 @@
 AdGuard for iOS is an app that blocks ads in Safari browser at exceptional level, and also provides additional Premium features like configurable DNS settings, encrypted DNS support (DOH, DOT, DNSCrypt), and custom ad blocking subscriptions. To get more information and to download AdGuard for iOS, [visit our website](https://adguard.com/adguard-ios/overview.html).
 
 <p align="center">
-  <picture>
+   <picture>
      <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adtidy.org/content/github/ad_blocker/ios/dark_home.png" width="250">
      <img src="https://cdn.adtidy.org/content/github/ad_blocker/ios/home.png" width="250">
    </picture>
-  <picture>
+   <picture>
      <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adtidy.org/content/github/ad_blocker/ios/dark_protection.png" width="250">
      <img src="https://cdn.adtidy.org/content/github/ad_blocker/ios/protection.png" width="250">
    </picture>
-  <picture>
+   <picture>
      <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adtidy.org/content/github/ad_blocker/ios/dark_stats.png" width="250">
      <img src="https://cdn.adtidy.org/content/github/ad_blocker/ios/stats.png" width="250">
    </picture>
-  </p>
+</p>
 
 
 <a id="contribution"></a>
