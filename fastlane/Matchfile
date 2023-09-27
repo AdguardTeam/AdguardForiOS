@@ -1,4 +1,4 @@
-git_url("ssh://git@bit.adguard.com:7999/adguard-ios/certificates.git")
+git_url("ssh://git@bit.int.agrd.dev:7999/adguard-ios/certificates.git")
 storage_mode("git")
 type("development")
 
