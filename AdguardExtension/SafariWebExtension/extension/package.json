@@ -16,7 +16,7 @@
     "@adguard/assistant": "4.3.68",
     "@adguard/extended-css": "2.0.52",
     "@adguard/translate": "0.3.0",
-    "@adguard/tsurlfilter": "2.0.6",
+    "@adguard/tsurlfilter": "2.1.12",
     "@babel/runtime": "^7.14.6",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
