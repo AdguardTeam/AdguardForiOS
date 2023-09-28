@@ -48,7 +48,7 @@ export const prepareAdvancedRules = (
     scriptRules.forEach((scriptRule) => {
         const script = scriptRule.getScript({
             debug,
-            request: new Request(url, null, RequestType.Document),
+            frameUrl: url,
         });
         if (script !== null) {
             scripts.push(script);
