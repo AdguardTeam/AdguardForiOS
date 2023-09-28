@@ -1,6 +1,6 @@
 {
   "name": "advanced-adblocker-web-extension",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Advanced AdBlocker Web Extension",
   "main": "index.js",
   "author": "AdGuard",
