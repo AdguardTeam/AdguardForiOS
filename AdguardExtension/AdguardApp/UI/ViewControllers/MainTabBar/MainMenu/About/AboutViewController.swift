@@ -85,6 +85,7 @@ class AboutViewController: UIViewController {
                             Scriptlets v1.9.37
                             ExtendedCss v2.0.52
                             """
+            versionLabel.font = .systemFont(ofSize: isIpadTrait ? 20.0 : 16.0, weight: .bold)
         }
 
         versionLabel.text = String(format: versionFormat, version)
