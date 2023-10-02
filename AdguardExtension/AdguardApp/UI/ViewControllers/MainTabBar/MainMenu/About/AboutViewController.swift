@@ -80,10 +80,12 @@ class AboutViewController: UIViewController {
             // Scriptlets version is placed in the yarn.lock file as a dependency of `tsurlfilter`
             versionFormat += """
 
-                            SafariConverterLib v2.0.39
-                            Scriptlets v1.9.72
+                            SafariConverterLib v2.0.43
+                            TSUrlFilter v2.1.12
+                            Scriptlets v1.9.37
                             ExtendedCss v2.0.52
                             """
+            versionLabel.font = .systemFont(ofSize: isIpadTrait ? 20.0 : 16.0, weight: .bold)
         }
 
         versionLabel.text = String(format: versionFormat, version)

@@ -25,10 +25,10 @@
   resolved "https://registry.yarnpkg.com/@adguard/translate/-/translate-0.3.0.tgz#a7a06d1d4847b57a1692ab079fd40939f8b9baff"
   integrity sha512-MP74O2BFjW8ez3W+jJQyGNs3e1FTfIYijBHRwmZ/J/IrjCsrYGqER4TnNo7eL9j4Ffpth00ME+wtvsyCCNkRfg==
 
-"@adguard/tsurlfilter@2.1.11":
-  version "2.1.11"
-  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-2.1.11.tgz#9d034f556deaf4bf2bf2beed6564eb0472438f44"
-  integrity sha512-OUlwlPttBIzpjVwriMwEMdy18UnLviwMxpyJOpAKThX5NHNoIAwpT/x5PSy4z5rIln+vz+xpb5tCXD5FcQXqkg==
+"@adguard/tsurlfilter@2.1.12":
+  version "2.1.12"
+  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-2.1.12.tgz#d4152a35656d67e3ddcd52779ee706bb2ddc0d48"
+  integrity sha512-MnrXzDU4KuYVhbauj4L8rPdJUpyfQkR1mZabNiSQVdLbIqWZrfLMeTIQcE3IQ918YuE/iOAvUoZRGiAK3f2OCg==
   dependencies:
     "@adguard/scriptlets" "^1.9.72"
     cidr-tools "^6.4.1"
@@ -1108,11 +1108,11 @@
     regenerator-runtime "^0.13.4"
 
 "@babel/runtime@^7.20.13":
-  version "7.22.6"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.6.tgz#57d64b9ae3cff1d67eb067ae117dac087f5bd438"
-  integrity sha512-wDb5pWm4WDdF6LFUde3Jl8WzPA+3ZbxYqkC6xAXuD3irdEHN1k0NfTRrJD8ZD378SJ61miMLCqIOXYhd8x+AJQ==
+  version "7.23.1"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.1.tgz#72741dc4d413338a91dcb044a86f3c0bc402646d"
+  integrity sha512-hC2v6p8ZSI/W0HUzh3V8C5g+NwSKzKPtJwSpTjwl0o297GP9+ZLQSkdvHz46CM3LqyoXxq+5G9komY+eSqSO0g==
   dependencies:
-    regenerator-runtime "^0.13.11"
+    regenerator-runtime "^0.14.0"
 
 "@babel/template@^7.14.5", "@babel/template@^7.3.3":
   version "7.14.5"
@@ -2687,9 +2687,9 @@ camelcase@^6.2.0:
   integrity sha512-c7wVvbw3f37nuobQNtgsgG9POC9qMbNuMQmTCqZv23b6MIz0fcYpBiOlv9gEN/hdLdnZTDQhg6e9Dq5M1vKvfg==
 
 caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001219:
-  version "1.0.30001465"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001465.tgz"
-  integrity sha512-HvjgL3MYAJjceTDCcjRnQGjwUz/5qec9n7JPOzUursUoOTIsYCSDOb1l7RsnZE8mjbxG78zVRCKfrBXyvChBag==
+  version "1.0.30001541"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001541.tgz"
+  integrity sha512-bLOsqxDgTqUBkzxbNlSBt8annkDpQB9NdzdTbO2ooJ+eC/IQcvDspDc058g84ejCelF7vHUx57KIOjEecOHXaw==
 
 chalk@^2.0.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
@@ -2769,12 +2769,12 @@ cidr-regex@^3.1.1:
     ip-regex "^4.1.0"
 
 cidr-tools@^6.4.1:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/cidr-tools/-/cidr-tools-6.4.1.tgz#ec0f286dd54bb00e90b5b28628fb7fb5e1c5ec61"
-  integrity sha512-s8JNDwWgc2e0roEF6KDkQfHkZgEnehoap5hK7swPlEQMb9f8msrWqpgVCVKiDm3ARxpesOru9Tu49N8UpJjmDA==
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/cidr-tools/-/cidr-tools-6.4.2.tgz#c47fa24128497d7482f446e883c5e69befa33030"
+  integrity sha512-KZC8t2ipCqU2M+ISmTxRDGu9bku5MRU3V1cWyGEFJTZEzRhGvBJvVsbpZO5UAu12fExRFihtYGXAlgFFpmK9jw==
   dependencies:
     cidr-regex "4.0.3"
-    ip-bigint "7.2.1"
+    ip-bigint "7.3.0"
     ip-regex "5.0.0"
     string-natural-compare "3.0.1"
 
@@ -4291,10 +4291,10 @@ interpret@^3.1.1:
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-3.1.1.tgz#5be0ceed67ca79c6c4bc5cf0d7ee843dcea110c4"
   integrity sha512-6xwYfHbajpoF0xLW+iwLkhwgvLoZDfjYfoFNu8ftMoXINzwuymNLd9u/KmwtdT2GbR+/Cz66otEGEVVUHX9QLQ==
 
-ip-bigint@7.2.1:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/ip-bigint/-/ip-bigint-7.2.1.tgz#f9fdce58b1f88c8e97e39f5c646200873bd75228"
-  integrity sha512-AftDIrlM5ZQM+qQ31IQ5MsL3tJWleeN3r0VqhmkB9oLvwcaDLeLNPtX4d9hahzExTFtz69eRv6LsGAoH20/8/g==
+ip-bigint@7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/ip-bigint/-/ip-bigint-7.3.0.tgz#31cdcc86134ac0d461780330bbbcff46ffa3117b"
+  integrity sha512-2qVAe0Q9+Y+5nGvmogwK9y4kefD5Ks5l/IG0Jo1lhU9gIF34jifhqrwXwzkIl+LC594Q6SyAlngs4p890xsXVw==
 
 ip-regex@5.0.0, ip-regex@^5.0.0:
   version "5.0.0"
@@ -6438,15 +6438,15 @@ regenerate@^1.4.0:
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.2.tgz#b9346d8827e8f5a32f7ba29637d398b69014848a"
   integrity sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==
 
-regenerator-runtime@^0.13.11:
-  version "0.13.11"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
-  integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
-
 regenerator-runtime@^0.13.4:
   version "0.13.7"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
   integrity sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==
+
+regenerator-runtime@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.14.0.tgz#5e19d68eb12d486f797e15a3c6a918f7cec5eb45"
+  integrity sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==
 
 regenerator-transform@^0.14.2:
   version "0.14.5"
