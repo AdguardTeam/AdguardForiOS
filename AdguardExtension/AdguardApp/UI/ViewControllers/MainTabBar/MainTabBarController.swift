@@ -178,6 +178,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 extension UITabBar {
     override open var traitCollection: UITraitCollection {
         if UIDevice.current.userInterfaceIdiom == .pad {
+            if #available(iOS 17.0, *) {
+                super.traitOverrides.horizontalSizeClass = .compact
+                return super.traitCollection
+            }
+
             return UITraitCollection(horizontalSizeClass: .compact)
         }
         return super.traitCollection
