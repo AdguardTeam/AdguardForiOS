@@ -50,7 +50,7 @@
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted_inverted": {
-        "message": "lisättiin sallittujen listalle (käänteinen)",
+        "message": "lisätty sallittujen listalle (käänteinen)",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {

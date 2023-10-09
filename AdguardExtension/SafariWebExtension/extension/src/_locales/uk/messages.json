@@ -98,7 +98,7 @@
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_desc_free": {
-        "message": "В безкоштовній версії недоступний розширений захист, який здатний блокувати більш складну рекламу та стеження. Згодні покращити захист?",
+        "message": "В безплатній версії недоступний розширений захист, який здатний блокувати складніші рекламу та стеження. Згодні покращити захист?",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
@@ -130,7 +130,7 @@
         "description": "TEXT MAX LENGTH: 28"
     },
     "modal_protection_off_extensions": {
-        "message": "Торкніть <b>Safari<\/b> та оберіть <b>Розширення<\/b>",
+        "message": "Торкніть <b>Safari<\/b> та виберіть <b>Розширення<\/b>",
         "description": "TEXT MAX LENGTH: 56"
     },
     "modal_protection_off_switch": {

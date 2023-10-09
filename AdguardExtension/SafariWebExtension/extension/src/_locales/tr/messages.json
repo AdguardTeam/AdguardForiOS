@@ -3,7 +3,7 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web Eklentisi"
+        "message": "AdGuard Safari Web Uzantısı"
     },
     "popup_action_safari_protection_title": {
         "message": "Safari koruması",
@@ -58,11 +58,11 @@
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Üst düzey koruma",
+        "message": "En yüksek koruma",
         "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Aferin! AdGuard, neredeyse tüm reklamları engelleyecek ve en zor meydan okumalarla yüzleşecektir.",
+        "message": "Aferin! AdGuard, neredeyse tüm reklamları engelleyecek ve en zor meydan okumalarla yüzleşir.",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_all_sites_allowed_button": {
@@ -74,7 +74,7 @@
         "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "AdGuard'ı yalnızca birkaç site için etkinleştirdiniz. AdGuard'a daha fazla izin vermediğiniz sürece, reklamlar diğer sitelerde görünebilir. <a>Daha fazla okuyun<\/a>",
+        "message": "AdGuard'ı yalnızca birkaç site için etkinleştirdiniz. AdGuard'a daha fazla izin vermediğiniz sürece, reklamlar diğer sitelerde görünebilir. <a>Devamını okuyun<\/a>",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {
@@ -86,7 +86,7 @@
         "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Gelişmiş engelleme kuralları ve diğer genişletilmiş özellikler kullanılamaz. <a>Daha fazla okuyun<\/a>",
+        "message": "Gelişmiş engelleme kuralları ve diğer genişletilmiş özellikler kullanılamaz. <a>Devamını okuyun<\/a>",
         "description": "TEXT MAX LENGTH: 85"
     },
     "popup_modal_advanced_blocking_disabled_button": {
@@ -130,7 +130,11 @@
         "description": "TEXT MAX LENGTH: 28"
     },
     "modal_protection_off_extensions": {
-        "message": "<b>Safari'ye<\/b> dokunun, aşağı kaydırın ve <b>Eklentiler'e<\/b> dokunun",
+        "message": "<b>Safari'ye<\/b> dokunun, aşağı kaydırın ve <b>Uzantılar<\/b> öğesine dokunun",
         "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "AdGuard içerik engelleyicilerini <b>etkinleştir<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
     }
 }

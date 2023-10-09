@@ -74,7 +74,7 @@
         "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Włączyłeś AdGuard tylko dla kilku stron internetowych. Reklamy mogą pojawiać się na innych stronach internetowych, chyba że dasz AdGuard więcej uprawnień. <a>Czytaj więcej<\/a>",
+        "message": "Włączono AdGuard tylko dla kilku stron internetowych. Reklamy mogą pojawiać się na innych stronach internetowych, chyba że dasz AdGuard więcej uprawnień. <a>Czytaj więcej<\/a>",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {

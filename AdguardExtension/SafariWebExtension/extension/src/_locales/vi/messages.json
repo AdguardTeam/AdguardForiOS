@@ -2,35 +2,139 @@
     "extension_name": {
         "message": "AdGuard"
     },
+    "extension_description": {
+        "message": "Tiện ích mở rộng Web AdGuard Safari"
+    },
     "popup_action_safari_protection_title": {
         "message": "Bảo vệ Safari",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "đã bật cho trang web này",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "đã tắt cho trang web này",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "bảo vệ đã bị tắt",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "bảo vệ đã được bật",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "bảo vệ đã bị tắt",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_block_element": {
+        "message": "Chặn thành phần trên trang này",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Xóa tất cả Quy tắc của người dùng cho trang này",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "Quyền bị hạn chế",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "đang bật bảo vệ...",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "đã thêm vào danh sách cho phép",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "đã thêm vào danh sách cho phép (đảo ngược)",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "chỉ bảo vệ cơ bản",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Bảo vệ cao cấp",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Tốt lắm! AdGuard sẽ chặn hầu hết mọi loại quảng cáo và đương đầu với những thách thức khó khăn nhất.",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Tiếp tục",
+        "message": "Hãy để điều kỳ diệu bắt đầu",
         "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Sắp xong rồi",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Bạn đã cho phép AdGuard chỉ hoạt động trên trang web này, có nghĩa là nó sẽ không chặn quảng cáo trên các trang web khác trừ khi bạn cấp quyền vào lần sau.",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Tiếp tục",
+        "message": "Ok",
         "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Trình bảo vệ nâng cao đang bị tắt",
+        "description": "TEXT MAX LENGTH: 40"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Userscript và trình chặn quảng cáo YouTube đang không được kích hoạt.",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Kích hoạt",
+        "message": "Mở",
         "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_title_free": {
+        "message": "Rất tốt nhưng...",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "Lưu ý rằng bạn bỏ lỡ tính năng bảo vệ nâng cao nó không có trong phiên bản miễn phí. Nó sẽ giúp xử lý nhiều quảng cáo hơn, bao gồm cả quảng cáo YouTube trong Safari.",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
-        "message": "Cập nhật",
+        "message": "Nâng cấp",
         "description": "TEXT MAX LENGTH: 20"
     },
+    "popup_fullscreen_support_title": {
+        "message": "Uh-oh, đó có phải là một cú vuốt lên không?",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Nếu có gì đó không ổn, hãy cho chúng tôi biết và chúng tôi sẽ sửa lại ứng dụng.",
+        "description": "TEXT MAX LENGTH: 45"
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Uh-oh, có vẻ như bạn đã tắt tính năng bảo vệ... Có gì đó không ổn? Chúng tôi có thể sửa nó!",
+        "description": "TEXT MAX LENGTH: 85"
+    },
     "popup_support_button_text": {
-        "message": "Báo lỗi",
+        "message": "Báo cáo vấn đề",
         "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Bật AdGuard",
+        "message": "Để sử dụng bảo vệ:",
         "description": "TEXT MAX LENGTH: 30"
     },
-    "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+    "modal_protection_off_settings": {
+        "message": "Mở <b>Cài đặt<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Nhấn vào <b>Safari<\/b> và chọn <b> \"Tiện ích\"<\/b> trong danh sách",
+        "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Bật<\/b> tất cả các AdGuard",
+        "description": "TEXT MAX LENGTH: 28"
     }
 }

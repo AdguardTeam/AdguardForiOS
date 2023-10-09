@@ -46,11 +46,11 @@
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "zur Freigabeliste hinzugefügt",
+        "message": "zur Positivliste hinzugefügt",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted_inverted": {
-        "message": "zur invertierten Freigabeliste hinzugefügt",
+        "message": "zur invertierten Positivliste hinzugefügt",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {
@@ -118,7 +118,7 @@
         "description": "TEXT MAX LENGTH: 85"
     },
     "popup_support_button_text": {
-        "message": "Ein Problem melden",
+        "message": "Problem melden",
         "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
