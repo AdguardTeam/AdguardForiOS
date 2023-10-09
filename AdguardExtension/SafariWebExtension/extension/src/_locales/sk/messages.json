@@ -74,7 +74,7 @@
         "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Aktivovali ste AdGuard iba pre tento web. Na iných webových stránkach sa môžu zobrazovať reklamy, pokiaľ nedáte AdGuard viac povolení.",
+        "message": "Aktivovali ste AdGuard iba pre tieto webové stránky. Reklamy sa môžu zobraziť aj na iných, pokiaľ nedáte AdGuard povolenie. <a>Viac<\/a>",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {

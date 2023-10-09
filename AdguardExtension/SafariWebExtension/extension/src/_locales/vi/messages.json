@@ -74,7 +74,7 @@
         "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Bạn đã cho phép AdGuard chỉ hoạt động trên trang web này, có nghĩa là nó sẽ không chặn quảng cáo trên các trang web khác trừ khi bạn cấp quyền vào lần sau.",
+        "message": "AdGuard được kích hoạt cho một số trang web. Quảng cáo có thể xuất hiện trên các trang khác nếu không được phép ở mọi nơi. <a>Đọc thêm<\/a>",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {
@@ -86,7 +86,7 @@
         "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Userscript và trình chặn quảng cáo YouTube đang không được kích hoạt.",
+        "message": "Trình chặn quảng cáo tiên tiến và những tính năng mở rộng khác không khả dụng. <a>Đọc thêm<\/a>",
         "description": "TEXT MAX LENGTH: 85"
     },
     "popup_modal_advanced_blocking_disabled_button": {
