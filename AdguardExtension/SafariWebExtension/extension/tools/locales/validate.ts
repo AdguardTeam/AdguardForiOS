@@ -1,6 +1,7 @@
 import _ from 'lodash';
-import { validator } from '@adguard/translate';
+import { validator, Locale } from '@adguard/translate';
 
+import { getErrorMessage } from '../../src/pages/common/error';
 import { log } from './log';
 import { getLocaleTranslations } from './helpers';
 import type { LocaleMessages } from './types';
@@ -12,6 +13,18 @@ import {
 } from './constants';
 
 const LOCALES = Object.keys(LANGUAGES);
+
+type MessageValidationResult = {
+    /**
+     * Key of the base locale string.
+     */
+    key: string,
+
+    /**
+     * Error message.
+     */
+    error: string,
+}
 
 /**
  * @typedef Result
@@ -25,7 +38,7 @@ interface Result {
     locale: string,
     level: number,
     untranslatedStrings: string[],
-    invalidTranslations: { key: string, error: string } []
+    invalidTranslations: MessageValidationResult[]
 }
 
 /**
@@ -73,19 +86,40 @@ const printCriticalResults = (criticalResults: Result[]) => {
     });
 };
 
+/**
+ * Validates that localized string correspond by structure to base locale string.
+ *
+ * @param {string} baseKey Key of the base locale string.
+ * @param {object} baseLocaleTranslations Translations of the base locale.
+ * @param {string} rawLocale Locale to validate.
+ * @param {object} localeTranslations Translations of the locale to validate.
+ *
+ * @returns {object} Validation result if error occurred, otherwise undefined.
+ */
 const validateMessage = (
     baseKey: string,
     baseLocaleTranslations: LocaleMessages,
+    rawLocale: string,
     localeTranslations: LocaleMessages,
-) => {
+): MessageValidationResult | undefined => {
     const baseMessageValue = baseLocaleTranslations[baseKey].message;
     const localeMessageValue = localeTranslations[baseKey].message;
+    // locale should be lowercase, e.g. 'pt_br', not 'pt_BR'
+    const locale: Locale = rawLocale.toLowerCase() as Locale;
+
+    let validation: MessageValidationResult | undefined;
     try {
-        validator.isTranslationValid(baseMessageValue, localeMessageValue);
-        return undefined;
-    } catch (error) {
-        return { key: baseKey, error: error as string };
+        if (!validator.isTranslationValid(
+            baseMessageValue,
+            localeMessageValue,
+            locale,
+        )) {
+            throw new Error('Invalid translation');
+        }
+    } catch (e: unknown) {
+        validation = { key: baseKey, error: getErrorMessage(e) };
     }
+    return validation;
 };
 
 /**
@@ -120,7 +154,7 @@ export const checkTranslations = async (locales: string[], flags: ValidationFlag
         const localeMessagesCount = localeMessages.length;
 
         const untranslatedStrings: string[] = [];
-        const invalidTranslations: { key: string, error: string }[] = [];
+        const invalidTranslations: MessageValidationResult[] = [];
         baseMessages.forEach((baseKey) => {
             if (!localeMessages.includes(baseKey)) {
                 untranslatedStrings.push(baseKey);
@@ -128,6 +162,7 @@ export const checkTranslations = async (locales: string[], flags: ValidationFlag
                 const validationError = validateMessage(
                     baseKey,
                     baseLocaleTranslations,
+                    locale,
                     localeTranslations,
                 );
                 if (validationError) {
