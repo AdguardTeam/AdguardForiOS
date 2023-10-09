@@ -1,6 +1,6 @@
 {
     "extension_name": {
-        "message": "AdGuard Pro"
+        "message": "AdGuard"
     },
     "extension_description": {
         "message": "AdGuard Safari Web Extension"
@@ -74,7 +74,7 @@
         "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "You enabled AdGuard only for several websites. Ads may appear on other websites unless you give AdGuard more permissions. <a>Read more</a>",
+        "message": "You enabled AdGuard only for several websites. Ads may appear on other websites unless you give AdGuard more permissions. <a>Read more<\/a>",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {
@@ -86,7 +86,7 @@
         "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Advanced blocking rules and other extended features are not available. <a>Read more</a>",
+        "message": "Advanced blocking rules and other extended features are not available. <a>Read more<\/a>",
         "description": "TEXT MAX LENGTH: 85"
     },
     "popup_modal_advanced_blocking_disabled_button": {
@@ -126,15 +126,15 @@
         "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_settings": {
-        "message": "Open <b>Settings</b>",
+        "message": "Open <b>Settings<\/b>",
         "description": "TEXT MAX LENGTH: 28"
     },
     "modal_protection_off_extensions": {
-        "message": "Tap <b>Safari</b>, swipe down, and tap <b>Extensions</b>",
+        "message": "Tap <b>Safari<\/b>, swipe down, and tap <b>Extensions<\/b>",
         "description": "TEXT MAX LENGTH: 56"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Enable</b> all AdGuard content blockers",
+        "message": "<b>Enable<\/b> all AdGuard content blockers",
         "description": "TEXT MAX LENGTH: 28"
     }
 }
