@@ -46,11 +46,11 @@
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "toegevoegd aan toestemmingslijst",
+        "message": "toegevoegd aan toelatingslijst",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted_inverted": {
-        "message": "toegevoegd aan toestemmingslijst (omgekeerd)",
+        "message": "toegevoegd aan toelatingslijst (omgekeerd)",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {

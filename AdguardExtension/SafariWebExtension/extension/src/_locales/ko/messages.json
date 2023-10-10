@@ -74,7 +74,7 @@
         "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "여러 사이트에서만 AdGuard가 동작하도록 설정되어 있습니다. AdGuard에 추가 권한을 부여하지 않는 이상 다른 사이트에서는 광고를 차단하지 않게 됩니다. <a>자세히 알아보기<\/a>",
+        "message": "몇 사이트에서만 AdGuard가 동작하도록 설정되어 있습니다. AdGuard에 추가 권한을 부여하지 않는 이상 다른 사이트에서는 광고를 차단하지 않게 됩니다. <a>자세히 알아보기<\/a>",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {
@@ -98,7 +98,7 @@
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_desc_free": {
-        "message": "AdGuard 프리미엄 버전에서는 사용할 수 있는 고급 보호 기능을 놓치지 마세요. 더 복잡한 광고와 추적기를 차단합시다.",
+        "message": "AdGuard 프리미엄 버전에서 사용할 수 있는 고급 보호 기능을 놓치지 마세요. 더 복잡한 광고와 추적기를 차단합시다.",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {

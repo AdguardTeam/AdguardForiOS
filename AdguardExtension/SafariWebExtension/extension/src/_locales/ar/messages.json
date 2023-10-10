@@ -2,27 +2,139 @@
     "extension_name": {
         "message": "AdGuard"
     },
+    "extension_description": {
+        "message": "إضافة AdGuard لمتصفح سفاري"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "حماية سفاري",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "تم تمكين هذا الموقع",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "معطل لهذا الموقع",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "الحماية متوقفة",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "الحماية مفعلة",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "الحماية متوقفة",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_block_element": {
+        "message": "حظر عنصر في الصفحة",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "مسح كل قواعد المستخدم لهذا الموقع",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "صلاحيات محدودة",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "من فضلك انتظر, جاري تفعيل الحماية...",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "إضافة إلى قائمة السماح",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "أضيف إلى قائمة السماح (inverted)",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "حماية بسيطة فقط",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "الحماية القصوى",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "أحسنت! الآن سيقوم AdGuard بحظر المزيد من الإعلانات والتعامل مع أصعب التحديات!",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_all_sites_allowed_button": {
         "message": "استمرار",
         "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "الحماية الانتقائية",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "لقد قمت بتمكين AdGuard لعدة مواقع فقط. قد تظهر الإعلانات على مواقع الويب الأخرى ما لم تمنح AdGuard المزيد من الأذونات. <a> اقرأ المزيد <\/a>",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "استمرار",
         "description": "TEXT MAX LENGTH: 20"
     },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "الحماية المتقدمة متوقفة",
+        "description": "TEXT MAX LENGTH: 40"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "قواعد المنع المتقدمة والميزات الموسعة الأخرى غير متوفرة. <a> اقرأ المزيد <\/a>",
+        "description": "TEXT MAX LENGTH: 85"
+    },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "تمكين",
         "description": "TEXT MAX LENGTH: 20"
     },
+    "popup_modal_title_free": {
+        "message": "حقق أقصى الأمكانيات",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "ما زلت تفتقر إلى الحماية المتقدمة المتاحة في AdGuard Premium. دعنا نحظر الإعلانات والمتتبعات الأكثر تعقيدا؟",
+        "description": "TEXT MAX LENGTH: 140"
+    },
+    "popup_modal_btn_free": {
+        "message": "ترقيه",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "هل تحتاج للمساعدة؟",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "هل هناك أي خطأ ، قد بمككنا اصلاحة.",
+        "description": "TEXT MAX LENGTH: 45"
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "تم تعطيل الحماية لهذا الموقع. هل هناك خطأ؟ قد يمكننا إصلاحه.",
+        "description": "TEXT MAX LENGTH: 85"
+    },
     "popup_support_button_text": {
-        "message": "الإبلاغ عن مشكلة",
+        "message": "إبلاغ عن مشكلة",
         "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "AdGuardتمكين",
+        "message": "تفعيل AdGuard",
         "description": "TEXT MAX LENGTH: 30"
     },
-    "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+    "modal_protection_off_settings": {
+        "message": "فتح <b>الاعدادات<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "اضغط على <b> سفاري <\/b> واذهب للاسفل، واضغط على <b>الملحقات<\/b>",
+        "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>قم بتفعيل<\/b> جميع محتويات مانع الاعلانات AdGuard",
+        "description": "TEXT MAX LENGTH: 28"
     }
 }

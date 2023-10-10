@@ -98,7 +98,7 @@
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_desc_free": {
-        "message": "Non puoi ancora usufruire della protezione avanzata disponibile in AdGuard Premium. Vorresti bloccare più annunci complessi e traccianti?",
+        "message": "Non puoi ancora usufruire della protezione avanzata disponibile in AdGuard Premium. Vorresti bloccare più annunci complessi e tracciatori?",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
