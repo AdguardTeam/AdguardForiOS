@@ -2,25 +2,120 @@
     "extension_name": {
         "message": "AdGuard"
     },
+    "extension_description": {
+        "message": "AdGuard Safari Web proširenje"
+    },
     "popup_action_safari_protection_title": {
         "message": "Zaštita za Safari",
         "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "uključeno na ovom sajtu",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "isključeno na ovom sajtu",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "zaštita je isključena",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "zaštita je uključena",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "zaštita je isključena",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_block_element": {
+        "message": "Blokiraj element na ovoj stranici",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Izbriši korisnička pravila za sajt",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "Ograničene dozvole",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "uključujem zaštitu...",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "dodato na belu listu",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "dodato na belu listu (obrnuto)",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "samo osnovna zaštita",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Najbolja zaštita",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Odličan posao! AdGuard će blokirati skoro svaku reklamu i boriće se sa najtežim izazovima.",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_all_sites_allowed_button": {
         "message": "Nastavi",
         "description": "TEXT MAX LENGTH: 20"
     },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Selektivna zaštita",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Uključili ste AdGuard samo za nekoliko sajtova. reklame se mogu pojavljivati na drugim sajtovima osim ako ne date AdGuard više dozvola. <a>Saznajte više<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Nastavi",
         "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Napredna zaštita je isključena",
+        "description": "TEXT MAX LENGTH: 40"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Napredna pravila blokiranja i druge napredne funkcije nisu dostupne. <a>pročitaj više<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "Uključi",
         "description": "TEXT MAX LENGTH: 20"
     },
+    "popup_modal_title_free": {
+        "message": "Ostvarite svoj pun potencijal",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "Još uvek vam nedostaje napredna zaštita dostupna u AdGuard Premium-u. Hajde da blokiramo još složenije reklame i tragače?",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_btn_free": {
         "message": "Nadogradi",
         "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Da li vam je potrebna pomoć?",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Nešto je pošlo naopako? Možda možemo da popravimo.",
+        "description": "TEXT MAX LENGTH: 45"
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Zaštita za ovaj sajt je isključena. Nešto nije u redu? Možda možemo da popravimo.",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_support_button_text": {
         "message": "Prijavi poteškoću",
@@ -30,7 +125,16 @@
         "message": "Uključi AdGuard",
         "description": "TEXT MAX LENGTH: 30"
     },
-    "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+    "modal_protection_off_settings": {
+        "message": "Otvori <b>Postavke<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Dodirnite <b>Safari<\/b>, kliznite nadole, pa dodirnite <b>Proširenja<\/b>",
+        "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Uključite<\/b> sve AdGuard blokatore sadržaja",
+        "description": "TEXT MAX LENGTH: 28"
     }
 }

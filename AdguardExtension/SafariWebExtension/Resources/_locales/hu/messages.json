@@ -26,15 +26,31 @@
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "védelem le van tiltva",
+        "message": "védelem kikapcsolva",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_block_element": {
         "message": "Elemek blokkolása ezen az oldalon",
         "description": "TEXT MAX LENGTH: 30"
     },
+    "popup_action_delete_user_rules": {
+        "message": "A webhelyhez tartozó felhasználó szabályok törlése",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_insufficient_permissions": {
         "message": "Korlátozott engedélyek",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "védelem bekapcsolása...",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "hozzáadva a kivételekhez",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "hozzáadva a kivételekhez (fordított)",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {
@@ -45,6 +61,10 @@
         "message": "Magas védelem",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Szép munka! Az AdGuard szinte minden hirdetést blokkol, és megbirkózik a legnehezebb kihívásokkal is.",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_all_sites_allowed_button": {
         "message": "Folytatás",
         "description": "TEXT MAX LENGTH: 20"
@@ -53,9 +73,17 @@
         "message": "Szelektív védelem",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Csak néhány webhelyen engedélyezte az AdGuard-ot. Más webhelyeken hirdetések jelenhetnek meg, hacsak nem ad az AdGuard-nak több jogosultságot. <a>Tudjon meg többet<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Folytatás",
         "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Haladó védelem kikapcsolva",
+        "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_description": {
         "message": "Advanced blocking rules and other extended features are not available. <a>Bővebben<\/a>",
@@ -68,6 +96,10 @@
     "popup_modal_title_free": {
         "message": "Érje el teljes potenciálját",
         "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "Még mindig hiányzik az AdGuard Premiumban elérhető fejlett védelem. Le szeretné tiltani a még összetettebb hirdetéseket és követőket?",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
         "message": "Frissítés",
@@ -95,6 +127,14 @@
     },
     "modal_protection_off_settings": {
         "message": "<b>Beállítások<\/b> megnyitása",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Érintse meg a <b>Safari<\/b> lehetőséget, majd alul válassza ki, hogy <b>Kiegészítők<\/b>",
+        "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Engedélyezze<\/b> az összes AdGuard tartalomblokkolót",
         "description": "TEXT MAX LENGTH: 28"
     }
 }
