@@ -181,7 +181,7 @@ final class UpstreamsController: BottomAlertController {
             dnsUpstream.bootstrap = bootstraps
             dnsUpstream.serverIp = Data()
             dnsUpstream.id = 0
-            dnsUpstream.outboundInterfaceName = nil
+            dnsUpstream.outboundInterfaceName = networkUtils.getCurrentNetworkInterfaceSync()?.name
 
             return dnsUpstream
         }
