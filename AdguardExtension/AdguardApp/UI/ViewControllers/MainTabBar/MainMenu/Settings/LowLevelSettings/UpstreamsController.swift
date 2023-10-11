@@ -174,20 +174,20 @@ final class UpstreamsController: BottomAlertController {
         saveButton?.isEnabled = false
         saveButton?.startIndicator()
 
-        let bootstraps = bootstrapsHelper.bootstraps
-        let upstreams = upstreams.map {
-            let dnsUpstream = AGDnsUpstream()
-            dnsUpstream.address = $0
-            dnsUpstream.bootstrap = bootstraps
-            dnsUpstream.serverIp = Data()
-            dnsUpstream.id = 0
-            dnsUpstream.outboundInterfaceName = nil
-
-            return dnsUpstream
-        }
-
         DispatchQueue(label: "save dns upstreams queue").async { [weak self] in
             guard let self = self else { return }
+
+            let bootstraps = self.bootstrapsHelper.bootstraps
+            let upstreams = upstreams.map {
+                let dnsUpstream = AGDnsUpstream()
+                dnsUpstream.address = $0
+                dnsUpstream.bootstrap = bootstraps
+                dnsUpstream.serverIp = Data()
+                dnsUpstream.id = 0
+                dnsUpstream.outboundInterfaceName = self.networkUtils.getCurrentNetworkInterfaceSync()?.name
+
+                return dnsUpstream
+            }
 
             let errors = upstreams.compactMap {
                 AGDnsUtils.test($0, timeoutMs: UInt(AGDnsProxyConfig.defaultTimeoutMs), ipv6Available: self.networkUtils.isIpv6Available, offline: false)

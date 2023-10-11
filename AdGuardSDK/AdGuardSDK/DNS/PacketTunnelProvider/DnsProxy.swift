@@ -39,12 +39,14 @@ final class DnsProxy: DnsProxyProtocol {
     private var proxy: AGDnsProxy?
 
     /* Services */
+    private let networkUtils: NetworkUtilsProtocol
     private let proxySettingsProvider: DnsProxyConfigurationProviderProtocol
     private let statisticsDbContainerUrl: URL
 
     // MARK: - Initialization
 
-    init(proxySettingsProvider: DnsProxyConfigurationProviderProtocol, statisticsDbContainerUrl: URL) {
+    init(networkUtils: NetworkUtilsProtocol, proxySettingsProvider: DnsProxyConfigurationProviderProtocol, statisticsDbContainerUrl: URL) {
+        self.networkUtils = networkUtils
         self.proxySettingsProvider = proxySettingsProvider
         self.statisticsDbContainerUrl = statisticsDbContainerUrl
     }
@@ -85,7 +87,7 @@ final class DnsProxy: DnsProxyProtocol {
         }
         proxySettingsProvider.reset()
         let configuration = proxySettingsProvider.getProxyConfig(systemDnsUpstreams)
-        let agConfig = AGDnsProxyConfig.initialize(from: configuration)
+        let agConfig = AGDnsProxyConfig.initialize(from: configuration, networkUtils)
 
         // Processing events config
         let handler: DnsRequestProcessedEventHandlerProtocol

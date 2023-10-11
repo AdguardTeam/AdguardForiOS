@@ -36,9 +36,15 @@ public protocol NetworkUtilsProtocol {
 
     /* Checks if upstream is valid */
     func upstreamIsValid(_ upstream: String) -> Bool
+
+    func getCurrentNetworkInterfaceSync() -> NWInterface?
 }
 
 public class NetworkUtils: NetworkUtilsProtocol {
+
+    @Atomic
+    private var currentNetworkInterface: NWInterface?
+
 
     // We cannot use the @available attribute on properties. Therefore, we have to use a function to get it.
     private var _monitor: Any?
@@ -52,7 +58,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
             _monitor = NWPathMonitor()
             var group: DispatchGroup? = DispatchGroup()
             group?.enter()
-            monitor().pathUpdateHandler = { newPath in
+            monitor().pathUpdateHandler = { [weak self] newPath in
                 Logger.logInfo("(NetworkUtils) - NWPathMonitor received the current path update")
                 Logger.logInfo("(NetworkUtils) - path status: \(newPath.status)")
                 Logger.logInfo("(NetworkUtils) - path debugDescription: \(newPath.debugDescription)")
@@ -68,6 +74,8 @@ public class NetworkUtils: NetworkUtilsProtocol {
                     Logger.logInfo("(NetworkUtils) - interface debugDescription: \(interface.debugDescription)")
                     Logger.logInfo("(NetworkUtils) - interface type: \(interface.type)")
                 }
+
+                self?._currentNetworkInterface.mutate { $0 = newPath.availableInterfaces.first(where: { $0.name.contains("tun") } ) ?? newPath.availableInterfaces.first }
 
                 group?.leave()
                 group = nil
@@ -173,7 +181,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
         dnsUpstream.bootstrap = bootstraps
         dnsUpstream.serverIp = Data()
         dnsUpstream.id = 0
-        dnsUpstream.outboundInterfaceName = nil
+        dnsUpstream.outboundInterfaceName = currentNetworkInterface?.name
 
         if let error = AGDnsUtils.test(dnsUpstream, timeoutMs: UInt(AGDnsProxyConfig.defaultTimeoutMs), ipv6Available: isIpv6Available, offline: false) {
             Logger.logError("(NetworkUtils) - upstreamIsValid; Error: \(error)")
@@ -182,6 +190,10 @@ public class NetworkUtils: NetworkUtilsProtocol {
             return true
         }
     }
+
+    public func getCurrentNetworkInterfaceSync() -> NWInterface? { currentNetworkInterface }
+
+
 
     private func enumerateNetworkInterfaces(process: (UnsafeMutablePointer<ifaddrs>) -> Bool) {
         var addrList : UnsafeMutablePointer<ifaddrs>?

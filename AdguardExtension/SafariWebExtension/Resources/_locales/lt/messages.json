@@ -2,6 +2,10 @@
     "extension_name": {
         "message": "AdGuard"
     },
+    "popup_action_safari_protection_title": {
+        "message": "Safari apsauga",
+        "description": "TEXT MAX LENGTH: 25"
+    },
     "popup_modal_all_sites_allowed_button": {
         "message": "Tęsti",
         "description": "TEXT MAX LENGTH: 20"

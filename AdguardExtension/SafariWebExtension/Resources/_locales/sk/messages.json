@@ -73,6 +73,10 @@
         "message": "Výberová ochrana",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Aktivovali ste AdGuard iba pre tieto webové stránky. Reklamy sa môžu zobraziť aj na iných, pokiaľ nedáte AdGuard povolenie. <a>Viac<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Pokračovať",
         "description": "TEXT MAX LENGTH: 20"
@@ -81,6 +85,10 @@
         "message": "Pokročilá ochrana je vypnutá",
         "description": "TEXT MAX LENGTH: 40"
     },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Pokročilé pravidlá blokovania a ďalšie rozšírené funkcie nie sú k dispozícii. <a>Prečítajte si viac<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
+    },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "Zapnúť",
         "description": "TEXT MAX LENGTH: 20"
@@ -88,6 +96,10 @@
     "popup_modal_title_free": {
         "message": "Dosiahnite svoj plný potenciál",
         "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "Stále Vám chýba pokročilá ochrana dostupná v AdGuard Premium. Zablokujeme ešte zložitejšie reklamy a sledovače?",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
         "message": "Upgradovať",
@@ -115,6 +127,14 @@
     },
     "modal_protection_off_settings": {
         "message": "Otvorte <b>Nastavenia<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Ťuknite na <b>Safari<\/b>, potiahnite prstom nadol a ťuknite <b>Rozšírenia<\/b>",
+        "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Zapnúť<\/b> všetky AdGuard blokovače obsahu",
         "description": "TEXT MAX LENGTH: 28"
     }
 }

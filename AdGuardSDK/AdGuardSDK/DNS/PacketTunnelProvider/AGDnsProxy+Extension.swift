@@ -44,13 +44,13 @@ extension AGStampProtoType {
 // MARK: - AGDnsUpstream + DnsProxyUpstream init
 
 extension AGDnsUpstream {
-    static func initialize(from upstream: DnsProxyUpstream) -> AGDnsUpstream {
+    static func initialize(from upstream: DnsProxyUpstream, _ networkUtils: NetworkUtilsProtocol) -> AGDnsUpstream {
         let dnsUpstream = AGDnsUpstream()
         dnsUpstream.address = upstream.dnsUpstreamInfo.upstream
         dnsUpstream.bootstrap = upstream.dnsBootstraps.map { $0.upstream }
         dnsUpstream.serverIp = nil
         dnsUpstream.id = upstream.id
-        dnsUpstream.outboundInterfaceName = nil
+        dnsUpstream.outboundInterfaceName = networkUtils.getCurrentNetworkInterfaceSync()?.name
 
         return dnsUpstream
     }
@@ -95,9 +95,9 @@ extension AGDnsFilterParams {
 // MARK: - AGDns64Settings + DnsProxy64Settings init
 
 extension AGDns64Settings {
-    static func initialize(from upstreams: [DnsProxyUpstream]) -> AGDns64Settings {
+    static func initialize(from upstreams: [DnsProxyUpstream], _ networkUtils: NetworkUtilsProtocol) -> AGDns64Settings {
         let dns64Settings = AGDns64Settings()
-        dns64Settings.upstreams = upstreams.map { AGDnsUpstream.initialize(from: $0) }
+        dns64Settings.upstreams = upstreams.map { AGDnsUpstream.initialize(from: $0, networkUtils) }
         dns64Settings.maxTries = 2
         dns64Settings.waitTimeMs = AGDnsProxyConfig.defaultTimeoutMs
 
@@ -121,18 +121,18 @@ extension AGDnsProxyConfig {
 
     /// Initializer for `AGDnsProxyConfig` from `DnsProxyConfiguration`
     /// We use `DnsProxyConfiguration` to be able to test how we configure `AGDnsProxyConfig`
-    static func initialize(from configuration: DnsProxyConfiguration) -> AGDnsProxyConfig {
+    static func initialize(from configuration: DnsProxyConfiguration, _ networkUtils: NetworkUtilsProtocol) -> AGDnsProxyConfig {
         let defaultConfig = AGDnsProxyConfig.getDefault()!
 
         let dnsProxyConfiguration = AGDnsProxyConfig()
-        dnsProxyConfiguration.upstreams = configuration.upstreams.map { AGDnsUpstream.initialize(from: $0) }
-        dnsProxyConfiguration.fallbacks = configuration.fallbacks.map { AGDnsUpstream.initialize(from: $0) }
+        dnsProxyConfiguration.upstreams = configuration.upstreams.map { AGDnsUpstream.initialize(from: $0, networkUtils) }
+        dnsProxyConfiguration.fallbacks = configuration.fallbacks.map { AGDnsUpstream.initialize(from: $0, networkUtils) }
         dnsProxyConfiguration.fallbackDomains = defaultConfig.fallbackDomains
         dnsProxyConfiguration.detectSearchDomains = defaultConfig.detectSearchDomains
         dnsProxyConfiguration.filters = configuration.filters.map { AGDnsFilterParams.initialize(from: $0) }
         dnsProxyConfiguration.filtersMemoryLimitBytes = defaultConfig.filtersMemoryLimitBytes
         dnsProxyConfiguration.blockedResponseTtlSecs = configuration.blockedResponseTtlSecs
-        dnsProxyConfiguration.dns64Settings = AGDns64Settings.initialize(from: configuration.dns64Upstreams)
+        dnsProxyConfiguration.dns64Settings = AGDns64Settings.initialize(from: configuration.dns64Upstreams, networkUtils)
         dnsProxyConfiguration.listeners = defaultConfig.listeners
         dnsProxyConfiguration.outboundProxy = defaultConfig.outboundProxy
         dnsProxyConfiguration.ipv6Available = configuration.ipv6Available

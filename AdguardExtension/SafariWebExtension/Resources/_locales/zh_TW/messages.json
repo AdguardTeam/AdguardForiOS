@@ -82,7 +82,7 @@
         "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_title": {
-        "message": "進階的防護被禁用",
+        "message": "進階防護被禁用",
         "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_description": {
@@ -98,7 +98,7 @@
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_desc_free": {
-        "message": "您仍然缺少在 AdGuard 高級版中可用的進階的防護。咱們封鎖甚至更複雜的廣告和追蹤器？",
+        "message": "您仍然缺少在 AdGuard 高級版中可用的進階防護。咱們封鎖甚至更複雜的廣告和追蹤器？",
         "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
@@ -130,7 +130,7 @@
         "description": "TEXT MAX LENGTH: 28"
     },
     "modal_protection_off_extensions": {
-        "message": "輕觸 <b>Safari<\/b>、向下滑動並輕觸<b>延伸功能<\/b>",
+        "message": "輕觸 <b>Safari<\/b>，向下滑動並輕觸<b>延伸功能<\/b>",
         "description": "TEXT MAX LENGTH: 56"
     },
     "modal_protection_off_switch": {
