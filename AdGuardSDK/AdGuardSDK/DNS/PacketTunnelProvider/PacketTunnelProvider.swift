@@ -105,6 +105,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         )
 
         let dnsProxy = DnsProxy(
+            networkUtils: networkUtils,
             proxySettingsProvider: proxySettingsProvider,
             statisticsDbContainerUrl: statisticsDbContainerUrl
         )
