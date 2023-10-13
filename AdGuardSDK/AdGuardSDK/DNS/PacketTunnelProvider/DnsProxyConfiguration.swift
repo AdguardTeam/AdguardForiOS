@@ -17,6 +17,7 @@
 //
 
 import AGDnsProxy
+import Network
 
 // MARK: - DnsProxyConfiguration
 
@@ -41,9 +42,17 @@ struct DnsProxyConfiguration: Equatable {
 // MARK: - DnsProxyUpstream
 
 struct DnsProxyUpstream: Equatable {
+    static func == (lhs: DnsProxyUpstream, rhs: DnsProxyUpstream) -> Bool {
+        lhs.dnsUpstreamInfo == rhs.dnsUpstreamInfo &&
+        lhs.dnsBootstraps == rhs.dnsBootstraps &&
+        lhs.id == rhs.id &&
+        lhs.outboundInterface?.name == rhs.outboundInterface?.name
+    }
+    
     let dnsUpstreamInfo: DnsUpstream
     let dnsBootstraps: [DnsUpstream]
     let id: Int
+    let outboundInterface: NWInterface?
 }
 
 // MARK: - DnsProxyBlockingMode

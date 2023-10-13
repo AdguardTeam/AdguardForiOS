@@ -35,38 +35,36 @@ public protocol NetworkUtilsProtocol {
     func getProtocol(from upstream: String) throws -> DnsProtocol
 
     /* Checks if upstream is valid */
-    func upstreamIsValid(_ upstream: String) -> Bool
+    func upstreamIsValid(_ upstream: String,  _ outboundInterface: NWInterface?) -> Bool
 
     func getCurrentNetworkInterfaceSync() -> NWInterface?
 }
 
 public class NetworkUtils: NetworkUtilsProtocol {
 
-    @Atomic
-    private var currentNetworkInterface: NWInterface?
-
-
     // We cannot use the @available attribute on properties. Therefore, we have to use a function to get it.
     private var _monitor: Any?
-    @available(iOS 13.0, *)
+    @available(iOS 12.0, *)
     private func monitor() -> NWPathMonitor {
         return _monitor as! NWPathMonitor
     }
 
     public init() {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 12.0, *) {
             _monitor = NWPathMonitor()
             var group: DispatchGroup? = DispatchGroup()
             group?.enter()
-            monitor().pathUpdateHandler = { [weak self] newPath in
+            monitor().pathUpdateHandler = { newPath in
                 Logger.logInfo("(NetworkUtils) - NWPathMonitor received the current path update")
                 Logger.logInfo("(NetworkUtils) - path status: \(newPath.status)")
                 Logger.logInfo("(NetworkUtils) - path debugDescription: \(newPath.debugDescription)")
                 Logger.logInfo("(NetworkUtils) - path supportsIPv4: \(newPath.supportsIPv4)")
                 Logger.logInfo("(NetworkUtils) - path supportsIPv6: \(newPath.supportsIPv6)")
 
-                for gateway in newPath.gateways {
-                    Logger.logInfo("(NetworkUtils) - gateway: \(gateway.debugDescription)")
+                if #available(iOS 13, *) {
+                    for gateway in newPath.gateways {
+                        Logger.logInfo("(NetworkUtils) - gateway: \(gateway.debugDescription)")
+                    }
                 }
 
                 for interface in newPath.availableInterfaces {
@@ -74,8 +72,6 @@ public class NetworkUtils: NetworkUtilsProtocol {
                     Logger.logInfo("(NetworkUtils) - interface debugDescription: \(interface.debugDescription)")
                     Logger.logInfo("(NetworkUtils) - interface type: \(interface.type)")
                 }
-
-                self?._currentNetworkInterface.mutate { $0 = newPath.availableInterfaces.first(where: { $0.name.contains("tun") } ) ?? newPath.availableInterfaces.first }
 
                 group?.leave()
                 group = nil
@@ -173,7 +169,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
         }
     }
 
-    public func upstreamIsValid(_ upstream: String) -> Bool {
+    public func upstreamIsValid(_ upstream: String, _ outboundInterface: NWInterface? = nil) -> Bool {
         let bootstraps = systemDnsServers
 
         let dnsUpstream = AGDnsUpstream()
@@ -181,7 +177,9 @@ public class NetworkUtils: NetworkUtilsProtocol {
         dnsUpstream.bootstrap = bootstraps
         dnsUpstream.serverIp = Data()
         dnsUpstream.id = 0
-        dnsUpstream.outboundInterfaceName = currentNetworkInterface?.name
+        dnsUpstream.outboundInterfaceName = outboundInterface?.name
+
+        Logger.logDebug("(NetworkUtils) - upstream to test=\(dnsUpstream) and it's oubtound interface=\(outboundInterface?.name ?? "nil")")
 
         if let error = AGDnsUtils.test(dnsUpstream, timeoutMs: UInt(AGDnsProxyConfig.defaultTimeoutMs), ipv6Available: isIpv6Available, offline: false) {
             Logger.logError("(NetworkUtils) - upstreamIsValid; Error: \(error)")
@@ -191,7 +189,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
         }
     }
 
-    public func getCurrentNetworkInterfaceSync() -> NWInterface? { currentNetworkInterface }
+    public func getCurrentNetworkInterfaceSync() -> NWInterface? { monitor().currentPath.availableInterfaces.first }
 
 
 

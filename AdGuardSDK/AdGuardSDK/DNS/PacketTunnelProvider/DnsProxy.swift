@@ -18,9 +18,10 @@
 
 import AGDnsProxy
 import SharedAdGuardSDK
+import Network
 
 protocol DnsProxyProtocol: AnyObject {
-    func start(_ systemDnsUpstreams: [DnsUpstream]) -> Error?
+    func start(_ systemDnsUpstreams: [DnsUpstream], _ outboundInterface: NWInterface?) -> Error?
     func stop()
     func resolve(dnsRequest: Data, onRequestResolved: @escaping (Data?) -> Void)
 }
@@ -39,23 +40,21 @@ final class DnsProxy: DnsProxyProtocol {
     private var proxy: AGDnsProxy?
 
     /* Services */
-    private let networkUtils: NetworkUtilsProtocol
     private let proxySettingsProvider: DnsProxyConfigurationProviderProtocol
     private let statisticsDbContainerUrl: URL
 
     // MARK: - Initialization
 
-    init(networkUtils: NetworkUtilsProtocol, proxySettingsProvider: DnsProxyConfigurationProviderProtocol, statisticsDbContainerUrl: URL) {
-        self.networkUtils = networkUtils
+    init(proxySettingsProvider: DnsProxyConfigurationProviderProtocol, statisticsDbContainerUrl: URL) {
         self.proxySettingsProvider = proxySettingsProvider
         self.statisticsDbContainerUrl = statisticsDbContainerUrl
     }
 
     // MARK: - Public methods
 
-    func start(_ systemDnsUpstreams: [DnsUpstream]) -> Error? {
+    func start(_ systemDnsUpstreams: [DnsUpstream], _ outboundInterface: NWInterface?) -> Error? {
         return resolveQueue.sync(flags: .barrier) { [weak self] in
-            return self?.internalStart(systemDnsUpstreams)
+            return self?.internalStart(systemDnsUpstreams, outboundInterface)
         }
     }
 
@@ -77,7 +76,7 @@ final class DnsProxy: DnsProxyProtocol {
 
     // MARK: - Private methods
 
-    private func internalStart(_ systemDnsUpstreams: [DnsUpstream]) -> Error? {
+    private func internalStart(_ systemDnsUpstreams: [DnsUpstream], _ outboundInterface: NWInterface?) -> Error? {
         Logger.logInfo("(DnsProxy) - start")
 
         // Configuration
@@ -86,8 +85,8 @@ final class DnsProxy: DnsProxyProtocol {
             proxy = nil
         }
         proxySettingsProvider.reset()
-        let configuration = proxySettingsProvider.getProxyConfig(systemDnsUpstreams)
-        let agConfig = AGDnsProxyConfig.initialize(from: configuration, networkUtils)
+        let configuration = proxySettingsProvider.getProxyConfig(systemDnsUpstreams, outboundInterface)
+        let agConfig = AGDnsProxyConfig.initialize(from: configuration)
 
         // Processing events config
         let handler: DnsRequestProcessedEventHandlerProtocol
