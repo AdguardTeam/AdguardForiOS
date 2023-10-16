@@ -18,6 +18,7 @@
 
 import Foundation
 import SharedAdGuardSDK
+import Network
 
 protocol DnsProxyConfigurationProviderProtocol {
     /**
@@ -50,7 +51,7 @@ protocol DnsProxyConfigurationProviderProtocol {
      - Parameter systemDnsUpstreams: System DNS addresses objects. Should be obtained in `PacketTunnelProvider`
      - Returns configuration that will be passed to DNS-lib
      */
-    func getProxyConfig(_ systemDnsUpstreams: [DnsUpstream]) -> DnsProxyConfiguration
+    func getProxyConfig(_ systemDnsUpstreams: [DnsUpstream], _ outboundInterface: NWInterface?) -> DnsProxyConfiguration
 
     /// Just clears `upstreamById`
     func reset()
@@ -85,7 +86,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         self.networkUtils = networkUtils
     }
 
-    func getProxyConfig(_ systemDnsUpstreams: [DnsUpstream]) -> DnsProxyConfiguration {
+    func getProxyConfig(_ systemDnsUpstreams: [DnsUpstream], _ outboundInterface: NWInterface?) -> DnsProxyConfiguration {
         let lowLevelConfiguration = dnsConfiguration.lowLevelConfiguration
 
         // Reveal DNS bootstraps
@@ -98,7 +99,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         let upstreams = getUpstreams(systemDnsUpstreams)
         let proxyUpstreams: [DnsProxyUpstream] = upstreams.map {
             let id = nextUpstreamId
-            let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id)
+            let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id, outboundInterface: outboundInterface)
             dnsUpstreamById[id] = dnsProxy
             return dnsProxy
         }
@@ -107,7 +108,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         let fallbacks = getDnsUpstreams(from: lowLevelConfiguration.fallbackServers ?? [])
         let proxyFallbacks: [DnsProxyUpstream] = fallbacks.map {
             let id = nextUpstreamId
-            let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id)
+            let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id, outboundInterface: outboundInterface)
             dnsUpstreamById[id] = dnsProxy
             return dnsProxy
         }
@@ -121,7 +122,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
             .filter { UrlUtils.isIpv6($0.upstream) }
             .map {
                 let id = nextUpstreamId
-                let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id)
+                let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id, outboundInterface: outboundInterface)
                 dnsUpstreamById[id] = dnsProxy
                 return dnsProxy
             }

@@ -215,7 +215,7 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
         }
 
         try upstreams.forEach {
-            let isValid = networkUtils.upstreamIsValid($0)
+            let isValid = networkUtils.upstreamIsValid($0, nil)
             if !isValid {
                 throw CustomDnsProvidersStorageError.invalidUpstream(upstream: $0)
             }

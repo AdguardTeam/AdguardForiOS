@@ -163,8 +163,8 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             }
 
             switch result {
-            case .success(let systemDnsAddresses):
-                let error = self.startDnsProxy(with: systemDnsAddresses)
+            case .success((let systemDnsAddresses, let interface)):
+                let error = self.startDnsProxy(with: systemDnsAddresses, outboundInterface: interface)
                 if error == nil {
                     self.startPacketHanding()
                 }
@@ -176,12 +176,13 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     }
 
     /// Updates tunnel settings. Returns system DNS addresses if success and error occurred otherwise
-    private func updateTunnelSettings(_ onSettingsUpdated: @escaping (_ result: Result<[String]>) -> Void) {
+    private func updateTunnelSettings(_ onSettingsUpdated: @escaping (_ result: Result<([String], NWInterface?)>) -> Void) {
         let lowLevelConfig = dnsConfiguration.lowLevelConfiguration
 
         let allSystemServers = networkUtils.systemDnsServers
+        let outboundInterface = networkUtils.getCurrentNetworkInterfaceSync()
 
-        Logger.logInfo("updateTunnelSettings with system servers: \(allSystemServers)")
+        Logger.logInfo("updateTunnelSettings with system servers: \(allSystemServers) and outboundInterface \(outboundInterface?.debugDescription ?? "nil")")
 
         let systemDnsServers = allSystemServers.filter { $0 != addresses.localDnsIpv4 && $0 != addresses.localDnsIpv6 }
 
@@ -197,7 +198,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
                 if let error = error {
                     onSettingsUpdated(.error(error))
                 } else {
-                    onSettingsUpdated(.success(systemDnsServers))
+                    onSettingsUpdated(.success((systemDnsServers, outboundInterface)))
                 }
             }
             return
@@ -231,7 +232,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
                     if let error = error {
                         onSettingsUpdated(.error(error))
                     } else {
-                        onSettingsUpdated(.success(systemIps))
+                        onSettingsUpdated(.success((systemIps, outboundInterface)))
                     }
                 }
             }
@@ -262,9 +263,9 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     }
 
     /// Starts DNS-lib proxy. Returns error if occurred or nil otherwise
-    private func startDnsProxy(with systemDnsAddresses: [String]) -> Error? {
+    private func startDnsProxy(with systemDnsAddresses: [String], outboundInterface: NWInterface?) -> Error? {
         let systemUpstreams = getSystemDnsAddresses(systemDnsAddresses)
-        return dnsProxy.start(systemUpstreams)
+        return dnsProxy.start(systemUpstreams, outboundInterface)
     }
 
     /// Initializes DNS-lib logger
