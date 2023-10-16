@@ -179,7 +179,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
         dnsUpstream.id = 0
         dnsUpstream.outboundInterfaceName = outboundInterface?.name
 
-        Logger.logDebug("(NetworkUtils) - upstream to test=\(dnsUpstream) and it's oubtound interface=\(outboundInterface?.name ?? "nil")")
+        Logger.logDebug("(NetworkUtils) - upstream to test=\(dnsUpstream) and it's outbound interface=\(outboundInterface?.name ?? "nil")")
 
         if let error = AGDnsUtils.test(dnsUpstream, timeoutMs: UInt(AGDnsProxyConfig.defaultTimeoutMs), ipv6Available: isIpv6Available, offline: false) {
             Logger.logError("(NetworkUtils) - upstreamIsValid; Error: \(error)")
