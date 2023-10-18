@@ -81,8 +81,8 @@ class AboutViewController: UIViewController {
             versionFormat += """
 
                             SafariConverterLib v2.0.43
-                            TSUrlFilter v2.1.12
-                            Scriptlets v1.9.72
+                            TSUrlFilter v2.2.1
+                            Scriptlets v1.9.83
                             ExtendedCss v2.0.52
                             """
             versionLabel.font = .systemFont(ofSize: isIpadTrait ? 20.0 : 16.0, weight: .bold)
