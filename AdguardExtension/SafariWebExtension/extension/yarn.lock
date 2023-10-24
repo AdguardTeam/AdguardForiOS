@@ -12,10 +12,10 @@
   resolved "https://registry.yarnpkg.com/@adguard/extended-css/-/extended-css-2.0.52.tgz#f5e7c3df1796deb96404a1b6441e7a4c729f09ac"
   integrity sha512-T77MnFD/+A3q93MNEq13qPUXPQRBeOUO9LRyqslcaz7jD5qMcikX1nx436u3PXdZXZpa6R0nnwXQ7wwScDmVgw==
 
-"@adguard/scriptlets@^1.9.72":
-  version "1.9.72"
-  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.9.72.tgz#79db94d91083b531ff83d37a97c2d608877e62f2"
-  integrity sha512-4nxqXTyD+sDonMdlXchp2sxqcfafWM4RRrv13yVe9prDloWyMTd2D8z4RF65aKRodc/waW4Xe7ehvdnE94X1qg==
+"@adguard/scriptlets@^1.9.83":
+  version "1.9.83"
+  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.9.83.tgz#77d1e6a0e0eb74a359618281e62cfcf829e408ec"
+  integrity sha512-Nnv/tW1yEujFovc54mZWBrZNGYe0vqHcymgRmveAWNSSGDEoYh+kG/YtvweNZa01yx859O6Tfq/8kXajtWaTPg==
   dependencies:
     "@babel/runtime" "^7.20.13"
     js-yaml "^3.13.1"
@@ -25,12 +25,12 @@
   resolved "https://registry.yarnpkg.com/@adguard/translate/-/translate-1.0.2.tgz#e8076902f0950a62d40519d6eb389778516928a0"
   integrity sha512-TeQV4ngse/fcpFDCrtU5VqjZfQsdytSuGT8wF4biIM6c6v6W/tkUdrTDhNItq126hAZe65V8QgipTAp8qHdeZw==
 
-"@adguard/tsurlfilter@2.1.12":
-  version "2.1.12"
-  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-2.1.12.tgz#d4152a35656d67e3ddcd52779ee706bb2ddc0d48"
-  integrity sha512-MnrXzDU4KuYVhbauj4L8rPdJUpyfQkR1mZabNiSQVdLbIqWZrfLMeTIQcE3IQ918YuE/iOAvUoZRGiAK3f2OCg==
+"@adguard/tsurlfilter@2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-2.2.1.tgz#72ef750664ed5ae46b72e6153d0572a68bfefec7"
+  integrity sha512-qYZRK46U5X0lujKgWSpduIn0wisA/s0LttUDYE4UNRglDun0PG+v4RNQt+aq+EFcSOkAqIdKtLf1DcXhAkPNdA==
   dependencies:
-    "@adguard/scriptlets" "^1.9.72"
+    "@adguard/scriptlets" "^1.9.83"
     cidr-tools "^6.4.1"
     commander "9.4.1"
     is-cidr "4.0.2"

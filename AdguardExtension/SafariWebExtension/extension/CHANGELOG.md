@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- TODO: during the libs update, `versionFormat` also should be updated in -->
 <!-- AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About/AboutViewController.swift -->
 
+
+## 0.0.7
+
+### Changed
+
+- Updated Scriptlets to v1.9.83
+- Updated TSUrlFilter to v2.2.1
+
+
 ## 0.0.6
 
 ### Changed
