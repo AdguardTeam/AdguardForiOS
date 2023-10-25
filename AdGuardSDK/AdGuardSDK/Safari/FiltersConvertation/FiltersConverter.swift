@@ -52,12 +52,18 @@ protocol ContentBlockerConverterProtocol {
 final class ContentBlockerConverterWrapper: ContentBlockerConverterProtocol {
     func convertArray(rules: [String], safariVersion: SafariVersion, optimize: Bool, advancedBlocking: Bool) -> ConversionResult {
         let converter = ContentBlockerConverter()
+        var maxJsonSizeBytes: Int?
+        if #available(iOS 17.0, *) {
+            maxJsonSizeBytes = 10 * 1024 * 1024 // 10 MB in bytes
+        }
+
         let result = converter.convertArray(
             rules: rules,
             safariVersion: safariVersion,
             optimize: optimize,
             advancedBlocking: advancedBlocking,
-            advancedBlockingFormat: .txt
+            advancedBlockingFormat: .txt,
+            maxJsonSizeBytes: maxJsonSizeBytes
         )
         return result
     }

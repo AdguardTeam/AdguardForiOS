@@ -80,7 +80,7 @@ class AboutViewController: UIViewController {
             // Scriptlets version is placed in the yarn.lock file as a dependency of `tsurlfilter`
             versionFormat += """
 
-                            SafariConverterLib v2.0.43
+                            SafariConverterLib v2.0.48
                             TSUrlFilter v2.2.1
                             Scriptlets v1.9.83
                             ExtendedCss v2.0.52

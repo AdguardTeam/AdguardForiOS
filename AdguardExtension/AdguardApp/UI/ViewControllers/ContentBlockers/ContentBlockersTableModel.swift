@@ -73,8 +73,12 @@ final class ContentBlockersTableModel {
             let cbType = converterResult.type
 
             // Reveal number of rules that are not in CB
-            var overLimitCount = converterResult.totalRules - converterResult.totalConverted
-            if overLimitCount < 0 { overLimitCount = 0 }
+            var overLimitCount: Int = 0
+
+            if converterResult.overlimit {
+                let overLimitRulesCount = converterResult.totalRules - converterResult.totalConverted
+                overLimitCount = overLimitRulesCount <= 0 ? 0 : overLimitRulesCount
+            }
 
             // Reveal CB state
             let state: ContentBlockerCellState
