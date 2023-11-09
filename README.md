@@ -1,7 +1,11 @@
+&nbsp;
 <p align="center">
-  <img src="https://cdn.adguard.com/public/Adguard/Common/Logos/ios.svg" width="300px" alt="AdGuard for iOS"
- />
-  </p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adguard.com/public/Adguard/Common/Logos/ios_dark.svg" width="300px" alt="AdGuard for iOS" />
+    <img src="https://cdn.adguard.com/public/Adguard/Common/Logos/ios.svg" width="300px" alt="AdGuard for iOS" />
+  </picture>
+</p>
+
 <h3 align="center">The most advanced Safari content blocker and privacy keeper for iOS</h3>
 <p align="center">
   Top-notch ad blocking in Safari, anti-tracking protection and DNS privacy.
@@ -33,8 +37,20 @@
 AdGuard for iOS is an app that blocks ads in Safari browser at exceptional level, and also provides additional Premium features like configurable DNS settings, encrypted DNS support (DOH, DOT, DNSCrypt), and custom ad blocking subscriptions. To get more information and to download AdGuard for iOS, [visit our website](https://adguard.com/adguard-ios/overview.html).
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/17472907/105178597-4b542000-5b39-11eb-86ed-136f0697bcec.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178604-4f803d80-5b39-11eb-9381-24682e06b8d8.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105339304-93347f00-5bed-11eb-99b6-ab438b34eb34.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178609-50b16a80-5b39-11eb-9723-5179fb811b65.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105339299-92035200-5bed-11eb-87ef-a7171432fe5d.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178607-5018d400-5b39-11eb-97d6-9dc792b28654.png" width="250">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adtidy.org/content/github/ad_blocker/ios/dark_home.png" width="250">
+    <img src="https://cdn.adtidy.org/content/github/ad_blocker/ios/home.png" width="250">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adtidy.org/content/github/ad_blocker/ios/dark_protection.png" width="250">
+    <img src="https://cdn.adtidy.org/content/github/ad_blocker/ios/protection.png" width="250">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adtidy.org/content/github/ad_blocker/ios/dark_stats.png" width="250">
+    <img src="https://cdn.adtidy.org/content/github/ad_blocker/ios/stats.png" width="250">
+  </picture>
 </p>
+
 
 <a id="contribution"></a>
 
