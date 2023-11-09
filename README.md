@@ -1,3 +1,4 @@
+&nbsp;
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adguard.com/public/Adguard/Common/Logos/ios_dark.svg" width="300px" alt="AdGuard for iOS" />
