@@ -34,11 +34,9 @@ body:
         Examples:
           - **OS**: 17
           - **Device**: iphone 15
-          - **Fallback DNS**: 1.1.1.1
       value: |
           - OS:
           - Device:
-          - Bootstrap or fallback servers, other low-level settings, etc.:
     validations:
       required: true
 
@@ -244,7 +242,25 @@ body:
     attributes:
       label: Custom DNS
       description: Please provide a link to the custom DNS you use
-      placeholder: If you have enabled DNS from the pre-defined list, skip this
+      placeholder: If you have enabled DNS from the pre-defined list, skip this step
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: dns_filter
+    attributes:
+      label: DNS filtering
+      description: Do you have AdGuard DNS filter enabled?
+      options:
+        - label: yes, I do
+          required: false
+
+  - type: textarea
+    id: custom_dns_filter
+    attributes:
+      label: Custom DNS filter
+      description: Please provide a link to the custom DNS filter you use
+      placeholder: Skip this step if you have DNS protection disabled
     validations:
       required: false
 
@@ -276,10 +292,23 @@ body:
       required: true
 
   - type: textarea
+    id: advanced
+    attributes:
+      label: Low-level settings
+      description: Let us know if you have made any changes to the low-level settings
+      placeholder: 
+      value: |
+        Bootstrap server:
+        Fallback server:
+        Blocking mode, etc:
+    validations:
+      required: false
+
+  - type: textarea
     id: what-happened
     attributes:
       label: Issue Details
-      description: Please provide a set of steps to reproduce the issue.
+      description: Please provide a set of steps to reproduce the issue
       placeholder:
       value: |
         Steps to reproduce:
@@ -294,7 +323,7 @@ body:
     attributes:
       label: Expected Behavior
       description:
-      placeholder: A clear and concise description of what you expected to happen.
+      placeholder: A clear and concise description of what you expected to happen
     validations:
       required: false
   
@@ -302,7 +331,7 @@ body:
     id: how_it_is
     attributes:
       label: Actual Behavior
-      placeholder: A clear description of what happened instead.
+      placeholder: A clear description of what happened instead
     validations:
       required: true
 
@@ -314,7 +343,7 @@ body:
         If applicable add screenshots explaining your problem.
         You can drag and drop images or paste them from clipboard.
         Use `<details> </details>` tag to hide screenshots under the spoiler.
-      placeholder: If applicable add screenshots explaining your problem.
+      placeholder: If applicable add screenshots explaining your problem
       value: |
           <details><summary>Screenshot 1</summary>
           <!-- paste screenshot here -->
@@ -326,6 +355,6 @@ body:
     id: additional
     attributes:
       label: Additional Information
-      placeholder: Add any other context about the problem here.
+      placeholder: Add any other context about the problem here
     validations:
       required: false
