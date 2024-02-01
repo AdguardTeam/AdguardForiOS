@@ -1,6 +1,6 @@
 name: ❓ Question
 description: If the options above do not work for you
-labels: "Question"
+labels: ["Question"]
 body:
   - type: markdown
     attributes:

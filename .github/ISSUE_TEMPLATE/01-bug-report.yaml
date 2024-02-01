@@ -242,7 +242,7 @@ body:
     attributes:
       label: Custom DNS
       description: Please provide a link to the custom DNS you use
-      placeholder: If you have enabled DNS from the pre-defined list, skip this step
+      placeholder: If you have enabled DNS from the pre-defined list, skip this step.
     validations:
       required: false
 
@@ -260,7 +260,7 @@ body:
     attributes:
       label: Custom DNS filter
       description: Please provide a link to the custom DNS filter you use
-      placeholder: Skip this step if you have DNS protection disabled
+      placeholder: Skip this step if you have DNS protection disabled.
     validations:
       required: false
 
@@ -323,7 +323,7 @@ body:
     attributes:
       label: Expected Behavior
       description:
-      placeholder: A clear and concise description of what you expected to happen
+      placeholder: A clear and concise description of what you expected to happen.
     validations:
       required: false
   
@@ -331,7 +331,7 @@ body:
     id: how_it_is
     attributes:
       label: Actual Behavior
-      placeholder: A clear description of what happened instead
+      placeholder: A clear description of what happened instead.
     validations:
       required: true
 
@@ -343,7 +343,7 @@ body:
         If applicable add screenshots explaining your problem.
         You can drag and drop images or paste them from clipboard.
         Use `<details> </details>` tag to hide screenshots under the spoiler.
-      placeholder: If applicable add screenshots explaining your problem
+      placeholder: If applicable add screenshots explaining your problem.
       value: |
           <details><summary>Screenshot 1</summary>
           <!-- paste screenshot here -->
@@ -355,6 +355,6 @@ body:
     id: additional
     attributes:
       label: Additional Information
-      placeholder: Add any other context about the problem here
+      placeholder: Add any other context about the problem here.
     validations:
       required: false
