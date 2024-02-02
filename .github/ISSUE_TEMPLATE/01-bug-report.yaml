@@ -32,8 +32,8 @@ body:
       label: Environment
       description: |
         Examples:
-          - **OS**: 17
-          - **Device**: iphone 15
+          - **OS**: 17.3
+          - **Device**: iPhone 15
       value: |
           - OS:
           - Device:
