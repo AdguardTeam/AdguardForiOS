@@ -30,12 +30,14 @@ enum BackgroundFetchUpdateInterval: Int, CaseIterable {
     case every12Hours
     case every24Hours
 
+    // We use smaller interval for default (1 hour).
+    // For 1 hour we actually use the minimum available interval.
     var interval: TimeInterval {
         let hour: TimeInterval = 3600.0
 
         switch self {
-        case .defaultPeriod: return 6 * hour
-        case .everyHour: return hour
+        case .defaultPeriod: return hour
+        case .everyHour: return 0
         case .every3Hour: return 3 * hour
         case .every12Hours: return 12 * hour
         case .every24Hours: return 24 * hour

@@ -1,3 +1,4 @@
+import { BackgroundScript, Configuration } from '@adguard/safari-extension';
 import { ContentScriptData } from '../common/interfaces';
 import { adguard } from './adguard';
 
@@ -14,6 +15,13 @@ class Engine {
     private engineTimestamp = 0;
 
     /**
+     * BackgroundScript is used to apply filtering configuration to web pages.
+     * Note, that it relies on the content script to be injected into the page
+     * and available in the ISOLATED world via `adguard.contentScript` object.
+     */
+    private backgroundScript = new BackgroundScript();
+
+    /**
      * Cache to store the rules for a given URL. The key is a URL (string) and
      * the value is a ContentScriptData object. Caching responses allows us to
      * respond to content script requests quickly while also updating the cache
@@ -25,6 +33,48 @@ class Engine {
      * Returns a cache key for the given URL and top-level URL.
      */
     private cacheKey = (url: string, topUrl?: string) => `${url}#${topUrl ?? ''}`;
+
+    /**
+     * Retrieves the configuration for the content script that is running on
+     * the specified url from the cache.
+     *
+     * @param url URL of the website.
+     * @param topUrl URL of the top-level website.
+     * @returns The configuration for the content script.
+     */
+    private getFromCache = (url: string, topUrl?: string): ContentScriptData | undefined => {
+        const key = this.cacheKey(url, topUrl);
+        const cachedData = this.cache.get(key);
+
+        if (cachedData) {
+            // Make sure to copy the object so that the user wouldn't be able
+            // to mutate the cached data.
+            const data = {
+                ...cachedData,
+            };
+
+            return data;
+        }
+
+        return undefined;
+    };
+
+    /**
+     * Saves the configuration for the content script that is running on
+     * the specified url to the cache.
+     *
+     * @param url URL of the website.
+     * @param topUrl URL of the top-level website.
+     * @param data The configuration for the content script.
+     */
+    private saveToCache = (url: string, topUrl: string | undefined, data: ContentScriptData) => {
+        const key = this.cacheKey(url, topUrl);
+        this.cache.set(key, {
+            ...data,
+            // Mark as cached.
+            cached: true,
+        });
+    };
 
     /**
      * Retrieves the configuration for the content script that is running on
@@ -49,8 +99,7 @@ class Engine {
         }
 
         // Save the new message in the cache for the given URL.
-        const key = this.cacheKey(url, topUrl);
-        this.cache.set(key, data);
+        this.saveToCache(url, topUrl, data);
 
         return data;
     };
@@ -63,16 +112,12 @@ class Engine {
      * @param topUrl URL of the top-level website.
      */
     public lookup = async (url: string, topUrl?: string): Promise<ContentScriptData> => {
-        const cacheKey = this.cacheKey(url, topUrl);
-        const cachedData = this.cache.get(cacheKey);
+        const cachedData = this.getFromCache(url, topUrl);
 
         // If the data is already cached, return it.
         if (cachedData) {
             // Fire off a new request to update the cache in the background.
             this.lookupNative(url, topUrl);
-
-            // Mark response as cached.
-            cachedData.cached = true;
 
             return cachedData;
         }
@@ -82,6 +127,15 @@ class Engine {
         const data = await this.lookupNative(url, topUrl);
 
         return data;
+    };
+
+    /**
+     * Applies the configuration to the web page.
+     *
+     * @param configuration Configuration to apply.
+     */
+    public applyConfiguration = async (tabId: number, frameId: number, configuration: Configuration) => {
+        await this.backgroundScript.applyConfiguration(tabId, frameId, configuration);
     };
 }
 

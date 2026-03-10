@@ -2147,13 +2147,7 @@ var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 // EXTERNAL MODULE: ./node_modules/webextension-polyfill/dist/browser-polyfill.js
 var browser_polyfill = __webpack_require__(3150);
 var browser_polyfill_default = /*#__PURE__*/__webpack_require__.n(browser_polyfill);
-;// CONCATENATED MODULE: ./node_modules/@adguard/safari-extension/dist/safari-extension.esm.js
-/*
- * SafariExtension v3.0.0 (build date: Thu, 17 Apr 2025 16:44:26 GMT)
- * (c) 2025 Adguard Software Ltd.
- * Released under the GPL-3.0 license
- * https://github.com/AdguardTeam/SafariConverterLib/tree/master/Extension
- */
+;// CONCATENATED MODULE: ./node_modules/@adguard/extended-css/dist/extended-css.esm.js
 /**
  * @adguard/extended-css - v2.1.1 - Thu Dec 19 2024
  * https://github.com/AdguardTeam/ExtendedCss#homepage
@@ -2170,6 +2164,7 @@ function _defineProperty(obj, key, value) {
   } else {
     obj[key] = value;
   }
+
   return obj;
 }
 
@@ -2200,6 +2195,7 @@ class AnySelectorNode {
    */
   constructor(type) {
     _defineProperty(this, "children", []);
+
     this.type = type;
   }
   /**
@@ -2208,9 +2204,11 @@ class AnySelectorNode {
    * @param child Ast node.
    */
 
+
   addChild(child) {
     this.children.push(child);
   }
+
 }
 /**
  * Class needed for creating RegularSelector ast node while selector parsing.
@@ -2226,6 +2224,7 @@ class RegularSelectorNode extends AnySelectorNode {
     super(NODE.REGULAR_SELECTOR);
     this.value = value;
   }
+
 }
 /**
  * Class needed for creating RelativePseudoClass ast node while selector parsing.
@@ -2241,6 +2240,7 @@ class RelativePseudoClassNode extends AnySelectorNode {
     super(NODE.RELATIVE_PSEUDO_CLASS);
     this.name = name;
   }
+
 }
 /**
  * Class needed for creating AbsolutePseudoClass ast node while selector parsing.
@@ -2254,10 +2254,96 @@ class AbsolutePseudoClassNode extends AnySelectorNode {
    */
   constructor(name) {
     super(NODE.ABSOLUTE_PSEUDO_CLASS);
+
     _defineProperty(this, "value", '');
+
     this.name = name;
   }
+
 }
+/* eslint-disable jsdoc/require-description-complete-sentence */
+
+/**
+ * Root node.
+ *
+ * SelectorList
+ *   : Selector
+ *     ...
+ *   ;
+ */
+
+/**
+ * Selector node.
+ *
+ * Selector
+ *   : RegularSelector
+ *   | ExtendedSelector
+ *     ...
+ *   ;
+ */
+
+/**
+ * Regular selector node.
+ * It can be selected by querySelectorAll().
+ *
+ * RegularSelector
+ *   : type
+ *   : value
+ *   ;
+ */
+
+/**
+ * Extended selector node.
+ *
+ * ExtendedSelector
+ *   : AbsolutePseudoClass
+ *   | RelativePseudoClass
+ *   ;
+ */
+
+/**
+ * Absolute extended pseudo-class node,
+ * i.e. none-selector args.
+ *
+ * AbsolutePseudoClass
+ *   : type
+ *   : name
+ *   : value
+ *   ;
+ */
+
+/**
+ * Relative extended pseudo-class node
+ * i.e. selector as arg.
+ *
+ * RelativePseudoClass
+ *   : type
+ *   : name
+ *   : SelectorList
+ *   ;
+ */
+//
+//  ast example
+//
+//  div.banner > div:has(span, p), a img.ad
+//
+//  SelectorList - div.banner > div:has(span, p), a img.ad
+//      Selector - div.banner > div:has(span, p)
+//          RegularSelector - div.banner > div
+//          ExtendedSelector - :has(span, p)
+//              PseudoClassSelector - :has
+//              SelectorList - span, p
+//                  Selector - span
+//                      RegularSelector - span
+//                  Selector - p
+//                      RegularSelector - p
+//      Selector - a img.ad
+//          RegularSelector - a img.ad
+//
+
+var version = "2.1.1";
+
+const EXTENDED_CSS_VERSION = (/* unused pure expression or super */ null && (version));
 const LEFT_SQUARE_BRACKET = '[';
 const RIGHT_SQUARE_BRACKET = ']';
 const LEFT_PARENTHESIS = '(';
@@ -2308,17 +2394,12 @@ const NEXT_SIBLING_COMBINATOR = '+';
 const SUBSEQUENT_SIBLING_COMBINATOR = '~';
 const COMBINATORS = [DESCENDANT_COMBINATOR, CHILD_COMBINATOR, NEXT_SIBLING_COMBINATOR, SUBSEQUENT_SIBLING_COMBINATOR];
 const SUPPORTED_SELECTOR_MARKS = [LEFT_SQUARE_BRACKET, RIGHT_SQUARE_BRACKET, LEFT_PARENTHESIS, RIGHT_PARENTHESIS, LEFT_CURLY_BRACKET, RIGHT_CURLY_BRACKET, SLASH, BACKSLASH, SEMICOLON, COLON, COMMA, SINGLE_QUOTE, DOUBLE_QUOTE, CARET, DOLLAR_SIGN, ASTERISK, ID_MARKER, CLASS_MARKER, DESCENDANT_COMBINATOR, CHILD_COMBINATOR, NEXT_SIBLING_COMBINATOR, SUBSEQUENT_SIBLING_COMBINATOR, TAB, CARRIAGE_RETURN, LINE_FEED, FORM_FEED];
-const SUPPORTED_STYLE_DECLARATION_MARKS = [
-// divider between property and value in declaration
-COLON,
-// divider between declarations
-SEMICOLON,
-// sometimes is needed for value wrapping
+const SUPPORTED_STYLE_DECLARATION_MARKS = [// divider between property and value in declaration
+COLON, // divider between declarations
+SEMICOLON, // sometimes is needed for value wrapping
 // e.g. 'content: "-"'
-SINGLE_QUOTE, DOUBLE_QUOTE,
-// needed for quote escaping inside the same-type quotes
-BACKSLASH,
-// whitespaces
+SINGLE_QUOTE, DOUBLE_QUOTE, // needed for quote escaping inside the same-type quotes
+BACKSLASH, // whitespaces
 SPACE, TAB, CARRIAGE_RETURN, LINE_FEED, FORM_FEED]; // absolute:
 
 const CONTAINS_PSEUDO = 'contains';
@@ -2449,9 +2530,11 @@ const evaluateMatch = (match, name, quoteChar, rawValue) => {
 }; // ':scope' pseudo may be at start of :has() argument
 // but ExtCssDocument.querySelectorAll() already use it for selecting exact element descendants
 
+
 const SCOPE_MARKER_REGEXP = /\(:scope >/g;
 const SCOPE_REPLACER = '(>';
 const MATCHES_CSS_PSEUDO_ELEMENT_REGEXP = /(:matches-css)-(before|after)\(/g;
+
 const convertMatchesCss = (match, extendedPseudoClass, regularPseudoElement) => {
   // ':matches-css-before('  -->  ':matches-css(before, '
   // ':matches-css-after('   -->  ':matches-css(after, '
@@ -2466,6 +2549,7 @@ const convertMatchesCss = (match, extendedPseudoClass, regularPseudoElement) => 
  * @throws An error on invalid old extended syntax selector.
  */
 
+
 const normalize = selector => {
   const normalizedSelector = selector.replace(REGEXP_VALID_OLD_SYNTAX, evaluateMatch).replace(SCOPE_MARKER_REGEXP, SCOPE_REPLACER).replace(MATCHES_CSS_PSEUDO_ELEMENT_REGEXP, convertMatchesCss); // validate old syntax after normalizing
   // e.g. '[-ext-matches-css-before=\'content:  /^[A-Z][a-z]'
@@ -2473,6 +2557,7 @@ const normalize = selector => {
   if (normalizedSelector.includes(INVALID_OLD_SYNTAX_MARKER)) {
     throw new Error(`Invalid extended-css old syntax selector: '${selector}'`);
   }
+
   return normalizedSelector;
 };
 /**
@@ -2484,6 +2569,7 @@ const normalize = selector => {
  * @param rawSelector Selector with no style declaration.
  * @returns Prepared selector with no style declaration.
  */
+
 
 const convert = rawSelector => {
   const trimmedSelector = rawSelector.trim();
@@ -2530,12 +2616,14 @@ const tokenize = (input, supportedMarks) => {
         wordBuffer = '';
       } // save current symbol as "mark"
 
+
       tokens.push({
         type: TOKEN_TYPE.MARK,
         value: symbol
       });
       return;
     } // otherwise collect symbol to the buffer
+
 
     wordBuffer += symbol;
   }); // save the last collected word
@@ -2546,6 +2634,7 @@ const tokenize = (input, supportedMarks) => {
       value: wordBuffer
     });
   }
+
   return tokens;
 };
 
@@ -2589,12 +2678,15 @@ const flatten = input => {
   const stack = [];
   input.forEach(el => stack.push(el));
   const res = [];
+
   while (stack.length) {
     // pop value from stack
     const next = stack.pop();
+
     if (!next) {
       throw new Error('Unable to make array flat');
     }
+
     if (Array.isArray(next)) {
       // push back array items, won't modify the original input
       next.forEach(el => stack.push(el));
@@ -2602,6 +2694,7 @@ const flatten = input => {
       res.push(next);
     }
   } // reverse to restore input order
+
 
   return res.reverse();
 };
@@ -2652,11 +2745,14 @@ const getPrevToLast = array => {
 
 const getItemByIndex = (array, index, errorMessage) => {
   const indexChild = array[index];
+
   if (!indexChild) {
     throw new Error(errorMessage || `No array item found by index ${index}`);
   }
+
   return indexChild;
 };
+
 const NO_REGULAR_SELECTOR_ERROR = 'At least one of Selector node children should be RegularSelector';
 /**
  * Checks whether the type of `astNode` is SelectorList.
@@ -2737,12 +2833,15 @@ const getNodeName = astNode => {
   if (astNode === null) {
     throw new Error('Ast node should be defined');
   }
+
   if (!isAbsolutePseudoClassNode(astNode) && !isRelativePseudoClassNode(astNode)) {
     throw new Error('Only AbsolutePseudoClass or RelativePseudoClass ast node can have a name');
   }
+
   if (!astNode.name) {
     throw new Error('Extended pseudo-class should have a name');
   }
+
   return astNode.name;
 };
 /**
@@ -2759,12 +2858,15 @@ const getNodeValue = (astNode, errorMessage) => {
   if (astNode === null) {
     throw new Error('Ast node should be defined');
   }
+
   if (!isRegularSelectorNode(astNode) && !isAbsolutePseudoClassNode(astNode)) {
     throw new Error('Only RegularSelector ot AbsolutePseudoClass ast node can have a value');
   }
+
   if (!astNode.value) {
     throw new Error(errorMessage || 'Ast RegularSelector ot AbsolutePseudoClass node should have a value');
   }
+
   return astNode.value;
 };
 /**
@@ -2788,12 +2890,15 @@ const getRegularSelectorNodes = children => {
  * @throws An error if no RegularSelector node found.
  */
 
+
 const getFirstRegularChild = (children, errorMessage) => {
   const regularSelectorNodes = getRegularSelectorNodes(children);
   const firstRegularSelectorNode = getFirst(regularSelectorNodes);
+
   if (!firstRegularSelectorNode) {
     throw new Error(errorMessage || NO_REGULAR_SELECTOR_ERROR);
   }
+
   return firstRegularSelectorNode;
 };
 /**
@@ -2808,9 +2913,11 @@ const getFirstRegularChild = (children, errorMessage) => {
 const getLastRegularChild = children => {
   const regularSelectorNodes = getRegularSelectorNodes(children);
   const lastRegularSelectorNode = getLast(regularSelectorNodes);
+
   if (!lastRegularSelectorNode) {
     throw new Error(NO_REGULAR_SELECTOR_ERROR);
   }
+
   return lastRegularSelectorNode;
 };
 /**
@@ -2827,10 +2934,13 @@ const getNodeOnlyChild = (node, errorMessage) => {
   if (node.children.length !== 1) {
     throw new Error(errorMessage);
   }
+
   const onlyChild = getFirst(node.children);
+
   if (!onlyChild) {
     throw new Error(errorMessage);
   }
+
   return onlyChild;
 };
 /**
@@ -2859,8 +2969,10 @@ const getRelativeSelectorListNode = pseudoClassNode => {
   if (!isRelativePseudoClassNode(pseudoClassNode)) {
     throw new Error('Only RelativePseudoClass node can have relative SelectorList node as child');
   }
+
   return getNodeOnlyChild(pseudoClassNode, `Missing arg for :${getNodeName(pseudoClassNode)}() pseudo-class`);
 };
+
 const ATTRIBUTE_CASE_INSENSITIVE_FLAG = 'i';
 /**
  * Limited list of available symbols before slash `/`
@@ -2868,27 +2980,17 @@ const ATTRIBUTE_CASE_INSENSITIVE_FLAG = 'i';
  */
 
 const POSSIBLE_MARKS_BEFORE_REGEXP = {
-  COMMON: [
-  // e.g. ':matches-attr(/data-/)'
-  BRACKET.PARENTHESES.LEFT,
-  // e.g. `:matches-attr('/data-/')`
-  SINGLE_QUOTE,
-  // e.g. ':matches-attr("/data-/")'
-  DOUBLE_QUOTE,
-  // e.g. ':matches-attr(check=/data-v-/)'
-  EQUAL_SIGN,
-  // e.g. ':matches-property(inner./_test/=null)'
-  DOT,
-  // e.g. ':matches-css(height:/20px/)'
-  COLON,
-  // ':matches-css-after( content  :   /(\\d+\\s)*me/  )'
+  COMMON: [// e.g. ':matches-attr(/data-/)'
+  BRACKET.PARENTHESES.LEFT, // e.g. `:matches-attr('/data-/')`
+  SINGLE_QUOTE, // e.g. ':matches-attr("/data-/")'
+  DOUBLE_QUOTE, // e.g. ':matches-attr(check=/data-v-/)'
+  EQUAL_SIGN, // e.g. ':matches-property(inner./_test/=null)'
+  DOT, // e.g. ':matches-css(height:/20px/)'
+  COLON, // ':matches-css-after( content  :   /(\\d+\\s)*me/  )'
   SPACE],
-  CONTAINS: [
-  // e.g. ':contains(/text/)'
-  BRACKET.PARENTHESES.LEFT,
-  // e.g. `:contains('/text/')`
-  SINGLE_QUOTE,
-  // e.g. ':contains("/text/")'
+  CONTAINS: [// e.g. ':contains(/text/)'
+  BRACKET.PARENTHESES.LEFT, // e.g. `:contains('/text/')`
+  SINGLE_QUOTE, // e.g. ':contains("/text/")'
   DOUBLE_QUOTE]
 };
 /**
@@ -2928,6 +3030,7 @@ const doesRegularContinueAfterSpace = (nextTokenType, nextTokenValue) => {
   if (!nextTokenType || !nextTokenValue) {
     return false;
   }
+
   return COMBINATORS.includes(nextTokenValue) || nextTokenType === TOKEN_TYPE.WORD // e.g. '#main *:has(> .ad)'
   || nextTokenValue === ASTERISK || nextTokenValue === ID_MARKER || nextTokenValue === CLASS_MARKER // e.g. 'div :where(.content)'
   || nextTokenValue === COLON // e.g. "div[class*=' ']"
@@ -2948,6 +3051,7 @@ const doesRegularContinueAfterSpace = (nextTokenType, nextTokenValue) => {
 
 const isRegexpOpening = (context, prevTokenValue, bufferNodeValue) => {
   const lastExtendedPseudoClassName = getLast(context.extendedPseudoNamesStack);
+
   if (!lastExtendedPseudoClassName) {
     throw new Error('Regexp pattern allowed only in arg of extended pseudo-class');
   } // for regexp pattens the slash should not be escaped
@@ -2956,13 +3060,16 @@ const isRegexpOpening = (context, prevTokenValue, bufferNodeValue) => {
   // which means limited list of available symbols before slash `/`;
   // for :contains() pseudo-class regexp pattern should be at the beginning of arg
 
+
   if (CONTAINS_PSEUDO_NAMES.includes(lastExtendedPseudoClassName)) {
     return POSSIBLE_MARKS_BEFORE_REGEXP.CONTAINS.includes(prevTokenValue);
   }
+
   if (prevTokenValue === SLASH && lastExtendedPseudoClassName !== XPATH_PSEUDO_CLASS_MARKER) {
     const rawArgDesc = bufferNodeValue ? `in arg part: '${bufferNodeValue}'` : 'arg';
     throw new Error(`Invalid regexp pattern for :${lastExtendedPseudoClassName}() pseudo-class ${rawArgDesc}`);
   } // for other pseudo-classes regexp pattern can be either the whole arg or its part
+
 
   return POSSIBLE_MARKS_BEFORE_REGEXP.COMMON.includes(prevTokenValue);
 };
@@ -2989,6 +3096,7 @@ const isAttributeOpening = (tokenValue, prevTokenValue) => {
 
 const isAttributeClosing = context => {
   var _getPrevToLast;
+
   if (!context.isAttributeBracketsOpen) {
     return false;
   } // valid attributes may have extra spaces inside.
@@ -2997,6 +3105,7 @@ const isAttributeClosing = context => {
   //   - extra spaces in attribute are not relevant to attribute syntax validity
   //     e.g. 'a[ title ]' is the same as 'a[title]'
   //          'div[style *= "MARGIN" i]' is the same as 'div[style*="MARGIN"i]'
+
 
   const noSpaceAttr = context.attributeBuffer.split(SPACE).join(''); // tokenize the prepared attribute string
 
@@ -3012,17 +3121,21 @@ const isAttributeClosing = context => {
     // eslint-disable-next-line max-len
     throw new Error(`'[${context.attributeBuffer}]' is not a valid attribute due to '${firstAttrTokenValue}' at start of it`);
   }
+
   const lastAttrToken = getLast(attrTokens);
   const lastAttrTokenType = lastAttrToken === null || lastAttrToken === void 0 ? void 0 : lastAttrToken.type;
   const lastAttrTokenValue = lastAttrToken === null || lastAttrToken === void 0 ? void 0 : lastAttrToken.value;
+
   if (lastAttrTokenValue === EQUAL_SIGN) {
     // e.g. '[style=]'
     throw new Error(`'[${context.attributeBuffer}]' is not a valid attribute due to '${EQUAL_SIGN}'`);
   }
+
   const equalSignIndex = attrTokens.findIndex(token => {
     return token.type === TOKEN_TYPE.MARK && token.value === EQUAL_SIGN;
   });
   const prevToLastAttrTokenValue = (_getPrevToLast = getPrevToLast(attrTokens)) === null || _getPrevToLast === void 0 ? void 0 : _getPrevToLast.value;
+
   if (equalSignIndex === -1) {
     // if there is no '=' inside attribute,
     // it must be just attribute name which means the word-type token before closing bracket
@@ -3030,11 +3143,13 @@ const isAttributeClosing = context => {
     if (lastAttrTokenType === TOKEN_TYPE.WORD) {
       return true;
     }
+
     return prevToLastAttrTokenValue === BACKSLASH // some weird attribute are valid too
     // e.g. '[class\\"ads-article\\"]'
     && (lastAttrTokenValue === DOUBLE_QUOTE // e.g. "[class\\'ads-article\\']"
     || lastAttrTokenValue === SINGLE_QUOTE);
   } // get the value of token next to `=`
+
 
   const nextToEqualSignToken = getItemByIndex(attrTokens, equalSignIndex + 1);
   const nextToEqualSignTokenValue = nextToEqualSignToken.value; // check whether the attribute value wrapper in quotes
@@ -3049,15 +3164,18 @@ const isAttributeClosing = context => {
     } // otherwise signal an error
     // e.g. 'table[style*=border: 0px"]'
 
+
     throw new Error(`'[${context.attributeBuffer}]' is not a valid attribute`);
   } // otherwise if quotes for value are present
   // the last token before `]` can still be word-type token
   // e.g. 'div[style*="MARGIN" i]'
 
+
   if (lastAttrTokenType === TOKEN_TYPE.WORD && (lastAttrTokenValue === null || lastAttrTokenValue === void 0 ? void 0 : lastAttrTokenValue.toLocaleLowerCase()) === ATTRIBUTE_CASE_INSENSITIVE_FLAG) {
     return prevToLastAttrTokenValue === nextToEqualSignTokenValue;
   } // eventually if there is quotes for attribute value and last token is not a word,
   // the closing mark should be the same quote as opening one
+
 
   return lastAttrTokenValue === nextToEqualSignTokenValue;
 };
@@ -3073,6 +3191,7 @@ const isWhiteSpaceChar = tokenValue => {
   if (!tokenValue) {
     return false;
   }
+
   return WHITE_SPACE_CHARACTERS.includes(tokenValue);
 };
 
@@ -3115,6 +3234,7 @@ const getBufferNode = context => {
     return null;
   } // buffer node is always the last in the pathToBufferNode stack
 
+
   return getLast(context.pathToBufferNode) || null;
 };
 /**
@@ -3134,6 +3254,7 @@ const getBufferNodeParent = context => {
   } // since the buffer node is always the last in the pathToBufferNode stack
   // its parent is previous to it in the stack
 
+
   return getPrevToLast(context.pathToBufferNode) || null;
 };
 /**
@@ -3151,12 +3272,15 @@ const getBufferNodeParent = context => {
 
 const getContextLastRegularSelectorNode = context => {
   const bufferNode = getBufferNode(context);
+
   if (!bufferNode) {
     throw new Error('No bufferNode found');
   }
+
   if (!isSelectorNode(bufferNode)) {
     throw new Error('Unsupported bufferNode type');
   }
+
   const lastRegularSelectorNode = getLastRegularChild(bufferNode.children);
   context.pathToBufferNode.push(lastRegularSelectorNode);
   return lastRegularSelectorNode;
@@ -3176,13 +3300,16 @@ const getContextLastRegularSelectorNode = context => {
 
 const updateBufferNode = (context, tokenValue) => {
   const bufferNode = getBufferNode(context);
+
   if (bufferNode === null) {
     throw new Error('No bufferNode to update');
   }
+
   if (isAbsolutePseudoClassNode(bufferNode)) {
     bufferNode.value += tokenValue;
   } else if (isRegularSelectorNode(bufferNode)) {
     bufferNode.value += tokenValue;
+
     if (context.isAttributeBracketsOpen) {
       context.attributeBuffer += tokenValue;
     }
@@ -3216,10 +3343,13 @@ const addSelectorListNode = context => {
 const addAstNodeByType = function (context, type) {
   let tokenValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   const bufferNode = getBufferNode(context);
+
   if (bufferNode === null) {
     throw new Error('No buffer node');
   }
+
   let node;
+
   if (type === NODE.REGULAR_SELECTOR) {
     node = new RegularSelectorNode(tokenValue);
   } else if (type === NODE.ABSOLUTE_PSEUDO_CLASS) {
@@ -3230,6 +3360,7 @@ const addAstNodeByType = function (context, type) {
     // SelectorList || Selector || ExtendedSelector
     node = new AnySelectorNode(type);
   }
+
   bufferNode.addChild(node);
   context.pathToBufferNode.push(node);
 };
@@ -3270,6 +3401,7 @@ const initRelativeSubtree = function (context) {
 const upToClosest = (context, parentType) => {
   for (let i = context.pathToBufferNode.length - 1; i >= 0; i -= 1) {
     var _context$pathToBuffer;
+
     if (((_context$pathToBuffer = context.pathToBufferNode[i]) === null || _context$pathToBuffer === void 0 ? void 0 : _context$pathToBuffer.type) === parentType) {
       context.pathToBufferNode = context.pathToBufferNode.slice(0, i + 1);
       break;
@@ -3293,20 +3425,25 @@ const getUpdatedBufferNode = context => {
   // so if after the comma the buffer node type is SelectorList and parent type is RelativePseudoClass
   // we should simply return the current buffer node
   const bufferNode = getBufferNode(context);
+
   if (bufferNode && isSelectorListNode(bufferNode) && isRelativePseudoClassNode(getBufferNodeParent(context))) {
     return bufferNode;
   }
+
   upToClosest(context, NODE.SELECTOR);
   const selectorNode = getBufferNode(context);
+
   if (!selectorNode) {
     throw new Error('No SelectorNode, impossible to continue selector parsing by ExtendedCss');
   }
+
   const lastSelectorNodeChild = getLast(selectorNode.children);
   const hasExtended = lastSelectorNodeChild && isExtendedSelectorNode(lastSelectorNodeChild) // parser position might be inside standard pseudo-class brackets which has space
   // e.g. 'div:contains(/а/):nth-child(100n + 2)'
   && context.standardPseudoBracketsStack.length === 0;
   const supposedPseudoClassNode = hasExtended && getFirst(lastSelectorNodeChild.children);
   let newNeededBufferNode = selectorNode;
+
   if (supposedPseudoClassNode) {
     // name of pseudo-class for last extended-node child for Selector node
     const lastExtendedPseudoName = hasExtended && supposedPseudoClassNode.name;
@@ -3314,6 +3451,7 @@ const getUpdatedBufferNode = context => {
     const isLastExtendedNameAbsolute = lastExtendedPseudoName && isAbsolutePseudoClass(lastExtendedPseudoName);
     const hasRelativeExtended = isLastExtendedNameRelative && context.extendedPseudoBracketsStack.length > 0 && context.extendedPseudoBracketsStack.length === context.extendedPseudoNamesStack.length;
     const hasAbsoluteExtended = isLastExtendedNameAbsolute && lastExtendedPseudoName === getLast(context.extendedPseudoNamesStack);
+
     if (hasRelativeExtended) {
       // return relative selector node to update later
       context.pathToBufferNode.push(lastSelectorNodeChild);
@@ -3330,6 +3468,7 @@ const getUpdatedBufferNode = context => {
     // otherwise return last regular selector node to update later
     newNeededBufferNode = getContextLastRegularSelectorNode(context);
   } // update the path to buffer node properly
+
 
   context.pathToBufferNode.push(newNeededBufferNode);
   return newNeededBufferNode;
@@ -3354,6 +3493,7 @@ const handleNextTokenOnColon = (context, selector, tokenValue, nextTokenValue, n
   if (!nextTokenValue) {
     throw new Error(`Invalid colon ':' at the end of selector: '${selector}'`);
   }
+
   if (!isSupportedPseudoClass(nextTokenValue.toLowerCase())) {
     if (nextTokenValue.toLowerCase() === REMOVE_PSEUDO_MARKER) {
       // :remove() pseudo-class should be handled before
@@ -3363,6 +3503,7 @@ const handleNextTokenOnColon = (context, selector, tokenValue, nextTokenValue, n
     } // if following token is not an extended pseudo
     // the colon should be collected to value of RegularSelector
     // e.g. '.entry_text:nth-child(2)'
+
 
     updateBufferNode(context, tokenValue); // check the token after the pseudo and do balance parentheses later
     // only if it is functional pseudo-class (standard with brackets, e.g. ':lang()').
@@ -3418,6 +3559,7 @@ const hasExtendedSelector = selectorList => {
  * @returns String representation for selector list of regular selectors.
  */
 
+
 const selectorListOfRegularsToString = selectorList => {
   // if there is no ExtendedSelector in relative SelectorList
   // it means that each Selector node has single child — RegularSelector node
@@ -3438,6 +3580,7 @@ const selectorListOfRegularsToString = selectorList => {
  * @returns Updated ast node.
  */
 
+
 const updateNodeChildren = (node, newChildren) => {
   node.children = newChildren;
   return node;
@@ -3451,15 +3594,19 @@ const updateNodeChildren = (node, newChildren) => {
  * @returns True is ExtendedSelector should be optimized.
  */
 
+
 const shouldOptimizeExtendedSelector = currExtendedSelectorNode => {
   if (currExtendedSelectorNode === null) {
     return false;
   }
+
   const extendedPseudoClassNode = getPseudoClassNode(currExtendedSelectorNode);
   const pseudoName = getNodeName(extendedPseudoClassNode);
+
   if (isAbsolutePseudoClass(pseudoName)) {
     return false;
   }
+
   const relativeSelectorList = getRelativeSelectorListNode(extendedPseudoClassNode);
   const innerSelectorNodes = relativeSelectorList.children; // simple checking for standard selectors in arg of :not() or :is() pseudo-class
   // e.g. 'div > *:is(div, a, span)'
@@ -3474,10 +3621,12 @@ const shouldOptimizeExtendedSelector = currExtendedSelectorNode => {
         return false;
       }
     });
+
     if (areAllSelectorNodeChildrenRegular) {
       return true;
     }
   } // for other extended pseudo-classes than :not() and :is()
+
 
   return innerSelectorNodes.some(selectorNode => {
     return selectorNode.children.some(selectorNodeChild => {
@@ -3485,6 +3634,7 @@ const shouldOptimizeExtendedSelector = currExtendedSelectorNode => {
         return false;
       } // check inner ExtendedSelector recursively
       // e.g. 'div:has(*:not(.header))'
+
 
       return shouldOptimizeExtendedSelector(selectorNodeChild);
     });
@@ -3501,13 +3651,16 @@ const shouldOptimizeExtendedSelector = currExtendedSelectorNode => {
  * @returns Ast node or null.
  */
 
+
 const getOptimizedExtendedSelector = (currExtendedSelectorNode, prevRegularSelectorNode) => {
   if (!currExtendedSelectorNode) {
     return null;
   }
+
   const extendedPseudoClassNode = getPseudoClassNode(currExtendedSelectorNode);
   const relativeSelectorList = getRelativeSelectorListNode(extendedPseudoClassNode);
   const hasInnerExtendedSelector = hasExtendedSelector(relativeSelectorList);
+
   if (!hasInnerExtendedSelector) {
     // if there is no extended selectors for :not() or :is()
     // e.g. 'div:not(.content, .main)'
@@ -3518,6 +3671,7 @@ const getOptimizedExtendedSelector = (currExtendedSelectorNode, prevRegularSelec
     prevRegularSelectorNode.value = `${getNodeValue(prevRegularSelectorNode)}${optimizedExtendedStr}`;
     return null;
   } // eslint-disable-next-line @typescript-eslint/no-use-before-define
+
 
   const optimizedRelativeSelectorList = optimizeSelectorListNode(relativeSelectorList);
   const optimizedExtendedPseudoClassNode = updateNodeChildren(extendedPseudoClassNode, [optimizedRelativeSelectorList]);
@@ -3531,6 +3685,7 @@ const getOptimizedExtendedSelector = (currExtendedSelectorNode, prevRegularSelec
  * @param previous Previous RegularSelector node.
  */
 
+
 const optimizeCurrentRegularSelector = (current, previous) => {
   previous.value = `${getNodeValue(previous)}${SPACE}${getNodeValue(current)}`;
 };
@@ -3542,6 +3697,7 @@ const optimizeCurrentRegularSelector = (current, previous) => {
  * @returns Optimized ast node.
  * @throws An error while collecting optimized nodes.
  */
+
 
 const optimizeSelectorNode = selectorNode => {
   // non-optimized list of SelectorNode children
@@ -3557,6 +3713,7 @@ const optimizeSelectorNode = selectorNode => {
       optimizedChildrenList.push(currentChild);
     } else {
       const prevRegularChild = getLastRegularChild(optimizedChildrenList);
+
       if (isExtendedSelectorNode(currentChild)) {
         // start checking with point is null
         let optimizedExtendedSelector = null; // check whether the optimization is needed
@@ -3565,6 +3722,7 @@ const optimizeSelectorNode = selectorNode => {
         // i.e. `getOptimizedExtendedSelector(optimizedExtendedSelector)` below
 
         optimizedExtendedSelector = currentChild;
+
         while (isOptimizationNeeded) {
           // recursively optimize ExtendedSelector until no optimization needed
           // e.g. div > *:is(.banner:not(.block))
@@ -3577,6 +3735,7 @@ const optimizeSelectorNode = selectorNode => {
         // so nothing to save eventually
         // otherwise the optimized ExtendedSelector should be saved
         // e.g. 'div:has(:not([class]))'
+
 
         if (optimizedExtendedSelector !== null) {
           optimizedChildrenList.push(optimizedExtendedSelector); // if optimization is not needed
@@ -3611,13 +3770,16 @@ const optimizeSelectorNode = selectorNode => {
         // ]
         // here we check **children of selectorNode** after previous optimization if it was
         const lastOptimizedChild = getLast(optimizedChildrenList) || null;
+
         if (isRegularSelectorNode(lastOptimizedChild)) {
           optimizeCurrentRegularSelector(currentChild, prevRegularChild);
         }
       }
     }
+
     currentIndex += 1;
   }
+
   return updateNodeChildren(selectorNode, optimizedChildrenList);
 };
 /**
@@ -3627,6 +3789,7 @@ const optimizeSelectorNode = selectorNode => {
  *
  * @returns Optimized ast node.
  */
+
 
 const optimizeSelectorListNode = selectorListNode => {
   return updateNodeChildren(selectorListNode, selectorListNode.children.map(s => optimizeSelectorNode(s)));
@@ -3642,6 +3805,7 @@ const optimizeSelectorListNode = selectorListNode => {
  *
  * @returns Optimized ast.
  */
+
 
 const optimizeAst = ast => {
   // ast is basically the selector list of selectors
@@ -3676,11 +3840,14 @@ const parse = selector => {
     shouldOptimize: false
   };
   let i = 0;
+
   while (i < tokens.length) {
     const token = tokens[i];
+
     if (!token) {
       break;
     } // Token to process
+
 
     const {
       type: tokenType,
@@ -3707,6 +3874,7 @@ const parse = selector => {
     const previousToPreviousToken = tokens[i - 2];
     const prevToPrevTokenValue = previousToPreviousToken === null || previousToPreviousToken === void 0 ? void 0 : previousToPreviousToken.value;
     let bufferNode = getBufferNode(context);
+
     switch (tokenType) {
       case TOKEN_TYPE.WORD:
         if (bufferNode === null) {
@@ -3726,6 +3894,7 @@ const parse = selector => {
           if (isWhiteSpaceChar(nextTokenValue) && nextToNextTokenValue === BRACKET.PARENTHESES.LEFT) {
             throw new Error(`${NO_WHITESPACE_ERROR_PREFIX}: '${selector}'`);
           }
+
           const lowerCaseTokenValue = tokenValue.toLowerCase(); // save pseudo-class name for brackets balance checking
 
           context.extendedPseudoNamesStack.push(lowerCaseTokenValue); // extended pseudo-class name are parsed in lower case
@@ -3749,7 +3918,9 @@ const parse = selector => {
         } else if (isRelativePseudoClassNode(bufferNode)) {
           initRelativeSubtree(context, tokenValue);
         }
+
         break;
+
       case TOKEN_TYPE.MARK:
         switch (tokenValue) {
           case COMMA:
@@ -3775,7 +3946,9 @@ const parse = selector => {
               // if parser position is on Selector node
               upToClosest(context, NODE.SELECTOR_LIST);
             }
+
             break;
+
           case SPACE:
             // it might be complex selector with extended pseudo-class inside it
             // and the space is between that complex selector and following regular selector
@@ -3789,6 +3962,7 @@ const parse = selector => {
             && !context.isAttributeBracketsOpen) {
               bufferNode = getUpdatedBufferNode(context);
             }
+
             if (isRegularSelectorNode(bufferNode)) {
               // standard selectors with white space between colon and name of pseudo
               // are invalid for native document.querySelectorAll() anyway,
@@ -3806,6 +3980,7 @@ const parse = selector => {
               // if it is the last token or standard selector continues after the space.
               // otherwise it will be skipped
 
+
               if (!nextTokenValue || doesRegularContinueAfterSpace(nextTokenType, nextTokenValue) // we also should collect space inside attribute value
               // e.g. `[onclick^="window.open ('https://example.com/share?url="]`
               // parser position             ↑
@@ -3813,17 +3988,20 @@ const parse = selector => {
                 updateBufferNode(context, tokenValue);
               }
             }
+
             if (isAbsolutePseudoClassNode(bufferNode)) {
               // space inside extended pseudo-class arg
               // e.g. 'span:contains(some text)'
               updateBufferNode(context, tokenValue);
             }
+
             if (isRelativePseudoClassNode(bufferNode)) {
               // init with empty value RegularSelector
               // as the space is not needed for selector value
               // e.g. 'p:not( .content )'
               initRelativeSubtree(context);
             }
+
             if (isSelectorNode(bufferNode)) {
               // do NOT add RegularSelector if parser position on space BEFORE the comma in selector list
               // e.g. '.block:has(> img) , .banner)'
@@ -3836,7 +4014,9 @@ const parse = selector => {
                 addAstNodeByType(context, NODE.REGULAR_SELECTOR);
               }
             }
+
             break;
+
           case DESCENDANT_COMBINATOR:
           case CHILD_COMBINATOR:
           case NEXT_SIBLING_COMBINATOR:
@@ -3869,8 +4049,10 @@ const parse = selector => {
                 // but may be validated by FilterCompiler so error message should be appropriate
                 throw new Error(`'${selector}' is not a valid selector`);
               }
+
               bufferNode = getUpdatedBufferNode(context);
             }
+
             if (bufferNode === null) {
               // no ast collecting has been started
               // e.g. '.banner > p'
@@ -3878,6 +4060,7 @@ const parse = selector => {
               // or   '[class][style][attr]'
               // or   '*:not(span)'
               initAst(context, tokenValue);
+
               if (isAttributeOpening(tokenValue, prevTokenValue)) {
                 // e.g. '[class^="banner-"]'
                 context.isAttributeBracketsOpen = true;
@@ -3888,7 +4071,9 @@ const parse = selector => {
                 throw new Error(`'${selector}' is not a valid selector`);
               } // collect the mark to the value of RegularSelector node
 
+
               updateBufferNode(context, tokenValue);
+
               if (isAttributeOpening(tokenValue, prevTokenValue)) {
                 // needed for proper handling element attribute value with comma
                 // e.g. 'div[data-comma="0,1"]'
@@ -3916,6 +4101,7 @@ const parse = selector => {
             } else if (isRelativePseudoClassNode(bufferNode)) {
               // add SelectorList to children of RelativePseudoClass node
               initRelativeSubtree(context, tokenValue);
+
               if (isAttributeOpening(tokenValue, prevTokenValue)) {
                 // besides of creating the relative subtree
                 // opening square bracket means start of attribute
@@ -3938,6 +4124,7 @@ const parse = selector => {
                 // so we need to get last regular selector node and update its value
                 bufferNode = getContextLastRegularSelectorNode(context);
                 updateBufferNode(context, tokenValue);
+
                 if (isAttributeOpening(tokenValue, prevTokenValue)) {
                   // handle attribute in compound selector after extended pseudo-class
                   // e.g. 'div:not(.top)[style="z-index: 10000;"]'
@@ -3950,13 +4137,16 @@ const parse = selector => {
               addAstNodeByType(context, NODE.SELECTOR); // and RegularSelector as it is always the first child of Selector
 
               addAstNodeByType(context, NODE.REGULAR_SELECTOR, tokenValue);
+
               if (isAttributeOpening(tokenValue, prevTokenValue)) {
                 // handle simple attribute selector in selector list
                 // e.g. '.banner, [class^="ad-"]'
                 context.isAttributeBracketsOpen = true;
               }
             }
+
             break;
+
           case BRACKET.SQUARE.RIGHT:
             if (isRegularSelectorNode(bufferNode)) {
               // unescaped `]` in regular selector allowed only inside attribute value
@@ -3967,21 +4157,26 @@ const parse = selector => {
               } // needed for proper parsing regular selectors after the attributes with comma
               // e.g. 'div[data-comma="0,1"] > img'
 
+
               if (isAttributeClosing(context)) {
                 context.isAttributeBracketsOpen = false; // reset attribute buffer on closing `]`
 
                 context.attributeBuffer = '';
               } // collect the bracket to the value of RegularSelector node
 
+
               updateBufferNode(context, tokenValue);
             }
+
             if (isAbsolutePseudoClassNode(bufferNode)) {
               // :xpath() expended pseudo-class arg might contain square bracket
               // so it should be collected
               // e.g. 'div:xpath(//h3[contains(text(),"Share it!")]/..)'
               updateBufferNode(context, tokenValue);
             }
+
             break;
+
           case COLON:
             // No white space is allowed between the colon and the following name of the pseudo-class
             // https://www.w3.org/TR/selectors-4/#pseudo-classes
@@ -3989,6 +4184,7 @@ const parse = selector => {
             if (isWhiteSpaceChar(nextTokenValue) && nextToNextTokenValue && SUPPORTED_PSEUDO_CLASSES.includes(nextToNextTokenValue)) {
               throw new Error(`${NO_WHITESPACE_ERROR_PREFIX}: '${selector}'`);
             }
+
             if (bufferNode === null) {
               // no ast collecting has been started
               if (nextTokenValue === XPATH_PSEUDO_CLASS_MARKER) {
@@ -4007,8 +4203,10 @@ const parse = selector => {
                 initAst(context, ASTERISK);
               } // bufferNode should be updated for following checking
 
+
               bufferNode = getBufferNode(context);
             }
+
             if (isSelectorListNode(bufferNode)) {
               // bufferNode is SelectorList after comma has been parsed.
               // parser position is on colon now:
@@ -4020,6 +4218,7 @@ const parse = selector => {
 
               bufferNode = getBufferNode(context);
             }
+
             if (isRegularSelectorNode(bufferNode)) {
               // it can be extended or standard pseudo
               // e.g. '#share, :contains(share it)'
@@ -4030,8 +4229,10 @@ const parse = selector => {
                 // is covered by 'bufferNode === null' above at start of COLON checking
                 updateBufferNode(context, ASTERISK);
               }
+
               handleNextTokenOnColon(context, selector, tokenValue, nextTokenValue, nextToNextTokenValue);
             }
+
             if (isSelectorNode(bufferNode)) {
               // e.g. 'div:contains(text):'
               if (!nextTokenValue) {
@@ -4041,6 +4242,7 @@ const parse = selector => {
               // and there is might be another extended selector.
               // parser position is on colon before 'upward':
               // e.g. 'p:contains(PR):upward(2)'
+
 
               if (isSupportedPseudoClass(nextTokenValue.toLowerCase())) {
                 // if supported extended pseudo-class is next to colon
@@ -4060,6 +4262,7 @@ const parse = selector => {
                 handleNextTokenOnColon(context, selector, tokenValue, nextTokenType, nextToNextTokenValue);
               }
             }
+
             if (isAbsolutePseudoClassNode(bufferNode)) {
               // :xpath() pseudo-class should be the last of extended pseudo-classes
               if (getNodeName(bufferNode) === XPATH_PSEUDO_CLASS_MARKER && nextTokenValue && SUPPORTED_PSEUDO_CLASSES.includes(nextTokenValue) && nextToNextTokenValue === BRACKET.PARENTHESES.LEFT) {
@@ -4067,8 +4270,10 @@ const parse = selector => {
               } // collecting arg for absolute pseudo-class
               // e.g. 'div:matches-css(width:400px)'
 
+
               updateBufferNode(context, tokenValue);
             }
+
             if (isRelativePseudoClassNode(bufferNode)) {
               if (!nextTokenValue) {
                 // e.g. 'div:has(:'
@@ -4078,7 +4283,9 @@ const parse = selector => {
               // e.g. 'div:has(:contains(text))'
               // or   'div:not(:empty)'
 
+
               initRelativeSubtree(context, ASTERISK);
+
               if (!isSupportedPseudoClass(nextTokenValue.toLowerCase())) {
                 // collect the colon to value of RegularSelector
                 // e.g. 'div:not(:empty)'
@@ -4095,7 +4302,9 @@ const parse = selector => {
                 addAstNodeByType(context, NODE.EXTENDED_SELECTOR);
               }
             }
+
             break;
+
           case BRACKET.PARENTHESES.LEFT:
             // start of pseudo-class arg
             if (isAbsolutePseudoClassNode(bufferNode)) {
@@ -4117,6 +4326,7 @@ const parse = selector => {
                 }
               }
             }
+
             if (isRegularSelectorNode(bufferNode)) {
               // continue RegularSelector value collecting for standard pseudo-classes
               // e.g. '.banner:where(div)'
@@ -4127,16 +4337,20 @@ const parse = selector => {
               // e.g. 'div:not([href*="window.print()"])'   <-- parser position
               // is on the `(` after `print`       ↑
 
+
               if (context.isAttributeBracketsOpen) {
                 updateBufferNode(context, tokenValue);
               }
             }
+
             if (isRelativePseudoClassNode(bufferNode)) {
               // save opening bracket for balancing
               // e.g. 'div:not()'  // position is on `(`
               context.extendedPseudoBracketsStack.push(tokenValue);
             }
+
             break;
+
           case BRACKET.PARENTHESES.RIGHT:
             if (isAbsolutePseudoClassNode(bufferNode)) {
               // no brackets balancing needed inside
@@ -4151,6 +4365,7 @@ const parse = selector => {
                 // e.g. 'h3:contains((Ads))'
                 // or   'div:xpath(//h3[contains(text(),"Share it!")]/..)'
                 context.extendedPseudoBracketsStack.pop();
+
                 if (getNodeName(bufferNode) !== XPATH_PSEUDO_CLASS_MARKER) {
                   // for all other absolute pseudo-classes except :xpath()
                   // remove stacked name of extended pseudo-class
@@ -4183,6 +4398,7 @@ const parse = selector => {
                 }
               }
             }
+
             if (isRegularSelectorNode(bufferNode)) {
               if (context.isAttributeBracketsOpen) {
                 // parentheses inside attribute value should be part of RegularSelector value
@@ -4198,12 +4414,14 @@ const parse = selector => {
 
                 context.standardPseudoBracketsStack.pop();
                 const lastStandardPseudo = context.standardPseudoNamesStack.pop();
+
                 if (!lastStandardPseudo) {
                   // standard pseudo should be in standardPseudoNamesStack
                   // as related to standardPseudoBracketsStack
                   throw new Error(`Parsing error. Invalid selector: ${selector}`);
                 } // Disallow :has() after regular pseudo-elements
                 // https://bugs.chromium.org/p/chromium/issues/detail?id=669058#c54 [3]
+
 
                 if (Object.values(REGULAR_PSEUDO_ELEMENTS).includes(lastStandardPseudo) // check token which is next to closing parentheses and token after it
                 // parser position is on bracket after 'foo' now:
@@ -4224,6 +4442,7 @@ const parse = selector => {
                 upToClosest(context, NODE.SELECTOR);
               }
             }
+
             if (isSelectorNode(bufferNode)) {
               // after inner extended pseudo-class bufferNode is Selector.
               // parser position is on last bracket now:
@@ -4233,6 +4452,7 @@ const parse = selector => {
               upToClosest(context, NODE.EXTENDED_SELECTOR);
               upToClosest(context, NODE.SELECTOR);
             }
+
             if (isRelativePseudoClassNode(bufferNode)) {
               // save opening bracket for balancing
               // e.g. 'div:not()'  // position is on `)`
@@ -4242,13 +4462,16 @@ const parse = selector => {
                 context.extendedPseudoNamesStack.pop();
               }
             }
+
             break;
+
           case LINE_FEED:
           case FORM_FEED:
           case CARRIAGE_RETURN:
             // such characters at start and end of selector should be trimmed
             // so is there is one them among tokens, it is not valid selector
             throw new Error(`'${selector}' is not a valid selector`);
+
           case TAB:
             // allow tab only inside attribute value
             // as there are such valid rules in filter lists
@@ -4260,7 +4483,9 @@ const parse = selector => {
               // otherwise not valid
               throw new Error(`'${selector}' is not a valid selector`);
             }
+
         }
+
         break;
       // no default statement for Marks as they are limited to SUPPORTED_SELECTOR_MARKS
       // and all other symbol combinations are tokenized as Word
@@ -4269,20 +4494,26 @@ const parse = selector => {
       default:
         throw new Error(`Unknown type of token: '${tokenValue}'`);
     }
+
     i += 1;
   }
+
   if (context.ast === null) {
     throw new Error(`'${selector}' is not a valid selector`);
   }
+
   if (context.extendedPseudoNamesStack.length > 0 || context.extendedPseudoBracketsStack.length > 0) {
     // eslint-disable-next-line max-len
     throw new Error(`Unbalanced brackets for extended pseudo-class: '${getLast(context.extendedPseudoNamesStack)}'`);
   }
+
   if (context.isAttributeBracketsOpen) {
     throw new Error(`Unbalanced attribute brackets in selector: '${selector}'`);
   }
+
   return context.shouldOptimize ? optimizeAst(context.ast) : context.ast;
 };
+
 const natives = {
   MutationObserver: window.MutationObserver || window.WebKitMutationObserver
 };
@@ -4312,10 +4543,13 @@ class NativeTextContent {
    * Sets native Node textContext getter to `getter` class field.
    */
 
+
   setGetter() {
     var _Object$getOwnPropert;
+
     this.getter = (_Object$getOwnPropert = Object.getOwnPropertyDescriptor(this.nativeNode.prototype, 'textContent')) === null || _Object$getOwnPropert === void 0 ? void 0 : _Object$getOwnPropert.get;
   }
+
 }
 const nativeTextContent = new NativeTextContent();
 
@@ -4332,6 +4566,7 @@ const getNodeTextContent = domElement => {
     return nativeTextContent.getter.apply(domElement);
   } // if ExtendedCss.init() has not been executed and there is no nodeTextContentGetter,
   // use simple approach, especially when init() is not really needed, e.g. local tests
+
 
   return domElement.textContent || '';
 };
@@ -4363,6 +4598,7 @@ const getElementSelectorPath = inputEl => {
   if (!(inputEl instanceof Element)) {
     throw new Error('Function received argument with wrong type');
   }
+
   let el;
   el = inputEl;
   const path = []; // we need to check '!!el' first because it is possible
@@ -4370,25 +4606,32 @@ const getElementSelectorPath = inputEl => {
 
   while (!!el && el.nodeType === Node.ELEMENT_NODE) {
     let selector = el.nodeName.toLowerCase();
+
     if (el.id && typeof el.id === 'string') {
       selector += `#${el.id}`;
       path.unshift(selector);
       break;
     }
+
     let sibling = el;
     let nth = 1;
+
     while (sibling.previousElementSibling) {
       sibling = sibling.previousElementSibling;
+
       if (sibling.nodeType === Node.ELEMENT_NODE && sibling.nodeName.toLowerCase() === selector) {
         nth += 1;
       }
     }
+
     if (nth !== 1) {
       selector += `:nth-of-type(${nth})`;
     }
+
     path.unshift(selector);
     el = el.parentElement;
   }
+
   return path.join(' > ');
 };
 /**
@@ -4416,9 +4659,11 @@ const getParent = (element, errorMessage) => {
   const {
     parentElement
   } = element;
+
   if (!parentElement) {
     throw new Error(errorMessage || 'Element does no have parent element');
   }
+
   return parentElement;
 };
 
@@ -4440,10 +4685,12 @@ const isErrorWithMessage = error => {
  * @returns Error object with defined `message` property.
  */
 
+
 const toErrorWithMessage = maybeError => {
   if (isErrorWithMessage(maybeError)) {
     return maybeError;
   }
+
   try {
     return new Error(JSON.stringify(maybeError));
   } catch {
@@ -4461,14 +4708,17 @@ const toErrorWithMessage = maybeError => {
  * @returns Message of `error`.
  */
 
+
 const getErrorMessage = error => {
   return toErrorWithMessage(error).message;
 };
+
 const logger = {
   /**
    * Safe console.error version.
    */
   error: typeof console !== 'undefined' && console.error && console.error.bind ? console.error.bind(window.console) : console.error,
+
   /**
    * Safe console.info version.
    */
@@ -4486,9 +4736,11 @@ const logger = {
 
 const removeSuffix = (str, suffix) => {
   const index = str.indexOf(suffix, str.length - suffix.length);
+
   if (index >= 0) {
     return str.substring(0, index);
   }
+
   return str;
 };
 /**
@@ -4508,6 +4760,7 @@ const replaceAll = (input, pattern, replacement) => {
   if (!input) {
     return input;
   }
+
   return input.split(pattern).join(replacement);
 };
 /**
@@ -4522,6 +4775,7 @@ const toRegExp = str => {
   if (str.startsWith(SLASH) && str.endsWith(SLASH)) {
     return new RegExp(str.slice(1, -1));
   }
+
   const escaped = str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return new RegExp(escaped);
 };
@@ -4536,16 +4790,20 @@ const toRegExp = str => {
 
 const convertTypeIntoString = value => {
   let output;
+
   switch (value) {
     case undefined:
       output = 'undefined';
       break;
+
     case null:
       output = 'null';
       break;
+
     default:
       output = value.toString();
   }
+
   return output;
 };
 /**
@@ -4560,6 +4818,7 @@ const convertTypeIntoString = value => {
 const convertTypeFromString = value => {
   const numValue = Number(value);
   let output;
+
   if (!Number.isNaN(numValue)) {
     output = numValue;
   } else {
@@ -4567,21 +4826,27 @@ const convertTypeFromString = value => {
       case 'undefined':
         output = undefined;
         break;
+
       case 'null':
         output = null;
         break;
+
       case 'true':
         output = true;
         break;
+
       case 'false':
         output = false;
         break;
+
       default:
         output = value;
     }
   }
+
   return output;
 };
+
 const SAFARI_USER_AGENT_REGEXP = /\sVersion\/(\d{2}\.\d)(.+\s|\s)(Safari)\//;
 const isSafariBrowser = SAFARI_USER_AGENT_REGEXP.test(navigator.userAgent);
 /**
@@ -4597,6 +4862,7 @@ const isUserAgentSupported = userAgent => {
   if (userAgent.includes('MSIE') || userAgent.includes('Trident/')) {
     return false;
   }
+
   return true;
 };
 /**
@@ -4657,16 +4923,19 @@ const removeContentQuotes = str => {
  * @returns String with unified quotes for background url value.
  */
 
+
 const addUrlPropertyQuotes = str => {
   if (!str.includes('url("')) {
     const re = /url\((.*?)\)/g;
     return str.replace(re, 'url("$1")');
   }
+
   return str;
 };
 /**
  * Adds quotes to url arg for consistent property value matching.
  */
+
 
 const addUrlQuotesTo = {
   regexpArg: str => {
@@ -4702,8 +4971,10 @@ const escapeRegExp = str => {
  * @returns Arg of :matches-css() converted to regular expression.
  */
 
+
 const convertStyleMatchValueToRegexp = rawValue => {
   let value;
+
   if (rawValue.startsWith(SLASH) && rawValue.endsWith(SLASH)) {
     // For regex patterns double quotes `"` and backslashes `\` should be escaped
     value = addUrlQuotesTo.regexpArg(rawValue);
@@ -4717,6 +4988,7 @@ const convertStyleMatchValueToRegexp = rawValue => {
 
     value = replaceAll(value, ASTERISK, REGEXP_ANY_SYMBOL);
   }
+
   return new RegExp(value, 'i');
 };
 /**
@@ -4728,8 +5000,10 @@ const convertStyleMatchValueToRegexp = rawValue => {
  * @returns Normalized values for some CSS properties.
  */
 
+
 const normalizePropertyValue = (propertyName, propertyValue) => {
   let normalized = '';
+
   switch (propertyName) {
     case CSS_PROPERTY.BACKGROUND:
     case CSS_PROPERTY.BACKGROUND_IMAGE:
@@ -4737,16 +5011,20 @@ const normalizePropertyValue = (propertyName, propertyValue) => {
       // so we add them for consistent matching
       normalized = addUrlPropertyQuotes(propertyValue);
       break;
+
     case CSS_PROPERTY.CONTENT:
       normalized = removeContentQuotes(propertyValue);
       break;
+
     case CSS_PROPERTY.OPACITY:
       // https://bugs.webkit.org/show_bug.cgi?id=93445
       normalized = isSafariBrowser ? (Math.round(parseFloat(propertyValue) * 100) / 100).toString() : propertyValue;
       break;
+
     default:
       normalized = propertyValue;
   }
+
   return normalized;
 };
 /**
@@ -4759,6 +5037,7 @@ const normalizePropertyValue = (propertyName, propertyValue) => {
  *
  * @returns String containing the value of a specified CSS property.
  */
+
 
 const getComputedStylePropertyValue = (domElement, propertyName, regularPseudoElement) => {
   const style = window.getComputedStyle(domElement, regularPseudoElement);
@@ -4781,12 +5060,14 @@ const getPseudoArgData = (pseudoArg, separator) => {
   const index = pseudoArg.indexOf(separator);
   let name;
   let value;
+
   if (index > -1) {
     name = pseudoArg.substring(0, index).trim();
     value = pseudoArg.substring(index + 1).trim();
   } else {
     name = pseudoArg;
   }
+
   return {
     name,
     value
@@ -4817,9 +5098,11 @@ const parseStyleMatchArg = (pseudoName, rawArg) => {
     regularPseudoElement = null;
     styleMatchArg = rawArg;
   }
+
   if (!styleMatchArg) {
     throw new Error(`Required style property argument part is missing in :${pseudoName}() arg: '${rawArg}'`);
   } // if regularPseudoElement is not `null`
+
 
   if (regularPseudoElement) {
     // pseudo-element should have two colon marks for Window.getComputedStyle() due to the syntax:
@@ -4827,6 +5110,7 @@ const parseStyleMatchArg = (pseudoName, rawArg) => {
     // ':matches-css(before, content: ads)' ->> '::before'
     regularPseudoElement = `${COLON}${COLON}${regularPseudoElement}`;
   }
+
   return {
     regularPseudoElement,
     styleMatchArg
@@ -4840,6 +5124,7 @@ const parseStyleMatchArg = (pseudoName, rawArg) => {
  @returns True if DOM element is matched.
  * @throws An error on invalid pseudo-class arg.
  */
+
 
 const isStyleMatched = argsData => {
   const {
@@ -4855,16 +5140,20 @@ const isStyleMatched = argsData => {
     name: matchName,
     value: matchValue
   } = getPseudoArgData(styleMatchArg, COLON);
+
   if (!matchName || !matchValue) {
     throw new Error(`Required property name or value is missing in :${pseudoName}() arg: '${styleMatchArg}'`);
   }
+
   let valueRegexp;
+
   try {
     valueRegexp = convertStyleMatchValueToRegexp(matchValue);
   } catch (e) {
     logger.error(getErrorMessage(e));
     throw new Error(`Invalid argument of :${pseudoName}() pseudo-class: '${styleMatchArg}'`);
   }
+
   const value = getComputedStylePropertyValue(domElement, matchName, regularPseudoElement);
   return valueRegexp && valueRegexp.test(value);
 };
@@ -4880,9 +5169,11 @@ const validateStrMatcherArg = arg => {
   if (arg.includes(SLASH)) {
     return false;
   }
+
   if (!/^[\w-]+$/.test(arg)) {
     return false;
   }
+
   return true;
 };
 /**
@@ -4895,6 +5186,7 @@ const validateStrMatcherArg = arg => {
  * @throws An error on invalid `rawArg`.
  */
 
+
 const getValidMatcherArg = function (rawArg) {
   let isWildcardAllowed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   // if rawArg is missing for pseudo-class
@@ -4902,13 +5194,16 @@ const getValidMatcherArg = function (rawArg) {
   // error will be thrown before getValidMatcherArg() is called:
   // name or arg is missing in AbsolutePseudoClass
   let arg;
+
   if (rawArg.length > 1 && rawArg.startsWith(DOUBLE_QUOTE) && rawArg.endsWith(DOUBLE_QUOTE)) {
     rawArg = rawArg.slice(1, -1);
   }
+
   if (rawArg === '') {
     // e.g. :matches-property("")
     throw new Error('Argument should be specified. Empty arg is invalid.');
   }
+
   if (rawArg.startsWith(SLASH) && rawArg.endsWith(SLASH)) {
     // e.g. :matches-property("//")
     if (rawArg.length > 2) {
@@ -4921,14 +5216,17 @@ const getValidMatcherArg = function (rawArg) {
       // e.g. :matches-attr(*)
       throw new Error(`Argument should be more specific than ${rawArg}`);
     }
+
     arg = replaceAll(rawArg, ASTERISK, REGEXP_ANY_SYMBOL);
     arg = new RegExp(arg);
   } else {
     if (!validateStrMatcherArg(rawArg)) {
       throw new Error(`Invalid argument: '${rawArg}'`);
     }
+
     arg = rawArg;
   }
+
   return arg;
 };
 
@@ -4946,9 +5244,11 @@ const getRawMatchingData = (pseudoName, pseudoArg) => {
     name: rawName,
     value: rawValue
   } = getPseudoArgData(pseudoArg, EQUAL_SIGN);
+
   if (!rawName) {
     throw new Error(`Required attribute name is missing in :${pseudoName} arg: ${pseudoArg}`);
   }
+
   return {
     rawName,
     rawValue
@@ -4974,11 +5274,13 @@ const isAttributeMatched = argsData => {
   if (elementAttributes.length === 0) {
     return false;
   }
+
   const {
     rawName: rawAttrName,
     rawValue: rawAttrValue
   } = getRawMatchingData(pseudoName, pseudoArg);
   let attrNameMatch;
+
   try {
     attrNameMatch = getValidMatcherArg(rawAttrName);
   } catch (e) {
@@ -4986,20 +5288,26 @@ const isAttributeMatched = argsData => {
     logger.error(errorMessage);
     throw new SyntaxError(errorMessage);
   }
+
   let isMatched = false;
   let i = 0;
+
   while (i < elementAttributes.length && !isMatched) {
     const attr = elementAttributes[i];
+
     if (!attr) {
       break;
     }
+
     const isNameMatched = attrNameMatch instanceof RegExp ? attrNameMatch.test(attr.name) : attrNameMatch === attr.name;
+
     if (!rawAttrValue) {
       // for rules with no attribute value specified
       // e.g. :matches-attr("/regex/") or :matches-attr("attr-name")
       isMatched = isNameMatched;
     } else {
       let attrValueMatch;
+
       try {
         attrValueMatch = getValidMatcherArg(rawAttrValue);
       } catch (e) {
@@ -5007,11 +5315,14 @@ const isAttributeMatched = argsData => {
         logger.error(errorMessage);
         throw new SyntaxError(errorMessage);
       }
+
       const isValueMatched = attrValueMatch instanceof RegExp ? attrValueMatch.test(attr.value) : attrValueMatch === attr.value;
       isMatched = isNameMatched && isValueMatched;
     }
+
     i += 1;
   }
+
   return isMatched;
 };
 /**
@@ -5027,13 +5338,16 @@ const parseRawPropChain = input => {
   if (input.length > 1 && input.startsWith(DOUBLE_QUOTE) && input.endsWith(DOUBLE_QUOTE)) {
     input = input.slice(1, -1);
   }
+
   const chainChunks = input.split(DOT);
   const chainPatterns = [];
   let patternBuffer = '';
   let isRegexpPattern = false;
   let i = 0;
+
   while (i < chainChunks.length) {
     const chunk = getItemByIndex(chainChunks, i, `Invalid pseudo-class arg: '${input}'`);
+
     if (chunk.startsWith(SLASH) && chunk.endsWith(SLASH) && chunk.length > 2) {
       // regexp pattern with no dot in it, e.g. /propName/
       chainPatterns.push(chunk);
@@ -5058,23 +5372,29 @@ const parseRawPropChain = input => {
         chainPatterns.push(chunk);
       }
     }
+
     i += 1;
   }
+
   if (patternBuffer.length > 0) {
     throw new Error(`Invalid regexp property pattern '${input}'`);
   }
+
   const chainMatchPatterns = chainPatterns.map(pattern => {
     if (pattern.length === 0) {
       // e.g. '.prop.id' or 'nested..test'
       throw new Error(`Empty pattern '${pattern}' is invalid in chain '${input}'`);
     }
+
     let validPattern;
+
     try {
       validPattern = getValidMatcherArg(pattern, true);
     } catch (e) {
       logger.error(getErrorMessage(e));
       throw new Error(`Invalid property pattern '${pattern}' in property chain '${input}'`);
     }
+
     return validPattern;
   });
   return chainMatchPatterns;
@@ -5092,8 +5412,10 @@ const parseRawPropChain = input => {
 const filterRootsByRegexpChain = function (base, chain) {
   let output = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
   const tempProp = getFirst(chain);
+
   if (chain.length === 1) {
     let key;
+
     for (key in base) {
       if (tempProp instanceof RegExp) {
         if (tempProp.test(key)) {
@@ -5111,33 +5433,42 @@ const filterRootsByRegexpChain = function (base, chain) {
         });
       }
     }
+
     return output;
   } // if there is a regexp prop in input chain
   // e.g. 'unit./^ad.+/.src' for 'unit.ad-1gf2.src unit.ad-fgd34.src'),
   // every base keys should be tested by regexp and it can be more that one results
 
+
   if (tempProp instanceof RegExp) {
     const nextProp = chain.slice(1);
     const baseKeys = [];
+
     for (const key in base) {
       if (tempProp.test(key)) {
         baseKeys.push(key);
       }
     }
+
     baseKeys.forEach(key => {
       var _Object$getOwnPropert;
+
       const item = (_Object$getOwnPropert = Object.getOwnPropertyDescriptor(base, key)) === null || _Object$getOwnPropert === void 0 ? void 0 : _Object$getOwnPropert.value;
       filterRootsByRegexpChain(item, nextProp, output);
     });
   }
+
   if (base && typeof tempProp === 'string') {
     var _Object$getOwnPropert2;
+
     const nextBase = (_Object$getOwnPropert2 = Object.getOwnPropertyDescriptor(base, tempProp)) === null || _Object$getOwnPropert2 === void 0 ? void 0 : _Object$getOwnPropert2.value;
     chain = chain.slice(1);
+
     if (nextBase !== undefined) {
       filterRootsByRegexpChain(nextBase, chain, output);
     }
   }
+
   return output;
 };
 /**
@@ -5148,6 +5479,7 @@ const filterRootsByRegexpChain = function (base, chain) {
  @returns True if DOM element is matched.
  * @throws An error on invalid prop in chain.
  */
+
 
 const isPropertyMatched = argsData => {
   const {
@@ -5164,7 +5496,9 @@ const isPropertyMatched = argsData => {
   if (rawPropertyName.includes('\\/') || rawPropertyName.includes('\\.')) {
     throw new Error(`Invalid :${pseudoName} name pattern: ${rawPropertyName}`);
   }
+
   let propChainMatches;
+
   try {
     propChainMatches = parseRawPropChain(rawPropertyName);
   } catch (e) {
@@ -5172,13 +5506,18 @@ const isPropertyMatched = argsData => {
     logger.error(errorMessage);
     throw new SyntaxError(errorMessage);
   }
+
   const ownerObjArr = filterRootsByRegexpChain(domElement, propChainMatches);
+
   if (ownerObjArr.length === 0) {
     return false;
   }
+
   let isMatched = true;
+
   if (rawPropertyValue) {
     let propValueMatch;
+
     try {
       propValueMatch = getValidMatcherArg(rawPropertyValue);
     } catch (e) {
@@ -5186,10 +5525,13 @@ const isPropertyMatched = argsData => {
       logger.error(errorMessage);
       throw new SyntaxError(errorMessage);
     }
+
     if (propValueMatch) {
       for (let i = 0; i < ownerObjArr.length; i += 1) {
         var _ownerObjArr$i;
+
         const realValue = (_ownerObjArr$i = ownerObjArr[i]) === null || _ownerObjArr$i === void 0 ? void 0 : _ownerObjArr$i.value;
+
         if (propValueMatch instanceof RegExp) {
           isMatched = propValueMatch.test(convertTypeIntoString(realValue));
         } else {
@@ -5198,14 +5540,17 @@ const isPropertyMatched = argsData => {
             isMatched = propValueMatch === realValue;
             break;
           }
+
           isMatched = convertTypeFromString(propValueMatch) === realValue;
         }
+
         if (isMatched) {
           break;
         }
       }
     }
   }
+
   return isMatched;
 };
 /**
@@ -5226,23 +5571,27 @@ const isTextMatched = argsData => {
   const textContent = getNodeTextContent(domElement);
   let isTextContentMatched;
   let pseudoArgToMatch = pseudoArg;
+
   if (pseudoArgToMatch.startsWith(SLASH) && REGEXP_WITH_FLAGS_REGEXP.test(pseudoArgToMatch)) {
     // regexp arg
     const flagsIndex = pseudoArgToMatch.lastIndexOf('/');
     const flagsStr = pseudoArgToMatch.substring(flagsIndex + 1);
     pseudoArgToMatch = pseudoArgToMatch.substring(0, flagsIndex + 1).slice(1, -1).replace(/\\([\\"])/g, '$1');
     let regex;
+
     try {
       regex = new RegExp(pseudoArgToMatch, flagsStr);
     } catch (e) {
       throw new Error(`Invalid argument of :${pseudoName}() pseudo-class: ${pseudoArg}`);
     }
+
     isTextContentMatched = regex.test(textContent);
   } else {
     // none-regexp arg
     pseudoArgToMatch = pseudoArgToMatch.replace(/\\([\\()[\]"])/g, '$1');
     isTextContentMatched = textContent.includes(pseudoArgToMatch);
   }
+
   return isTextContentMatched;
 };
 
@@ -5257,9 +5606,11 @@ const isTextMatched = argsData => {
  */
 const getValidNumberAncestorArg = (rawArg, pseudoName) => {
   const deep = Number(rawArg);
+
   if (Number.isNaN(deep) || deep < 1 || deep >= 256) {
     throw new Error(`Invalid argument of :${pseudoName} pseudo-class: '${rawArg}'`);
   }
+
   return deep;
 };
 /**
@@ -5276,14 +5627,18 @@ const getValidNumberAncestorArg = (rawArg, pseudoName) => {
 const getNthAncestor = (domElement, nth, pseudoName) => {
   let ancestor = null;
   let i = 0;
+
   while (i < nth) {
     ancestor = domElement.parentElement;
+
     if (!ancestor) {
       throw new Error(`Out of DOM: Argument of :${pseudoName}() pseudo-class is too big — '${nth}'.`);
     }
+
     domElement = ancestor;
     i += 1;
   }
+
   return ancestor;
 };
 /**
@@ -5296,12 +5651,14 @@ const getNthAncestor = (domElement, nth, pseudoName) => {
 
 const validateStandardSelector = selector => {
   let isValid;
+
   try {
     document.querySelectorAll(selector);
     isValid = true;
   } catch (e) {
     isValid = false;
   }
+
   return isValid;
 };
 
@@ -5318,12 +5675,14 @@ const validateStandardSelector = selector => {
  */
 const matcherWrapper = (callback, argsData, errorMessage) => {
   let isMatched;
+
   try {
     isMatched = callback(argsData);
   } catch (e) {
     logger.error(getErrorMessage(e));
     throw new Error(errorMessage);
   }
+
   return isMatched;
 };
 /**
@@ -5335,6 +5694,7 @@ const matcherWrapper = (callback, argsData, errorMessage) => {
  *
  * @returns Generated error message string.
  */
+
 
 const getAbsolutePseudoError = (propDesc, pseudoName, pseudoArg) => {
   // eslint-disable-next-line max-len
@@ -5351,10 +5711,12 @@ const getAbsolutePseudoError = (propDesc, pseudoName, pseudoArg) => {
  * @throws An error on unknown absolute pseudo-class.
  */
 
+
 const isMatchedByAbsolutePseudo = (domElement, pseudoName, pseudoArg) => {
   let argsData;
   let errorMessage;
   let callback;
+
   switch (pseudoName) {
     case CONTAINS_PSEUDO:
     case HAS_TEXT_PSEUDO:
@@ -5367,6 +5729,7 @@ const isMatchedByAbsolutePseudo = (domElement, pseudoName, pseudoArg) => {
       };
       errorMessage = getAbsolutePseudoError('text content', pseudoName, pseudoArg);
       break;
+
     case MATCHES_CSS_PSEUDO:
     case MATCHES_CSS_AFTER_PSEUDO:
     case MATCHES_CSS_BEFORE_PSEUDO:
@@ -5378,6 +5741,7 @@ const isMatchedByAbsolutePseudo = (domElement, pseudoName, pseudoArg) => {
       };
       errorMessage = getAbsolutePseudoError('style', pseudoName, pseudoArg);
       break;
+
     case MATCHES_ATTR_PSEUDO_CLASS_MARKER:
       callback = isAttributeMatched;
       argsData = {
@@ -5387,6 +5751,7 @@ const isMatchedByAbsolutePseudo = (domElement, pseudoName, pseudoArg) => {
       };
       errorMessage = getAbsolutePseudoError('attributes', pseudoName, pseudoArg);
       break;
+
     case MATCHES_PROPERTY_PSEUDO_CLASS_MARKER:
       callback = isPropertyMatched;
       argsData = {
@@ -5396,9 +5761,11 @@ const isMatchedByAbsolutePseudo = (domElement, pseudoName, pseudoArg) => {
       };
       errorMessage = getAbsolutePseudoError('properties', pseudoName, pseudoArg);
       break;
+
     default:
       throw new Error(`Unknown absolute pseudo-class :${pseudoName}()`);
   }
+
   return matcherWrapper(callback, argsData, errorMessage);
 };
 const findByAbsolutePseudoPseudo = {
@@ -5415,15 +5782,18 @@ const findByAbsolutePseudoPseudo = {
     const deep = getValidNumberAncestorArg(rawPseudoArg, pseudoName);
     const ancestors = domElements.map(domElement => {
       let ancestor = null;
+
       try {
         ancestor = getNthAncestor(domElement, deep, pseudoName);
       } catch (e) {
         logger.error(getErrorMessage(e));
       }
+
       return ancestor;
     }).filter(isHtmlElement);
     return ancestors;
   },
+
   /**
    * Returns list of elements by xpath expression, evaluated on every dom node from domElements list.
    *
@@ -5436,23 +5806,29 @@ const findByAbsolutePseudoPseudo = {
     const foundElements = domElements.map(domElement => {
       const result = [];
       let xpathResult;
+
       try {
         xpathResult = document.evaluate(rawPseudoArg, domElement, null, window.XPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
       } catch (e) {
         logger.error(getErrorMessage(e));
         throw new Error(`Invalid argument of :xpath() pseudo-class: '${rawPseudoArg}'`);
       }
+
       let node = xpathResult.iterateNext();
+
       while (node) {
         if (isHtmlElement(node)) {
           result.push(node);
         }
+
         node = xpathResult.iterateNext();
       }
+
       return result;
     });
     return flatten(foundElements);
   },
+
   /**
    * Returns list of closest ancestors relative to every dom node from domElements list.
    *
@@ -5466,13 +5842,16 @@ const findByAbsolutePseudoPseudo = {
     if (!validateStandardSelector(rawPseudoArg)) {
       throw new Error(`Invalid argument of :upward pseudo-class: '${rawPseudoArg}'`);
     }
+
     const closestAncestors = domElements.map(domElement => {
       // closest to parent element should be found
       // otherwise `.base:upward(.base)` will return itself too, not only ancestor
       const parent = domElement.parentElement;
+
       if (!parent) {
         return null;
       }
+
       return parent.closest(rawPseudoArg);
     }).filter(isHtmlElement);
     return closestAncestors;
@@ -5527,6 +5906,7 @@ const getFirstInnerRegularChild = (selectorNode, pseudoName) => {
  * @returns True if **all selectors** from argsData.relativeSelectorList is **matched** for argsData.element.
  */
 
+
 const hasRelativesBySelectorList = argsData => {
   const {
     element,
@@ -5540,6 +5920,7 @@ const hasRelativesBySelectorList = argsData => {
     let specifiedSelector = '';
     let rootElement = null;
     const regularSelector = getNodeValue(relativeRegularSelector);
+
     if (regularSelector.startsWith(NEXT_SIBLING_COMBINATOR) || regularSelector.startsWith(SUBSEQUENT_SIBLING_COMBINATOR)) {
       /**
        * For matching the element by "element:has(+ next-sibling)" and "element:has(~ sibling)"
@@ -5572,10 +5953,13 @@ const hasRelativesBySelectorList = argsData => {
       specifiedSelector = `${scopeAnyChildren}${regularSelector}`;
       rootElement = element;
     }
+
     if (!rootElement) {
       throw new Error(`Selection by :${pseudoName}() pseudo-class is not possible`);
     }
+
     let relativeElements;
+
     try {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       relativeElements = getElementsForSelectorNode(selectorNode, rootElement, specifiedSelector);
@@ -5584,6 +5968,7 @@ const hasRelativesBySelectorList = argsData => {
 
       throw new Error(`Invalid selector for :${pseudoName}() pseudo-class: '${regularSelector}'`);
     }
+
     return relativeElements.length > 0;
   });
 };
@@ -5595,6 +5980,7 @@ const hasRelativesBySelectorList = argsData => {
  *
  * @returns True if **any selector** from argsData.relativeSelectorList is **matched** for argsData.element.
  */
+
 
 const isAnyElementBySelectorList = argsData => {
   const {
@@ -5620,6 +6006,7 @@ const isAnyElementBySelectorList = argsData => {
 
     const specifiedSelector = `${scopeDirectChildren}${getNodeValue(relativeRegularSelector)}`;
     let anyElements;
+
     try {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       anyElements = getElementsForSelectorNode(selectorNode, rootElement, specifiedSelector);
@@ -5629,6 +6016,7 @@ const isAnyElementBySelectorList = argsData => {
     } // TODO: figure out how to handle complex selectors with extended pseudo-classes
     // (check readme - extended-css-is-limitations)
     // because `element` and `anyElements` may be from different DOM levels
+
 
     return anyElements.includes(element);
   });
@@ -5641,6 +6029,7 @@ const isAnyElementBySelectorList = argsData => {
  *
  * @returns True if **any selector** from argsData.relativeSelectorList is **not matched** for argsData.element.
  */
+
 
 const notElementBySelectorList = argsData => {
   const {
@@ -5666,6 +6055,7 @@ const notElementBySelectorList = argsData => {
 
     const specifiedSelector = `${scopeDirectChildren}${getNodeValue(relativeRegularSelector)}`;
     let anyElements;
+
     try {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       anyElements = getElementsForSelectorNode(selectorNode, rootElement, specifiedSelector);
@@ -5677,6 +6067,7 @@ const notElementBySelectorList = argsData => {
     } // TODO: figure out how to handle up-looking pseudo-classes inside :not()
     // (check readme - extended-css-not-limitations)
     // because `element` and `anyElements` may be from different DOM levels
+
 
     return !anyElements.includes(element);
   });
@@ -5692,14 +6083,17 @@ const notElementBySelectorList = argsData => {
  * @throws An error if RegularSelector node value is an invalid selector.
  */
 
+
 const getByRegularSelector = (regularSelectorNode, root, specifiedSelector) => {
   const selectorText = specifiedSelector ? specifiedSelector : getNodeValue(regularSelectorNode);
   let selectedElements = [];
+
   try {
     selectedElements = Array.from(root.querySelectorAll(selectorText));
   } catch (e) {
     throw new Error(`Error: unable to select by '${selectorText}' — ${getErrorMessage(e)}`);
   }
+
   return selectedElements;
 };
 /**
@@ -5717,9 +6111,11 @@ const getByExtendedSelector = (domElements, extendedSelectorNode) => {
   let foundElements = [];
   const extendedPseudoClassNode = getPseudoClassNode(extendedSelectorNode);
   const pseudoName = getNodeName(extendedPseudoClassNode);
+
   if (isAbsolutePseudoClass(pseudoName)) {
     // absolute extended pseudo-classes should have an argument
     const absolutePseudoArg = getNodeValue(extendedPseudoClassNode, `Missing arg for :${pseudoName}() pseudo-class`);
+
     if (pseudoName === NTH_ANCESTOR_PSEUDO_CLASS_MARKER) {
       // :nth-ancestor()
       foundElements = findByAbsolutePseudoPseudo.nthAncestor(domElements, absolutePseudoArg, pseudoName);
@@ -5730,6 +6126,7 @@ const getByExtendedSelector = (domElements, extendedSelectorNode) => {
       } catch (e) {
         throw new Error(`Invalid argument of :${pseudoName}() pseudo-class: '${absolutePseudoArg}'`);
       }
+
       foundElements = findByAbsolutePseudoPseudo.xpath(domElements, absolutePseudoArg);
     } else if (pseudoName === UPWARD_PSEUDO_CLASS_MARKER) {
       // :upward()
@@ -5749,6 +6146,7 @@ const getByExtendedSelector = (domElements, extendedSelectorNode) => {
   } else if (isRelativePseudoClass(pseudoName)) {
     const relativeSelectorList = getRelativeSelectorListNode(extendedPseudoClassNode);
     let relativePredicate;
+
     switch (pseudoName) {
       case HAS_PSEUDO_CLASS_MARKER:
       case ABP_HAS_PSEUDO_CLASS_MARKER:
@@ -5757,29 +6155,37 @@ const getByExtendedSelector = (domElements, extendedSelectorNode) => {
           relativeSelectorList,
           pseudoName
         });
+
         break;
+
       case IS_PSEUDO_CLASS_MARKER:
         relativePredicate = element => isAnyElementBySelectorList({
           element,
           relativeSelectorList,
           pseudoName
         });
+
         break;
+
       case NOT_PSEUDO_CLASS_MARKER:
         relativePredicate = element => notElementBySelectorList({
           element,
           relativeSelectorList,
           pseudoName
         });
+
         break;
+
       default:
         throw new Error(`Unknown relative pseudo-class: '${pseudoName}'`);
     }
+
     foundElements = domElements.filter(relativePredicate);
   } else {
     // extra check is parser missed something
     throw new Error(`Unknown extended pseudo-class: '${pseudoName}'`);
   }
+
   return foundElements;
 };
 /**
@@ -5796,6 +6202,7 @@ const getByFollowingRegularSelector = (domElements, regularSelectorNode) => {
   // array of arrays because of Array.map() later
   let foundElements = [];
   const value = getNodeValue(regularSelectorNode);
+
   if (value.startsWith(CHILD_COMBINATOR)) {
     // e.g. div:has(> img) > .banner
     foundElements = domElements.map(root => {
@@ -5807,11 +6214,13 @@ const getByFollowingRegularSelector = (domElements, regularSelectorNode) => {
     // or   div:has(> img) ~ .banner
     foundElements = domElements.map(element => {
       const rootElement = element.parentElement;
+
       if (!rootElement) {
         // do not throw error if there in no parent for element
         // e.g. '*:contains(text)' selects `html` which has no parentElement
         return [];
       }
+
       const elementSelectorText = getElementSelectorDesc(element);
       const specifiedSelector = `${scopeDirectChildren}${elementSelectorText}${value}`;
       const selected = getByRegularSelector(regularSelectorNode, rootElement, specifiedSelector);
@@ -5826,6 +6235,7 @@ const getByFollowingRegularSelector = (domElements, regularSelectorNode) => {
     });
   } // foundElements should be flattened
   // as getByRegularSelector() returns elements array, and Array.map() collects them to array
+
 
   return flatten(foundElements);
 };
@@ -5852,8 +6262,10 @@ const getByFollowingRegularSelector = (domElements, regularSelectorNode) => {
 const getElementsForSelectorNode = (selectorNode, root, specifiedSelector) => {
   let selectedElements = [];
   let i = 0;
+
   while (i < selectorNode.children.length) {
     const selectorNodeChild = getItemByIndex(selectorNode.children, i, 'selectorNodeChild should be specified');
+
     if (i === 0) {
       // any selector always starts with regular selector
       selectedElements = getByRegularSelector(selectorNodeChild, root, specifiedSelector);
@@ -5863,8 +6275,10 @@ const getElementsForSelectorNode = (selectorNode, root, specifiedSelector) => {
     } else if (isRegularSelectorNode(selectorNodeChild)) {
       selectedElements = getByFollowingRegularSelector(selectedElements, selectorNodeChild);
     }
+
     i += 1;
   }
+
   return selectedElements;
 };
 
@@ -5912,6 +6326,7 @@ class ExtCssDocument {
    * @param ast Selector ast.
    */
 
+
   saveAstToCache(selector, ast) {
     this.astCache.set(selector, ast);
   }
@@ -5922,6 +6337,7 @@ class ExtCssDocument {
    *
    * @returns Previously parsed ast found in cache, or null if not found.
    */
+
 
   getAstFromCache(selector) {
     const cachedAst = this.astCache.get(selector) || null;
@@ -5937,11 +6353,14 @@ class ExtCssDocument {
    * @returns Ast for `selector`.
    */
 
+
   getSelectorAst(selector) {
     let ast = this.getAstFromCache(selector);
+
     if (!ast) {
       ast = parse(selector);
     }
+
     this.saveAstToCache(selector, ast);
     return ast;
   }
@@ -5953,10 +6372,12 @@ class ExtCssDocument {
    * @returns Array of DOM elements.
    */
 
+
   querySelectorAll(selector) {
     const ast = this.getSelectorAst(selector);
     return selectElementsByAst(ast);
   }
+
 }
 const extCssDocument = new ExtCssDocument();
 
@@ -5979,6 +6400,7 @@ const getObjectFromEntries = entries => {
   });
   return object;
 };
+
 const DEBUG_PSEUDO_PROPERTY_KEY = 'debug';
 /**
  * Checks the presence of :remove() pseudo-class and validates it while parsing the selector part of css rule.
@@ -6003,6 +6425,7 @@ const parseRemoveSelector = rawSelector => {
   let selector;
   let shouldRemove = false;
   const firstIndex = rawSelector.indexOf(VALID_REMOVE_MARKER);
+
   if (firstIndex === 0) {
     // e.g. ':remove()'
     throw new Error(`${REMOVE_ERROR_PREFIX.NO_TARGET_SELECTOR}: '${rawSelector}'`);
@@ -6028,6 +6451,7 @@ const parseRemoveSelector = rawSelector => {
     // there is no :remove() pseudo-class in rule
     selector = rawSelector;
   }
+
   const stylesOfSelector = shouldRemove ? [{
     property: REMOVE_PSEUDO_MARKER,
     value: PSEUDO_PROPERTY_POSITIVE_VALUE
@@ -6049,19 +6473,24 @@ const parseRemoveSelector = rawSelector => {
 
 const parseSelectorRulePart = (selectorBuffer, extCssDoc) => {
   let selector = selectorBuffer.trim();
+
   if (selector.startsWith(AT_RULE_MARKER)) {
     throw new Error(`${NO_AT_RULE_ERROR_PREFIX}: '${selector}'.`);
   }
+
   let removeSelectorData;
+
   try {
     removeSelectorData = parseRemoveSelector(selector);
   } catch (e) {
     logger.error(getErrorMessage(e));
     throw new Error(`${REMOVE_ERROR_PREFIX.INVALID_REMOVE}: '${selector}'`);
   }
+
   let stylesOfSelector = [];
   let success = false;
   let ast;
+
   try {
     selector = removeSelectorData.selector;
     stylesOfSelector = removeSelectorData.stylesOfSelector; // validate found selector by parsing it to ast
@@ -6072,6 +6501,7 @@ const parseSelectorRulePart = (selectorBuffer, extCssDoc) => {
   } catch (e) {
     success = false;
   }
+
   return {
     success,
     selector,
@@ -6105,13 +6535,17 @@ const saveToRawResults = (rawResults, rawRuleData) => {
     ast,
     rawStyles
   } = rawRuleData;
+
   if (!rawStyles) {
     throw new Error(`No style declaration for selector: '${selector}'`);
   }
+
   if (!ast) {
     throw new Error(`No ast parsed for selector: '${selector}'`);
   }
+
   const storedRuleData = rawResults.get(selector);
+
   if (!storedRuleData) {
     rawResults.set(selector, {
       ast,
@@ -6144,6 +6578,7 @@ const isRemoveSetInStyles = styles => {
  * or `undefined` if the property is not found.
  */
 
+
 const getDebugStyleValue = styles => {
   const debugStyle = styles.find(s => {
     return s.property === DEBUG_PSEUDO_PROPERTY_KEY;
@@ -6160,18 +6595,22 @@ const getDebugStyleValue = styles => {
  * @throws An error if rawRuleData.ast or rawRuleData.rawStyles not defined.
  */
 
+
 const prepareRuleData = rawRuleData => {
   const {
     selector,
     ast,
     rawStyles
   } = rawRuleData;
+
   if (!ast) {
     throw new Error(`AST should be parsed for selector: '${selector}'`);
   }
+
   if (!rawStyles) {
     throw new Error(`Styles should be parsed for selector: '${selector}'`);
   }
+
   const ruleData = {
     selector,
     ast
@@ -6179,6 +6618,7 @@ const prepareRuleData = rawRuleData => {
   const debugValue = getDebugStyleValue(rawStyles);
   const shouldRemove = isRemoveSetInStyles(rawStyles);
   let styles = rawStyles;
+
   if (debugValue) {
     // get rid of 'debug' from styles
     styles = rawStyles.filter(s => s.property !== DEBUG_PSEUDO_PROPERTY_KEY); // and set it as separate property only if its value is valid
@@ -6188,6 +6628,7 @@ const prepareRuleData = rawRuleData => {
       ruleData.debug = debugValue;
     }
   }
+
   if (shouldRemove) {
     // no other styles are needed to apply if 'remove' is set
     ruleData.style = {
@@ -6200,6 +6641,7 @@ const prepareRuleData = rawRuleData => {
      */
 
     const contentStyle = styles.find(s => s.property === CONTENT_CSS_PROPERTY);
+
     if (contentStyle) {
       ruleData.style[CONTENT_CSS_PROPERTY] = contentStyle.value;
     }
@@ -6218,6 +6660,7 @@ const prepareRuleData = rawRuleData => {
       ruleData.style = preparedStyleData;
     }
   }
+
   return ruleData;
 };
 /**
@@ -6289,6 +6732,7 @@ const isValueQuotesOpen = context => {
  * @param context Style block parser context.
  */
 
+
 const collectStyle = context => {
   context.styles.push({
     property: context.bufferProperty.trim(),
@@ -6308,18 +6752,22 @@ const collectStyle = context => {
  * @throws An error on invalid token.
  */
 
+
 const processPropertyToken = (context, styleBlock, token) => {
   const {
     value: tokenValue
   } = token;
+
   switch (token.type) {
     case TOKEN_TYPE.WORD:
       if (context.bufferProperty.length > 0) {
         // e.g. 'padding top: 0;' - current tokenValue is 'top' which is not valid
         throw new Error(`Invalid style property in style block: '${styleBlock}'`);
       }
+
       context.bufferProperty += tokenValue;
       break;
+
     case TOKEN_TYPE.MARK:
       // only colon and whitespaces are allowed while style property parsing
       if (tokenValue === COLON) {
@@ -6328,15 +6776,18 @@ const processPropertyToken = (context, styleBlock, token) => {
           throw new Error(`Missing style property before ':' in style block: '${styleBlock}'`);
         } // the property successfully collected
 
+
         context.bufferProperty = context.bufferProperty.trim(); // prepare for value collecting
 
         context.processing = DECLARATION_PART.VALUE; // the property buffer shall be reset after the value is successfully collected
-      } else if (WHITE_SPACE_CHARACTERS.includes(tokenValue)) ;else {
+      } else if (WHITE_SPACE_CHARACTERS.includes(tokenValue)) ; else {
         // if after the property there is anything other than ':' except whitespace, this is a parse error
         // https://www.w3.org/TR/css-syntax-3/#consume-declaration
         throw new Error(`Invalid style declaration in style block: '${styleBlock}'`);
       }
+
       break;
+
     default:
       throw new Error(`Unsupported style property character: '${tokenValue}' in style block: '${styleBlock}'`);
   }
@@ -6351,10 +6802,12 @@ const processPropertyToken = (context, styleBlock, token) => {
  * @throws An error on invalid token.
  */
 
+
 const processValueToken = (context, styleBlock, token) => {
   const {
     value: tokenValue
   } = token;
+
   if (token.type === TOKEN_TYPE.WORD) {
     // simply collect to buffer
     context.bufferValue += tokenValue;
@@ -6373,8 +6826,10 @@ const processValueToken = (context, styleBlock, token) => {
         // e.g. 'content: "test:123"'
         // parser is here      ↑
 
+
         context.bufferValue += tokenValue;
         break;
+
       case SEMICOLON:
         if (isValueQuotesOpen(context)) {
           // ';' inside quotes is part of style value
@@ -6387,7 +6842,9 @@ const processValueToken = (context, styleBlock, token) => {
 
           context.processing = DECLARATION_PART.PROPERTY;
         }
+
         break;
+
       case SINGLE_QUOTE:
       case DOUBLE_QUOTE:
         // if quotes are not open
@@ -6403,8 +6860,10 @@ const processValueToken = (context, styleBlock, token) => {
         // e.g. 'content: "test:123"'
         //      'content: "\""'
 
+
         context.bufferValue += tokenValue;
         break;
+
       case BACKSLASH:
         if (!isValueQuotesOpen(context)) {
           // eslint-disable-next-line max-len
@@ -6413,8 +6872,10 @@ const processValueToken = (context, styleBlock, token) => {
         // e.g. ' content: "\"" '
         // parser is here   ↑
 
+
         context.bufferValue += tokenValue;
         break;
+
       case SPACE:
       case TAB:
       case CARRIAGE_RETURN:
@@ -6430,7 +6891,9 @@ const processValueToken = (context, styleBlock, token) => {
         // e.g. 'width:  100% !important'
         // here        ↑
 
+
         break;
+
       default:
         throw new Error(`Unknown style declaration token: '${tokenValue}'`);
     }
@@ -6445,6 +6908,7 @@ const processValueToken = (context, styleBlock, token) => {
  * @throws An error on invalid style block.
  */
 
+
 const parseStyleBlock = rawStyleBlock => {
   const styleBlock = rawStyleBlock.trim();
   const tokens = tokenizeStyleBlock(styleBlock);
@@ -6457,11 +6921,14 @@ const parseStyleBlock = rawStyleBlock => {
     valueQuoteMark: null
   };
   let i = 0;
+
   while (i < tokens.length) {
     const token = tokens[i];
+
     if (!token) {
       break;
     }
+
     if (context.processing === DECLARATION_PART.PROPERTY) {
       processPropertyToken(context, styleBlock, token);
     } else if (context.processing === DECLARATION_PART.VALUE) {
@@ -6469,15 +6936,18 @@ const parseStyleBlock = rawStyleBlock => {
     } else {
       throw new Error('Style declaration parsing failed');
     }
+
     i += 1;
   } // unbalanced value quotes
   // e.g. 'content: "test} '
+
 
   if (isValueQuotesOpen(context)) {
     throw new Error(`Unbalanced style declaration quotes in style block: '${styleBlock}'`);
   } // collected property and value have not been saved to styles;
   // it is possible for style block with no semicolon at the end
   // e.g. such style block: '{ display: none }'
+
 
   if (context.bufferProperty.length > 0) {
     if (context.bufferValue.length === 0) {
@@ -6487,13 +6957,16 @@ const parseStyleBlock = rawStyleBlock => {
       // eslint-disable-next-line max-len
       throw new Error(`Missing style value for property '${context.bufferProperty}' in style block '${styleBlock}'`);
     }
+
     collectStyle(context);
   } // rule with empty style block
   // e.g. 'div { }'
 
+
   if (context.styles.length === 0) {
     throw new Error(STYLE_ERROR_PREFIX.NO_STYLE);
   }
+
   return context.styles;
 };
 
@@ -6507,11 +6980,13 @@ const parseStyleBlock = rawStyleBlock => {
 
 const getLeftCurlyBracketIndexes = cssRule => {
   const indexes = [];
+
   for (let i = 0; i < cssRule.length; i += 1) {
     if (cssRule[i] === BRACKET.CURLY.LEFT) {
       indexes.push(i);
     }
   }
+
   return indexes;
 }; // TODO: use `extCssDoc` for caching of style block parser results
 
@@ -6536,31 +7011,37 @@ const getLeftCurlyBracketIndexes = cssRule => {
  *   - invalid selector or style block.
  */
 
+
 const parseRule = (rawCssRule, extCssDoc) => {
   var _rawRuleData$selector;
+
   const cssRule = rawCssRule.trim();
+
   if (cssRule.includes(`${SLASH}${ASTERISK}`) && cssRule.includes(`${ASTERISK}${SLASH}`)) {
     throw new Error(STYLE_ERROR_PREFIX.NO_COMMENT);
   }
+
   const leftCurlyBracketIndexes = getLeftCurlyBracketIndexes(cssRule); // rule with style block but no selector
   // e.g. '{ display: none; }'
 
   if (getFirst(leftCurlyBracketIndexes) === 0) {
     throw new Error(NO_SELECTOR_ERROR_PREFIX);
   }
+
   let selectorData; // if rule has `{` but there is no `}`
 
   if (leftCurlyBracketIndexes.length > 0 && !cssRule.includes(BRACKET.CURLY.RIGHT)) {
     throw new Error(`${STYLE_ERROR_PREFIX.NO_STYLE} OR ${STYLE_ERROR_PREFIX.UNCLOSED_STYLE}`);
   }
-  if (
-  // if rule has no `{`
+
+  if ( // if rule has no `{`
   leftCurlyBracketIndexes.length === 0 // or `}`
   || !cssRule.includes(BRACKET.CURLY.RIGHT)) {
     try {
       // the whole css rule considered as "selector part"
       // which may contain :remove() pseudo-class
       selectorData = parseSelectorRulePart(cssRule, extCssDoc);
+
       if (selectorData.success) {
         var _selectorData$stylesO;
 
@@ -6573,6 +7054,7 @@ const parseRule = (rawCssRule, extCssDoc) => {
         if (((_selectorData$stylesO = selectorData.stylesOfSelector) === null || _selectorData$stylesO === void 0 ? void 0 : _selectorData$stylesO.length) === 0) {
           throw new Error(STYLE_ERROR_PREFIX.NO_STYLE_OR_REMOVE);
         }
+
         return {
           selector: selectorData.selector.trim(),
           ast: selectorData.ast,
@@ -6586,6 +7068,7 @@ const parseRule = (rawCssRule, extCssDoc) => {
       throw new Error(getErrorMessage(e));
     }
   }
+
   let selectorBuffer;
   let styleBlockBuffer;
   const rawRuleData = {
@@ -6594,14 +7077,17 @@ const parseRule = (rawCssRule, extCssDoc) => {
 
   for (let i = leftCurlyBracketIndexes.length - 1; i > -1; i -= 1) {
     const index = leftCurlyBracketIndexes[i];
+
     if (!index) {
       throw new Error(`Impossible to continue, no '{' to process for rule: '${cssRule}'`);
     } // selector is before `{`, style block is after it
+
 
     selectorBuffer = cssRule.slice(0, index); // skip curly brackets
 
     styleBlockBuffer = cssRule.slice(index + 1, cssRule.length - 1);
     selectorData = parseSelectorRulePart(selectorBuffer, extCssDoc);
+
     if (selectorData.success) {
       var _rawRuleData$rawStyle;
 
@@ -6621,10 +7107,12 @@ const parseRule = (rawCssRule, extCssDoc) => {
       continue;
     }
   }
+
   if (((_rawRuleData$selector = rawRuleData.selector) === null || _rawRuleData$selector === void 0 ? void 0 : _rawRuleData$selector.length) === 0) {
     // skip the rule as selector
     throw new Error('Selector in not valid');
   }
+
   return rawRuleData;
 };
 /**
@@ -6656,8 +7144,10 @@ const parseRules = (rawCssRules, extCssDoc) => {
   if (warnings.length > 0) {
     logger.info(`Invalid rules:\n  ${warnings.join('\n  ')}`);
   }
+
   return combineRulesData(rawResults);
 };
+
 const REGEXP_DECLARATION_END = /[;}]/g;
 const REGEXP_DECLARATION_DIVIDER = /[;:}]/g;
 const REGEXP_NON_WHITESPACE = /\S/g;
@@ -6685,29 +7175,37 @@ const restoreRuleAcc = context => {
  * @throws An error on unsupported CSS features, e.g. at-rules.
  */
 
+
 const parseSelectorPart = (context, extCssDoc) => {
   let selector = context.selectorBuffer.trim();
+
   if (selector.startsWith(AT_RULE_MARKER)) {
     throw new Error(`${NO_AT_RULE_ERROR_PREFIX}: '${selector}'.`);
   }
+
   let removeSelectorData;
+
   try {
     removeSelectorData = parseRemoveSelector(selector);
   } catch (e) {
     logger.error(getErrorMessage(e));
     throw new Error(`${REMOVE_ERROR_PREFIX.INVALID_REMOVE}: '${selector}'`);
   }
+
   if (context.nextIndex === -1) {
     if (selector === removeSelectorData.selector) {
       // rule should have style or pseudo-class :remove()
       throw new Error(`${STYLE_ERROR_PREFIX.NO_STYLE_OR_REMOVE}: '${context.cssToParse}'`);
     } // stop parsing as there is no style declaration and selector parsed fine
 
+
     context.cssToParse = '';
   }
+
   let stylesOfSelector = [];
   let success = false;
   let ast;
+
   try {
     selector = removeSelectorData.selector;
     stylesOfSelector = removeSelectorData.stylesOfSelector; // validate found selector by parsing it to ast
@@ -6718,11 +7216,13 @@ const parseSelectorPart = (context, extCssDoc) => {
   } catch (e) {
     success = false;
   }
+
   if (context.nextIndex > 0) {
     // slice found valid selector part off
     // and parse rest of stylesheet later
     context.cssToParse = context.cssToParse.slice(context.nextIndex);
   }
+
   return {
     success,
     selector,
@@ -6740,17 +7240,22 @@ const parseSelectorPart = (context, extCssDoc) => {
  * @returns A number index of the next `}` in `this.cssToParse`.
  */
 
+
 const parseUntilClosingBracket = (context, styles) => {
   // Expects ":", ";", and "}".
   REGEXP_DECLARATION_DIVIDER.lastIndex = context.nextIndex;
   let match = REGEXP_DECLARATION_DIVIDER.exec(context.cssToParse);
+
   if (match === null) {
     throw new Error(`${STYLE_ERROR_PREFIX.INVALID_STYLE}: '${context.cssToParse}'`);
   }
+
   let matchPos = match.index;
   let matched = match[0];
+
   if (matched === BRACKET.CURLY.RIGHT) {
     const declarationChunk = context.cssToParse.slice(context.nextIndex, matchPos);
+
     if (declarationChunk.trim().length === 0) {
       // empty style declaration
       // e.g. 'div { }'
@@ -6758,33 +7263,42 @@ const parseUntilClosingBracket = (context, styles) => {
         throw new Error(`${STYLE_ERROR_PREFIX.NO_STYLE}: '${context.cssToParse}'`);
       } // else valid style parsed before it
       // e.g. '{ display: none; }' -- position is after ';'
+
     } else {
       // closing curly bracket '}' is matched before colon ':'
       // trimmed declarationChunk is not a space, between ';' and '}',
       // e.g. 'visible }' in style '{ display: none; visible }' after part before ';' is parsed
       throw new Error(`${STYLE_ERROR_PREFIX.INVALID_STYLE}: '${context.cssToParse}'`);
     }
+
     return matchPos;
   }
+
   if (matched === COLON) {
     const colonIndex = matchPos; // Expects ";" and "}".
 
     REGEXP_DECLARATION_END.lastIndex = colonIndex;
     match = REGEXP_DECLARATION_END.exec(context.cssToParse);
+
     if (match === null) {
       throw new Error(`${STYLE_ERROR_PREFIX.UNCLOSED_STYLE}: '${context.cssToParse}'`);
     }
+
     matchPos = match.index;
     matched = match[0]; // Populates the `styleMap` key-value map.
 
     const property = context.cssToParse.slice(context.nextIndex, colonIndex).trim();
+
     if (property.length === 0) {
       throw new Error(`${STYLE_ERROR_PREFIX.NO_PROPERTY}: '${context.cssToParse}'`);
     }
+
     const value = context.cssToParse.slice(colonIndex + 1, matchPos).trim();
+
     if (value.length === 0) {
       throw new Error(`${STYLE_ERROR_PREFIX.NO_VALUE}: '${context.cssToParse}'`);
     }
+
     styles.push({
       property,
       value
@@ -6796,6 +7310,7 @@ const parseUntilClosingBracket = (context, styles) => {
     }
   } // matchPos is the position of the next ';'
   // crop 'cssToParse' and re-run the loop
+
 
   context.cssToParse = context.cssToParse.slice(matchPos + 1);
   context.nextIndex = 0;
@@ -6809,16 +7324,19 @@ const parseUntilClosingBracket = (context, styles) => {
  * @returns Array of style data objects.
  */
 
+
 const parseNextStyle = context => {
   const styles = [];
   const styleEndPos = parseUntilClosingBracket(context, styles); // find next rule after the style declaration
 
   REGEXP_NON_WHITESPACE.lastIndex = styleEndPos + 1;
   const match = REGEXP_NON_WHITESPACE.exec(context.cssToParse);
+
   if (match === null) {
     context.cssToParse = '';
     return styles;
   }
+
   const matchPos = match.index; // cut out matched style declaration for previous selector
 
   context.cssToParse = context.cssToParse.slice(matchPos);
@@ -6842,11 +7360,14 @@ const parseNextStyle = context => {
  * - map of styles to apply.
  */
 
+
 const parseStylesheet = (rawStylesheet, extCssDoc) => {
   const stylesheet = rawStylesheet.trim();
+
   if (stylesheet.includes(`${SLASH}${ASTERISK}`) && stylesheet.includes(`${ASTERISK}${SLASH}`)) {
     throw new Error(`${STYLE_ERROR_PREFIX.NO_COMMENT} in stylesheet: '${stylesheet}'`);
   }
+
   const context = {
     // any stylesheet should start with selector
     isSelector: true,
@@ -6874,6 +7395,7 @@ const parseStylesheet = (rawStylesheet, extCssDoc) => {
       if (context.selectorBuffer.length === 0 && context.nextIndex === 0) {
         throw new Error(`${STYLE_ERROR_PREFIX.NO_SELECTOR}: '${context.cssToParse}'`);
       }
+
       if (context.nextIndex === -1) {
         // no style declaration in rule
         // but rule still may contain :remove() pseudo-class
@@ -6883,7 +7405,9 @@ const parseStylesheet = (rawStylesheet, extCssDoc) => {
         // until valid selector collected
         context.selectorBuffer += context.cssToParse.slice(0, context.nextIndex);
       }
+
       selectorData = parseSelectorPart(context, extCssDoc);
+
       if (selectorData.success) {
         // selector successfully parsed
         context.rawRuleData.selector = selectorData.selector.trim();
@@ -6924,6 +7448,7 @@ const parseStylesheet = (rawStylesheet, extCssDoc) => {
       context.isSelector = true;
     }
   }
+
   return combineRulesData(rawResults);
 };
 
@@ -6961,12 +7486,15 @@ class ThrottleWrapper {
    * Calls the {@link callback} function and update bounded throttle wrapper properties.
    */
 
+
   executeCallback() {
     this.lastRunTime = performance.now();
+
     if (isNumber(this.timerId)) {
       clearTimeout(this.timerId);
       delete this.timerId;
     }
+
     this.callback();
   }
   /**
@@ -6983,13 +7511,16 @@ class ThrottleWrapper {
    * those tasks have completed.
    */
 
+
   run() {
     if (isNumber(this.timerId)) {
       // there is a pending execution scheduled
       return;
     }
+
     if (isNumber(this.lastRunTime)) {
       const elapsedTime = performance.now() - this.lastRunTime;
+
       if (elapsedTime < ThrottleWrapper.THROTTLE_DELAY_MS) {
         this.timerId = window.setTimeout(this.executeCallback, ThrottleWrapper.THROTTLE_DELAY_MS - elapsedTime);
         return;
@@ -7001,16 +7532,18 @@ class ThrottleWrapper {
      * when the browser saves battery or the engine is heavily loaded.
      */
 
+
     this.timerId = window.setTimeout(this.executeCallback);
   }
+
 }
+
 _defineProperty(ThrottleWrapper, "THROTTLE_DELAY_MS", 150);
+
 const LAST_EVENT_TIMEOUT_MS = 10;
 const IGNORED_EVENTS = ['mouseover', 'mouseleave', 'mouseenter', 'mouseout'];
-const SUPPORTED_EVENTS = [
-// keyboard events
-'keydown', 'keypress', 'keyup',
-// mouse events
+const SUPPORTED_EVENTS = [// keyboard events
+'keydown', 'keypress', 'keyup', // mouse events
 'auxclick', 'click', 'contextmenu', 'dblclick', 'mousedown', 'mouseenter', 'mouseleave', 'mousemove', 'mouseover', 'mouseout', 'mouseup', 'pointerlockchange', 'pointerlockerror', 'select', 'wheel']; // 'wheel' event makes scrolling in Safari twitchy
 // https://github.com/AdguardTeam/ExtendedCss/issues/120
 
@@ -7027,12 +7560,15 @@ class EventTracker {
    */
   constructor() {
     _defineProperty(this, "getLastEventType", () => this.lastEventType);
+
     _defineProperty(this, "getTimeSinceLastEvent", () => {
       if (!this.lastEventTime) {
         return null;
       }
+
       return Date.now() - this.lastEventTime;
     });
+
     this.trackedEvents = isSafariBrowser ? SUPPORTED_EVENTS.filter(event => !SAFARI_PROBLEMATIC_EVENTS.includes(event)) : SUPPORTED_EVENTS;
     this.trackedEvents.forEach(eventName => {
       document.documentElement.addEventListener(eventName, this.trackEvent, true);
@@ -7043,6 +7579,7 @@ class EventTracker {
    *
    * @param event Any event.
    */
+
 
   trackEvent(event) {
     this.lastEventType = event.type;
@@ -7063,11 +7600,13 @@ class EventTracker {
    * Stops event tracking by removing event listener.
    */
 
+
   stopTracking() {
     this.trackedEvents.forEach(eventName => {
       document.documentElement.removeEventListener(eventName, this.trackEvent, true);
     });
   }
+
 }
 
 /**
@@ -7089,21 +7628,26 @@ function shouldIgnoreMutations(mutations) {
  * @param context ExtendedCss context.
  */
 
+
 function observeDocument(context) {
   if (context.isDomObserved) {
     return;
   } // enable dynamically added elements handling
+
 
   context.isDomObserved = true;
   context.domMutationObserver = new natives.MutationObserver(mutations => {
     if (!mutations || mutations.length === 0) {
       return;
     }
+
     const eventTracker = new EventTracker();
+
     if (eventTracker.isIgnoredEventType() && shouldIgnoreMutations(mutations)) {
       return;
     } // save instance of EventTracker to context
     // for removing its event listeners on disconnectDocument() while mainDisconnect()
+
 
     context.eventTracker = eventTracker;
     context.scheduler.run();
@@ -7126,15 +7670,19 @@ function disconnectDocument(context) {
     return;
   } // disable dynamically added elements handling
 
+
   context.isDomObserved = false;
+
   if (context.domMutationObserver) {
     context.domMutationObserver.disconnect();
   } // clean up event listeners
+
 
   if (context.eventTracker) {
     context.eventTracker.stopTracking();
   }
 }
+
 const CONTENT_ATTR_PREFIX_REGEXP = /^("|')adguard.+?/;
 /**
  * Removes affectedElement.node from DOM.
@@ -7156,6 +7704,7 @@ const removeElement = (context, affectedElement) => {
     logger.error(`ExtendedCss: infinite loop protection for selector: '${elementSelector}'`);
     return;
   }
+
   if (node.parentElement) {
     node.parentElement.removeChild(node);
     context.removalsStatistic[elementSelector] = elementRemovalsCounter + 1;
@@ -7168,23 +7717,28 @@ const removeElement = (context, affectedElement) => {
  * @param style Style to set.
  */
 
+
 const setStyleToElement = (node, style) => {
   if (!(node instanceof HTMLElement)) {
     return;
   }
+
   Object.keys(style).forEach(prop => {
     // Apply this style only to existing properties
     // We cannot use hasOwnProperty here (does not work in FF)
     if (typeof node.style.getPropertyValue(prop.toString()) !== 'undefined') {
       let value = style[prop];
+
       if (!value) {
         return;
       } // do not apply 'content' style given by tsurlfilter
       // which is needed only for BeforeStyleAppliedCallback
 
+
       if (prop === CONTENT_CSS_PROPERTY && value.match(CONTENT_ATTR_PREFIX_REGEXP)) {
         return;
       } // First we should remove !important attribute (or it won't be applied')
+
 
       value = removeSuffix(value.trim(), '!important').trim();
       node.style.setProperty(prop, value, 'important');
@@ -7215,6 +7769,7 @@ const isIAffectedElement = affectedElement => {
  * or `rules` is not an array.
  */
 
+
 const isAffectedElement = affectedElement => {
   return 'node' in affectedElement && 'originalStyle' in affectedElement && 'rules' in affectedElement && affectedElement.rules instanceof Array;
 };
@@ -7227,30 +7782,38 @@ const isAffectedElement = affectedElement => {
  * @throws An error if affectedElement has no style to apply.
  */
 
+
 const applyStyle = (context, rawAffectedElement) => {
   if (rawAffectedElement.protectionObserver) {
     // style is already applied and protected by the observer
     return;
   }
+
   let affectedElement;
+
   if (context.beforeStyleApplied) {
     if (!isIAffectedElement(rawAffectedElement)) {
       throw new Error("Returned IAffectedElement should have 'node' and 'rules' properties");
     }
+
     affectedElement = context.beforeStyleApplied(rawAffectedElement);
+
     if (!affectedElement) {
       throw new Error("Callback 'beforeStyleApplied' should return IAffectedElement");
     }
   } else {
     affectedElement = rawAffectedElement;
   }
+
   if (!isAffectedElement(affectedElement)) {
     throw new Error("Returned IAffectedElement should have 'node' and 'rules' properties");
   }
+
   const {
     node,
     rules
   } = affectedElement;
+
   for (let i = 0; i < rules.length; i += 1) {
     const rule = rules[i];
     const selector = rule === null || rule === void 0 ? void 0 : rule.selector;
@@ -7263,6 +7826,7 @@ const applyStyle = (context, rawAffectedElement) => {
         removeElement(context, affectedElement);
         return;
       }
+
       setStyleToElement(node, style);
     } else if (!debug) {
       // but rule should not have both style and debug properties
@@ -7280,6 +7844,7 @@ const revertStyle = affectedElement => {
   if (affectedElement.protectionObserver) {
     affectedElement.protectionObserver.disconnect();
   }
+
   affectedElement.node.style.cssText = affectedElement.originalStyle;
 };
 
@@ -7311,6 +7876,7 @@ class ExtMutationObserver {
       if (!mutations.length) {
         return;
       }
+
       this.styleProtectionCount += 1;
       protectionCallback(mutations, this);
     });
@@ -7322,6 +7888,7 @@ class ExtMutationObserver {
    * @param target Target to observe.
    * @param options Mutation observer options.
    */
+
 
   observe(target, options) {
     if (this.styleProtectionCount < MAX_STYLE_PROTECTION_COUNT) {
@@ -7335,10 +7902,13 @@ class ExtMutationObserver {
    * Until the `observe()` is used again, `protectionCallback` will not be invoked.
    */
 
+
   disconnect() {
     this.observer.disconnect();
   }
+
 }
+
 const PROTECTION_OBSERVER_OPTIONS = {
   attributes: true,
   attributeOldValue: true,
@@ -7357,6 +7927,7 @@ const createProtectionCallback = styles => {
     if (!mutations[0]) {
       return;
     }
+
     const {
       target
     } = mutations[0];
@@ -7366,6 +7937,7 @@ const createProtectionCallback = styles => {
     });
     extObserver.observe(target, PROTECTION_OBSERVER_OPTIONS);
   };
+
   return protectionCallback;
 };
 /**
@@ -7376,10 +7948,12 @@ const createProtectionCallback = styles => {
  * @returns Mutation observer used to protect attribute or null if there's nothing to protect.
  */
 
+
 const protectStyleAttribute = (node, rules) => {
   if (!natives.MutationObserver) {
     return null;
   }
+
   const styles = [];
   rules.forEach(ruleData => {
     const {
@@ -7396,6 +7970,7 @@ const protectStyleAttribute = (node, rules) => {
   protectionObserver.observe(node, PROTECTION_OBSERVER_OPTIONS);
   return protectionObserver;
 };
+
 const STATS_DECIMAL_DIGITS_COUNT = 4;
 
 /**
@@ -7419,6 +7994,7 @@ class TimingStats {
    * @param elapsedTimeMs Time in ms.
    */
 
+
   push(elapsedTimeMs) {
     this.appliesTimings.push(elapsedTimeMs);
     this.appliesCount += 1;
@@ -7427,6 +8003,7 @@ class TimingStats {
     this.squaredSum += elapsedTimeMs * elapsedTimeMs;
     this.standardDeviation = Math.sqrt(this.squaredSum / this.appliesCount - Math.pow(this.meanTiming, 2));
   }
+
 }
 
 /**
@@ -7447,6 +8024,7 @@ const beautifyTimingNumber = timestamp => {
  * @returns Fine-looking timing stats.
  */
 
+
 const beautifyTimings = rawTimings => {
   return {
     appliesTimings: rawTimings.appliesTimings.map(t => beautifyTimingNumber(t)),
@@ -7462,10 +8040,12 @@ const beautifyTimings = rawTimings => {
  * @param context ExtendedCss context.
  */
 
+
 const printTimingInfo = context => {
   if (context.areTimingsPrinted) {
     return;
   }
+
   context.areTimingsPrinted = true;
   const timingsLogData = {};
   context.parsedRules.forEach(ruleData => {
@@ -7481,6 +8061,7 @@ const printTimingInfo = context => {
       if (!style && !debug) {
         throw new Error(`Rule should have style declaration for selector: '${selector}'`);
       }
+
       const selectorData = {
         selectorParsed: selector,
         timings: beautifyTimings(ruleData.timingStats)
@@ -7493,12 +8074,15 @@ const printTimingInfo = context => {
         selectorData.styleApplied = style || null;
         selectorData.matchedElements = matchedElements;
       }
+
       timingsLogData[selector] = selectorData;
     }
   });
+
   if (Object.keys(timingsLogData).length === 0) {
     return;
   } // add location.href to the message to distinguish frames
+
 
   logger.info('[ExtendedCss] Timings in milliseconds for %o:\n%o', window.location.href, timingsLogData);
 };
@@ -7522,6 +8106,7 @@ const findAffectedElement = (affElements, domNode) => {
  * @returns List of elements affected by the rule.
  */
 
+
 const applyRule = (context, ruleData) => {
   // debugging mode can be enabled in two ways:
   // 1. for separate rules - by `{ debug: true; }`
@@ -7530,9 +8115,11 @@ const applyRule = (context, ruleData) => {
   //   - positive `debug` property in ExtCssConfiguration
   const isDebuggingMode = !!ruleData.debug || context.debug;
   let startTime;
+
   if (isDebuggingMode) {
     startTime = performance.now();
   }
+
   const {
     ast
   } = ruleData;
@@ -7548,8 +8135,10 @@ const applyRule = (context, ruleData) => {
       logger.error(getErrorMessage(e));
     }
   }
+
   nodes.forEach(node => {
     let affectedElement = findAffectedElement(context.affectedElements, node);
+
     if (affectedElement) {
       affectedElement.rules.push(ruleData);
       applyStyle(context, affectedElement);
@@ -7564,18 +8153,23 @@ const applyRule = (context, ruleData) => {
         originalStyle,
         // original node style
         protectionObserver: null // style attribute observer
+
       };
       applyStyle(context, affectedElement);
       context.affectedElements.push(affectedElement);
     }
   });
+
   if (isDebuggingMode && startTime) {
     const elapsedTimeMs = performance.now() - startTime;
+
     if (!ruleData.timingStats) {
       ruleData.timingStats = new TimingStats();
     }
+
     ruleData.timingStats.push(elapsedTimeMs);
   }
+
   return nodes;
 };
 /**
@@ -7583,6 +8177,7 @@ const applyRule = (context, ruleData) => {
  *
  * @param context ExtendedCss context.
  */
+
 
 const applyRules = context => {
   const newSelectedElements = []; // some rules could make call - selector.querySelectorAll() temporarily to change node id attribute
@@ -7604,9 +8199,11 @@ const applyRules = context => {
 
   while (affLength) {
     const affectedElement = context.affectedElements[affLength - 1];
+
     if (!affectedElement) {
       break;
     }
+
     if (!newSelectedElements.includes(affectedElement.node)) {
       // Time to revert style
       revertStyle(affectedElement);
@@ -7618,8 +8215,10 @@ const applyRules = context => {
         affectedElement.protectionObserver = protectStyleAttribute(affectedElement.node, affectedElement.rules);
       }
     }
+
     affLength -= 1;
   } // After styles are applied we can start observe again
+
 
   observeDocument(context);
   printTimingInfo(context);
@@ -7653,6 +8252,7 @@ class ExtendedCss {
     if (!configuration) {
       throw new Error('ExtendedCss configuration should be provided.');
     }
+
     this.applyRulesCallbackListener = this.applyRulesCallbackListener.bind(this);
     this.context = {
       beforeStyleApplied: configuration.beforeStyleApplied,
@@ -7669,11 +8269,13 @@ class ExtendedCss {
       return;
     } // at least 'styleSheet' or 'cssRules' should be provided
 
+
     if (!configuration.styleSheet && !configuration.cssRules) {
       throw new Error("ExtendedCss configuration should have 'styleSheet' or 'cssRules' defined.");
     } // 'styleSheet' and 'cssRules' are optional
     // and both can be provided at the same time
     // so both should be parsed and applied in such case
+
 
     if (configuration.styleSheet) {
       // stylesheet parsing can fail on some invalid selectors
@@ -7684,14 +8286,17 @@ class ExtendedCss {
         throw new Error(`Pass the rules as configuration.cssRules since configuration.styleSheet cannot be parsed because of: '${getErrorMessage(e)}'`);
       }
     }
+
     if (configuration.cssRules) {
       this.context.parsedRules.push(...parseRules(configuration.cssRules, extCssDocument));
     } // true if set in configuration
     // or any rule in styleSheet has `debug: global`
 
+
     this.context.debug = configuration.debug || this.context.parsedRules.some(ruleData => {
       return ruleData.debug === DEBUG_PSEUDO_PROPERTY_GLOBAL_VALUE;
     });
+
     if (this.context.beforeStyleApplied && typeof this.context.beforeStyleApplied !== 'function') {
       // eslint-disable-next-line max-len
       throw new Error(`Invalid configuration. Type of 'beforeStyleApplied' should be a function, received: '${typeof this.context.beforeStyleApplied}'`);
@@ -7704,6 +8309,7 @@ class ExtendedCss {
    * in {@link ThrottleWrapper} and on the DOMContentLoaded event.
    */
 
+
   applyRulesCallbackListener() {
     applyRules(this.context);
   }
@@ -7713,6 +8319,7 @@ class ExtendedCss {
    * Should be executed on page ASAP,
    * otherwise the :contains() pseudo-class may work incorrectly.
    */
+
 
   init() {
     /**
@@ -7728,8 +8335,10 @@ class ExtendedCss {
    * Applies stylesheet rules on page.
    */
 
+
   apply() {
     applyRules(this.context);
+
     if (document.readyState !== 'complete') {
       document.addEventListener('DOMContentLoaded', this.applyRulesCallbackListener, false);
     }
@@ -7737,6 +8346,7 @@ class ExtendedCss {
   /**
    * Disposes ExtendedCss and removes our styles from matched elements.
    */
+
 
   dispose() {
     disconnectDocument(this.context);
@@ -7750,6 +8360,7 @@ class ExtendedCss {
    *
    * @returns Array of AffectedElement data objects.
    */
+
 
   getAffectedElements() {
     return this.context.affectedElements;
@@ -7765,16 +8376,21 @@ class ExtendedCss {
    * @returns A list of elements that match the selector.
    */
 
+
   static query(selector) {
     let noTiming = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
     if (typeof selector !== 'string') {
       throw new Error('Selector should be defined as a string.');
     }
+
     const start = performance.now();
+
     try {
       return extCssDocument.querySelectorAll(selector);
     } finally {
       const end = performance.now();
+
       if (!noTiming) {
         logger.info(`[ExtendedCss] Elapsed: ${Math.round((end - start) * 1000)} μs.`);
       }
@@ -7787,6 +8403,7 @@ class ExtendedCss {
    *
    * @returns Result of selector validation.
    */
+
 
   static validate(inputSelector) {
     try {
@@ -7810,7 +8427,12 @@ class ExtendedCss {
       };
     }
   }
+
 }
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@adguard/scriptlets/dist/scriptlets/index.js
 function AmazonApstag(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -7833,36 +8455,19 @@ function AmazonApstag(source, args) {
     window.apstag = apstagWrapper;
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     AmazonApstag.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -7877,6 +8482,7 @@ function AmazonApstag(source, args) {
     console.log(e);
   }
 }
+
 function DidomiLoader(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -7887,16 +8493,16 @@ function DidomiLoader(source, args) {
   }
   function DidomiLoader(source) {
     function UserConsentStatusForVendorSubscribe() {}
-    UserConsentStatusForVendorSubscribe.prototype.filter = function () {
-      return new UserConsentStatusForVendorSubscribe();
+    UserConsentStatusForVendorSubscribe.prototype.filter = function() {
+      return new UserConsentStatusForVendorSubscribe;
     };
     UserConsentStatusForVendorSubscribe.prototype.subscribe = noopFunc;
     function UserConsentStatusForVendor() {}
-    UserConsentStatusForVendor.prototype.first = function () {
-      return new UserConsentStatusForVendorSubscribe();
+    UserConsentStatusForVendor.prototype.first = function() {
+      return new UserConsentStatusForVendorSubscribe;
     };
-    UserConsentStatusForVendor.prototype.filter = function () {
-      return new UserConsentStatusForVendorSubscribe();
+    UserConsentStatusForVendor.prototype.filter = function() {
+      return new UserConsentStatusForVendorSubscribe;
     };
     UserConsentStatusForVendor.prototype.subscribe = noopFunc;
     var DidomiWrapper = {
@@ -7928,7 +8534,7 @@ function DidomiLoader(source, args) {
       shouldConsentBeCollected: falseFunc,
       getUserConsentStatusForAll: noopFunc,
       getObservableOnUserConsentStatusForVendor() {
-        return new UserConsentStatusForVendor();
+        return new UserConsentStatusForVendor;
       }
     };
     window.Didomi = DidomiWrapper;
@@ -7978,9 +8584,9 @@ function DidomiLoader(source, args) {
           return;
         }
         if (document.readyState !== "complete") {
-          window.addEventListener("load", function () {
+          window.addEventListener("load", (function() {
             setTimeout(arg(window.Didomi));
-          });
+          }));
         } else {
           setTimeout(arg(window.Didomi));
         }
@@ -7988,42 +8594,25 @@ function DidomiLoader(source, args) {
     };
     window.didomiOnReady = window.didomiOnReady || didomiOnReadyWrapper;
     if (Array.isArray(window.didomiOnReady)) {
-      window.didomiOnReady.forEach(function (arg) {
+      window.didomiOnReady.forEach((function(arg) {
         if (typeof arg === "function") {
           try {
             setTimeout(arg(window.Didomi));
           } catch (e) {}
         }
-      });
+      }));
     }
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
@@ -8036,7 +8625,7 @@ function DidomiLoader(source, args) {
   function falseFunc() {
     return false;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     DidomiLoader.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -8051,6 +8640,7 @@ function DidomiLoader(source, args) {
     console.log(e);
   }
 }
+
 function Fingerprintjs2(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -8065,15 +8655,15 @@ function Fingerprintjs2(source, args) {
       browserId += (Math.random() * 65536 + 4096).toString(16).slice(-4);
     }
     var Fingerprint2 = function Fingerprint2() {};
-    Fingerprint2.get = function (options, callback) {
+    Fingerprint2.get = function(options, callback) {
       if (!callback) {
         callback = options;
       }
-      setTimeout(function () {
+      setTimeout((function() {
         if (callback) {
           callback(browserId, []);
         }
-      }, 1);
+      }), 1);
     };
     Fingerprint2.prototype = {
       get: Fingerprint2.get
@@ -8081,35 +8671,18 @@ function Fingerprintjs2(source, args) {
     window.Fingerprint2 = Fingerprint2;
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     Fingerprintjs2.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -8124,6 +8697,7 @@ function Fingerprintjs2(source, args) {
     console.log(e);
   }
 }
+
 function Fingerprintjs3(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -8133,7 +8707,7 @@ function Fingerprintjs3(source, args) {
     }
   }
   function Fingerprintjs3(source) {
-    var visitorId = function () {
+    var visitorId = function() {
       var id = "";
       for (var i = 0; i < 8; i += 1) {
         id += (Math.random() * 65536 + 4096).toString(16).slice(-4);
@@ -8143,7 +8717,7 @@ function Fingerprintjs3(source, args) {
     var FingerprintJS = function FingerprintJS() {};
     FingerprintJS.prototype = {
       load() {
-        return Promise.resolve(new FingerprintJS());
+        return Promise.resolve(new FingerprintJS);
       },
       get() {
         return Promise.resolve({
@@ -8152,41 +8726,24 @@ function Fingerprintjs3(source, args) {
       },
       hashComponents: noopStr
     };
-    window.FingerprintJS = new FingerprintJS();
+    window.FingerprintJS = new FingerprintJS;
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopStr() {
     return "";
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     Fingerprintjs3.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -8201,6 +8758,7 @@ function Fingerprintjs3(source, args) {
     console.log(e);
   }
 }
+
 function Gemius(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -8221,36 +8779,19 @@ function Gemius(source, args) {
     window.GemiusPlayer = GemiusPlayer;
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     Gemius.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -8265,6 +8806,7 @@ function Gemius(source, args) {
     console.log(e);
   }
 }
+
 function GoogleAnalytics(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -8300,14 +8842,14 @@ function GoogleAnalytics(source, args) {
         setTimeout(replacer, 1);
       } catch (ex) {}
     }
-    ga.create = function () {
-      return new Tracker();
+    ga.create = function() {
+      return new Tracker;
     };
-    ga.getByName = function () {
-      return new Tracker();
+    ga.getByName = function() {
+      return new Tracker;
     };
-    ga.getAll = function () {
-      return [new Tracker()];
+    ga.getAll = function() {
+      return [ new Tracker ];
     };
     ga.remove = noopFunc;
     ga.loaded = true;
@@ -8319,10 +8861,7 @@ function GoogleAnalytics(source, args) {
       queue.push = push;
       queue.forEach(push);
     }
-    var {
-      dataLayer: dataLayer,
-      google_optimize: google_optimize
-    } = window;
+    var {dataLayer: dataLayer, google_optimize: google_optimize} = window;
     if (dataLayer instanceof Object === false) {
       return;
     }
@@ -8335,7 +8874,7 @@ function GoogleAnalytics(source, args) {
       }
     };
     if (typeof dataLayer.push === "function") {
-      dataLayer.push = function (data) {
+      dataLayer.push = function(data) {
         if (data instanceof Object) {
           handleCallback(data, "eventCallback");
           for (var key in data) {
@@ -8346,9 +8885,9 @@ function GoogleAnalytics(source, args) {
           }
         }
         if (Array.isArray(data)) {
-          data.forEach(function (arg) {
+          data.forEach((function(arg) {
             handleCallback(arg, "callback");
-          });
+          }));
         }
         return noopFunc;
       };
@@ -8361,36 +8900,19 @@ function GoogleAnalytics(source, args) {
     }
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     GoogleAnalytics.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -8405,6 +8927,7 @@ function GoogleAnalytics(source, args) {
     console.log(e);
   }
 }
+
 function GoogleAnalyticsGa(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -8423,7 +8946,7 @@ function GoogleAnalyticsGa(source, args) {
     Gaq.prototype._createAsyncTracker = noopFunc;
     Gaq.prototype._getAsyncTracker = noopFunc;
     Gaq.prototype._getPlugin = noopFunc;
-    Gaq.prototype.push = function (data) {
+    Gaq.prototype.push = function(data) {
       if (typeof data === "function") {
         data();
         return;
@@ -8438,7 +8961,7 @@ function GoogleAnalyticsGa(source, args) {
         data[2]();
       }
     };
-    var gaq = new Gaq();
+    var gaq = new Gaq;
     var asyncTrackers = window._gaq || [];
     if (Array.isArray(asyncTrackers)) {
       while (asyncTrackers[0]) {
@@ -8447,15 +8970,15 @@ function GoogleAnalyticsGa(source, args) {
     }
     window._gaq = gaq.qf = gaq;
     function Gat() {}
-    var api = ["_addIgnoredOrganic", "_addIgnoredRef", "_addItem", "_addOrganic", "_addTrans", "_clearIgnoredOrganic", "_clearIgnoredRef", "_clearOrganic", "_cookiePathCopy", "_deleteCustomVar", "_getName", "_setAccount", "_getAccount", "_getClientInfo", "_getDetectFlash", "_getDetectTitle", "_getLinkerUrl", "_getLocalGifPath", "_getServiceMode", "_getVersion", "_getVisitorCustomVar", "_initData", "_link", "_linkByPost", "_setAllowAnchor", "_setAllowHash", "_setAllowLinker", "_setCampContentKey", "_setCampMediumKey", "_setCampNameKey", "_setCampNOKey", "_setCampSourceKey", "_setCampTermKey", "_setCampaignCookieTimeout", "_setCampaignTrack", "_setClientInfo", "_setCookiePath", "_setCookiePersistence", "_setCookieTimeout", "_setCustomVar", "_setDetectFlash", "_setDetectTitle", "_setDomainName", "_setLocalGifPath", "_setLocalRemoteServerMode", "_setLocalServerMode", "_setReferrerOverride", "_setRemoteServerMode", "_setSampleRate", "_setSessionTimeout", "_setSiteSpeedSampleRate", "_setSessionCookieTimeout", "_setVar", "_setVisitorCookieTimeout", "_trackEvent", "_trackPageLoadTime", "_trackPageview", "_trackSocial", "_trackTiming", "_trackTrans", "_visitCode"];
-    var tracker = api.reduce(function (res, funcName) {
+    var api = [ "_addIgnoredOrganic", "_addIgnoredRef", "_addItem", "_addOrganic", "_addTrans", "_clearIgnoredOrganic", "_clearIgnoredRef", "_clearOrganic", "_cookiePathCopy", "_deleteCustomVar", "_getName", "_setAccount", "_getAccount", "_getClientInfo", "_getDetectFlash", "_getDetectTitle", "_getLinkerUrl", "_getLocalGifPath", "_getServiceMode", "_getVersion", "_getVisitorCustomVar", "_initData", "_link", "_linkByPost", "_setAllowAnchor", "_setAllowHash", "_setAllowLinker", "_setCampContentKey", "_setCampMediumKey", "_setCampNameKey", "_setCampNOKey", "_setCampSourceKey", "_setCampTermKey", "_setCampaignCookieTimeout", "_setCampaignTrack", "_setClientInfo", "_setCookiePath", "_setCookiePersistence", "_setCookieTimeout", "_setCustomVar", "_setDetectFlash", "_setDetectTitle", "_setDomainName", "_setLocalGifPath", "_setLocalRemoteServerMode", "_setLocalServerMode", "_setReferrerOverride", "_setRemoteServerMode", "_setSampleRate", "_setSessionTimeout", "_setSiteSpeedSampleRate", "_setSessionCookieTimeout", "_setVar", "_setVisitorCookieTimeout", "_trackEvent", "_trackPageLoadTime", "_trackPageview", "_trackSocial", "_trackTiming", "_trackTrans", "_visitCode" ];
+    var tracker = api.reduce((function(res, funcName) {
       res[funcName] = noopFunc;
       return res;
-    }, {});
-    tracker._getLinkerUrl = function (a) {
+    }), {});
+    tracker._getLinkerUrl = function(a) {
       return a;
     };
-    tracker._link = function (url) {
+    tracker._link = function(url) {
       if (typeof url !== "string") {
         return;
       }
@@ -8469,10 +8992,10 @@ function GoogleAnalyticsGa(source, args) {
     Gat.prototype._createTracker = noopFunc;
     Gat.prototype._forceSSL = noopFunc;
     Gat.prototype._getPlugin = noopFunc;
-    Gat.prototype._getTracker = function () {
+    Gat.prototype._getTracker = function() {
       return tracker;
     };
-    Gat.prototype._getTrackerByName = function () {
+    Gat.prototype._getTrackerByName = function() {
       return tracker;
     };
     Gat.prototype._getTrackers = noopFunc;
@@ -8483,57 +9006,30 @@ function GoogleAnalyticsGa(source, args) {
     Gat.prototype.oa = noopFunc;
     Gat.prototype.pa = noopFunc;
     Gat.prototype.u = noopFunc;
-    var gat = new Gat();
+    var gat = new Gat;
     window._gat = gat;
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     GoogleAnalyticsGa.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -8548,6 +9044,7 @@ function GoogleAnalyticsGa(source, args) {
     console.log(e);
   }
 }
+
 function GoogleIma3(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -8675,8 +9172,8 @@ function GoogleIma3(source, args) {
       }
     };
     var EventHandler = function EventHandler() {
-      this.listeners = new Map();
-      this._dispatch = function (e) {
+      this.listeners = new Map;
+      this._dispatch = function(e) {
         var listeners = this.listeners.get(e.type);
         listeners = listeners ? listeners.values() : [];
         for (var _i = 0, _Array$from = Array.from(listeners); _i < _Array$from.length; _i++) {
@@ -8688,21 +9185,21 @@ function GoogleIma3(source, args) {
           }
         }
       };
-      this.addEventListener = function (types, callback, options, context) {
+      this.addEventListener = function(types, callback, options, context) {
         if (!Array.isArray(types)) {
-          types = [types];
+          types = [ types ];
         }
         for (var i = 0; i < types.length; i += 1) {
           var type = types[i];
           if (!this.listeners.has(type)) {
-            this.listeners.set(type, new Map());
+            this.listeners.set(type, new Map);
           }
           this.listeners.get(type).set(callback, callback.bind(context || this));
         }
       };
-      this.removeEventListener = function (types, callback) {
+      this.removeEventListener = function(types, callback) {
         if (!Array.isArray(types)) {
-          types = [types];
+          types = [ types ];
         }
         for (var i = 0; i < types.length; i += 1) {
           var _this$listeners$get;
@@ -8711,7 +9208,7 @@ function GoogleIma3(source, args) {
         }
       };
     };
-    var AdsManager = new EventHandler();
+    var AdsManager = new EventHandler;
     AdsManager.volume = 1;
     AdsManager.collapse = noopFunc;
     AdsManager.configureAdsManager = noopFunc;
@@ -8719,41 +9216,41 @@ function GoogleIma3(source, args) {
     AdsManager.discardAdBreak = noopFunc;
     AdsManager.expand = noopFunc;
     AdsManager.focus = noopFunc;
-    AdsManager.getAdSkippableState = function () {
+    AdsManager.getAdSkippableState = function() {
       return false;
     };
-    AdsManager.getCuePoints = function () {
-      return [0];
+    AdsManager.getCuePoints = function() {
+      return [ 0 ];
     };
-    AdsManager.getCurrentAd = function () {
+    AdsManager.getCurrentAd = function() {
       return currentAd;
     };
-    AdsManager.getCurrentAdCuePoints = function () {
+    AdsManager.getCurrentAdCuePoints = function() {
       return [];
     };
-    AdsManager.getRemainingTime = function () {
+    AdsManager.getRemainingTime = function() {
       return 0;
     };
-    AdsManager.getVolume = function () {
+    AdsManager.getVolume = function() {
       return this.volume;
     };
     AdsManager.init = noopFunc;
-    AdsManager.isCustomClickTrackingUsed = function () {
+    AdsManager.isCustomClickTrackingUsed = function() {
       return false;
     };
-    AdsManager.isCustomPlaybackUsed = function () {
+    AdsManager.isCustomPlaybackUsed = function() {
       return false;
     };
     AdsManager.pause = noopFunc;
     AdsManager.requestNextAdBreak = noopFunc;
     AdsManager.resize = noopFunc;
     AdsManager.resume = noopFunc;
-    AdsManager.setVolume = function (v) {
+    AdsManager.setVolume = function(v) {
       this.volume = v;
     };
     AdsManager.skip = noopFunc;
-    AdsManager.start = function () {
-      for (var _i2 = 0, _arr = [AdEvent.Type.ALL_ADS_COMPLETED, AdEvent.Type.CONTENT_RESUME_REQUESTED]; _i2 < _arr.length; _i2++) {
+    AdsManager.start = function() {
+      for (var _i2 = 0, _arr = [ AdEvent.Type.ALL_ADS_COMPLETED, AdEvent.Type.CONTENT_RESUME_REQUESTED ]; _i2 < _arr.length; _i2++) {
         var type = _arr[_i2];
         try {
           this._dispatch(new ima.AdEvent(type));
@@ -8785,28 +9282,26 @@ function GoogleIma3(source, args) {
       ADS_MANAGER_LOADED: "adsManagerLoaded"
     };
     var AdsLoader = EventHandler;
-    AdsLoader.prototype.settings = new ImaSdkSettings();
+    AdsLoader.prototype.settings = new ImaSdkSettings;
     AdsLoader.prototype.contentComplete = noopFunc;
     AdsLoader.prototype.destroy = noopFunc;
-    AdsLoader.prototype.getSettings = function () {
+    AdsLoader.prototype.getSettings = function() {
       return this.settings;
     };
-    AdsLoader.prototype.getVersion = function () {
+    AdsLoader.prototype.getVersion = function() {
       return VERSION;
     };
-    AdsLoader.prototype.requestAds = function (adsRequest, userRequestContext) {
+    AdsLoader.prototype.requestAds = function(adsRequest, userRequestContext) {
       var _this = this;
-      requestAnimationFrame(function () {
-        var {
-          ADS_MANAGER_LOADED: ADS_MANAGER_LOADED
-        } = AdsManagerLoadedEvent.Type;
+      requestAnimationFrame((function() {
+        var {ADS_MANAGER_LOADED: ADS_MANAGER_LOADED} = AdsManagerLoadedEvent.Type;
         var event = new ima.AdsManagerLoadedEvent(ADS_MANAGER_LOADED, adsRequest, userRequestContext);
         _this._dispatch(event);
-      });
+      }));
       var e = new ima.AdError("adPlayError", 1205, 1205, "The browser prevented playback initiated without user interaction.", adsRequest, userRequestContext);
-      requestAnimationFrame(function () {
+      requestAnimationFrame((function() {
         _this._dispatch(new ima.AdErrorEvent(e));
-      });
+      }));
     };
     var AdsRenderingSettings = noopFunc;
     var AdsRequest = function AdsRequest() {};
@@ -8837,15 +9332,15 @@ function GoogleIma3(source, args) {
       }
     };
     var UniversalAdIdInfo = function UniversalAdIdInfo() {};
-    UniversalAdIdInfo.prototype.getAdIdRegistry = function () {
+    UniversalAdIdInfo.prototype.getAdIdRegistry = function() {
       return "";
     };
-    UniversalAdIdInfo.prototype.getAdIsValue = function () {
+    UniversalAdIdInfo.prototype.getAdIsValue = function() {
       return "";
     };
     var Ad = function Ad() {};
     Ad.prototype = {
-      pi: new AdPodInfo(),
+      pi: new AdPodInfo,
       getAdId: function getAdId() {
         return "";
       },
@@ -8901,13 +9396,13 @@ function GoogleIma3(source, args) {
         return "";
       },
       getUiElements: function getUiElements() {
-        return [""];
+        return [ "" ];
       },
       getUniversalAdIdRegistry: function getUniversalAdIdRegistry() {
         return "unknown";
       },
       getUniversalAdIds: function getUniversalAdIds() {
-        return [new UniversalAdIdInfo()];
+        return [ new UniversalAdIdInfo ];
       },
       getUniversalAdIdValue: function getUniversalAdIdValue() {
         return "unknown";
@@ -8925,13 +9420,13 @@ function GoogleIma3(source, args) {
         return 0;
       },
       getWrapperAdIds: function getWrapperAdIds() {
-        return [""];
+        return [ "" ];
       },
       getWrapperAdSystems: function getWrapperAdSystems() {
-        return [""];
+        return [ "" ];
       },
       getWrapperCreativeIds: function getWrapperCreativeIds() {
-        return [""];
+        return [ "" ];
       },
       isLinear: function isLinear() {
         return true;
@@ -8964,22 +9459,22 @@ function GoogleIma3(source, args) {
       this.type = type;
       this.adsRequest = adsRequest;
       this.userRequestContext = userRequestContext;
-      this.getErrorCode = function () {
+      this.getErrorCode = function() {
         return this.errorCode;
       };
-      this.getInnerError = function () {
+      this.getInnerError = function() {
         return null;
       };
-      this.getMessage = function () {
+      this.getMessage = function() {
         return this.message;
       };
-      this.getType = function () {
+      this.getType = function() {
         return this.type;
       };
-      this.getVastErrorCode = function () {
+      this.getVastErrorCode = function() {
         return this.vastErrorCode;
       };
-      this.toString = function () {
+      this.toString = function() {
         return `AdError ${this.errorCode}: ${this.message}`;
       };
     };
@@ -8997,7 +9492,7 @@ function GoogleIma3(source, args) {
       } catch (e) {}
       return false;
     };
-    var currentAd = isEngadget() ? undefined : new Ad();
+    var currentAd = isEngadget() ? undefined : new Ad;
     var AdEvent = function AdEvent(type) {
       this.type = type;
     };
@@ -9044,10 +9539,10 @@ function GoogleIma3(source, args) {
     var AdErrorEvent = function AdErrorEvent(error) {
       this.error = error;
       this.type = "adError";
-      this.getError = function () {
+      this.getError = function() {
         return this.error;
       };
-      this.getUserRequestContext = function () {
+      this.getUserRequestContext = function() {
         var _this$error;
         if ((_this$error = this.error) !== null && _this$error !== void 0 && _this$error.userRequestContext) {
           return this.error.userRequestContext;
@@ -9135,7 +9630,7 @@ function GoogleIma3(source, args) {
         MEETRICS: 8,
         GOOGLE: 9
       },
-      settings: new ImaSdkSettings(),
+      settings: new ImaSdkSettings,
       UiElements: {
         AD_ATTRIBUTION: "adAttribution",
         COUNTDOWN: "countdown"
@@ -9156,53 +9651,26 @@ function GoogleIma3(source, args) {
     window.google.ima = ima;
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     GoogleIma3.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -9217,6 +9685,7 @@ function GoogleIma3(source, args) {
     console.log(e);
   }
 }
+
 function GoogleSyndicationAdsByGoogle(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -9279,35 +9748,18 @@ function GoogleSyndicationAdsByGoogle(source, args) {
       hit(source);
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     GoogleSyndicationAdsByGoogle.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -9322,6 +9774,7 @@ function GoogleSyndicationAdsByGoogle(source, args) {
     console.log(e);
   }
 }
+
 function GoogleTagServicesGpt(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -9331,15 +9784,15 @@ function GoogleTagServicesGpt(source, args) {
     }
   }
   function GoogleTagServicesGpt(source) {
-    var slots = new Map();
-    var slotsById = new Map();
-    var slotsPerPath = new Map();
-    var slotCreatives = new Map();
-    var eventCallbacks = new Map();
-    var gTargeting = new Map();
+    var slots = new Map;
+    var slotsById = new Map;
+    var slotsPerPath = new Map;
+    var slotCreatives = new Map;
+    var eventCallbacks = new Map;
+    var gTargeting = new Map;
     var addEventListener = function addEventListener(name, listener) {
       if (!eventCallbacks.has(name)) {
-        eventCallbacks.set(name, new Set());
+        eventCallbacks.set(name, new Set);
       }
       eventCallbacks.get(name).add(listener);
       return this;
@@ -9351,9 +9804,9 @@ function GoogleTagServicesGpt(source, args) {
       return false;
     };
     var fireSlotEvent = function fireSlotEvent(name, slot) {
-      return new Promise(function (resolve) {
-        requestAnimationFrame(function () {
-          var size = [0, 0];
+      return new Promise((function(resolve) {
+        requestAnimationFrame((function() {
+          var size = [ 0, 0 ];
           var callbacksSet = eventCallbacks.get(name) || [];
           var callbackArray = Array.from(callbacksSet);
           for (var i = 0; i < callbackArray.length; i += 1) {
@@ -9364,8 +9817,8 @@ function GoogleTagServicesGpt(source, args) {
             });
           }
           resolve();
-        });
-      });
+        }));
+      }));
     };
     var emptySlotElement = function emptySlotElement(slot) {
       var node = document.getElementById(slot.getSlotElementId());
@@ -9436,7 +9889,7 @@ function GoogleTagServicesGpt(source, args) {
     SizeMappingBuilder.prototype.build = noopNull;
     var getTargetingValue = function getTargetingValue(v) {
       if (typeof v === "string") {
-        return [v];
+        return [ v ];
       }
       try {
         return Array.prototype.flat.call(v);
@@ -9458,9 +9911,9 @@ function GoogleTagServicesGpt(source, args) {
         (_document$getElementB2 = document.getElementById(optDiv)) === null || _document$getElementB2 === void 0 || _document$getElementB2.remove();
         return slotsById.get(optDiv);
       }
-      var attributes = new Map();
-      var targeting = new Map();
-      var exclusions = new Set();
+      var attributes = new Map;
+      var targeting = new Map;
+      var exclusions = new Set;
       var response = {
         advertiserId: undefined,
         campaignId: undefined,
@@ -9468,20 +9921,20 @@ function GoogleTagServicesGpt(source, args) {
         creativeTemplateId: undefined,
         lineItemId: undefined
       };
-      var sizes = [{
+      var sizes = [ {
         getHeight: function getHeight() {
           return 2;
         },
         getWidth: function getWidth() {
           return 2;
         }
-      }];
+      } ];
       var num = (slotsPerPath.get(adUnitPath) || 0) + 1;
       slotsPerPath.set(adUnitPath, num);
       var id = `${adUnitPath}_${num}`;
       var clickUrl = "";
       var collapseEmptyDiv = null;
-      var services = new Set();
+      var services = new Set;
       var slot = {
         addService(e) {
           services.add(e);
@@ -9618,10 +10071,10 @@ function GoogleTagServicesGpt(source, args) {
       },
       collapseEmptyDivs: noopFunc,
       defineOutOfPagePassback() {
-        return new PassbackSlot();
+        return new PassbackSlot;
       },
       definePassback() {
-        return new PassbackSlot();
+        return new PassbackSlot;
       },
       disableInitialLoad: noopFunc,
       display: noopFunc,
@@ -9652,34 +10105,30 @@ function GoogleTagServicesGpt(source, args) {
       setVideoContent: noopThis,
       updateCorrelator: noopFunc
     };
-    var {
-      googletag = {}
-    } = window;
-    var {
-      cmd = []
-    } = googletag;
+    var {googletag: googletag = {}} = window;
+    var {cmd: cmd = []} = googletag;
     googletag.apiReady = true;
     googletag.cmd = [];
-    googletag.cmd.push = function (a) {
+    googletag.cmd.push = function(a) {
       try {
         a();
       } catch (ex) {}
       return 1;
     };
-    googletag.companionAds = function () {
+    googletag.companionAds = function() {
       return companionAdsService;
     };
-    googletag.content = function () {
+    googletag.content = function() {
       return contentService;
     };
     googletag.defineOutOfPageSlot = defineSlot;
     googletag.defineSlot = defineSlot;
-    googletag.destroySlots = function () {
+    googletag.destroySlots = function() {
       slots.clear();
       slotsById.clear();
     };
     googletag.disablePublisherConsole = noopFunc;
-    googletag.display = function (arg) {
+    googletag.display = function(arg) {
       var id;
       if (arg !== null && arg !== void 0 && arg.getSlotElementId) {
         id = arg.getSlotElementId();
@@ -9692,13 +10141,13 @@ function GoogleTagServicesGpt(source, args) {
     };
     googletag.enableServices = noopFunc;
     googletag.getVersion = noopStr;
-    googletag.pubads = function () {
+    googletag.pubads = function() {
       return pubAdsService;
     };
     googletag.pubadsReady = true;
     googletag.setAdIframeTitle = noopFunc;
-    googletag.sizeMapping = function () {
-      return new SizeMappingBuilder();
+    googletag.sizeMapping = function() {
+      return new SizeMappingBuilder;
     };
     window.googletag = googletag;
     while (cmd.length !== 0) {
@@ -9706,32 +10155,15 @@ function GoogleTagServicesGpt(source, args) {
     }
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
@@ -9750,7 +10182,7 @@ function GoogleTagServicesGpt(source, args) {
   function trueFunc() {
     return true;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     GoogleTagServicesGpt.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -9765,6 +10197,7 @@ function GoogleTagServicesGpt(source, args) {
     console.log(e);
   }
 }
+
 function Matomo(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -9788,36 +10221,19 @@ function Matomo(source, args) {
     window.Piwik = matomoWrapper;
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     Matomo.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -9832,6 +10248,7 @@ function Matomo(source, args) {
     console.log(e);
   }
 }
+
 function NaverWcslog(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -9848,36 +10265,19 @@ function NaverWcslog(source, args) {
     };
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     NaverWcslog.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -9892,6 +10292,7 @@ function NaverWcslog(source, args) {
     console.log(e);
   }
 }
+
 function Pardot(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -9925,32 +10326,15 @@ function Pardot(source, args) {
     piTracker();
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
@@ -9960,7 +10344,7 @@ function Pardot(source, args) {
   function noopNull() {
     return null;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     Pardot.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -9975,6 +10359,7 @@ function Pardot(source, args) {
     console.log(e);
   }
 }
+
 function Prebid(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -10022,32 +10407,15 @@ function Prebid(source, args) {
     window.pbjs = pbjsWrapper;
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopStr() {
@@ -10056,7 +10424,7 @@ function Prebid(source, args) {
   function noopArray() {
     return [];
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     Prebid.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -10071,6 +10439,7 @@ function Prebid(source, args) {
     console.log(e);
   }
 }
+
 function ScoreCardResearchBeacon(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -10088,35 +10457,18 @@ function ScoreCardResearchBeacon(source, args) {
     };
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     ScoreCardResearchBeacon.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -10131,6 +10483,7 @@ function ScoreCardResearchBeacon(source, args) {
     console.log(e);
   }
 }
+
 function abortCurrentInlineScript(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -10173,13 +10526,8 @@ function abortCurrentInlineScript(source, args) {
     };
     var _setChainPropAccess = function setChainPropAccess(owner, property) {
       var chainInfo = getPropertyInChain(owner, property);
-      var {
-        base: base
-      } = chainInfo;
-      var {
-        prop: prop,
-        chain: chain
-      } = chainInfo;
+      var {base: base} = chainInfo;
+      var {prop: prop, chain: chain} = chainInfo;
       if (base instanceof Object === false && base === null) {
         var props = property.split(".");
         var propIndex = props.indexOf(prop);
@@ -10246,177 +10594,100 @@ function abortCurrentInlineScript(source, args) {
   function randomId() {
     return Math.random().toString(36).slice(2, 9);
   }
-  function setPropertyAccess(object, property, descriptor) {
-    var currentDescriptor = Object.getOwnPropertyDescriptor(object, property);
-    if (currentDescriptor && !currentDescriptor.configurable) {
-      return false;
-    }
-    Object.defineProperty(object, property, descriptor);
-    return true;
+  function setPropertyAccess(e, r, t) {
+    var c = Object.getOwnPropertyDescriptor(e, r);
+    return !(c && !c.configurable) && (Object.defineProperty(e, r, t), true);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
       configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
     });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
-    };
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function createOnErrorHandler(rid) {
-    var nativeOnError = window.onerror;
-    return function onError(error) {
-      if (typeof error === "string" && error.includes(rid)) {
-        return true;
-      }
-      if (nativeOnError instanceof Function) {
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-        return nativeOnError.apply(window, [error, ...args]);
+  function createOnErrorHandler(r) {
+    var n = window.onerror;
+    return function(e) {
+      if ("string" == typeof e && e.includes(r)) return true;
+      if (n instanceof Function) {
+        for (var t = arguments.length, o = new Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) o[i - 1] = arguments[i];
+        return n.apply(window, [ e, ...o ]);
       }
       return false;
     };
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
   function getDescriptorAddon() {
     return {
       isAbortingSuspended: false,
-      isolateCallback(cb) {
+      isolateCallback(r) {
         this.isAbortingSuspended = true;
         try {
-          for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-            args[_key - 1] = arguments[_key];
-          }
-          var result = cb(...args);
-          this.isAbortingSuspended = false;
-          return result;
-        } catch (_unused) {
-          var rid = randomId();
-          this.isAbortingSuspended = false;
-          throw new ReferenceError(rid);
+          for (var e = arguments.length, n = new Array(e > 1 ? e - 1 : 0), t = 1; t < e; t++) n[t - 1] = arguments[t];
+          var i = r(...n);
+          return this.isAbortingSuspended = !1, i;
+        } catch (r) {
+          var s = randomId();
+          throw this.isAbortingSuspended = false, new ReferenceError(s);
         }
       }
     };
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     abortCurrentInlineScript.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -10431,6 +10702,7 @@ function abortCurrentInlineScript(source, args) {
     console.log(e);
   }
 }
+
 function abortOnPropertyRead(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -10450,13 +10722,8 @@ function abortOnPropertyRead(source, args) {
     };
     var _setChainPropAccess = function setChainPropAccess(owner, property) {
       var chainInfo = getPropertyInChain(owner, property);
-      var {
-        base: base
-      } = chainInfo;
-      var {
-        prop: prop,
-        chain: chain
-      } = chainInfo;
+      var {base: base} = chainInfo;
+      var {prop: prop, chain: chain} = chainInfo;
       if (chain) {
         var setter = function setter(a) {
           base = a;
@@ -10483,105 +10750,61 @@ function abortOnPropertyRead(source, args) {
   function randomId() {
     return Math.random().toString(36).slice(2, 9);
   }
-  function setPropertyAccess(object, property, descriptor) {
-    var currentDescriptor = Object.getOwnPropertyDescriptor(object, property);
-    if (currentDescriptor && !currentDescriptor.configurable) {
-      return false;
-    }
-    Object.defineProperty(object, property, descriptor);
-    return true;
+  function setPropertyAccess(e, r, t) {
+    var c = Object.getOwnPropertyDescriptor(e, r);
+    return !(c && !c.configurable) && (Object.defineProperty(e, r, t), true);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
       configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
     });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
-    };
   }
-  function createOnErrorHandler(rid) {
-    var nativeOnError = window.onerror;
-    return function onError(error) {
-      if (typeof error === "string" && error.includes(rid)) {
-        return true;
-      }
-      if (nativeOnError instanceof Function) {
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-        return nativeOnError.apply(window, [error, ...args]);
+  function createOnErrorHandler(r) {
+    var n = window.onerror;
+    return function(e) {
+      if ("string" == typeof e && e.includes(r)) return true;
+      if (n instanceof Function) {
+        for (var t = arguments.length, o = new Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) o[i - 1] = arguments[i];
+        return n.apply(window, [ e, ...o ]);
       }
       return false;
     };
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     abortOnPropertyRead.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -10596,6 +10819,7 @@ function abortOnPropertyRead(source, args) {
     console.log(e);
   }
 }
+
 function abortOnPropertyWrite(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -10615,13 +10839,8 @@ function abortOnPropertyWrite(source, args) {
     };
     var _setChainPropAccess = function setChainPropAccess(owner, property) {
       var chainInfo = getPropertyInChain(owner, property);
-      var {
-        base: base
-      } = chainInfo;
-      var {
-        prop: prop,
-        chain: chain
-      } = chainInfo;
+      var {base: base} = chainInfo;
+      var {prop: prop, chain: chain} = chainInfo;
       if (chain) {
         var setter = function setter(a) {
           base = a;
@@ -10647,105 +10866,61 @@ function abortOnPropertyWrite(source, args) {
   function randomId() {
     return Math.random().toString(36).slice(2, 9);
   }
-  function setPropertyAccess(object, property, descriptor) {
-    var currentDescriptor = Object.getOwnPropertyDescriptor(object, property);
-    if (currentDescriptor && !currentDescriptor.configurable) {
-      return false;
-    }
-    Object.defineProperty(object, property, descriptor);
-    return true;
+  function setPropertyAccess(e, r, t) {
+    var c = Object.getOwnPropertyDescriptor(e, r);
+    return !(c && !c.configurable) && (Object.defineProperty(e, r, t), true);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
       configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
     });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
-    };
   }
-  function createOnErrorHandler(rid) {
-    var nativeOnError = window.onerror;
-    return function onError(error) {
-      if (typeof error === "string" && error.includes(rid)) {
-        return true;
-      }
-      if (nativeOnError instanceof Function) {
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-        return nativeOnError.apply(window, [error, ...args]);
+  function createOnErrorHandler(r) {
+    var n = window.onerror;
+    return function(e) {
+      if ("string" == typeof e && e.includes(r)) return true;
+      if (n instanceof Function) {
+        for (var t = arguments.length, o = new Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) o[i - 1] = arguments[i];
+        return n.apply(window, [ e, ...o ]);
       }
       return false;
     };
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     abortOnPropertyWrite.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -10760,6 +10935,7 @@ function abortOnPropertyWrite(source, args) {
     console.log(e);
   }
 }
+
 function abortOnStackTrace(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -10779,13 +10955,8 @@ function abortOnStackTrace(source, args) {
     };
     var _setChainPropAccess = function setChainPropAccess(owner, property) {
       var chainInfo = getPropertyInChain(owner, property);
-      var {
-        base: base
-      } = chainInfo;
-      var {
-        prop: prop,
-        chain: chain
-      } = chainInfo;
+      var {base: base} = chainInfo;
+      var {prop: prop, chain: chain} = chainInfo;
       if (chain) {
         var setter = function setter(a) {
           base = a;
@@ -10808,13 +10979,13 @@ function abortOnStackTrace(source, args) {
       var descriptorWrapper = Object.assign(getDescriptorAddon(), {
         value: base[prop],
         get() {
-          if (!this.isAbortingSuspended && this.isolateCallback(matchStackTrace, stack, new Error().stack)) {
+          if (!this.isAbortingSuspended && this.isolateCallback(matchStackTrace, stack, (new Error).stack)) {
             abort();
           }
           return this.value;
         },
         set(newValue) {
-          if (!this.isAbortingSuspended && this.isolateCallback(matchStackTrace, stack, new Error().stack)) {
+          if (!this.isAbortingSuspended && this.isolateCallback(matchStackTrace, stack, (new Error).stack)) {
             abort();
           }
           this.value = newValue;
@@ -10835,323 +11006,184 @@ function abortOnStackTrace(source, args) {
   function randomId() {
     return Math.random().toString(36).slice(2, 9);
   }
-  function setPropertyAccess(object, property, descriptor) {
-    var currentDescriptor = Object.getOwnPropertyDescriptor(object, property);
-    if (currentDescriptor && !currentDescriptor.configurable) {
-      return false;
-    }
-    Object.defineProperty(object, property, descriptor);
-    return true;
+  function setPropertyAccess(e, r, t) {
+    var c = Object.getOwnPropertyDescriptor(e, r);
+    return !(c && !c.configurable) && (Object.defineProperty(e, r, t), true);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
       configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
     });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
-    };
   }
-  function createOnErrorHandler(rid) {
-    var nativeOnError = window.onerror;
-    return function onError(error) {
-      if (typeof error === "string" && error.includes(rid)) {
-        return true;
-      }
-      if (nativeOnError instanceof Function) {
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-        return nativeOnError.apply(window, [error, ...args]);
+  function createOnErrorHandler(r) {
+    var n = window.onerror;
+    return function(e) {
+      if ("string" == typeof e && e.includes(r)) return true;
+      if (n instanceof Function) {
+        for (var t = arguments.length, o = new Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) o[i - 1] = arguments[i];
+        return n.apply(window, [ e, ...o ]);
       }
       return false;
     };
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function matchStackTrace(stackMatch, stackTrace) {
-    if (!stackMatch || stackMatch === "") {
-      return true;
-    }
-    var regExpValues = backupRegExpValues();
-    if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-      if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-        restoreRegExpValues(regExpValues);
-      }
-      return true;
-    }
-    var stackRegexp = toRegExp(stackMatch);
-    var refinedStackTrace = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    }).join("\n");
-    if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-      restoreRegExpValues(regExpValues);
-    }
-    return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
   }
   function getDescriptorAddon() {
     return {
       isAbortingSuspended: false,
-      isolateCallback(cb) {
+      isolateCallback(r) {
         this.isAbortingSuspended = true;
         try {
-          for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-            args[_key - 1] = arguments[_key];
-          }
-          var result = cb(...args);
-          this.isAbortingSuspended = false;
-          return result;
-        } catch (_unused) {
-          var rid = randomId();
-          this.isAbortingSuspended = false;
-          throw new ReferenceError(rid);
+          for (var e = arguments.length, n = new Array(e > 1 ? e - 1 : 0), t = 1; t < e; t++) n[t - 1] = arguments[t];
+          var i = r(...n);
+          return this.isAbortingSuspended = !1, i;
+        } catch (r) {
+          var s = randomId();
+          throw this.isAbortingSuspended = false, new ReferenceError(s);
         }
       }
     };
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
   function getNativeRegexpTest() {
-    var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "test");
-    var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-    if (descriptor && typeof descriptor.value === "function") {
-      return nativeRegexTest;
-    }
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
     throw new Error("RegExp.prototype.test is not a function");
   }
-  function shouldAbortInlineOrInjectedScript(stackMatch, stackTrace) {
-    var INLINE_SCRIPT_STRING = "inlineScript";
-    var INJECTED_SCRIPT_STRING = "injectedScript";
-    var INJECTED_SCRIPT_MARKER = "<anonymous>";
-    var isInlineScript = function isInlineScript(match) {
-      return match.includes(INLINE_SCRIPT_STRING);
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
     };
-    var isInjectedScript = function isInjectedScript(match) {
-      return match.includes(INJECTED_SCRIPT_STRING);
-    };
-    if (!(isInlineScript(stackMatch) || isInjectedScript(stackMatch))) {
-      return false;
-    }
-    var documentURL = window.location.href;
-    var pos = documentURL.indexOf("#");
-    if (pos !== -1) {
-      documentURL = documentURL.slice(0, pos);
-    }
-    var stackSteps = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    });
-    var stackLines = stackSteps.map(function (line) {
-      var stack;
-      var getStackTraceValues = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(line);
-      if (getStackTraceValues) {
-        var _stackURL, _stackURL2;
-        var stackURL = getStackTraceValues[2];
-        var stackLine = getStackTraceValues[3];
-        var stackCol = getStackTraceValues[4];
-        if ((_stackURL = stackURL) !== null && _stackURL !== void 0 && _stackURL.startsWith("(")) {
-          stackURL = stackURL.slice(1);
-        }
-        if ((_stackURL2 = stackURL) !== null && _stackURL2 !== void 0 && _stackURL2.startsWith(INJECTED_SCRIPT_MARKER)) {
-          var _stackFunction;
-          stackURL = INJECTED_SCRIPT_STRING;
-          var stackFunction = getStackTraceValues[1] !== undefined ? getStackTraceValues[1].slice(0, -1) : line.slice(0, getStackTraceValues.index).trim();
-          if ((_stackFunction = stackFunction) !== null && _stackFunction !== void 0 && _stackFunction.startsWith("at")) {
-            stackFunction = stackFunction.slice(2).trim();
-          }
-          stack = `${stackFunction} ${stackURL}${stackLine}${stackCol}`.trim();
-        } else if (stackURL === documentURL) {
-          stack = `${INLINE_SCRIPT_STRING}${stackLine}${stackCol}`.trim();
-        } else {
-          stack = `${stackURL}${stackLine}${stackCol}`.trim();
-        }
-      } else {
-        stack = line;
-      }
-      return stack;
-    });
-    if (stackLines) {
-      for (var index = 0; index < stackLines.length; index += 1) {
-        if (isInlineScript(stackMatch) && stackLines[index].startsWith(INLINE_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-        if (isInjectedScript(stackMatch) && stackLines[index].startsWith(INJECTED_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-      }
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
     }
     return false;
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     abortOnStackTrace.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -11166,6 +11198,7 @@ function abortOnStackTrace(source, args) {
     console.log(e);
   }
 }
+
 function adjustSetInterval(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -11188,128 +11221,68 @@ function adjustSetInterval(source, args) {
       for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         args[_key - 2] = arguments[_key];
       }
-      return nativeSetInterval.apply(window, [callback, delay, ...args]);
+      return nativeSetInterval.apply(window, [ callback, delay, ...args ]);
     };
     window.setInterval = intervalWrapper;
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function isValidCallback(callback) {
-    return callback instanceof Function || typeof callback === "string";
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function isValidCallback(n) {
+    return n instanceof Function || "string" == typeof n;
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
+  }
+  function getBoostMultiplier(t) {
+    var e = parseFloat(t), i = nativeIsNaN(e) || !nativeIsFinite(e) ? .05 : e;
+    return i < .001 && (i = .001), i > 50 && (i = 50), i;
+  }
+  function isDelayMatched(a, e) {
+    return shouldMatchAnyDelay(a) || e === getMatchDelay(a);
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
   }
-  function getBoostMultiplier(boost) {
-    var DEFAULT_MULTIPLIER = .05;
-    var MIN_MULTIPLIER = .001;
-    var MAX_MULTIPLIER = 50;
-    var parsedBoost = parseFloat(boost);
-    var boostMultiplier = nativeIsNaN(parsedBoost) || !nativeIsFinite(parsedBoost) ? DEFAULT_MULTIPLIER : parsedBoost;
-    if (boostMultiplier < MIN_MULTIPLIER) {
-      boostMultiplier = MIN_MULTIPLIER;
-    }
-    if (boostMultiplier > MAX_MULTIPLIER) {
-      boostMultiplier = MAX_MULTIPLIER;
-    }
-    return boostMultiplier;
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  function isDelayMatched(inputDelay, realDelay) {
-    return shouldMatchAnyDelay(inputDelay) || realDelay === getMatchDelay(inputDelay);
+  function nativeIsFinite(i) {
+    return (Number.isFinite || window.isFinite)(i);
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
+  function getMatchDelay(a) {
+    var e = parseInt(a, 10);
+    return nativeIsNaN(e) ? 1e3 : e;
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function shouldMatchAnyDelay(n) {
+    return "*" === n;
   }
-  function nativeIsFinite(num) {
-    var native = Number.isFinite || window.isFinite;
-    return native(num);
-  }
-  function getMatchDelay(delay) {
-    var DEFAULT_DELAY = 1e3;
-    var parsedDelay = parseInt(delay, 10);
-    var delayMatch = nativeIsNaN(parsedDelay) ? DEFAULT_DELAY : parsedDelay;
-    return delayMatch;
-  }
-  function shouldMatchAnyDelay(delay) {
-    return delay === "*";
-  }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     adjustSetInterval.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -11324,6 +11297,7 @@ function adjustSetInterval(source, args) {
     console.log(e);
   }
 }
+
 function adjustSetTimeout(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -11346,128 +11320,68 @@ function adjustSetTimeout(source, args) {
       for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         args[_key - 2] = arguments[_key];
       }
-      return nativeSetTimeout.apply(window, [callback, delay, ...args]);
+      return nativeSetTimeout.apply(window, [ callback, delay, ...args ]);
     };
     window.setTimeout = timeoutWrapper;
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function isValidCallback(callback) {
-    return callback instanceof Function || typeof callback === "string";
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function isValidCallback(n) {
+    return n instanceof Function || "string" == typeof n;
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
+  }
+  function getBoostMultiplier(t) {
+    var e = parseFloat(t), i = nativeIsNaN(e) || !nativeIsFinite(e) ? .05 : e;
+    return i < .001 && (i = .001), i > 50 && (i = 50), i;
+  }
+  function isDelayMatched(a, e) {
+    return shouldMatchAnyDelay(a) || e === getMatchDelay(a);
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
   }
-  function getBoostMultiplier(boost) {
-    var DEFAULT_MULTIPLIER = .05;
-    var MIN_MULTIPLIER = .001;
-    var MAX_MULTIPLIER = 50;
-    var parsedBoost = parseFloat(boost);
-    var boostMultiplier = nativeIsNaN(parsedBoost) || !nativeIsFinite(parsedBoost) ? DEFAULT_MULTIPLIER : parsedBoost;
-    if (boostMultiplier < MIN_MULTIPLIER) {
-      boostMultiplier = MIN_MULTIPLIER;
-    }
-    if (boostMultiplier > MAX_MULTIPLIER) {
-      boostMultiplier = MAX_MULTIPLIER;
-    }
-    return boostMultiplier;
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  function isDelayMatched(inputDelay, realDelay) {
-    return shouldMatchAnyDelay(inputDelay) || realDelay === getMatchDelay(inputDelay);
+  function nativeIsFinite(i) {
+    return (Number.isFinite || window.isFinite)(i);
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
+  function getMatchDelay(a) {
+    var e = parseInt(a, 10);
+    return nativeIsNaN(e) ? 1e3 : e;
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function shouldMatchAnyDelay(n) {
+    return "*" === n;
   }
-  function nativeIsFinite(num) {
-    var native = Number.isFinite || window.isFinite;
-    return native(num);
-  }
-  function getMatchDelay(delay) {
-    var DEFAULT_DELAY = 1e3;
-    var parsedDelay = parseInt(delay, 10);
-    var delayMatch = nativeIsNaN(parsedDelay) ? DEFAULT_DELAY : parsedDelay;
-    return delayMatch;
-  }
-  function shouldMatchAnyDelay(delay) {
-    return delay === "*";
-  }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     adjustSetTimeout.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -11482,6 +11396,7 @@ function adjustSetTimeout(source, args) {
     console.log(e);
   }
 }
+
 function callNoThrow(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -11494,10 +11409,7 @@ function callNoThrow(source, args) {
     if (!functionName) {
       return;
     }
-    var {
-      base: base,
-      prop: prop
-    } = getPropertyInChain(window, functionName);
+    var {base: base, prop: prop} = getPropertyInChain(window, functionName);
     if (!base || !prop || typeof base[prop] !== "function") {
       var message = `${functionName} is not a function`;
       logMessage(source, message);
@@ -11519,99 +11431,53 @@ function callNoThrow(source, args) {
     };
     base[prop] = new Proxy(base[prop], objectHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
-      configurable: true
-    });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
     };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
+      configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
+    });
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     callNoThrow.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -11626,6 +11492,7 @@ function callNoThrow(source, args) {
     console.log(e);
   }
 }
+
 function debugCurrentInlineScript(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -11662,13 +11529,8 @@ function debugCurrentInlineScript(source, args) {
     };
     var _setChainPropAccess = function setChainPropAccess(owner, property) {
       var chainInfo = getPropertyInChain(owner, property);
-      var {
-        base: base
-      } = chainInfo;
-      var {
-        prop: prop,
-        chain: chain
-      } = chainInfo;
+      var {base: base} = chainInfo;
+      var {prop: prop, chain: chain} = chainInfo;
       if (base instanceof Object === false && base === null) {
         var props = property.split(".");
         var propIndex = props.indexOf(prop);
@@ -11710,157 +11572,84 @@ function debugCurrentInlineScript(source, args) {
   function randomId() {
     return Math.random().toString(36).slice(2, 9);
   }
-  function setPropertyAccess(object, property, descriptor) {
-    var currentDescriptor = Object.getOwnPropertyDescriptor(object, property);
-    if (currentDescriptor && !currentDescriptor.configurable) {
-      return false;
-    }
-    Object.defineProperty(object, property, descriptor);
-    return true;
+  function setPropertyAccess(e, r, t) {
+    var c = Object.getOwnPropertyDescriptor(e, r);
+    return !(c && !c.configurable) && (Object.defineProperty(e, r, t), true);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
       configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
     });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
-    };
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function createOnErrorHandler(rid) {
-    var nativeOnError = window.onerror;
-    return function onError(error) {
-      if (typeof error === "string" && error.includes(rid)) {
-        return true;
-      }
-      if (nativeOnError instanceof Function) {
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-        return nativeOnError.apply(window, [error, ...args]);
+  function createOnErrorHandler(r) {
+    var n = window.onerror;
+    return function(e) {
+      if ("string" == typeof e && e.includes(r)) return true;
+      if (n instanceof Function) {
+        for (var t = arguments.length, o = new Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) o[i - 1] = arguments[i];
+        return n.apply(window, [ e, ...o ]);
       }
       return false;
     };
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     debugCurrentInlineScript.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -11875,6 +11664,7 @@ function debugCurrentInlineScript(source, args) {
     console.log(e);
   }
 }
+
 function debugOnPropertyRead(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -11894,13 +11684,8 @@ function debugOnPropertyRead(source, args) {
     };
     var _setChainPropAccess = function setChainPropAccess(owner, property) {
       var chainInfo = getPropertyInChain(owner, property);
-      var {
-        base: base
-      } = chainInfo;
-      var {
-        prop: prop,
-        chain: chain
-      } = chainInfo;
+      var {base: base} = chainInfo;
+      var {prop: prop, chain: chain} = chainInfo;
       if (chain) {
         var setter = function setter(a) {
           base = a;
@@ -11927,106 +11712,62 @@ function debugOnPropertyRead(source, args) {
   function randomId() {
     return Math.random().toString(36).slice(2, 9);
   }
-  function setPropertyAccess(object, property, descriptor) {
-    var currentDescriptor = Object.getOwnPropertyDescriptor(object, property);
-    if (currentDescriptor && !currentDescriptor.configurable) {
-      return false;
-    }
-    Object.defineProperty(object, property, descriptor);
-    return true;
+  function setPropertyAccess(e, r, t) {
+    var c = Object.getOwnPropertyDescriptor(e, r);
+    return !(c && !c.configurable) && (Object.defineProperty(e, r, t), true);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
       configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
     });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
-    };
   }
-  function createOnErrorHandler(rid) {
-    var nativeOnError = window.onerror;
-    return function onError(error) {
-      if (typeof error === "string" && error.includes(rid)) {
-        return true;
-      }
-      if (nativeOnError instanceof Function) {
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-        return nativeOnError.apply(window, [error, ...args]);
+  function createOnErrorHandler(r) {
+    var n = window.onerror;
+    return function(e) {
+      if ("string" == typeof e && e.includes(r)) return true;
+      if (n instanceof Function) {
+        for (var t = arguments.length, o = new Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) o[i - 1] = arguments[i];
+        return n.apply(window, [ e, ...o ]);
       }
       return false;
     };
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     debugOnPropertyRead.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -12041,6 +11782,7 @@ function debugOnPropertyRead(source, args) {
     console.log(e);
   }
 }
+
 function debugOnPropertyWrite(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -12060,13 +11802,8 @@ function debugOnPropertyWrite(source, args) {
     };
     var _setChainPropAccess = function setChainPropAccess(owner, property) {
       var chainInfo = getPropertyInChain(owner, property);
-      var {
-        base: base
-      } = chainInfo;
-      var {
-        prop: prop,
-        chain: chain
-      } = chainInfo;
+      var {base: base} = chainInfo;
+      var {prop: prop, chain: chain} = chainInfo;
       if (chain) {
         var setter = function setter(a) {
           base = a;
@@ -12092,105 +11829,61 @@ function debugOnPropertyWrite(source, args) {
   function randomId() {
     return Math.random().toString(36).slice(2, 9);
   }
-  function setPropertyAccess(object, property, descriptor) {
-    var currentDescriptor = Object.getOwnPropertyDescriptor(object, property);
-    if (currentDescriptor && !currentDescriptor.configurable) {
-      return false;
-    }
-    Object.defineProperty(object, property, descriptor);
-    return true;
+  function setPropertyAccess(e, r, t) {
+    var c = Object.getOwnPropertyDescriptor(e, r);
+    return !(c && !c.configurable) && (Object.defineProperty(e, r, t), true);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
       configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
     });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
-    };
   }
-  function createOnErrorHandler(rid) {
-    var nativeOnError = window.onerror;
-    return function onError(error) {
-      if (typeof error === "string" && error.includes(rid)) {
-        return true;
-      }
-      if (nativeOnError instanceof Function) {
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-        return nativeOnError.apply(window, [error, ...args]);
+  function createOnErrorHandler(r) {
+    var n = window.onerror;
+    return function(e) {
+      if ("string" == typeof e && e.includes(r)) return true;
+      if (n instanceof Function) {
+        for (var t = arguments.length, o = new Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) o[i - 1] = arguments[i];
+        return n.apply(window, [ e, ...o ]);
       }
       return false;
     };
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     debugOnPropertyWrite.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -12205,6 +11898,7 @@ function debugOnPropertyWrite(source, args) {
     console.log(e);
   }
 }
+
 function dirString(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -12214,9 +11908,7 @@ function dirString(source, args) {
     }
   }
   function dirString(source, times) {
-    var {
-      dir: dir
-    } = console;
+    var {dir: dir} = console;
     function dirWrapper(object) {
       if (typeof dir === "function") {
         dir.call(this, object);
@@ -12225,35 +11917,18 @@ function dirString(source, args) {
     }
     console.dir = dirWrapper;
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     dirString.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -12268,6 +11943,7 @@ function dirString(source, args) {
     console.log(e);
   }
 }
+
 function disableNewtabLinks(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -12277,10 +11953,8 @@ function disableNewtabLinks(source, args) {
     }
   }
   function disableNewtabLinks(source) {
-    document.addEventListener("click", function (ev) {
-      var {
-        target: target
-      } = ev;
+    document.addEventListener("click", (function(ev) {
+      var {target: target} = ev;
       while (target !== null) {
         if (target.localName === "a" && target.hasAttribute("target")) {
           ev.stopPropagation();
@@ -12290,37 +11964,20 @@ function disableNewtabLinks(source, args) {
         }
         target = target.parentNode;
       }
-    });
+    }));
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     disableNewtabLinks.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -12335,6 +11992,7 @@ function disableNewtabLinks(source, args) {
     console.log(e);
   }
 }
+
 function evalDataPrune(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -12361,351 +12019,274 @@ function evalDataPrune(source, args) {
     };
     window.eval = new Proxy(window.eval, evalHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function matchStackTrace(stackMatch, stackTrace) {
-    if (!stackMatch || stackMatch === "") {
-      return true;
-    }
-    var regExpValues = backupRegExpValues();
-    if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-      if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-        restoreRegExpValues(regExpValues);
-      }
-      return true;
-    }
-    var stackRegexp = toRegExp(stackMatch);
-    var refinedStackTrace = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    }).join("\n");
-    if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-      restoreRegExpValues(regExpValues);
-    }
-    return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
-  }
-  function getWildcardPropertyInChain(base, chain) {
-    var lookThrough = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var output = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      if (chain === "*" || chain === "[]") {
-        for (var key in base) {
-          if (Object.prototype.hasOwnProperty.call(base, key)) {
-            output.push({
-              base: base,
-              prop: key
-            });
-          }
-        }
-      } else {
-        output.push({
-          base: base,
-          prop: chain
-        });
-      }
-      return output;
-    }
-    var prop = chain.slice(0, pos);
-    var shouldLookThrough = prop === "[]" && Array.isArray(base) || prop === "*" && base instanceof Object;
-    if (shouldLookThrough) {
-      var nextProp = chain.slice(pos + 1);
-      var baseKeys = Object.keys(base);
-      baseKeys.forEach(function (key) {
-        var item = base[key];
-        getWildcardPropertyInChain(item, nextProp, lookThrough, output);
-      });
-    }
-    if (Array.isArray(base)) {
-      base.forEach(function (key) {
-        var nextBase = key;
-        if (nextBase !== undefined) {
-          getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
-        }
-      });
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if (nextBase !== undefined) {
-      getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
-    }
-    return output;
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
+  }
+  function getWildcardPropertyInChain(r, e) {
+    var a = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : [], t = arguments.length > 4 ? arguments[4] : void 0, o = e.indexOf(".");
+    if (-1 === o) {
+      if ("*" === e || "[]" === e) {
+        for (var n in r) if (Object.prototype.hasOwnProperty.call(r, n)) if (void 0 !== t) {
+          var s = r[n];
+          "string" == typeof s && t instanceof RegExp ? t.test(s) && i.push({
+            base: r,
+            prop: n
+          }) : s === t && i.push({
+            base: r,
+            prop: n
+          });
+        } else i.push({
+          base: r,
+          prop: n
+        });
+      } else if (void 0 !== t) {
+        var p = r[e];
+        "string" == typeof p && t instanceof RegExp ? t.test(p) && i.push({
+          base: r,
+          prop: e
+        }) : r[e] === t && i.push({
+          base: r,
+          prop: e
+        });
+      } else i.push({
+        base: r,
+        prop: e
+      });
+      return i;
+    }
+    var c = e.slice(0, o);
+    if ("[]" === c && Array.isArray(r) || "*" === c && r instanceof Object || "[-]" === c && Array.isArray(r) || "{-}" === c && r instanceof Object) {
+      var f = e.slice(o + 1), y = Object.keys(r);
+      if ("{-}" === c || "[-]" === c) {
+        var h = Array.isArray(r) ? "array" : "object";
+        return ("{-}" !== c || "object" !== h) && ("[-]" !== c || "array" !== h) || y.forEach((function(e) {
+          var a = r[e];
+          isKeyInObject(a, f, t) && i.push({
+            base: r,
+            prop: e
+          });
+        })), i;
+      }
+      y.forEach((function(e) {
+        getWildcardPropertyInChain(r[e], f, a, i, t);
+      }));
+    }
+    Array.isArray(r) && r.forEach((function(r) {
+      void 0 !== r && getWildcardPropertyInChain(r, e, a, i, t);
+    }));
+    var d = r[c];
+    return e = e.slice(o + 1), void 0 !== d && getWildcardPropertyInChain(d, e, a, i, t), 
+    i;
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function isPruningNeeded(source, root, prunePaths, requiredPaths, stack, nativeObjects) {
-    if (!root) {
-      return false;
+  function isPruningNeeded(n, t, r, e, a, i) {
+    if (!t) return false;
+    var o, {nativeStringify: u} = i, c = r.map((function(n) {
+      return n.path;
+    })), f = e.map((function(n) {
+      return n.path;
+    }));
+    if (0 === c.length && f.length > 0) {
+      var g = u(t);
+      if (toRegExp(f.join("")).test(g)) return logMessage(n, `${window.location.hostname}\n${u(t, null, 2)}\nStack trace:\n${(new Error).stack}`, true), 
+      t && "object" == typeof t && logMessage(n, t, true, false), o = false;
     }
-    var {
-      nativeStringify: nativeStringify
-    } = nativeObjects;
-    var shouldProcess;
-    if (prunePaths.length === 0 && requiredPaths.length > 0) {
-      var rootString = nativeStringify(root);
-      var matchRegex = toRegExp(requiredPaths.join(""));
-      var shouldLog = matchRegex.test(rootString);
-      if (shouldLog) {
-        logMessage(source, `${window.location.hostname}\n${nativeStringify(root, null, 2)}\nStack trace:\n${new Error().stack}`, true);
-        if (root && typeof root === "object") {
-          logMessage(source, root, true, false);
-        }
-        shouldProcess = false;
-        return shouldProcess;
+    if (a && !matchStackTrace(a, (new Error).stack || "")) return o = false;
+    for (var s, l = [ ".*.", "*.", ".*", ".[].", "[].", ".[]" ], _loop = function _loop() {
+      var n = f[p], r = n.split(".").pop(), e = l.some((function(t) {
+        return n.includes(t);
+      })), a = getWildcardPropertyInChain(t, n, e);
+      if (!a.length) return {
+        v: o = false
+      };
+      o = !e;
+      for (var i = 0; i < a.length; i += 1) {
+        var u = "string" == typeof r && void 0 !== a[i].base[r];
+        o = e ? u || o : u && o;
       }
-    }
-    if (stack && !matchStackTrace(stack, new Error().stack || "")) {
-      shouldProcess = false;
-      return shouldProcess;
-    }
-    var wildcardSymbols = [".*.", "*.", ".*", ".[].", "[].", ".[]"];
-    var _loop = function _loop() {
-        var requiredPath = requiredPaths[i];
-        var lastNestedPropName = requiredPath.split(".").pop();
-        var hasWildcard = wildcardSymbols.some(function (symbol) {
-          return requiredPath.includes(symbol);
-        });
-        var details = getWildcardPropertyInChain(root, requiredPath, hasWildcard);
-        if (!details.length) {
-          shouldProcess = false;
-          return {
-            v: shouldProcess
-          };
-        }
-        shouldProcess = !hasWildcard;
-        for (var j = 0; j < details.length; j += 1) {
-          var hasRequiredProp = typeof lastNestedPropName === "string" && details[j].base[lastNestedPropName] !== undefined;
-          if (hasWildcard) {
-            shouldProcess = hasRequiredProp || shouldProcess;
-          } else {
-            shouldProcess = hasRequiredProp && shouldProcess;
-          }
-        }
-      },
-      _ret;
-    for (var i = 0; i < requiredPaths.length; i += 1) {
-      _ret = _loop();
-      if (_ret) return _ret.v;
-    }
-    return shouldProcess;
+    }, p = 0; p < f.length; p += 1) if (s = _loop()) return s.v;
+    return o;
   }
-  function jsonPruner(source, root, prunePaths, requiredPaths, stack, nativeObjects) {
-    var {
-      nativeStringify: nativeStringify
-    } = nativeObjects;
-    if (prunePaths.length === 0 && requiredPaths.length === 0) {
-      logMessage(source, `${window.location.hostname}\n${nativeStringify(root, null, 2)}\nStack trace:\n${new Error().stack}`, true);
-      if (root && typeof root === "object") {
-        logMessage(source, root, true, false);
-      }
-      return root;
-    }
+  function jsonPruner(e, r, n, a, t, i) {
+    var {nativeStringify: o} = i;
+    if (0 === n.length && 0 === a.length) return logMessage(e, `${window.location.hostname}\n${o(r, null, 2)}\nStack trace:\n${(new Error).stack}`, true), 
+    r && "object" == typeof r && logMessage(e, r, true, false), r;
     try {
-      if (isPruningNeeded(source, root, prunePaths, requiredPaths, stack, nativeObjects) === false) {
-        return root;
-      }
-      prunePaths.forEach(function (path) {
-        var ownerObjArr = getWildcardPropertyInChain(root, path, true);
-        ownerObjArr.forEach(function (ownerObj) {
-          if (ownerObj !== undefined && ownerObj.base) {
-            delete ownerObj.base[ownerObj.prop];
-            hit(source);
-          }
-        });
-      });
-    } catch (e) {
-      logMessage(source, e);
+      if (!1 === isPruningNeeded(e, r, n, a, t, i)) return r;
+      n.forEach((function(n) {
+        for (var a = n.path, t = n.value, i = getWildcardPropertyInChain(r, a, !0, [], t), o = i.length - 1; o >= 0; o -= 1) {
+          var s = i[o];
+          if (void 0 !== s && s.base) if (hit(e), Array.isArray(s.base)) try {
+            var l = Number(s.prop);
+            if (Number.isNaN(l)) continue;
+            s.base.splice(l, 1);
+          } catch (e) {
+            console.error("Error while deleting array element", e);
+          } else delete s.base[s.prop];
+        }
+      }));
+    } catch (r) {
+      logMessage(e, r);
     }
-    return root;
+    return r;
   }
-  function getPrunePath(props) {
-    var validPropsString = typeof props === "string" && props !== undefined && props !== "";
-    return validPropsString ? props.split(/ +/) : [];
+  function getPrunePath(t) {
+    var r = ".[=].";
+    if ("string" == typeof t && void 0 !== t && "" !== t) {
+      var e = function(t) {
+        for (var e = [], n = "", i = 0, a = false, s = false; i < t.length; ) {
+          var u = t[i];
+          if (a) n += u, "\\" === u ? s = !s : ("/" !== u || s || (a = false), s = false), 
+          i += 1; else {
+            if (" " === u || "\n" === u || "\t" === u || "\r" === u || "\f" === u || "\v" === u) {
+              for (;i < t.length && /\s/.test(t[i]); ) i += 1;
+              "" !== n && (e.push(n), n = "");
+              continue;
+            }
+            if (t.startsWith(r, i)) {
+              if (n += r, "/" === t[i += 5]) {
+                a = true, s = false, n += "/", i += 1;
+                continue;
+              }
+              continue;
+            }
+            n += u, i += 1;
+          }
+        }
+        return "" !== n && e.push(n), e;
+      }(t);
+      return e.map((function(t) {
+        var e = t.split(r), n = e[0], i = e[1];
+        return void 0 !== i ? ("true" === i ? i = true : "false" === i ? i = false : i.startsWith("/") ? i = toRegExp(i) : "string" == typeof i && /^\d+$/.test(i) && (i = parseFloat(i)), 
+        {
+          path: n,
+          value: i
+        }) : {
+          path: n
+        };
+      }));
+    }
+    return [];
   }
   function getNativeRegexpTest() {
-    var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "test");
-    var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-    if (descriptor && typeof descriptor.value === "function") {
-      return nativeRegexTest;
-    }
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
     throw new Error("RegExp.prototype.test is not a function");
   }
-  function shouldAbortInlineOrInjectedScript(stackMatch, stackTrace) {
-    var INLINE_SCRIPT_STRING = "inlineScript";
-    var INJECTED_SCRIPT_STRING = "injectedScript";
-    var INJECTED_SCRIPT_MARKER = "<anonymous>";
-    var isInlineScript = function isInlineScript(match) {
-      return match.includes(INLINE_SCRIPT_STRING);
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
     };
-    var isInjectedScript = function isInjectedScript(match) {
-      return match.includes(INJECTED_SCRIPT_STRING);
-    };
-    if (!(isInlineScript(stackMatch) || isInjectedScript(stackMatch))) {
-      return false;
-    }
-    var documentURL = window.location.href;
-    var pos = documentURL.indexOf("#");
-    if (pos !== -1) {
-      documentURL = documentURL.slice(0, pos);
-    }
-    var stackSteps = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    });
-    var stackLines = stackSteps.map(function (line) {
-      var stack;
-      var getStackTraceValues = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(line);
-      if (getStackTraceValues) {
-        var _stackURL, _stackURL2;
-        var stackURL = getStackTraceValues[2];
-        var stackLine = getStackTraceValues[3];
-        var stackCol = getStackTraceValues[4];
-        if ((_stackURL = stackURL) !== null && _stackURL !== void 0 && _stackURL.startsWith("(")) {
-          stackURL = stackURL.slice(1);
-        }
-        if ((_stackURL2 = stackURL) !== null && _stackURL2 !== void 0 && _stackURL2.startsWith(INJECTED_SCRIPT_MARKER)) {
-          var _stackFunction;
-          stackURL = INJECTED_SCRIPT_STRING;
-          var stackFunction = getStackTraceValues[1] !== undefined ? getStackTraceValues[1].slice(0, -1) : line.slice(0, getStackTraceValues.index).trim();
-          if ((_stackFunction = stackFunction) !== null && _stackFunction !== void 0 && _stackFunction.startsWith("at")) {
-            stackFunction = stackFunction.slice(2).trim();
-          }
-          stack = `${stackFunction} ${stackURL}${stackLine}${stackCol}`.trim();
-        } else if (stackURL === documentURL) {
-          stack = `${INLINE_SCRIPT_STRING}${stackLine}${stackCol}`.trim();
-        } else {
-          stack = `${stackURL}${stackLine}${stackCol}`.trim();
-        }
-      } else {
-        stack = line;
-      }
-      return stack;
-    });
-    if (stackLines) {
-      for (var index = 0; index < stackLines.length; index += 1) {
-        if (isInlineScript(stackMatch) && stackLines[index].startsWith(INLINE_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-        if (isInjectedScript(stackMatch) && stackLines[index].startsWith(INJECTED_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-      }
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
     }
     return false;
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  function isKeyInObject(t, r, e) {
+    var n = r.split("."), _check2 = function _check(t, r) {
+      if (null == t) return false;
+      if (0 === r.length) return void 0 === e || ("string" == typeof t && e instanceof RegExp ? e.test(t) : t === e);
+      var n = r[0], i = r.slice(1);
+      if ("*" === n || "[]" === n) {
+        if (Array.isArray(t)) return t.some((function(t) {
+          return _check2(t, i);
+        }));
+        if ("object" == typeof t && null !== t) return Object.keys(t).some((function(r) {
+          return _check2(t[r], i);
+        }));
+      }
+      return !!Object.prototype.hasOwnProperty.call(t, n) && _check2(t[n], i);
+    };
+    return _check2(t, n);
+  }
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     evalDataPrune.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -12720,6 +12301,7 @@ function evalDataPrune(source, args) {
     console.log(e);
   }
 }
+
 function forceWindowClose(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -12750,11 +12332,11 @@ function forceWindowClose(source, args) {
       window.addEventListener("adguard:subscribed-to-close-window", extCall, {
         once: true
       });
-      setTimeout(function () {
+      setTimeout((function() {
         window.removeEventListener("adguard:subscribed-to-close-window", extCall, {
           once: true
         });
-      }, 5e3);
+      }), 5e3);
     };
     var shouldClose = function shouldClose() {
       if (path === "") {
@@ -12771,87 +12353,41 @@ function forceWindowClose(source, args) {
       }
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     forceWindowClose.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -12866,6 +12402,7 @@ function forceWindowClose(source, args) {
     console.log(e);
   }
 }
+
 function hideInShadowDom(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -12886,14 +12423,11 @@ function hideInShadowDom(source, args) {
       var hostElements = !baseSelector ? findHostElements(document.documentElement) : document.querySelectorAll(baseSelector);
       var _loop = function _loop() {
         var isHidden = false;
-        var {
-          targets: targets,
-          innerHosts: innerHosts
-        } = pierceShadowDom(selector, hostElements);
-        targets.forEach(function (targetEl) {
+        var {targets: targets, innerHosts: innerHosts} = pierceShadowDom(selector, hostElements);
+        targets.forEach((function(targetEl) {
           hideElement(targetEl);
           isHidden = true;
-        });
+        }));
         if (isHidden) {
           hit(source);
         }
@@ -12906,136 +12440,80 @@ function hideInShadowDom(source, args) {
     hideHandler();
     observeDOMChanges(hideHandler, true);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function observeDOMChanges(callback) {
-    var observeAttrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var attrsToObserve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    var THROTTLE_DELAY_MS = 20;
-    var observer = new MutationObserver(throttle(callbackWrapper, THROTTLE_DELAY_MS));
-    var connect = function connect() {
-      if (attrsToObserve.length > 0) {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs,
-          attributeFilter: attrsToObserve
-        });
-      } else {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs
-        });
-      }
+  function observeDOMChanges(t) {
+    var e = arguments.length > 1 && void 0 !== arguments[1] && arguments[1], n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : [], i = new MutationObserver(throttle((function() {
+      disconnect(), t(), connect();
+    }), 20)), connect = function connect() {
+      n.length > 0 ? i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e,
+        attributeFilter: n
+      }) : i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e
+      });
+    }, disconnect = function disconnect() {
+      i.disconnect();
     };
-    var disconnect = function disconnect() {
-      observer.disconnect();
-    };
-    function callbackWrapper() {
-      disconnect();
-      callback();
-      connect();
-    }
     connect();
   }
-  function findHostElements(rootElement) {
-    var hosts = [];
-    if (rootElement) {
-      var domElems = rootElement.querySelectorAll("*");
-      domElems.forEach(function (el) {
-        if (el.shadowRoot) {
-          hosts.push(el);
-        }
-      });
-    }
-    return hosts;
+  function findHostElements(o) {
+    var n = [];
+    o && o.querySelectorAll("*").forEach((function(o) {
+      o.shadowRoot && n.push(o);
+    }));
+    return n;
   }
-  function pierceShadowDom(selector, hostElements) {
-    var targets = [];
-    var innerHostsAcc = [];
-    hostElements.forEach(function (host) {
-      var simpleElems = host.querySelectorAll(selector);
-      targets = targets.concat([].slice.call(simpleElems));
-      var shadowRootElem = host.shadowRoot;
-      var shadowChildren = shadowRootElem.querySelectorAll(selector);
-      targets = targets.concat([].slice.call(shadowChildren));
-      innerHostsAcc.push(findHostElements(shadowRootElem));
-    });
-    var innerHosts = flatten(innerHostsAcc);
+  function pierceShadowDom(e, t) {
+    var c = [], l = [];
+    t.forEach((function(t) {
+      var o = t.querySelectorAll(e);
+      c = c.concat([].slice.call(o));
+      var r = t.shadowRoot, a = r.querySelectorAll(e);
+      c = c.concat([].slice.call(a)), l.push(findHostElements(r));
+    }));
+    var o = flatten(l);
     return {
-      targets: targets,
-      innerHosts: innerHosts
+      targets: c,
+      innerHosts: o
     };
   }
-  function flatten(input) {
-    var stack = [];
-    input.forEach(function (el) {
-      return stack.push(el);
-    });
-    var res = [];
-    while (stack.length) {
-      var next = stack.pop();
-      if (Array.isArray(next)) {
-        next.forEach(function (el) {
-          return stack.push(el);
-        });
-      } else {
-        res.push(next);
-      }
+  function flatten(r) {
+    var n = [];
+    r.forEach((function(r) {
+      return n.push(r);
+    }));
+    for (var t = []; n.length; ) {
+      var u = n.pop();
+      Array.isArray(u) ? u.forEach((function(r) {
+        return n.push(r);
+      })) : t.push(u);
     }
-    return res.reverse();
+    return t.reverse();
   }
-  function throttle(cb, delay) {
-    var wait = false;
-    var savedArgs;
-    var _wrapper = function wrapper() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      if (wait) {
-        savedArgs = args;
-        return;
-      }
-      cb(...args);
-      wait = true;
-      setTimeout(function () {
-        wait = false;
-        if (savedArgs) {
-          _wrapper(...savedArgs);
-          savedArgs = null;
-        }
-      }, delay);
+  function throttle(n, t) {
+    var r, e = false, _wrapper2 = function _wrapper() {
+      for (var o = arguments.length, u = new Array(o), f = 0; f < o; f++) u[f] = arguments[f];
+      e ? r = u : (n(...u), e = true, setTimeout((function() {
+        e = false, r && (_wrapper2(...r), r = null);
+      }), t));
     };
-    return _wrapper;
+    return _wrapper2;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     hideInShadowDom.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -13050,6 +12528,7 @@ function hideInShadowDom(source, args) {
     console.log(e);
   }
 }
+
 function hrefSanitizer(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -13106,10 +12585,7 @@ function hrefSanitizer(source, args) {
         return null;
       }
       try {
-        var {
-          href: href,
-          protocol: protocol
-        } = new URL(text, document.location.href);
+        var {href: href, protocol: protocol} = new URL(text, document.location.href);
         if (protocol !== "http:" && protocol !== "https:") {
           logMessage(source, `Protocol not allowed: "${protocol}", from URL: "${href}"`);
           return null;
@@ -13179,12 +12655,12 @@ function hrefSanitizer(source, args) {
       var validEncodedParam;
       if (searchString.includes(SEARCH_PARAMS_MARKER)) {
         var searchParamsArray = searchString.split(SEARCH_PARAMS_MARKER);
-        searchParamsArray.forEach(function (param) {
+        searchParamsArray.forEach((function(param) {
           decodedParam = decodeBase64SeveralTimes(param, DECODE_ATTEMPTS_NUMBER);
           if (decodedParam && decodedParam.length > 0) {
             validEncodedParam = decodedParam;
           }
-        });
+        }));
         return validEncodedParam;
       }
       return decodeBase64SeveralTimes(searchString, DECODE_ATTEMPTS_NUMBER);
@@ -13215,21 +12691,18 @@ function hrefSanitizer(source, args) {
       }
       var initSearchParamsLength = urlObj.searchParams.toString().length;
       var removeParams = paramNamesToRemoveStr.split(COMMA);
-      removeParams.forEach(function (param) {
+      removeParams.forEach((function(param) {
         if (urlObj.searchParams.has(param)) {
           urlObj.searchParams.delete(param);
         }
-      });
+      }));
       if (initSearchParamsLength === urlObj.searchParams.toString().length) {
         return "";
       }
       return urlObj.toString();
     };
     var decodeBase64URL = function decodeBase64URL(url) {
-      var {
-        search: search,
-        hash: hash
-      } = new URL(url, document.location.href);
+      var {search: search, hash: hash} = new URL(url, document.location.href);
       if (search.length > 0) {
         return decodeSearchString(search);
       }
@@ -13253,7 +12726,7 @@ function hrefSanitizer(source, args) {
         logMessage(source, `Invalid selector "${elementSelector}"`);
         return;
       }
-      elements.forEach(function (elem) {
+      elements.forEach((function(elem) {
         try {
           if (!isSanitizableAnchor(elem)) {
             logMessage(source, `${elem} is not a valid element to sanitize`);
@@ -13262,20 +12735,23 @@ function hrefSanitizer(source, args) {
           var newHref = extractNewHref(elem, attribute);
           if (transform) {
             switch (true) {
-              case transform === BASE64_DECODE_TRANSFORM_MARKER:
-                newHref = base64Decode(newHref);
+             case transform === BASE64_DECODE_TRANSFORM_MARKER:
+              newHref = base64Decode(newHref);
+              break;
+
+             case transform === REMOVE_HASH_TRANSFORM_MARKER:
+              newHref = removeHash(newHref);
+              break;
+
+             case transform.startsWith(REMOVE_PARAM_TRANSFORM_MARKER):
+              {
+                newHref = removeParam(newHref, transform);
                 break;
-              case transform === REMOVE_HASH_TRANSFORM_MARKER:
-                newHref = removeHash(newHref);
-                break;
-              case transform.startsWith(REMOVE_PARAM_TRANSFORM_MARKER):
-                {
-                  newHref = removeParam(newHref, transform);
-                  break;
-                }
-              default:
-                logMessage(source, `Invalid transform option: "${transform}"`);
-                return;
+              }
+
+             default:
+              logMessage(source, `Invalid transform option: "${transform}"`);
+              return;
             }
           }
           var newValidHref = getValidURL(newHref);
@@ -13291,14 +12767,14 @@ function hrefSanitizer(source, args) {
         } catch (ex) {
           logMessage(source, `Failed to sanitize ${elem}.`);
         }
-      });
+      }));
       hit(source);
     };
     var run = function run() {
       sanitize(selector);
-      observeDOMChanges(function () {
+      observeDOMChanges((function() {
         return sanitize(selector);
-      }, true);
+      }), true);
     };
     if (document.readyState === "loading") {
       window.addEventListener("DOMContentLoaded", run, {
@@ -13308,106 +12784,53 @@ function hrefSanitizer(source, args) {
       run();
     }
   }
-  function observeDOMChanges(callback) {
-    var observeAttrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var attrsToObserve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    var THROTTLE_DELAY_MS = 20;
-    var observer = new MutationObserver(throttle(callbackWrapper, THROTTLE_DELAY_MS));
-    var connect = function connect() {
-      if (attrsToObserve.length > 0) {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs,
-          attributeFilter: attrsToObserve
-        });
-      } else {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs
-        });
-      }
+  function observeDOMChanges(t) {
+    var e = arguments.length > 1 && void 0 !== arguments[1] && arguments[1], n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : [], i = new MutationObserver(throttle((function() {
+      disconnect(), t(), connect();
+    }), 20)), connect = function connect() {
+      n.length > 0 ? i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e,
+        attributeFilter: n
+      }) : i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e
+      });
+    }, disconnect = function disconnect() {
+      i.disconnect();
     };
-    var disconnect = function disconnect() {
-      observer.disconnect();
-    };
-    function callbackWrapper() {
-      disconnect();
-      callback();
-      connect();
-    }
     connect();
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function throttle(cb, delay) {
-    var wait = false;
-    var savedArgs;
-    var _wrapper = function wrapper() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      if (wait) {
-        savedArgs = args;
-        return;
-      }
-      cb(...args);
-      wait = true;
-      setTimeout(function () {
-        wait = false;
-        if (savedArgs) {
-          _wrapper(...savedArgs);
-          savedArgs = null;
-        }
-      }, delay);
+  function throttle(n, t) {
+    var r, e = false, _wrapper3 = function _wrapper() {
+      for (var o = arguments.length, u = new Array(o), f = 0; f < o; f++) u[f] = arguments[f];
+      e ? r = u : (n(...u), e = true, setTimeout((function() {
+        e = false, r && (_wrapper3(...r), r = null);
+      }), t));
     };
-    return _wrapper;
+    return _wrapper3;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     hrefSanitizer.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -13422,6 +12845,7 @@ function hrefSanitizer(source, args) {
     console.log(e);
   }
 }
+
 function injectCssInShadowDom(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -13432,91 +12856,81 @@ function injectCssInShadowDom(source, args) {
   }
   function injectCssInShadowDom(source, cssRule) {
     var hostSelector = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
+    var cssInjectionMethod = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "adoptedStyleSheets";
     if (!Element.prototype.attachShadow || typeof Proxy === "undefined" || typeof Reflect === "undefined") {
+      return;
+    }
+    if (cssInjectionMethod !== "adoptedStyleSheets" && cssInjectionMethod !== "styleTag") {
+      logMessage(source, `Unknown cssInjectionMethod: ${cssInjectionMethod}`);
       return;
     }
     if (cssRule.match(/(url|image-set)\(.*\)/i)) {
       logMessage(source, '"url()" function is not allowed for css rules');
       return;
     }
-    var callback = function callback(shadowRoot) {
+    var injectStyleTag = function injectStyleTag(shadowRoot) {
       try {
-        var stylesheet = new CSSStyleSheet();
+        var styleTag = document.createElement("style");
+        styleTag.innerText = cssRule;
+        shadowRoot.appendChild(styleTag);
+        hit(source);
+      } catch (error) {
+        logMessage(source, `Unable to inject style tag due to: \n'${error.message}'`);
+      }
+    };
+    var injectAdoptedStyleSheets = function injectAdoptedStyleSheets(shadowRoot) {
+      try {
+        var stylesheet = new CSSStyleSheet;
         try {
           stylesheet.insertRule(cssRule);
         } catch (e) {
           logMessage(source, `Unable to apply the rule '${cssRule}' due to: \n'${e.message}'`);
           return;
         }
-        shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, stylesheet];
-      } catch (_unused) {
-        var styleTag = document.createElement("style");
-        styleTag.innerText = cssRule;
-        shadowRoot.appendChild(styleTag);
+        shadowRoot.adoptedStyleSheets = [ ...shadowRoot.adoptedStyleSheets, stylesheet ];
+        hit(source);
+      } catch (error) {
+        logMessage(source, `Unable to inject adopted style sheet due to: \n'${error.message}'`);
+        injectStyleTag(shadowRoot);
       }
-      hit(source);
+    };
+    var callback = function callback(shadowRoot) {
+      if (cssInjectionMethod === "adoptedStyleSheets") {
+        injectAdoptedStyleSheets(shadowRoot);
+      } else if (cssInjectionMethod === "styleTag") {
+        injectStyleTag(shadowRoot);
+      }
     };
     hijackAttachShadow(window, hostSelector, callback);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function hijackAttachShadow(context, hostSelector, callback) {
-    var handlerWrapper = function handlerWrapper(target, thisArg, args) {
-      var shadowRoot = Reflect.apply(target, thisArg, args);
-      if (thisArg && thisArg.matches(hostSelector || "*")) {
-        callback(shadowRoot);
+  function hijackAttachShadow(t, a, e) {
+    var o = {
+      apply: function apply(t, o, c) {
+        var h = Reflect.apply(t, o, c);
+        return o && o.matches(a || "*") && e(h), h;
       }
-      return shadowRoot;
     };
-    var attachShadowHandler = {
-      apply: handlerWrapper
-    };
-    context.Element.prototype.attachShadow = new Proxy(context.Element.prototype.attachShadow, attachShadowHandler);
+    t.Element.prototype.attachShadow = new Proxy(t.Element.prototype.attachShadow, o);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     injectCssInShadowDom.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -13531,6 +12945,7 @@ function injectCssInShadowDom(source, args) {
     console.log(e);
   }
 }
+
 function jsonPrune(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -13559,360 +12974,283 @@ function jsonPrune(source, args) {
     var nativeResponseJson = Response.prototype.json;
     var responseJsonWrapper = function responseJsonWrapper() {
       var promise = nativeResponseJson.apply(this);
-      return promise.then(function (obj) {
+      return promise.then((function(obj) {
         return jsonPruner(source, obj, prunePaths, requiredPaths, stack, nativeObjects);
-      });
+      }));
     };
     if (typeof Response === "undefined") {
       return;
     }
     Response.prototype.json = responseJsonWrapper;
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function matchStackTrace(stackMatch, stackTrace) {
-    if (!stackMatch || stackMatch === "") {
-      return true;
-    }
-    var regExpValues = backupRegExpValues();
-    if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-      if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-        restoreRegExpValues(regExpValues);
-      }
-      return true;
-    }
-    var stackRegexp = toRegExp(stackMatch);
-    var refinedStackTrace = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    }).join("\n");
-    if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-      restoreRegExpValues(regExpValues);
-    }
-    return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
-  }
-  function getWildcardPropertyInChain(base, chain) {
-    var lookThrough = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var output = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      if (chain === "*" || chain === "[]") {
-        for (var key in base) {
-          if (Object.prototype.hasOwnProperty.call(base, key)) {
-            output.push({
-              base: base,
-              prop: key
-            });
-          }
-        }
-      } else {
-        output.push({
-          base: base,
-          prop: chain
-        });
-      }
-      return output;
-    }
-    var prop = chain.slice(0, pos);
-    var shouldLookThrough = prop === "[]" && Array.isArray(base) || prop === "*" && base instanceof Object;
-    if (shouldLookThrough) {
-      var nextProp = chain.slice(pos + 1);
-      var baseKeys = Object.keys(base);
-      baseKeys.forEach(function (key) {
-        var item = base[key];
-        getWildcardPropertyInChain(item, nextProp, lookThrough, output);
-      });
-    }
-    if (Array.isArray(base)) {
-      base.forEach(function (key) {
-        var nextBase = key;
-        if (nextBase !== undefined) {
-          getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
-        }
-      });
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if (nextBase !== undefined) {
-      getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
-    }
-    return output;
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function isPruningNeeded(source, root, prunePaths, requiredPaths, stack, nativeObjects) {
-    if (!root) {
-      return false;
-    }
-    var {
-      nativeStringify: nativeStringify
-    } = nativeObjects;
-    var shouldProcess;
-    if (prunePaths.length === 0 && requiredPaths.length > 0) {
-      var rootString = nativeStringify(root);
-      var matchRegex = toRegExp(requiredPaths.join(""));
-      var shouldLog = matchRegex.test(rootString);
-      if (shouldLog) {
-        logMessage(source, `${window.location.hostname}\n${nativeStringify(root, null, 2)}\nStack trace:\n${new Error().stack}`, true);
-        if (root && typeof root === "object") {
-          logMessage(source, root, true, false);
-        }
-        shouldProcess = false;
-        return shouldProcess;
-      }
-    }
-    if (stack && !matchStackTrace(stack, new Error().stack || "")) {
-      shouldProcess = false;
-      return shouldProcess;
-    }
-    var wildcardSymbols = [".*.", "*.", ".*", ".[].", "[].", ".[]"];
-    var _loop = function _loop() {
-        var requiredPath = requiredPaths[i];
-        var lastNestedPropName = requiredPath.split(".").pop();
-        var hasWildcard = wildcardSymbols.some(function (symbol) {
-          return requiredPath.includes(symbol);
-        });
-        var details = getWildcardPropertyInChain(root, requiredPath, hasWildcard);
-        if (!details.length) {
-          shouldProcess = false;
-          return {
-            v: shouldProcess
-          };
-        }
-        shouldProcess = !hasWildcard;
-        for (var j = 0; j < details.length; j += 1) {
-          var hasRequiredProp = typeof lastNestedPropName === "string" && details[j].base[lastNestedPropName] !== undefined;
-          if (hasWildcard) {
-            shouldProcess = hasRequiredProp || shouldProcess;
-          } else {
-            shouldProcess = hasRequiredProp && shouldProcess;
-          }
-        }
-      },
-      _ret;
-    for (var i = 0; i < requiredPaths.length; i += 1) {
-      _ret = _loop();
-      if (_ret) return _ret.v;
-    }
-    return shouldProcess;
-  }
-  function jsonPruner(source, root, prunePaths, requiredPaths, stack, nativeObjects) {
-    var {
-      nativeStringify: nativeStringify
-    } = nativeObjects;
-    if (prunePaths.length === 0 && requiredPaths.length === 0) {
-      logMessage(source, `${window.location.hostname}\n${nativeStringify(root, null, 2)}\nStack trace:\n${new Error().stack}`, true);
-      if (root && typeof root === "object") {
-        logMessage(source, root, true, false);
-      }
-      return root;
-    }
-    try {
-      if (isPruningNeeded(source, root, prunePaths, requiredPaths, stack, nativeObjects) === false) {
-        return root;
-      }
-      prunePaths.forEach(function (path) {
-        var ownerObjArr = getWildcardPropertyInChain(root, path, true);
-        ownerObjArr.forEach(function (ownerObj) {
-          if (ownerObj !== undefined && ownerObj.base) {
-            delete ownerObj.base[ownerObj.prop];
-            hit(source);
-          }
-        });
-      });
-    } catch (e) {
-      logMessage(source, e);
-    }
-    return root;
-  }
-  function getPrunePath(props) {
-    var validPropsString = typeof props === "string" && props !== undefined && props !== "";
-    return validPropsString ? props.split(/ +/) : [];
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
+  }
+  function getWildcardPropertyInChain(r, e) {
+    var a = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : [], t = arguments.length > 4 ? arguments[4] : void 0, o = e.indexOf(".");
+    if (-1 === o) {
+      if ("*" === e || "[]" === e) {
+        for (var n in r) if (Object.prototype.hasOwnProperty.call(r, n)) if (void 0 !== t) {
+          var s = r[n];
+          "string" == typeof s && t instanceof RegExp ? t.test(s) && i.push({
+            base: r,
+            prop: n
+          }) : s === t && i.push({
+            base: r,
+            prop: n
+          });
+        } else i.push({
+          base: r,
+          prop: n
+        });
+      } else if (void 0 !== t) {
+        var p = r[e];
+        "string" == typeof p && t instanceof RegExp ? t.test(p) && i.push({
+          base: r,
+          prop: e
+        }) : r[e] === t && i.push({
+          base: r,
+          prop: e
+        });
+      } else i.push({
+        base: r,
+        prop: e
+      });
+      return i;
+    }
+    var c = e.slice(0, o);
+    if ("[]" === c && Array.isArray(r) || "*" === c && r instanceof Object || "[-]" === c && Array.isArray(r) || "{-}" === c && r instanceof Object) {
+      var f = e.slice(o + 1), y = Object.keys(r);
+      if ("{-}" === c || "[-]" === c) {
+        var h = Array.isArray(r) ? "array" : "object";
+        return ("{-}" !== c || "object" !== h) && ("[-]" !== c || "array" !== h) || y.forEach((function(e) {
+          var a = r[e];
+          isKeyInObject(a, f, t) && i.push({
+            base: r,
+            prop: e
+          });
+        })), i;
+      }
+      y.forEach((function(e) {
+        getWildcardPropertyInChain(r[e], f, a, i, t);
+      }));
+    }
+    Array.isArray(r) && r.forEach((function(r) {
+      void 0 !== r && getWildcardPropertyInChain(r, e, a, i, t);
+    }));
+    var d = r[c];
+    return e = e.slice(o + 1), void 0 !== d && getWildcardPropertyInChain(d, e, a, i, t), 
+    i;
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function isPruningNeeded(n, t, r, e, a, i) {
+    if (!t) return false;
+    var o, {nativeStringify: u} = i, c = r.map((function(n) {
+      return n.path;
+    })), f = e.map((function(n) {
+      return n.path;
+    }));
+    if (0 === c.length && f.length > 0) {
+      var g = u(t);
+      if (toRegExp(f.join("")).test(g)) return logMessage(n, `${window.location.hostname}\n${u(t, null, 2)}\nStack trace:\n${(new Error).stack}`, true), 
+      t && "object" == typeof t && logMessage(n, t, true, false), o = false;
+    }
+    if (a && !matchStackTrace(a, (new Error).stack || "")) return o = false;
+    for (var s, l = [ ".*.", "*.", ".*", ".[].", "[].", ".[]" ], _loop = function _loop() {
+      var n = f[p], r = n.split(".").pop(), e = l.some((function(t) {
+        return n.includes(t);
+      })), a = getWildcardPropertyInChain(t, n, e);
+      if (!a.length) return {
+        v: o = false
+      };
+      o = !e;
+      for (var i = 0; i < a.length; i += 1) {
+        var u = "string" == typeof r && void 0 !== a[i].base[r];
+        o = e ? u || o : u && o;
+      }
+    }, p = 0; p < f.length; p += 1) if (s = _loop()) return s.v;
+    return o;
+  }
+  function jsonPruner(e, r, n, a, t, i) {
+    var {nativeStringify: o} = i;
+    if (0 === n.length && 0 === a.length) return logMessage(e, `${window.location.hostname}\n${o(r, null, 2)}\nStack trace:\n${(new Error).stack}`, true), 
+    r && "object" == typeof r && logMessage(e, r, true, false), r;
+    try {
+      if (!1 === isPruningNeeded(e, r, n, a, t, i)) return r;
+      n.forEach((function(n) {
+        for (var a = n.path, t = n.value, i = getWildcardPropertyInChain(r, a, !0, [], t), o = i.length - 1; o >= 0; o -= 1) {
+          var s = i[o];
+          if (void 0 !== s && s.base) if (hit(e), Array.isArray(s.base)) try {
+            var l = Number(s.prop);
+            if (Number.isNaN(l)) continue;
+            s.base.splice(l, 1);
+          } catch (e) {
+            console.error("Error while deleting array element", e);
+          } else delete s.base[s.prop];
+        }
+      }));
+    } catch (r) {
+      logMessage(e, r);
+    }
+    return r;
+  }
+  function getPrunePath(t) {
+    var r = ".[=].";
+    if ("string" == typeof t && void 0 !== t && "" !== t) {
+      var e = function(t) {
+        for (var e = [], n = "", i = 0, a = false, s = false; i < t.length; ) {
+          var u = t[i];
+          if (a) n += u, "\\" === u ? s = !s : ("/" !== u || s || (a = false), s = false), 
+          i += 1; else {
+            if (" " === u || "\n" === u || "\t" === u || "\r" === u || "\f" === u || "\v" === u) {
+              for (;i < t.length && /\s/.test(t[i]); ) i += 1;
+              "" !== n && (e.push(n), n = "");
+              continue;
+            }
+            if (t.startsWith(r, i)) {
+              if (n += r, "/" === t[i += 5]) {
+                a = true, s = false, n += "/", i += 1;
+                continue;
+              }
+              continue;
+            }
+            n += u, i += 1;
+          }
+        }
+        return "" !== n && e.push(n), e;
+      }(t);
+      return e.map((function(t) {
+        var e = t.split(r), n = e[0], i = e[1];
+        return void 0 !== i ? ("true" === i ? i = true : "false" === i ? i = false : i.startsWith("/") ? i = toRegExp(i) : "string" == typeof i && /^\d+$/.test(i) && (i = parseFloat(i)), 
+        {
+          path: n,
+          value: i
+        }) : {
+          path: n
+        };
+      }));
+    }
+    return [];
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
   function getNativeRegexpTest() {
-    var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "test");
-    var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-    if (descriptor && typeof descriptor.value === "function") {
-      return nativeRegexTest;
-    }
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
     throw new Error("RegExp.prototype.test is not a function");
   }
-  function shouldAbortInlineOrInjectedScript(stackMatch, stackTrace) {
-    var INLINE_SCRIPT_STRING = "inlineScript";
-    var INJECTED_SCRIPT_STRING = "injectedScript";
-    var INJECTED_SCRIPT_MARKER = "<anonymous>";
-    var isInlineScript = function isInlineScript(match) {
-      return match.includes(INLINE_SCRIPT_STRING);
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
     };
-    var isInjectedScript = function isInjectedScript(match) {
-      return match.includes(INJECTED_SCRIPT_STRING);
-    };
-    if (!(isInlineScript(stackMatch) || isInjectedScript(stackMatch))) {
-      return false;
-    }
-    var documentURL = window.location.href;
-    var pos = documentURL.indexOf("#");
-    if (pos !== -1) {
-      documentURL = documentURL.slice(0, pos);
-    }
-    var stackSteps = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    });
-    var stackLines = stackSteps.map(function (line) {
-      var stack;
-      var getStackTraceValues = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(line);
-      if (getStackTraceValues) {
-        var _stackURL, _stackURL2;
-        var stackURL = getStackTraceValues[2];
-        var stackLine = getStackTraceValues[3];
-        var stackCol = getStackTraceValues[4];
-        if ((_stackURL = stackURL) !== null && _stackURL !== void 0 && _stackURL.startsWith("(")) {
-          stackURL = stackURL.slice(1);
-        }
-        if ((_stackURL2 = stackURL) !== null && _stackURL2 !== void 0 && _stackURL2.startsWith(INJECTED_SCRIPT_MARKER)) {
-          var _stackFunction;
-          stackURL = INJECTED_SCRIPT_STRING;
-          var stackFunction = getStackTraceValues[1] !== undefined ? getStackTraceValues[1].slice(0, -1) : line.slice(0, getStackTraceValues.index).trim();
-          if ((_stackFunction = stackFunction) !== null && _stackFunction !== void 0 && _stackFunction.startsWith("at")) {
-            stackFunction = stackFunction.slice(2).trim();
-          }
-          stack = `${stackFunction} ${stackURL}${stackLine}${stackCol}`.trim();
-        } else if (stackURL === documentURL) {
-          stack = `${INLINE_SCRIPT_STRING}${stackLine}${stackCol}`.trim();
-        } else {
-          stack = `${stackURL}${stackLine}${stackCol}`.trim();
-        }
-      } else {
-        stack = line;
-      }
-      return stack;
-    });
-    if (stackLines) {
-      for (var index = 0; index < stackLines.length; index += 1) {
-        if (isInlineScript(stackMatch) && stackLines[index].startsWith(INLINE_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-        if (isInjectedScript(stackMatch) && stackLines[index].startsWith(INJECTED_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-      }
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
     }
     return false;
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  function isKeyInObject(t, r, e) {
+    var n = r.split("."), _check3 = function _check(t, r) {
+      if (null == t) return false;
+      if (0 === r.length) return void 0 === e || ("string" == typeof t && e instanceof RegExp ? e.test(t) : t === e);
+      var n = r[0], i = r.slice(1);
+      if ("*" === n || "[]" === n) {
+        if (Array.isArray(t)) return t.some((function(t) {
+          return _check3(t, i);
+        }));
+        if ("object" == typeof t && null !== t) return Object.keys(t).some((function(r) {
+          return _check3(t[r], i);
+        }));
+      }
+      return !!Object.prototype.hasOwnProperty.call(t, n) && _check3(t[n], i);
+    };
+    return _check3(t, n);
+  }
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     jsonPrune.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -13927,6 +13265,7 @@ function jsonPrune(source, args) {
     console.log(e);
   }
 }
+
 function jsonPruneFetchResponse(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -13984,511 +13323,375 @@ function jsonPruneFetchResponse(source, args) {
     };
     window.fetch = new Proxy(window.fetch, fetchHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function getFetchData(e, t) {
+    var a, c, n = {}, r = e[0];
+    if (r instanceof Request) {
+      var u = t.call(r), f = getRequestData(u);
+      a = f.url, c = f;
+    } else a = r, c = e[1];
+    (n.url = a, c instanceof Object) && Object.keys(c).forEach((function(e) {
+      n[e] = c[e];
+    }));
+    return n;
+  }
+  function objectToString(t) {
+    return t && "object" == typeof t ? isEmptyObject(t) ? "{}" : Object.entries(t).map((function(t) {
+      var n = t[0], e = t[1], o = e;
+      return e instanceof Object && (o = `{ ${objectToString(e)} }`), `${n}:"${o}"`;
+    })).join(" ") : String(t);
+  }
+  function matchRequestProps(e, t, r) {
+    if ("" === t || "*" === t) return true;
+    var a, s = parseMatchProps(t);
+    if (isValidParsedData(s)) {
+      var n = getMatchPropsData(s);
+      a = Object.keys(n).every((function(e) {
+        var t = n[e], a = r[e];
+        return Object.prototype.hasOwnProperty.call(r, e) && "string" == typeof a && (null == t ? void 0 : t.test(a));
+      }));
+    } else logMessage(e, `Invalid parameter: ${t}`), a = false;
+    return a;
+  }
+  function jsonPruner(e, r, n, a, t, i) {
+    var {nativeStringify: o} = i;
+    if (0 === n.length && 0 === a.length) return logMessage(e, `${window.location.hostname}\n${o(r, null, 2)}\nStack trace:\n${(new Error).stack}`, true), 
+    r && "object" == typeof r && logMessage(e, r, true, false), r;
     try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
+      if (!1 === isPruningNeeded(e, r, n, a, t, i)) return r;
+      n.forEach((function(n) {
+        for (var a = n.path, t = n.value, i = getWildcardPropertyInChain(r, a, !0, [], t), o = i.length - 1; o >= 0; o -= 1) {
+          var s = i[o];
+          if (void 0 !== s && s.base) if (hit(e), Array.isArray(s.base)) try {
+            var l = Number(s.prop);
+            if (Number.isNaN(l)) continue;
+            s.base.splice(l, 1);
+          } catch (e) {
+            console.error("Error while deleting array element", e);
+          } else delete s.base[s.prop];
         }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+      }));
+    } catch (r) {
+      logMessage(e, r);
     }
+    return r;
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function getFetchData(args, nativeRequestClone) {
-    var fetchPropsObj = {};
-    var resource = args[0];
-    var fetchUrl;
-    var fetchInit;
-    if (resource instanceof Request) {
-      var realData = nativeRequestClone.call(resource);
-      var requestData = getRequestData(realData);
-      fetchUrl = requestData.url;
-      fetchInit = requestData;
-    } else {
-      fetchUrl = resource;
-      fetchInit = args[1];
-    }
-    fetchPropsObj.url = fetchUrl;
-    if (fetchInit instanceof Object) {
-      var props = Object.keys(fetchInit);
-      props.forEach(function (prop) {
-        fetchPropsObj[prop] = fetchInit[prop];
-      });
-    }
-    return fetchPropsObj;
-  }
-  function objectToString(obj) {
-    if (!obj || typeof obj !== "object") {
-      return String(obj);
-    }
-    if (isEmptyObject(obj)) {
-      return "{}";
-    }
-    return Object.entries(obj).map(function (pair) {
-      var key = pair[0];
-      var value = pair[1];
-      var recordValueStr = value;
-      if (value instanceof Object) {
-        recordValueStr = `{ ${objectToString(value)} }`;
-      }
-      return `${key}:"${recordValueStr}"`;
-    }).join(" ");
-  }
-  function matchRequestProps(source, propsToMatch, requestData) {
-    if (propsToMatch === "" || propsToMatch === "*") {
-      return true;
-    }
-    var isMatched;
-    var parsedData = parseMatchProps(propsToMatch);
-    if (!isValidParsedData(parsedData)) {
-      logMessage(source, `Invalid parameter: ${propsToMatch}`);
-      isMatched = false;
-    } else {
-      var matchData = getMatchPropsData(parsedData);
-      var matchKeys = Object.keys(matchData);
-      isMatched = matchKeys.every(function (matchKey) {
-        var matchValue = matchData[matchKey];
-        var dataValue = requestData[matchKey];
-        return Object.prototype.hasOwnProperty.call(requestData, matchKey) && typeof dataValue === "string" && (matchValue === null || matchValue === void 0 ? void 0 : matchValue.test(dataValue));
-      });
-    }
-    return isMatched;
-  }
-  function jsonPruner(source, root, prunePaths, requiredPaths, stack, nativeObjects) {
-    var {
-      nativeStringify: nativeStringify
-    } = nativeObjects;
-    if (prunePaths.length === 0 && requiredPaths.length === 0) {
-      logMessage(source, `${window.location.hostname}\n${nativeStringify(root, null, 2)}\nStack trace:\n${new Error().stack}`, true);
-      if (root && typeof root === "object") {
-        logMessage(source, root, true, false);
-      }
-      return root;
-    }
-    try {
-      if (isPruningNeeded(source, root, prunePaths, requiredPaths, stack, nativeObjects) === false) {
-        return root;
-      }
-      prunePaths.forEach(function (path) {
-        var ownerObjArr = getWildcardPropertyInChain(root, path, true);
-        ownerObjArr.forEach(function (ownerObj) {
-          if (ownerObj !== undefined && ownerObj.base) {
-            delete ownerObj.base[ownerObj.prop];
-            hit(source);
+  function getPrunePath(t) {
+    var r = ".[=].";
+    if ("string" == typeof t && void 0 !== t && "" !== t) {
+      var e = function(t) {
+        for (var e = [], n = "", i = 0, a = false, s = false; i < t.length; ) {
+          var u = t[i];
+          if (a) n += u, "\\" === u ? s = !s : ("/" !== u || s || (a = false), s = false), 
+          i += 1; else {
+            if (" " === u || "\n" === u || "\t" === u || "\r" === u || "\f" === u || "\v" === u) {
+              for (;i < t.length && /\s/.test(t[i]); ) i += 1;
+              "" !== n && (e.push(n), n = "");
+              continue;
+            }
+            if (t.startsWith(r, i)) {
+              if (n += r, "/" === t[i += 5]) {
+                a = true, s = false, n += "/", i += 1;
+                continue;
+              }
+              continue;
+            }
+            n += u, i += 1;
           }
-        });
-      });
-    } catch (e) {
-      logMessage(source, e);
+        }
+        return "" !== n && e.push(n), e;
+      }(t);
+      return e.map((function(t) {
+        var e = t.split(r), n = e[0], i = e[1];
+        return void 0 !== i ? ("true" === i ? i = true : "false" === i ? i = false : i.startsWith("/") ? i = toRegExp(i) : "string" == typeof i && /^\d+$/.test(i) && (i = parseFloat(i)), 
+        {
+          path: n,
+          value: i
+        }) : {
+          path: n
+        };
+      }));
     }
-    return root;
+    return [];
   }
-  function getPrunePath(props) {
-    var validPropsString = typeof props === "string" && props !== undefined && props !== "";
-    return validPropsString ? props.split(/ +/) : [];
-  }
-  function forgeResponse(response, textContent) {
-    var {
-      bodyUsed: bodyUsed,
-      headers: headers,
-      ok: ok,
-      redirected: redirected,
-      status: status,
-      statusText: statusText,
-      type: type,
-      url: url
-    } = response;
-    var forgedResponse = new Response(textContent, {
-      status: status,
-      statusText: statusText,
-      headers: headers
+  function forgeResponse(e, t) {
+    var {bodyUsed: s, headers: r, ok: u, redirected: a, status: d, statusText: o, type: l, url: n} = e, v = new Response(t, {
+      status: d,
+      statusText: o,
+      headers: r
     });
-    Object.defineProperties(forgedResponse, {
+    return Object.defineProperties(v, {
       url: {
-        value: url
+        value: n
       },
       type: {
-        value: type
+        value: l
       },
       ok: {
-        value: ok
+        value: u
       },
       bodyUsed: {
-        value: bodyUsed
+        value: s
       },
       redirected: {
-        value: redirected
+        value: a
       }
-    });
-    return forgedResponse;
+    }), v;
   }
-  function isPruningNeeded(source, root, prunePaths, requiredPaths, stack, nativeObjects) {
-    if (!root) {
-      return false;
+  function isPruningNeeded(n, t, r, e, a, i) {
+    if (!t) return false;
+    var o, {nativeStringify: u} = i, c = r.map((function(n) {
+      return n.path;
+    })), f = e.map((function(n) {
+      return n.path;
+    }));
+    if (0 === c.length && f.length > 0) {
+      var g = u(t);
+      if (toRegExp(f.join("")).test(g)) return logMessage(n, `${window.location.hostname}\n${u(t, null, 2)}\nStack trace:\n${(new Error).stack}`, true), 
+      t && "object" == typeof t && logMessage(n, t, true, false), o = false;
     }
-    var {
-      nativeStringify: nativeStringify
-    } = nativeObjects;
-    var shouldProcess;
-    if (prunePaths.length === 0 && requiredPaths.length > 0) {
-      var rootString = nativeStringify(root);
-      var matchRegex = toRegExp(requiredPaths.join(""));
-      var shouldLog = matchRegex.test(rootString);
-      if (shouldLog) {
-        logMessage(source, `${window.location.hostname}\n${nativeStringify(root, null, 2)}\nStack trace:\n${new Error().stack}`, true);
-        if (root && typeof root === "object") {
-          logMessage(source, root, true, false);
-        }
-        shouldProcess = false;
-        return shouldProcess;
+    if (a && !matchStackTrace(a, (new Error).stack || "")) return o = false;
+    for (var s, l = [ ".*.", "*.", ".*", ".[].", "[].", ".[]" ], _loop = function _loop() {
+      var n = f[p], r = n.split(".").pop(), e = l.some((function(t) {
+        return n.includes(t);
+      })), a = getWildcardPropertyInChain(t, n, e);
+      if (!a.length) return {
+        v: o = false
+      };
+      o = !e;
+      for (var i = 0; i < a.length; i += 1) {
+        var u = "string" == typeof r && void 0 !== a[i].base[r];
+        o = e ? u || o : u && o;
       }
-    }
-    if (stack && !matchStackTrace(stack, new Error().stack || "")) {
-      shouldProcess = false;
-      return shouldProcess;
-    }
-    var wildcardSymbols = [".*.", "*.", ".*", ".[].", "[].", ".[]"];
-    var _loop = function _loop() {
-        var requiredPath = requiredPaths[i];
-        var lastNestedPropName = requiredPath.split(".").pop();
-        var hasWildcard = wildcardSymbols.some(function (symbol) {
-          return requiredPath.includes(symbol);
-        });
-        var details = getWildcardPropertyInChain(root, requiredPath, hasWildcard);
-        if (!details.length) {
-          shouldProcess = false;
-          return {
-            v: shouldProcess
-          };
-        }
-        shouldProcess = !hasWildcard;
-        for (var j = 0; j < details.length; j += 1) {
-          var hasRequiredProp = typeof lastNestedPropName === "string" && details[j].base[lastNestedPropName] !== undefined;
-          if (hasWildcard) {
-            shouldProcess = hasRequiredProp || shouldProcess;
-          } else {
-            shouldProcess = hasRequiredProp && shouldProcess;
-          }
-        }
-      },
-      _ret;
-    for (var i = 0; i < requiredPaths.length; i += 1) {
-      _ret = _loop();
-      if (_ret) return _ret.v;
-    }
-    return shouldProcess;
+    }, p = 0; p < f.length; p += 1) if (s = _loop()) return s.v;
+    return o;
   }
-  function matchStackTrace(stackMatch, stackTrace) {
-    if (!stackMatch || stackMatch === "") {
-      return true;
-    }
-    var regExpValues = backupRegExpValues();
-    if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-      if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-        restoreRegExpValues(regExpValues);
-      }
-      return true;
-    }
-    var stackRegexp = toRegExp(stackMatch);
-    var refinedStackTrace = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    }).join("\n");
-    if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-      restoreRegExpValues(regExpValues);
-    }
-    return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  function getRequestData(request) {
-    var requestInitOptions = getRequestProps();
-    var entries = requestInitOptions.map(function (key) {
-      var value = request[key];
-      return [key, value];
-    });
-    return Object.fromEntries(entries);
+  function getRequestData(t) {
+    var e = getRequestProps().map((function(e) {
+      return [ e, t[e] ];
+    }));
+    return Object.fromEntries(e);
   }
   function getRequestProps() {
-    return ["url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode"];
+    return [ "url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode" ];
   }
-  function parseMatchProps(propsToMatchStr) {
-    var PROPS_DIVIDER = " ";
-    var PAIRS_MARKER = ":";
-    var isRequestProp = function isRequestProp(prop) {
-      return getRequestProps().includes(prop);
-    };
-    var propsObj = {};
-    var props = propsToMatchStr.split(PROPS_DIVIDER);
-    props.forEach(function (prop) {
-      var dividerInd = prop.indexOf(PAIRS_MARKER);
-      var key = prop.slice(0, dividerInd);
-      if (isRequestProp(key)) {
-        var value = prop.slice(dividerInd + 1);
-        propsObj[key] = value;
-      } else {
-        propsObj.url = prop;
-      }
-    });
-    return propsObj;
+  function parseMatchProps(e) {
+    var r = {};
+    return e.split(" ").forEach((function(e) {
+      var n = e.indexOf(":"), i = e.slice(0, n);
+      if (function(e) {
+        return getRequestProps().includes(e);
+      }(i)) {
+        var s = e.slice(n + 1);
+        r[i] = s;
+      } else r.url = e;
+    })), r;
   }
-  function isValidParsedData(data) {
-    return Object.values(data).every(function (value) {
-      return isValidStrPattern(value);
-    });
+  function isValidParsedData(t) {
+    return Object.values(t).every((function(t) {
+      return isValidStrPattern(t);
+    }));
   }
-  function getMatchPropsData(data) {
-    var matchData = {};
-    var dataKeys = Object.keys(data);
-    dataKeys.forEach(function (key) {
-      matchData[key] = toRegExp(data[key]);
-    });
-    return matchData;
+  function getMatchPropsData(t) {
+    var a = {};
+    return Object.keys(t).forEach((function(c) {
+      a[c] = toRegExp(t[c]);
+    })), a;
   }
-  function getWildcardPropertyInChain(base, chain) {
-    var lookThrough = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var output = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      if (chain === "*" || chain === "[]") {
-        for (var key in base) {
-          if (Object.prototype.hasOwnProperty.call(base, key)) {
-            output.push({
-              base: base,
-              prop: key
-            });
-          }
-        }
-      } else {
-        output.push({
-          base: base,
-          prop: chain
+  function getWildcardPropertyInChain(r, e) {
+    var a = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : [], t = arguments.length > 4 ? arguments[4] : void 0, o = e.indexOf(".");
+    if (-1 === o) {
+      if ("*" === e || "[]" === e) {
+        for (var n in r) if (Object.prototype.hasOwnProperty.call(r, n)) if (void 0 !== t) {
+          var s = r[n];
+          "string" == typeof s && t instanceof RegExp ? t.test(s) && i.push({
+            base: r,
+            prop: n
+          }) : s === t && i.push({
+            base: r,
+            prop: n
+          });
+        } else i.push({
+          base: r,
+          prop: n
         });
+      } else if (void 0 !== t) {
+        var p = r[e];
+        "string" == typeof p && t instanceof RegExp ? t.test(p) && i.push({
+          base: r,
+          prop: e
+        }) : r[e] === t && i.push({
+          base: r,
+          prop: e
+        });
+      } else i.push({
+        base: r,
+        prop: e
+      });
+      return i;
+    }
+    var c = e.slice(0, o);
+    if ("[]" === c && Array.isArray(r) || "*" === c && r instanceof Object || "[-]" === c && Array.isArray(r) || "{-}" === c && r instanceof Object) {
+      var f = e.slice(o + 1), y = Object.keys(r);
+      if ("{-}" === c || "[-]" === c) {
+        var h = Array.isArray(r) ? "array" : "object";
+        return ("{-}" !== c || "object" !== h) && ("[-]" !== c || "array" !== h) || y.forEach((function(e) {
+          var a = r[e];
+          isKeyInObject(a, f, t) && i.push({
+            base: r,
+            prop: e
+          });
+        })), i;
       }
-      return output;
+      y.forEach((function(e) {
+        getWildcardPropertyInChain(r[e], f, a, i, t);
+      }));
     }
-    var prop = chain.slice(0, pos);
-    var shouldLookThrough = prop === "[]" && Array.isArray(base) || prop === "*" && base instanceof Object;
-    if (shouldLookThrough) {
-      var nextProp = chain.slice(pos + 1);
-      var baseKeys = Object.keys(base);
-      baseKeys.forEach(function (key) {
-        var item = base[key];
-        getWildcardPropertyInChain(item, nextProp, lookThrough, output);
-      });
-    }
-    if (Array.isArray(base)) {
-      base.forEach(function (key) {
-        var nextBase = key;
-        if (nextBase !== undefined) {
-          getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
-        }
-      });
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if (nextBase !== undefined) {
-      getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
-    }
-    return output;
+    Array.isArray(r) && r.forEach((function(r) {
+      void 0 !== r && getWildcardPropertyInChain(r, e, a, i, t);
+    }));
+    var d = r[c];
+    return e = e.slice(o + 1), void 0 !== d && getWildcardPropertyInChain(d, e, a, i, t), 
+    i;
   }
-  function shouldAbortInlineOrInjectedScript(stackMatch, stackTrace) {
-    var INLINE_SCRIPT_STRING = "inlineScript";
-    var INJECTED_SCRIPT_STRING = "injectedScript";
-    var INJECTED_SCRIPT_MARKER = "<anonymous>";
-    var isInlineScript = function isInlineScript(match) {
-      return match.includes(INLINE_SCRIPT_STRING);
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
     };
-    var isInjectedScript = function isInjectedScript(match) {
-      return match.includes(INJECTED_SCRIPT_STRING);
-    };
-    if (!(isInlineScript(stackMatch) || isInjectedScript(stackMatch))) {
-      return false;
-    }
-    var documentURL = window.location.href;
-    var pos = documentURL.indexOf("#");
-    if (pos !== -1) {
-      documentURL = documentURL.slice(0, pos);
-    }
-    var stackSteps = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    });
-    var stackLines = stackSteps.map(function (line) {
-      var stack;
-      var getStackTraceValues = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(line);
-      if (getStackTraceValues) {
-        var _stackURL, _stackURL2;
-        var stackURL = getStackTraceValues[2];
-        var stackLine = getStackTraceValues[3];
-        var stackCol = getStackTraceValues[4];
-        if ((_stackURL = stackURL) !== null && _stackURL !== void 0 && _stackURL.startsWith("(")) {
-          stackURL = stackURL.slice(1);
-        }
-        if ((_stackURL2 = stackURL) !== null && _stackURL2 !== void 0 && _stackURL2.startsWith(INJECTED_SCRIPT_MARKER)) {
-          var _stackFunction;
-          stackURL = INJECTED_SCRIPT_STRING;
-          var stackFunction = getStackTraceValues[1] !== undefined ? getStackTraceValues[1].slice(0, -1) : line.slice(0, getStackTraceValues.index).trim();
-          if ((_stackFunction = stackFunction) !== null && _stackFunction !== void 0 && _stackFunction.startsWith("at")) {
-            stackFunction = stackFunction.slice(2).trim();
-          }
-          stack = `${stackFunction} ${stackURL}${stackLine}${stackCol}`.trim();
-        } else if (stackURL === documentURL) {
-          stack = `${INLINE_SCRIPT_STRING}${stackLine}${stackCol}`.trim();
-        } else {
-          stack = `${stackURL}${stackLine}${stackCol}`.trim();
-        }
-      } else {
-        stack = line;
-      }
-      return stack;
-    });
-    if (stackLines) {
-      for (var index = 0; index < stackLines.length; index += 1) {
-        if (isInlineScript(stackMatch) && stackLines[index].startsWith(INLINE_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-        if (isInjectedScript(stackMatch) && stackLines[index].startsWith(INJECTED_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-      }
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
     }
     return false;
   }
   function getNativeRegexpTest() {
-    var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "test");
-    var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-    if (descriptor && typeof descriptor.value === "function") {
-      return nativeRegexTest;
-    }
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
     throw new Error("RegExp.prototype.test is not a function");
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  function isKeyInObject(t, r, e) {
+    var n = r.split("."), _check4 = function _check(t, r) {
+      if (null == t) return false;
+      if (0 === r.length) return void 0 === e || ("string" == typeof t && e instanceof RegExp ? e.test(t) : t === e);
+      var n = r[0], i = r.slice(1);
+      if ("*" === n || "[]" === n) {
+        if (Array.isArray(t)) return t.some((function(t) {
+          return _check4(t, i);
+        }));
+        if ("object" == typeof t && null !== t) return Object.keys(t).some((function(r) {
+          return _check4(t[r], i);
+        }));
+      }
+      return !!Object.prototype.hasOwnProperty.call(t, n) && _check4(t[n], i);
+    };
+    return _check4(t, n);
+  }
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     jsonPruneFetchResponse.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -14503,6 +13706,7 @@ function jsonPruneFetchResponse(source, args) {
     console.log(e);
   }
 }
+
 function jsonPruneXhrResponse(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -14546,24 +13750,16 @@ function jsonPruneXhrResponse(source, args) {
       return Reflect.apply(target, thisArg, args);
     };
     var sendWrapper = function sendWrapper(target, thisArg, args) {
-      var stackTrace = new Error().stack || "";
+      var stackTrace = (new Error).stack || "";
       if (!thisArg.xhrShouldBePruned || stack && !matchStackTrace(stack, stackTrace)) {
         return Reflect.apply(target, thisArg, args);
       }
-      var forgedRequest = new XMLHttpRequest();
-      forgedRequest.addEventListener("readystatechange", function () {
+      var forgedRequest = new XMLHttpRequest;
+      forgedRequest.addEventListener("readystatechange", (function() {
         if (forgedRequest.readyState !== 4) {
           return;
         }
-        var {
-          readyState: readyState,
-          response: response,
-          responseText: responseText,
-          responseURL: responseURL,
-          responseXML: responseXML,
-          status: status,
-          statusText: statusText
-        } = forgedRequest;
+        var {readyState: readyState, response: response, responseText: responseText, responseURL: responseURL, responseXML: responseXML, status: status, statusText: statusText} = forgedRequest;
         var content = responseText || response;
         if (typeof content !== "string" && typeof content !== "object") {
           return;
@@ -14581,22 +13777,23 @@ function jsonPruneXhrResponse(source, args) {
                 nativeStringify: nativeStringify
               });
               try {
-                var {
-                  responseType: responseType
-                } = thisArg;
+                var {responseType: responseType} = thisArg;
                 switch (responseType) {
-                  case "":
-                  case "text":
-                    modifiedContent = nativeStringify(modifiedContent);
-                    break;
-                  case "arraybuffer":
-                    modifiedContent = new TextEncoder().encode(nativeStringify(modifiedContent)).buffer;
-                    break;
-                  case "blob":
-                    modifiedContent = new Blob([nativeStringify(modifiedContent)]);
-                    break;
-                  default:
-                    break;
+                 case "":
+                 case "text":
+                  modifiedContent = nativeStringify(modifiedContent);
+                  break;
+
+                 case "arraybuffer":
+                  modifiedContent = (new TextEncoder).encode(nativeStringify(modifiedContent)).buffer;
+                  break;
+
+                 case "blob":
+                  modifiedContent = new Blob([ nativeStringify(modifiedContent) ]);
+                  break;
+
+                 default:
+                  break;
                 }
               } catch (error) {
                 var message = `Response body cannot be converted to reponse type: '${content}'`;
@@ -14640,20 +13837,20 @@ function jsonPruneXhrResponse(source, args) {
             writable: false
           }
         });
-        setTimeout(function () {
+        setTimeout((function() {
           var stateEvent = new Event("readystatechange");
           thisArg.dispatchEvent(stateEvent);
           var loadEvent = new Event("load");
           thisArg.dispatchEvent(loadEvent);
           var loadEndEvent = new Event("loadend");
           thisArg.dispatchEvent(loadEndEvent);
-        }, 1);
+        }), 1);
         hit(source);
-      });
-      nativeOpen.apply(forgedRequest, [xhrData.method, xhrData.url, Boolean(xhrData.async)]);
-      thisArg.collectedHeaders.forEach(function (header) {
+      }));
+      nativeOpen.apply(forgedRequest, [ xhrData.method, xhrData.url, Boolean(xhrData.async) ]);
+      thisArg.collectedHeaders.forEach((function(header) {
         forgedRequest.setRequestHeader(header[0], header[1]);
-      });
+      }));
       thisArg.collectedHeaders = [];
       try {
         nativeSend.call(forgedRequest, args);
@@ -14671,434 +13868,334 @@ function jsonPruneXhrResponse(source, args) {
     XMLHttpRequest.prototype.open = new Proxy(XMLHttpRequest.prototype.open, openHandler);
     XMLHttpRequest.prototype.send = new Proxy(XMLHttpRequest.prototype.send, sendHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function jsonPruner(source, root, prunePaths, requiredPaths, stack, nativeObjects) {
-    var {
-      nativeStringify: nativeStringify
-    } = nativeObjects;
-    if (prunePaths.length === 0 && requiredPaths.length === 0) {
-      logMessage(source, `${window.location.hostname}\n${nativeStringify(root, null, 2)}\nStack trace:\n${new Error().stack}`, true);
-      if (root && typeof root === "object") {
-        logMessage(source, root, true, false);
-      }
-      return root;
-    }
+  function jsonPruner(e, r, n, a, t, i) {
+    var {nativeStringify: o} = i;
+    if (0 === n.length && 0 === a.length) return logMessage(e, `${window.location.hostname}\n${o(r, null, 2)}\nStack trace:\n${(new Error).stack}`, true), 
+    r && "object" == typeof r && logMessage(e, r, true, false), r;
     try {
-      if (isPruningNeeded(source, root, prunePaths, requiredPaths, stack, nativeObjects) === false) {
-        return root;
-      }
-      prunePaths.forEach(function (path) {
-        var ownerObjArr = getWildcardPropertyInChain(root, path, true);
-        ownerObjArr.forEach(function (ownerObj) {
-          if (ownerObj !== undefined && ownerObj.base) {
-            delete ownerObj.base[ownerObj.prop];
-            hit(source);
+      if (!1 === isPruningNeeded(e, r, n, a, t, i)) return r;
+      n.forEach((function(n) {
+        for (var a = n.path, t = n.value, i = getWildcardPropertyInChain(r, a, !0, [], t), o = i.length - 1; o >= 0; o -= 1) {
+          var s = i[o];
+          if (void 0 !== s && s.base) if (hit(e), Array.isArray(s.base)) try {
+            var l = Number(s.prop);
+            if (Number.isNaN(l)) continue;
+            s.base.splice(l, 1);
+          } catch (e) {
+            console.error("Error while deleting array element", e);
+          } else delete s.base[s.prop];
+        }
+      }));
+    } catch (r) {
+      logMessage(e, r);
+    }
+    return r;
+  }
+  function getPrunePath(t) {
+    var r = ".[=].";
+    if ("string" == typeof t && void 0 !== t && "" !== t) {
+      var e = function(t) {
+        for (var e = [], n = "", i = 0, a = false, s = false; i < t.length; ) {
+          var u = t[i];
+          if (a) n += u, "\\" === u ? s = !s : ("/" !== u || s || (a = false), s = false), 
+          i += 1; else {
+            if (" " === u || "\n" === u || "\t" === u || "\r" === u || "\f" === u || "\v" === u) {
+              for (;i < t.length && /\s/.test(t[i]); ) i += 1;
+              "" !== n && (e.push(n), n = "");
+              continue;
+            }
+            if (t.startsWith(r, i)) {
+              if (n += r, "/" === t[i += 5]) {
+                a = true, s = false, n += "/", i += 1;
+                continue;
+              }
+              continue;
+            }
+            n += u, i += 1;
           }
-        });
-      });
-    } catch (e) {
-      logMessage(source, e);
+        }
+        return "" !== n && e.push(n), e;
+      }(t);
+      return e.map((function(t) {
+        var e = t.split(r), n = e[0], i = e[1];
+        return void 0 !== i ? ("true" === i ? i = true : "false" === i ? i = false : i.startsWith("/") ? i = toRegExp(i) : "string" == typeof i && /^\d+$/.test(i) && (i = parseFloat(i)), 
+        {
+          path: n,
+          value: i
+        }) : {
+          path: n
+        };
+      }));
     }
-    return root;
+    return [];
   }
-  function getPrunePath(props) {
-    var validPropsString = typeof props === "string" && props !== undefined && props !== "";
-    return validPropsString ? props.split(/ +/) : [];
+  function matchRequestProps(e, t, r) {
+    if ("" === t || "*" === t) return true;
+    var a, s = parseMatchProps(t);
+    if (isValidParsedData(s)) {
+      var n = getMatchPropsData(s);
+      a = Object.keys(n).every((function(e) {
+        var t = n[e], a = r[e];
+        return Object.prototype.hasOwnProperty.call(r, e) && "string" == typeof a && (null == t ? void 0 : t.test(a));
+      }));
+    } else logMessage(e, `Invalid parameter: ${t}`), a = false;
+    return a;
   }
-  function matchRequestProps(source, propsToMatch, requestData) {
-    if (propsToMatch === "" || propsToMatch === "*") {
-      return true;
-    }
-    var isMatched;
-    var parsedData = parseMatchProps(propsToMatch);
-    if (!isValidParsedData(parsedData)) {
-      logMessage(source, `Invalid parameter: ${propsToMatch}`);
-      isMatched = false;
-    } else {
-      var matchData = getMatchPropsData(parsedData);
-      var matchKeys = Object.keys(matchData);
-      isMatched = matchKeys.every(function (matchKey) {
-        var matchValue = matchData[matchKey];
-        var dataValue = requestData[matchKey];
-        return Object.prototype.hasOwnProperty.call(requestData, matchKey) && typeof dataValue === "string" && (matchValue === null || matchValue === void 0 ? void 0 : matchValue.test(dataValue));
-      });
-    }
-    return isMatched;
-  }
-  function getXhrData(method, url, async, user, password) {
+  function getXhrData(r, t, a, e, n) {
     return {
-      method: method,
-      url: url,
-      async: async,
-      user: user,
-      password: password
+      method: r,
+      url: t,
+      async: a,
+      user: e,
+      password: n
     };
   }
-  function isPruningNeeded(source, root, prunePaths, requiredPaths, stack, nativeObjects) {
-    if (!root) {
-      return false;
+  function isPruningNeeded(n, t, r, e, a, i) {
+    if (!t) return false;
+    var o, {nativeStringify: u} = i, c = r.map((function(n) {
+      return n.path;
+    })), f = e.map((function(n) {
+      return n.path;
+    }));
+    if (0 === c.length && f.length > 0) {
+      var g = u(t);
+      if (toRegExp(f.join("")).test(g)) return logMessage(n, `${window.location.hostname}\n${u(t, null, 2)}\nStack trace:\n${(new Error).stack}`, true), 
+      t && "object" == typeof t && logMessage(n, t, true, false), o = false;
     }
-    var {
-      nativeStringify: nativeStringify
-    } = nativeObjects;
-    var shouldProcess;
-    if (prunePaths.length === 0 && requiredPaths.length > 0) {
-      var rootString = nativeStringify(root);
-      var matchRegex = toRegExp(requiredPaths.join(""));
-      var shouldLog = matchRegex.test(rootString);
-      if (shouldLog) {
-        logMessage(source, `${window.location.hostname}\n${nativeStringify(root, null, 2)}\nStack trace:\n${new Error().stack}`, true);
-        if (root && typeof root === "object") {
-          logMessage(source, root, true, false);
-        }
-        shouldProcess = false;
-        return shouldProcess;
+    if (a && !matchStackTrace(a, (new Error).stack || "")) return o = false;
+    for (var s, l = [ ".*.", "*.", ".*", ".[].", "[].", ".[]" ], _loop = function _loop() {
+      var n = f[p], r = n.split(".").pop(), e = l.some((function(t) {
+        return n.includes(t);
+      })), a = getWildcardPropertyInChain(t, n, e);
+      if (!a.length) return {
+        v: o = false
+      };
+      o = !e;
+      for (var i = 0; i < a.length; i += 1) {
+        var u = "string" == typeof r && void 0 !== a[i].base[r];
+        o = e ? u || o : u && o;
       }
-    }
-    if (stack && !matchStackTrace(stack, new Error().stack || "")) {
-      shouldProcess = false;
-      return shouldProcess;
-    }
-    var wildcardSymbols = [".*.", "*.", ".*", ".[].", "[].", ".[]"];
-    var _loop = function _loop() {
-        var requiredPath = requiredPaths[i];
-        var lastNestedPropName = requiredPath.split(".").pop();
-        var hasWildcard = wildcardSymbols.some(function (symbol) {
-          return requiredPath.includes(symbol);
-        });
-        var details = getWildcardPropertyInChain(root, requiredPath, hasWildcard);
-        if (!details.length) {
-          shouldProcess = false;
-          return {
-            v: shouldProcess
-          };
-        }
-        shouldProcess = !hasWildcard;
-        for (var j = 0; j < details.length; j += 1) {
-          var hasRequiredProp = typeof lastNestedPropName === "string" && details[j].base[lastNestedPropName] !== undefined;
-          if (hasWildcard) {
-            shouldProcess = hasRequiredProp || shouldProcess;
-          } else {
-            shouldProcess = hasRequiredProp && shouldProcess;
-          }
-        }
-      },
-      _ret;
-    for (var i = 0; i < requiredPaths.length; i += 1) {
-      _ret = _loop();
-      if (_ret) return _ret.v;
-    }
-    return shouldProcess;
+    }, p = 0; p < f.length; p += 1) if (s = _loop()) return s.v;
+    return o;
   }
-  function matchStackTrace(stackMatch, stackTrace) {
-    if (!stackMatch || stackMatch === "") {
-      return true;
-    }
-    var regExpValues = backupRegExpValues();
-    if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-      if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-        restoreRegExpValues(regExpValues);
-      }
-      return true;
-    }
-    var stackRegexp = toRegExp(stackMatch);
-    var refinedStackTrace = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    }).join("\n");
-    if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-      restoreRegExpValues(regExpValues);
-    }
-    return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
   }
-  function getMatchPropsData(data) {
-    var matchData = {};
-    var dataKeys = Object.keys(data);
-    dataKeys.forEach(function (key) {
-      matchData[key] = toRegExp(data[key]);
-    });
-    return matchData;
+  function getMatchPropsData(t) {
+    var a = {};
+    return Object.keys(t).forEach((function(c) {
+      a[c] = toRegExp(t[c]);
+    })), a;
   }
   function getRequestProps() {
-    return ["url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode"];
+    return [ "url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode" ];
   }
-  function isValidParsedData(data) {
-    return Object.values(data).every(function (value) {
-      return isValidStrPattern(value);
-    });
+  function isValidParsedData(t) {
+    return Object.values(t).every((function(t) {
+      return isValidStrPattern(t);
+    }));
   }
-  function parseMatchProps(propsToMatchStr) {
-    var PROPS_DIVIDER = " ";
-    var PAIRS_MARKER = ":";
-    var isRequestProp = function isRequestProp(prop) {
-      return getRequestProps().includes(prop);
-    };
-    var propsObj = {};
-    var props = propsToMatchStr.split(PROPS_DIVIDER);
-    props.forEach(function (prop) {
-      var dividerInd = prop.indexOf(PAIRS_MARKER);
-      var key = prop.slice(0, dividerInd);
-      if (isRequestProp(key)) {
-        var value = prop.slice(dividerInd + 1);
-        propsObj[key] = value;
-      } else {
-        propsObj.url = prop;
-      }
-    });
-    return propsObj;
+  function parseMatchProps(e) {
+    var r = {};
+    return e.split(" ").forEach((function(e) {
+      var n = e.indexOf(":"), i = e.slice(0, n);
+      if (function(e) {
+        return getRequestProps().includes(e);
+      }(i)) {
+        var s = e.slice(n + 1);
+        r[i] = s;
+      } else r.url = e;
+    })), r;
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function getWildcardPropertyInChain(base, chain) {
-    var lookThrough = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var output = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      if (chain === "*" || chain === "[]") {
-        for (var key in base) {
-          if (Object.prototype.hasOwnProperty.call(base, key)) {
-            output.push({
-              base: base,
-              prop: key
-            });
-          }
-        }
-      } else {
-        output.push({
-          base: base,
-          prop: chain
+  function getWildcardPropertyInChain(r, e) {
+    var a = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : [], t = arguments.length > 4 ? arguments[4] : void 0, o = e.indexOf(".");
+    if (-1 === o) {
+      if ("*" === e || "[]" === e) {
+        for (var n in r) if (Object.prototype.hasOwnProperty.call(r, n)) if (void 0 !== t) {
+          var s = r[n];
+          "string" == typeof s && t instanceof RegExp ? t.test(s) && i.push({
+            base: r,
+            prop: n
+          }) : s === t && i.push({
+            base: r,
+            prop: n
+          });
+        } else i.push({
+          base: r,
+          prop: n
         });
+      } else if (void 0 !== t) {
+        var p = r[e];
+        "string" == typeof p && t instanceof RegExp ? t.test(p) && i.push({
+          base: r,
+          prop: e
+        }) : r[e] === t && i.push({
+          base: r,
+          prop: e
+        });
+      } else i.push({
+        base: r,
+        prop: e
+      });
+      return i;
+    }
+    var c = e.slice(0, o);
+    if ("[]" === c && Array.isArray(r) || "*" === c && r instanceof Object || "[-]" === c && Array.isArray(r) || "{-}" === c && r instanceof Object) {
+      var f = e.slice(o + 1), y = Object.keys(r);
+      if ("{-}" === c || "[-]" === c) {
+        var h = Array.isArray(r) ? "array" : "object";
+        return ("{-}" !== c || "object" !== h) && ("[-]" !== c || "array" !== h) || y.forEach((function(e) {
+          var a = r[e];
+          isKeyInObject(a, f, t) && i.push({
+            base: r,
+            prop: e
+          });
+        })), i;
       }
-      return output;
+      y.forEach((function(e) {
+        getWildcardPropertyInChain(r[e], f, a, i, t);
+      }));
     }
-    var prop = chain.slice(0, pos);
-    var shouldLookThrough = prop === "[]" && Array.isArray(base) || prop === "*" && base instanceof Object;
-    if (shouldLookThrough) {
-      var nextProp = chain.slice(pos + 1);
-      var baseKeys = Object.keys(base);
-      baseKeys.forEach(function (key) {
-        var item = base[key];
-        getWildcardPropertyInChain(item, nextProp, lookThrough, output);
-      });
-    }
-    if (Array.isArray(base)) {
-      base.forEach(function (key) {
-        var nextBase = key;
-        if (nextBase !== undefined) {
-          getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
-        }
-      });
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if (nextBase !== undefined) {
-      getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
-    }
-    return output;
+    Array.isArray(r) && r.forEach((function(r) {
+      void 0 !== r && getWildcardPropertyInChain(r, e, a, i, t);
+    }));
+    var d = r[c];
+    return e = e.slice(o + 1), void 0 !== d && getWildcardPropertyInChain(d, e, a, i, t), 
+    i;
   }
-  function shouldAbortInlineOrInjectedScript(stackMatch, stackTrace) {
-    var INLINE_SCRIPT_STRING = "inlineScript";
-    var INJECTED_SCRIPT_STRING = "injectedScript";
-    var INJECTED_SCRIPT_MARKER = "<anonymous>";
-    var isInlineScript = function isInlineScript(match) {
-      return match.includes(INLINE_SCRIPT_STRING);
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
     };
-    var isInjectedScript = function isInjectedScript(match) {
-      return match.includes(INJECTED_SCRIPT_STRING);
-    };
-    if (!(isInlineScript(stackMatch) || isInjectedScript(stackMatch))) {
-      return false;
-    }
-    var documentURL = window.location.href;
-    var pos = documentURL.indexOf("#");
-    if (pos !== -1) {
-      documentURL = documentURL.slice(0, pos);
-    }
-    var stackSteps = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    });
-    var stackLines = stackSteps.map(function (line) {
-      var stack;
-      var getStackTraceValues = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(line);
-      if (getStackTraceValues) {
-        var _stackURL, _stackURL2;
-        var stackURL = getStackTraceValues[2];
-        var stackLine = getStackTraceValues[3];
-        var stackCol = getStackTraceValues[4];
-        if ((_stackURL = stackURL) !== null && _stackURL !== void 0 && _stackURL.startsWith("(")) {
-          stackURL = stackURL.slice(1);
-        }
-        if ((_stackURL2 = stackURL) !== null && _stackURL2 !== void 0 && _stackURL2.startsWith(INJECTED_SCRIPT_MARKER)) {
-          var _stackFunction;
-          stackURL = INJECTED_SCRIPT_STRING;
-          var stackFunction = getStackTraceValues[1] !== undefined ? getStackTraceValues[1].slice(0, -1) : line.slice(0, getStackTraceValues.index).trim();
-          if ((_stackFunction = stackFunction) !== null && _stackFunction !== void 0 && _stackFunction.startsWith("at")) {
-            stackFunction = stackFunction.slice(2).trim();
-          }
-          stack = `${stackFunction} ${stackURL}${stackLine}${stackCol}`.trim();
-        } else if (stackURL === documentURL) {
-          stack = `${INLINE_SCRIPT_STRING}${stackLine}${stackCol}`.trim();
-        } else {
-          stack = `${stackURL}${stackLine}${stackCol}`.trim();
-        }
-      } else {
-        stack = line;
-      }
-      return stack;
-    });
-    if (stackLines) {
-      for (var index = 0; index < stackLines.length; index += 1) {
-        if (isInlineScript(stackMatch) && stackLines[index].startsWith(INLINE_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-        if (isInjectedScript(stackMatch) && stackLines[index].startsWith(INJECTED_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-      }
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
     }
     return false;
   }
   function getNativeRegexpTest() {
-    var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "test");
-    var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-    if (descriptor && typeof descriptor.value === "function") {
-      return nativeRegexTest;
-    }
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
     throw new Error("RegExp.prototype.test is not a function");
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  function isKeyInObject(t, r, e) {
+    var n = r.split("."), _check5 = function _check(t, r) {
+      if (null == t) return false;
+      if (0 === r.length) return void 0 === e || ("string" == typeof t && e instanceof RegExp ? e.test(t) : t === e);
+      var n = r[0], i = r.slice(1);
+      if ("*" === n || "[]" === n) {
+        if (Array.isArray(t)) return t.some((function(t) {
+          return _check5(t, i);
+        }));
+        if ("object" == typeof t && null !== t) return Object.keys(t).some((function(r) {
+          return _check5(t[r], i);
+        }));
+      }
+      return !!Object.prototype.hasOwnProperty.call(t, n) && _check5(t[n], i);
+    };
+    return _check5(t, n);
+  }
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     jsonPruneXhrResponse.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -15113,7 +14210,8 @@ function jsonPruneXhrResponse(source, args) {
     console.log(e);
   }
 }
-function log$1(source, args) {
+
+function log(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
   if (source.uniqueId) {
@@ -15127,7 +14225,7 @@ function log$1(source, args) {
     }
     console.log(args);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     log.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -15142,6 +14240,7 @@ function log$1(source, args) {
     console.log(e);
   }
 }
+
 function logAddEventListener(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -15155,12 +14254,33 @@ function logAddEventListener(source, args) {
     function addEventListenerWrapper(type, listener) {
       var _this$constructor;
       if (validateType(type) && validateListener(listener)) {
-        var message = `addEventListener("${type}", ${listenerToString(listener)})`;
-        logMessage(source, message, true);
+        var targetElement;
+        var targetElementInfo;
+        var listenerInfo = listenerToString(listener);
+        if (this) {
+          if (this instanceof Window) {
+            targetElementInfo = "window";
+          } else if (this instanceof Document) {
+            targetElementInfo = "document";
+          } else if (this instanceof Element) {
+            targetElement = this;
+            targetElementInfo = getElementAttributesWithValues(this);
+          }
+        }
+        if (targetElementInfo) {
+          var message = `addEventListener("${type}", ${listenerInfo})\nElement: ${targetElementInfo}`;
+          logMessage(source, message, true);
+          if (targetElement) {
+            console.log("log-addEventListener Element:", targetElement);
+          }
+        } else {
+          var _message = `addEventListener("${type}", ${listenerInfo})`;
+          logMessage(source, _message, true);
+        }
         hit(source);
       } else {
-        var _message = `Invalid event type or listener passed to addEventListener:\n        type: ${convertTypeToString(type)}\n        listener: ${convertTypeToString(listener)}`;
-        logMessage(source, _message, true);
+        var _message2 = `Invalid event type or listener passed to addEventListener:\n        type: ${convertTypeToString(type)}\n        listener: ${convertTypeToString(listener)}`;
+        logMessage(source, _message2, true);
       }
       var context = this;
       if (this && ((_this$constructor = this.constructor) === null || _this$constructor === void 0 ? void 0 : _this$constructor.name) === "Window" && this !== window) {
@@ -15169,7 +14289,7 @@ function logAddEventListener(source, args) {
       for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         args[_key - 2] = arguments[_key];
       }
-      return nativeAddEventListener.apply(context, [type, listener, ...args]);
+      return nativeAddEventListener.apply(context, [ type, listener, ...args ]);
     }
     var descriptor = {
       configurable: true,
@@ -15182,96 +14302,54 @@ function logAddEventListener(source, args) {
     Object.defineProperty(window, "addEventListener", descriptor);
     Object.defineProperty(document, "addEventListener", descriptor);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function validateType(type) {
-    return typeof type !== "undefined";
+  function validateType(e) {
+    return void 0 !== e;
   }
-  function validateListener(listener) {
-    return typeof listener !== "undefined" && (typeof listener === "function" || typeof listener === "object" && listener !== null && "handleEvent" in listener && typeof listener.handleEvent === "function");
+  function validateListener(n) {
+    return void 0 !== n && ("function" == typeof n || "object" == typeof n && null !== n && "handleEvent" in n && "function" == typeof n.handleEvent);
   }
-  function listenerToString(listener) {
-    return typeof listener === "function" ? listener.toString() : listener.handleEvent.toString();
+  function listenerToString(n) {
+    return "function" == typeof n ? n.toString() : n.handleEvent.toString();
   }
-  function convertTypeToString(value) {
-    var output;
-    if (typeof value === "undefined") {
-      output = "undefined";
-    } else if (typeof value === "object") {
-      if (value === null) {
-        output = "null";
-      } else {
-        output = objectToString(value);
-      }
-    } else {
-      output = String(value);
+  function convertTypeToString(n) {
+    return void 0 === n ? "undefined" : "object" == typeof n ? null === n ? "null" : objectToString(n) : String(n);
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    return output;
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
+  function objectToString(t) {
+    return t && "object" == typeof t ? isEmptyObject(t) ? "{}" : Object.entries(t).map((function(t) {
+      var n = t[0], e = t[1], o = e;
+      return e instanceof Object && (o = `{ ${objectToString(e)} }`), `${n}:"${o}"`;
+    })).join(" ") : String(t);
   }
-  function objectToString(obj) {
-    if (!obj || typeof obj !== "object") {
-      return String(obj);
-    }
-    if (isEmptyObject(obj)) {
-      return "{}";
-    }
-    return Object.entries(obj).map(function (pair) {
-      var key = pair[0];
-      var value = pair[1];
-      var recordValueStr = value;
-      if (value instanceof Object) {
-        recordValueStr = `{ ${objectToString(value)} }`;
-      }
-      return `${key}:"${recordValueStr}"`;
-    }).join(" ");
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function getElementAttributesWithValues(e) {
+    if (!(e && e instanceof Element && e.attributes && e.nodeName)) return "";
+    for (var t = e.attributes, n = e.nodeName.toLowerCase(), a = 0; a < t.length; a += 1) {
+      var r = t[a];
+      n += `[${r.name}="${r.value}"]`;
+    }
+    return n;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     logAddEventListener.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -15286,6 +14364,7 @@ function logAddEventListener(source, args) {
     console.log(e);
   }
 }
+
 function logEval(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -15309,58 +14388,31 @@ function logEval(source, args) {
         args[_key] = arguments[_key];
       }
       logMessage(source, `new Function(${args.join(", ")})`, true);
-      return nativeFunction.apply(this, [...args]);
+      return nativeFunction.apply(this, [ ...args ]);
     }
     FunctionWrapper.prototype = Object.create(nativeFunction.prototype);
     FunctionWrapper.prototype.constructor = FunctionWrapper;
     window.Function = FunctionWrapper;
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     logEval.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -15375,6 +14427,7 @@ function logEval(source, args) {
     console.log(e);
   }
 }
+
 function logOnStackTrace(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -15389,10 +14442,10 @@ function logOnStackTrace(source, args) {
     }
     var refineStackTrace = function refineStackTrace(stackString) {
       var regExpValues = backupRegExpValues();
-      var stackSteps = stackString.split("\n").slice(2).map(function (line) {
+      var stackSteps = stackString.split("\n").slice(2).map((function(line) {
         return line.replace(/ {4}at /, "");
-      });
-      var logInfoArray = stackSteps.map(function (line) {
+      }));
+      var logInfoArray = stackSteps.map((function(line) {
         var funcName;
         var funcFullPath;
         var reg = /\(([^\)]+)\)/;
@@ -15407,12 +14460,12 @@ function logOnStackTrace(source, args) {
           funcName = "function name is not available";
           funcFullPath = line;
         }
-        return [funcName, funcFullPath];
-      });
+        return [ funcName, funcFullPath ];
+      }));
       var logInfoObject = {};
-      logInfoArray.forEach(function (pair) {
+      logInfoArray.forEach((function(pair) {
         logInfoObject[pair[0]] = pair[1];
-      });
+      }));
       if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
         restoreRegExpValues(regExpValues);
       }
@@ -15420,13 +14473,8 @@ function logOnStackTrace(source, args) {
     };
     var _setChainPropAccess = function setChainPropAccess(owner, property) {
       var chainInfo = getPropertyInChain(owner, property);
-      var {
-        base: base
-      } = chainInfo;
-      var {
-        prop: prop,
-        chain: chain
-      } = chainInfo;
+      var {base: base} = chainInfo;
+      var {prop: prop, chain: chain} = chainInfo;
       if (chain) {
         var setter = function setter(a) {
           base = a;
@@ -15447,158 +14495,95 @@ function logOnStackTrace(source, args) {
         get() {
           hit(source);
           logMessage(source, `Get ${prop}`, true);
-          console.table(refineStackTrace(new Error().stack));
+          console.table(refineStackTrace((new Error).stack));
           return value;
         },
         set(newValue) {
           hit(source);
           logMessage(source, `Set ${prop}`, true);
-          console.table(refineStackTrace(new Error().stack));
+          console.table(refineStackTrace((new Error).stack));
           value = newValue;
         }
       });
     };
     _setChainPropAccess(window, property);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
-      configurable: true
-    });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
     };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
+      configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
+    });
   }
-  function setPropertyAccess(object, property, descriptor) {
-    var currentDescriptor = Object.getOwnPropertyDescriptor(object, property);
-    if (currentDescriptor && !currentDescriptor.configurable) {
-      return false;
-    }
-    Object.defineProperty(object, property, descriptor);
-    return true;
+  function setPropertyAccess(e, r, t) {
+    var c = Object.getOwnPropertyDescriptor(e, r);
+    return !(c && !c.configurable) && (Object.defineProperty(e, r, t), true);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     logOnStackTrace.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -15613,6 +14598,7 @@ function logOnStackTrace(source, args) {
     console.log(e);
   }
 }
+
 function m3uPrune(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -15646,11 +14632,11 @@ function m3uPrune(source, args) {
       VMAP_AD: "-VMAP-AD-",
       VMAP_AD_BREAK: "#EXT-X-VMAP-AD-BREAK:"
     };
-    var TAGS_ALLOWLIST = ["#EXT-X-TARGETDURATION", "#EXT-X-MEDIA-SEQUENCE", "#EXT-X-DISCONTINUITY-SEQUENCE", "#EXT-X-ENDLIST", "#EXT-X-PLAYLIST-TYPE", "#EXT-X-I-FRAMES-ONLY", "#EXT-X-MEDIA", "#EXT-X-STREAM-INF", "#EXT-X-I-FRAME-STREAM-INF", "#EXT-X-SESSION-DATA", "#EXT-X-SESSION-KEY", "#EXT-X-INDEPENDENT-SEGMENTS", "#EXT-X-START"];
+    var TAGS_ALLOWLIST = [ "#EXT-X-TARGETDURATION", "#EXT-X-MEDIA-SEQUENCE", "#EXT-X-DISCONTINUITY-SEQUENCE", "#EXT-X-ENDLIST", "#EXT-X-PLAYLIST-TYPE", "#EXT-X-I-FRAMES-ONLY", "#EXT-X-MEDIA", "#EXT-X-STREAM-INF", "#EXT-X-I-FRAME-STREAM-INF", "#EXT-X-SESSION-DATA", "#EXT-X-SESSION-KEY", "#EXT-X-INDEPENDENT-SEGMENTS", "#EXT-X-START" ];
     var isAllowedTag = function isAllowedTag(str) {
-      return TAGS_ALLOWLIST.some(function (el) {
+      return TAGS_ALLOWLIST.some((function(el) {
         return str.startsWith(el);
-      });
+      }));
     };
     var _pruneExtinfFromVmapBlock = function pruneExtinfFromVmapBlock(lines, i) {
       var array = lines.slice();
@@ -15769,16 +14755,16 @@ function m3uPrune(source, args) {
       var lines = text.split(/\r?\n/);
       if (text.includes(COMCAST_AD_MARKER.VMAP_AD_BREAK)) {
         lines = pruneVmapBlock(lines);
-        lines = lines.filter(function (l) {
+        lines = lines.filter((function(l) {
           return !!l;
-        }).join("\n");
+        })).join("\n");
         if (shouldLogContent) {
           logMessage(source, `Modified M3U content:\n${lines}`);
         }
         return lines;
       }
       lines = pruneSegments(lines);
-      lines = lines.map(function (line, index, array) {
+      lines = lines.map((function(line, index, array) {
         if (typeof line === "undefined") {
           return line;
         }
@@ -15787,9 +14773,9 @@ function m3uPrune(source, args) {
           line = pruneInfBlock(line, index, array);
         }
         return line;
-      }).filter(function (l) {
+      })).filter((function(l) {
         return !!l;
-      }).join("\n");
+      })).join("\n");
       if (shouldLogContent) {
         logMessage(source, `Modified M3U content:\n${lines}`);
       }
@@ -15817,24 +14803,16 @@ function m3uPrune(source, args) {
       return Reflect.apply(target, thisArg, args);
     };
     var sendWrapper = function sendWrapper(target, thisArg, args) {
-      var allowedResponseTypeValues = ["", "text"];
+      var allowedResponseTypeValues = [ "", "text" ];
       if (!thisArg.shouldBePruned || !allowedResponseTypeValues.includes(thisArg.responseType)) {
         return Reflect.apply(target, thisArg, args);
       }
-      var forgedRequest = new XMLHttpRequest();
-      forgedRequest.addEventListener("readystatechange", function () {
+      var forgedRequest = new XMLHttpRequest;
+      forgedRequest.addEventListener("readystatechange", (function() {
         if (forgedRequest.readyState !== 4) {
           return;
         }
-        var {
-          readyState: readyState,
-          response: response,
-          responseText: responseText,
-          responseURL: responseURL,
-          responseXML: responseXML,
-          status: status,
-          statusText: statusText
-        } = forgedRequest;
+        var {readyState: readyState, response: response, responseText: responseText, responseURL: responseURL, responseXML: responseXML, status: status, statusText: statusText} = forgedRequest;
         var content = responseText || response;
         if (typeof content !== "string") {
           return;
@@ -15878,22 +14856,22 @@ function m3uPrune(source, args) {
             writable: false
           }
         });
-        setTimeout(function () {
+        setTimeout((function() {
           var stateEvent = new Event("readystatechange");
           thisArg.dispatchEvent(stateEvent);
           var loadEvent = new Event("load");
           thisArg.dispatchEvent(loadEvent);
           var loadEndEvent = new Event("loadend");
           thisArg.dispatchEvent(loadEndEvent);
-        }, 1);
+        }), 1);
         hit(source);
-      });
-      nativeOpen.apply(forgedRequest, [xhrData.method, xhrData.url]);
-      thisArg.collectedHeaders.forEach(function (header) {
+      }));
+      nativeOpen.apply(forgedRequest, [ xhrData.method, xhrData.url ]);
+      thisArg.collectedHeaders.forEach((function(header) {
         var name = header[0];
         var value = header[1];
         forgedRequest.setRequestHeader(name, value);
-      });
+      }));
       thisArg.collectedHeaders = [];
       try {
         nativeSend.call(forgedRequest, args);
@@ -15943,170 +14921,101 @@ function m3uPrune(source, args) {
     };
     window.fetch = new Proxy(window.fetch, fetchHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function getXhrData(method, url, async, user, password) {
+  function getXhrData(r, t, a, e, n) {
     return {
-      method: method,
-      url: url,
-      async: async,
-      user: user,
-      password: password
+      method: r,
+      url: t,
+      async: a,
+      user: e,
+      password: n
     };
   }
-  function matchRequestProps(source, propsToMatch, requestData) {
-    if (propsToMatch === "" || propsToMatch === "*") {
-      return true;
-    }
-    var isMatched;
-    var parsedData = parseMatchProps(propsToMatch);
-    if (!isValidParsedData(parsedData)) {
-      logMessage(source, `Invalid parameter: ${propsToMatch}`);
-      isMatched = false;
-    } else {
-      var matchData = getMatchPropsData(parsedData);
-      var matchKeys = Object.keys(matchData);
-      isMatched = matchKeys.every(function (matchKey) {
-        var matchValue = matchData[matchKey];
-        var dataValue = requestData[matchKey];
-        return Object.prototype.hasOwnProperty.call(requestData, matchKey) && typeof dataValue === "string" && (matchValue === null || matchValue === void 0 ? void 0 : matchValue.test(dataValue));
-      });
-    }
-    return isMatched;
+  function matchRequestProps(e, t, r) {
+    if ("" === t || "*" === t) return true;
+    var a, s = parseMatchProps(t);
+    if (isValidParsedData(s)) {
+      var n = getMatchPropsData(s);
+      a = Object.keys(n).every((function(e) {
+        var t = n[e], a = r[e];
+        return Object.prototype.hasOwnProperty.call(r, e) && "string" == typeof a && (null == t ? void 0 : t.test(a));
+      }));
+    } else logMessage(e, `Invalid parameter: ${t}`), a = false;
+    return a;
   }
-  function getMatchPropsData(data) {
-    var matchData = {};
-    var dataKeys = Object.keys(data);
-    dataKeys.forEach(function (key) {
-      matchData[key] = toRegExp(data[key]);
-    });
-    return matchData;
+  function getMatchPropsData(t) {
+    var a = {};
+    return Object.keys(t).forEach((function(c) {
+      a[c] = toRegExp(t[c]);
+    })), a;
   }
   function getRequestProps() {
-    return ["url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode"];
+    return [ "url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode" ];
   }
-  function isValidParsedData(data) {
-    return Object.values(data).every(function (value) {
-      return isValidStrPattern(value);
-    });
+  function isValidParsedData(t) {
+    return Object.values(t).every((function(t) {
+      return isValidStrPattern(t);
+    }));
   }
-  function parseMatchProps(propsToMatchStr) {
-    var PROPS_DIVIDER = " ";
-    var PAIRS_MARKER = ":";
-    var isRequestProp = function isRequestProp(prop) {
-      return getRequestProps().includes(prop);
-    };
-    var propsObj = {};
-    var props = propsToMatchStr.split(PROPS_DIVIDER);
-    props.forEach(function (prop) {
-      var dividerInd = prop.indexOf(PAIRS_MARKER);
-      var key = prop.slice(0, dividerInd);
-      if (isRequestProp(key)) {
-        var value = prop.slice(dividerInd + 1);
-        propsObj[key] = value;
-      } else {
-        propsObj.url = prop;
-      }
-    });
-    return propsObj;
+  function parseMatchProps(e) {
+    var r = {};
+    return e.split(" ").forEach((function(e) {
+      var n = e.indexOf(":"), i = e.slice(0, n);
+      if (function(e) {
+        return getRequestProps().includes(e);
+      }(i)) {
+        var s = e.slice(n + 1);
+        r[i] = s;
+      } else r.url = e;
+    })), r;
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     m3uPrune.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -16121,6 +15030,7 @@ function m3uPrune(source, args) {
     console.log(e);
   }
 }
+
 function metrikaYandexTag(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -16132,17 +15042,13 @@ function metrikaYandexTag(source, args) {
   function metrikaYandexTag(source) {
     var asyncCallbackFromOptions = function asyncCallbackFromOptions(id, param) {
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      var {
-        callback: callback
-      } = options;
-      var {
-        ctx: ctx
-      } = options;
+      var {callback: callback} = options;
+      var {ctx: ctx} = options;
       if (typeof callback === "function") {
         callback = ctx !== undefined ? callback.bind(ctx) : callback;
-        setTimeout(function () {
+        setTimeout((function() {
           return callback();
-        });
+        }));
       }
     };
     var addFileExtension = noopFunc;
@@ -16198,43 +15104,26 @@ function metrikaYandexTag(source, args) {
     } else if (window.ym && window.ym.a) {
       ym.a = window.ym.a;
       window.ym = ym;
-      window.ym.a.forEach(function (params) {
+      window.ym.a.forEach((function(params) {
         var id = params[0];
         init(id);
-      });
+      }));
     }
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     metrikaYandexTag.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -16249,6 +15138,7 @@ function metrikaYandexTag(source, args) {
     console.log(e);
   }
 }
+
 function metrikaYandexWatch(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -16261,17 +15151,13 @@ function metrikaYandexWatch(source, args) {
     var cbName = "yandex_metrika_callbacks";
     var asyncCallbackFromOptions = function asyncCallbackFromOptions() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var {
-        callback: callback
-      } = options;
-      var {
-        ctx: ctx
-      } = options;
+      var {callback: callback} = options;
+      var {ctx: ctx} = options;
       if (typeof callback === "function") {
         callback = ctx !== undefined ? callback.bind(ctx) : callback;
-        setTimeout(function () {
+        setTimeout((function() {
           return callback();
-        });
+        }));
       }
     };
     function Metrika() {}
@@ -16282,16 +15168,16 @@ function metrikaYandexWatch(source, args) {
     Metrika.prototype.userParams = noopFunc;
     Metrika.prototype.params = noopFunc;
     Metrika.prototype.counters = noopArray;
-    Metrika.prototype.extLink = function (url, options) {
+    Metrika.prototype.extLink = function(url, options) {
       asyncCallbackFromOptions(options);
     };
-    Metrika.prototype.file = function (url, options) {
+    Metrika.prototype.file = function(url, options) {
       asyncCallbackFromOptions(options);
     };
-    Metrika.prototype.hit = function (url, options) {
+    Metrika.prototype.hit = function(url, options) {
       asyncCallbackFromOptions(options);
     };
-    Metrika.prototype.reachGoal = function (target, params, cb, ctx) {
+    Metrika.prototype.reachGoal = function(target, params, cb, ctx) {
       asyncCallbackFromOptions({
         callback: cb,
         ctx: ctx
@@ -16306,47 +15192,30 @@ function metrikaYandexWatch(source, args) {
       };
     }
     if (window[cbName] && Array.isArray(window[cbName])) {
-      window[cbName].forEach(function (func) {
+      window[cbName].forEach((function(func) {
         if (typeof func === "function") {
           func();
         }
-      });
+      }));
     }
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
   function noopArray() {
     return [];
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     metrikaYandexWatch.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -16361,6 +15230,7 @@ function metrikaYandexWatch(source, args) {
     console.log(e);
   }
 }
+
 function noProtectedAudience(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -16392,32 +15262,15 @@ function noProtectedAudience(source, args) {
     }
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopStr() {
@@ -16425,12 +15278,12 @@ function noProtectedAudience(source, args) {
   }
   function noopFunc() {}
   function noopResolveVoid() {
-    return Promise.resolve(undefined);
+    return Promise.resolve(void 0);
   }
   function noopResolveNull() {
     return Promise.resolve(null);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     noProtectedAudience.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -16445,6 +15298,7 @@ function noProtectedAudience(source, args) {
     console.log(e);
   }
 }
+
 function noTopics(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -16461,52 +15315,33 @@ function noTopics(source, args) {
     if (!Object.prototype.hasOwnProperty.call(Document.prototype, TOPICS_PROPERTY_NAME) || Document.prototype[TOPICS_PROPERTY_NAME] instanceof Function === false) {
       return;
     }
-    Document.prototype[TOPICS_PROPERTY_NAME] = function () {
+    Document.prototype[TOPICS_PROPERTY_NAME] = function() {
       return noopPromiseResolve("[]");
     };
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopPromiseResolve() {
-    var responseBody = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "{}";
-    var responseUrl = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
-    var responseType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "basic";
-    if (typeof Response === "undefined") {
-      return;
-    }
-    var response = new Response(responseBody, {
-      status: 200,
-      statusText: "OK"
-    });
-    if (responseType === "opaque") {
-      Object.defineProperties(response, {
+    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "{}", t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "", s = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "basic";
+    if ("undefined" != typeof Response) {
+      var n = new Response(e, {
+        headers: {
+          "Content-Length": `${e.length}`
+        },
+        status: 200,
+        statusText: "OK"
+      });
+      return "opaque" === s ? Object.defineProperties(n, {
         body: {
           value: null
         },
@@ -16523,22 +15358,19 @@ function noTopics(source, args) {
           value: ""
         },
         type: {
-          value: responseType
+          value: s
         }
-      });
-    } else {
-      Object.defineProperties(response, {
+      }) : Object.defineProperties(n, {
         url: {
-          value: responseUrl
+          value: t
         },
         type: {
-          value: responseType
+          value: s
         }
-      });
+      }), Promise.resolve(n);
     }
-    return Promise.resolve(response);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     noTopics.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -16553,6 +15385,7 @@ function noTopics(source, args) {
     console.log(e);
   }
 }
+
 function noeval(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -16567,52 +15400,25 @@ function noeval(source, args) {
       logMessage(source, `AdGuard has prevented eval:\n${s}`, true);
     }.bind();
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     noeval.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -16627,6 +15433,7 @@ function noeval(source, args) {
     console.log(e);
   }
 }
+
 function nowebrtc(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -16659,7 +15466,7 @@ function nowebrtc(source, args) {
     var rtc = window[propertyName];
     window[propertyName] = rtcReplacement;
     if (rtc.prototype) {
-      rtc.prototype.createDataChannel = function (a, b) {
+      rtc.prototype.createDataChannel = function(a, b) {
         return {
           close: noopFunc,
           send: noopFunc
@@ -16667,67 +15474,34 @@ function nowebrtc(source, args) {
       }.bind(null);
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function convertRtcConfigToString(config) {
-    var UNDEF_STR = "undefined";
-    var str = UNDEF_STR;
-    if (config === null) {
-      str = "null";
-    } else if (config instanceof Object) {
-      var SERVERS_PROP_NAME = "iceServers";
-      var URLS_PROP_NAME = "urls";
-      if (Object.prototype.hasOwnProperty.call(config, SERVERS_PROP_NAME) && config[SERVERS_PROP_NAME] && Object.prototype.hasOwnProperty.call(config[SERVERS_PROP_NAME][0], URLS_PROP_NAME) && !!config[SERVERS_PROP_NAME][0][URLS_PROP_NAME]) {
-        str = config[SERVERS_PROP_NAME][0][URLS_PROP_NAME].toString();
-      }
+  function convertRtcConfigToString(e) {
+    var t = "undefined";
+    if (null === e) t = "null"; else if (e instanceof Object) {
+      var r = "iceServers", n = "urls";
+      Object.prototype.hasOwnProperty.call(e, r) && e[r] && Object.prototype.hasOwnProperty.call(e[r][0], n) && e[r][0][n] && (t = e[r][0][n].toString());
     }
-    return str;
+    return t;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     nowebrtc.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -16742,6 +15516,7 @@ function nowebrtc(source, args) {
     console.log(e);
   }
 }
+
 function preventAddEventListener(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -16750,15 +15525,42 @@ function preventAddEventListener(source, args) {
       return;
     }
   }
-  function preventAddEventListener(source, typeSearch, listenerSearch) {
+  function preventAddEventListener(source, typeSearch, listenerSearch, additionalArgName, additionalArgValue) {
     var typeSearchRegexp = toRegExp(typeSearch);
     var listenerSearchRegexp = toRegExp(listenerSearch);
+    var elementToMatch;
+    if (additionalArgName) {
+      if (additionalArgName !== "elements") {
+        logMessage(source, `Invalid "additionalArgName": ${additionalArgName}\nOnly "elements" is supported.`);
+        return;
+      }
+      if (!additionalArgValue) {
+        logMessage(source, '"additionalArgValue" is required.');
+        return;
+      }
+      elementToMatch = additionalArgValue;
+    }
+    var elementMatches = function elementMatches(element) {
+      if (elementToMatch === undefined) {
+        return true;
+      }
+      if (elementToMatch === "window") {
+        return element === window;
+      }
+      if (elementToMatch === "document") {
+        return element === document;
+      }
+      if (element && element.matches && element.matches(elementToMatch)) {
+        return true;
+      }
+      return false;
+    };
     var nativeAddEventListener = window.EventTarget.prototype.addEventListener;
     function addEventListenerWrapper(type, listener) {
       var _this$constructor;
       var shouldPrevent = false;
       if (validateType(type) && validateListener(listener)) {
-        shouldPrevent = typeSearchRegexp.test(type.toString()) && listenerSearchRegexp.test(listenerToString(listener));
+        shouldPrevent = typeSearchRegexp.test(type.toString()) && listenerSearchRegexp.test(listenerToString(listener)) && elementMatches(this);
       }
       if (shouldPrevent) {
         hit(source);
@@ -16771,7 +15573,7 @@ function preventAddEventListener(source, args) {
       for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         args[_key - 2] = arguments[_key];
       }
-      return nativeAddEventListener.apply(context, [type, listener, ...args]);
+      return nativeAddEventListener.apply(context, [ type, listener, ...args ]);
     }
     var descriptor = {
       configurable: true,
@@ -16784,79 +15586,50 @@ function preventAddEventListener(source, args) {
     Object.defineProperty(window, "addEventListener", descriptor);
     Object.defineProperty(document, "addEventListener", descriptor);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
+  }
+  function validateType(e) {
+    return void 0 !== e;
+  }
+  function validateListener(n) {
+    return void 0 !== n && ("function" == typeof n || "object" == typeof n && null !== n && "handleEvent" in n && "function" == typeof n.handleEvent);
+  }
+  function listenerToString(n) {
+    return "function" == typeof n ? n.toString() : n.handleEvent.toString();
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
   }
-  function validateType(type) {
-    return typeof type !== "undefined";
-  }
-  function validateListener(listener) {
-    return typeof listener !== "undefined" && (typeof listener === "function" || typeof listener === "object" && listener !== null && "handleEvent" in listener && typeof listener.handleEvent === "function");
-  }
-  function listenerToString(listener) {
-    return typeof listener === "function" ? listener.toString() : listener.handleEvent.toString();
-  }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventAddEventListener.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -16871,6 +15644,7 @@ function preventAddEventListener(source, args) {
     console.log(e);
   }
 }
+
 function preventAdfly(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -16941,60 +15715,29 @@ function preventAdfly(source, args) {
       logMessage(source, "Failed to set up prevent-adfly scriptlet");
     }
   }
-  function setPropertyAccess(object, property, descriptor) {
-    var currentDescriptor = Object.getOwnPropertyDescriptor(object, property);
-    if (currentDescriptor && !currentDescriptor.configurable) {
-      return false;
-    }
-    Object.defineProperty(object, property, descriptor);
-    return true;
+  function setPropertyAccess(e, r, t) {
+    var c = Object.getOwnPropertyDescriptor(e, r);
+    return !(c && !c.configurable) && (Object.defineProperty(e, r, t), true);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventAdfly.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -17009,6 +15752,7 @@ function preventAdfly(source, args) {
     console.log(e);
   }
 }
+
 function preventBab(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -17025,12 +15769,12 @@ function preventBab(source, args) {
         for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
           args[_key - 1] = arguments[_key];
         }
-        return nativeSetTimeout.apply(window, [callback, ...args]);
+        return nativeSetTimeout.apply(window, [ callback, ...args ]);
       }
       hit(source);
     };
     window.setTimeout = timeoutWrapper;
-    var signatures = [["blockadblock"], ["babasbm"], [/getItem\('babn'\)/], ["getElementById", "String.fromCharCode", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", "charAt", "DOMContentLoaded", "AdBlock", "addEventListener", "doScroll", "fromCharCode", "<<2|r>>4", "sessionStorage", "clientWidth", "localStorage", "Math", "random"]];
+    var signatures = [ [ "blockadblock" ], [ "babasbm" ], [ /getItem\('babn'\)/ ], [ "getElementById", "String.fromCharCode", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", "charAt", "DOMContentLoaded", "AdBlock", "addEventListener", "doScroll", "fromCharCode", "<<2|r>>4", "sessionStorage", "clientWidth", "localStorage", "Math", "random" ] ];
     var check = function check(str) {
       if (typeof str !== "string") {
         return false;
@@ -17067,36 +15811,20 @@ function preventBab(source, args) {
       }
     };
     window.eval = evalWrapper.bind(window);
+    window.eval.toString = nativeEval.toString.bind(nativeEval);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventBab.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -17111,6 +15839,7 @@ function preventBab(source, args) {
     console.log(e);
   }
 }
+
 function preventCanvas(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -17126,10 +15855,7 @@ function preventCanvas(source, args) {
       if (!contextType) {
         shouldPrevent = true;
       } else if (isValidMatchStr(contextType)) {
-        var {
-          isInvertedMatch: isInvertedMatch,
-          matchRegexp: matchRegexp
-        } = parseMatchArg(contextType);
+        var {isInvertedMatch: isInvertedMatch, matchRegexp: matchRegexp} = parseMatchArg(contextType);
         shouldPrevent = matchRegexp.test(type) !== isInvertedMatch;
       } else {
         logMessage(source, `Invalid contextType parameter: ${contextType}`);
@@ -17146,124 +15872,66 @@ function preventCanvas(source, args) {
     };
     window.HTMLCanvasElement.prototype.getContext = new Proxy(window.HTMLCanvasElement.prototype.getContext, canvasHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function parseMatchArg(match) {
-    var INVERT_MARKER = "!";
-    var isInvertedMatch = match ? match === null || match === void 0 ? void 0 : match.startsWith(INVERT_MARKER) : false;
-    var matchValue = isInvertedMatch ? match.slice(1) : match;
-    var matchRegexp = toRegExp(matchValue);
-    return {
-      isInvertedMatch: isInvertedMatch,
-      matchRegexp: matchRegexp,
-      matchValue: matchValue
-    };
-  }
-  function isValidMatchStr(match) {
-    var INVERT_MARKER = "!";
-    var str = match;
-    if (match !== null && match !== void 0 && match.startsWith(INVERT_MARKER)) {
-      str = match.slice(1);
-    }
-    return isValidStrPattern(str);
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function parseMatchArg(t) {
+    var e = !!t && (null == t ? void 0 : t.startsWith("!")), a = e ? t.slice(1) : t;
+    return {
+      isInvertedMatch: e,
+      matchRegexp: toRegExp(a),
+      matchValue: a
+    };
+  }
+  function isValidMatchStr(t) {
+    var i = t;
+    return null != t && t.startsWith("!") && (i = t.slice(1)), isValidStrPattern(i);
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventCanvas.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -17278,6 +15946,7 @@ function preventCanvas(source, args) {
     console.log(e);
   }
 }
+
 function preventElementSrcLoading(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -17308,15 +15977,7 @@ function preventElementSrcLoading(source, args) {
     } else {
       return;
     }
-    var hasTrustedTypes = window.trustedTypes && typeof window.trustedTypes.createPolicy === "function";
-    var policy;
-    if (hasTrustedTypes) {
-      policy = window.trustedTypes.createPolicy("AGPolicy", {
-        createScriptURL: function createScriptURL(arg) {
-          return arg;
-        }
-      });
-    }
+    var policy = getTrustedTypesApi(source);
     var SOURCE_PROPERTY_NAME = tagName === "link" ? "href" : "src";
     var ONERROR_PROPERTY_NAME = "onerror";
     var searchRegexp = toRegExp(match);
@@ -17336,7 +15997,7 @@ function preventElementSrcLoading(source, args) {
       }
       hit(source);
       setMatchedAttribute(thisArg);
-      return Reflect.apply(target, thisArg, [attrName, srcMockData[nodeName]]);
+      return Reflect.apply(target, thisArg, [ attrName, srcMockData[nodeName] ]);
     };
     var setAttributeHandler = {
       apply: setAttributeWrapper
@@ -17359,14 +16020,12 @@ function preventElementSrcLoading(source, args) {
           origSrcDescriptor.set.call(this, urlValue);
           return true;
         }
-        if (policy && urlValue instanceof TrustedScriptURL) {
-          var trustedSrc = policy.createScriptURL(urlValue);
-          origSrcDescriptor.set.call(this, trustedSrc);
-          hit(source);
-          return;
+        var mockData = srcMockData[nodeName];
+        if (typeof TrustedScriptURL !== "undefined" && policy !== null && policy !== void 0 && policy.isSupported && urlValue instanceof TrustedScriptURL) {
+          mockData = policy.createScriptURL(mockData);
         }
         setMatchedAttribute(this);
-        origSrcDescriptor.set.call(this, srcMockData[nodeName]);
+        origSrcDescriptor.set.call(this, mockData);
         hit(source);
       }
     });
@@ -17397,7 +16056,7 @@ function preventElementSrcLoading(source, args) {
       var eventName = args[0];
       var isMatched = typeof thisArg.getAttribute === "function" && thisArg.getAttribute(source.name) === "matched" && eventName === "error";
       if (isMatched) {
-        return Reflect.apply(target, thisArg, [eventName, noopFunc]);
+        return Reflect.apply(target, thisArg, [ eventName, noopFunc ]);
       }
       return Reflect.apply(target, thisArg, args);
     };
@@ -17406,7 +16065,7 @@ function preventElementSrcLoading(source, args) {
     };
     EventTarget.prototype.addEventListener = new Proxy(EventTarget.prototype.addEventListener, addEventListenerHandler);
     var preventInlineOnerror = function preventInlineOnerror(tagName, src) {
-      window.addEventListener("error", function (event) {
+      window.addEventListener("error", (function(event) {
         if (!event.target || !event.target.nodeName || event.target.nodeName.toLowerCase() !== tagName || !event.target.src || !src.test(event.target.src)) {
           return;
         }
@@ -17416,82 +16075,143 @@ function preventElementSrcLoading(source, args) {
           return;
         }
         event.target.onerror = noopFunc;
-      }, true);
+      }), true);
     };
     preventInlineOnerror(tagName, searchRegexp);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function safeGetDescriptor(obj, prop) {
-    var descriptor = Object.getOwnPropertyDescriptor(obj, prop);
-    if (descriptor && descriptor.configurable) {
-      return descriptor;
-    }
-    return null;
+  function safeGetDescriptor(r, e) {
+    var t = Object.getOwnPropertyDescriptor(r, e);
+    return t && t.configurable ? t : null;
   }
   function noopFunc() {}
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  function getTrustedTypesApi(t) {
+    var r, e = null == t || null === (r = t.api) || void 0 === r ? void 0 : r.policy;
+    if (e) return e;
+    var n = "AGPolicy", i = window.trustedTypes, u = !!i, c = {
+      HTML: "TrustedHTML",
+      Script: "TrustedScript",
+      ScriptURL: "TrustedScriptURL"
+    };
+    if (!u) return {
+      name: n,
+      isSupported: u,
+      TrustedType: c,
+      createHTML: function createHTML(t) {
+        return t;
+      },
+      createScript: function createScript(t) {
+        return t;
+      },
+      createScriptURL: function createScriptURL(t) {
+        return t;
+      },
+      create: function create(t, r) {
+        return r;
+      },
+      getAttributeType: function getAttributeType() {
+        return null;
+      },
+      convertAttributeToTrusted: function convertAttributeToTrusted(t, r, e) {
+        return e;
+      },
+      getPropertyType: function getPropertyType() {
+        return null;
+      },
+      convertPropertyToTrusted: function convertPropertyToTrusted(t, r, e) {
+        return e;
+      },
+      isHTML: function isHTML() {
+        return false;
+      },
+      isScript: function isScript() {
+        return false;
+      },
+      isScriptURL: function isScriptURL() {
+        return false;
+      }
+    };
+    var o = i.createPolicy(n, {
+      createHTML: function createHTML(t) {
+        return t;
+      },
+      createScript: function createScript(t) {
+        return t;
+      },
+      createScriptURL: function createScriptURL(t) {
+        return t;
+      }
+    }), createHTML = function createHTML(t) {
+      return o.createHTML(t);
+    }, createScript = function createScript(t) {
+      return o.createScript(t);
+    }, createScriptURL = function createScriptURL(t) {
+      return o.createScriptURL(t);
+    }, create = function create(t, r) {
+      switch (t) {
+       case c.HTML:
+        return createHTML(r);
+
+       case c.Script:
+        return createScript(r);
+
+       case c.ScriptURL:
+        return createScriptURL(r);
+
+       default:
+        return r;
+      }
+    }, p = i.getAttributeType.bind(i), T = i.getPropertyType.bind(i), s = i.isHTML.bind(i), a = i.isScript.bind(i), f = i.isScriptURL.bind(i);
+    return {
+      name: n,
+      isSupported: u,
+      TrustedType: c,
+      createHTML: createHTML,
+      createScript: createScript,
+      createScriptURL: createScriptURL,
+      create: create,
+      getAttributeType: p,
+      convertAttributeToTrusted: function convertAttributeToTrusted(t, r, e, n, i) {
+        var u = p(t, r, n, i);
+        return u ? create(u, e) : e;
+      },
+      getPropertyType: T,
+      convertPropertyToTrusted: function convertPropertyToTrusted(t, r, e, n) {
+        var i = T(t, r, n);
+        return i ? create(i, e) : e;
+      },
+      isHTML: s,
+      isScript: a,
+      isScriptURL: f
+    };
+  }
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventElementSrcLoading.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -17506,6 +16226,7 @@ function preventElementSrcLoading(source, args) {
     console.log(e);
   }
 }
+
 function preventEvalIf(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -17517,78 +16238,43 @@ function preventEvalIf(source, args) {
   function preventEvalIf(source, search) {
     var searchRegexp = toRegExp(search);
     var nativeEval = window.eval;
-    window.eval = function (payload) {
+    window.eval = function(payload) {
       if (!searchRegexp.test(payload.toString())) {
         return nativeEval.call(window, payload);
       }
       hit(source);
       return undefined;
     }.bind(window);
+    window.eval.toString = nativeEval.toString.bind(nativeEval);
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventEvalIf.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -17603,6 +16289,7 @@ function preventEvalIf(source, args) {
     console.log(e);
   }
 }
+
 function preventFab(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -17617,14 +16304,14 @@ function preventFab(source, args) {
     Fab.prototype.check = noopFunc;
     Fab.prototype.clearEvent = noopFunc;
     Fab.prototype.emitEvent = noopFunc;
-    Fab.prototype.on = function (a, b) {
+    Fab.prototype.on = function(a, b) {
       if (!a) {
         b();
       }
       return this;
     };
     Fab.prototype.onDetected = noopThis;
-    Fab.prototype.onNotDetected = function (a) {
+    Fab.prototype.onNotDetected = function(a) {
       a();
       return this;
     };
@@ -17633,7 +16320,7 @@ function preventFab(source, args) {
       set: noopFunc,
       get: noopFunc
     };
-    var fab = new Fab();
+    var fab = new Fab;
     var getSetFab = {
       get() {
         return Fab;
@@ -17677,39 +16364,22 @@ function preventFab(source, args) {
       Object.defineProperty(window, "sniffAdBlock", getsetfab);
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
   function noopThis() {
     return this;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventFab.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -17724,6 +16394,7 @@ function preventFab(source, args) {
     console.log(e);
   }
 }
+
 function preventFetch(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -17746,13 +16417,15 @@ function preventFetch(source, args) {
       strResponseBody = "[]";
     } else if (responseBody === "emptyStr") {
       strResponseBody = "";
+    } else if (responseBody === "true" || responseBody.match(/^length:\d+-\d+$/)) {
+      strResponseBody = generateRandomResponse(responseBody);
     } else {
       logMessage(source, `Invalid responseBody parameter: '${responseBody}'`);
       return;
     }
     var isResponseTypeSpecified = typeof responseType !== "undefined";
     var isResponseTypeSupported = function isResponseTypeSupported(responseType) {
-      var SUPPORTED_TYPES = ["basic", "cors", "opaque"];
+      var SUPPORTED_TYPES = [ "basic", "cors", "opaque" ];
       return SUPPORTED_TYPES.includes(responseType);
     };
     if (isResponseTypeSpecified && !isResponseTypeSupported(responseType)) {
@@ -17761,9 +16434,7 @@ function preventFetch(source, args) {
     }
     var getResponseType = function getResponseType(request) {
       try {
-        var {
-          mode: mode
-        } = request;
+        var {mode: mode} = request;
         if (mode === undefined || mode === "cors" || mode === "no-cors") {
           var fetchURL = new URL(request.url);
           if (fetchURL.origin === document.location.origin) {
@@ -17809,124 +16480,64 @@ function preventFetch(source, args) {
     };
     fetch = new Proxy(fetch, fetchHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function getFetchData(args, nativeRequestClone) {
-    var fetchPropsObj = {};
-    var resource = args[0];
-    var fetchUrl;
-    var fetchInit;
-    if (resource instanceof Request) {
-      var realData = nativeRequestClone.call(resource);
-      var requestData = getRequestData(realData);
-      fetchUrl = requestData.url;
-      fetchInit = requestData;
-    } else {
-      fetchUrl = resource;
-      fetchInit = args[1];
-    }
-    fetchPropsObj.url = fetchUrl;
-    if (fetchInit instanceof Object) {
-      var props = Object.keys(fetchInit);
-      props.forEach(function (prop) {
-        fetchPropsObj[prop] = fetchInit[prop];
-      });
-    }
-    return fetchPropsObj;
+  function getFetchData(e, t) {
+    var a, c, n = {}, r = e[0];
+    if (r instanceof Request) {
+      var u = t.call(r), f = getRequestData(u);
+      a = f.url, c = f;
+    } else a = r, c = e[1];
+    (n.url = a, c instanceof Object) && Object.keys(c).forEach((function(e) {
+      n[e] = c[e];
+    }));
+    return n;
   }
-  function objectToString(obj) {
-    if (!obj || typeof obj !== "object") {
-      return String(obj);
-    }
-    if (isEmptyObject(obj)) {
-      return "{}";
-    }
-    return Object.entries(obj).map(function (pair) {
-      var key = pair[0];
-      var value = pair[1];
-      var recordValueStr = value;
-      if (value instanceof Object) {
-        recordValueStr = `{ ${objectToString(value)} }`;
-      }
-      return `${key}:"${recordValueStr}"`;
-    }).join(" ");
+  function objectToString(t) {
+    return t && "object" == typeof t ? isEmptyObject(t) ? "{}" : Object.entries(t).map((function(t) {
+      var n = t[0], e = t[1], o = e;
+      return e instanceof Object && (o = `{ ${objectToString(e)} }`), `${n}:"${o}"`;
+    })).join(" ") : String(t);
   }
-  function matchRequestProps(source, propsToMatch, requestData) {
-    if (propsToMatch === "" || propsToMatch === "*") {
-      return true;
-    }
-    var isMatched;
-    var parsedData = parseMatchProps(propsToMatch);
-    if (!isValidParsedData(parsedData)) {
-      logMessage(source, `Invalid parameter: ${propsToMatch}`);
-      isMatched = false;
-    } else {
-      var matchData = getMatchPropsData(parsedData);
-      var matchKeys = Object.keys(matchData);
-      isMatched = matchKeys.every(function (matchKey) {
-        var matchValue = matchData[matchKey];
-        var dataValue = requestData[matchKey];
-        return Object.prototype.hasOwnProperty.call(requestData, matchKey) && typeof dataValue === "string" && (matchValue === null || matchValue === void 0 ? void 0 : matchValue.test(dataValue));
-      });
-    }
-    return isMatched;
+  function matchRequestProps(e, t, r) {
+    if ("" === t || "*" === t) return true;
+    var a, s = parseMatchProps(t);
+    if (isValidParsedData(s)) {
+      var n = getMatchPropsData(s);
+      a = Object.keys(n).every((function(e) {
+        var t = n[e], a = r[e];
+        return Object.prototype.hasOwnProperty.call(r, e) && "string" == typeof a && (null == t ? void 0 : t.test(a));
+      }));
+    } else logMessage(e, `Invalid parameter: ${t}`), a = false;
+    return a;
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
   function noopPromiseResolve() {
-    var responseBody = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "{}";
-    var responseUrl = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
-    var responseType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "basic";
-    if (typeof Response === "undefined") {
-      return;
-    }
-    var response = new Response(responseBody, {
-      status: 200,
-      statusText: "OK"
-    });
-    if (responseType === "opaque") {
-      Object.defineProperties(response, {
+    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "{}", t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "", s = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "basic";
+    if ("undefined" != typeof Response) {
+      var n = new Response(e, {
+        headers: {
+          "Content-Length": `${e.length}`
+        },
+        status: 200,
+        statusText: "OK"
+      });
+      return "opaque" === s ? Object.defineProperties(n, {
         body: {
           value: null
         },
@@ -17943,146 +16554,136 @@ function preventFetch(source, args) {
           value: ""
         },
         type: {
-          value: responseType
+          value: s
         }
-      });
-    } else {
-      Object.defineProperties(response, {
+      }) : Object.defineProperties(n, {
         url: {
-          value: responseUrl
+          value: t
         },
         type: {
-          value: responseType
+          value: s
         }
-      });
+      }), Promise.resolve(n);
     }
-    return Promise.resolve(response);
   }
-  function modifyResponse(origResponse) {
-    var _origResponse$headers;
-    var replacement = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+  function modifyResponse(e) {
+    var t, s = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {
       body: "{}"
-    };
-    var headers = {};
-    origResponse === null || origResponse === void 0 || (_origResponse$headers = origResponse.headers) === null || _origResponse$headers === void 0 || _origResponse$headers.forEach(function (value, key) {
-      headers[key] = value;
+    }, u = {};
+    null == e || null === (t = e.headers) || void 0 === t || t.forEach((function(e, t) {
+      u[t] = e;
+    }));
+    var n = new Response(s.body, {
+      status: e.status,
+      statusText: e.statusText,
+      headers: u
     });
-    var modifiedResponse = new Response(replacement.body, {
-      status: origResponse.status,
-      statusText: origResponse.statusText,
-      headers: headers
-    });
-    Object.defineProperties(modifiedResponse, {
+    return Object.defineProperties(n, {
       url: {
-        value: origResponse.url
+        value: e.url
       },
       type: {
-        value: replacement.type || origResponse.type
+        value: s.type || e.type
       }
-    });
-    return modifiedResponse;
+    }), n;
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  function getRequestData(request) {
-    var requestInitOptions = getRequestProps();
-    var entries = requestInitOptions.map(function (key) {
-      var value = request[key];
-      return [key, value];
-    });
-    return Object.fromEntries(entries);
+  function getRequestData(t) {
+    var e = getRequestProps().map((function(e) {
+      return [ e, t[e] ];
+    }));
+    return Object.fromEntries(e);
   }
   function getRequestProps() {
-    return ["url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode"];
+    return [ "url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode" ];
   }
-  function parseMatchProps(propsToMatchStr) {
-    var PROPS_DIVIDER = " ";
-    var PAIRS_MARKER = ":";
-    var isRequestProp = function isRequestProp(prop) {
-      return getRequestProps().includes(prop);
-    };
-    var propsObj = {};
-    var props = propsToMatchStr.split(PROPS_DIVIDER);
-    props.forEach(function (prop) {
-      var dividerInd = prop.indexOf(PAIRS_MARKER);
-      var key = prop.slice(0, dividerInd);
-      if (isRequestProp(key)) {
-        var value = prop.slice(dividerInd + 1);
-        propsObj[key] = value;
-      } else {
-        propsObj.url = prop;
-      }
-    });
-    return propsObj;
+  function parseMatchProps(e) {
+    var r = {};
+    return e.split(" ").forEach((function(e) {
+      var n = e.indexOf(":"), i = e.slice(0, n);
+      if (function(e) {
+        return getRequestProps().includes(e);
+      }(i)) {
+        var s = e.slice(n + 1);
+        r[i] = s;
+      } else r.url = e;
+    })), r;
   }
-  function isValidParsedData(data) {
-    return Object.values(data).every(function (value) {
-      return isValidStrPattern(value);
-    });
+  function isValidParsedData(t) {
+    return Object.values(t).every((function(t) {
+      return isValidStrPattern(t);
+    }));
   }
-  function getMatchPropsData(data) {
-    var matchData = {};
-    var dataKeys = Object.keys(data);
-    dataKeys.forEach(function (key) {
-      matchData[key] = toRegExp(data[key]);
-    });
-    return matchData;
+  function getMatchPropsData(t) {
+    var a = {};
+    return Object.keys(t).forEach((function(c) {
+      a[c] = toRegExp(t[c]);
+    })), a;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  function generateRandomResponse(e) {
+    var t = e;
+    if ("true" === t) return t = Math.random().toString(36).slice(-10);
+    t = t.replace("length:", "");
+    if (!/^\d+-\d+$/.test(t)) return null;
+    var n = getNumberFromString(t.split("-")[0]), r = getNumberFromString(t.split("-")[1]);
+    if (!nativeIsFinite(n) || !nativeIsFinite(r)) return null;
+    if (n > r) {
+      var i = n;
+      n = r, r = i;
+    }
+    if (r > 5e5) return null;
+    var a = getRandomIntInclusive(n, r);
+    return t = getRandomStrByLength(a);
+  }
+  function nativeIsFinite(i) {
+    return (Number.isFinite || window.isFinite)(i);
+  }
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
+  }
+  function getNumberFromString(n) {
+    var r = parseInt(n, 10);
+    return nativeIsNaN(r) ? null : r;
+  }
+  function getRandomIntInclusive(t, n) {
+    return t = Math.ceil(t), n = Math.floor(n), Math.floor(Math.random() * (n - t + 1) + t);
+  }
+  function getRandomStrByLength(r) {
+    for (var t = "", a = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=~", n = 0; n < r; n += 1) t += a.charAt(Math.floor(76 * Math.random()));
+    return t;
+  }
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventFetch.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -18097,6 +16698,7 @@ function preventFetch(source, args) {
     console.log(e);
   }
 }
+
 function preventPopadsNet(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -18123,17 +16725,13 @@ function preventPopadsNet(source, args) {
     window.onerror = createOnErrorHandler(rid).bind();
     hit(source);
   }
-  function createOnErrorHandler(rid) {
-    var nativeOnError = window.onerror;
-    return function onError(error) {
-      if (typeof error === "string" && error.includes(rid)) {
-        return true;
-      }
-      if (nativeOnError instanceof Function) {
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-        return nativeOnError.apply(window, [error, ...args]);
+  function createOnErrorHandler(r) {
+    var n = window.onerror;
+    return function(e) {
+      if ("string" == typeof e && e.includes(r)) return true;
+      if (n instanceof Function) {
+        for (var t = arguments.length, o = new Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) o[i - 1] = arguments[i];
+        return n.apply(window, [ e, ...o ]);
       }
       return false;
     };
@@ -18141,35 +16739,18 @@ function preventPopadsNet(source, args) {
   function randomId() {
     return Math.random().toString(36).slice(2, 9);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventPopadsNet.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -18184,6 +16765,7 @@ function preventPopadsNet(source, args) {
     console.log(e);
   }
 }
+
 function preventRefresh(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -18207,7 +16789,7 @@ function preventRefresh(source, args) {
       return Array.from(metaNodes);
     };
     var getMetaContentDelay = function getMetaContentDelay(metaElements) {
-      var delays = metaElements.map(function (meta) {
+      var delays = metaElements.map((function(meta) {
         var contentString = meta.getAttribute("content");
         if (contentString.length === 0) {
           return null;
@@ -18221,15 +16803,15 @@ function preventRefresh(source, args) {
           contentDelay = getNumberFromString(contentString);
         }
         return contentDelay;
-      }).filter(function (delay) {
+      })).filter((function(delay) {
         return delay !== null;
-      });
+      }));
       if (!delays.length) {
         return null;
       }
-      var minDelay = delays.reduce(function (a, b) {
+      var minDelay = delays.reduce((function(a, b) {
         return Math.min(a, b);
-      });
+      }));
       return minDelay;
     };
     var stop = function stop() {
@@ -18245,10 +16827,10 @@ function preventRefresh(source, args) {
         return;
       }
       var delayMs = secondsToRun * 1e3;
-      setTimeout(function () {
+      setTimeout((function() {
         window.stop();
         hit(source);
-      }, delayMs);
+      }), delayMs);
     };
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", stop, {
@@ -18258,61 +16840,32 @@ function preventRefresh(source, args) {
       stop();
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function getNumberFromString(rawString) {
-    var parsedDelay = parseInt(rawString, 10);
-    var validDelay = nativeIsNaN(parsedDelay) ? null : parsedDelay;
-    return validDelay;
+  function getNumberFromString(n) {
+    var r = parseInt(n, 10);
+    return nativeIsNaN(r) ? null : r;
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventRefresh.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -18327,6 +16880,7 @@ function preventRefresh(source, args) {
     console.log(e);
   }
 }
+
 function preventRequestAnimationFrame(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -18338,10 +16892,7 @@ function preventRequestAnimationFrame(source, args) {
   function preventRequestAnimationFrame(source, match) {
     var nativeRequestAnimationFrame = window.requestAnimationFrame;
     var shouldLog = typeof match === "undefined";
-    var {
-      isInvertedMatch: isInvertedMatch,
-      matchRegexp: matchRegexp
-    } = parseMatchArg(match);
+    var {isInvertedMatch: isInvertedMatch, matchRegexp: matchRegexp} = parseMatchArg(match);
     var rafWrapper = function rafWrapper(callback) {
       var shouldPrevent = false;
       if (shouldLog) {
@@ -18357,124 +16908,70 @@ function preventRequestAnimationFrame(source, args) {
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
-      return nativeRequestAnimationFrame.apply(window, [callback, ...args]);
+      return nativeRequestAnimationFrame.apply(window, [ callback, ...args ]);
     };
     window.requestAnimationFrame = rafWrapper;
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  function parseMatchArg(match) {
-    var INVERT_MARKER = "!";
-    var isInvertedMatch = match ? match === null || match === void 0 ? void 0 : match.startsWith(INVERT_MARKER) : false;
-    var matchValue = isInvertedMatch ? match.slice(1) : match;
-    var matchRegexp = toRegExp(matchValue);
+  function parseMatchArg(t) {
+    var e = !!t && (null == t ? void 0 : t.startsWith("!")), a = e ? t.slice(1) : t;
     return {
-      isInvertedMatch: isInvertedMatch,
-      matchRegexp: matchRegexp,
-      matchValue: matchValue
+      isInvertedMatch: e,
+      matchRegexp: toRegExp(a),
+      matchValue: a
     };
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function isValidCallback(callback) {
-    return callback instanceof Function || typeof callback === "string";
+  function isValidCallback(n) {
+    return n instanceof Function || "string" == typeof n;
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventRequestAnimationFrame.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -18489,6 +16986,7 @@ function preventRequestAnimationFrame(source, args) {
     console.log(e);
   }
 }
+
 function preventSetInterval(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -18525,193 +17023,100 @@ function preventSetInterval(source, args) {
     };
     window.setInterval = new Proxy(window.setInterval, setIntervalHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  function isPreventionNeeded(_ref) {
-    var {
-      callback: callback,
-      delay: delay,
-      matchCallback: matchCallback,
-      matchDelay: matchDelay
-    } = _ref;
-    if (!isValidCallback(callback)) {
-      return false;
-    }
-    if (!isValidMatchStr(matchCallback) || matchDelay && !isValidMatchNumber(matchDelay)) {
-      return false;
-    }
-    var {
-      isInvertedMatch: isInvertedMatch,
-      matchRegexp: matchRegexp
-    } = parseMatchArg(matchCallback);
-    var {
-      isInvertedDelayMatch: isInvertedDelayMatch,
-      delayMatch: delayMatch
-    } = parseDelayArg(matchDelay);
-    var parsedDelay = parseRawDelay(delay);
-    var shouldPrevent = false;
-    var callbackStr = String(callback);
-    if (delayMatch === null) {
-      shouldPrevent = matchRegexp.test(callbackStr) !== isInvertedMatch;
-    } else if (!matchCallback) {
-      shouldPrevent = parsedDelay === delayMatch !== isInvertedDelayMatch;
-    } else {
-      shouldPrevent = matchRegexp.test(callbackStr) !== isInvertedMatch && parsedDelay === delayMatch !== isInvertedDelayMatch;
-    }
-    return shouldPrevent;
+  function isPreventionNeeded(a) {
+    var {callback: e, delay: t, matchCallback: r, matchDelay: l} = a;
+    if (!isValidCallback(e)) return false;
+    if (!isValidMatchStr(r) || l && !isValidMatchNumber(l)) return false;
+    var {isInvertedMatch: c, matchRegexp: i} = parseMatchArg(r), {isInvertedDelayMatch: n, delayMatch: s} = parseDelayArg(l), d = parseRawDelay(t), h = String(e);
+    return null === s ? i.test(h) !== c : r ? i.test(h) !== c && d === s !== n : d === s !== n;
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  function parseMatchArg(match) {
-    var INVERT_MARKER = "!";
-    var isInvertedMatch = match ? match === null || match === void 0 ? void 0 : match.startsWith(INVERT_MARKER) : false;
-    var matchValue = isInvertedMatch ? match.slice(1) : match;
-    var matchRegexp = toRegExp(matchValue);
+  function parseMatchArg(t) {
+    var e = !!t && (null == t ? void 0 : t.startsWith("!")), a = e ? t.slice(1) : t;
     return {
-      isInvertedMatch: isInvertedMatch,
-      matchRegexp: matchRegexp,
-      matchValue: matchValue
+      isInvertedMatch: e,
+      matchRegexp: toRegExp(a),
+      matchValue: a
     };
   }
-  function parseDelayArg(delay) {
-    var INVERT_MARKER = "!";
-    var isInvertedDelayMatch = delay === null || delay === void 0 ? void 0 : delay.startsWith(INVERT_MARKER);
-    var delayValue = isInvertedDelayMatch ? delay.slice(1) : delay;
-    var parsedDelay = parseInt(delayValue, 10);
-    var delayMatch = nativeIsNaN(parsedDelay) ? null : parsedDelay;
+  function parseDelayArg(a) {
+    var e = null == a ? void 0 : a.startsWith("!"), t = e ? a.slice(1) : a, l = parseInt(t, 10);
     return {
-      isInvertedDelayMatch: isInvertedDelayMatch,
-      delayMatch: delayMatch
+      isInvertedDelayMatch: e,
+      delayMatch: nativeIsNaN(l) ? null : l
     };
   }
-  function isValidCallback(callback) {
-    return callback instanceof Function || typeof callback === "string";
+  function isValidCallback(n) {
+    return n instanceof Function || "string" == typeof n;
   }
-  function isValidMatchStr(match) {
-    var INVERT_MARKER = "!";
-    var str = match;
-    if (match !== null && match !== void 0 && match.startsWith(INVERT_MARKER)) {
-      str = match.slice(1);
-    }
-    return isValidStrPattern(str);
+  function isValidMatchStr(t) {
+    var i = t;
+    return null != t && t.startsWith("!") && (i = t.slice(1)), isValidStrPattern(i);
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function nativeIsFinite(num) {
-    var native = Number.isFinite || window.isFinite;
-    return native(num);
+  function nativeIsFinite(i) {
+    return (Number.isFinite || window.isFinite)(i);
   }
-  function isValidMatchNumber(match) {
-    var INVERT_MARKER = "!";
-    var str = match;
-    if (match !== null && match !== void 0 && match.startsWith(INVERT_MARKER)) {
-      str = match.slice(1);
-    }
-    var num = parseFloat(str);
-    return !nativeIsNaN(num) && nativeIsFinite(num);
+  function isValidMatchNumber(a) {
+    var t = a;
+    null != a && a.startsWith("!") && (t = a.slice(1));
+    var i = parseFloat(t);
+    return !nativeIsNaN(i) && nativeIsFinite(i);
   }
-  function parseRawDelay(delay) {
-    var parsedDelay = Math.floor(parseInt(delay, 10));
-    return typeof parsedDelay === "number" && !nativeIsNaN(parsedDelay) ? parsedDelay : delay;
+  function parseRawDelay(a) {
+    var e = Math.floor(parseInt(a, 10));
+    return "number" != typeof e || nativeIsNaN(e) ? a : e;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventSetInterval.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -18726,6 +17131,7 @@ function preventSetInterval(source, args) {
     console.log(e);
   }
 }
+
 function preventSetTimeout(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -18762,193 +17168,100 @@ function preventSetTimeout(source, args) {
     };
     window.setTimeout = new Proxy(window.setTimeout, setTimeoutHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
   function noopFunc() {}
-  function isPreventionNeeded(_ref) {
-    var {
-      callback: callback,
-      delay: delay,
-      matchCallback: matchCallback,
-      matchDelay: matchDelay
-    } = _ref;
-    if (!isValidCallback(callback)) {
-      return false;
-    }
-    if (!isValidMatchStr(matchCallback) || matchDelay && !isValidMatchNumber(matchDelay)) {
-      return false;
-    }
-    var {
-      isInvertedMatch: isInvertedMatch,
-      matchRegexp: matchRegexp
-    } = parseMatchArg(matchCallback);
-    var {
-      isInvertedDelayMatch: isInvertedDelayMatch,
-      delayMatch: delayMatch
-    } = parseDelayArg(matchDelay);
-    var parsedDelay = parseRawDelay(delay);
-    var shouldPrevent = false;
-    var callbackStr = String(callback);
-    if (delayMatch === null) {
-      shouldPrevent = matchRegexp.test(callbackStr) !== isInvertedMatch;
-    } else if (!matchCallback) {
-      shouldPrevent = parsedDelay === delayMatch !== isInvertedDelayMatch;
-    } else {
-      shouldPrevent = matchRegexp.test(callbackStr) !== isInvertedMatch && parsedDelay === delayMatch !== isInvertedDelayMatch;
-    }
-    return shouldPrevent;
+  function isPreventionNeeded(a) {
+    var {callback: e, delay: t, matchCallback: r, matchDelay: l} = a;
+    if (!isValidCallback(e)) return false;
+    if (!isValidMatchStr(r) || l && !isValidMatchNumber(l)) return false;
+    var {isInvertedMatch: c, matchRegexp: i} = parseMatchArg(r), {isInvertedDelayMatch: n, delayMatch: s} = parseDelayArg(l), d = parseRawDelay(t), h = String(e);
+    return null === s ? i.test(h) !== c : r ? i.test(h) !== c && d === s !== n : d === s !== n;
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function parseMatchArg(match) {
-    var INVERT_MARKER = "!";
-    var isInvertedMatch = match ? match === null || match === void 0 ? void 0 : match.startsWith(INVERT_MARKER) : false;
-    var matchValue = isInvertedMatch ? match.slice(1) : match;
-    var matchRegexp = toRegExp(matchValue);
+  function parseMatchArg(t) {
+    var e = !!t && (null == t ? void 0 : t.startsWith("!")), a = e ? t.slice(1) : t;
     return {
-      isInvertedMatch: isInvertedMatch,
-      matchRegexp: matchRegexp,
-      matchValue: matchValue
+      isInvertedMatch: e,
+      matchRegexp: toRegExp(a),
+      matchValue: a
     };
   }
-  function parseDelayArg(delay) {
-    var INVERT_MARKER = "!";
-    var isInvertedDelayMatch = delay === null || delay === void 0 ? void 0 : delay.startsWith(INVERT_MARKER);
-    var delayValue = isInvertedDelayMatch ? delay.slice(1) : delay;
-    var parsedDelay = parseInt(delayValue, 10);
-    var delayMatch = nativeIsNaN(parsedDelay) ? null : parsedDelay;
+  function parseDelayArg(a) {
+    var e = null == a ? void 0 : a.startsWith("!"), t = e ? a.slice(1) : a, l = parseInt(t, 10);
     return {
-      isInvertedDelayMatch: isInvertedDelayMatch,
-      delayMatch: delayMatch
+      isInvertedDelayMatch: e,
+      delayMatch: nativeIsNaN(l) ? null : l
     };
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  function isValidCallback(callback) {
-    return callback instanceof Function || typeof callback === "string";
+  function isValidCallback(n) {
+    return n instanceof Function || "string" == typeof n;
   }
-  function isValidMatchStr(match) {
-    var INVERT_MARKER = "!";
-    var str = match;
-    if (match !== null && match !== void 0 && match.startsWith(INVERT_MARKER)) {
-      str = match.slice(1);
-    }
-    return isValidStrPattern(str);
+  function isValidMatchStr(t) {
+    var i = t;
+    return null != t && t.startsWith("!") && (i = t.slice(1)), isValidStrPattern(i);
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function nativeIsFinite(num) {
-    var native = Number.isFinite || window.isFinite;
-    return native(num);
+  function nativeIsFinite(i) {
+    return (Number.isFinite || window.isFinite)(i);
   }
-  function isValidMatchNumber(match) {
-    var INVERT_MARKER = "!";
-    var str = match;
-    if (match !== null && match !== void 0 && match.startsWith(INVERT_MARKER)) {
-      str = match.slice(1);
-    }
-    var num = parseFloat(str);
-    return !nativeIsNaN(num) && nativeIsFinite(num);
+  function isValidMatchNumber(a) {
+    var t = a;
+    null != a && a.startsWith("!") && (t = a.slice(1));
+    var i = parseFloat(t);
+    return !nativeIsNaN(i) && nativeIsFinite(i);
   }
-  function parseRawDelay(delay) {
-    var parsedDelay = Math.floor(parseInt(delay, 10));
-    return typeof parsedDelay === "number" && !nativeIsNaN(parsedDelay) ? parsedDelay : delay;
+  function parseRawDelay(a) {
+    var e = Math.floor(parseInt(a, 10));
+    return "number" != typeof e || nativeIsNaN(e) ? a : e;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventSetTimeout.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -18963,6 +17276,7 @@ function preventSetTimeout(source, args) {
     console.log(e);
   }
 }
+
 function preventWindowOpen(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -18984,11 +17298,11 @@ function preventWindowOpen(source, args) {
       }
       if (!isValidStrPattern(delay)) {
         logMessage(source, `Invalid parameter: ${delay}`);
-        return nativeOpen.apply(window, [str, ...args]);
+        return nativeOpen.apply(window, [ str, ...args ]);
       }
       var searchRegexp = toRegExp(delay);
       if (match !== searchRegexp.test(str)) {
-        return nativeOpen.apply(window, [str, ...args]);
+        return nativeOpen.apply(window, [ str, ...args ]);
       }
       hit(source);
       return handleOldReplacement(replacement);
@@ -19008,10 +17322,7 @@ function preventWindowOpen(source, args) {
       if (match === "*") {
         shouldPrevent = true;
       } else if (isValidMatchStr(match)) {
-        var {
-          isInvertedMatch: isInvertedMatch,
-          matchRegexp: matchRegexp
-        } = parseMatchArg(match);
+        var {isInvertedMatch: isInvertedMatch, matchRegexp: matchRegexp} = parseMatchArg(match);
         shouldPrevent = matchRegexp.test(url) !== isInvertedMatch;
       } else {
         logMessage(source, `Invalid parameter: ${match}`);
@@ -19052,219 +17363,121 @@ function preventWindowOpen(source, args) {
         hit(source);
         return result;
       }
-      return nativeOpen.apply(window, [url, ...args]);
+      return nativeOpen.apply(window, [ url, ...args ]);
     };
     window.open = isNewSyntax ? newOpenWrapper : oldOpenWrapper;
     window.open.toString = nativeOpen.toString.bind(nativeOpen);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
-    try {
-      isValid = new RegExp(str);
-      isValid = true;
-    } catch (e) {
-      isValid = false;
-    }
-    return isValid;
-  }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  }
-  function isValidMatchStr(match) {
-    var INVERT_MARKER = "!";
-    var str = match;
-    if (match !== null && match !== void 0 && match.startsWith(INVERT_MARKER)) {
-      str = match.slice(1);
-    }
-    return isValidStrPattern(str);
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
+    try {
+      t = new RegExp(n), t = !0;
+    } catch (e) {
+      t = false;
+    }
+    return t;
+  }
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+  function isValidMatchStr(t) {
+    var i = t;
+    return null != t && t.startsWith("!") && (i = t.slice(1)), isValidStrPattern(i);
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  function parseMatchArg(match) {
-    var INVERT_MARKER = "!";
-    var isInvertedMatch = match ? match === null || match === void 0 ? void 0 : match.startsWith(INVERT_MARKER) : false;
-    var matchValue = isInvertedMatch ? match.slice(1) : match;
-    var matchRegexp = toRegExp(matchValue);
+  function parseMatchArg(t) {
+    var e = !!t && (null == t ? void 0 : t.startsWith("!")), a = e ? t.slice(1) : t;
     return {
-      isInvertedMatch: isInvertedMatch,
-      matchRegexp: matchRegexp,
-      matchValue: matchValue
+      isInvertedMatch: e,
+      matchRegexp: toRegExp(a),
+      matchValue: a
     };
   }
-  function handleOldReplacement(replacement) {
-    var result;
-    if (!replacement) {
-      result = noopFunc;
-    } else if (replacement === "trueFunc") {
-      result = trueFunc;
-    } else if (replacement.includes("=")) {
-      var isProp = replacement.startsWith("{") && replacement.endsWith("}");
-      if (isProp) {
-        var propertyPart = replacement.slice(1, -1);
-        var propertyName = substringBefore(propertyPart, "=");
-        var propertyValue = substringAfter(propertyPart, "=");
-        if (propertyValue === "noopFunc") {
-          result = {};
-          result[propertyName] = noopFunc;
+  function handleOldReplacement(e) {
+    var n;
+    if (e) {
+      if ("trueFunc" === e) n = trueFunc; else if (e.includes("=")) {
+        if (e.startsWith("{") && e.endsWith("}")) {
+          var t = e.slice(1, -1), u = substringBefore(t, "=");
+          "noopFunc" === substringAfter(t, "=") && ((n = {})[u] = noopFunc);
         }
       }
-    }
-    return result;
+    } else n = noopFunc;
+    return n;
   }
-  function createDecoy(args) {
-    var UrlPropNameOf = function (UrlPropNameOf) {
-      UrlPropNameOf["Object"] = "data";
-      UrlPropNameOf["Iframe"] = "src";
-      return UrlPropNameOf;
-    }({});
-    var {
-      replacement: replacement,
-      url: url,
-      delay: delay
-    } = args;
-    var tag;
-    if (replacement === "obj") {
-      tag = "object";
-    } else {
-      tag = "iframe";
-    }
-    var decoy = document.createElement(tag);
-    if (decoy instanceof HTMLObjectElement) {
-      decoy[UrlPropNameOf.Object] = url;
-    } else if (decoy instanceof HTMLIFrameElement) {
-      decoy[UrlPropNameOf.Iframe] = url;
-    }
-    decoy.style.setProperty("height", "1px", "important");
-    decoy.style.setProperty("position", "fixed", "important");
-    decoy.style.setProperty("top", "-1px", "important");
-    decoy.style.setProperty("width", "1px", "important");
-    document.body.appendChild(decoy);
-    setTimeout(function () {
-      return decoy.remove();
-    }, delay * 1e3);
-    return decoy;
+  function createDecoy(e) {
+    var t, r = function(e) {
+      return e.Object = "data", e.Iframe = "src", e;
+    }({}), {replacement: n, url: o, delay: a} = e;
+    t = "obj" === n ? "object" : "iframe";
+    var i = document.createElement(t);
+    return i instanceof HTMLObjectElement ? i[r.Object] = o : i instanceof HTMLIFrameElement && (i[r.Iframe] = o), 
+    i.style.setProperty("height", "1px", "important"), i.style.setProperty("position", "fixed", "important"), 
+    i.style.setProperty("top", "-1px", "important"), i.style.setProperty("width", "1px", "important"), 
+    document.body.appendChild(i), setTimeout((function() {
+      return i.remove();
+    }), 1e3 * a), i;
   }
-  function getPreventGetter(nativeGetter) {
-    var preventGetter = function preventGetter(target, prop) {
-      if (prop && prop === "closed") {
-        return false;
-      }
-      if (typeof nativeGetter === "function") {
-        return noopFunc;
-      }
-      return prop && target[prop];
+  function getPreventGetter(n) {
+    return function(t, e) {
+      return (!e || "closed" !== e) && ("function" == typeof n ? noopFunc : e && t[e]);
     };
-    return preventGetter;
   }
   function noopNull() {
     return null;
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
   function noopFunc() {}
   function trueFunc() {
     return true;
   }
-  function substringBefore(str, separator) {
-    if (!str || !separator) {
-      return str;
-    }
-    var index = str.indexOf(separator);
-    return index < 0 ? str : str.substring(0, index);
+  function substringBefore(r, n) {
+    if (!r || false) return r;
+    var e = r.indexOf(n);
+    return e < 0 ? r : r.substring(0, e);
   }
-  function substringAfter(str, separator) {
-    if (!str) {
-      return str;
-    }
-    var index = str.indexOf(separator);
-    return index < 0 ? "" : str.substring(index + separator.length);
+  function substringAfter(n, r) {
+    if (!n) return n;
+    var t = n.indexOf(r);
+    return t < 0 ? "" : n.substring(t + r.length);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventWindowOpen.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -19279,6 +17492,7 @@ function preventWindowOpen(source, args) {
     console.log(e);
   }
 }
+
 function preventXHR(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -19324,10 +17538,10 @@ function preventXHR(source, args) {
         return Reflect.apply(target, thisArg, args);
       }
       if (thisArg.responseType === "blob") {
-        modifiedResponse = new Blob();
+        modifiedResponse = new Blob;
       }
       if (thisArg.responseType === "arraybuffer") {
-        modifiedResponse = new ArrayBuffer();
+        modifiedResponse = new ArrayBuffer;
       }
       if (customResponseText) {
         var randomText = generateRandomResponse(customResponseText);
@@ -19338,13 +17552,10 @@ function preventXHR(source, args) {
           logMessage(source, `Invalid randomize parameter: '${customResponseText}'`);
         }
       }
-      var forgedRequest = new XMLHttpRequest();
+      var forgedRequest = new XMLHttpRequest;
       var transitionReadyState = function transitionReadyState(state) {
         if (state === 4) {
-          var {
-            responseURL: responseURL,
-            responseXML: responseXML
-          } = forgedRequest;
+          var {responseURL: responseURL, responseXML: responseXML} = forgedRequest;
           Object.defineProperties(thisArg, {
             readyState: {
               value: 4,
@@ -19386,7 +17597,7 @@ function preventXHR(source, args) {
         var stateEvent = new Event("readystatechange");
         thisArg.dispatchEvent(stateEvent);
       };
-      forgedRequest.addEventListener("readystatechange", function () {
+      forgedRequest.addEventListener("readystatechange", (function() {
         transitionReadyState(1);
         var loadStartEvent = new ProgressEvent("loadstart");
         thisArg.dispatchEvent(loadStartEvent);
@@ -19395,19 +17606,19 @@ function preventXHR(source, args) {
         var progressEvent = new ProgressEvent("progress");
         thisArg.dispatchEvent(progressEvent);
         transitionReadyState(4);
-      });
-      setTimeout(function () {
+      }));
+      setTimeout((function() {
         var loadEvent = new ProgressEvent("load");
         thisArg.dispatchEvent(loadEvent);
         var loadEndEvent = new ProgressEvent("loadend");
         thisArg.dispatchEvent(loadEndEvent);
-      }, 1);
-      nativeOpen.apply(forgedRequest, [thisArg.xhrData.method, thisArg.xhrData.url]);
-      thisArg.collectedHeaders.forEach(function (header) {
+      }), 1);
+      nativeOpen.apply(forgedRequest, [ thisArg.xhrData.method, thisArg.xhrData.url ]);
+      thisArg.collectedHeaders.forEach((function(header) {
         var name = header[0];
         var value = header[1];
         forgedRequest.setRequestHeader(name, value);
-      });
+      }));
       return undefined;
     };
     var getHeaderWrapper = function getHeaderWrapper(target, thisArg, args) {
@@ -19418,10 +17629,10 @@ function preventXHR(source, args) {
         return null;
       }
       var searchHeaderName = args[0].toLowerCase();
-      var matchedHeader = thisArg.collectedHeaders.find(function (header) {
+      var matchedHeader = thisArg.collectedHeaders.find((function(header) {
         var headerName = header[0].toLowerCase();
         return headerName === searchHeaderName;
-      });
+      }));
       return matchedHeader ? matchedHeader[1] : null;
     };
     var getAllHeadersWrapper = function getAllHeadersWrapper(target, thisArg) {
@@ -19431,11 +17642,11 @@ function preventXHR(source, args) {
       if (!thisArg.collectedHeaders.length) {
         return "";
       }
-      var allHeadersStr = thisArg.collectedHeaders.map(function (header) {
+      var allHeadersStr = thisArg.collectedHeaders.map((function(header) {
         var headerName = header[0];
         var headerValue = header[1];
         return `${headerName.toLowerCase()}: ${headerValue}`;
-      }).join("\r\n");
+      })).join("\r\n");
       return allHeadersStr;
     };
     var openHandler = {
@@ -19455,246 +17666,142 @@ function preventXHR(source, args) {
     XMLHttpRequest.prototype.getResponseHeader = new Proxy(XMLHttpRequest.prototype.getResponseHeader, getHeaderHandler);
     XMLHttpRequest.prototype.getAllResponseHeaders = new Proxy(XMLHttpRequest.prototype.getAllResponseHeaders, getAllHeadersHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function objectToString(obj) {
-    if (!obj || typeof obj !== "object") {
-      return String(obj);
-    }
-    if (isEmptyObject(obj)) {
-      return "{}";
-    }
-    return Object.entries(obj).map(function (pair) {
-      var key = pair[0];
-      var value = pair[1];
-      var recordValueStr = value;
-      if (value instanceof Object) {
-        recordValueStr = `{ ${objectToString(value)} }`;
-      }
-      return `${key}:"${recordValueStr}"`;
-    }).join(" ");
-  }
-  function generateRandomResponse(customResponseText) {
-    var customResponse = customResponseText;
-    if (customResponse === "true") {
-      customResponse = Math.random().toString(36).slice(-10);
-      return customResponse;
-    }
-    customResponse = customResponse.replace("length:", "");
-    var rangeRegex = /^\d+-\d+$/;
-    if (!rangeRegex.test(customResponse)) {
-      return null;
-    }
-    var rangeMin = getNumberFromString(customResponse.split("-")[0]);
-    var rangeMax = getNumberFromString(customResponse.split("-")[1]);
-    if (!nativeIsFinite(rangeMin) || !nativeIsFinite(rangeMax)) {
-      return null;
-    }
-    if (rangeMin > rangeMax) {
-      var temp = rangeMin;
-      rangeMin = rangeMax;
-      rangeMax = temp;
-    }
-    var LENGTH_RANGE_LIMIT = 500 * 1e3;
-    if (rangeMax > LENGTH_RANGE_LIMIT) {
-      return null;
-    }
-    var length = getRandomIntInclusive(rangeMin, rangeMax);
-    customResponse = getRandomStrByLength(length);
-    return customResponse;
-  }
-  function matchRequestProps(source, propsToMatch, requestData) {
-    if (propsToMatch === "" || propsToMatch === "*") {
-      return true;
-    }
-    var isMatched;
-    var parsedData = parseMatchProps(propsToMatch);
-    if (!isValidParsedData(parsedData)) {
-      logMessage(source, `Invalid parameter: ${propsToMatch}`);
-      isMatched = false;
-    } else {
-      var matchData = getMatchPropsData(parsedData);
-      var matchKeys = Object.keys(matchData);
-      isMatched = matchKeys.every(function (matchKey) {
-        var matchValue = matchData[matchKey];
-        var dataValue = requestData[matchKey];
-        return Object.prototype.hasOwnProperty.call(requestData, matchKey) && typeof dataValue === "string" && (matchValue === null || matchValue === void 0 ? void 0 : matchValue.test(dataValue));
-      });
-    }
-    return isMatched;
-  }
-  function getXhrData(method, url, async, user, password) {
-    return {
-      method: method,
-      url: url,
-      async: async,
-      user: user,
-      password: password
-    };
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function objectToString(t) {
+    return t && "object" == typeof t ? isEmptyObject(t) ? "{}" : Object.entries(t).map((function(t) {
+      var n = t[0], e = t[1], o = e;
+      return e instanceof Object && (o = `{ ${objectToString(e)} }`), `${n}:"${o}"`;
+    })).join(" ") : String(t);
+  }
+  function generateRandomResponse(e) {
+    var t = e;
+    if ("true" === t) return t = Math.random().toString(36).slice(-10);
+    t = t.replace("length:", "");
+    if (!/^\d+-\d+$/.test(t)) return null;
+    var n = getNumberFromString(t.split("-")[0]), r = getNumberFromString(t.split("-")[1]);
+    if (!nativeIsFinite(n) || !nativeIsFinite(r)) return null;
+    if (n > r) {
+      var i = n;
+      n = r, r = i;
+    }
+    if (r > 5e5) return null;
+    var a = getRandomIntInclusive(n, r);
+    return t = getRandomStrByLength(a);
+  }
+  function matchRequestProps(e, t, r) {
+    if ("" === t || "*" === t) return true;
+    var a, s = parseMatchProps(t);
+    if (isValidParsedData(s)) {
+      var n = getMatchPropsData(s);
+      a = Object.keys(n).every((function(e) {
+        var t = n[e], a = r[e];
+        return Object.prototype.hasOwnProperty.call(r, e) && "string" == typeof a && (null == t ? void 0 : t.test(a));
+      }));
+    } else logMessage(e, `Invalid parameter: ${t}`), a = false;
+    return a;
+  }
+  function getXhrData(r, t, a, e, n) {
+    return {
+      method: r,
+      url: t,
+      async: a,
+      user: e,
+      password: n
+    };
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  function getNumberFromString(rawString) {
-    var parsedDelay = parseInt(rawString, 10);
-    var validDelay = nativeIsNaN(parsedDelay) ? null : parsedDelay;
-    return validDelay;
+  function getNumberFromString(n) {
+    var r = parseInt(n, 10);
+    return nativeIsNaN(r) ? null : r;
   }
-  function nativeIsFinite(num) {
-    var native = Number.isFinite || window.isFinite;
-    return native(num);
+  function nativeIsFinite(i) {
+    return (Number.isFinite || window.isFinite)(i);
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  function parseMatchProps(propsToMatchStr) {
-    var PROPS_DIVIDER = " ";
-    var PAIRS_MARKER = ":";
-    var isRequestProp = function isRequestProp(prop) {
-      return getRequestProps().includes(prop);
-    };
-    var propsObj = {};
-    var props = propsToMatchStr.split(PROPS_DIVIDER);
-    props.forEach(function (prop) {
-      var dividerInd = prop.indexOf(PAIRS_MARKER);
-      var key = prop.slice(0, dividerInd);
-      if (isRequestProp(key)) {
-        var value = prop.slice(dividerInd + 1);
-        propsObj[key] = value;
-      } else {
-        propsObj.url = prop;
-      }
-    });
-    return propsObj;
+  function parseMatchProps(e) {
+    var r = {};
+    return e.split(" ").forEach((function(e) {
+      var n = e.indexOf(":"), i = e.slice(0, n);
+      if (function(e) {
+        return getRequestProps().includes(e);
+      }(i)) {
+        var s = e.slice(n + 1);
+        r[i] = s;
+      } else r.url = e;
+    })), r;
   }
-  function isValidParsedData(data) {
-    return Object.values(data).every(function (value) {
-      return isValidStrPattern(value);
-    });
+  function isValidParsedData(t) {
+    return Object.values(t).every((function(t) {
+      return isValidStrPattern(t);
+    }));
   }
-  function getMatchPropsData(data) {
-    var matchData = {};
-    var dataKeys = Object.keys(data);
-    dataKeys.forEach(function (key) {
-      matchData[key] = toRegExp(data[key]);
-    });
-    return matchData;
+  function getMatchPropsData(t) {
+    var a = {};
+    return Object.keys(t).forEach((function(c) {
+      a[c] = toRegExp(t[c]);
+    })), a;
   }
   function getRequestProps() {
-    return ["url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode"];
+    return [ "url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode" ];
   }
-  function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1) + min);
+  function getRandomIntInclusive(t, n) {
+    return t = Math.ceil(t), n = Math.floor(n), Math.floor(Math.random() * (n - t + 1) + t);
   }
-  function getRandomStrByLength(length) {
-    var result = "";
-    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=~";
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i += 1) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
+  function getRandomStrByLength(r) {
+    for (var t = "", a = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=~", n = 0; n < r; n += 1) t += a.charAt(Math.floor(76 * Math.random()));
+    return t;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     preventXHR.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -19709,6 +17816,7 @@ function preventXHR(source, args) {
     console.log(e);
   }
 }
+
 function removeAttr(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -19734,12 +17842,12 @@ function removeAttr(source, args) {
         logMessage(source, `Invalid selector arg: '${selector}'`);
       }
       var removed = false;
-      nodes.forEach(function (node) {
-        attrs.forEach(function (attr) {
+      nodes.forEach((function(node) {
+        attrs.forEach((function(attr) {
           node.removeAttribute(attr);
           removed = true;
-        });
-      });
+        }));
+      }));
       if (removed) {
         hit(source);
       }
@@ -19772,124 +17880,66 @@ function removeAttr(source, args) {
       observeDOMChanges(rmattr, true);
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function observeDOMChanges(callback) {
-    var observeAttrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var attrsToObserve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    var THROTTLE_DELAY_MS = 20;
-    var observer = new MutationObserver(throttle(callbackWrapper, THROTTLE_DELAY_MS));
-    var connect = function connect() {
-      if (attrsToObserve.length > 0) {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs,
-          attributeFilter: attrsToObserve
-        });
-      } else {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs
-        });
-      }
+  function observeDOMChanges(t) {
+    var e = arguments.length > 1 && void 0 !== arguments[1] && arguments[1], n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : [], i = new MutationObserver(throttle((function() {
+      disconnect(), t(), connect();
+    }), 20)), connect = function connect() {
+      n.length > 0 ? i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e,
+        attributeFilter: n
+      }) : i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e
+      });
+    }, disconnect = function disconnect() {
+      i.disconnect();
     };
-    var disconnect = function disconnect() {
-      observer.disconnect();
-    };
-    function callbackWrapper() {
-      disconnect();
-      callback();
-      connect();
-    }
     connect();
   }
-  function parseFlags(flags) {
-    var FLAGS_DIVIDER = " ";
-    var ASAP_FLAG = "asap";
-    var COMPLETE_FLAG = "complete";
-    var STAY_FLAG = "stay";
-    var VALID_FLAGS = new Set([ASAP_FLAG, COMPLETE_FLAG, STAY_FLAG]);
-    var passedFlags = new Set(flags.trim().split(FLAGS_DIVIDER).filter(function (flag) {
-      return VALID_FLAGS.has(flag);
-    }));
+  function parseFlags(t) {
+    var e = "asap", n = "complete", a = "stay", r = new Set([ e, n, a ]), s = new Set(t.trim().split(" ").filter((function(t) {
+      return r.has(t);
+    })));
     return {
-      ASAP: ASAP_FLAG,
-      COMPLETE: COMPLETE_FLAG,
-      STAY: STAY_FLAG,
-      hasFlag: function hasFlag(flag) {
-        return passedFlags.has(flag);
+      ASAP: e,
+      COMPLETE: n,
+      STAY: a,
+      hasFlag: function hasFlag(t) {
+        return s.has(t);
       }
     };
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function throttle(cb, delay) {
-    var wait = false;
-    var savedArgs;
-    var _wrapper = function wrapper() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      if (wait) {
-        savedArgs = args;
-        return;
-      }
-      cb(...args);
-      wait = true;
-      setTimeout(function () {
-        wait = false;
-        if (savedArgs) {
-          _wrapper(...savedArgs);
-          savedArgs = null;
-        }
-      }, delay);
+  function throttle(n, t) {
+    var r, e = false, _wrapper4 = function _wrapper() {
+      for (var o = arguments.length, u = new Array(o), f = 0; f < o; f++) u[f] = arguments[f];
+      e ? r = u : (n(...u), e = true, setTimeout((function() {
+        e = false, r && (_wrapper4(...r), r = null);
+      }), t));
     };
-    return _wrapper;
+    return _wrapper4;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     removeAttr.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -19904,6 +17954,7 @@ function removeAttr(source, args) {
     console.log(e);
   }
 }
+
 function removeClass(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -19920,12 +17971,12 @@ function removeClass(source, args) {
     classNames = classNames.split(/\s*\|\s*/);
     var selectors = [];
     if (!selector) {
-      selectors = classNames.map(function (className) {
+      selectors = classNames.map((function(className) {
         return `.${className}`;
-      });
+      }));
     }
     var removeClassHandler = function removeClassHandler() {
-      var nodes = new Set();
+      var nodes = new Set;
       if (selector) {
         var foundNodes = [];
         try {
@@ -19933,32 +17984,32 @@ function removeClass(source, args) {
         } catch (e) {
           logMessage(source, `Invalid selector arg: '${selector}'`);
         }
-        foundNodes.forEach(function (n) {
+        foundNodes.forEach((function(n) {
           return nodes.add(n);
-        });
+        }));
       } else if (selectors.length > 0) {
-        selectors.forEach(function (s) {
+        selectors.forEach((function(s) {
           var elements = document.querySelectorAll(s);
           for (var i = 0; i < elements.length; i += 1) {
             var element = elements[i];
             nodes.add(element);
           }
-        });
+        }));
       }
       var removed = false;
-      nodes.forEach(function (node) {
-        classNames.forEach(function (className) {
+      nodes.forEach((function(node) {
+        classNames.forEach((function(className) {
           if (node.classList.contains(className)) {
             node.classList.remove(className);
             removed = true;
           }
-        });
-      });
+        }));
+      }));
       if (removed) {
         hit(source);
       }
     };
-    var CLASS_ATTR_NAME = ["class"];
+    var CLASS_ATTR_NAME = [ "class" ];
     var flags = parseFlags(applying);
     var run = function run() {
       removeClassHandler();
@@ -19987,124 +18038,66 @@ function removeClass(source, args) {
       observeDOMChanges(removeClassHandler, true, CLASS_ATTR_NAME);
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function observeDOMChanges(callback) {
-    var observeAttrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var attrsToObserve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    var THROTTLE_DELAY_MS = 20;
-    var observer = new MutationObserver(throttle(callbackWrapper, THROTTLE_DELAY_MS));
-    var connect = function connect() {
-      if (attrsToObserve.length > 0) {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs,
-          attributeFilter: attrsToObserve
-        });
-      } else {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs
-        });
-      }
+  function observeDOMChanges(t) {
+    var e = arguments.length > 1 && void 0 !== arguments[1] && arguments[1], n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : [], i = new MutationObserver(throttle((function() {
+      disconnect(), t(), connect();
+    }), 20)), connect = function connect() {
+      n.length > 0 ? i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e,
+        attributeFilter: n
+      }) : i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e
+      });
+    }, disconnect = function disconnect() {
+      i.disconnect();
     };
-    var disconnect = function disconnect() {
-      observer.disconnect();
-    };
-    function callbackWrapper() {
-      disconnect();
-      callback();
-      connect();
-    }
     connect();
   }
-  function parseFlags(flags) {
-    var FLAGS_DIVIDER = " ";
-    var ASAP_FLAG = "asap";
-    var COMPLETE_FLAG = "complete";
-    var STAY_FLAG = "stay";
-    var VALID_FLAGS = new Set([ASAP_FLAG, COMPLETE_FLAG, STAY_FLAG]);
-    var passedFlags = new Set(flags.trim().split(FLAGS_DIVIDER).filter(function (flag) {
-      return VALID_FLAGS.has(flag);
-    }));
+  function parseFlags(t) {
+    var e = "asap", n = "complete", a = "stay", r = new Set([ e, n, a ]), s = new Set(t.trim().split(" ").filter((function(t) {
+      return r.has(t);
+    })));
     return {
-      ASAP: ASAP_FLAG,
-      COMPLETE: COMPLETE_FLAG,
-      STAY: STAY_FLAG,
-      hasFlag: function hasFlag(flag) {
-        return passedFlags.has(flag);
+      ASAP: e,
+      COMPLETE: n,
+      STAY: a,
+      hasFlag: function hasFlag(t) {
+        return s.has(t);
       }
     };
   }
-  function throttle(cb, delay) {
-    var wait = false;
-    var savedArgs;
-    var _wrapper = function wrapper() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      if (wait) {
-        savedArgs = args;
-        return;
-      }
-      cb(...args);
-      wait = true;
-      setTimeout(function () {
-        wait = false;
-        if (savedArgs) {
-          _wrapper(...savedArgs);
-          savedArgs = null;
-        }
-      }, delay);
+  function throttle(n, t) {
+    var r, e = false, _wrapper5 = function _wrapper() {
+      for (var o = arguments.length, u = new Array(o), f = 0; f < o; f++) u[f] = arguments[f];
+      e ? r = u : (n(...u), e = true, setTimeout((function() {
+        e = false, r && (_wrapper5(...r), r = null);
+      }), t));
     };
-    return _wrapper;
+    return _wrapper5;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     removeClass.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -20119,6 +18112,7 @@ function removeClass(source, args) {
     console.log(e);
   }
 }
+
 function removeCookie(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -20144,7 +18138,7 @@ function removeCookie(source, args) {
       hit(source);
     };
     var rmCookie = function rmCookie() {
-      document.cookie.split(";").forEach(function (cookieStr) {
+      document.cookie.split(";").forEach((function(cookieStr) {
         var pos = cookieStr.indexOf("=");
         if (pos === -1) {
           return;
@@ -20160,75 +18154,39 @@ function removeCookie(source, args) {
             removeCookieFromHost(cookieName, hostName);
           }
         }
-      });
+      }));
     };
     rmCookie();
     window.addEventListener("beforeunload", rmCookie);
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     removeCookie.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -20243,6 +18201,7 @@ function removeCookie(source, args) {
     console.log(e);
   }
 }
+
 function removeInShadowDom(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -20262,14 +18221,11 @@ function removeInShadowDom(source, args) {
       var hostElements = !baseSelector ? findHostElements(document.documentElement) : document.querySelectorAll(baseSelector);
       var _loop = function _loop() {
         var isRemoved = false;
-        var {
-          targets: targets,
-          innerHosts: innerHosts
-        } = pierceShadowDom(selector, hostElements);
-        targets.forEach(function (targetEl) {
+        var {targets: targets, innerHosts: innerHosts} = pierceShadowDom(selector, hostElements);
+        targets.forEach((function(targetEl) {
           removeElement(targetEl);
           isRemoved = true;
-        });
+        }));
         if (isRemoved) {
           hit(source);
         }
@@ -20282,136 +18238,80 @@ function removeInShadowDom(source, args) {
     removeHandler();
     observeDOMChanges(removeHandler, true);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function observeDOMChanges(callback) {
-    var observeAttrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var attrsToObserve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    var THROTTLE_DELAY_MS = 20;
-    var observer = new MutationObserver(throttle(callbackWrapper, THROTTLE_DELAY_MS));
-    var connect = function connect() {
-      if (attrsToObserve.length > 0) {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs,
-          attributeFilter: attrsToObserve
-        });
-      } else {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs
-        });
-      }
+  function observeDOMChanges(t) {
+    var e = arguments.length > 1 && void 0 !== arguments[1] && arguments[1], n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : [], i = new MutationObserver(throttle((function() {
+      disconnect(), t(), connect();
+    }), 20)), connect = function connect() {
+      n.length > 0 ? i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e,
+        attributeFilter: n
+      }) : i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e
+      });
+    }, disconnect = function disconnect() {
+      i.disconnect();
     };
-    var disconnect = function disconnect() {
-      observer.disconnect();
-    };
-    function callbackWrapper() {
-      disconnect();
-      callback();
-      connect();
-    }
     connect();
   }
-  function findHostElements(rootElement) {
-    var hosts = [];
-    if (rootElement) {
-      var domElems = rootElement.querySelectorAll("*");
-      domElems.forEach(function (el) {
-        if (el.shadowRoot) {
-          hosts.push(el);
-        }
-      });
-    }
-    return hosts;
+  function findHostElements(o) {
+    var n = [];
+    o && o.querySelectorAll("*").forEach((function(o) {
+      o.shadowRoot && n.push(o);
+    }));
+    return n;
   }
-  function pierceShadowDom(selector, hostElements) {
-    var targets = [];
-    var innerHostsAcc = [];
-    hostElements.forEach(function (host) {
-      var simpleElems = host.querySelectorAll(selector);
-      targets = targets.concat([].slice.call(simpleElems));
-      var shadowRootElem = host.shadowRoot;
-      var shadowChildren = shadowRootElem.querySelectorAll(selector);
-      targets = targets.concat([].slice.call(shadowChildren));
-      innerHostsAcc.push(findHostElements(shadowRootElem));
-    });
-    var innerHosts = flatten(innerHostsAcc);
+  function pierceShadowDom(e, t) {
+    var c = [], l = [];
+    t.forEach((function(t) {
+      var o = t.querySelectorAll(e);
+      c = c.concat([].slice.call(o));
+      var r = t.shadowRoot, a = r.querySelectorAll(e);
+      c = c.concat([].slice.call(a)), l.push(findHostElements(r));
+    }));
+    var o = flatten(l);
     return {
-      targets: targets,
-      innerHosts: innerHosts
+      targets: c,
+      innerHosts: o
     };
   }
-  function flatten(input) {
-    var stack = [];
-    input.forEach(function (el) {
-      return stack.push(el);
-    });
-    var res = [];
-    while (stack.length) {
-      var next = stack.pop();
-      if (Array.isArray(next)) {
-        next.forEach(function (el) {
-          return stack.push(el);
-        });
-      } else {
-        res.push(next);
-      }
+  function flatten(r) {
+    var n = [];
+    r.forEach((function(r) {
+      return n.push(r);
+    }));
+    for (var t = []; n.length; ) {
+      var u = n.pop();
+      Array.isArray(u) ? u.forEach((function(r) {
+        return n.push(r);
+      })) : t.push(u);
     }
-    return res.reverse();
+    return t.reverse();
   }
-  function throttle(cb, delay) {
-    var wait = false;
-    var savedArgs;
-    var _wrapper = function wrapper() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      if (wait) {
-        savedArgs = args;
-        return;
-      }
-      cb(...args);
-      wait = true;
-      setTimeout(function () {
-        wait = false;
-        if (savedArgs) {
-          _wrapper(...savedArgs);
-          savedArgs = null;
-        }
-      }, delay);
+  function throttle(n, t) {
+    var r, e = false, _wrapper6 = function _wrapper() {
+      for (var o = arguments.length, u = new Array(o), f = 0; f < o; f++) u[f] = arguments[f];
+      e ? r = u : (n(...u), e = true, setTimeout((function() {
+        e = false, r && (_wrapper6(...r), r = null);
+      }), t));
     };
-    return _wrapper;
+    return _wrapper6;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     removeInShadowDom.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -20426,6 +18326,7 @@ function removeInShadowDom(source, args) {
     console.log(e);
   }
 }
+
 function removeNodeText(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -20435,202 +18336,213 @@ function removeNodeText(source, args) {
     }
   }
   function removeNodeText(source, nodeName, textMatch, parentSelector) {
-    var {
-      selector: selector,
-      nodeNameMatch: nodeNameMatch,
-      textContentMatch: textContentMatch
-    } = parseNodeTextParams(nodeName, textMatch);
+    var {selector: selector, nodeNameMatch: nodeNameMatch, textContentMatch: textContentMatch} = parseNodeTextParams(nodeName, textMatch);
     var handleNodes = function handleNodes(nodes) {
-      return nodes.forEach(function (node) {
+      return nodes.forEach((function(node) {
         var shouldReplace = isTargetNode(node, nodeNameMatch, textContentMatch);
         if (shouldReplace) {
           var ALL_TEXT_PATTERN = /^[^]*$/;
           var REPLACEMENT = "";
           replaceNodeText(source, node, ALL_TEXT_PATTERN, REPLACEMENT);
         }
-      });
+      }));
     };
     if (document.documentElement) {
       handleExistingNodes(selector, handleNodes, parentSelector);
     }
-    observeDocumentWithTimeout(function (mutations) {
+    observeDocumentWithTimeout((function(mutations) {
       return handleMutations(mutations, handleNodes, selector, parentSelector);
-    });
+    }));
   }
-  function observeDocumentWithTimeout(callback) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+  function observeDocumentWithTimeout(e) {
+    var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {
       subtree: true,
       childList: true
-    };
-    var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1e4;
-    var documentObserver = new MutationObserver(function (mutations, observer) {
-      observer.disconnect();
-      callback(mutations, observer);
-      observer.observe(document.documentElement, options);
-    });
-    documentObserver.observe(document.documentElement, options);
-    if (typeof timeout === "number") {
-      setTimeout(function () {
-        return documentObserver.disconnect();
-      }, timeout);
-    }
+    }, n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 1e4, o = new MutationObserver((function(n, o) {
+      o.disconnect(), e(n, o), o.observe(document.documentElement, t);
+    }));
+    o.observe(document.documentElement, t), "number" == typeof n && setTimeout((function() {
+      return o.disconnect();
+    }), n);
   }
-  function handleExistingNodes(selector, handler, parentSelector) {
-    var processNodes = function processNodes(parent) {
-      if (selector === "#text") {
-        var textNodes = nodeListToArray(parent.childNodes).filter(function (node) {
-          return node.nodeType === Node.TEXT_NODE;
-        });
-        handler(textNodes);
-      } else {
-        var _nodes = nodeListToArray(parent.querySelectorAll(selector));
-        handler(_nodes);
-      }
-    };
-    var parents = parentSelector ? document.querySelectorAll(parentSelector) : [document];
-    parents.forEach(function (parent) {
-      return processNodes(parent);
-    });
-  }
-  function handleMutations(mutations, handler, selector, parentSelector) {
-    var addedNodes = getAddedNodes(mutations);
-    if (selector && parentSelector) {
-      addedNodes.forEach(function () {
-        handleExistingNodes(selector, handler, parentSelector);
-      });
-    } else {
-      handler(addedNodes);
-    }
-  }
-  function replaceNodeText(source, node, pattern, replacement) {
-    var {
-      textContent: textContent
-    } = node;
-    if (textContent) {
-      if (node.nodeName === "SCRIPT" && window.trustedTypes && window.trustedTypes.createPolicy) {
-        var policy = window.trustedTypes.createPolicy("AGPolicy", {
-          createScript: function createScript(string) {
-            return string;
-          }
-        });
-        var modifiedText = textContent.replace(pattern, replacement);
-        var trustedReplacement = policy.createScript(modifiedText);
-        node.textContent = trustedReplacement;
-      } else {
-        node.textContent = textContent.replace(pattern, replacement);
-      }
-      hit(source);
-    }
-  }
-  function isTargetNode(node, nodeNameMatch, textContentMatch) {
-    var {
-      nodeName: nodeName,
-      textContent: textContent
-    } = node;
-    var nodeNameLowerCase = nodeName.toLowerCase();
-    return textContent !== null && textContent !== "" && (nodeNameMatch instanceof RegExp ? nodeNameMatch.test(nodeNameLowerCase) : nodeNameMatch === nodeNameLowerCase) && (textContentMatch instanceof RegExp ? textContentMatch.test(textContent) : textContent.includes(textContentMatch));
-  }
-  function parseNodeTextParams(nodeName, textMatch) {
-    var pattern = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    var REGEXP_START_MARKER = "/";
-    var isStringNameMatch = !(nodeName.startsWith(REGEXP_START_MARKER) && nodeName.endsWith(REGEXP_START_MARKER));
-    var selector = isStringNameMatch ? nodeName : "*";
-    var nodeNameMatch = isStringNameMatch ? nodeName : toRegExp(nodeName);
-    var textContentMatch = !textMatch.startsWith(REGEXP_START_MARKER) ? textMatch : toRegExp(textMatch);
-    var patternMatch;
-    if (pattern) {
-      patternMatch = !pattern.startsWith(REGEXP_START_MARKER) ? pattern : toRegExp(pattern);
-    }
-    return {
-      selector: selector,
-      nodeNameMatch: nodeNameMatch,
-      textContentMatch: textContentMatch,
-      patternMatch: patternMatch
-    };
-  }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
+  function handleExistingNodes(e, n, o) {
+    (o ? document.querySelectorAll(o) : [ document ]).forEach((function(o) {
+      return function(o) {
+        if ("#text" === e) {
+          var r = nodeListToArray(o.childNodes).filter((function(e) {
+            return e.nodeType === Node.TEXT_NODE;
+          }));
+          n(r);
         } else {
-          label += `#%#//scriptlet('${source.name}')`;
+          var t = nodeListToArray(o.querySelectorAll(e));
+          n(t);
         }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+      }(o);
+    }));
+  }
+  function handleMutations(n, d, e, o) {
+    var t = getAddedNodes(n);
+    e && o ? t.forEach((function() {
+      handleExistingNodes(e, d, o);
+    })) : d(t);
+  }
+  function replaceNodeText(e, t, n, r) {
+    var {textContent: a} = t;
+    if (a) {
+      var i = a.replace(n, r);
+      if ("SCRIPT" === t.nodeName) i = getTrustedTypesApi(e).createScript(i);
+      t.textContent = i, hit(e);
     }
   }
-  function nodeListToArray(nodeList) {
-    var nodes = [];
-    for (var i = 0; i < nodeList.length; i += 1) {
-      nodes.push(nodeList[i]);
-    }
-    return nodes;
+  function isTargetNode(e, t, n) {
+    var {nodeName: o, textContent: s} = e, a = o.toLowerCase();
+    return null !== s && "" !== s && (t instanceof RegExp ? t.test(a) : t === a) && (n instanceof RegExp ? n.test(s) : s.includes(n));
   }
-  function getAddedNodes(mutations) {
-    var nodes = [];
-    for (var i = 0; i < mutations.length; i += 1) {
-      var {
-        addedNodes: addedNodes
-      } = mutations[i];
-      for (var j = 0; j < addedNodes.length; j += 1) {
-        nodes.push(addedNodes[j]);
-      }
-    }
-    return nodes;
+  function parseNodeTextParams(t, e) {
+    var a, n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null, r = "/", s = !(t.startsWith(r) && t.endsWith(r)), o = s ? t : "*", h = s ? t : toRegExp(t), i = e.startsWith(r) ? toRegExp(e) : e;
+    return n && (a = n.startsWith(r) ? toRegExp(n) : n), {
+      selector: o,
+      nodeNameMatch: h,
+      textContentMatch: i,
+      patternMatch: a
+    };
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function nodeListToArray(r) {
+    for (var n = [], o = 0; o < r.length; o += 1) n.push(r[o]);
+    return n;
+  }
+  function getAddedNodes(d) {
+    for (var e = [], r = 0; r < d.length; r += 1) for (var {addedNodes: n} = d[r], o = 0; o < n.length; o += 1) e.push(n[o]);
+    return e;
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
+        return false;
+      }
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
+  }
+  function getTrustedTypesApi(t) {
+    var r, e = null == t || null === (r = t.api) || void 0 === r ? void 0 : r.policy;
+    if (e) return e;
+    var n = "AGPolicy", i = window.trustedTypes, u = !!i, c = {
+      HTML: "TrustedHTML",
+      Script: "TrustedScript",
+      ScriptURL: "TrustedScriptURL"
+    };
+    if (!u) return {
+      name: n,
+      isSupported: u,
+      TrustedType: c,
+      createHTML: function createHTML(t) {
+        return t;
+      },
+      createScript: function createScript(t) {
+        return t;
+      },
+      createScriptURL: function createScriptURL(t) {
+        return t;
+      },
+      create: function create(t, r) {
+        return r;
+      },
+      getAttributeType: function getAttributeType() {
+        return null;
+      },
+      convertAttributeToTrusted: function convertAttributeToTrusted(t, r, e) {
+        return e;
+      },
+      getPropertyType: function getPropertyType() {
+        return null;
+      },
+      convertPropertyToTrusted: function convertPropertyToTrusted(t, r, e) {
+        return e;
+      },
+      isHTML: function isHTML() {
+        return false;
+      },
+      isScript: function isScript() {
+        return false;
+      },
+      isScriptURL: function isScriptURL() {
         return false;
       }
     };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
+    var o = i.createPolicy(n, {
+      createHTML: function createHTML(t) {
+        return t;
+      },
+      createScript: function createScript(t) {
+        return t;
+      },
+      createScriptURL: function createScriptURL(t) {
+        return t;
       }
-      return "";
+    }), createHTML = function createHTML(t) {
+      return o.createHTML(t);
+    }, createScript = function createScript(t) {
+      return o.createScript(t);
+    }, createScriptURL = function createScriptURL(t) {
+      return o.createScriptURL(t);
+    }, create = function create(t, r) {
+      switch (t) {
+       case c.HTML:
+        return createHTML(r);
+
+       case c.Script:
+        return createScript(r);
+
+       case c.ScriptURL:
+        return createScriptURL(r);
+
+       default:
+        return r;
+      }
+    }, p = i.getAttributeType.bind(i), T = i.getPropertyType.bind(i), s = i.isHTML.bind(i), a = i.isScript.bind(i), f = i.isScriptURL.bind(i);
+    return {
+      name: n,
+      isSupported: u,
+      TrustedType: c,
+      createHTML: createHTML,
+      createScript: createScript,
+      createScriptURL: createScriptURL,
+      create: create,
+      getAttributeType: p,
+      convertAttributeToTrusted: function convertAttributeToTrusted(t, r, e, n, i) {
+        var u = p(t, r, n, i);
+        return u ? create(u, e) : e;
+      },
+      getPropertyType: T,
+      convertPropertyToTrusted: function convertPropertyToTrusted(t, r, e, n) {
+        var i = T(t, r, n);
+        return i ? create(i, e) : e;
+      },
+      isHTML: s,
+      isScript: a,
+      isScriptURL: f
     };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     removeNodeText.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -20645,6 +18557,7 @@ function removeNodeText(source, args) {
     console.log(e);
   }
 }
+
 function setAttr(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -20658,7 +18571,7 @@ function setAttr(source, args) {
     if (!selector || !attr) {
       return;
     }
-    var allowedValues = ["true", "false"];
+    var allowedValues = [ "true", "false" ];
     var shouldCopyValue = value.startsWith("[") && value.endsWith("]");
     var isValidValue = value.length === 0 || !nativeIsNaN(parseInt(value, 10)) && parseInt(value, 10) >= 0 && parseInt(value, 10) <= 32767 || allowedValues.includes(value.toLowerCase());
     if (!shouldCopyValue && !isValidValue) {
@@ -20676,153 +18589,81 @@ function setAttr(source, args) {
       };
     }
     setAttributeBySelector(source, selector, attr, value, attributeHandler);
-    observeDOMChanges(function () {
+    observeDOMChanges((function() {
       return setAttributeBySelector(source, selector, attr, value, attributeHandler);
-    }, true);
+    }), true);
   }
-  function setAttributeBySelector(source, selector, attribute, value) {
-    var attributeSetter = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultAttributeSetter;
-    var elements;
+  function setAttributeBySelector(e, t, l, o) {
+    var r, c = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : defaultAttributeSetter;
     try {
-      elements = document.querySelectorAll(selector);
-    } catch (_unused) {
-      logMessage(source, `Failed to find elements matching selector "${selector}"`);
-      return;
+      r = document.querySelectorAll(t);
+    } catch (l) {
+      return void logMessage(e, `Failed to find elements matching selector "${t}"`);
     }
-    if (!elements || elements.length === 0) {
-      return;
+    if (r && 0 !== r.length) try {
+      r.forEach((function(e) {
+        return c(e, l, o);
+      })), hit(e);
+    } catch (t) {
+      logMessage(e, `Failed to set [${l}="${o}"] to each of selected elements.`);
     }
-    try {
-      elements.forEach(function (elem) {
-        return attributeSetter(elem, attribute, value);
+  }
+  function observeDOMChanges(t) {
+    var e = arguments.length > 1 && void 0 !== arguments[1] && arguments[1], n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : [], i = new MutationObserver(throttle((function() {
+      disconnect(), t(), connect();
+    }), 20)), connect = function connect() {
+      n.length > 0 ? i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e,
+        attributeFilter: n
+      }) : i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e
       });
-      hit(source);
-    } catch (_unused2) {
-      logMessage(source, `Failed to set [${attribute}="${value}"] to each of selected elements.`);
-    }
-  }
-  function observeDOMChanges(callback) {
-    var observeAttrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var attrsToObserve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    var THROTTLE_DELAY_MS = 20;
-    var observer = new MutationObserver(throttle(callbackWrapper, THROTTLE_DELAY_MS));
-    var connect = function connect() {
-      if (attrsToObserve.length > 0) {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs,
-          attributeFilter: attrsToObserve
-        });
-      } else {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs
-        });
-      }
+    }, disconnect = function disconnect() {
+      i.disconnect();
     };
-    var disconnect = function disconnect() {
-      observer.disconnect();
-    };
-    function callbackWrapper() {
-      disconnect();
-      callback();
-      connect();
-    }
     connect();
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  function convertTypeToString(value) {
-    var output;
-    if (typeof value === "undefined") {
-      output = "undefined";
-    } else if (typeof value === "object") {
-      if (value === null) {
-        output = "null";
-      } else {
-        output = objectToString(value);
-      }
-    } else {
-      output = String(value);
+  function convertTypeToString(n) {
+    return void 0 === n ? "undefined" : "object" == typeof n ? null === n ? "null" : objectToString(n) : String(n);
+  }
+  function defaultAttributeSetter(t, e, r) {
+    return t.setAttribute(e, r);
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    return output;
   }
-  function defaultAttributeSetter(elem, attribute, value) {
-    return elem.setAttribute(attribute, value);
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function throttle(cb, delay) {
-    var wait = false;
-    var savedArgs;
-    var _wrapper = function wrapper() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      if (wait) {
-        savedArgs = args;
-        return;
-      }
-      cb(...args);
-      wait = true;
-      setTimeout(function () {
-        wait = false;
-        if (savedArgs) {
-          _wrapper(...savedArgs);
-          savedArgs = null;
-        }
-      }, delay);
+  function throttle(n, t) {
+    var r, e = false, _wrapper7 = function _wrapper() {
+      for (var o = arguments.length, u = new Array(o), f = 0; f < o; f++) u[f] = arguments[f];
+      e ? r = u : (n(...u), e = true, setTimeout((function() {
+        e = false, r && (_wrapper7(...r), r = null);
+      }), t));
     };
-    return _wrapper;
+    return _wrapper7;
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     setAttr.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -20837,6 +18678,7 @@ function setAttr(source, args) {
     console.log(e);
   }
 }
+
 function setConstant(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -20849,14 +18691,14 @@ function setConstant(source, args) {
     var stack = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
     var valueWrapper = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
     var setProxyTrap = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
-    var uboAliases = ["set-constant.js", "ubo-set-constant.js", "set.js", "ubo-set.js", "ubo-set-constant", "ubo-set"];
+    var uboAliases = [ "set-constant.js", "ubo-set-constant.js", "set.js", "ubo-set.js", "ubo-set-constant", "ubo-set" ];
     if (uboAliases.includes(source.name)) {
       if (stack.length !== 1 && !getNumberFromString(stack)) {
         valueWrapper = stack;
       }
       stack = undefined;
     }
-    if (!property || !matchStackTrace(stack, new Error().stack)) {
+    if (!property || !matchStackTrace(stack, (new Error).stack)) {
       return;
     }
     var isProxyTrapSet = false;
@@ -20908,17 +18750,17 @@ function setConstant(source, args) {
     } else {
       return;
     }
-    var valueWrapperNames = ["asFunction", "asCallback", "asResolved", "asRejected"];
+    var valueWrapperNames = [ "asFunction", "asCallback", "asResolved", "asRejected" ];
     if (valueWrapperNames.includes(valueWrapper)) {
       var valueWrappersMap = {
         asFunction(v) {
-          return function () {
+          return function() {
             return v;
           };
         },
         asCallback(v) {
-          return function () {
-            return function () {
+          return function() {
+            return function() {
               return v;
             };
           };
@@ -20974,13 +18816,13 @@ function setConstant(source, args) {
               isProxyTrapSet = true;
               a = new Proxy(a, {
                 get: function get(target, propertyKey, val) {
-                  propertiesToCheck.reduce(function (object, currentProp, index, array) {
+                  propertiesToCheck.reduce((function(object, currentProp, index, array) {
                     var currentObj = object === null || object === void 0 ? void 0 : object[currentProp];
                     if (index === array.length - 1 && currentObj !== constantValue) {
                       object[currentProp] = constantValue;
                     }
                     return currentObj || object;
-                  }, target);
+                  }), target);
                   return Reflect.get(target, propertyKey, val);
                 }
               });
@@ -20993,13 +18835,8 @@ function setConstant(source, args) {
     };
     var _setChainPropAccess = function setChainPropAccess(owner, property) {
       var chainInfo = getPropertyInChain(owner, property);
-      var {
-        base: base
-      } = chainInfo;
-      var {
-        prop: prop,
-        chain: chain
-      } = chainInfo;
+      var {base: base} = chainInfo;
+      var {prop: prop, chain: chain} = chainInfo;
       var inChainPropHandler = {
         factValue: undefined,
         init(a) {
@@ -21058,55 +18895,27 @@ function setConstant(source, args) {
     };
     _setChainPropAccess(window, property);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function getNumberFromString(rawString) {
-    var parsedDelay = parseInt(rawString, 10);
-    var validDelay = nativeIsNaN(parsedDelay) ? null : parsedDelay;
-    return validDelay;
+  function getNumberFromString(n) {
+    var r = parseInt(n, 10);
+    return nativeIsNaN(r) ? null : r;
   }
   function noopArray() {
     return [];
@@ -21125,24 +18934,22 @@ function setConstant(source, args) {
     return false;
   }
   function throwFunc() {
-    throw new Error();
+    throw new Error;
   }
   function noopPromiseReject() {
     return Promise.reject();
   }
   function noopPromiseResolve() {
-    var responseBody = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "{}";
-    var responseUrl = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
-    var responseType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "basic";
-    if (typeof Response === "undefined") {
-      return;
-    }
-    var response = new Response(responseBody, {
-      status: 200,
-      statusText: "OK"
-    });
-    if (responseType === "opaque") {
-      Object.defineProperties(response, {
+    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "{}", t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "", s = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "basic";
+    if ("undefined" != typeof Response) {
+      var n = new Response(e, {
+        headers: {
+          "Content-Length": `${e.length}`
+        },
+        status: 200,
+        statusText: "OK"
+      });
+      return "opaque" === s ? Object.defineProperties(n, {
         body: {
           value: null
         },
@@ -21159,236 +18966,137 @@ function setConstant(source, args) {
           value: ""
         },
         type: {
-          value: responseType
+          value: s
         }
-      });
-    } else {
-      Object.defineProperties(response, {
+      }) : Object.defineProperties(n, {
         url: {
-          value: responseUrl
+          value: t
         },
         type: {
-          value: responseType
+          value: s
         }
-      });
+      }), Promise.resolve(n);
     }
-    return Promise.resolve(response);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
       configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
     });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
+  }
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
+  }
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
+  }
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
+  }
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
     };
-  }
-  function matchStackTrace(stackMatch, stackTrace) {
-    if (!stackMatch || stackMatch === "") {
-      return true;
-    }
-    var regExpValues = backupRegExpValues();
-    if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-      if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-        restoreRegExpValues(regExpValues);
-      }
-      return true;
-    }
-    var stackRegexp = toRegExp(stackMatch);
-    var refinedStackTrace = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    }).join("\n");
-    if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-      restoreRegExpValues(regExpValues);
-    }
-    return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
-  }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
-  }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
-  }
-  function shouldAbortInlineOrInjectedScript(stackMatch, stackTrace) {
-    var INLINE_SCRIPT_STRING = "inlineScript";
-    var INJECTED_SCRIPT_STRING = "injectedScript";
-    var INJECTED_SCRIPT_MARKER = "<anonymous>";
-    var isInlineScript = function isInlineScript(match) {
-      return match.includes(INLINE_SCRIPT_STRING);
-    };
-    var isInjectedScript = function isInjectedScript(match) {
-      return match.includes(INJECTED_SCRIPT_STRING);
-    };
-    if (!(isInlineScript(stackMatch) || isInjectedScript(stackMatch))) {
-      return false;
-    }
-    var documentURL = window.location.href;
-    var pos = documentURL.indexOf("#");
-    if (pos !== -1) {
-      documentURL = documentURL.slice(0, pos);
-    }
-    var stackSteps = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    });
-    var stackLines = stackSteps.map(function (line) {
-      var stack;
-      var getStackTraceValues = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(line);
-      if (getStackTraceValues) {
-        var _stackURL, _stackURL2;
-        var stackURL = getStackTraceValues[2];
-        var stackLine = getStackTraceValues[3];
-        var stackCol = getStackTraceValues[4];
-        if ((_stackURL = stackURL) !== null && _stackURL !== void 0 && _stackURL.startsWith("(")) {
-          stackURL = stackURL.slice(1);
-        }
-        if ((_stackURL2 = stackURL) !== null && _stackURL2 !== void 0 && _stackURL2.startsWith(INJECTED_SCRIPT_MARKER)) {
-          var _stackFunction;
-          stackURL = INJECTED_SCRIPT_STRING;
-          var stackFunction = getStackTraceValues[1] !== undefined ? getStackTraceValues[1].slice(0, -1) : line.slice(0, getStackTraceValues.index).trim();
-          if ((_stackFunction = stackFunction) !== null && _stackFunction !== void 0 && _stackFunction.startsWith("at")) {
-            stackFunction = stackFunction.slice(2).trim();
-          }
-          stack = `${stackFunction} ${stackURL}${stackLine}${stackCol}`.trim();
-        } else if (stackURL === documentURL) {
-          stack = `${INLINE_SCRIPT_STRING}${stackLine}${stackCol}`.trim();
-        } else {
-          stack = `${stackURL}${stackLine}${stackCol}`.trim();
-        }
-      } else {
-        stack = line;
-      }
-      return stack;
-    });
-    if (stackLines) {
-      for (var index = 0; index < stackLines.length; index += 1) {
-        if (isInlineScript(stackMatch) && stackLines[index].startsWith(INLINE_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-        if (isInjectedScript(stackMatch) && stackLines[index].startsWith(INJECTED_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-      }
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
     }
     return false;
   }
   function getNativeRegexpTest() {
-    var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "test");
-    var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-    if (descriptor && typeof descriptor.value === "function") {
-      return nativeRegexTest;
-    }
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
     throw new Error("RegExp.prototype.test is not a function");
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     setConstant.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -21403,6 +19111,7 @@ function setConstant(source, args) {
     console.log(e);
   }
 }
+
 function setCookie(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -21427,7 +19136,7 @@ function setCookie(source, args) {
       logMessage(source, `Cookie domain not matched by origin: '${domain}'`);
       return;
     }
-    var cookieToSet = serializeCookie(name, validValue, path, domain);
+    var cookieToSet = serializeCookie(name, validValue, path, domain, false);
     if (!cookieToSet) {
       logMessage(source, "Invalid cookie name or value");
       return;
@@ -21435,116 +19144,54 @@ function setCookie(source, args) {
     hit(source);
     document.cookie = cookieToSet;
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  function getLimitedCookieValue(value) {
-    if (!value) {
-      return null;
+  function getLimitedCookieValue(e) {
+    if (!e) return null;
+    var n;
+    if (new Set([ "true", "t", "false", "f", "yes", "y", "no", "n", "ok", "on", "off", "accept", "accepted", "notaccepted", "reject", "rejected", "allow", "allowed", "disallow", "deny", "enable", "enabled", "disable", "disabled", "necessary", "required", "hide", "hidden", "essential", "nonessential", "checked", "unchecked", "forbidden", "forever" ]).has(e.toLowerCase())) n = e; else if ("emptyArr" === e) n = "[]"; else if ("emptyObj" === e) n = "{}"; else {
+      if (!/^\d+$/.test(e)) return null;
+      if (n = parseFloat(e), nativeIsNaN(n)) return null;
+      if (Math.abs(n) < 0 || Math.abs(n) > 32767) return null;
     }
-    var allowedCookieValues = new Set(["true", "t", "false", "f", "yes", "y", "no", "n", "ok", "on", "off", "accept", "accepted", "notaccepted", "reject", "rejected", "allow", "allowed", "disallow", "deny", "enable", "enabled", "disable", "disabled", "necessary", "required", "hide", "hidden", "essential", "nonessential", "checked", "unchecked", "forbidden", "forever"]);
-    var validValue;
-    if (allowedCookieValues.has(value.toLowerCase())) {
-      validValue = value;
-    } else if (/^\d+$/.test(value)) {
-      validValue = parseFloat(value);
-      if (nativeIsNaN(validValue)) {
-        return null;
-      }
-      if (Math.abs(validValue) < 0 || Math.abs(validValue) > 32767) {
-        return null;
-      }
-    } else {
-      return null;
-    }
-    return validValue;
+    return n;
   }
-  function serializeCookie(name, rawValue, rawPath) {
-    var domainValue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
-    var shouldEncodeValue = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-    var HOST_PREFIX = "__Host-";
-    var SECURE_PREFIX = "__Secure-";
-    var COOKIE_BREAKER = ";";
-    if (!shouldEncodeValue && `${rawValue}`.includes(COOKIE_BREAKER) || name.includes(COOKIE_BREAKER)) {
-      return null;
-    }
-    var value = shouldEncodeValue ? encodeURIComponent(rawValue) : rawValue;
-    var resultCookie = `${name}=${value}`;
-    if (name.startsWith(HOST_PREFIX)) {
-      resultCookie += "; path=/; secure";
-      if (domainValue) {
-        console.debug(`Domain value: "${domainValue}" has been ignored, because is not allowed for __Host- prefixed cookies`);
-      }
-      return resultCookie;
-    }
-    var path = getCookiePath(rawPath);
-    if (path) {
-      resultCookie += `; ${path}`;
-    }
-    if (name.startsWith(SECURE_PREFIX)) {
-      resultCookie += "; secure";
-    }
-    if (domainValue) {
-      resultCookie += `; domain=${domainValue}`;
-    }
-    return resultCookie;
+  function serializeCookie(e, o, i) {
+    var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : "", t = !(arguments.length > 4 && void 0 !== arguments[4]) || arguments[4];
+    if (!t && `${o}`.includes(";") || e.includes(";")) return null;
+    var r = `${e}=${t ? encodeURIComponent(o) : o}`;
+    if (e.startsWith("__Host-")) return r += "; path=/; secure", n && console.debug(`Domain value: "${n}" has been ignored, because is not allowed for __Host- prefixed cookies`), 
+    r;
+    var s = getCookiePath(i);
+    return s && (r += `; ${s}`), e.startsWith("__Secure-") && (r += "; secure"), n && (r += `; domain=${n}`), 
+    r;
   }
-  function isValidCookiePath(rawPath) {
-    return rawPath === "/" || rawPath === "none";
+  function isValidCookiePath(n) {
+    return "/" === n || "none" === n;
   }
-  function getCookiePath(rawPath) {
-    if (rawPath === "/") {
-      return "path=/";
-    }
-    return "";
+  function getCookiePath(t) {
+    return "/" === t ? "path=/" : "";
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     setCookie.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -21559,6 +19206,7 @@ function setCookie(source, args) {
     console.log(e);
   }
 }
+
 function setCookieReload(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -21586,7 +19234,7 @@ function setCookieReload(source, args) {
       logMessage(source, `Cookie domain not matched by origin: '${domain}'`);
       return;
     }
-    var cookieToSet = serializeCookie(name, validValue, path, domain);
+    var cookieToSet = serializeCookie(name, validValue, path, domain, false);
     if (!cookieToSet) {
       logMessage(source, "Invalid cookie name or value");
       return;
@@ -21597,127 +19245,66 @@ function setCookieReload(source, args) {
       window.location.reload();
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
+  }
+  function isCookieSetWithValue(e, t, r) {
+    return e.split(";").some((function(e) {
+      var n = e.indexOf("=");
+      if (-1 === n) return false;
+      var i = e.slice(0, n).trim(), a = e.slice(n + 1).trim();
+      if (new Set([ "$now$", "$currentDate$", "$currentISODate$" ]).has(r)) {
+        var u = Date.now(), s = /^\d+$/.test(a) ? parseInt(a, 10) : new Date(a).getTime();
+        return t === i && s > u - 864e5;
       }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
+      return t === i && r === a;
+    }));
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function getLimitedCookieValue(e) {
+    if (!e) return null;
+    var n;
+    if (new Set([ "true", "t", "false", "f", "yes", "y", "no", "n", "ok", "on", "off", "accept", "accepted", "notaccepted", "reject", "rejected", "allow", "allowed", "disallow", "deny", "enable", "enabled", "disable", "disabled", "necessary", "required", "hide", "hidden", "essential", "nonessential", "checked", "unchecked", "forbidden", "forever" ]).has(e.toLowerCase())) n = e; else if ("emptyArr" === e) n = "[]"; else if ("emptyObj" === e) n = "{}"; else {
+      if (!/^\d+$/.test(e)) return null;
+      if (n = parseFloat(e), nativeIsNaN(n)) return null;
+      if (Math.abs(n) < 0 || Math.abs(n) > 32767) return null;
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
+    return n;
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function serializeCookie(e, o, i) {
+    var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : "", t = !(arguments.length > 4 && void 0 !== arguments[4]) || arguments[4];
+    if (!t && `${o}`.includes(";") || e.includes(";")) return null;
+    var r = `${e}=${t ? encodeURIComponent(o) : o}`;
+    if (e.startsWith("__Host-")) return r += "; path=/; secure", n && console.debug(`Domain value: "${n}" has been ignored, because is not allowed for __Host- prefixed cookies`), 
+    r;
+    var s = getCookiePath(i);
+    return s && (r += `; ${s}`), e.startsWith("__Secure-") && (r += "; secure"), n && (r += `; domain=${n}`), 
+    r;
   }
-  function isCookieSetWithValue(cookieString, name, value) {
-    return cookieString.split(";").some(function (cookieStr) {
-      var pos = cookieStr.indexOf("=");
-      if (pos === -1) {
-        return false;
-      }
-      var cookieName = cookieStr.slice(0, pos).trim();
-      var cookieValue = cookieStr.slice(pos + 1).trim();
-      return name === cookieName && value === cookieValue;
-    });
+  function isValidCookiePath(n) {
+    return "/" === n || "none" === n;
   }
-  function getLimitedCookieValue(value) {
-    if (!value) {
-      return null;
-    }
-    var allowedCookieValues = new Set(["true", "t", "false", "f", "yes", "y", "no", "n", "ok", "on", "off", "accept", "accepted", "notaccepted", "reject", "rejected", "allow", "allowed", "disallow", "deny", "enable", "enabled", "disable", "disabled", "necessary", "required", "hide", "hidden", "essential", "nonessential", "checked", "unchecked", "forbidden", "forever"]);
-    var validValue;
-    if (allowedCookieValues.has(value.toLowerCase())) {
-      validValue = value;
-    } else if (/^\d+$/.test(value)) {
-      validValue = parseFloat(value);
-      if (nativeIsNaN(validValue)) {
-        return null;
-      }
-      if (Math.abs(validValue) < 0 || Math.abs(validValue) > 32767) {
-        return null;
-      }
-    } else {
-      return null;
-    }
-    return validValue;
+  function getCookiePath(t) {
+    return "/" === t ? "path=/" : "";
   }
-  function serializeCookie(name, rawValue, rawPath) {
-    var domainValue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
-    var shouldEncodeValue = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-    var HOST_PREFIX = "__Host-";
-    var SECURE_PREFIX = "__Secure-";
-    var COOKIE_BREAKER = ";";
-    if (!shouldEncodeValue && `${rawValue}`.includes(COOKIE_BREAKER) || name.includes(COOKIE_BREAKER)) {
-      return null;
-    }
-    var value = shouldEncodeValue ? encodeURIComponent(rawValue) : rawValue;
-    var resultCookie = `${name}=${value}`;
-    if (name.startsWith(HOST_PREFIX)) {
-      resultCookie += "; path=/; secure";
-      if (domainValue) {
-        console.debug(`Domain value: "${domainValue}" has been ignored, because is not allowed for __Host- prefixed cookies`);
-      }
-      return resultCookie;
-    }
-    var path = getCookiePath(rawPath);
-    if (path) {
-      resultCookie += `; ${path}`;
-    }
-    if (name.startsWith(SECURE_PREFIX)) {
-      resultCookie += "; secure";
-    }
-    if (domainValue) {
-      resultCookie += `; domain=${domainValue}`;
-    }
-    return resultCookie;
-  }
-  function isValidCookiePath(rawPath) {
-    return rawPath === "/" || rawPath === "none";
-  }
-  function getCookiePath(rawPath) {
-    if (rawPath === "/") {
-      return "path=/";
-    }
-    return "";
-  }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     setCookieReload.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -21732,6 +19319,7 @@ function setCookieReload(source, args) {
     console.log(e);
   }
 }
+
 function setLocalStorageItem(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -21752,9 +19340,7 @@ function setLocalStorageItem(source, args) {
       logMessage(source, `Invalid storage item value: '${value}'`);
       return;
     }
-    var {
-      localStorage: localStorage
-    } = window;
+    var {localStorage: localStorage} = window;
     if (validValue === "$remove$") {
       removeStorageItem(source, localStorage, key);
     } else {
@@ -21762,162 +19348,90 @@ function setLocalStorageItem(source, args) {
     }
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
-  }
-  function setStorageItem(source, storage, key, value) {
-    try {
-      storage.setItem(key, value);
-    } catch (e) {
-      var message = `Unable to set storage item due to: ${e.message}`;
-      logMessage(source, message);
-    }
-  }
-  function removeStorageItem(source, storage, key) {
-    try {
-      if (key.startsWith("/") && (key.endsWith("/") || key.endsWith("/i")) && isValidStrPattern(key)) {
-        var regExpKey = toRegExp(key);
-        var storageKeys = Object.keys(storage);
-        storageKeys.forEach(function (storageKey) {
-          if (regExpKey.test(storageKey)) {
-            storage.removeItem(storageKey);
-          }
-        });
-      } else {
-        storage.removeItem(key);
-      }
-    } catch (e) {
-      var message = `Unable to remove storage item due to: ${e.message}`;
-      logMessage(source, message);
-    }
-  }
-  function getLimitedStorageItemValue(value) {
-    if (typeof value !== "string") {
-      throw new Error("Invalid value");
-    }
-    var allowedStorageValues = new Set(["undefined", "false", "true", "null", "", "yes", "no", "on", "off", "accept", "accepted", "reject", "rejected", "allowed", "denied", "forbidden", "forever"]);
-    var validValue;
-    if (allowedStorageValues.has(value.toLowerCase())) {
-      validValue = value;
-    } else if (value === "emptyArr") {
-      validValue = "[]";
-    } else if (value === "emptyObj") {
-      validValue = "{}";
-    } else if (/^\d+$/.test(value)) {
-      validValue = parseFloat(value);
-      if (nativeIsNaN(validValue)) {
-        throw new Error("Invalid value");
-      }
-      if (Math.abs(validValue) > 32767) {
-        throw new Error("Invalid value");
-      }
-    } else if (value === "$remove$") {
-      validValue = "$remove$";
-    } else {
-      throw new Error("Invalid value");
-    }
-    return validValue;
-  }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
-    try {
-      isValid = new RegExp(str);
-      isValid = true;
-    } catch (e) {
-      isValid = false;
-    }
-    return isValid;
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
+  }
+  function setStorageItem(e, t, s, a) {
+    try {
+      t.setItem(s, a);
+    } catch (t) {
+      var o = `Unable to set storage item due to: ${t.message}`;
+      logMessage(e, o);
+    }
+  }
+  function removeStorageItem(e, t, o) {
+    try {
+      if (o.startsWith("/") && (o.endsWith("/") || o.endsWith("/i")) && isValidStrPattern(o)) {
+        var r = toRegExp(o);
+        Object.keys(t).forEach((function(e) {
+          r.test(e) && t.removeItem(e);
+        }));
+      } else t.removeItem(o);
+    } catch (t) {
+      var s = `Unable to remove storage item due to: ${t.message}`;
+      logMessage(e, s);
+    }
+  }
+  function getLimitedStorageItemValue(e) {
+    if ("string" != typeof e) throw new Error("Invalid value");
+    var r;
+    if (new Set([ "undefined", "false", "true", "null", "", "yes", "no", "on", "off", "accept", "accepted", "reject", "rejected", "allowed", "denied", "forbidden", "forever" ]).has(e.toLowerCase())) r = e; else if ("emptyArr" === e) r = "[]"; else if ("emptyObj" === e) r = "{}"; else if (/^\d+$/.test(e)) {
+      if (r = parseFloat(e), nativeIsNaN(r)) throw new Error("Invalid value");
+      if (Math.abs(r) > 32767) throw new Error("Invalid value");
+    } else {
+      if ("$remove$" !== e) throw new Error("Invalid value");
+      r = "$remove$";
+    }
+    return r;
+  }
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
+    try {
+      t = new RegExp(n), t = !0;
+    } catch (e) {
+      t = false;
+    }
+    return t;
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     setLocalStorageItem.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -21932,6 +19446,7 @@ function setLocalStorageItem(source, args) {
     console.log(e);
   }
 }
+
 function setPopadsDummy(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -21958,35 +19473,18 @@ function setPopadsDummy(source, args) {
       }
     });
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     setPopadsDummy.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -22001,6 +19499,7 @@ function setPopadsDummy(source, args) {
     console.log(e);
   }
 }
+
 function setSessionStorageItem(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -22021,9 +19520,7 @@ function setSessionStorageItem(source, args) {
       logMessage(source, `Invalid storage item value: '${value}'`);
       return;
     }
-    var {
-      sessionStorage: sessionStorage
-    } = window;
+    var {sessionStorage: sessionStorage} = window;
     if (validValue === "$remove$") {
       removeStorageItem(source, sessionStorage, key);
     } else {
@@ -22031,162 +19528,90 @@ function setSessionStorageItem(source, args) {
     }
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
-  }
-  function setStorageItem(source, storage, key, value) {
-    try {
-      storage.setItem(key, value);
-    } catch (e) {
-      var message = `Unable to set storage item due to: ${e.message}`;
-      logMessage(source, message);
-    }
-  }
-  function removeStorageItem(source, storage, key) {
-    try {
-      if (key.startsWith("/") && (key.endsWith("/") || key.endsWith("/i")) && isValidStrPattern(key)) {
-        var regExpKey = toRegExp(key);
-        var storageKeys = Object.keys(storage);
-        storageKeys.forEach(function (storageKey) {
-          if (regExpKey.test(storageKey)) {
-            storage.removeItem(storageKey);
-          }
-        });
-      } else {
-        storage.removeItem(key);
-      }
-    } catch (e) {
-      var message = `Unable to remove storage item due to: ${e.message}`;
-      logMessage(source, message);
-    }
-  }
-  function getLimitedStorageItemValue(value) {
-    if (typeof value !== "string") {
-      throw new Error("Invalid value");
-    }
-    var allowedStorageValues = new Set(["undefined", "false", "true", "null", "", "yes", "no", "on", "off", "accept", "accepted", "reject", "rejected", "allowed", "denied", "forbidden", "forever"]);
-    var validValue;
-    if (allowedStorageValues.has(value.toLowerCase())) {
-      validValue = value;
-    } else if (value === "emptyArr") {
-      validValue = "[]";
-    } else if (value === "emptyObj") {
-      validValue = "{}";
-    } else if (/^\d+$/.test(value)) {
-      validValue = parseFloat(value);
-      if (nativeIsNaN(validValue)) {
-        throw new Error("Invalid value");
-      }
-      if (Math.abs(validValue) > 32767) {
-        throw new Error("Invalid value");
-      }
-    } else if (value === "$remove$") {
-      validValue = "$remove$";
-    } else {
-      throw new Error("Invalid value");
-    }
-    return validValue;
-  }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
-    try {
-      isValid = new RegExp(str);
-      isValid = true;
-    } catch (e) {
-      isValid = false;
-    }
-    return isValid;
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
+  }
+  function setStorageItem(e, t, s, a) {
+    try {
+      t.setItem(s, a);
+    } catch (t) {
+      var o = `Unable to set storage item due to: ${t.message}`;
+      logMessage(e, o);
+    }
+  }
+  function removeStorageItem(e, t, o) {
+    try {
+      if (o.startsWith("/") && (o.endsWith("/") || o.endsWith("/i")) && isValidStrPattern(o)) {
+        var r = toRegExp(o);
+        Object.keys(t).forEach((function(e) {
+          r.test(e) && t.removeItem(e);
+        }));
+      } else t.removeItem(o);
+    } catch (t) {
+      var s = `Unable to remove storage item due to: ${t.message}`;
+      logMessage(e, s);
+    }
+  }
+  function getLimitedStorageItemValue(e) {
+    if ("string" != typeof e) throw new Error("Invalid value");
+    var r;
+    if (new Set([ "undefined", "false", "true", "null", "", "yes", "no", "on", "off", "accept", "accepted", "reject", "rejected", "allowed", "denied", "forbidden", "forever" ]).has(e.toLowerCase())) r = e; else if ("emptyArr" === e) r = "[]"; else if ("emptyObj" === e) r = "{}"; else if (/^\d+$/.test(e)) {
+      if (r = parseFloat(e), nativeIsNaN(r)) throw new Error("Invalid value");
+      if (Math.abs(r) > 32767) throw new Error("Invalid value");
+    } else {
+      if ("$remove$" !== e) throw new Error("Invalid value");
+      r = "$remove$";
+    }
+    return r;
+  }
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
+    try {
+      t = new RegExp(n), t = !0;
+    } catch (e) {
+      t = false;
+    }
+    return t;
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     setSessionStorageItem.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -22201,6 +19626,7 @@ function setSessionStorageItem(source, args) {
     console.log(e);
   }
 }
+
 function spoofCSS(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -22213,7 +19639,7 @@ function spoofCSS(source, args) {
     if (!selectors) {
       return;
     }
-    var uboAliases = ["spoof-css.js", "ubo-spoof-css.js", "ubo-spoof-css"];
+    var uboAliases = [ "spoof-css.js", "ubo-spoof-css.js", "ubo-spoof-css" ];
     function convertToCamelCase(cssProperty) {
       if (!cssProperty.includes("-")) {
         return cssProperty;
@@ -22224,11 +19650,9 @@ function spoofCSS(source, args) {
       return `${firstPart}${secondPart[0].toUpperCase()}${secondPart.slice(1)}`;
     }
     var shouldDebug = !!(cssPropertyName === "debug" && cssPropertyValue);
-    var propToValueMap = new Map();
+    var propToValueMap = new Map;
     if (uboAliases.includes(source.name)) {
-      var {
-        args: args
-      } = source;
+      var {args: args} = source;
       var arrayOfProperties = [];
       var isDebug = args.at(-2);
       if (isDebug === "debug") {
@@ -22315,15 +19739,8 @@ function spoofCSS(source, args) {
       if (!thisArg.matches(selectors)) {
         return rect;
       }
-      var {
-        top: top,
-        bottom: bottom,
-        height: height,
-        width: width,
-        left: left,
-        right: right
-      } = rect;
-      var newDOMRect = new window.DOMRect(rect.x, rect.y, top, bottom, width, height, left, right);
+      var {x: x, y: y, height: height, width: width} = rect;
+      var newDOMRect = new window.DOMRect(x, y, width, height);
       if (propToValueMap.has("top")) {
         setRectValue(newDOMRect, "top", propToValueMap.get("top"));
       }
@@ -22351,35 +19768,18 @@ function spoofCSS(source, args) {
     };
     window.Element.prototype.getBoundingClientRect = new Proxy(window.Element.prototype.getBoundingClientRect, getBoundingClientRectHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     spoofCSS.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -22394,6 +19794,7 @@ function spoofCSS(source, args) {
     console.log(e);
   }
 }
+
 function trustedClickElement(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -22423,9 +19824,9 @@ function trustedClickElement(source, args) {
     var COLON = ":";
     var EXTRA_MATCH_DELIMITER = /(,\s*){1}(?=!?cookie:|!?localStorage:|containsText:)/;
     var sleep = function sleep(delayMs) {
-      return new Promise(function (resolve) {
+      return new Promise((function(resolve) {
         setTimeout(resolve, delayMs);
-      });
+      }));
     };
     if (selectors.includes(SHADOW_COMBINATOR)) {
       var attachShadowWrapper = function attachShadowWrapper(target, thisArg, argumentsList) {
@@ -22458,36 +19859,28 @@ function trustedClickElement(source, args) {
     var isInvertedMatchCookie = false;
     var isInvertedMatchLocalStorage = false;
     if (extraMatch) {
-      var parsedExtraMatch = extraMatch.split(EXTRA_MATCH_DELIMITER).map(function (matchStr) {
+      var parsedExtraMatch = extraMatch.split(EXTRA_MATCH_DELIMITER).map((function(matchStr) {
         return matchStr.trim();
-      });
-      parsedExtraMatch.forEach(function (matchStr) {
+      }));
+      parsedExtraMatch.forEach((function(matchStr) {
         if (matchStr.includes(COOKIE_MATCH_MARKER)) {
-          var {
-            isInvertedMatch: isInvertedMatch,
-            matchValue: matchValue
-          } = parseMatchArg(matchStr);
+          var {isInvertedMatch: isInvertedMatch, matchValue: matchValue} = parseMatchArg(matchStr);
           isInvertedMatchCookie = isInvertedMatch;
           var cookieMatch = matchValue.replace(COOKIE_MATCH_MARKER, "");
           cookieMatches.push(cookieMatch);
         }
         if (matchStr.includes(LOCAL_STORAGE_MATCH_MARKER)) {
-          var {
-            isInvertedMatch: _isInvertedMatch,
-            matchValue: _matchValue
-          } = parseMatchArg(matchStr);
+          var {isInvertedMatch: _isInvertedMatch, matchValue: _matchValue} = parseMatchArg(matchStr);
           isInvertedMatchLocalStorage = _isInvertedMatch;
           var localStorageMatch = _matchValue.replace(LOCAL_STORAGE_MATCH_MARKER, "");
           localStorageMatches.push(localStorageMatch);
         }
         if (matchStr.includes(TEXT_MATCH_MARKER)) {
-          var {
-            matchValue: _matchValue2
-          } = parseMatchArg(matchStr);
+          var {matchValue: _matchValue2} = parseMatchArg(matchStr);
           var textMatch = _matchValue2.replace(TEXT_MATCH_MARKER, "");
           textMatches = textMatch;
         }
-      });
+      }));
     }
     if (cookieMatches.length > 0) {
       var parsedCookieMatches = parseCookieString(cookieMatches.join(COOKIE_STRING_DELIMITER));
@@ -22496,10 +19889,10 @@ function trustedClickElement(source, args) {
       if (cookieKeys.length === 0) {
         return;
       }
-      var cookiesMatched = Object.keys(parsedCookieMatches).every(function (key) {
+      var cookiesMatched = Object.keys(parsedCookieMatches).every((function(key) {
         var valueMatch = parsedCookieMatches[key] ? toRegExp(parsedCookieMatches[key]) : null;
         var keyMatch = toRegExp(key);
-        return cookieKeys.some(function (cookieKey) {
+        return cookieKeys.some((function(cookieKey) {
           var keysMatched = keyMatch.test(cookieKey);
           if (!keysMatched) {
             return false;
@@ -22512,27 +19905,27 @@ function trustedClickElement(source, args) {
             return false;
           }
           return valueMatch.test(parsedCookieValue);
-        });
-      });
+        }));
+      }));
       var shouldRun = cookiesMatched !== isInvertedMatchCookie;
       if (!shouldRun) {
         return;
       }
     }
     if (localStorageMatches.length > 0) {
-      var localStorageMatched = localStorageMatches.every(function (str) {
+      var localStorageMatched = localStorageMatches.every((function(str) {
         var itemValue = window.localStorage.getItem(str);
         return itemValue || itemValue === "";
-      });
+      }));
       var _shouldRun = localStorageMatched !== isInvertedMatchLocalStorage;
       if (!_shouldRun) {
         return;
       }
     }
     var textMatchRegexp = textMatches ? toRegExp(textMatches) : null;
-    var selectorsSequence = selectors.split(SELECTORS_DELIMITER).map(function (selector) {
+    var selectorsSequence = selectors.split(SELECTORS_DELIMITER).map((function(selector) {
       return selector.trim();
-    });
+    }));
     var createElementObj = function createElementObj(element, selector) {
       return {
         element: element || null,
@@ -22600,15 +19993,15 @@ function trustedClickElement(source, args) {
           }
         }
       }
-      var allElementsClicked = elementsSequence.every(function (elementObj) {
+      var allElementsClicked = elementsSequence.every((function(elementObj) {
         return elementObj.clicked === true;
-      });
+      }));
       if (allElementsClicked) {
         if (shouldReloadAfterClick && canReload) {
           canReload = false;
-          setTimeout(function () {
+          setTimeout((function() {
             window.location.reload();
-          }, reloadDelayMs);
+          }), reloadDelayMs);
         }
         hit(source);
       }
@@ -22622,7 +20015,7 @@ function trustedClickElement(source, args) {
     };
     var fulfillAndHandleSelectors = function fulfillAndHandleSelectors() {
       var fulfilledSelectors = [];
-      selectorsSequence.forEach(function (selector, i) {
+      selectorsSequence.forEach((function(selector, i) {
         if (!selector) {
           return;
         }
@@ -22632,17 +20025,17 @@ function trustedClickElement(source, args) {
         }
         handleElement(element, i, selector);
         fulfilledSelectors.push(selector);
-      });
-      selectorsSequence = selectorsSequence.map(function (selector) {
+      }));
+      selectorsSequence = selectorsSequence.map((function(selector) {
         return selector && fulfilledSelectors.includes(selector) ? null : selector;
-      });
+      }));
       return selectorsSequence;
     };
     var findElements = function findElements(mutations, observer) {
       selectorsSequence = fulfillAndHandleSelectors();
-      var allSelectorsFulfilled = selectorsSequence.every(function (selector) {
+      var allSelectorsFulfilled = selectorsSequence.every((function(selector) {
         return selector === null;
-      });
+      }));
       if (allSelectorsFulfilled) {
         observer.disconnect();
       }
@@ -22654,18 +20047,18 @@ function trustedClickElement(source, args) {
         childList: true,
         subtree: true
       });
-      setTimeout(function () {
+      setTimeout((function() {
         return observer.disconnect();
-      }, OBSERVER_TIMEOUT_MS);
+      }), OBSERVER_TIMEOUT_MS);
     };
     var checkInitialElements = function checkInitialElements() {
-      var foundElements = selectorsSequence.every(function (selector) {
+      var foundElements = selectorsSequence.every((function(selector) {
         if (!selector) {
           return false;
         }
         var element = queryShadowSelector(selector, document.documentElement, textMatchRegexp);
         return !!element;
-      });
+      }));
       if (foundElements) {
         fulfillAndHandleSelectors();
       } else {
@@ -22674,183 +20067,85 @@ function trustedClickElement(source, args) {
     };
     checkInitialElements();
     if (parsedDelay) {
-      setTimeout(function () {
+      setTimeout((function() {
         clickElementsBySequence();
         canClick = true;
-      }, parsedDelay);
+      }), parsedDelay);
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
+  }
+  function parseCookieString(i) {
+    var r = i.split(";"), n = {};
+    return r.forEach((function(i) {
+      var r, t = "", e = i.indexOf("=");
+      -1 === e ? r = i.trim() : (r = i.slice(0, e).trim(), t = i.slice(e + 1)), n[r] = t || null;
+    })), n;
+  }
+  function throttle(n, t) {
+    var r, e = false, _wrapper8 = function _wrapper() {
+      for (var o = arguments.length, u = new Array(o), f = 0; f < o; f++) u[f] = arguments[f];
+      e ? r = u : (n(...u), e = true, setTimeout((function() {
+        e = false, r && (_wrapper8(...r), r = null);
+      }), t));
     };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
+    return _wrapper8;
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
   }
-  function parseCookieString(cookieString) {
-    var COOKIE_DELIMITER = "=";
-    var COOKIE_PAIRS_DELIMITER = ";";
-    var cookieChunks = cookieString.split(COOKIE_PAIRS_DELIMITER);
-    var cookieData = {};
-    cookieChunks.forEach(function (singleCookie) {
-      var cookieKey;
-      var cookieValue = "";
-      var delimiterIndex = singleCookie.indexOf(COOKIE_DELIMITER);
-      if (delimiterIndex === -1) {
-        cookieKey = singleCookie.trim();
-      } else {
-        cookieKey = singleCookie.slice(0, delimiterIndex).trim();
-        cookieValue = singleCookie.slice(delimiterIndex + 1);
-      }
-      cookieData[cookieKey] = cookieValue || null;
-    });
-    return cookieData;
-  }
-  function throttle(cb, delay) {
-    var wait = false;
-    var savedArgs;
-    var _wrapper = function wrapper() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      if (wait) {
-        savedArgs = args;
-        return;
-      }
-      cb(...args);
-      wait = true;
-      setTimeout(function () {
-        wait = false;
-        if (savedArgs) {
-          _wrapper(...savedArgs);
-          savedArgs = null;
-        }
-      }, delay);
-    };
-    return _wrapper;
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function parseMatchArg(match) {
-    var INVERT_MARKER = "!";
-    var isInvertedMatch = match ? match === null || match === void 0 ? void 0 : match.startsWith(INVERT_MARKER) : false;
-    var matchValue = isInvertedMatch ? match.slice(1) : match;
-    var matchRegexp = toRegExp(matchValue);
+  function parseMatchArg(t) {
+    var e = !!t && (null == t ? void 0 : t.startsWith("!")), a = e ? t.slice(1) : t;
     return {
-      isInvertedMatch: isInvertedMatch,
-      matchRegexp: matchRegexp,
-      matchValue: matchValue
+      isInvertedMatch: e,
+      matchRegexp: toRegExp(a),
+      matchValue: a
     };
   }
-  function queryShadowSelector(selector) {
-    var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document.documentElement;
-    var textContent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    var SHADOW_COMBINATOR = " >>> ";
-    var pos = selector.indexOf(SHADOW_COMBINATOR);
-    if (pos === -1) {
-      if (textContent) {
-        return findElementWithText(context, selector, textContent);
-      }
-      return context.querySelector(selector);
-    }
-    var shadowHostSelector = selector.slice(0, pos).trim();
-    var elem = context.querySelector(shadowHostSelector);
-    if (!elem || !elem.shadowRoot) {
-      return null;
-    }
-    var shadowRootSelector = selector.slice(pos + SHADOW_COMBINATOR.length).trim();
-    return queryShadowSelector(shadowRootSelector, elem.shadowRoot, textContent);
+  function queryShadowSelector(e) {
+    var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : document.documentElement, o = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null, r = " >>> ", l = e.indexOf(r);
+    if (-1 === l) return o ? findElementWithText(t, e, o) : t.querySelector(e);
+    var n = e.slice(0, l).trim(), i = t.querySelector(n);
+    return i && i.shadowRoot ? queryShadowSelector(e.slice(l + 5).trim(), i.shadowRoot, o) : null;
   }
-  function doesElementContainText(element, matchRegexp) {
-    var {
-      textContent: textContent
-    } = element;
-    if (!textContent) {
-      return false;
-    }
-    return matchRegexp.test(textContent);
+  function doesElementContainText(t, e) {
+    var {textContent: n} = t;
+    return !!n && e.test(n);
   }
-  function findElementWithText(rootElement, selector, matchRegexp) {
-    var elements = rootElement.querySelectorAll(selector);
-    for (var i = 0; i < elements.length; i += 1) {
-      if (doesElementContainText(elements[i], matchRegexp)) {
-        return elements[i];
-      }
-    }
+  function findElementWithText(e, n, t) {
+    for (var l = e.querySelectorAll(n), r = 0; r < l.length; r += 1) if (doesElementContainText(l[r], t)) return l[r];
     return null;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedClickElement.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -22865,6 +20160,7 @@ function trustedClickElement(source, args) {
     console.log(e);
   }
 }
+
 function trustedCreateElement(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -22902,13 +20198,13 @@ function trustedCreateElement(source, args) {
       logError(`Cannot parse attributePairs param: '${attributePairs}'`, e);
       return;
     }
-    attributes.forEach(function (attr) {
+    attributes.forEach((function(attr) {
       try {
         element.setAttribute(attr.name, attr.value);
       } catch (e) {
         logError(`Cannot set attribute '${attr.name}' with value '${attr.value}'`, e);
       }
-    });
+    }));
     var timerId;
     var elementCreated = false;
     var elementRemoved = false;
@@ -22938,164 +20234,92 @@ function trustedCreateElement(source, args) {
         return false;
       }
       if (!nativeIsNaN(removeElDelayMs)) {
-        timerId = setTimeout(function () {
+        timerId = setTimeout((function() {
           el.remove();
           elementRemoved = true;
           clearTimeout(timerId);
-        }, removeElDelayMs);
+        }), removeElDelayMs);
       }
       return true;
     };
     if (!findParentAndAppendEl(parentSelector, element, cleanupDelayMs)) {
-      observeDocumentWithTimeout(function (mutations, observer) {
+      observeDocumentWithTimeout((function(mutations, observer) {
         if (elementRemoved || elementCreated || findParentAndAppendEl(parentSelector, element, cleanupDelayMs)) {
           observer.disconnect();
         }
-      });
+      }));
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function observeDocumentWithTimeout(callback) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+  function observeDocumentWithTimeout(e) {
+    var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {
       subtree: true,
       childList: true
-    };
-    var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1e4;
-    var documentObserver = new MutationObserver(function (mutations, observer) {
-      observer.disconnect();
-      callback(mutations, observer);
-      observer.observe(document.documentElement, options);
-    });
-    documentObserver.observe(document.documentElement, options);
-    if (typeof timeout === "number") {
-      setTimeout(function () {
-        return documentObserver.disconnect();
-      }, timeout);
-    }
+    }, n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 1e4, o = new MutationObserver((function(n, o) {
+      o.disconnect(), e(n, o), o.observe(document.documentElement, t);
+    }));
+    o.observe(document.documentElement, t), "number" == typeof n && setTimeout((function() {
+      return o.disconnect();
+    }), n);
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  function parseAttributePairs(input) {
-    if (!input) {
-      return [];
-    }
-    var NAME_VALUE_SEPARATOR = "=";
-    var PAIRS_SEPARATOR = " ";
-    var SINGLE_QUOTE = "'";
-    var DOUBLE_QUOTE = '"';
-    var BACKSLASH = "\\";
-    var pairs = [];
-    for (var i = 0; i < input.length; i += 1) {
-      var name = "";
-      var value = "";
-      while (i < input.length && input[i] !== NAME_VALUE_SEPARATOR && input[i] !== PAIRS_SEPARATOR) {
-        name += input[i];
-        i += 1;
-      }
-      if (i < input.length && input[i] === NAME_VALUE_SEPARATOR) {
-        i += 1;
-        var quote = null;
-        if (input[i] === SINGLE_QUOTE || input[i] === DOUBLE_QUOTE) {
-          quote = input[i];
-          i += 1;
-          for (; i < input.length; i += 1) {
-            if (input[i] === quote) {
-              if (input[i - 1] === BACKSLASH) {
-                value = `${value.slice(0, -1)}${quote}`;
-              } else {
-                i += 1;
-                quote = null;
-                break;
-              }
-            } else {
-              value += input[i];
-            }
+  function parseAttributePairs(e) {
+    if (!e) return [];
+    for (var r = [], t = 0; t < e.length; t += 1) {
+      for (var i = "", n = ""; t < e.length && "=" !== e[t] && " " !== e[t]; ) i += e[t], 
+      t += 1;
+      if (t < e.length && "=" === e[t]) {
+        var o = null;
+        if ("'" !== e[t += 1] && '"' !== e[t]) throw new Error(`Attribute value should be quoted: "${e.slice(t)}"`);
+        for (o = e[t], t += 1; t < e.length; t += 1) if (e[t] === o) {
+          if ("\\" !== e[t - 1]) {
+            t += 1, o = null;
+            break;
           }
-          if (quote !== null) {
-            throw new Error(`Unbalanced quote for attribute value: '${input}'`);
-          }
-        } else {
-          throw new Error(`Attribute value should be quoted: "${input.slice(i)}"`);
-        }
+          n = `${n.slice(0, -1)}${o}`;
+        } else n += e[t];
+        if (null !== o) throw new Error(`Unbalanced quote for attribute value: '${e}'`);
       }
-      name = name.trim();
-      value = value.trim();
-      if (!name) {
-        if (!value) {
-          continue;
-        }
-        throw new Error(`Attribute name before '=' should be specified: '${input}'`);
+      if (i = i.trim(), n = n.trim(), !i) {
+        if (!n) continue;
+        throw new Error(`Attribute name before '=' should be specified: '${e}'`);
       }
-      pairs.push({
-        name: name,
-        value: value
-      });
-      if (input[i] && input[i] !== PAIRS_SEPARATOR) {
-        throw new Error(`No space before attribute: '${input.slice(i)}'`);
-      }
+      if (r.push({
+        name: i,
+        value: n
+      }), e[t] && " " !== e[t]) throw new Error(`No space before attribute: '${e.slice(t)}'`);
     }
-    return pairs;
+    return r;
   }
-  function getErrorMessage(error) {
-    var isErrorWithMessage = function isErrorWithMessage(e) {
-      return typeof e === "object" && e !== null && "message" in e && typeof e.message === "string";
-    };
-    if (isErrorWithMessage(error)) {
-      return error.message;
-    }
+  function getErrorMessage(e) {
+    var r;
+    if ("object" == typeof (r = e) && null !== r && "message" in r && "string" == typeof r.message) return e.message;
     try {
-      return new Error(JSON.stringify(error)).message;
-    } catch (_unused) {
-      return new Error(String(error)).message;
+      return new Error(JSON.stringify(e)).message;
+    } catch (r) {
+      return new Error(String(e)).message;
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedCreateElement.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -23110,6 +20334,7 @@ function trustedCreateElement(source, args) {
     console.log(e);
   }
 }
+
 function trustedDispatchEvent(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -23127,7 +20352,7 @@ function trustedDispatchEvent(source, args) {
     if (target === "window") {
       eventTarget = window;
     }
-    var events = new Set();
+    var events = new Set;
     var dispatch = function dispatch() {
       var customEvent = new Event(event);
       if (typeof target === "string" && target !== "window") {
@@ -23144,9 +20369,9 @@ function trustedDispatchEvent(source, args) {
       var eventName = args[0];
       if (thisArg && eventName) {
         events.add(eventName);
-        setTimeout(function () {
+        setTimeout((function() {
           dispatch();
-        }, 1);
+        }), 1);
       }
       return Reflect.apply(eventListener, thisArg, args);
     };
@@ -23155,35 +20380,18 @@ function trustedDispatchEvent(source, args) {
     };
     EventTarget.prototype.addEventListener = new Proxy(EventTarget.prototype.addEventListener, handler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedDispatchEvent.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -23198,6 +20406,7 @@ function trustedDispatchEvent(source, args) {
     console.log(e);
   }
 }
+
 function trustedPruneInboundObject(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -23214,10 +20423,7 @@ function trustedPruneInboundObject(source, args) {
     var nativeObjects = {
       nativeStringify: window.JSON.stringify
     };
-    var {
-      base: base,
-      prop: prop
-    } = getPropertyInChain(window, functionName);
+    var {base: base, prop: prop} = getPropertyInChain(window, functionName);
     if (!base || !prop || typeof base[prop] !== "function") {
       var message = `${functionName} is not a function`;
       logMessage(source, message);
@@ -23238,398 +20444,302 @@ function trustedPruneInboundObject(source, args) {
     };
     base[prop] = new Proxy(base[prop], objectHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function matchStackTrace(stackMatch, stackTrace) {
-    if (!stackMatch || stackMatch === "") {
-      return true;
-    }
-    var regExpValues = backupRegExpValues();
-    if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-      if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-        restoreRegExpValues(regExpValues);
-      }
-      return true;
-    }
-    var stackRegexp = toRegExp(stackMatch);
-    var refinedStackTrace = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    }).join("\n");
-    if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-      restoreRegExpValues(regExpValues);
-    }
-    return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
-  }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
-      configurable: true
-    });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
-    };
-  }
-  function getWildcardPropertyInChain(base, chain) {
-    var lookThrough = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var output = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      if (chain === "*" || chain === "[]") {
-        for (var key in base) {
-          if (Object.prototype.hasOwnProperty.call(base, key)) {
-            output.push({
-              base: base,
-              prop: key
-            });
-          }
-        }
-      } else {
-        output.push({
-          base: base,
-          prop: chain
-        });
-      }
-      return output;
-    }
-    var prop = chain.slice(0, pos);
-    var shouldLookThrough = prop === "[]" && Array.isArray(base) || prop === "*" && base instanceof Object;
-    if (shouldLookThrough) {
-      var nextProp = chain.slice(pos + 1);
-      var baseKeys = Object.keys(base);
-      baseKeys.forEach(function (key) {
-        var item = base[key];
-        getWildcardPropertyInChain(item, nextProp, lookThrough, output);
-      });
-    }
-    if (Array.isArray(base)) {
-      base.forEach(function (key) {
-        var nextBase = key;
-        if (nextBase !== undefined) {
-          getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
-        }
-      });
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if (nextBase !== undefined) {
-      getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
-    }
-    return output;
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function isPruningNeeded(source, root, prunePaths, requiredPaths, stack, nativeObjects) {
-    if (!root) {
-      return false;
-    }
-    var {
-      nativeStringify: nativeStringify
-    } = nativeObjects;
-    var shouldProcess;
-    if (prunePaths.length === 0 && requiredPaths.length > 0) {
-      var rootString = nativeStringify(root);
-      var matchRegex = toRegExp(requiredPaths.join(""));
-      var shouldLog = matchRegex.test(rootString);
-      if (shouldLog) {
-        logMessage(source, `${window.location.hostname}\n${nativeStringify(root, null, 2)}\nStack trace:\n${new Error().stack}`, true);
-        if (root && typeof root === "object") {
-          logMessage(source, root, true, false);
-        }
-        shouldProcess = false;
-        return shouldProcess;
-      }
-    }
-    if (stack && !matchStackTrace(stack, new Error().stack || "")) {
-      shouldProcess = false;
-      return shouldProcess;
-    }
-    var wildcardSymbols = [".*.", "*.", ".*", ".[].", "[].", ".[]"];
-    var _loop = function _loop() {
-        var requiredPath = requiredPaths[i];
-        var lastNestedPropName = requiredPath.split(".").pop();
-        var hasWildcard = wildcardSymbols.some(function (symbol) {
-          return requiredPath.includes(symbol);
-        });
-        var details = getWildcardPropertyInChain(root, requiredPath, hasWildcard);
-        if (!details.length) {
-          shouldProcess = false;
-          return {
-            v: shouldProcess
-          };
-        }
-        shouldProcess = !hasWildcard;
-        for (var j = 0; j < details.length; j += 1) {
-          var hasRequiredProp = typeof lastNestedPropName === "string" && details[j].base[lastNestedPropName] !== undefined;
-          if (hasWildcard) {
-            shouldProcess = hasRequiredProp || shouldProcess;
-          } else {
-            shouldProcess = hasRequiredProp && shouldProcess;
-          }
-        }
-      },
-      _ret;
-    for (var i = 0; i < requiredPaths.length; i += 1) {
-      _ret = _loop();
-      if (_ret) return _ret.v;
-    }
-    return shouldProcess;
-  }
-  function jsonPruner(source, root, prunePaths, requiredPaths, stack, nativeObjects) {
-    var {
-      nativeStringify: nativeStringify
-    } = nativeObjects;
-    if (prunePaths.length === 0 && requiredPaths.length === 0) {
-      logMessage(source, `${window.location.hostname}\n${nativeStringify(root, null, 2)}\nStack trace:\n${new Error().stack}`, true);
-      if (root && typeof root === "object") {
-        logMessage(source, root, true, false);
-      }
-      return root;
-    }
-    try {
-      if (isPruningNeeded(source, root, prunePaths, requiredPaths, stack, nativeObjects) === false) {
-        return root;
-      }
-      prunePaths.forEach(function (path) {
-        var ownerObjArr = getWildcardPropertyInChain(root, path, true);
-        ownerObjArr.forEach(function (ownerObj) {
-          if (ownerObj !== undefined && ownerObj.base) {
-            delete ownerObj.base[ownerObj.prop];
-            hit(source);
-          }
-        });
-      });
-    } catch (e) {
-      logMessage(source, e);
-    }
-    return root;
-  }
-  function getPrunePath(props) {
-    var validPropsString = typeof props === "string" && props !== undefined && props !== "";
-    return validPropsString ? props.split(/ +/) : [];
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
+  }
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
+      configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
+    });
+  }
+  function getWildcardPropertyInChain(r, e) {
+    var a = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : [], t = arguments.length > 4 ? arguments[4] : void 0, o = e.indexOf(".");
+    if (-1 === o) {
+      if ("*" === e || "[]" === e) {
+        for (var n in r) if (Object.prototype.hasOwnProperty.call(r, n)) if (void 0 !== t) {
+          var s = r[n];
+          "string" == typeof s && t instanceof RegExp ? t.test(s) && i.push({
+            base: r,
+            prop: n
+          }) : s === t && i.push({
+            base: r,
+            prop: n
+          });
+        } else i.push({
+          base: r,
+          prop: n
+        });
+      } else if (void 0 !== t) {
+        var p = r[e];
+        "string" == typeof p && t instanceof RegExp ? t.test(p) && i.push({
+          base: r,
+          prop: e
+        }) : r[e] === t && i.push({
+          base: r,
+          prop: e
+        });
+      } else i.push({
+        base: r,
+        prop: e
+      });
+      return i;
+    }
+    var c = e.slice(0, o);
+    if ("[]" === c && Array.isArray(r) || "*" === c && r instanceof Object || "[-]" === c && Array.isArray(r) || "{-}" === c && r instanceof Object) {
+      var f = e.slice(o + 1), y = Object.keys(r);
+      if ("{-}" === c || "[-]" === c) {
+        var h = Array.isArray(r) ? "array" : "object";
+        return ("{-}" !== c || "object" !== h) && ("[-]" !== c || "array" !== h) || y.forEach((function(e) {
+          var a = r[e];
+          isKeyInObject(a, f, t) && i.push({
+            base: r,
+            prop: e
+          });
+        })), i;
+      }
+      y.forEach((function(e) {
+        getWildcardPropertyInChain(r[e], f, a, i, t);
+      }));
+    }
+    Array.isArray(r) && r.forEach((function(r) {
+      void 0 !== r && getWildcardPropertyInChain(r, e, a, i, t);
+    }));
+    var d = r[c];
+    return e = e.slice(o + 1), void 0 !== d && getWildcardPropertyInChain(d, e, a, i, t), 
+    i;
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function isPruningNeeded(n, t, r, e, a, i) {
+    if (!t) return false;
+    var o, {nativeStringify: u} = i, c = r.map((function(n) {
+      return n.path;
+    })), f = e.map((function(n) {
+      return n.path;
+    }));
+    if (0 === c.length && f.length > 0) {
+      var g = u(t);
+      if (toRegExp(f.join("")).test(g)) return logMessage(n, `${window.location.hostname}\n${u(t, null, 2)}\nStack trace:\n${(new Error).stack}`, true), 
+      t && "object" == typeof t && logMessage(n, t, true, false), o = false;
+    }
+    if (a && !matchStackTrace(a, (new Error).stack || "")) return o = false;
+    for (var s, l = [ ".*.", "*.", ".*", ".[].", "[].", ".[]" ], _loop = function _loop() {
+      var n = f[p], r = n.split(".").pop(), e = l.some((function(t) {
+        return n.includes(t);
+      })), a = getWildcardPropertyInChain(t, n, e);
+      if (!a.length) return {
+        v: o = false
+      };
+      o = !e;
+      for (var i = 0; i < a.length; i += 1) {
+        var u = "string" == typeof r && void 0 !== a[i].base[r];
+        o = e ? u || o : u && o;
+      }
+    }, p = 0; p < f.length; p += 1) if (s = _loop()) return s.v;
+    return o;
+  }
+  function jsonPruner(e, r, n, a, t, i) {
+    var {nativeStringify: o} = i;
+    if (0 === n.length && 0 === a.length) return logMessage(e, `${window.location.hostname}\n${o(r, null, 2)}\nStack trace:\n${(new Error).stack}`, true), 
+    r && "object" == typeof r && logMessage(e, r, true, false), r;
+    try {
+      if (!1 === isPruningNeeded(e, r, n, a, t, i)) return r;
+      n.forEach((function(n) {
+        for (var a = n.path, t = n.value, i = getWildcardPropertyInChain(r, a, !0, [], t), o = i.length - 1; o >= 0; o -= 1) {
+          var s = i[o];
+          if (void 0 !== s && s.base) if (hit(e), Array.isArray(s.base)) try {
+            var l = Number(s.prop);
+            if (Number.isNaN(l)) continue;
+            s.base.splice(l, 1);
+          } catch (e) {
+            console.error("Error while deleting array element", e);
+          } else delete s.base[s.prop];
+        }
+      }));
+    } catch (r) {
+      logMessage(e, r);
+    }
+    return r;
+  }
+  function getPrunePath(t) {
+    var r = ".[=].";
+    if ("string" == typeof t && void 0 !== t && "" !== t) {
+      var e = function(t) {
+        for (var e = [], n = "", i = 0, a = false, s = false; i < t.length; ) {
+          var u = t[i];
+          if (a) n += u, "\\" === u ? s = !s : ("/" !== u || s || (a = false), s = false), 
+          i += 1; else {
+            if (" " === u || "\n" === u || "\t" === u || "\r" === u || "\f" === u || "\v" === u) {
+              for (;i < t.length && /\s/.test(t[i]); ) i += 1;
+              "" !== n && (e.push(n), n = "");
+              continue;
+            }
+            if (t.startsWith(r, i)) {
+              if (n += r, "/" === t[i += 5]) {
+                a = true, s = false, n += "/", i += 1;
+                continue;
+              }
+              continue;
+            }
+            n += u, i += 1;
+          }
+        }
+        return "" !== n && e.push(n), e;
+      }(t);
+      return e.map((function(t) {
+        var e = t.split(r), n = e[0], i = e[1];
+        return void 0 !== i ? ("true" === i ? i = true : "false" === i ? i = false : i.startsWith("/") ? i = toRegExp(i) : "string" == typeof i && /^\d+$/.test(i) && (i = parseFloat(i)), 
+        {
+          path: n,
+          value: i
+        }) : {
+          path: n
+        };
+      }));
+    }
+    return [];
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
   function getNativeRegexpTest() {
-    var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "test");
-    var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-    if (descriptor && typeof descriptor.value === "function") {
-      return nativeRegexTest;
-    }
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
     throw new Error("RegExp.prototype.test is not a function");
   }
-  function shouldAbortInlineOrInjectedScript(stackMatch, stackTrace) {
-    var INLINE_SCRIPT_STRING = "inlineScript";
-    var INJECTED_SCRIPT_STRING = "injectedScript";
-    var INJECTED_SCRIPT_MARKER = "<anonymous>";
-    var isInlineScript = function isInlineScript(match) {
-      return match.includes(INLINE_SCRIPT_STRING);
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
     };
-    var isInjectedScript = function isInjectedScript(match) {
-      return match.includes(INJECTED_SCRIPT_STRING);
-    };
-    if (!(isInlineScript(stackMatch) || isInjectedScript(stackMatch))) {
-      return false;
-    }
-    var documentURL = window.location.href;
-    var pos = documentURL.indexOf("#");
-    if (pos !== -1) {
-      documentURL = documentURL.slice(0, pos);
-    }
-    var stackSteps = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    });
-    var stackLines = stackSteps.map(function (line) {
-      var stack;
-      var getStackTraceValues = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(line);
-      if (getStackTraceValues) {
-        var _stackURL, _stackURL2;
-        var stackURL = getStackTraceValues[2];
-        var stackLine = getStackTraceValues[3];
-        var stackCol = getStackTraceValues[4];
-        if ((_stackURL = stackURL) !== null && _stackURL !== void 0 && _stackURL.startsWith("(")) {
-          stackURL = stackURL.slice(1);
-        }
-        if ((_stackURL2 = stackURL) !== null && _stackURL2 !== void 0 && _stackURL2.startsWith(INJECTED_SCRIPT_MARKER)) {
-          var _stackFunction;
-          stackURL = INJECTED_SCRIPT_STRING;
-          var stackFunction = getStackTraceValues[1] !== undefined ? getStackTraceValues[1].slice(0, -1) : line.slice(0, getStackTraceValues.index).trim();
-          if ((_stackFunction = stackFunction) !== null && _stackFunction !== void 0 && _stackFunction.startsWith("at")) {
-            stackFunction = stackFunction.slice(2).trim();
-          }
-          stack = `${stackFunction} ${stackURL}${stackLine}${stackCol}`.trim();
-        } else if (stackURL === documentURL) {
-          stack = `${INLINE_SCRIPT_STRING}${stackLine}${stackCol}`.trim();
-        } else {
-          stack = `${stackURL}${stackLine}${stackCol}`.trim();
-        }
-      } else {
-        stack = line;
-      }
-      return stack;
-    });
-    if (stackLines) {
-      for (var index = 0; index < stackLines.length; index += 1) {
-        if (isInlineScript(stackMatch) && stackLines[index].startsWith(INLINE_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-        if (isInjectedScript(stackMatch) && stackLines[index].startsWith(INJECTED_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-      }
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
     }
     return false;
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  function isKeyInObject(t, r, e) {
+    var n = r.split("."), _check6 = function _check(t, r) {
+      if (null == t) return false;
+      if (0 === r.length) return void 0 === e || ("string" == typeof t && e instanceof RegExp ? e.test(t) : t === e);
+      var n = r[0], i = r.slice(1);
+      if ("*" === n || "[]" === n) {
+        if (Array.isArray(t)) return t.some((function(t) {
+          return _check6(t, i);
+        }));
+        if ("object" == typeof t && null !== t) return Object.keys(t).some((function(r) {
+          return _check6(t[r], i);
+        }));
+      }
+      return !!Object.prototype.hasOwnProperty.call(t, n) && _check6(t[n], i);
+    };
+    return _check6(t, n);
+  }
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedPruneInboundObject.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -23644,6 +20754,455 @@ function trustedPruneInboundObject(source, args) {
     console.log(e);
   }
 }
+
+function trustedReplaceArgument(source, args) {
+  var flag = "done";
+  var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
+  if (source.uniqueId) {
+    if (Window.prototype.toString[uniqueIdentifier] === flag) {
+      return;
+    }
+  }
+  function trustedReplaceArgument(source, methodPath, argumentIndex, argumentValue, pattern) {
+    var stack = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : "";
+    var verbose = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : "false";
+    if ((!methodPath || !argumentIndex || !argumentValue) && verbose === "false" || !methodPath && verbose === "true") {
+      return;
+    }
+    var SHOULD_LOG_ONLY = verbose === "true" && !argumentIndex && !argumentValue && !pattern && !stack;
+    var MARKERS = {
+      JSON: "json:",
+      REPLACE: "replace:"
+    };
+    var constantValue;
+    var replaceRegexValue = "";
+    var shouldReplaceArgument = false;
+    if (argumentValue.startsWith(MARKERS.REPLACE)) {
+      var replacementRegexPair = extractRegexAndReplacement(argumentValue);
+      if (!replacementRegexPair) {
+        logMessage(source, `Invalid argument value format: ${argumentValue}`);
+        return;
+      }
+      replaceRegexValue = replacementRegexPair.regexPart;
+      constantValue = replacementRegexPair.replacementPart;
+      shouldReplaceArgument = true;
+    } else if (argumentValue.startsWith(MARKERS.JSON)) {
+      try {
+        constantValue = JSON.parse(argumentValue.slice(MARKERS.JSON.length));
+      } catch (error) {
+        logMessage(source, `Invalid JSON argument value: ${argumentValue}`);
+        return;
+      }
+    } else {
+      var emptyArr = noopArray();
+      var emptyObj = noopObject();
+      if (argumentValue === "undefined") {
+        constantValue = undefined;
+      } else if (argumentValue === "false") {
+        constantValue = false;
+      } else if (argumentValue === "true") {
+        constantValue = true;
+      } else if (argumentValue === "null") {
+        constantValue = null;
+      } else if (argumentValue === "emptyArr") {
+        constantValue = emptyArr;
+      } else if (argumentValue === "emptyObj") {
+        constantValue = emptyObj;
+      } else if (argumentValue === "noopFunc") {
+        constantValue = noopFunc;
+      } else if (argumentValue === "noopCallbackFunc") {
+        constantValue = noopCallbackFunc;
+      } else if (argumentValue === "trueFunc") {
+        constantValue = trueFunc;
+      } else if (argumentValue === "falseFunc") {
+        constantValue = falseFunc;
+      } else if (argumentValue === "throwFunc") {
+        constantValue = throwFunc;
+      } else if (argumentValue === "noopPromiseResolve") {
+        constantValue = noopPromiseResolve;
+      } else if (argumentValue === "noopPromiseReject") {
+        constantValue = noopPromiseReject;
+      } else if (/^-?\d+$/.test(argumentValue)) {
+        constantValue = parseFloat(argumentValue);
+        if (nativeIsNaN(constantValue)) {
+          return;
+        }
+      } else {
+        constantValue = argumentValue;
+      }
+    }
+    var getPathParts = getPropertyInChain;
+    var {base: base, chain: chain, prop: prop} = getPathParts(window, methodPath);
+    if (typeof chain !== "undefined") {
+      logMessage(source, `Could not reach the end of the prop chain: ${methodPath}`);
+      return;
+    }
+    var nativeMethod = base[prop];
+    if (!nativeMethod || typeof nativeMethod !== "function") {
+      logMessage(source, `Could not retrieve the method: ${methodPath}`);
+      return;
+    }
+    var stringifyObject = function stringifyObject(obj) {
+      return JSON.stringify(obj, (function(key, value) {
+        return typeof value === "function" ? value.toString() : value;
+      }));
+    };
+    var createFormattedMessage = function createFormattedMessage(args) {
+      var when = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "original";
+      var formattedArgs = args.map((function(arg, index) {
+        if (typeof arg === "object" && arg !== null) {
+          try {
+            return `${index}: ${stringifyObject(arg)} // Object converted to string`;
+          } catch (e) {
+            return `${index}: ${String(arg)} // Object conversion failed`;
+          }
+        }
+        return `${index}: ${String(arg)}`;
+      }));
+      var modifiedOrOriginal = when === "modified" ? "modified" : when;
+      var message = `${methodPath} ${modifiedOrOriginal} arguments:\n${formattedArgs.join(",\n")}`;
+      return message;
+    };
+    var checkArgument = function checkArgument(arg) {
+      if (stack && !matchStackTrace(stack, (new Error).stack || "")) {
+        return false;
+      }
+      if (pattern) {
+        if (typeof arg === "object" && arg !== null) {
+          try {
+            var argString = stringifyObject(arg);
+            return !!argString && toRegExp(pattern).test(argString);
+          } catch (error) {
+            logMessage(source, `Failed to stringify argument: ${arg}\nError: ${error}`);
+          }
+        }
+        var argumentContent = String(arg);
+        return !!argumentContent && toRegExp(pattern).test(argumentContent);
+      }
+      return true;
+    };
+    var isMatchingSuspended = false;
+    var applyWrapper = function applyWrapper(target, thisArg, argumentsList) {
+      if (isMatchingSuspended) {
+        isMatchingSuspended = false;
+        return Reflect.apply(target, thisArg, argumentsList);
+      }
+      isMatchingSuspended = true;
+      if (verbose === "true") {
+        var formattedMessage = createFormattedMessage(argumentsList);
+        logMessage(source, formattedMessage);
+      }
+      if (SHOULD_LOG_ONLY) {
+        isMatchingSuspended = false;
+        return Reflect.apply(target, thisArg, argumentsList);
+      }
+      var argumentToReplace = argumentsList[Number(argumentIndex)];
+      var shouldSetArgument = checkArgument(argumentToReplace);
+      if (!shouldSetArgument) {
+        isMatchingSuspended = false;
+        return Reflect.apply(target, thisArg, argumentsList);
+      }
+      if (typeof argumentToReplace === "string" && shouldReplaceArgument) {
+        argumentsList[Number(argumentIndex)] = argumentToReplace.replace(replaceRegexValue, constantValue);
+      } else {
+        argumentsList[Number(argumentIndex)] = constantValue;
+      }
+      if (verbose === "true") {
+        var _formattedMessage = createFormattedMessage(argumentsList, "modified");
+        logMessage(source, _formattedMessage);
+      }
+      hit(source);
+      isMatchingSuspended = false;
+      return Reflect.apply(target, thisArg, argumentsList);
+    };
+    var constructWrapper = function constructWrapper(target, argumentsList, newTarget) {
+      if (isMatchingSuspended) {
+        isMatchingSuspended = false;
+        return Reflect.construct(target, argumentsList, newTarget);
+      }
+      isMatchingSuspended = true;
+      if (verbose === "true") {
+        var formattedMessage = createFormattedMessage(argumentsList);
+        logMessage(source, formattedMessage);
+      }
+      if (SHOULD_LOG_ONLY) {
+        isMatchingSuspended = false;
+        return Reflect.construct(target, argumentsList, newTarget);
+      }
+      var argumentToReplace = argumentsList[Number(argumentIndex)];
+      var shouldSetArgument = checkArgument(argumentToReplace);
+      if (!shouldSetArgument) {
+        isMatchingSuspended = false;
+        return Reflect.construct(target, argumentsList, newTarget);
+      }
+      if (typeof argumentToReplace === "string" && shouldReplaceArgument) {
+        argumentsList[Number(argumentIndex)] = argumentToReplace.replace(replaceRegexValue, constantValue);
+      } else {
+        argumentsList[Number(argumentIndex)] = constantValue;
+      }
+      if (verbose === "true") {
+        var _formattedMessage2 = createFormattedMessage(argumentsList, "modified");
+        logMessage(source, _formattedMessage2);
+      }
+      hit(source);
+      isMatchingSuspended = false;
+      return Reflect.construct(target, argumentsList, newTarget);
+    };
+    var getWrapper = function getWrapper(target, propName, receiver) {
+      if (propName === "toString") {
+        return target.toString.bind(target);
+      }
+      return Reflect.get(target, propName, receiver);
+    };
+    var objectHandler = {
+      apply: applyWrapper,
+      construct: constructWrapper,
+      get: getWrapper
+    };
+    base[prop] = new Proxy(nativeMethod, objectHandler);
+  }
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function noopArray() {
+    return [];
+  }
+  function noopObject() {
+    return {};
+  }
+  function noopCallbackFunc() {
+    return noopFunc;
+  }
+  function noopFunc() {}
+  function trueFunc() {
+    return true;
+  }
+  function falseFunc() {
+    return false;
+  }
+  function throwFunc() {
+    throw new Error;
+  }
+  function noopPromiseReject() {
+    return Promise.reject();
+  }
+  function noopPromiseResolve() {
+    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "{}", t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "", s = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "basic";
+    if ("undefined" != typeof Response) {
+      var n = new Response(e, {
+        headers: {
+          "Content-Length": `${e.length}`
+        },
+        status: 200,
+        statusText: "OK"
+      });
+      return "opaque" === s ? Object.defineProperties(n, {
+        body: {
+          value: null
+        },
+        status: {
+          value: 0
+        },
+        ok: {
+          value: false
+        },
+        statusText: {
+          value: ""
+        },
+        url: {
+          value: ""
+        },
+        type: {
+          value: s
+        }
+      }) : Object.defineProperties(n, {
+        url: {
+          value: t
+        },
+        type: {
+          value: s
+        }
+      }), Promise.resolve(n);
+    }
+  }
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
+  }
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
+      configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
+    });
+  }
+  function extractRegexAndReplacement(e) {
+    if (e) {
+      var r = e.slice(8), t = "";
+      if (r.endsWith("/g") && (r = r.slice(0, -1), t = "g"), r.startsWith("/") && r.endsWith("/")) {
+        for (var i = r.slice(1, -1), a = -1, c = 0; c < i.length; c += 1) if ("/" === i[c]) {
+          for (var f = false, n = c - 1; n >= 0 && "\\" === i[n]; ) f = !f, n -= 1;
+          if (!f) {
+            a = c;
+            break;
+          }
+        }
+        if (-1 !== a) {
+          var s = `/${i.slice(0, a)}/${t}`, l = i.slice(a + 1);
+          if (s && "//" !== s) {
+            var g;
+            try {
+              g = toRegExp(s);
+            } catch (e) {
+              return;
+            }
+            if (g) return {
+              regexPart: g,
+              replacementPart: l
+            };
+          }
+        }
+      }
+    }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
+        return false;
+      }
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
+  }
+  function getNativeRegexpTest() {
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
+    throw new Error("RegExp.prototype.test is not a function");
+  }
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
+    };
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
+    }
+    return false;
+  }
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
+  }
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
+  }
+  function backupRegExpValues() {
+    try {
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
+      }
+      return r;
+    } catch (r) {
+      return [];
+    }
+  }
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
+    }
+  }
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
+  try {
+    trustedReplaceArgument.apply(this, updatedArgs);
+    if (source.uniqueId) {
+      Object.defineProperty(Window.prototype.toString, uniqueIdentifier, {
+        value: flag,
+        enumerable: false,
+        writable: false,
+        configurable: false
+      });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 function trustedReplaceFetchResponse(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -23681,8 +21240,8 @@ function trustedReplaceFetchResponse(source, args) {
       if (!shouldReplace) {
         return Reflect.apply(target, thisArg, args);
       }
-      return nativeFetch.apply(null, args).then(function (response) {
-        return response.text().then(function (bodyText) {
+      return nativeFetch.apply(null, args).then((function(response) {
+        return response.text().then((function(bodyText) {
           var patternRegexp = pattern === "*" ? /(\n|.)*/ : toRegExp(pattern);
           if (shouldLogContent) {
             logMessage(source, `Original text content: ${bodyText}`);
@@ -23694,262 +21253,157 @@ function trustedReplaceFetchResponse(source, args) {
           var forgedResponse = forgeResponse(response, modifiedTextContent);
           hit(source);
           return forgedResponse;
-        }).catch(function () {
+        })).catch((function() {
           var fetchDataStr = objectToString(fetchData);
           var message = `Response body can't be converted to text: ${fetchDataStr}`;
           logMessage(source, message);
           return Reflect.apply(target, thisArg, args);
-        });
-      }).catch(function () {
+        }));
+      })).catch((function() {
         return Reflect.apply(target, thisArg, args);
-      });
+      }));
     };
     var fetchHandler = {
       apply: handlerWrapper
     };
     fetch = new Proxy(fetch, fetchHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function getFetchData(args, nativeRequestClone) {
-    var fetchPropsObj = {};
-    var resource = args[0];
-    var fetchUrl;
-    var fetchInit;
-    if (resource instanceof Request) {
-      var realData = nativeRequestClone.call(resource);
-      var requestData = getRequestData(realData);
-      fetchUrl = requestData.url;
-      fetchInit = requestData;
-    } else {
-      fetchUrl = resource;
-      fetchInit = args[1];
-    }
-    fetchPropsObj.url = fetchUrl;
-    if (fetchInit instanceof Object) {
-      var props = Object.keys(fetchInit);
-      props.forEach(function (prop) {
-        fetchPropsObj[prop] = fetchInit[prop];
-      });
-    }
-    return fetchPropsObj;
+  function getFetchData(e, t) {
+    var a, c, n = {}, r = e[0];
+    if (r instanceof Request) {
+      var u = t.call(r), f = getRequestData(u);
+      a = f.url, c = f;
+    } else a = r, c = e[1];
+    (n.url = a, c instanceof Object) && Object.keys(c).forEach((function(e) {
+      n[e] = c[e];
+    }));
+    return n;
   }
-  function objectToString(obj) {
-    if (!obj || typeof obj !== "object") {
-      return String(obj);
-    }
-    if (isEmptyObject(obj)) {
-      return "{}";
-    }
-    return Object.entries(obj).map(function (pair) {
-      var key = pair[0];
-      var value = pair[1];
-      var recordValueStr = value;
-      if (value instanceof Object) {
-        recordValueStr = `{ ${objectToString(value)} }`;
-      }
-      return `${key}:"${recordValueStr}"`;
-    }).join(" ");
+  function objectToString(t) {
+    return t && "object" == typeof t ? isEmptyObject(t) ? "{}" : Object.entries(t).map((function(t) {
+      var n = t[0], e = t[1], o = e;
+      return e instanceof Object && (o = `{ ${objectToString(e)} }`), `${n}:"${o}"`;
+    })).join(" ") : String(t);
   }
-  function matchRequestProps(source, propsToMatch, requestData) {
-    if (propsToMatch === "" || propsToMatch === "*") {
-      return true;
-    }
-    var isMatched;
-    var parsedData = parseMatchProps(propsToMatch);
-    if (!isValidParsedData(parsedData)) {
-      logMessage(source, `Invalid parameter: ${propsToMatch}`);
-      isMatched = false;
-    } else {
-      var matchData = getMatchPropsData(parsedData);
-      var matchKeys = Object.keys(matchData);
-      isMatched = matchKeys.every(function (matchKey) {
-        var matchValue = matchData[matchKey];
-        var dataValue = requestData[matchKey];
-        return Object.prototype.hasOwnProperty.call(requestData, matchKey) && typeof dataValue === "string" && (matchValue === null || matchValue === void 0 ? void 0 : matchValue.test(dataValue));
-      });
-    }
-    return isMatched;
+  function matchRequestProps(e, t, r) {
+    if ("" === t || "*" === t) return true;
+    var a, s = parseMatchProps(t);
+    if (isValidParsedData(s)) {
+      var n = getMatchPropsData(s);
+      a = Object.keys(n).every((function(e) {
+        var t = n[e], a = r[e];
+        return Object.prototype.hasOwnProperty.call(r, e) && "string" == typeof a && (null == t ? void 0 : t.test(a));
+      }));
+    } else logMessage(e, `Invalid parameter: ${t}`), a = false;
+    return a;
   }
-  function forgeResponse(response, textContent) {
-    var {
-      bodyUsed: bodyUsed,
-      headers: headers,
-      ok: ok,
-      redirected: redirected,
-      status: status,
-      statusText: statusText,
-      type: type,
-      url: url
-    } = response;
-    var forgedResponse = new Response(textContent, {
-      status: status,
-      statusText: statusText,
-      headers: headers
+  function forgeResponse(e, t) {
+    var {bodyUsed: s, headers: r, ok: u, redirected: a, status: d, statusText: o, type: l, url: n} = e, v = new Response(t, {
+      status: d,
+      statusText: o,
+      headers: r
     });
-    Object.defineProperties(forgedResponse, {
+    return Object.defineProperties(v, {
       url: {
-        value: url
+        value: n
       },
       type: {
-        value: type
+        value: l
       },
       ok: {
-        value: ok
+        value: u
       },
       bodyUsed: {
-        value: bodyUsed
+        value: s
       },
       redirected: {
-        value: redirected
+        value: a
       }
-    });
-    return forgedResponse;
+    }), v;
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  function getRequestData(request) {
-    var requestInitOptions = getRequestProps();
-    var entries = requestInitOptions.map(function (key) {
-      var value = request[key];
-      return [key, value];
-    });
-    return Object.fromEntries(entries);
+  function getRequestData(t) {
+    var e = getRequestProps().map((function(e) {
+      return [ e, t[e] ];
+    }));
+    return Object.fromEntries(e);
   }
   function getRequestProps() {
-    return ["url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode"];
+    return [ "url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode" ];
   }
-  function parseMatchProps(propsToMatchStr) {
-    var PROPS_DIVIDER = " ";
-    var PAIRS_MARKER = ":";
-    var isRequestProp = function isRequestProp(prop) {
-      return getRequestProps().includes(prop);
-    };
-    var propsObj = {};
-    var props = propsToMatchStr.split(PROPS_DIVIDER);
-    props.forEach(function (prop) {
-      var dividerInd = prop.indexOf(PAIRS_MARKER);
-      var key = prop.slice(0, dividerInd);
-      if (isRequestProp(key)) {
-        var value = prop.slice(dividerInd + 1);
-        propsObj[key] = value;
-      } else {
-        propsObj.url = prop;
-      }
-    });
-    return propsObj;
+  function parseMatchProps(e) {
+    var r = {};
+    return e.split(" ").forEach((function(e) {
+      var n = e.indexOf(":"), i = e.slice(0, n);
+      if (function(e) {
+        return getRequestProps().includes(e);
+      }(i)) {
+        var s = e.slice(n + 1);
+        r[i] = s;
+      } else r.url = e;
+    })), r;
   }
-  function isValidParsedData(data) {
-    return Object.values(data).every(function (value) {
-      return isValidStrPattern(value);
-    });
+  function isValidParsedData(t) {
+    return Object.values(t).every((function(t) {
+      return isValidStrPattern(t);
+    }));
   }
-  function getMatchPropsData(data) {
-    var matchData = {};
-    var dataKeys = Object.keys(data);
-    dataKeys.forEach(function (key) {
-      matchData[key] = toRegExp(data[key]);
-    });
-    return matchData;
+  function getMatchPropsData(t) {
+    var a = {};
+    return Object.keys(t).forEach((function(c) {
+      a[c] = toRegExp(t[c]);
+    })), a;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedReplaceFetchResponse.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -23964,6 +21418,7 @@ function trustedReplaceFetchResponse(source, args) {
     console.log(e);
   }
 }
+
 function trustedReplaceNodeText(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -23973,18 +21428,21 @@ function trustedReplaceNodeText(source, args) {
     }
   }
   function trustedReplaceNodeText(source, nodeName, textMatch, pattern, replacement) {
-    var {
-      selector: selector,
-      nodeNameMatch: nodeNameMatch,
-      textContentMatch: textContentMatch,
-      patternMatch: patternMatch
-    } = parseNodeTextParams(nodeName, textMatch, pattern);
+    var fixQuotes = function fixQuotes(str) {
+      if (typeof str !== "string") {
+        return str;
+      }
+      return str.replace(/\\'/g, "'").replace(/\\"/g, '"');
+    };
+    var fixedPattern = fixQuotes(pattern);
+    var fixedReplacement = fixQuotes(replacement);
+    var {selector: selector, nodeNameMatch: nodeNameMatch, textContentMatch: textContentMatch, patternMatch: patternMatch} = parseNodeTextParams(nodeName, textMatch, fixedPattern);
     for (var _len = arguments.length, extraArgs = new Array(_len > 5 ? _len - 5 : 0), _key = 5; _key < _len; _key++) {
       extraArgs[_key - 5] = arguments[_key];
     }
     var shouldLog = extraArgs.includes("verbose");
     var handleNodes = function handleNodes(nodes) {
-      return nodes.forEach(function (node) {
+      return nodes.forEach((function(node) {
         var shouldReplace = isTargetNode(node, nodeNameMatch, textContentMatch);
         if (shouldReplace) {
           if (shouldLog) {
@@ -23993,7 +21451,7 @@ function trustedReplaceNodeText(source, args) {
               logMessage(source, `Original text content: ${originalText}`);
             }
           }
-          replaceNodeText(source, node, patternMatch, replacement);
+          replaceNodeText(source, node, patternMatch, fixedReplacement);
           if (shouldLog) {
             var modifiedText = node.textContent;
             if (modifiedText) {
@@ -24001,202 +21459,209 @@ function trustedReplaceNodeText(source, args) {
             }
           }
         }
-      });
+      }));
     };
     if (document.documentElement) {
       handleExistingNodes(selector, handleNodes);
     }
-    observeDocumentWithTimeout(function (mutations) {
+    observeDocumentWithTimeout((function(mutations) {
       return handleMutations(mutations, handleNodes);
-    });
+    }));
   }
-  function observeDocumentWithTimeout(callback) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+  function observeDocumentWithTimeout(e) {
+    var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {
       subtree: true,
       childList: true
-    };
-    var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1e4;
-    var documentObserver = new MutationObserver(function (mutations, observer) {
-      observer.disconnect();
-      callback(mutations, observer);
-      observer.observe(document.documentElement, options);
-    });
-    documentObserver.observe(document.documentElement, options);
-    if (typeof timeout === "number") {
-      setTimeout(function () {
-        return documentObserver.disconnect();
-      }, timeout);
-    }
+    }, n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 1e4, o = new MutationObserver((function(n, o) {
+      o.disconnect(), e(n, o), o.observe(document.documentElement, t);
+    }));
+    o.observe(document.documentElement, t), "number" == typeof n && setTimeout((function() {
+      return o.disconnect();
+    }), n);
   }
-  function handleExistingNodes(selector, handler, parentSelector) {
-    var processNodes = function processNodes(parent) {
-      if (selector === "#text") {
-        var textNodes = nodeListToArray(parent.childNodes).filter(function (node) {
-          return node.nodeType === Node.TEXT_NODE;
-        });
-        handler(textNodes);
-      } else {
-        var _nodes = nodeListToArray(parent.querySelectorAll(selector));
-        handler(_nodes);
-      }
-    };
-    var parents = [document];
-    parents.forEach(function (parent) {
-      return processNodes(parent);
-    });
-  }
-  function handleMutations(mutations, handler, selector, parentSelector) {
-    var addedNodes = getAddedNodes(mutations);
-    {
-      handler(addedNodes);
-    }
-  }
-  function replaceNodeText(source, node, pattern, replacement) {
-    var {
-      textContent: textContent
-    } = node;
-    if (textContent) {
-      if (node.nodeName === "SCRIPT" && window.trustedTypes && window.trustedTypes.createPolicy) {
-        var policy = window.trustedTypes.createPolicy("AGPolicy", {
-          createScript: function createScript(string) {
-            return string;
-          }
-        });
-        var modifiedText = textContent.replace(pattern, replacement);
-        var trustedReplacement = policy.createScript(modifiedText);
-        node.textContent = trustedReplacement;
-      } else {
-        node.textContent = textContent.replace(pattern, replacement);
-      }
-      hit(source);
-    }
-  }
-  function isTargetNode(node, nodeNameMatch, textContentMatch) {
-    var {
-      nodeName: nodeName,
-      textContent: textContent
-    } = node;
-    var nodeNameLowerCase = nodeName.toLowerCase();
-    return textContent !== null && textContent !== "" && (nodeNameMatch instanceof RegExp ? nodeNameMatch.test(nodeNameLowerCase) : nodeNameMatch === nodeNameLowerCase) && (textContentMatch instanceof RegExp ? textContentMatch.test(textContent) : textContent.includes(textContentMatch));
-  }
-  function parseNodeTextParams(nodeName, textMatch) {
-    var pattern = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    var REGEXP_START_MARKER = "/";
-    var isStringNameMatch = !(nodeName.startsWith(REGEXP_START_MARKER) && nodeName.endsWith(REGEXP_START_MARKER));
-    var selector = isStringNameMatch ? nodeName : "*";
-    var nodeNameMatch = isStringNameMatch ? nodeName : toRegExp(nodeName);
-    var textContentMatch = !textMatch.startsWith(REGEXP_START_MARKER) ? textMatch : toRegExp(textMatch);
-    var patternMatch;
-    if (pattern) {
-      patternMatch = !pattern.startsWith(REGEXP_START_MARKER) ? pattern : toRegExp(pattern);
-    }
-    return {
-      selector: selector,
-      nodeNameMatch: nodeNameMatch,
-      textContentMatch: textContentMatch,
-      patternMatch: patternMatch
-    };
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
+  function handleExistingNodes(e, n, o) {
+    [ document ].forEach((function(o) {
+      return function(o) {
+        if ("#text" === e) {
+          var r = nodeListToArray(o.childNodes).filter((function(e) {
+            return e.nodeType === Node.TEXT_NODE;
+          }));
+          n(r);
         } else {
-          label += `#%#//scriptlet('${source.name}')`;
+          var t = nodeListToArray(o.querySelectorAll(e));
+          n(t);
         }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+      }(o);
+    }));
+  }
+  function handleMutations(n, d, e, o) {
+    var t = getAddedNodes(n);
+    d(t);
+  }
+  function replaceNodeText(e, t, n, r) {
+    var {textContent: a} = t;
+    if (a) {
+      var i = a.replace(n, r);
+      if ("SCRIPT" === t.nodeName) i = getTrustedTypesApi(e).createScript(i);
+      t.textContent = i, hit(e);
     }
   }
-  function nodeListToArray(nodeList) {
-    var nodes = [];
-    for (var i = 0; i < nodeList.length; i += 1) {
-      nodes.push(nodeList[i]);
-    }
-    return nodes;
+  function isTargetNode(e, t, n) {
+    var {nodeName: o, textContent: s} = e, a = o.toLowerCase();
+    return null !== s && "" !== s && (t instanceof RegExp ? t.test(a) : t === a) && (n instanceof RegExp ? n.test(s) : s.includes(n));
   }
-  function getAddedNodes(mutations) {
-    var nodes = [];
-    for (var i = 0; i < mutations.length; i += 1) {
-      var {
-        addedNodes: addedNodes
-      } = mutations[i];
-      for (var j = 0; j < addedNodes.length; j += 1) {
-        nodes.push(addedNodes[j]);
-      }
-    }
-    return nodes;
+  function parseNodeTextParams(t, e) {
+    var a, n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null, r = "/", s = !(t.startsWith(r) && t.endsWith(r)), o = s ? t : "*", h = s ? t : toRegExp(t), i = e.startsWith(r) ? toRegExp(e) : e;
+    return n && (a = n.startsWith(r) ? toRegExp(n) : n), {
+      selector: o,
+      nodeNameMatch: h,
+      textContentMatch: i,
+      patternMatch: a
+    };
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function nodeListToArray(r) {
+    for (var n = [], o = 0; o < r.length; o += 1) n.push(r[o]);
+    return n;
+  }
+  function getAddedNodes(d) {
+    for (var e = [], r = 0; r < d.length; r += 1) for (var {addedNodes: n} = d[r], o = 0; o < n.length; o += 1) e.push(n[o]);
+    return e;
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
+        return false;
+      }
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
+  }
+  function getTrustedTypesApi(t) {
+    var r, e = null == t || null === (r = t.api) || void 0 === r ? void 0 : r.policy;
+    if (e) return e;
+    var n = "AGPolicy", i = window.trustedTypes, u = !!i, c = {
+      HTML: "TrustedHTML",
+      Script: "TrustedScript",
+      ScriptURL: "TrustedScriptURL"
+    };
+    if (!u) return {
+      name: n,
+      isSupported: u,
+      TrustedType: c,
+      createHTML: function createHTML(t) {
+        return t;
+      },
+      createScript: function createScript(t) {
+        return t;
+      },
+      createScriptURL: function createScriptURL(t) {
+        return t;
+      },
+      create: function create(t, r) {
+        return r;
+      },
+      getAttributeType: function getAttributeType() {
+        return null;
+      },
+      convertAttributeToTrusted: function convertAttributeToTrusted(t, r, e) {
+        return e;
+      },
+      getPropertyType: function getPropertyType() {
+        return null;
+      },
+      convertPropertyToTrusted: function convertPropertyToTrusted(t, r, e) {
+        return e;
+      },
+      isHTML: function isHTML() {
+        return false;
+      },
+      isScript: function isScript() {
+        return false;
+      },
+      isScriptURL: function isScriptURL() {
         return false;
       }
     };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
+    var o = i.createPolicy(n, {
+      createHTML: function createHTML(t) {
+        return t;
+      },
+      createScript: function createScript(t) {
+        return t;
+      },
+      createScriptURL: function createScriptURL(t) {
+        return t;
       }
-      return "";
+    }), createHTML = function createHTML(t) {
+      return o.createHTML(t);
+    }, createScript = function createScript(t) {
+      return o.createScript(t);
+    }, createScriptURL = function createScriptURL(t) {
+      return o.createScriptURL(t);
+    }, create = function create(t, r) {
+      switch (t) {
+       case c.HTML:
+        return createHTML(r);
+
+       case c.Script:
+        return createScript(r);
+
+       case c.ScriptURL:
+        return createScriptURL(r);
+
+       default:
+        return r;
+      }
+    }, p = i.getAttributeType.bind(i), T = i.getPropertyType.bind(i), s = i.isHTML.bind(i), a = i.isScript.bind(i), f = i.isScriptURL.bind(i);
+    return {
+      name: n,
+      isSupported: u,
+      TrustedType: c,
+      createHTML: createHTML,
+      createScript: createScript,
+      createScriptURL: createScriptURL,
+      create: create,
+      getAttributeType: p,
+      convertAttributeToTrusted: function convertAttributeToTrusted(t, r, e, n, i) {
+        var u = p(t, r, n, i);
+        return u ? create(u, e) : e;
+      },
+      getPropertyType: T,
+      convertPropertyToTrusted: function convertPropertyToTrusted(t, r, e, n) {
+        var i = T(t, r, n);
+        return i ? create(i, e) : e;
+      },
+      isHTML: s,
+      isScript: a,
+      isScriptURL: f
     };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedReplaceNodeText.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -24211,6 +21676,7 @@ function trustedReplaceNodeText(source, args) {
     console.log(e);
   }
 }
+
 function trustedReplaceOutboundText(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -24229,11 +21695,7 @@ function trustedReplaceOutboundText(source, args) {
       return;
     }
     var getPathParts = getPropertyInChain;
-    var {
-      base: base,
-      chain: chain,
-      prop: prop
-    } = getPathParts(window, methodPath);
+    var {base: base, chain: chain, prop: prop} = getPathParts(window, methodPath);
     if (typeof chain !== "undefined") {
       logMessage(source, `Could not reach the end of the prop chain: ${methodPath}`);
       return;
@@ -24259,28 +21721,29 @@ function trustedReplaceOutboundText(source, args) {
     };
     var decodeAndReplaceContent = function decodeAndReplaceContent(content, pattern, textReplacement, decode, log) {
       switch (decode) {
-        case "base64":
-          try {
-            if (!isValidBase64(content)) {
-              logMessage(source, `Text content is not a valid base64 encoded string: ${content}`);
-              return content;
-            }
-            var decodedContent = atob(content);
-            if (log) {
-              logMessage(source, `Decoded text content: ${decodedContent}`);
-            }
-            var modifiedContent = textToReplace ? decodedContent.replace(pattern, textReplacement) : decodedContent;
-            if (log) {
-              var message = modifiedContent !== decodedContent ? `Modified decoded text content: ${modifiedContent}` : "Decoded text content was not modified";
-              logMessage(source, message);
-            }
-            var encodedContent = btoa(modifiedContent);
-            return encodedContent;
-          } catch (e) {
+       case "base64":
+        try {
+          if (!isValidBase64(content)) {
+            logMessage(source, `Text content is not a valid base64 encoded string: ${content}`);
             return content;
           }
-        default:
-          return content.replace(pattern, textReplacement);
+          var decodedContent = atob(content);
+          if (log) {
+            logMessage(source, `Decoded text content: ${decodedContent}`);
+          }
+          var modifiedContent = textToReplace ? decodedContent.replace(pattern, textReplacement) : decodedContent;
+          if (log) {
+            var message = modifiedContent !== decodedContent ? `Modified decoded text content: ${modifiedContent}` : "Decoded text content was not modified";
+            logMessage(source, message);
+          }
+          var encodedContent = btoa(modifiedContent);
+          return encodedContent;
+        } catch (e) {
+          return content;
+        }
+
+       default:
+        return content.replace(pattern, textReplacement);
       }
     };
     var logOriginalContent = !textToReplace || !!logContent;
@@ -24294,7 +21757,7 @@ function trustedReplaceOutboundText(source, args) {
       isMatchingSuspended = true;
       hit(source);
       var result = Reflect.apply(target, thisArg, argumentsList);
-      if (stack && !matchStackTrace(stack, new Error().stack || "")) {
+      if (stack && !matchStackTrace(stack, (new Error).stack || "")) {
         return result;
       }
       if (typeof result === "string") {
@@ -24319,262 +21782,140 @@ function trustedReplaceOutboundText(source, args) {
     };
     base[prop] = new Proxy(nativeMethod, objectHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function matchStackTrace(stackMatch, stackTrace) {
-    if (!stackMatch || stackMatch === "") {
-      return true;
-    }
-    var regExpValues = backupRegExpValues();
-    if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-      if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-        restoreRegExpValues(regExpValues);
-      }
-      return true;
-    }
-    var stackRegexp = toRegExp(stackMatch);
-    var refinedStackTrace = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    }).join("\n");
-    if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-      restoreRegExpValues(regExpValues);
-    }
-    return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
       configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
     });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
-    };
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function shouldAbortInlineOrInjectedScript(stackMatch, stackTrace) {
-    var INLINE_SCRIPT_STRING = "inlineScript";
-    var INJECTED_SCRIPT_STRING = "injectedScript";
-    var INJECTED_SCRIPT_MARKER = "<anonymous>";
-    var isInlineScript = function isInlineScript(match) {
-      return match.includes(INLINE_SCRIPT_STRING);
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
     };
-    var isInjectedScript = function isInjectedScript(match) {
-      return match.includes(INJECTED_SCRIPT_STRING);
-    };
-    if (!(isInlineScript(stackMatch) || isInjectedScript(stackMatch))) {
-      return false;
-    }
-    var documentURL = window.location.href;
-    var pos = documentURL.indexOf("#");
-    if (pos !== -1) {
-      documentURL = documentURL.slice(0, pos);
-    }
-    var stackSteps = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    });
-    var stackLines = stackSteps.map(function (line) {
-      var stack;
-      var getStackTraceValues = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(line);
-      if (getStackTraceValues) {
-        var _stackURL, _stackURL2;
-        var stackURL = getStackTraceValues[2];
-        var stackLine = getStackTraceValues[3];
-        var stackCol = getStackTraceValues[4];
-        if ((_stackURL = stackURL) !== null && _stackURL !== void 0 && _stackURL.startsWith("(")) {
-          stackURL = stackURL.slice(1);
-        }
-        if ((_stackURL2 = stackURL) !== null && _stackURL2 !== void 0 && _stackURL2.startsWith(INJECTED_SCRIPT_MARKER)) {
-          var _stackFunction;
-          stackURL = INJECTED_SCRIPT_STRING;
-          var stackFunction = getStackTraceValues[1] !== undefined ? getStackTraceValues[1].slice(0, -1) : line.slice(0, getStackTraceValues.index).trim();
-          if ((_stackFunction = stackFunction) !== null && _stackFunction !== void 0 && _stackFunction.startsWith("at")) {
-            stackFunction = stackFunction.slice(2).trim();
-          }
-          stack = `${stackFunction} ${stackURL}${stackLine}${stackCol}`.trim();
-        } else if (stackURL === documentURL) {
-          stack = `${INLINE_SCRIPT_STRING}${stackLine}${stackCol}`.trim();
-        } else {
-          stack = `${stackURL}${stackLine}${stackCol}`.trim();
-        }
-      } else {
-        stack = line;
-      }
-      return stack;
-    });
-    if (stackLines) {
-      for (var index = 0; index < stackLines.length; index += 1) {
-        if (isInlineScript(stackMatch) && stackLines[index].startsWith(INLINE_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-        if (isInjectedScript(stackMatch) && stackLines[index].startsWith(INJECTED_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-      }
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
     }
     return false;
   }
   function getNativeRegexpTest() {
-    var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "test");
-    var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-    if (descriptor && typeof descriptor.value === "function") {
-      return nativeRegexTest;
-    }
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
     throw new Error("RegExp.prototype.test is not a function");
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedReplaceOutboundText.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -24589,6 +21930,7 @@ function trustedReplaceOutboundText(source, args) {
     console.log(e);
   }
 }
+
 function trustedReplaceXhrResponse(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -24645,20 +21987,12 @@ function trustedReplaceXhrResponse(source, args) {
       if (!thisArg.shouldBePrevented) {
         return Reflect.apply(target, thisArg, args);
       }
-      var forgedRequest = new XMLHttpRequest();
-      forgedRequest.addEventListener("readystatechange", function () {
+      var forgedRequest = new XMLHttpRequest;
+      forgedRequest.addEventListener("readystatechange", (function() {
         if (forgedRequest.readyState !== 4) {
           return;
         }
-        var {
-          readyState: readyState,
-          response: response,
-          responseText: responseText,
-          responseURL: responseURL,
-          responseXML: responseXML,
-          status: status,
-          statusText: statusText
-        } = forgedRequest;
+        var {readyState: readyState, response: response, responseText: responseText, responseURL: responseURL, responseXML: responseXML, status: status, statusText: statusText} = forgedRequest;
         var content = responseText || response;
         if (typeof content !== "string") {
           return;
@@ -24701,22 +22035,22 @@ function trustedReplaceXhrResponse(source, args) {
             writable: false
           }
         });
-        setTimeout(function () {
+        setTimeout((function() {
           var stateEvent = new Event("readystatechange");
           thisArg.dispatchEvent(stateEvent);
           var loadEvent = new Event("load");
           thisArg.dispatchEvent(loadEvent);
           var loadEndEvent = new Event("loadend");
           thisArg.dispatchEvent(loadEndEvent);
-        }, 1);
+        }), 1);
         hit(source);
-      });
-      nativeOpen.apply(forgedRequest, [xhrData.method, xhrData.url]);
-      thisArg.collectedHeaders.forEach(function (header) {
+      }));
+      nativeOpen.apply(forgedRequest, [ xhrData.method, xhrData.url ]);
+      thisArg.collectedHeaders.forEach((function(header) {
         var name = header[0];
         var value = header[1];
         forgedRequest.setRequestHeader(name, value);
-      });
+      }));
       thisArg.collectedHeaders = [];
       try {
         nativeSend.call(forgedRequest, args);
@@ -24734,190 +22068,110 @@ function trustedReplaceXhrResponse(source, args) {
     XMLHttpRequest.prototype.open = new Proxy(XMLHttpRequest.prototype.open, openHandler);
     XMLHttpRequest.prototype.send = new Proxy(XMLHttpRequest.prototype.send, sendHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function objectToString(obj) {
-    if (!obj || typeof obj !== "object") {
-      return String(obj);
-    }
-    if (isEmptyObject(obj)) {
-      return "{}";
-    }
-    return Object.entries(obj).map(function (pair) {
-      var key = pair[0];
-      var value = pair[1];
-      var recordValueStr = value;
-      if (value instanceof Object) {
-        recordValueStr = `{ ${objectToString(value)} }`;
-      }
-      return `${key}:"${recordValueStr}"`;
-    }).join(" ");
+  function objectToString(t) {
+    return t && "object" == typeof t ? isEmptyObject(t) ? "{}" : Object.entries(t).map((function(t) {
+      var n = t[0], e = t[1], o = e;
+      return e instanceof Object && (o = `{ ${objectToString(e)} }`), `${n}:"${o}"`;
+    })).join(" ") : String(t);
   }
-  function matchRequestProps(source, propsToMatch, requestData) {
-    if (propsToMatch === "" || propsToMatch === "*") {
-      return true;
-    }
-    var isMatched;
-    var parsedData = parseMatchProps(propsToMatch);
-    if (!isValidParsedData(parsedData)) {
-      logMessage(source, `Invalid parameter: ${propsToMatch}`);
-      isMatched = false;
-    } else {
-      var matchData = getMatchPropsData(parsedData);
-      var matchKeys = Object.keys(matchData);
-      isMatched = matchKeys.every(function (matchKey) {
-        var matchValue = matchData[matchKey];
-        var dataValue = requestData[matchKey];
-        return Object.prototype.hasOwnProperty.call(requestData, matchKey) && typeof dataValue === "string" && (matchValue === null || matchValue === void 0 ? void 0 : matchValue.test(dataValue));
-      });
-    }
-    return isMatched;
+  function matchRequestProps(e, t, r) {
+    if ("" === t || "*" === t) return true;
+    var a, s = parseMatchProps(t);
+    if (isValidParsedData(s)) {
+      var n = getMatchPropsData(s);
+      a = Object.keys(n).every((function(e) {
+        var t = n[e], a = r[e];
+        return Object.prototype.hasOwnProperty.call(r, e) && "string" == typeof a && (null == t ? void 0 : t.test(a));
+      }));
+    } else logMessage(e, `Invalid parameter: ${t}`), a = false;
+    return a;
   }
-  function getXhrData(method, url, async, user, password) {
+  function getXhrData(r, t, a, e, n) {
     return {
-      method: method,
-      url: url,
-      async: async,
-      user: user,
-      password: password
+      method: r,
+      url: t,
+      async: a,
+      user: e,
+      password: n
     };
   }
-  function getMatchPropsData(data) {
-    var matchData = {};
-    var dataKeys = Object.keys(data);
-    dataKeys.forEach(function (key) {
-      matchData[key] = toRegExp(data[key]);
-    });
-    return matchData;
+  function getMatchPropsData(t) {
+    var a = {};
+    return Object.keys(t).forEach((function(c) {
+      a[c] = toRegExp(t[c]);
+    })), a;
   }
   function getRequestProps() {
-    return ["url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode"];
+    return [ "url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode" ];
   }
-  function isValidParsedData(data) {
-    return Object.values(data).every(function (value) {
-      return isValidStrPattern(value);
-    });
+  function isValidParsedData(t) {
+    return Object.values(t).every((function(t) {
+      return isValidStrPattern(t);
+    }));
   }
-  function parseMatchProps(propsToMatchStr) {
-    var PROPS_DIVIDER = " ";
-    var PAIRS_MARKER = ":";
-    var isRequestProp = function isRequestProp(prop) {
-      return getRequestProps().includes(prop);
-    };
-    var propsObj = {};
-    var props = propsToMatchStr.split(PROPS_DIVIDER);
-    props.forEach(function (prop) {
-      var dividerInd = prop.indexOf(PAIRS_MARKER);
-      var key = prop.slice(0, dividerInd);
-      if (isRequestProp(key)) {
-        var value = prop.slice(dividerInd + 1);
-        propsObj[key] = value;
-      } else {
-        propsObj.url = prop;
-      }
-    });
-    return propsObj;
+  function parseMatchProps(e) {
+    var r = {};
+    return e.split(" ").forEach((function(e) {
+      var n = e.indexOf(":"), i = e.slice(0, n);
+      if (function(e) {
+        return getRequestProps().includes(e);
+      }(i)) {
+        var s = e.slice(n + 1);
+        r[i] = s;
+      } else r.url = e;
+    })), r;
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedReplaceXhrResponse.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -24932,6 +22186,7 @@ function trustedReplaceXhrResponse(source, args) {
     console.log(e);
   }
 }
+
 function trustedSetAttr(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -24946,134 +22201,75 @@ function trustedSetAttr(source, args) {
       return;
     }
     setAttributeBySelector(source, selector, attr, value);
-    observeDOMChanges(function () {
+    observeDOMChanges((function() {
       return setAttributeBySelector(source, selector, attr, value);
-    }, true);
+    }), true);
   }
-  function setAttributeBySelector(source, selector, attribute, value) {
-    var attributeSetter = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultAttributeSetter;
-    var elements;
+  function setAttributeBySelector(e, t, l, o) {
+    var r, c = arguments.length > 4 && void 0 !== arguments[4] ? arguments[4] : defaultAttributeSetter;
     try {
-      elements = document.querySelectorAll(selector);
-    } catch (_unused) {
-      logMessage(source, `Failed to find elements matching selector "${selector}"`);
-      return;
+      r = document.querySelectorAll(t);
+    } catch (l) {
+      return void logMessage(e, `Failed to find elements matching selector "${t}"`);
     }
-    if (!elements || elements.length === 0) {
-      return;
+    if (r && 0 !== r.length) try {
+      r.forEach((function(e) {
+        return c(e, l, o);
+      })), hit(e);
+    } catch (t) {
+      logMessage(e, `Failed to set [${l}="${o}"] to each of selected elements.`);
     }
-    try {
-      elements.forEach(function (elem) {
-        return attributeSetter(elem, attribute, value);
+  }
+  function observeDOMChanges(t) {
+    var e = arguments.length > 1 && void 0 !== arguments[1] && arguments[1], n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : [], i = new MutationObserver(throttle((function() {
+      disconnect(), t(), connect();
+    }), 20)), connect = function connect() {
+      n.length > 0 ? i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e,
+        attributeFilter: n
+      }) : i.observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: e
       });
-      hit(source);
-    } catch (_unused2) {
-      logMessage(source, `Failed to set [${attribute}="${value}"] to each of selected elements.`);
-    }
-  }
-  function observeDOMChanges(callback) {
-    var observeAttrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var attrsToObserve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    var THROTTLE_DELAY_MS = 20;
-    var observer = new MutationObserver(throttle(callbackWrapper, THROTTLE_DELAY_MS));
-    var connect = function connect() {
-      if (attrsToObserve.length > 0) {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs,
-          attributeFilter: attrsToObserve
-        });
-      } else {
-        observer.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: observeAttrs
-        });
-      }
+    }, disconnect = function disconnect() {
+      i.disconnect();
     };
-    var disconnect = function disconnect() {
-      observer.disconnect();
-    };
-    function callbackWrapper() {
-      disconnect();
-      callback();
-      connect();
-    }
     connect();
   }
-  function defaultAttributeSetter(elem, attribute, value) {
-    return elem.setAttribute(attribute, value);
+  function defaultAttributeSetter(t, e, r) {
+    return t.setAttribute(e, r);
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function throttle(cb, delay) {
-    var wait = false;
-    var savedArgs;
-    var _wrapper = function wrapper() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-      if (wait) {
-        savedArgs = args;
-        return;
-      }
-      cb(...args);
-      wait = true;
-      setTimeout(function () {
-        wait = false;
-        if (savedArgs) {
-          _wrapper(...savedArgs);
-          savedArgs = null;
-        }
-      }, delay);
+  function throttle(n, t) {
+    var r, e = false, _wrapper9 = function _wrapper() {
+      for (var o = arguments.length, u = new Array(o), f = 0; f < o; f++) u[f] = arguments[f];
+      e ? r = u : (n(...u), e = true, setTimeout((function() {
+        e = false, r && (_wrapper9(...r), r = null);
+      }), t));
     };
-    return _wrapper;
+    return _wrapper9;
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedSetAttr.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -25088,6 +22284,7 @@ function trustedSetAttr(source, args) {
     console.log(e);
   }
 }
+
 function trustedSetConstant(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -25097,7 +22294,7 @@ function trustedSetConstant(source, args) {
     }
   }
   function trustedSetConstant(source, property, value, stack) {
-    if (!property || !matchStackTrace(stack, new Error().stack)) {
+    if (!property || !matchStackTrace(stack, (new Error).stack)) {
       return;
     }
     var constantValue;
@@ -25148,13 +22345,8 @@ function trustedSetConstant(source, args) {
     };
     var _setChainPropAccess = function setChainPropAccess(owner, property) {
       var chainInfo = getPropertyInChain(owner, property);
-      var {
-        base: base
-      } = chainInfo;
-      var {
-        prop: prop,
-        chain: chain
-      } = chainInfo;
+      var {base: base} = chainInfo;
+      var {prop: prop, chain: chain} = chainInfo;
       var inChainPropHandler = {
         factValue: undefined,
         init(a) {
@@ -25213,304 +22405,165 @@ function trustedSetConstant(source, args) {
     };
     _setChainPropAccess(window, property);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function inferValue(value) {
-    if (value === "undefined") {
-      return undefined;
-    }
-    if (value === "false") {
-      return false;
-    }
-    if (value === "true") {
-      return true;
-    }
-    if (value === "null") {
-      return null;
-    }
-    if (value === "NaN") {
-      return NaN;
-    }
-    if (value.startsWith("/") && value.endsWith("/")) {
-      return toRegExp(value);
-    }
-    var MAX_ALLOWED_NUM = 32767;
-    var numVal = Number(value);
-    if (!nativeIsNaN(numVal)) {
-      if (Math.abs(numVal) > MAX_ALLOWED_NUM) {
-        throw new Error("number values bigger than 32767 are not allowed");
-      }
-      return numVal;
-    }
-    var errorMessage = `'${value}' value type can't be inferred`;
-    try {
-      var parsableVal = JSON.parse(value);
-      if (parsableVal instanceof Object || typeof parsableVal === "string") {
-        return parsableVal;
-      }
-    } catch (e) {
-      errorMessage += `: ${e}`;
-    }
-    throw new TypeError(errorMessage);
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
-      configurable: true
-    });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
-    };
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function inferValue(r) {
+    if ("undefined" !== r) {
+      if ("false" === r) return false;
+      if ("true" === r) return true;
+      if ("null" === r) return null;
+      if ("NaN" === r) return NaN;
+      if (r.startsWith("/") && r.endsWith("/")) return toRegExp(r);
+      var e = Number(r);
+      if (!nativeIsNaN(e)) {
+        if (Math.abs(e) > 32767) throw new Error("number values bigger than 32767 are not allowed");
+        return e;
+      }
+      var t = `'${r}' value type can't be inferred`;
+      try {
+        var n = JSON.parse(r);
+        if (n instanceof Object || "string" == typeof n) return n;
+      } catch (r) {
+        t += `: ${r}`;
+      }
+      throw new TypeError(t);
+    }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
+    };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
+      configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
+    });
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function matchStackTrace(stackMatch, stackTrace) {
-    if (!stackMatch || stackMatch === "") {
-      return true;
-    }
-    var regExpValues = backupRegExpValues();
-    if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-      if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-        restoreRegExpValues(regExpValues);
-      }
-      return true;
-    }
-    var stackRegexp = toRegExp(stackMatch);
-    var refinedStackTrace = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    }).join("\n");
-    if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-      restoreRegExpValues(regExpValues);
-    }
-    return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
   function getNativeRegexpTest() {
-    var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "test");
-    var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-    if (descriptor && typeof descriptor.value === "function") {
-      return nativeRegexTest;
-    }
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
     throw new Error("RegExp.prototype.test is not a function");
   }
-  function shouldAbortInlineOrInjectedScript(stackMatch, stackTrace) {
-    var INLINE_SCRIPT_STRING = "inlineScript";
-    var INJECTED_SCRIPT_STRING = "injectedScript";
-    var INJECTED_SCRIPT_MARKER = "<anonymous>";
-    var isInlineScript = function isInlineScript(match) {
-      return match.includes(INLINE_SCRIPT_STRING);
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
     };
-    var isInjectedScript = function isInjectedScript(match) {
-      return match.includes(INJECTED_SCRIPT_STRING);
-    };
-    if (!(isInlineScript(stackMatch) || isInjectedScript(stackMatch))) {
-      return false;
-    }
-    var documentURL = window.location.href;
-    var pos = documentURL.indexOf("#");
-    if (pos !== -1) {
-      documentURL = documentURL.slice(0, pos);
-    }
-    var stackSteps = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    });
-    var stackLines = stackSteps.map(function (line) {
-      var stack;
-      var getStackTraceValues = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(line);
-      if (getStackTraceValues) {
-        var _stackURL, _stackURL2;
-        var stackURL = getStackTraceValues[2];
-        var stackLine = getStackTraceValues[3];
-        var stackCol = getStackTraceValues[4];
-        if ((_stackURL = stackURL) !== null && _stackURL !== void 0 && _stackURL.startsWith("(")) {
-          stackURL = stackURL.slice(1);
-        }
-        if ((_stackURL2 = stackURL) !== null && _stackURL2 !== void 0 && _stackURL2.startsWith(INJECTED_SCRIPT_MARKER)) {
-          var _stackFunction;
-          stackURL = INJECTED_SCRIPT_STRING;
-          var stackFunction = getStackTraceValues[1] !== undefined ? getStackTraceValues[1].slice(0, -1) : line.slice(0, getStackTraceValues.index).trim();
-          if ((_stackFunction = stackFunction) !== null && _stackFunction !== void 0 && _stackFunction.startsWith("at")) {
-            stackFunction = stackFunction.slice(2).trim();
-          }
-          stack = `${stackFunction} ${stackURL}${stackLine}${stackCol}`.trim();
-        } else if (stackURL === documentURL) {
-          stack = `${INLINE_SCRIPT_STRING}${stackLine}${stackCol}`.trim();
-        } else {
-          stack = `${stackURL}${stackLine}${stackCol}`.trim();
-        }
-      } else {
-        stack = line;
-      }
-      return stack;
-    });
-    if (stackLines) {
-      for (var index = 0; index < stackLines.length; index += 1) {
-        if (isInlineScript(stackMatch) && stackLines[index].startsWith(INLINE_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-        if (isInjectedScript(stackMatch) && stackLines[index].startsWith(INJECTED_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-      }
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
     }
     return false;
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedSetConstant.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -25525,6 +22578,7 @@ function trustedSetConstant(source, args) {
     console.log(e);
   }
 }
+
 function trustedSetCookie(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -25571,124 +22625,52 @@ function trustedSetCookie(source, args) {
     document.cookie = cookieToSet;
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function serializeCookie(name, rawValue, rawPath) {
-    var domainValue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
-    var shouldEncodeValue = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-    var HOST_PREFIX = "__Host-";
-    var SECURE_PREFIX = "__Secure-";
-    var COOKIE_BREAKER = ";";
-    if (!shouldEncodeValue && `${rawValue}`.includes(COOKIE_BREAKER) || name.includes(COOKIE_BREAKER)) {
-      return null;
-    }
-    var value = shouldEncodeValue ? encodeURIComponent(rawValue) : rawValue;
-    var resultCookie = `${name}=${value}`;
-    if (name.startsWith(HOST_PREFIX)) {
-      resultCookie += "; path=/; secure";
-      if (domainValue) {
-        console.debug(`Domain value: "${domainValue}" has been ignored, because is not allowed for __Host- prefixed cookies`);
-      }
-      return resultCookie;
-    }
-    var path = getCookiePath(rawPath);
-    if (path) {
-      resultCookie += `; ${path}`;
-    }
-    if (name.startsWith(SECURE_PREFIX)) {
-      resultCookie += "; secure";
-    }
-    if (domainValue) {
-      resultCookie += `; domain=${domainValue}`;
-    }
-    return resultCookie;
+  function serializeCookie(e, o, i) {
+    var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : "", t = !(arguments.length > 4 && void 0 !== arguments[4]) || arguments[4];
+    if (!t && `${o}`.includes(";") || e.includes(";")) return null;
+    var r = `${e}=${t ? encodeURIComponent(o) : o}`;
+    if (e.startsWith("__Host-")) return r += "; path=/; secure", n && console.debug(`Domain value: "${n}" has been ignored, because is not allowed for __Host- prefixed cookies`), 
+    r;
+    var s = getCookiePath(i);
+    return s && (r += `; ${s}`), e.startsWith("__Secure-") && (r += "; secure"), n && (r += `; domain=${n}`), 
+    r;
   }
-  function isValidCookiePath(rawPath) {
-    return rawPath === "/" || rawPath === "none";
+  function isValidCookiePath(n) {
+    return "/" === n || "none" === n;
   }
-  function getTrustedCookieOffsetMs(offsetExpiresSec) {
-    var ONE_YEAR_EXPIRATION_KEYWORD = "1year";
-    var ONE_DAY_EXPIRATION_KEYWORD = "1day";
-    var MS_IN_SEC = 1e3;
-    var SECONDS_IN_YEAR = 365 * 24 * 60 * 60;
-    var SECONDS_IN_DAY = 24 * 60 * 60;
-    var parsedSec;
-    if (offsetExpiresSec === ONE_YEAR_EXPIRATION_KEYWORD) {
-      parsedSec = SECONDS_IN_YEAR;
-    } else if (offsetExpiresSec === ONE_DAY_EXPIRATION_KEYWORD) {
-      parsedSec = SECONDS_IN_DAY;
-    } else {
-      parsedSec = Number.parseInt(offsetExpiresSec, 10);
-      if (Number.isNaN(parsedSec)) {
-        return null;
-      }
-    }
-    return parsedSec * MS_IN_SEC;
+  function getTrustedCookieOffsetMs(e) {
+    var r;
+    if ("1year" === e) r = 31536e3; else if ("1day" === e) r = 86400; else if (r = Number.parseInt(e, 10), 
+    Number.isNaN(r)) return null;
+    return 1e3 * r;
   }
-  function parseKeywordValue(rawValue) {
-    var NOW_VALUE_KEYWORD = "$now$";
-    var CURRENT_DATE_KEYWORD = "$currentDate$";
-    var CURRENT_ISO_DATE_KEYWORD = "$currentISODate$";
-    var parsedValue = rawValue;
-    if (rawValue === NOW_VALUE_KEYWORD) {
-      parsedValue = Date.now().toString();
-    } else if (rawValue === CURRENT_DATE_KEYWORD) {
-      parsedValue = Date();
-    } else if (rawValue === CURRENT_ISO_DATE_KEYWORD) {
-      parsedValue = new Date().toISOString();
-    }
-    return parsedValue;
+  function parseKeywordValue(t) {
+    var e = t;
+    return "$now$" === t ? e = Date.now().toString() : "$currentDate$" === t ? e = Date() : "$currentISODate$" === t && (e = (new Date).toISOString()), 
+    e;
   }
-  function getCookiePath(rawPath) {
-    if (rawPath === "/") {
-      return "path=/";
-    }
-    return "";
+  function getCookiePath(t) {
+    return "/" === t ? "path=/" : "";
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedSetCookie.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -25703,6 +22685,7 @@ function trustedSetCookie(source, args) {
     console.log(e);
   }
 }
+
 function trustedSetCookieReload(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -25756,154 +22739,71 @@ function trustedSetCookieReload(source, args) {
       window.location.reload();
     }
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function isCookieSetWithValue(e, t, r) {
+    return e.split(";").some((function(e) {
+      var n = e.indexOf("=");
+      if (-1 === n) return false;
+      var i = e.slice(0, n).trim(), a = e.slice(n + 1).trim();
+      if (new Set([ "$now$", "$currentDate$", "$currentISODate$" ]).has(r)) {
+        var u = Date.now(), s = /^\d+$/.test(a) ? parseInt(a, 10) : new Date(a).getTime();
+        return t === i && s > u - 864e5;
       }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
+      return t === i && r === a;
+    }));
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
+  function serializeCookie(e, o, i) {
+    var n = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : "", t = !(arguments.length > 4 && void 0 !== arguments[4]) || arguments[4];
+    if (!t && `${o}`.includes(";") || e.includes(";")) return null;
+    var r = `${e}=${t ? encodeURIComponent(o) : o}`;
+    if (e.startsWith("__Host-")) return r += "; path=/; secure", n && console.debug(`Domain value: "${n}" has been ignored, because is not allowed for __Host- prefixed cookies`), 
+    r;
+    var s = getCookiePath(i);
+    return s && (r += `; ${s}`), e.startsWith("__Secure-") && (r += "; secure"), n && (r += `; domain=${n}`), 
+    r;
   }
-  function isCookieSetWithValue(cookieString, name, value) {
-    return cookieString.split(";").some(function (cookieStr) {
-      var pos = cookieStr.indexOf("=");
-      if (pos === -1) {
-        return false;
-      }
-      var cookieName = cookieStr.slice(0, pos).trim();
-      var cookieValue = cookieStr.slice(pos + 1).trim();
-      return name === cookieName && value === cookieValue;
-    });
+  function isValidCookiePath(n) {
+    return "/" === n || "none" === n;
   }
-  function serializeCookie(name, rawValue, rawPath) {
-    var domainValue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
-    var shouldEncodeValue = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-    var HOST_PREFIX = "__Host-";
-    var SECURE_PREFIX = "__Secure-";
-    var COOKIE_BREAKER = ";";
-    if (!shouldEncodeValue && `${rawValue}`.includes(COOKIE_BREAKER) || name.includes(COOKIE_BREAKER)) {
-      return null;
-    }
-    var value = shouldEncodeValue ? encodeURIComponent(rawValue) : rawValue;
-    var resultCookie = `${name}=${value}`;
-    if (name.startsWith(HOST_PREFIX)) {
-      resultCookie += "; path=/; secure";
-      if (domainValue) {
-        console.debug(`Domain value: "${domainValue}" has been ignored, because is not allowed for __Host- prefixed cookies`);
-      }
-      return resultCookie;
-    }
-    var path = getCookiePath(rawPath);
-    if (path) {
-      resultCookie += `; ${path}`;
-    }
-    if (name.startsWith(SECURE_PREFIX)) {
-      resultCookie += "; secure";
-    }
-    if (domainValue) {
-      resultCookie += `; domain=${domainValue}`;
-    }
-    return resultCookie;
+  function getTrustedCookieOffsetMs(e) {
+    var r;
+    if ("1year" === e) r = 31536e3; else if ("1day" === e) r = 86400; else if (r = Number.parseInt(e, 10), 
+    Number.isNaN(r)) return null;
+    return 1e3 * r;
   }
-  function isValidCookiePath(rawPath) {
-    return rawPath === "/" || rawPath === "none";
+  function parseKeywordValue(t) {
+    var e = t;
+    return "$now$" === t ? e = Date.now().toString() : "$currentDate$" === t ? e = Date() : "$currentISODate$" === t && (e = (new Date).toISOString()), 
+    e;
   }
-  function getTrustedCookieOffsetMs(offsetExpiresSec) {
-    var ONE_YEAR_EXPIRATION_KEYWORD = "1year";
-    var ONE_DAY_EXPIRATION_KEYWORD = "1day";
-    var MS_IN_SEC = 1e3;
-    var SECONDS_IN_YEAR = 365 * 24 * 60 * 60;
-    var SECONDS_IN_DAY = 24 * 60 * 60;
-    var parsedSec;
-    if (offsetExpiresSec === ONE_YEAR_EXPIRATION_KEYWORD) {
-      parsedSec = SECONDS_IN_YEAR;
-    } else if (offsetExpiresSec === ONE_DAY_EXPIRATION_KEYWORD) {
-      parsedSec = SECONDS_IN_DAY;
-    } else {
-      parsedSec = Number.parseInt(offsetExpiresSec, 10);
-      if (Number.isNaN(parsedSec)) {
-        return null;
-      }
-    }
-    return parsedSec * MS_IN_SEC;
+  function parseCookieString(i) {
+    var r = i.split(";"), n = {};
+    return r.forEach((function(i) {
+      var r, t = "", e = i.indexOf("=");
+      -1 === e ? r = i.trim() : (r = i.slice(0, e).trim(), t = i.slice(e + 1)), n[r] = t || null;
+    })), n;
   }
-  function parseKeywordValue(rawValue) {
-    var NOW_VALUE_KEYWORD = "$now$";
-    var CURRENT_DATE_KEYWORD = "$currentDate$";
-    var CURRENT_ISO_DATE_KEYWORD = "$currentISODate$";
-    var parsedValue = rawValue;
-    if (rawValue === NOW_VALUE_KEYWORD) {
-      parsedValue = Date.now().toString();
-    } else if (rawValue === CURRENT_DATE_KEYWORD) {
-      parsedValue = Date();
-    } else if (rawValue === CURRENT_ISO_DATE_KEYWORD) {
-      parsedValue = new Date().toISOString();
-    }
-    return parsedValue;
+  function getCookiePath(t) {
+    return "/" === t ? "path=/" : "";
   }
-  function parseCookieString(cookieString) {
-    var COOKIE_DELIMITER = "=";
-    var COOKIE_PAIRS_DELIMITER = ";";
-    var cookieChunks = cookieString.split(COOKIE_PAIRS_DELIMITER);
-    var cookieData = {};
-    cookieChunks.forEach(function (singleCookie) {
-      var cookieKey;
-      var cookieValue = "";
-      var delimiterIndex = singleCookie.indexOf(COOKIE_DELIMITER);
-      if (delimiterIndex === -1) {
-        cookieKey = singleCookie.trim();
-      } else {
-        cookieKey = singleCookie.slice(0, delimiterIndex).trim();
-        cookieValue = singleCookie.slice(delimiterIndex + 1);
-      }
-      cookieData[cookieKey] = cookieValue || null;
-    });
-    return cookieData;
-  }
-  function getCookiePath(rawPath) {
-    if (rawPath === "/") {
-      return "path=/";
-    }
-    return "";
-  }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedSetCookieReload.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -25918,6 +22818,7 @@ function trustedSetCookieReload(source, args) {
     console.log(e);
   }
 }
+
 function trustedSetLocalStorageItem(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -25936,80 +22837,42 @@ function trustedSetLocalStorageItem(source, args) {
       return;
     }
     var parsedValue = parseKeywordValue(value);
-    var {
-      localStorage: localStorage
-    } = window;
+    var {localStorage: localStorage} = window;
     setStorageItem(source, localStorage, key, parsedValue);
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function setStorageItem(e, t, s, a) {
     try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+      t.setItem(s, a);
+    } catch (t) {
+      var o = `Unable to set storage item due to: ${t.message}`;
+      logMessage(e, o);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
+  function parseKeywordValue(t) {
+    var e = t;
+    return "$now$" === t ? e = Date.now().toString() : "$currentDate$" === t ? e = Date() : "$currentISODate$" === t && (e = (new Date).toISOString()), 
+    e;
   }
-  function setStorageItem(source, storage, key, value) {
-    try {
-      storage.setItem(key, value);
-    } catch (e) {
-      var message = `Unable to set storage item due to: ${e.message}`;
-      logMessage(source, message);
-    }
-  }
-  function parseKeywordValue(rawValue) {
-    var NOW_VALUE_KEYWORD = "$now$";
-    var CURRENT_DATE_KEYWORD = "$currentDate$";
-    var CURRENT_ISO_DATE_KEYWORD = "$currentISODate$";
-    var parsedValue = rawValue;
-    if (rawValue === NOW_VALUE_KEYWORD) {
-      parsedValue = Date.now().toString();
-    } else if (rawValue === CURRENT_DATE_KEYWORD) {
-      parsedValue = Date();
-    } else if (rawValue === CURRENT_ISO_DATE_KEYWORD) {
-      parsedValue = new Date().toISOString();
-    }
-    return parsedValue;
-  }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedSetLocalStorageItem.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -26024,6 +22887,7 @@ function trustedSetLocalStorageItem(source, args) {
     console.log(e);
   }
 }
+
 function trustedSetSessionStorageItem(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -26042,80 +22906,42 @@ function trustedSetSessionStorageItem(source, args) {
       return;
     }
     var parsedValue = parseKeywordValue(value);
-    var {
-      sessionStorage: sessionStorage
-    } = window;
+    var {sessionStorage: sessionStorage} = window;
     setStorageItem(source, sessionStorage, key, parsedValue);
     hit(source);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function setStorageItem(e, t, s, a) {
     try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+      t.setItem(s, a);
+    } catch (t) {
+      var o = `Unable to set storage item due to: ${t.message}`;
+      logMessage(e, o);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
+  function parseKeywordValue(t) {
+    var e = t;
+    return "$now$" === t ? e = Date.now().toString() : "$currentDate$" === t ? e = Date() : "$currentISODate$" === t && (e = (new Date).toISOString()), 
+    e;
   }
-  function setStorageItem(source, storage, key, value) {
-    try {
-      storage.setItem(key, value);
-    } catch (e) {
-      var message = `Unable to set storage item due to: ${e.message}`;
-      logMessage(source, message);
-    }
-  }
-  function parseKeywordValue(rawValue) {
-    var NOW_VALUE_KEYWORD = "$now$";
-    var CURRENT_DATE_KEYWORD = "$currentDate$";
-    var CURRENT_ISO_DATE_KEYWORD = "$currentISODate$";
-    var parsedValue = rawValue;
-    if (rawValue === NOW_VALUE_KEYWORD) {
-      parsedValue = Date.now().toString();
-    } else if (rawValue === CURRENT_DATE_KEYWORD) {
-      parsedValue = Date();
-    } else if (rawValue === CURRENT_ISO_DATE_KEYWORD) {
-      parsedValue = new Date().toISOString();
-    }
-    return parsedValue;
-  }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedSetSessionStorageItem.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -26130,6 +22956,7 @@ function trustedSetSessionStorageItem(source, args) {
     console.log(e);
   }
 }
+
 function trustedSuppressNativeMethod(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -26145,22 +22972,18 @@ function trustedSuppressNativeMethod(source, args) {
       return;
     }
     var IGNORE_ARG_SYMBOL = " ";
-    var suppress = how === "abort" ? getAbortFunc() : function () {};
+    var suppress = how === "abort" ? getAbortFunc() : function() {};
     var signatureMatcher;
     try {
-      signatureMatcher = signatureStr.split("|").map(function (value) {
+      signatureMatcher = signatureStr.split("|").map((function(value) {
         return value === IGNORE_ARG_SYMBOL ? value : inferValue(value);
-      });
+      }));
     } catch (e) {
       logMessage(source, `Could not parse the signature matcher: ${getErrorMessage(e)}`);
       return;
     }
     var getPathParts = getPropertyInChain;
-    var {
-      base: base,
-      chain: chain,
-      prop: prop
-    } = getPathParts(window, methodPath);
+    var {base: base, chain: chain, prop: prop} = getPathParts(window, methodPath);
     if (typeof chain !== "undefined") {
       logMessage(source, `Could not reach the end of the prop chain: ${methodPath}`);
       return;
@@ -26171,13 +22994,13 @@ function trustedSuppressNativeMethod(source, args) {
       return;
     }
     function matchMethodCall(nativeArguments, matchArguments) {
-      return matchArguments.every(function (matcher, i) {
+      return matchArguments.every((function(matcher, i) {
         if (matcher === IGNORE_ARG_SYMBOL) {
           return true;
         }
         var argument = nativeArguments[i];
         return isValueMatched(argument, matcher);
-      });
+      }));
     }
     var isMatchingSuspended = false;
     function apply(target, thisArg, argumentsList) {
@@ -26185,7 +23008,8 @@ function trustedSuppressNativeMethod(source, args) {
         return Reflect.apply(target, thisArg, argumentsList);
       }
       isMatchingSuspended = true;
-      if (stack && !matchStackTrace(stack, new Error().stack || "")) {
+      if (stack && !matchStackTrace(stack, (new Error).stack || "")) {
+        isMatchingSuspended = false;
         return Reflect.apply(target, thisArg, argumentsList);
       }
       var isMatching = matchMethodCall(argumentsList, signatureMatcher);
@@ -26200,424 +23024,223 @@ function trustedSuppressNativeMethod(source, args) {
       apply: apply
     });
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
+  function hit(e) {
+    if (e.verbose) {
+      try {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
     }
   }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
     }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
   }
-  function getPropertyInChain(base, chain) {
-    var pos = chain.indexOf(".");
-    if (pos === -1) {
-      return {
-        base: base,
-        prop: chain
-      };
-    }
-    var prop = chain.slice(0, pos);
-    if (base === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    var nextBase = base[prop];
-    chain = chain.slice(pos + 1);
-    if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase === null) {
-      return {
-        base: base,
-        prop: prop,
-        chain: chain
-      };
-    }
-    if (nextBase !== undefined) {
-      return getPropertyInChain(nextBase, chain);
-    }
-    Object.defineProperty(base, prop, {
-      configurable: true
-    });
-    return {
-      base: base,
-      prop: prop,
-      chain: chain
+  function getPropertyInChain(e, r) {
+    var n = r.indexOf(".");
+    if (-1 === n) return {
+      base: e,
+      prop: r
     };
+    var i = r.slice(0, n);
+    if (null === e) return {
+      base: e,
+      prop: i,
+      chain: r
+    };
+    var t = e[i];
+    return r = r.slice(n + 1), (e instanceof Object || "object" == typeof e) && isEmptyObject(e) || null === t ? {
+      base: e,
+      prop: i,
+      chain: r
+    } : void 0 !== t ? getPropertyInChain(t, r) : (Object.defineProperty(e, i, {
+      configurable: true
+    }), {
+      base: e,
+      prop: i,
+      chain: r
+    });
   }
-  function inferValue(value) {
-    if (value === "undefined") {
-      return undefined;
-    }
-    if (value === "false") {
-      return false;
-    }
-    if (value === "true") {
-      return true;
-    }
-    if (value === "null") {
-      return null;
-    }
-    if (value === "NaN") {
-      return NaN;
-    }
-    if (value.startsWith("/") && value.endsWith("/")) {
-      return toRegExp(value);
-    }
-    var MAX_ALLOWED_NUM = 32767;
-    var numVal = Number(value);
-    if (!nativeIsNaN(numVal)) {
-      if (Math.abs(numVal) > MAX_ALLOWED_NUM) {
-        throw new Error("number values bigger than 32767 are not allowed");
+  function inferValue(r) {
+    if ("undefined" !== r) {
+      if ("false" === r) return false;
+      if ("true" === r) return true;
+      if ("null" === r) return null;
+      if ("NaN" === r) return NaN;
+      if (r.startsWith("/") && r.endsWith("/")) return toRegExp(r);
+      var e = Number(r);
+      if (!nativeIsNaN(e)) {
+        if (Math.abs(e) > 32767) throw new Error("number values bigger than 32767 are not allowed");
+        return e;
       }
-      return numVal;
-    }
-    var errorMessage = `'${value}' value type can't be inferred`;
-    try {
-      var parsableVal = JSON.parse(value);
-      if (parsableVal instanceof Object || typeof parsableVal === "string") {
-        return parsableVal;
+      var t = `'${r}' value type can't be inferred`;
+      try {
+        var n = JSON.parse(r);
+        if (n instanceof Object || "string" == typeof n) return n;
+      } catch (r) {
+        t += `: ${r}`;
       }
-    } catch (e) {
-      errorMessage += `: ${e}`;
+      throw new TypeError(t);
     }
-    throw new TypeError(errorMessage);
   }
-  function isValueMatched(value, matcher) {
-    if (typeof value === "function") {
-      return false;
-    }
-    if (nativeIsNaN(value)) {
-      return nativeIsNaN(matcher);
-    }
-    if (value === null || typeof value === "undefined" || typeof value === "number" || typeof value === "boolean") {
-      return value === matcher;
-    }
-    if (typeof value === "string") {
-      if (typeof matcher === "string" || matcher instanceof RegExp) {
-        return isStringMatched(value, matcher);
-      }
-      return false;
-    }
-    if (Array.isArray(value) && Array.isArray(matcher)) {
-      return isArrayMatched(value, matcher);
-    }
-    if (isArbitraryObject(value) && isArbitraryObject(matcher)) {
-      return isObjectMatched(value, matcher);
-    }
-    return false;
+  function isValueMatched(t, r) {
+    return "function" != typeof t && (nativeIsNaN(t) ? nativeIsNaN(r) : null == t || "number" == typeof t || "boolean" == typeof t ? t === r : "string" == typeof t ? ("string" == typeof r || r instanceof RegExp) && isStringMatched(t, r) : Array.isArray(t) && Array.isArray(r) ? isArrayMatched(t, r) : !(!isArbitraryObject(t) || !isArbitraryObject(r)) && isObjectMatched(t, r));
   }
   function getAbortFunc() {
-    var rid = randomId();
-    var isErrorHandlerSet = false;
-    return function abort() {
-      if (!isErrorHandlerSet) {
-        window.onerror = createOnErrorHandler(rid);
-        isErrorHandlerSet = true;
-      }
-      throw new ReferenceError(rid);
+    var r = randomId(), n = false;
+    return function() {
+      throw n || (window.onerror = createOnErrorHandler(r), n = true), new ReferenceError(r);
     };
   }
-  function matchStackTrace(stackMatch, stackTrace) {
-    if (!stackMatch || stackMatch === "") {
-      return true;
-    }
-    var regExpValues = backupRegExpValues();
-    if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-      if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-        restoreRegExpValues(regExpValues);
-      }
-      return true;
-    }
-    var stackRegexp = toRegExp(stackMatch);
-    var refinedStackTrace = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    }).join("\n");
-    if (regExpValues.length && regExpValues[0] !== RegExp.$1) {
-      restoreRegExpValues(regExpValues);
-    }
-    return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
+  function matchStackTrace(e, t) {
+    if (!e || "" === e) return true;
+    var r = backupRegExpValues();
+    if (shouldAbortInlineOrInjectedScript(e, t)) return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), 
+    true;
+    var n = toRegExp(e), a = t.split("\n").slice(2).map((function(e) {
+      return e.trim();
+    })).join("\n");
+    return r.length && r[0] !== RegExp.$1 && restoreRegExpValues(r), getNativeRegexpTest().call(n, a);
   }
-  function getErrorMessage(error) {
-    var isErrorWithMessage = function isErrorWithMessage(e) {
-      return typeof e === "object" && e !== null && "message" in e && typeof e.message === "string";
-    };
-    if (isErrorWithMessage(error)) {
-      return error.message;
-    }
+  function getErrorMessage(e) {
+    var r;
+    if ("object" == typeof (r = e) && null !== r && "message" in r && "string" == typeof r.message) return e.message;
     try {
-      return new Error(JSON.stringify(error)).message;
-    } catch (_unused) {
-      return new Error(String(error)).message;
+      return new Error(JSON.stringify(e)).message;
+    } catch (r) {
+      return new Error(String(e)).message;
     }
   }
-  function shouldAbortInlineOrInjectedScript(stackMatch, stackTrace) {
-    var INLINE_SCRIPT_STRING = "inlineScript";
-    var INJECTED_SCRIPT_STRING = "injectedScript";
-    var INJECTED_SCRIPT_MARKER = "<anonymous>";
-    var isInlineScript = function isInlineScript(match) {
-      return match.includes(INLINE_SCRIPT_STRING);
+  function shouldAbortInlineOrInjectedScript(t, i) {
+    var r = "inlineScript", n = "injectedScript", isInlineScript = function isInlineScript(t) {
+      return t.includes(r);
+    }, isInjectedScript = function isInjectedScript(t) {
+      return t.includes(n);
     };
-    var isInjectedScript = function isInjectedScript(match) {
-      return match.includes(INJECTED_SCRIPT_STRING);
-    };
-    if (!(isInlineScript(stackMatch) || isInjectedScript(stackMatch))) {
-      return false;
-    }
-    var documentURL = window.location.href;
-    var pos = documentURL.indexOf("#");
-    if (pos !== -1) {
-      documentURL = documentURL.slice(0, pos);
-    }
-    var stackSteps = stackTrace.split("\n").slice(2).map(function (line) {
-      return line.trim();
-    });
-    var stackLines = stackSteps.map(function (line) {
-      var stack;
-      var getStackTraceValues = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(line);
-      if (getStackTraceValues) {
-        var _stackURL, _stackURL2;
-        var stackURL = getStackTraceValues[2];
-        var stackLine = getStackTraceValues[3];
-        var stackCol = getStackTraceValues[4];
-        if ((_stackURL = stackURL) !== null && _stackURL !== void 0 && _stackURL.startsWith("(")) {
-          stackURL = stackURL.slice(1);
-        }
-        if ((_stackURL2 = stackURL) !== null && _stackURL2 !== void 0 && _stackURL2.startsWith(INJECTED_SCRIPT_MARKER)) {
-          var _stackFunction;
-          stackURL = INJECTED_SCRIPT_STRING;
-          var stackFunction = getStackTraceValues[1] !== undefined ? getStackTraceValues[1].slice(0, -1) : line.slice(0, getStackTraceValues.index).trim();
-          if ((_stackFunction = stackFunction) !== null && _stackFunction !== void 0 && _stackFunction.startsWith("at")) {
-            stackFunction = stackFunction.slice(2).trim();
-          }
-          stack = `${stackFunction} ${stackURL}${stackLine}${stackCol}`.trim();
-        } else if (stackURL === documentURL) {
-          stack = `${INLINE_SCRIPT_STRING}${stackLine}${stackCol}`.trim();
-        } else {
-          stack = `${stackURL}${stackLine}${stackCol}`.trim();
-        }
-      } else {
-        stack = line;
-      }
-      return stack;
-    });
-    if (stackLines) {
-      for (var index = 0; index < stackLines.length; index += 1) {
-        if (isInlineScript(stackMatch) && stackLines[index].startsWith(INLINE_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-        if (isInjectedScript(stackMatch) && stackLines[index].startsWith(INJECTED_SCRIPT_STRING) && stackLines[index].match(toRegExp(stackMatch))) {
-          return true;
-        }
-      }
+    if (!isInlineScript(t) && !isInjectedScript(t)) return false;
+    var e = window.location.href, s = e.indexOf("#");
+    -1 !== s && (e = e.slice(0, s));
+    var c = i.split("\n").slice(2).map((function(t) {
+      return t.trim();
+    })).map((function(t) {
+      var i, s = /(.*?@)?(\S+)(:\d+)(:\d+)\)?$/.exec(t);
+      if (s) {
+        var c, l, a = s[2], u = s[3], o = s[4];
+        if (null !== (c = a) && void 0 !== c && c.startsWith("(") && (a = a.slice(1)), null !== (l = a) && void 0 !== l && l.startsWith("<anonymous>")) {
+          var d;
+          a = n;
+          var f = void 0 !== s[1] ? s[1].slice(0, -1) : t.slice(0, s.index).trim();
+          null !== (d = f) && void 0 !== d && d.startsWith("at") && (f = f.slice(2).trim()), 
+          i = `${f} ${a}${u}${o}`.trim();
+        } else i = a === e ? `${r}${u}${o}`.trim() : `${a}${u}${o}`.trim();
+      } else i = t;
+      return i;
+    }));
+    if (c) for (var l = 0; l < c.length; l += 1) {
+      if (isInlineScript(t) && c[l].startsWith(r) && c[l].match(toRegExp(t))) return true;
+      if (isInjectedScript(t) && c[l].startsWith(n) && c[l].match(toRegExp(t))) return true;
     }
     return false;
   }
   function getNativeRegexpTest() {
-    var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "test");
-    var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-    if (descriptor && typeof descriptor.value === "function") {
-      return nativeRegexTest;
-    }
+    var t = Object.getOwnPropertyDescriptor(RegExp.prototype, "test"), e = null == t ? void 0 : t.value;
+    if (t && "function" == typeof t.value) return e;
     throw new Error("RegExp.prototype.test is not a function");
   }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function nativeIsNaN(num) {
-    var native = Number.isNaN || window.isNaN;
-    return native(num);
+  function nativeIsNaN(N) {
+    return (Number.isNaN || window.isNaN)(N);
   }
   function randomId() {
     return Math.random().toString(36).slice(2, 9);
   }
-  function createOnErrorHandler(rid) {
-    var nativeOnError = window.onerror;
-    return function onError(error) {
-      if (typeof error === "string" && error.includes(rid)) {
-        return true;
-      }
-      if (nativeOnError instanceof Function) {
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-        return nativeOnError.apply(window, [error, ...args]);
+  function createOnErrorHandler(r) {
+    var n = window.onerror;
+    return function(e) {
+      if ("string" == typeof e && e.includes(r)) return true;
+      if (n instanceof Function) {
+        for (var t = arguments.length, o = new Array(t > 1 ? t - 1 : 0), i = 1; i < t; i++) o[i - 1] = arguments[i];
+        return n.apply(window, [ e, ...o ]);
       }
       return false;
     };
   }
-  function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && !obj.prototype;
+  function isEmptyObject(t) {
+    return 0 === Object.keys(t).length && !t.prototype;
   }
-  function isArbitraryObject(value) {
-    return value !== null && typeof value === "object" && !Array.isArray(value) && !(value instanceof RegExp);
+  function isArbitraryObject(r) {
+    return !(null === r || "object" != typeof r || Array.isArray(r) || r instanceof RegExp);
   }
-  function isStringMatched(str, matcher) {
-    if (typeof matcher === "string") {
-      if (matcher === "") {
-        return str === matcher;
-      }
-      return str.includes(matcher);
-    }
-    if (matcher instanceof RegExp) {
-      return matcher.test(str);
-    }
-    return false;
+  function isStringMatched(t, n) {
+    return "string" == typeof n ? "" === n ? t === n : t.includes(n) : n instanceof RegExp && n.test(t);
   }
-  function isArrayMatched(array, matcher) {
-    if (array.length === 0) {
-      return matcher.length === 0;
-    }
-    if (matcher.length === 0) {
-      return false;
-    }
-    var _loop = function _loop() {
-        var matcherValue = matcher[i];
-        var isMatching = array.some(function (arrItem) {
-          return isValueMatched(arrItem, matcherValue);
-        });
-        if (!isMatching) {
-          return {
-            v: false
-          };
-        }
-        return 0;
-      },
-      _ret;
-    for (var i = 0; i < matcher.length; i += 1) {
-      _ret = _loop();
-      if (_ret === 0) continue;
-      if (_ret) return _ret.v;
-    }
+  function isArrayMatched(r, n) {
+    if (0 === r.length) return 0 === n.length;
+    if (0 === n.length) return false;
+    for (var t, _loop = function _loop() {
+      var t = n[e];
+      return r.some((function(r) {
+        return isValueMatched(r, t);
+      })) ? 0 : {
+        v: false
+      };
+    }, e = 0; e < n.length; e += 1) if (0 !== (t = _loop()) && t) return t.v;
     return true;
   }
-  function isObjectMatched(obj, matcher) {
-    var matcherKeys = Object.keys(matcher);
-    for (var i = 0; i < matcherKeys.length; i += 1) {
-      var key = matcherKeys[i];
-      var value = obj[key];
-      if (!isValueMatched(value, matcher[key])) {
-        return false;
-      }
-      continue;
+  function isObjectMatched(e, t) {
+    for (var r = Object.keys(t), a = 0; a < r.length; a += 1) {
+      var c = r[a], n = e[c];
+      if (!isValueMatched(n, t[c])) return false;
     }
     return true;
   }
   function backupRegExpValues() {
     try {
-      var arrayOfRegexpValues = [];
-      for (var index = 1; index < 10; index += 1) {
-        var value = `$${index}`;
-        if (!RegExp[value]) {
-          break;
-        }
-        arrayOfRegexpValues.push(RegExp[value]);
+      for (var r = [], e = 1; e < 10; e += 1) {
+        var a = `$${e}`;
+        if (!RegExp[a]) break;
+        r.push(RegExp[a]);
       }
-      return arrayOfRegexpValues;
-    } catch (error) {
+      return r;
+    } catch (r) {
       return [];
     }
   }
-  function restoreRegExpValues(array) {
-    if (!array.length) {
-      return;
-    }
-    try {
-      var stringPattern = "";
-      if (array.length === 1) {
-        stringPattern = `(${array[0]})`;
-      } else {
-        stringPattern = array.reduce(function (accumulator, currentValue, currentIndex) {
-          if (currentIndex === 1) {
-            return `(${accumulator}),(${currentValue})`;
-          }
-          return `${accumulator},(${currentValue})`;
-        });
-      }
-      var regExpGroup = new RegExp(stringPattern);
-      array.toString().replace(regExpGroup, "");
-    } catch (error) {
-      var message = `Failed to restore RegExp values: ${error}`;
-      console.log(message);
+  function restoreRegExpValues(e) {
+    if (e.length) try {
+      var r = "";
+      r = 1 === e.length ? `(${e[0]})` : e.reduce((function(e, r, t) {
+        return 1 === t ? `(${e}),(${r})` : `${e},(${r})`;
+      }));
+      var t = new RegExp(r);
+      e.toString().replace(t, "");
+    } catch (e) {
+      var n = `Failed to restore RegExp values: ${e}`;
+      console.log(n);
     }
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     trustedSuppressNativeMethod.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -26632,6 +23255,7 @@ function trustedSuppressNativeMethod(source, args) {
     console.log(e);
   }
 }
+
 function xmlPrune(source, args) {
   var flag = "done";
   var uniqueIdentifier = source.uniqueId + source.name + "_" + (Array.isArray(args) ? args.join("_") : "");
@@ -26667,13 +23291,13 @@ function xmlPrune(source, args) {
       return matchedElements;
     };
     var xPathPruning = function xPathPruning(xPathElements) {
-      xPathElements.forEach(function (element) {
+      xPathElements.forEach((function(element) {
         if (element.nodeType === 1) {
           element.remove();
         } else if (element.nodeType === 2) {
           element.ownerElement.removeAttribute(element.nodeName);
         }
-      });
+      }));
     };
     var isXML = function isXML(text) {
       if (typeof text === "string") {
@@ -26685,7 +23309,7 @@ function xmlPrune(source, args) {
       return false;
     };
     var createXMLDocument = function createXMLDocument(text) {
-      var xmlParser = new DOMParser();
+      var xmlParser = new DOMParser;
       var xmlDocument = xmlParser.parseFromString(text, "text/xml");
       return xmlDocument;
     };
@@ -26723,15 +23347,15 @@ function xmlPrune(source, args) {
       if (isXpath) {
         xPathPruning(elements);
       } else {
-        elements.forEach(function (elem) {
+        elements.forEach((function(elem) {
           elem.remove();
-        });
+        }));
       }
       if (shouldLogContent) {
         logMessage(source, "Modified xml:");
         logMessage(source, xmlDoc, true, false);
       }
-      var serializer = new XMLSerializer();
+      var serializer = new XMLSerializer;
       text = serializer.serializeToString(xmlDoc);
       return text;
     };
@@ -26757,24 +23381,16 @@ function xmlPrune(source, args) {
       return Reflect.apply(target, thisArg, args);
     };
     var sendWrapper = function sendWrapper(target, thisArg, args) {
-      var allowedResponseTypeValues = ["", "text"];
+      var allowedResponseTypeValues = [ "", "text" ];
       if (!thisArg.shouldBePruned || !allowedResponseTypeValues.includes(thisArg.responseType)) {
         return Reflect.apply(target, thisArg, args);
       }
-      var forgedRequest = new XMLHttpRequest();
-      forgedRequest.addEventListener("readystatechange", function () {
+      var forgedRequest = new XMLHttpRequest;
+      forgedRequest.addEventListener("readystatechange", (function() {
         if (forgedRequest.readyState !== 4) {
           return;
         }
-        var {
-          readyState: readyState,
-          response: response,
-          responseText: responseText,
-          responseURL: responseURL,
-          responseXML: responseXML,
-          status: status,
-          statusText: statusText
-        } = forgedRequest;
+        var {readyState: readyState, response: response, responseText: responseText, responseURL: responseURL, responseXML: responseXML, status: status, statusText: statusText} = forgedRequest;
         var content = responseText || response;
         if (typeof content !== "string") {
           return;
@@ -26819,22 +23435,22 @@ function xmlPrune(source, args) {
             writable: false
           }
         });
-        setTimeout(function () {
+        setTimeout((function() {
           var stateEvent = new Event("readystatechange");
           thisArg.dispatchEvent(stateEvent);
           var loadEvent = new Event("load");
           thisArg.dispatchEvent(loadEvent);
           var loadEndEvent = new Event("loadend");
           thisArg.dispatchEvent(loadEndEvent);
-        }, 1);
+        }), 1);
         hit(source);
-      });
-      nativeOpen.apply(forgedRequest, [xhrData.method, xhrData.url]);
-      thisArg.collectedHeaders.forEach(function (header) {
+      }));
+      nativeOpen.apply(forgedRequest, [ xhrData.method, xhrData.url ]);
+      thisArg.collectedHeaders.forEach((function(header) {
         var name = header[0];
         var value = header[1];
         forgedRequest.setRequestHeader(name, value);
-      });
+      }));
       thisArg.collectedHeaders = [];
       try {
         nativeSend.call(forgedRequest, args);
@@ -26886,170 +23502,101 @@ function xmlPrune(source, args) {
     };
     window.fetch = new Proxy(window.fetch, fetchHandler);
   }
-  function hit(source) {
-    var ADGUARD_PREFIX = "[AdGuard]";
-    if (!source.verbose) {
-      return;
-    }
-    try {
-      var trace = console.trace.bind(console);
-      var label = `${ADGUARD_PREFIX} `;
-      if (source.engine === "corelibs") {
-        label += source.ruleText;
-      } else {
-        if (source.domainName) {
-          label += `${source.domainName}`;
-        }
-        if (source.args) {
-          label += `#%#//scriptlet('${source.name}', '${source.args.join("', '")}')`;
-        } else {
-          label += `#%#//scriptlet('${source.name}')`;
-        }
-      }
-      if (trace) {
-        trace(label);
-      }
-    } catch (e) {}
-    if (typeof window.__debug === "function") {
-      window.__debug(source);
-    }
-  }
-  function logMessage(source, message) {
-    var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-    var {
-      name: name,
-      verbose: verbose
-    } = source;
-    if (!forced && !verbose) {
-      return;
-    }
-    var nativeConsole = console.log;
-    if (!convertMessageToString) {
-      nativeConsole(`${name}:`, message);
-      return;
-    }
-    nativeConsole(`${name}: ${message}`);
-  }
-  function toRegExp(rawInput) {
-    var input = rawInput || "";
-    var DEFAULT_VALUE = ".?";
-    var FORWARD_SLASH = "/";
-    if (input === "") {
-      return new RegExp(DEFAULT_VALUE);
-    }
-    var delimiterIndex = input.lastIndexOf(FORWARD_SLASH);
-    var flagsPart = input.substring(delimiterIndex + 1);
-    var regExpPart = input.substring(0, delimiterIndex + 1);
-    var isValidRegExpFlag = function isValidRegExpFlag(flag) {
-      if (!flag) {
-        return false;
-      }
+  function hit(e) {
+    if (e.verbose) {
       try {
-        new RegExp("", flag);
-        return true;
-      } catch (ex) {
+        var n = console.trace.bind(console), i = "[AdGuard] ";
+        "corelibs" === e.engine ? i += e.ruleText : (e.domainName && (i += `${e.domainName}`), 
+        e.args ? i += `#%#//scriptlet('${e.name}', '${e.args.join("', '")}')` : i += `#%#//scriptlet('${e.name}')`), 
+        n && n(i);
+      } catch (e) {}
+      "function" == typeof window.__debug && window.__debug(e);
+    }
+  }
+  function logMessage(e, o) {
+    var n = arguments.length > 2 && void 0 !== arguments[2] && arguments[2], g = !(arguments.length > 3 && void 0 !== arguments[3]) || arguments[3], {name: l, verbose: v} = e;
+    if (n || v) {
+      var a = console.log;
+      g ? a(`${l}: ${o}`) : a(`${l}:`, o);
+    }
+  }
+  function toRegExp(e) {
+    var r = e || "", t = "/";
+    if ("" === r) return new RegExp(".?");
+    var n, i, s = r.lastIndexOf(t), a = r.substring(s + 1), g = r.substring(0, s + 1), u = (i = a, 
+    (n = g).startsWith(t) && n.endsWith(t) && !n.endsWith("\\/") && function(e) {
+      if (!e) return false;
+      try {
+        return new RegExp("", e), !0;
+      } catch (e) {
         return false;
       }
-    };
-    var getRegExpFlags = function getRegExpFlags(regExpStr, flagsStr) {
-      if (regExpStr.startsWith(FORWARD_SLASH) && regExpStr.endsWith(FORWARD_SLASH) && !regExpStr.endsWith("\\/") && isValidRegExpFlag(flagsStr)) {
-        return flagsStr;
-      }
-      return "";
-    };
-    var flags = getRegExpFlags(regExpPart, flagsPart);
-    if (input.startsWith(FORWARD_SLASH) && input.endsWith(FORWARD_SLASH) || flags) {
-      var regExpInput = flags ? regExpPart : input;
-      return new RegExp(regExpInput.slice(1, -1), flags);
-    }
-    var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(escaped);
+    }(i) ? i : "");
+    if (r.startsWith(t) && r.endsWith(t) || u) return new RegExp((u ? g : r).slice(1, -1), u);
+    var c = r.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(c);
   }
-  function getXhrData(method, url, async, user, password) {
+  function getXhrData(r, t, a, e, n) {
     return {
-      method: method,
-      url: url,
-      async: async,
-      user: user,
-      password: password
+      method: r,
+      url: t,
+      async: a,
+      user: e,
+      password: n
     };
   }
-  function matchRequestProps(source, propsToMatch, requestData) {
-    if (propsToMatch === "" || propsToMatch === "*") {
-      return true;
-    }
-    var isMatched;
-    var parsedData = parseMatchProps(propsToMatch);
-    if (!isValidParsedData(parsedData)) {
-      logMessage(source, `Invalid parameter: ${propsToMatch}`);
-      isMatched = false;
-    } else {
-      var matchData = getMatchPropsData(parsedData);
-      var matchKeys = Object.keys(matchData);
-      isMatched = matchKeys.every(function (matchKey) {
-        var matchValue = matchData[matchKey];
-        var dataValue = requestData[matchKey];
-        return Object.prototype.hasOwnProperty.call(requestData, matchKey) && typeof dataValue === "string" && (matchValue === null || matchValue === void 0 ? void 0 : matchValue.test(dataValue));
-      });
-    }
-    return isMatched;
+  function matchRequestProps(e, t, r) {
+    if ("" === t || "*" === t) return true;
+    var a, s = parseMatchProps(t);
+    if (isValidParsedData(s)) {
+      var n = getMatchPropsData(s);
+      a = Object.keys(n).every((function(e) {
+        var t = n[e], a = r[e];
+        return Object.prototype.hasOwnProperty.call(r, e) && "string" == typeof a && (null == t ? void 0 : t.test(a));
+      }));
+    } else logMessage(e, `Invalid parameter: ${t}`), a = false;
+    return a;
   }
-  function getMatchPropsData(data) {
-    var matchData = {};
-    var dataKeys = Object.keys(data);
-    dataKeys.forEach(function (key) {
-      matchData[key] = toRegExp(data[key]);
-    });
-    return matchData;
+  function getMatchPropsData(t) {
+    var a = {};
+    return Object.keys(t).forEach((function(c) {
+      a[c] = toRegExp(t[c]);
+    })), a;
   }
   function getRequestProps() {
-    return ["url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode"];
+    return [ "url", "method", "headers", "body", "credentials", "cache", "redirect", "referrer", "referrerPolicy", "integrity", "keepalive", "signal", "mode" ];
   }
-  function isValidParsedData(data) {
-    return Object.values(data).every(function (value) {
-      return isValidStrPattern(value);
-    });
+  function isValidParsedData(t) {
+    return Object.values(t).every((function(t) {
+      return isValidStrPattern(t);
+    }));
   }
-  function parseMatchProps(propsToMatchStr) {
-    var PROPS_DIVIDER = " ";
-    var PAIRS_MARKER = ":";
-    var isRequestProp = function isRequestProp(prop) {
-      return getRequestProps().includes(prop);
-    };
-    var propsObj = {};
-    var props = propsToMatchStr.split(PROPS_DIVIDER);
-    props.forEach(function (prop) {
-      var dividerInd = prop.indexOf(PAIRS_MARKER);
-      var key = prop.slice(0, dividerInd);
-      if (isRequestProp(key)) {
-        var value = prop.slice(dividerInd + 1);
-        propsObj[key] = value;
-      } else {
-        propsObj.url = prop;
-      }
-    });
-    return propsObj;
+  function parseMatchProps(e) {
+    var r = {};
+    return e.split(" ").forEach((function(e) {
+      var n = e.indexOf(":"), i = e.slice(0, n);
+      if (function(e) {
+        return getRequestProps().includes(e);
+      }(i)) {
+        var s = e.slice(n + 1);
+        r[i] = s;
+      } else r.url = e;
+    })), r;
   }
-  function isValidStrPattern(input) {
-    var FORWARD_SLASH = "/";
-    var str = escapeRegExp(input);
-    if (input[0] === FORWARD_SLASH && input[input.length - 1] === FORWARD_SLASH) {
-      str = input.slice(1, -1);
-    }
-    var isValid;
+  function isValidStrPattern(e) {
+    var t, n = escapeRegExp(e);
+    "/" === e[0] && "/" === e[e.length - 1] && (n = e.slice(1, -1));
     try {
-      isValid = new RegExp(str);
-      isValid = true;
+      t = new RegExp(n), t = !0;
     } catch (e) {
-      isValid = false;
+      t = false;
     }
-    return isValid;
+    return t;
   }
-  function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function escapeRegExp(e) {
+    return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
-  var updatedArgs = args ? [].concat(source).concat(args) : [source];
+  var updatedArgs = args ? [].concat(source).concat(args) : [ source ];
   try {
     xmlPrune.apply(this, updatedArgs);
     if (source.uniqueId) {
@@ -27064,6 +23611,7 @@ function xmlPrune(source, args) {
     console.log(e);
   }
 }
+
 var scriptletsMap = {
   "amazon-apstag": AmazonApstag,
   "ubo-amazon_apstag.js": AmazonApstag,
@@ -27209,8 +23757,8 @@ var scriptletsMap = {
   "ubo-addEventListener-logger": logAddEventListener,
   "ubo-aell": logAddEventListener,
   "log-eval": logEval,
-  log: log$1,
-  "abp-log": log$1,
+  log: log,
+  "abp-log": log,
   "log-on-stack-trace": logOnStackTrace,
   "m3u-prune": m3uPrune,
   "m3u-prune.js": m3uPrune,
@@ -27241,6 +23789,12 @@ var scriptletsMap = {
   "abp-prevent-listener": preventAddEventListener,
   "prevent-adfly": preventAdfly,
   "prevent-bab": preventBab,
+  "ubo-nobab": preventBab,
+  nobab: preventBab,
+  "bab-defuser": preventBab,
+  "nobab.js": preventBab,
+  "ubo-nobab.js": preventBab,
+  "bab-defuser.js": preventBab,
   "prevent-canvas": preventCanvas,
   "prevent-canvas.js": preventCanvas,
   "ubo-prevent-canvas.js": preventCanvas,
@@ -27392,6 +23946,7 @@ var scriptletsMap = {
   "trusted-create-element": trustedCreateElement,
   "trusted-dispatch-event": trustedDispatchEvent,
   "trusted-prune-inbound-object": trustedPruneInboundObject,
+  "trusted-replace-argument": trustedReplaceArgument,
   "trusted-replace-fetch-response": trustedReplaceFetchResponse,
   "trusted-replace-node-text": trustedReplaceNodeText,
   "trusted-replace-outbound-text": trustedReplaceOutboundText,
@@ -27408,25 +23963,29 @@ var scriptletsMap = {
   "ubo-xml-prune.js": xmlPrune,
   "ubo-xml-prune": xmlPrune
 };
+
 var getScriptletFunction = function getScriptletFunction(name) {
   return scriptletsMap[name];
 };
+
 function passSourceAndProps(source, code) {
   var redirect = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var sourceString = JSON.stringify(source);
-  var argsString = source.args ? `[${source.args.map(function (arg) {
+  var argsString = source.args ? `[${source.args.map((function(arg) {
     return JSON.stringify(arg);
-  })}]` : undefined;
+  }))}]` : undefined;
   var params = argsString ? `${sourceString}, ${argsString}` : sourceString;
   if (redirect) {
     return `(function(source, args){\n${code}\n})(${params});`;
   }
   return `(${code})(${params});`;
 }
+
 function wrapInNonameFunc(code) {
   return `function(source, args){\n${code}\n}`;
 }
-function getScriptletCode$1(source) {
+
+function getScriptletCode(source) {
   var scriptletFunction = getScriptletFunction(source.name);
   if (typeof scriptletFunction !== "function") {
     throw new Error(`Error: cannot invoke scriptlet with name: '${source.name}'`);
@@ -27435,80 +23994,155 @@ function getScriptletCode$1(source) {
   var result = source.engine === "corelibs" || source.engine === "test" ? wrapInNonameFunc(scriptletFunctionString) : passSourceAndProps(source, scriptletFunctionString);
   return result;
 }
-var scriptlets = {
-  invoke: getScriptletCode$1,
+
+var scriptlets_scriptlets = {
+  invoke: getScriptletCode,
   getScriptletFunction: getScriptletFunction
 };
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// currentLevel holds the active logging level.
-// It remains null until the logger is explicitly initialized.
-let currentLevel = null;
-// logPrefix holds the configurable prefix for all log messages.
-let logPrefix = '';
-// pendingLogs stores log messages that are buffered until the logger is
-// initialized. Each pending log is stored as an array so that it can be
-// re-spread into `console.log`.
-let pendingLogs = [];
-/**
- * Logs messages with an ISO 8601 timestamp and a configurable prefix.
- *
- * This function accepts a variable number of parameters to mirror the interface
- * of `console.log`.
- *
- * Behavior:
- * - If the logger is not yet initialized (currentLevel is null), the log entry
- *   is buffered.
- * - If the logger is initialized with the 'log' level, the message is
- *   immediately output to the console with the configured prefix.
- * - If the logger is initialized with the 'discard' level, the log entry is
- *   ignored.
- *
- * @param args - The log message and additional parameters.
+
+
+;// CONCATENATED MODULE: ./node_modules/@adguard/safari-extension/dist/safari-extension.esm.js
+/*
+ * SafariExtension v4.1.0 (build date: Tue, 23 Dec 2025 11:36:32 GMT)
+ * (c) 2025 Adguard Software Ltd.
+ * Released under the GPL-3.0 license
+ * https://github.com/AdguardTeam/SafariConverterLib/tree/master/Extension
  */
-function log(...args) {
-  const timestamp = `[${new Date().toISOString()}]`;
-  if (currentLevel === null) {
-    // Buffer the message until the logger is initialized.
-    pendingLogs.push([timestamp, ...args]);
-  } else if (currentLevel === 'log') {
-    // Output the timestamp, prefix, and the log message.
-    // eslint-disable-next-line no-console
-    console.log(timestamp, logPrefix, ...args);
+
+
+
+
+
+/* eslint-disable no-console */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable max-classes-per-file */
+/**
+ * @file Defines the logger interface and its default implementation.
+ */
+/**
+ * Logging level.
+ */
+var LoggingLevel;
+(function (LoggingLevel) {
+  LoggingLevel[LoggingLevel["Debug"] = 2] = "Debug";
+  LoggingLevel[LoggingLevel["Info"] = 1] = "Info";
+  LoggingLevel[LoggingLevel["Error"] = 0] = "Error";
+})(LoggingLevel || (LoggingLevel = {}));
+const getTimestamp = () => `[${new Date().toISOString()}]`;
+/**
+ * Console logger implementation.
+ */
+class ConsoleLogger {
+  prefix = '[Safari Extension]';
+  loggingLevel = LoggingLevel.Info;
+  /**
+   * Creates a new console logger.
+   *
+   * @param prefix Prefix to add to the log messages.
+   * @param level Logging level.
+   */
+  constructor(prefix, level) {
+    this.prefix = prefix;
+    this.loggingLevel = level;
   }
-  // If currentLevel is 'discard', the log entry is ignored.
+  get level() {
+    return this.loggingLevel;
+  }
+  set level(level) {
+    this.loggingLevel = level;
+  }
+  debug(...args) {
+    if (this.loggingLevel >= LoggingLevel.Debug) {
+      console.debug(getTimestamp(), this.prefix, ...args);
+    }
+  }
+  info(...args) {
+    if (this.loggingLevel >= LoggingLevel.Info) {
+      console.info(getTimestamp(), this.prefix, ...args);
+    }
+  }
+  error(...args) {
+    if (this.loggingLevel >= LoggingLevel.Error) {
+      console.error(getTimestamp(), this.prefix, ...args);
+    }
+  }
 }
 /**
- * Initializes the logger by setting the logging behavior and the message
- * prefix.
- *
- * After initialization, future log messages behave according to the specified
- * logging level:
- *
- * - 'log': Future messages are immediately output to the console with the
- *          configured prefix, and any buffered messages are flushed.
- * - 'discard': Both buffered and future log messages are dropped.
- *
- * @param level - The logging level to set:
- *   - 'log' to output log messages.
- *   - 'discard' to ignore log messages.
- * @param prefix - The configurable prefix to be added to every log message.
+ * Logger that does not print anything.
  */
-function initLogger(level, prefix) {
-  logPrefix = prefix;
-  currentLevel = level;
-  if (currentLevel === 'log') {
-    // Flush all buffered log messages to the console using the configured
-    // prefix.
-    pendingLogs.forEach(entry => {
-      // eslint-disable-next-line no-console
-      console.log(entry[0], logPrefix, ...entry.slice(1));
-    });
+class NullLogger {
+  level = LoggingLevel.Debug;
+  debug() {
+    // Do nothing.
   }
-  // Clear the buffer regardless of the logging level.
-  pendingLogs = [];
+  info() {
+    // Do nothing.
+  }
+  error() {
+    // Do nothing.
+  }
 }
-const version = "3.0.0";
+/**
+ * Default logger. Can be redefined by the library user.
+ */
+let internalLogger = new NullLogger();
+/**
+ * Proxy logger that delegates all calls to the internal logger.
+ * This internal logger can be redefined by the library user
+ * via `setLogger`.
+ */
+class ProxyLogger {
+  get level() {
+    return internalLogger.level;
+  }
+  set level(level) {
+    internalLogger.level = level;
+  }
+  debug(...args) {
+    internalLogger.debug(...args);
+  }
+  info(...args) {
+    internalLogger.info(...args);
+  }
+  error(...args) {
+    internalLogger.error(...args);
+  }
+}
+/**
+ * Sets the logger to use.
+ *
+ * @param logger to use.
+ */
+const setLogger = logger => {
+  internalLogger = logger;
+};
+/**
+ * Logger instance that will be used inside the library (and can be actually
+ * used outside the library too). It delegates all calls to the internal logger
+ * that can be redefined via `setLogger`.
+ */
+const safari_extension_esm_log = new ProxyLogger();
+const safari_extension_esm_version = "4.1.0";
+
+/**
+ * @file Contains common constants and helper functions.
+ */
+/**
+ * Name of the engine used to run scriptlets.
+ */
+const SCRIPTLET_ENGINE_NAME = 'safari-extension';
+/**
+ * Makes sure that we're dealing with CSS rules (selector + style)
+ *
+ * @param css Array of CSS selectors (for hiding elements) or full CSS rules.
+ * @returns Array of CSS rules.
+ */
+const toCSSRules = css => {
+  return css.map(s => s.trim()).filter(s => s.length > 0).map(s => {
+    return s.at(-1) !== '}' ? `${s} {display:none!important;}` : s;
+  });
+};
 
 /**
  * @file Contains the implementation of the content script.
@@ -27569,20 +24203,9 @@ const executeScripts = (scripts = []) => {
   const code = scripts.join('\r\n');
   if (!executeScriptsViaTextContent(code)) {
     if (!executeScriptsViaBlob(code)) {
-      log('Failed to execute scripts');
+      safari_extension_esm_log.error('Failed to execute scripts');
     }
   }
-};
-/**
- * Applies JS injections.
- *
- * @param {string[]} scripts Array with JS scripts.
- */
-const applyScripts = scripts => {
-  if (!scripts || scripts.length === 0) {
-    return;
-  }
-  executeScripts(scripts);
 };
 /**
  * Protects specified style element from changes to the current document
@@ -27635,124 +24258,520 @@ const protectStyleElementContent = protectStyleEl => {
   });
 };
 /**
- * Makes sure that we're dealing with CSS rules (selector + style)
- *
- * @param {string[]} css Array of CSS selectors (for hiding elemets) or full CSS rules.
- * @returns {string[]} Array of CSS rules.
- */
-const toCSSRules = css => {
-  return css.filter(s => s.length > 0).map(s => s.trim()).map(s => {
-    return s[s.length - 1] !== '}' ? `${s} {display:none!important;}` : s;
-  });
-};
-/**
- * Applies css stylesheet.
- *
- * @param {string[]} css Array of CSS rules to apply.
- */
-const applyCss = css => {
-  if (!css || !css.length) {
-    return;
-  }
-  try {
-    const styleElement = document.createElement('style');
-    styleElement.setAttribute('type', 'text/css');
-    (document.head || document.documentElement).appendChild(styleElement);
-    if (styleElement.sheet) {
-      const cssRules = toCSSRules(css);
-      for (const style of cssRules) {
-        styleElement.sheet.insertRule(style);
-      }
-    }
-    protectStyleElementContent(styleElement);
-  } catch (e) {
-    log('Failed to apply CSS', e);
-  }
-};
-/**
- * Applies Extended Css stylesheet.
- *
- * @param {string[]} extendedCss Array with ExtendedCss rules.
- */
-const applyExtendedCss = extendedCss => {
-  if (!extendedCss || !extendedCss.length) {
-    return;
-  }
-  try {
-    const cssRules = toCSSRules(extendedCss);
-    const extCss = new ExtendedCss({
-      cssRules
-    });
-    extCss.apply();
-  } catch (e) {
-    log('Failed to apply extended CSS', e);
-  }
-};
-/**
  * Converts scriptlet to the code that can be executed.
  *
  * @param {Scriptlet} scriptlet Scriptlet data (name and arguments)
  * @param {boolean} verbose Whether to log verbose output
  * @returns {string} Scriptlet code
  */
-const getScriptletCode = (scriptlet, verbose) => {
+const safari_extension_esm_getScriptletCode = (scriptlet, verbose) => {
   try {
     const scriptletSource = {
-      engine: 'safari-extension',
+      engine: SCRIPTLET_ENGINE_NAME,
       name: scriptlet.name,
       args: scriptlet.args,
-      version: version,
+      version: safari_extension_esm_version,
       verbose
     };
-    return scriptlets.invoke(scriptletSource);
+    return scriptlets_scriptlets.invoke(scriptletSource);
   } catch (e) {
-    log(`Failed to get scriptlet code ${scriptlet.name}`, e);
+    safari_extension_esm_log.error('Failed to get scriptlet code', scriptlet.name, e);
   }
   return '';
 };
+// Disable class-methods-use-this rule for the following code since it needs
+// to implement particular interface.
+/* eslint-disable class-methods-use-this  */
 /**
- * Applies scriptlets.
+ * Content script object. The way this object is used is different and
+ * depends on whether this code is used from Safari App Extension or from
+ * Safari Web Extension.
  *
- * @param {Scriptlet[]} scriptlets Array with scriptlets data.
- * @param {boolean} verbose Whether to log verbose output.
- */
-const applyScriptlets = (scriptlets, verbose) => {
-  if (!scriptlets || !scriptlets.length) {
-    return;
-  }
-  const getCode = scriptlet => getScriptletCode(scriptlet, verbose);
-  const scripts = scriptlets.map(getCode);
-  executeScripts(scripts);
-};
-/**
- * Content script that applies all the rules from the configuration.
+ * In the case of Safari App Extension, this object is used from within
+ * the content script, i.e. it is used to apply the configuration to the web
+ * page.
+ *
+ * In the case of Safari Web Extension, `BackgroundScript` relies on the
+ * functions of this object to run scripts and insert extended CSS into the
+ * web page, i.e. it expects that there will be a global `adguard.contentScript`
+ * object in the `ISOLATED` world that implements this interface.
  */
 class ContentScript {
-  configuration;
-  constructor(configuration) {
-    this.configuration = configuration;
+  /**
+   * Applies the configuration to the web page. This method is supposed to be
+   * run from the extension's content script (ISOLATED world) and it is only
+   * supposed to be used by Safari App Extension.
+   *
+   * @param configuration Configuration to apply.
+   * @param verbose Whether to log verbose output.
+   */
+  applyConfiguration(configuration, verbose = false) {
+    this.insertCss(configuration.css);
+    this.insertExtendedCss(configuration.extendedCss);
+    this.runScriptlets(configuration.scriptlets, verbose);
+    this.runScripts(configuration.js);
   }
   /**
-   * Runs the content script on the page.
+   * Inserts specified CSS rules to the page.
    *
-   * @param verbose Whether to log verbose output.
-   * @param prefix Prefix for log messages.
+   * @param css Array of CSS rules to apply. Can be a selector
    */
-  run(verbose = false, prefix = '[AdGuard Extension]') {
-    if (verbose) {
-      initLogger('log', prefix);
-    } else {
-      initLogger('discard', '');
+  insertCss(css) {
+    if (!css || !css.length) {
+      return;
     }
-    log('Starting content script execution...');
-    applyCss(this.configuration.css);
-    applyExtendedCss(this.configuration.extendedCss);
-    applyScriptlets(this.configuration.scriptlets, verbose);
-    applyScripts(this.configuration.js);
-    log('Finished content script execution');
+    try {
+      const styleElement = document.createElement('style');
+      styleElement.setAttribute('type', 'text/css');
+      (document.head || document.documentElement).appendChild(styleElement);
+      if (styleElement.sheet) {
+        const cssRules = toCSSRules(css);
+        for (const style of cssRules) {
+          styleElement.sheet.insertRule(style);
+        }
+      }
+      protectStyleElementContent(styleElement);
+    } catch (e) {
+      safari_extension_esm_log.error('Failed to insert CSS', e);
+    }
+  }
+  /**
+   * Applies Extended Css stylesheet.
+   *
+   * @param {string[]} extendedCss Array with ExtendedCss rules.
+   */
+  insertExtendedCss(extendedCss) {
+    if (!extendedCss || !extendedCss.length) {
+      return;
+    }
+    try {
+      const cssRules = toCSSRules(extendedCss);
+      const extCss = new ExtendedCss({
+        cssRules
+      });
+      extCss.apply();
+    } catch (e) {
+      safari_extension_esm_log.error('Failed to insert extended CSS', e);
+    }
+  }
+  /**
+   * Runs scripts in the web page. This method is supposed to be run from the
+   * extension's content script (ISOLATED world).
+   *
+   * In the case of Safari Web Extension this method is exposed via
+   * `adguard.contentScript` global object in `ISOLATED` world.
+   *
+   * @param scripts Array of scripts to run.
+   */
+  runScripts(scripts) {
+    if (!scripts || scripts.length === 0) {
+      return;
+    }
+    executeScripts(scripts);
+  }
+  /**
+   * Runs scriptlets in the web page. This method is supposed to be run from
+   * the extension's content script (ISOLATED world).
+   *
+   * In the case of Safari Web Extension this method is exposed via
+   * `adguard.contentScript` global object in `ISOLATED` world.
+   *
+   * @param scriptlets Array of scriptlets to run.
+   * @param verbose Whether to log verbose output.
+   */
+  runScriptlets(scriptlets, verbose) {
+    if (!scriptlets || !scriptlets.length) {
+      return;
+    }
+    const getCode = scriptlet => safari_extension_esm_getScriptletCode(scriptlet, verbose);
+    const scripts = scriptlets.map(getCode);
+    executeScripts(scripts);
+  }
+}
+/* eslint-enable class-methods-use-this */
+
+/**
+ * @file Exports `BackgroundScript` object that it supposed to be used by
+ * web extension's background script.
+ */
+/**
+ * `BackgroundScript` is a class that is used by web extension's background
+ * script to apply the configuration to the web page. It uses
+ * `browser.scripting` API to inject scripts and CSS into the web page.
+ *
+ * It's important that for correct work this class relies on the presence of
+ * `adguard.contentScript` object in the `ISOLATED` world that implements
+ * `ContentScript` interface.
+ */
+class BackgroundScript {
+  /**
+   * Map of registered script functions.
+   */
+  registeredScripts;
+  /**
+   * Creates an instance of the `BackgroundScript` object.
+   *
+   * The constructor accepts a map of registered functions. The idea is that
+   * we would like JS rules to work in the same way as scriptlets, i.e. use
+   * `browser.scripting.executeScript` with `world: 'MAIN'` In order to do
+   * that we need to deal with JS functions. Unfortunately, due to security
+   * limitations we cannot create `Function` objects from script text inside
+   * the extension. To overcome that we can prepare a map of script texts and
+   * functions. This map should be constructed in compile time and then
+   * passed to the constructor. Whenever the script rule is applied, we will
+   * first check if there's a registered `Function` object for the script
+   * text and if there is, it will be used to execute the script. Otherwise,
+   * we will attempt to execute it as a string (but the website CSP may
+   * prevent that).
+   *
+   * @param registeredScripts Map of registered script functions.
+   */
+  constructor(registeredScripts = new Map()) {
+    this.registeredScripts = registeredScripts;
+    // Make sure that the default registered script is always added to the
+    // map. This is a default registered script that is used on
+    // testcases.agrd.dev for CSP tests.
+    this.registeredScripts.set('console.log(Date.now(), "default registered script")', () => {
+      // eslint-disable-next-line no-console
+      console.log(Date.now(), 'default registered script');
+    });
+  }
+  /**
+   * Applies the configuration to the given tab and frame.
+   *
+   * @param tabId ID of the tab to apply the configuration to.
+   * @param frameId ID of the frame to apply the configuration to.
+   * @param configuration Configuration to apply.
+   * @returns Promise that resolves when the configuration is applied.
+   */
+  async applyConfiguration(tabId, frameId, configuration) {
+    safari_extension_esm_log.debug('Applying configuration to tab', tabId, 'frame', frameId, 'configuration', configuration);
+    await Promise.all([BackgroundScript.insertCss(tabId, frameId, configuration.css), BackgroundScript.insertExtendedCss(tabId, frameId, configuration.extendedCss), BackgroundScript.runScriptlets(tabId, frameId, configuration.scriptlets), BackgroundScript.runScripts(tabId, frameId, configuration.js, this.registeredScripts)]);
+    safari_extension_esm_log.debug('Finished applying configuration to tab', tabId, 'frame', frameId);
+  }
+  /**
+   * Wrapper over `browser.scripting.scriptInjection` that logs errors.
+   *
+   * @param scriptInjection Script injection to execute.
+   */
+  static async executeScript(scriptInjection) {
+    const results = await browser.scripting.executeScript(scriptInjection);
+    if (results.length === 0) {
+      safari_extension_esm_log.error('Failed to execute script in target', scriptInjection.target);
+      return;
+    }
+    const result = results[0];
+    if (result.error) {
+      safari_extension_esm_log.error('Failed to execute script in target', scriptInjection.target, 'error', result.error);
+    }
+  }
+  /**
+   * Runs scripts in the given tab and frame.
+   *
+   * @param tabId ID of the tab to run the scripts in.
+   * @param frameId ID of the frame to run the scripts in.
+   * @param scripts Scripts to run.
+   * @param registeredScripts Map of registered script functions.
+   * @returns Promise that resolves when the scripts are run.
+   */
+  static async runScripts(tabId, frameId, scripts, registeredScripts) {
+    if (scripts.length === 0) {
+      safari_extension_esm_log.debug('No scripts to run in tab', tabId, 'frame', frameId);
+      return;
+    }
+    // Scan scripts for registered functions.
+    const scriptFunctions = [];
+    const scriptTexts = [];
+    for (const script of scripts) {
+      const scriptFunction = registeredScripts.get(script);
+      if (scriptFunction) {
+        scriptFunctions.push(scriptFunction);
+      } else {
+        scriptTexts.push(script);
+      }
+    }
+    safari_extension_esm_log.debug('Found', scriptFunctions.length, 'registered functions and', scriptTexts.length, 'scripts to run in tab', tabId, 'frame', frameId);
+    await Promise.all([BackgroundScript.runScriptFunctions(tabId, frameId, scriptFunctions), BackgroundScript.runScriptTexts(tabId, frameId, scriptTexts)]);
+    safari_extension_esm_log.debug('Finished running scripts in tab', tabId, 'frame', frameId);
+  }
+  /**
+   * Runs script functions in the given tab and frame.
+   *
+   * @param tabId ID of the tab to run the scripts in.
+   * @param frameId ID of the frame to run the scripts in.
+   * @param scriptFunctions Scripts to run.
+   * @returns Promise that resolves when the scripts are run.
+   */
+  static async runScriptFunctions(tabId, frameId, scriptFunctions) {
+    if (scriptFunctions.length === 0) {
+      safari_extension_esm_log.debug('No script functions to run in tab', tabId, 'frame', frameId);
+      return;
+    }
+    safari_extension_esm_log.debug('Running script functions in tab', tabId, 'frame', frameId, 'script functions', scriptFunctions);
+    const promises = scriptFunctions.map(scriptFunction => {
+      return BackgroundScript.runScriptFunction(tabId, frameId, scriptFunction);
+    });
+    await Promise.all(promises);
+    safari_extension_esm_log.debug('Finished running script functions in tab', tabId, 'frame', frameId);
+  }
+  /**
+   * Runs a script in the given tab and frame.
+   *
+   * @param tabId ID of the tab to run the script in.
+   * @param frameId ID of the frame to run the script in.
+   * @param scriptFunction Script to run.
+   * @returns Promise that resolves when the script is run.
+   */
+  static async runScriptFunction(tabId, frameId, scriptFunction) {
+    safari_extension_esm_log.debug('Running script function in tab', tabId, 'frame', frameId, 'script function', scriptFunction);
+    await BackgroundScript.executeScript({
+      target: {
+        tabId,
+        frameIds: [frameId]
+      },
+      func: scriptFunction,
+      world: 'MAIN',
+      injectImmediately: true
+    });
+    safari_extension_esm_log.debug('Finished running script function in tab', tabId, 'frame', frameId);
+  }
+  /**
+   * Runs script texts in the given tab and frame.
+   *
+   * @param tabId ID of the tab to run the script texts in.
+   * @param frameId ID of the frame to run the script texts in.
+   * @param scriptTexts Script texts to run.
+   * @returns Promise that resolves when the script texts are run.
+   */
+  static async runScriptTexts(tabId, frameId, scriptTexts) {
+    if (scriptTexts.length === 0) {
+      safari_extension_esm_log.debug('No script texts to run in tab', tabId, 'frame', frameId);
+      return;
+    }
+    safari_extension_esm_log.debug('Running script texts in tab', tabId, 'frame', frameId, 'script texts', scriptTexts);
+    await BackgroundScript.executeScript({
+      target: {
+        tabId,
+        frameIds: [frameId]
+      },
+      func: (scripts = []) => {
+        try {
+          adguard.contentScript.runScripts(scripts);
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error('Failed to run scripts, make sure adguard.contentScript is available', e);
+        }
+      },
+      args: [scriptTexts],
+      world: 'ISOLATED',
+      injectImmediately: true
+    });
+    safari_extension_esm_log.debug('Finished running script texts in tab', tabId, 'frame', frameId);
+  }
+  /**
+   * Inserts extended CSS into the given tab and frame.
+   *
+   * @param tabId ID of the tab to insert extended CSS into.
+   * @param frameId ID of the frame to insert extended CSS into.
+   * @param extendedCss Extended CSS to insert.
+   * @returns Promise that resolves when the extended CSS is inserted.
+   */
+  static async insertExtendedCss(tabId, frameId, extendedCss) {
+    if (extendedCss.length === 0) {
+      safari_extension_esm_log.debug('No extended CSS to insert into tab', tabId, 'frame', frameId);
+      return;
+    }
+    await BackgroundScript.executeScript({
+      target: {
+        tabId,
+        frameIds: [frameId]
+      },
+      func: (extCss = []) => {
+        try {
+          adguard.contentScript.insertExtendedCss(extCss);
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error('Failed to insert extended CSS, make sure adguard.contentScript is available', e);
+        }
+      },
+      args: [extendedCss],
+      world: 'ISOLATED',
+      injectImmediately: true
+    });
+  }
+  /**
+   * Inserts CSS into the given tab and frame.
+   *
+   * @param tabId ID of the tab to insert CSS into.
+   * @param frameId ID of the frame to insert CSS into.
+   * @param css CSS to insert.
+   * @returns Promise that resolves when the CSS is inserted.
+   */
+  static async insertCss(tabId, frameId, css) {
+    if (css.length === 0) {
+      safari_extension_esm_log.debug('No CSS to insert into tab', tabId, 'frame', frameId);
+      return;
+    }
+    safari_extension_esm_log.debug('Inserting CSS into tab', tabId, 'frame', frameId, 'css', css);
+    const cssRules = toCSSRules(css);
+    const cssStyle = cssRules.join('\n');
+    await browser.scripting.insertCSS({
+      target: {
+        tabId,
+        frameIds: [frameId]
+      },
+      origin: 'USER',
+      css: cssStyle
+    });
+    safari_extension_esm_log.debug('CSS inserted into tab', tabId, 'frame', frameId);
+  }
+  /**
+   * Runs scriptlets in the given tab and frame.
+   *
+   * @param tabId ID of the tab to run the scriptlets in.
+   * @param frameId ID of the frame to run the scriptlets in.
+   * @param scriptlets Scriptlets to run.
+   * @returns Promise that resolves when the scriptlets are run.
+   */
+  static async runScriptlets(tabId, frameId, scriptlets) {
+    if (scriptlets.length === 0) {
+      safari_extension_esm_log.debug('No scriptlets to run into tab', tabId, 'frame', frameId);
+      return;
+    }
+    safari_extension_esm_log.debug('Running scriptlets in the tab', tabId, 'frame', frameId, 'scriptlets', scriptlets);
+    const promises = scriptlets.map(scriptlet => BackgroundScript.runScriptlet(tabId, frameId, scriptlet));
+    await Promise.all(promises);
+    safari_extension_esm_log.debug('Finished running scriptlets in the tab', tabId, 'frame', frameId);
+  }
+  /**
+   * Runs a scriptlet in the given tab and frame.
+   *
+   * @param tabId ID of the tab to run the scriptlet in.
+   * @param frameId ID of the frame to run the scriptlet in.
+   * @param scriptlet Scriptlet to run.
+   * @returns Promise that resolves when the scriptlet is run.
+   */
+  static async runScriptlet(tabId, frameId, scriptlet) {
+    safari_extension_esm_log.debug('Running scriptlet', scriptlet.name, 'in the tab', tabId, 'frame', frameId);
+    const scriptletFunction = scriptlets.getScriptletFunction(scriptlet.name);
+    if (!scriptletFunction) {
+      safari_extension_esm_log.error('Scriptlet function not found', scriptlet.name);
+      return;
+    }
+    // Use verbose logging in scriptlets when debug-level logging is
+    // enabled.
+    const verbose = safari_extension_esm_log.level === LoggingLevel.Debug;
+    const scriptletSource = {
+      engine: SCRIPTLET_ENGINE_NAME,
+      name: scriptlet.name,
+      args: scriptlet.args,
+      version: safari_extension_esm_version,
+      verbose
+    };
+    const args = [];
+    args.push(scriptletSource);
+    args.push(scriptlet.args);
+    await BackgroundScript.executeScript({
+      target: {
+        tabId,
+        frameIds: [frameId]
+      },
+      func: scriptletFunction,
+      args,
+      world: 'MAIN',
+      injectImmediately: true
+    });
+    safari_extension_esm_log.debug('Finished running scriptlet', scriptlet.name, 'in the tab', tabId, 'frame', frameId);
   }
 }
 
+/**
+ * @file Handles delaying and dispatching of DOMContentLoaded and load events.
+ */
+/**
+ * The interceptors delay the events until either a response is received or the
+ * timeout expires. If the events have already fired, no interceptors are added.
+ *
+ * In Safari extensions running scripts and scriptlets has a slight delay and
+ * the page scripts may already do their work. By delaying DOMContentLoaded and
+ * load we try to delay the execution of page scripts so that the extension's
+ * scriptlets work as expected.
+ *
+ * @param timeoutMs - Timeout in milliseconds after which the events are forced
+ *                  (if not already handled). Default is 1000ms.
+ * @returns A function which, when invoked, cancels the timeout and dispatches
+ *         (or removes) the interceptors.
+ */
+function setupDelayedEventDispatcher(timeoutMs = 1000) {
+  const interceptors = [];
+  const events = [{
+    name: 'DOMContentLoaded',
+    options: {
+      bubbles: true,
+      cancelable: false
+    },
+    target: document
+  }, {
+    name: 'load',
+    options: {
+      bubbles: false,
+      cancelable: false
+    },
+    target: window
+  }];
+  events.forEach(ev => {
+    const interceptor = {
+      name: ev.name,
+      options: ev.options,
+      intercepted: false,
+      target: ev.target,
+      listener: event => {
+        // Prevent immediate propagation.
+        event.stopImmediatePropagation();
+        interceptor.intercepted = true;
+        safari_extension_esm_log.debug('Event has been intercepted:', ev.name);
+      }
+    };
+    interceptors.push(interceptor);
+    interceptor.target.addEventListener(ev.name, interceptor.listener, {
+      capture: true
+    });
+  });
+  let dispatched = false;
+  const dispatchEvents = trigger => {
+    if (dispatched) {
+      // The events were already dispatched, do nothing.
+      return;
+    }
+    dispatched = true;
+    interceptors.forEach(interceptor => {
+      // Remove the interceptor listener.
+      interceptor.target.removeEventListener(interceptor.name, interceptor.listener, {
+        capture: true
+      });
+      if (interceptor.intercepted) {
+        // If intercepted, dispatch the event manually so downstream listeners eventually receive it.
+        const newEvent = new Event(interceptor.name, interceptor.options);
+        interceptor.target.dispatchEvent(newEvent);
+        const targetName = interceptor.target === document ? 'document' : 'window';
+        safari_extension_esm_log.debug(`${interceptor.name} event re-dispatched due to ${trigger} on ${targetName}.`);
+      } else {
+        safari_extension_esm_log.debug(`Interceptor for ${interceptor.name} removed due to ${trigger}.`);
+      }
+    });
+  };
+  // Set a timer to automatically dispatch the events after the timeout.
+  const timer = setTimeout(() => {
+    dispatchEvents('timeout');
+  }, timeoutMs);
+  // Return a function to cancel the timer and dispatch events immediately.
+  return () => {
+    clearTimeout(timer);
+    dispatchEvents('response received');
+  };
+}
+
+//# sourceMappingURL=safari-extension.esm.js.map
 
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
 function _typeof(obj) {
@@ -27798,11 +24817,14 @@ function _createClass(Constructor, protoProps, staticProps) {
 
 
 /* eslint-disable class-methods-use-this,no-console */
-// TODO: add enum for levels 'INFO', 'DEBUG', 'ERROR'
+// Configure debug-level logging. If you need to debug the content script,
+// set verbose to true.
+ // TODO: add enum for levels 'INFO', 'DEBUG', 'ERROR'
 
 /**
  * Redefine if you need it
 */
+
 var DEFAULT_LEVEL = 'INFO';
 var CONSOLE_METHODS = {
   LOG: 'log',
@@ -27926,7 +24948,39 @@ var Log = /*#__PURE__*/function () {
   return Log;
 }();
 
-var log_log = new Log();
+var log_log = new Log(); // Configure logging in @adguard/safari-extension
+
+setLogger({
+  debug: function debug() {
+    for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+      args[_key4] = arguments[_key4];
+    }
+
+    return log_log.debug(args);
+  },
+  info: function info() {
+    for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+      args[_key5] = arguments[_key5];
+    }
+
+    return log_log.info(args);
+  },
+  error: function error() {
+    for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+      args[_key6] = arguments[_key6];
+    }
+
+    return log_log.error(args);
+  },
+
+  get level() {
+    return log_log.currentLevel === 'DEBUG' ? LoggingLevel.Debug : LoggingLevel.Info;
+  },
+
+  set level(_) {// Do nothing
+  }
+
+});
 ;// CONCATENATED MODULE: ./src/pages/common/constants.ts
 var MessagesToNativeApp;
 
@@ -27973,90 +25027,6 @@ var Platform;
   Platform["IPad"] = "ipad";
   Platform["IPhone"] = "iphone";
 })(Platform || (Platform = {}));
-;// CONCATENATED MODULE: ./src/pages/content/delayedEventDispatcher.ts
-/**
- * @file Handles delaying and dispatching of DOMContentLoaded and load events.
- */
-
-/**
- * The interceptors delay the events until either a response is received or the
- * timeout expires. If the events have already fired, no interceptors are added.
- *
- * @param timeout - Timeout in milliseconds after which the events are forced
- *                  (if not already handled).
- * @returns A function which, when invoked, cancels the timeout and dispatches
- *         (or removes) the interceptors.
- */
-
-function setupDelayedEventDispatcher() {
-  var timeout = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 100;
-  var interceptors = [];
-  var events = [{
-    name: 'DOMContentLoaded',
-    options: {
-      bubbles: true,
-      cancelable: false
-    },
-    target: document
-  }, {
-    name: 'load',
-    options: {
-      bubbles: false,
-      cancelable: false
-    },
-    target: window
-  }];
-  events.forEach(function (ev) {
-    var interceptor = {
-      name: ev.name,
-      options: ev.options,
-      intercepted: false,
-      target: ev.target,
-      listener: function listener(event) {
-        // Prevent immediate propagation.
-        event.stopImmediatePropagation();
-        interceptor.intercepted = true;
-        log_log.debug("".concat(ev.name, " event has been intercepted."));
-      }
-    };
-    interceptors.push(interceptor);
-    interceptor.target.addEventListener(ev.name, interceptor.listener, {
-      capture: true
-    });
-  });
-  var dispatched = false;
-
-  var dispatchEvents = function dispatchEvents(trigger) {
-    if (dispatched) return;
-    dispatched = true;
-    interceptors.forEach(function (interceptor) {
-      // Remove the interceptor listener.
-      interceptor.target.removeEventListener(interceptor.name, interceptor.listener, {
-        capture: true
-      });
-
-      if (interceptor.intercepted) {
-        // If intercepted, dispatch the event manually so downstream listeners eventually receive it.
-        var newEvent = new Event(interceptor.name, interceptor.options);
-        interceptor.target.dispatchEvent(newEvent);
-        var targetName = interceptor.target === document ? 'document' : 'window';
-        log_log.debug("".concat(interceptor.name, " event re-dispatched due to ").concat(trigger, " on ").concat(targetName, "."));
-      } else {
-        log_log.debug("Interceptor for ".concat(interceptor.name, " removed due to ").concat(trigger, "."));
-      }
-    });
-  }; // Set a timer to automatically dispatch the events after the timeout.
-
-
-  var timer = setTimeout(function () {
-    dispatchEvents('timeout');
-  }, timeout); // Return a function to cancel the timer and dispatch events immediately.
-
-  return function () {
-    clearTimeout(timer);
-    dispatchEvents('response received');
-  };
-}
 ;// CONCATENATED MODULE: ./src/pages/content/content.ts
 
 
@@ -28073,19 +25043,10 @@ function setupDelayedEventDispatcher() {
 
 
 
-
- // Configure debug-level logging. If you need to debug the content script,
-// set verbose to true.
-
-var verbose = false;
-
-if (verbose) {
-  log_log.setLevelDebug();
-} // The delay of 300ms is used as a buffer to capture critical initial events
+ // The delay of 1000ms is used as a buffer to capture critical initial events
 // while waiting for the rules response.
 
-
-var DELAY_EVENTS_MS = 300; // Initialize the delayed event dispatcher. This may intercept DOMContentLoaded
+var DELAY_EVENTS_MS = 1000; // Initialize the delayed event dispatcher. This may intercept DOMContentLoaded
 // and load events. The idea is to delay `load` and `DOMContentLoaded` so that
 // they fire AFTER scriptlets and JS rules are executed. This may help on some
 // websites where scriptlets timing is important. It won't completely solve all
@@ -28112,7 +25073,11 @@ var printTiming = function printTiming(contentScriptData) {
     log_log.debug("Elapsed on messaging to native host: ".concat(elapsedRequest, "ms"));
     log_log.debug("Elapsed on native host processing: ".concat(elapsedNative, "ms"));
   }
-};
+}; // Declare global window object with `adguard` property so that we could
+// expose ContentScript to other scripts in the ISOLATED world, this way
+// it can be called by scripts injected by `browser.scripting.executeScript`.
+
+
 /**
  * Main entry point function for the content script.
  *
@@ -28120,41 +25085,49 @@ var printTiming = function printTiming(contentScriptData) {
  * 1. Requests configuration (rules) from the background script.
  * 2. Checks and applies the configuration if available.
  */
-
-
 var init = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default().mark(function _callee() {
-    var contentScriptData, contentScript;
+    var contentScript, contentScriptData;
     return regenerator_default().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           // Log that the content script process has started.
-          log_log.debug("Content script is starting on ".concat(window.location.href, " (iframe=").concat(window == window.top, ")...")); // Request the content script data from the background page.
+          log_log.debug("Content script is starting on ".concat(window.location.href, " (iframe=").concat(window === window.top, ")...")); // First of all, make sure that the content script is exposed to the
+          // scripts that will be called by background script.
 
-          _context.next = 3;
+          contentScript = new ContentScript();
+          window.adguard = {
+            contentScript: contentScript
+          }; // Request the content script data from the background page.
+
+          _context.next = 5;
           return browser_polyfill_default().runtime.sendMessage({
             type: MessagesToBackgroundPage.RequestContentScriptData
           });
 
-        case 3:
+        case 5:
           contentScriptData = _context.sent;
           printTiming(contentScriptData);
 
           if (contentScriptData.configuration) {
-            log_log.debug("Found rules for the website ".concat(window.location.href)); // Instantiate and run the content script with the provided configuration.
+            // Normally, we shouldn't get here as the rules are applied by the
+            // background page. But in the case of about: frames we need to apply
+            // the rules here.
+            log_log.debug("Found rules for the website ".concat(window.location.href)); // Run the content script with the provided configuration.
 
-            contentScript = new ContentScript(contentScriptData.configuration);
-            contentScript.run(verbose, '[AdGuard Web Extension]');
+            contentScript.applyConfiguration(contentScriptData.configuration);
             log_log.debug("The rules have been applied for the website ".concat(window.location.href));
           } else {
-            log_log.debug("No rules found for the website ".concat(window.location.href));
+            // This may mean that the rules were actually applied by the background
+            // page.
+            log_log.debug("No rules returned for the website ".concat(window.location.href));
           } // After processing, cancel any pending delayed event dispatch and process
           // any queued events immediately.
 
 
           cancelDelayedDispatchAndDispatch();
 
-        case 7:
+        case 9:
         case "end":
           return _context.stop();
       }

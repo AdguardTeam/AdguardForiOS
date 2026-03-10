@@ -3210,7 +3210,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
-				branch = "v2.5.51@swift-5";
+				branch = "v2.8.25@swift-5";
 				kind = branch;
 			};
 		};
@@ -3235,7 +3235,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
 			requirement = {
 				kind = exactVersion;
-				version = 3.1.0;
+				version = 4.2.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

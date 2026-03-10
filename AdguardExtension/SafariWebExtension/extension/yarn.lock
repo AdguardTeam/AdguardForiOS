@@ -27,23 +27,23 @@
   resolved "https://registry.yarnpkg.com/@adguard/css-tokenizer/-/css-tokenizer-1.2.0.tgz#edc72c297243a0514a2aa4a4c4d4b9327b0697eb"
   integrity sha512-cUj5j/AU5z/T4//5M6KnIJBpykAY4QbDsoiQ2DaWX/r2XkepMkTb8DhIbUHJD/QLGEyLeQLpi+nlxAgf4NTRRQ==
 
-"@adguard/extended-css@^2.1.1":
+"@adguard/extended-css@2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@adguard/extended-css/-/extended-css-2.1.1.tgz#53677a310cf39259f54dfce79b692b0a327a8bb7"
   integrity sha512-TsHZ20oUWhbtrzQ4w70B96oHkGBIUZg2FdMfkq4StGfLmXQb+kI7fQb6BtXP2D0bvraIHMq6/mtKExglDJ9vsg==
 
-"@adguard/safari-extension@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@adguard/safari-extension/-/safari-extension-3.0.0.tgz#84ef7c24e715d9a4f3cf5007a876808d46ea4d8c"
-  integrity sha512-Gl2Qw/WIRt9EK2BK9E4Fh2ibWSzM9GvxvlGmiADdkCMZ/HRH74oPnRALIA0Ravi+rZp3cdpnX8ItzoqlgCdUhA==
+"@adguard/safari-extension@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@adguard/safari-extension/-/safari-extension-4.1.0.tgz#f0805f22e4c0add417310f0949da5fc9959cc239"
+  integrity sha512-YIcZFjEGMA2moes0vMoDPnHe3iad3ifHcUML93fur0zMR5YvORe35vmmf9bNDxlpNP/1Hzkwfy6RakkoE/Rbsg==
   dependencies:
-    "@adguard/extended-css" "^2.1.1"
-    "@adguard/scriptlets" "^2.1.4"
+    "@adguard/extended-css" "2.1.1"
+    "@adguard/scriptlets" "2.2.9"
 
-"@adguard/scriptlets@^2.1.4":
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-2.2.8.tgz#9054c8957cbef2347d25df86b0585cf846df1039"
-  integrity sha512-V6d6akdFgRTHu6m6Q4E/j3v54xjRIntOUcoNLY+Wd/ch2BOGb6cmXGig/T767aoR5c5S1HkJq8LC6KDe9HqHGA==
+"@adguard/scriptlets@2.2.9":
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-2.2.9.tgz#5ade873269aee425a8e3ff78d48dbf95258555fb"
+  integrity sha512-q3hHnjy7RKbRWa6HJ4zIOjUjtIV2myB1nQOrpTk39DrTde9cgpV5avQxl1msWhdeq/KvXh8dG8+yJSfesjcDQg==
   dependencies:
     "@adguard/agtree" "^3.2.2"
     "@types/trusted-types" "^2.0.7"
@@ -2226,9 +2226,9 @@
   integrity sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==
 
 "@types/webextension-polyfill@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@types/webextension-polyfill/-/webextension-polyfill-0.8.0.tgz#6c40740eec531de412f6ceba27bb2cad4a24907c"
-  integrity sha512-usmQx2snpNkVl2VoOGZCdrPnfHL+CjuSFy84ZdTwQ2b2cvyygF/zGW5YI6Zywk+bfq9zmYpORO9lmdN7DknpRw==
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/@types/webextension-polyfill/-/webextension-polyfill-0.8.3.tgz#eb601b3fcf524f0ecf7d7579ccbd237928d0dda7"
+  integrity sha512-GN+Hjzy9mXjWoXKmaicTegv3FJ0WFZ3aYz77Wk8TMp1IY3vEzvzj1vnsa0ggV7vMI1i+PUxe4qqnIJKCzf9aTg==
 
 "@types/webpack@^5.28.0":
   version "5.28.0"

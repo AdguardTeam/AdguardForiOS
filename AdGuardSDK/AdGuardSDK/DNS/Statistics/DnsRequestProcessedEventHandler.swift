@@ -48,6 +48,8 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
 
     // TODO: - Add some tests
     func handle(event: AGDnsRequestProcessedEventWrapper) {
+        let configSnapshot = proxyConfigurationProvider.snapshot()
+
         eventQueue.async { [weak self] in
             guard let self = self, event.error == nil else {
                 Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; Error: \(event.error ?? "Missing self")")
@@ -59,7 +61,10 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
             let activeDnsUpstream: DnsProxyUpstream?
 
             if let upstreamId = event.upstreamId {
-                activeDnsUpstream = self.proxyConfigurationProvider.dnsUpstreamById[upstreamId]
+                activeDnsUpstream = configSnapshot.dnsUpstreamById[upstreamId]
+                if activeDnsUpstream == nil {
+                    Logger.logDebug("(DnsRequestProcessedEventHandler) - handleEvent; upstreamId=\(upstreamId) not found in snapshot (snapshot has \(configSnapshot.dnsUpstreamById.count) upstreams)")
+                }
             }
             else {
                 activeDnsUpstream = nil
@@ -68,9 +73,9 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
             let processedEvent = DnsRequestProcessedEvent(
                 event: event,
                 upstream: activeDnsUpstream?.dnsUpstreamInfo,
-                customDnsFilterIds: self.proxyConfigurationProvider.customDnsFilterIds,
-                dnsBlocklistFilterId: self.proxyConfigurationProvider.dnsBlocklistFilterId,
-                dnsAllowlistFilterId: self.proxyConfigurationProvider.dnsAllowlistFilterId
+                customDnsFilterIds: configSnapshot.customDnsFilterIds,
+                dnsBlocklistFilterId: configSnapshot.dnsBlocklistFilterId,
+                dnsAllowlistFilterId: configSnapshot.dnsAllowlistFilterId
             )
 
             // Add to statistics

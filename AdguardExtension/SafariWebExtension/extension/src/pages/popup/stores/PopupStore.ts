@@ -94,18 +94,20 @@ export class PopupStore {
             if (currentSiteFaviconDataUrl) {
                 this.currentSiteFaviconDataUrl = currentSiteFaviconDataUrl;
             }
-            this.permissionsModalViewed = popupData.permissionsModalViewed;
-            this.allSitesAllowed = popupData.allSitesAllowed;
-            this.protectionEnabled = popupData.protectionEnabled;
-            this.safariProtectionEnabled = popupData.safariProtectionEnabled;
-            this.hasUserRules = popupData.hasUserRules;
-            this.premiumApp = popupData.premiumApp;
-            this.contentBlockersEnabled = popupData.contentBlockersEnabled;
-            this.protectionModalVisible = !popupData.contentBlockersEnabled;
-            this.appearanceTheme = popupData.appearanceTheme;
-            this.advancedBlockingEnabled = popupData.advancedBlockingEnabled;
-            this.allowlistInverted = popupData.allowlistInverted;
-            this.platform = popupData.platform;
+
+            const data = popupData as any;
+            this.permissionsModalViewed = data.permissionsModalViewed;
+            this.allSitesAllowed = data.allSitesAllowed;
+            this.protectionEnabled = data.protectionEnabled;
+            this.safariProtectionEnabled = data.safariProtectionEnabled;
+            this.hasUserRules = data.hasUserRules;
+            this.premiumApp = data.premiumApp;
+            this.contentBlockersEnabled = data.contentBlockersEnabled;
+            this.protectionModalVisible = !data.contentBlockersEnabled;
+            this.appearanceTheme = data.appearanceTheme;
+            this.advancedBlockingEnabled = data.advancedBlockingEnabled;
+            this.allowlistInverted = data.allowlistInverted;
+            this.platform = data.platform;
         });
     };
 

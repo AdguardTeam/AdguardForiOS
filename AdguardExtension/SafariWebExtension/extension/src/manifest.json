@@ -46,6 +46,7 @@
         "nativeMessaging",
         "storage",
         "unlimitedStorage",
-        "activeTab"
+        "activeTab",
+        "scripting"
     ]
 }

@@ -63,6 +63,7 @@ final class DnsProxy: DnsProxyProtocol {
             Logger.logInfo("(DnsProxy) - stop")
             self?.proxy?.stop()
             self?.proxy = nil
+            Logger.logDebug("(DnsProxy) - stop; proxy stopped, calling reset")
             self?.proxySettingsProvider.reset()
             Logger.logInfo("(DnsProxy) - stopped")
         }
@@ -81,11 +82,14 @@ final class DnsProxy: DnsProxyProtocol {
 
         // Configuration
         if proxy != nil {
+            Logger.logDebug("(DnsProxy) - internalStart; stopping existing proxy")
             proxy?.stop()
             proxy = nil
         }
+        Logger.logDebug("(DnsProxy) - internalStart; calling reset before getProxyConfig")
         proxySettingsProvider.reset()
         let configuration = proxySettingsProvider.getProxyConfig(systemDnsUpstreams, outboundInterface)
+        Logger.logDebug("(DnsProxy) - internalStart; getProxyConfig done")
         let agConfig = AGDnsProxyConfig.initialize(from: configuration)
 
         // Processing events config

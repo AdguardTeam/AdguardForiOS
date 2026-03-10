@@ -86,24 +86,23 @@ nvm alias default 22
 npm install -g yarn
 ```
 
-### (optional) Install a newer ruby version
+### Install a newer ruby version
 
 ```sh
 brew install ruby
 ```
 
-Add to your `~/.bash_profile`
+Add to your `~/.zshrc`
 
 ```sh
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
+echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc
 ```
 
 ### Prepare
 
 Prepare and install Ruby bundler:
 
-- `sudo gem install bundler`
+- `gem install bundler -v 2.3.9`
 
 Configure bundler to use local directory for storing dependencies:
 

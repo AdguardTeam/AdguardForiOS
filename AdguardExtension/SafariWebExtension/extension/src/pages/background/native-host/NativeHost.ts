@@ -429,7 +429,7 @@ export class NativeHost implements NativeHostInterface {
             enable_advanced_blocking_link: enableAdvancedBlockingLink,
             // i.e. "adguard://safariWebExtension?action=enableSiteAndSafariProtection?domain="
             enable_safari_protection_link: enableSafariProtectionLink,
-        } = result;
+        } = result as any;
 
         await this.setLinks({
             addToBlocklistLink,

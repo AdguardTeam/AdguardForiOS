@@ -142,20 +142,39 @@ const handleMessages = async (message: Message, sender: MessageSender): Promise<
             break;
         }
         case MessagesToBackgroundPage.RequestContentScriptData: {
-            const topUrl = sender.frameId === 0 ? undefined : sender.tab?.url;
-            let { url } = sender;
+            const tabId = sender.tab?.id ?? 0;
+            const frameId = sender.frameId ?? 0;
+            let blankFrame = false;
 
-            if (!url) {
-                // If there's no url then we won't be able to get the
-                // content script configuration anyway.
-                break;
-            } else if (!url.startsWith('http') && topUrl) {
-                // Handle the case of non-HTTP iframes, i.e. frames created by JS.
-                // For instance, frames can be created as 'about:blank' or 'data:text/html'
+            let url = sender.url || '';
+            const topUrl = frameId === 0 ? undefined : sender.tab?.url;
+
+            if (!url.startsWith('http') && topUrl) {
+                // Handle the case of non-HTTP iframes, i.e. frames created by
+                // JS. For instance, frames can be created as 'about:blank' or
+                // 'about:srcdoc'.
                 url = topUrl;
+                blankFrame = true;
             }
 
-            return engine.lookup(url, topUrl);
+            const contentScriptData = await engine.lookup(url, topUrl);
+
+            // In the current Safari version we cannot apply rules to blank
+            // frames from the background: https://bugs.webkit.org/show_bug.cgi?id=296702
+            //
+            // In this case we fallback to using the content script to apply
+            // rules. The downside here is that the content script cannot
+            // override website's CSPs.
+            if (!blankFrame && contentScriptData.configuration) {
+                await engine.applyConfiguration(tabId, frameId, contentScriptData.configuration);
+
+                // Make sure that the configuration is not returned to the
+                // content script as the configuration has been already applied
+                // by engine.
+                contentScriptData.configuration = undefined;
+            }
+
+            return contentScriptData;
         }
         default:
             break;
@@ -167,5 +186,7 @@ const handleMessages = async (message: Message, sender: MessageSender): Promise<
 export const background = () => {
     // Message listener should be on the upper level to wake up background page
     // when it is necessary.
-    browser.runtime.onMessage.addListener(handleMessages);
+    browser.runtime.onMessage.addListener(async (message: unknown, sender: browser.Runtime.MessageSender) => {
+        return handleMessages(message as Message, sender);
+    });
 };

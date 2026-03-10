@@ -235,7 +235,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
         return false
     }
 
-    private func logNWPath(_ newPath: NWPath) {
+    private func logNWPath(_ newPath: Network.NWPath) {
         Logger.logInfo("(NetworkUtils) - NWPathMonitor received the current path update")
         Logger.logInfo("(NetworkUtils) - path status: \(newPath.status)")
         Logger.logInfo("(NetworkUtils) - path debugDescription: \(newPath.debugDescription)")

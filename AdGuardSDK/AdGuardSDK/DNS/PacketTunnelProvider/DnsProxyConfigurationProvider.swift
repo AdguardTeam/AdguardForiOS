@@ -20,6 +20,14 @@ import Foundation
 import SharedAdGuardSDK
 import Network
 
+/// Immutable snapshot of configuration state needed by event handler
+struct DnsProxyConfigurationSnapshot {
+    let dnsUpstreamById: [Int: DnsProxyUpstream]
+    let customDnsFilterIds: [Int]
+    let dnsBlocklistFilterId: Int
+    let dnsAllowlistFilterId: Int
+}
+
 protocol DnsProxyConfigurationProviderProtocol {
     /**
      Contains all DNS upstreams that can resolve the request by unique ids
@@ -55,9 +63,14 @@ protocol DnsProxyConfigurationProviderProtocol {
 
     /// Just clears `upstreamById`
     func reset()
+
+    /// Returns an atomic snapshot of all mutable configuration properties
+    func snapshot() -> DnsProxyConfigurationSnapshot
 }
 
 final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol {
+
+    private let lock = NSLock()
 
     private(set) var dnsUpstreamById: [Int: DnsProxyUpstream] = [:]
     private(set) var customDnsFilterIds: [Int] = []
@@ -86,7 +99,22 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         self.networkUtils = networkUtils
     }
 
+    func snapshot() -> DnsProxyConfigurationSnapshot {
+        lock.lock()
+        defer { lock.unlock() }
+        let snap = DnsProxyConfigurationSnapshot(
+            dnsUpstreamById: dnsUpstreamById,
+            customDnsFilterIds: customDnsFilterIds,
+            dnsBlocklistFilterId: dnsBlocklistFilterId,
+            dnsAllowlistFilterId: dnsAllowlistFilterId
+        )
+        Logger.logDebug("(DnsProxyConfigurationProvider) - snapshot; upstreams=\(snap.dnsUpstreamById.count), customFilters=\(snap.customDnsFilterIds.count), blocklistId=\(snap.dnsBlocklistFilterId), allowlistId=\(snap.dnsAllowlistFilterId)")
+        return snap
+    }
+
     func getProxyConfig(_ systemDnsUpstreams: [DnsUpstream], _ outboundInterface: NWInterface?) -> DnsProxyConfiguration {
+        lock.lock()
+        defer { lock.unlock() }
         let lowLevelConfiguration = dnsConfiguration.lowLevelConfiguration
 
         // Reveal DNS bootstraps
@@ -143,6 +171,8 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
             proxyFilters.append(allowlistFilter)
         }
 
+        Logger.logDebug("(DnsProxyConfigurationProvider) - getProxyConfig; done; upstreams=\(dnsUpstreamById.count), customFilters=\(customDnsFilterIds.count), blocklistId=\(dnsBlocklistFilterId), allowlistId=\(dnsAllowlistFilterId)")
+
         return DnsProxyConfiguration(
             upstreams: proxyUpstreams,
             fallbacks: proxyFallbacks,
@@ -159,6 +189,9 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
     }
 
     func reset() {
+        lock.lock()
+        defer { lock.unlock() }
+        Logger.logDebug("(DnsProxyConfigurationProvider) - reset; clearing \(dnsUpstreamById.count) upstreams")
         dnsUpstreamById.removeAll()
         customDnsFilterIds = []
         dnsBlocklistFilterId = -1

@@ -32,14 +32,16 @@ extension ChartStatistics {
     }
 
     func compressTable() throws {
-        Logger.logInfo("(ChartStatistics) - compressTable; Trying to compress the table")
+        try statisticsDb.transaction(.immediate) {
+            Logger.logInfo("(ChartStatistics) - compressTable; Trying to compress the table")
 
-        let recordsCountBeforeCompression = try statisticsDb.scalar(ChartStatisticsTable.table.count)
-        let compressedRecords = try getCompressedRecords()
-        try reset()
-        try compressedRecords.forEach { try add(record: $0) }
+            let recordsCountBeforeCompression = try statisticsDb.scalar(ChartStatisticsTable.table.count)
+            let compressedRecords = try getCompressedRecords()
+            try reset()
+            try compressedRecords.forEach { try add(record: $0) }
 
-        Logger.logInfo("(ChartStatistics) - compressTable; Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
+            Logger.logInfo("(ChartStatistics) - compressTable; Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
+        }
     }
 
     /// Returns specified `intervalsCount` number of  date intervals for specified `period`

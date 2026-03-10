@@ -150,10 +150,12 @@ extension AGDnsProxyConfig {
         // Unfortunately, it appears to be really unstable and causing issues with the current implementation.
         // We should revive it later when we change the way the network extension handles network change.
         dnsProxyConfiguration.enableRouteResolver = false
-        dnsProxyConfiguration.blockEch = false
+        dnsProxyConfiguration.blockEch = defaultConfig.blockEch
         dnsProxyConfiguration.helperPath = defaultConfig.helperPath
         dnsProxyConfiguration.upstreamTimeoutMs = UInt(AGDnsProxyConfig.defaultTimeoutMs)
-        dnsProxyConfiguration.enableServfailOnUpstreamsFailure = false // With DnsLibs 2.4.16+ we disable servfail on upstreams failure
+        dnsProxyConfiguration.enableServfailOnUpstreamsFailure = defaultConfig.enableServfailOnUpstreamsFailure
+        dnsProxyConfiguration.enableHttp3 = defaultConfig.enableHttp3
+        dnsProxyConfiguration.enablePostQuantumCryptography = defaultConfig.enablePostQuantumCryptography
         return dnsProxyConfiguration
     }
 

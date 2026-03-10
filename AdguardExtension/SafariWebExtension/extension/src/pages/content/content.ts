@@ -9,22 +9,14 @@
  */
 
 import browser from 'webextension-polyfill';
-import { ContentScript } from '@adguard/safari-extension';
+import { ContentScript, setupDelayedEventDispatcher } from '@adguard/safari-extension';
 import { ContentScriptData } from '../common/interfaces';
 import { log } from '../common/log';
 import { MessagesToBackgroundPage } from '../common/constants';
-import { setupDelayedEventDispatcher } from './delayedEventDispatcher';
 
-// Configure debug-level logging. If you need to debug the content script,
-// set verbose to true.
-const verbose = false;
-if (verbose) {
-    log.setLevelDebug();
-}
-
-// The delay of 300ms is used as a buffer to capture critical initial events
+// The delay of 1000ms is used as a buffer to capture critical initial events
 // while waiting for the rules response.
-const DELAY_EVENTS_MS = 300;
+const DELAY_EVENTS_MS = 1000;
 
 // Initialize the delayed event dispatcher. This may intercept DOMContentLoaded
 // and load events. The idea is to delay `load` and `DOMContentLoaded` so that
@@ -57,6 +49,17 @@ const printTiming = (contentScriptData: ContentScriptData) => {
     }
 };
 
+// Declare global window object with `adguard` property so that we could
+// expose ContentScript to other scripts in the ISOLATED world, this way
+// it can be called by scripts injected by `browser.scripting.executeScript`.
+declare global {
+    interface Window {
+        adguard: {
+            contentScript: ContentScript;
+        };
+    }
+}
+
 /**
  * Main entry point function for the content script.
  *
@@ -66,7 +69,14 @@ const printTiming = (contentScriptData: ContentScriptData) => {
  */
 const init = async () => {
     // Log that the content script process has started.
-    log.debug(`Content script is starting on ${window.location.href} (iframe=${window == window.top})...`);
+    log.debug(`Content script is starting on ${window.location.href} (iframe=${window === window.top})...`);
+
+    // First of all, make sure that the content script is exposed to the
+    // scripts that will be called by background script.
+    const contentScript = new ContentScript();
+    window.adguard = {
+        contentScript,
+    };
 
     // Request the content script data from the background page.
     const contentScriptData: ContentScriptData = await browser.runtime.sendMessage({
@@ -76,15 +86,19 @@ const init = async () => {
     printTiming(contentScriptData);
 
     if (contentScriptData.configuration) {
+        // Normally, we shouldn't get here as the rules are applied by the
+        // background page. But in the case of about: frames we need to apply
+        // the rules here.
         log.debug(`Found rules for the website ${window.location.href}`);
 
-        // Instantiate and run the content script with the provided configuration.
-        const contentScript = new ContentScript(contentScriptData.configuration);
-        contentScript.run(verbose, '[AdGuard Web Extension]');
+        // Run the content script with the provided configuration.
+        contentScript.applyConfiguration(contentScriptData.configuration);
 
         log.debug(`The rules have been applied for the website ${window.location.href}`);
     } else {
-        log.debug(`No rules found for the website ${window.location.href}`);
+        // This may mean that the rules were actually applied by the background
+        // page.
+        log.debug(`No rules returned for the website ${window.location.href}`);
     }
 
     // After processing, cancel any pending delayed event dispatch and process

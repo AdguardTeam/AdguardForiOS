@@ -32,7 +32,7 @@ export const initAssistant = () => {
         }
     });
 
-    browser.runtime.onMessage.addListener((message) => {
+    browser.runtime.onMessage.addListener((message: any) => {
         const { data, type } = message;
 
         switch (type) {

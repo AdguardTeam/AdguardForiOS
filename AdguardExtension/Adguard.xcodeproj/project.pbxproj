@@ -4348,7 +4348,6 @@
 		D78238722E24F96200AA2B4A /* translator.ts */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.typescript; path = translator.ts; sourceTree = "<group>"; };
 		D78238762E24F99400AA2B4A /* index.ts */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.typescript; path = index.ts; sourceTree = "<group>"; };
 		D78238772E24F99400AA2B4A /* Storage.ts */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.typescript; path = Storage.ts; sourceTree = "<group>"; };
-		D78238792E24F9B500AA2B4A /* delayedEventDispatcher.ts */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.typescript; path = delayedEventDispatcher.ts; sourceTree = "<group>"; };
 		D782387A2E24F9C800AA2B4A /* adguard.ts */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.typescript; path = adguard.ts; sourceTree = "<group>"; };
 		D782387B2E24F9D300AA2B4A /* engine.ts */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.typescript; path = engine.ts; sourceTree = "<group>"; };
 		D782387D2E24FA1400AA2B4A /* jest-setup.ts */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.typescript; path = "jest-setup.ts"; sourceTree = "<group>"; };
@@ -5605,7 +5604,6 @@
 			children = (
 				4982C19826D78F2A00CACBBE /* assistant */,
 				4982C19A26D78F2A00CACBBE /* content.ts */,
-				D78238792E24F9B500AA2B4A /* delayedEventDispatcher.ts */,
 				4982C19B26D78F2A00CACBBE /* index.ts */,
 			);
 			path = content;
@@ -8451,7 +8449,7 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/bin/sh -l";
+			shellPath = "/bin/zsh -l";
 			shellScript = "set -e -x\n\nJS_SOURCES=\"${SRCROOT}/SafariWebExtension/extension\"\nRESOURCES=\"${SRCROOT}/SafariWebExtension/Resources\"\ncd \"${JS_SOURCES}\" && yarn install && ADG_PRO=1 yarn build && rm -rf \"${RESOURCES}/*\" && cp -r build/* \"${RESOURCES}\"\n";
 		};
 		4982C2F926D79F9500CACBBE /* ShellScript */ = {
@@ -8469,7 +8467,7 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/bin/sh -l";
+			shellPath = "/bin/zsh -l";
 			shellScript = "set -e -x\n\nJS_SOURCES=\"${SRCROOT}/SafariWebExtension/extension\"\nRESOURCES=\"${SRCROOT}/SafariWebExtension/Resources\"\ncd \"${JS_SOURCES}\" && yarn install && yarn build && rm -rf \"${RESOURCES}/*\" && cp -r build/* \"${RESOURCES}\"\n";
 		};
 		6506CC2B1BD853140020F31E /* Setting Required device capabilities */ = {
@@ -14628,7 +14626,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
-				branch = "v2.5.51@swift-5";
+				branch = "v2.8.25@swift-5";
 				kind = branch;
 			};
 		};

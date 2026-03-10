@@ -1,6 +1,10 @@
 /* eslint-disable class-methods-use-this,no-console */
+// Configure debug-level logging. If you need to debug the content script,
+// set verbose to true.
+import { setLogger, Logger, LoggingLevel } from '@adguard/safari-extension';
 
 // TODO: add enum for levels 'INFO', 'DEBUG', 'ERROR'
+
 /**
  * Redefine if you need it
 */
@@ -100,3 +104,16 @@ class Log {
 }
 
 export const log = new Log();
+
+// Configure logging in @adguard/safari-extension
+setLogger({
+    debug: (...args: unknown[]) => log.debug(args),
+    info: (...args: unknown[]) => log.info(args),
+    error: (...args: unknown[]) => log.error(args),
+    get level() {
+        return log.currentLevel === 'DEBUG' ? LoggingLevel.Debug : LoggingLevel.Info;
+    },
+    set level(_: LoggingLevel) {
+        // Do nothing
+    },
+} as Logger);

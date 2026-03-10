@@ -51,7 +51,19 @@
         "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp/en.lproj/RateApp.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/ImportSettings/en.lproj/ImportSettings.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/UpsellViewController/en.lproj/UpsellViewController.strings",
-        "AdguardExtension/YouTubeAdsActionExtension/en.lproj/InfoPlist.strings"
+        "AdguardExtension/YouTubeAdsActionExtension/en.lproj/InfoPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/AdguardBlockingExtensionAnnoyancesPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/AdguardBlockingExtensionCustomPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/AdguardBlockingExtensionGeneralPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/AdguardBlockingExtensionOtherPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/AdguardBlockingExtensionPrivacyPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/AdguardBlockingExtensionSecurityPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/ProBlockingExtensionAnnoyancesInfoPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/ProBlockingExtensionCustomInfoPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/ProBlockingExtensionGeneralInfoPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/ProBlockingExtensionOtherInfoPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/ProBlockingExtensionPrivacyInfoPlist.strings",
+        "AdguardExtension/Extension/Resources/en.lproj/ProBlockingExtensionSecurityInfoPlist.strings"
     ],
     "storyboard_dirs": [
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About",
