@@ -21,3 +21,12 @@
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "확인";
+
+/* Class = "UILabel"; text = "Delete account"; ObjectID = "sJT-OU-IOd"; */
+"sJT-OU-IOd.text" = "계정 삭제";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "xFB-lA-lsv"; */
+"xFB-lA-lsv.normalTitle" = "취소";
+
+/* Class = "UIButton"; normalTitle = "Delete account"; ObjectID = "yIo-kb-pVa"; */
+"yIo-kb-pVa.normalTitle" = "계정 삭제";

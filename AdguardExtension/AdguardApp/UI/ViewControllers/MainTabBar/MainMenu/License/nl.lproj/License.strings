@@ -21,3 +21,12 @@
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "Bevestigen";
+
+/* Class = "UILabel"; text = "Delete account"; ObjectID = "sJT-OU-IOd"; */
+"sJT-OU-IOd.text" = "Account verwijderen";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "xFB-lA-lsv"; */
+"xFB-lA-lsv.normalTitle" = "Annuleren";
+
+/* Class = "UIButton"; normalTitle = "Delete account"; ObjectID = "yIo-kb-pVa"; */
+"yIo-kb-pVa.normalTitle" = "Account verwijderen";

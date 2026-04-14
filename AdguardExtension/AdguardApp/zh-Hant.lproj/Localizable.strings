@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "前往我的帳戶";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "刪除帳戶";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "您將被轉至您的 AdGuard 帳戶設定以確認刪除。<br><br>刪除帳戶後，您將無法再使用您的電子郵件地址登入。";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "購買";
 
@@ -758,7 +764,7 @@
 "advanced_protection_onboarding_third_step_text" = "設定所有的 AdGuard 切換為<b>開著</b>。您準備好了！";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "為了啟用<b>進階</b>防護，開啟 Safari，於網址欄位的左側上輕觸該圖像，<br><br>%@<br><br>然後輕觸<b>管理延伸功能</b>，並打開該 <b>AdGuard</b> 切換。";
+"onboarding_fours_step_text" = "若要啟用<b>進階</b>防護，請開啟 Safari，點擊網址列左側的圖示，<br><br>%@<br><br>接著點擊<b>管理擴充功能</b>，並開啟 <b>AdGuard</b> 的開關。";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "封鎖該請求";
@@ -1109,6 +1115,9 @@
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "新增 DNS 使用者規則";
 
+/* (ImportSettingsController) disable YouTube feature title */
+"disable_youtube_feature" = "停用 AdGuard 播放器";
+
 /* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
 "low_level_description" = "<b style=color:#c23814ff>警告！</b>啟用這些功能可能破壞網際網路連線或危害您的安全性及隱私。";
 
@@ -1240,6 +1249,12 @@ DO NOT TRANSLATE "none" */
 
 /* (YoutubePlayerController) 'userscript error' alert message */
 "youtube_player_controller_userscript_error_message" = "未能創建使用者腳本";
+
+/* (YoutubePlayerController) YouTube feature disabled alert title */
+"youtube_player_controller_feature_disabled_title" = "AdGuard 播放器已停用";
+
+/* (YoutubePlayerController) YouTube feature disabled alert message */
+"youtube_player_controller_feature_disabled_message" = "無法使用 AdGuard 分享影片";
 
 /* (YouTubeAdsRequestHandler) 'no url error' alert title */
 "youtube_share_extension_no_url_title" = "無被提供的網址";

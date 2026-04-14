@@ -20,7 +20,7 @@
 "NsT-wt-1hd.text" = "Nytt selvvalgt filter";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
-"OpB-AR-Og7.normalTitle" = "Avbryt";
+"OpB-AR-Og7.normalTitle" = "AVBRYT";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
 "QHZ-sJ-wTL.text" = "Dette modulet blokkerer annonser og sporere på nettsteder åpnet i Safari";

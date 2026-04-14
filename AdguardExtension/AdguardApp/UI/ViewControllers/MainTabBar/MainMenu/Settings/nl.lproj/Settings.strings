@@ -170,7 +170,7 @@
 "wPe-ae-X0G.text" = "Ben jij een ontwikkelaar?";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
-"wYq-g0-5k6.text" = "Deze optie verwijdert alle statistische data, zoals aantal aanvragen, etc.";
+"wYq-g0-5k6.text" = "Met deze optie worden alle statistische gegevens gewist, zoals het aantal aanvragen, enz.";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Sta advertenties toe, behalve bij websites van deze lijst";

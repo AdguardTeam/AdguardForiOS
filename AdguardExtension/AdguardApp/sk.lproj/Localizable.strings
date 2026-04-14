@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Prejsť na moje konto";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Odstrániť účet";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Budete presmerovaný do nastavení Vášho účtu AdGuard, kde potvrdíte odstránenie<br><br>Po odstránení účtu sa už nebudete môcť znova prihlásiť pomocou svojej e-mail adresy";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Nákup";
 
@@ -308,10 +314,10 @@
 "other_header_title" = "Iné";
 
 /* (AdvancedSettingsController) Content blocker description text */
-"cb_description_common" = "6 blokátorov obsahu, každý až s 50 000 pravidlami";
+"cb_description_common" = "6 blokovačov obsahu, každý až s 50 000 pravidlami";
 
 /* (AdvancedSettingsController) Content blocker description text */
-"cb_description_advanced_protection" = "6 blokátorov obsahu, každý až so 150 000 pravidlami, a pokročilá ochrana";
+"cb_description_advanced_protection" = "6 blokovačov obsahu, každý až so 150 000 pravidlami a pokročilá ochrana";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtre:";
@@ -320,7 +326,7 @@
 "cb_screen_advanced_protection_title" = "Pokročilá ochrana";
 
 /* (ContentBlockersTableController) - Content Blockers title */
-"cb_screen_content_blockers_title" = "Blokátory obsahu";
+"cb_screen_content_blockers_title" = "Blokovače obsahu";
 
 /* (ContentBlockersTableController) - General content blocker name */
 "cb_screen_content_blockers_general_name" = "Všeobecné";

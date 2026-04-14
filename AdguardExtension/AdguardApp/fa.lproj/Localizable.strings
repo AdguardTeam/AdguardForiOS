@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "به حساب کاربری من برو";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "حذف حساب";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "شما به تنظيمات حساب کاربری AdGuard خود هدایت می‌شوید تا تایید حذف را انجام دهید<br><br>بعد از حذف حساب کاربری خود، دیگر قادر به ورود مجدد با رایانشانی نخواهید بود";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "خرید";
 
@@ -284,7 +290,7 @@
 "purchase_description_format" = "شرایط اشتراک آدگارد<br><br>• پرداخت از حساب iTunes شما در هنگام تأیید خرید کسر می‌شود.<br><br>• اشتراک به‌طور خودکار تمدید می‌شود مگر اینکه تمدید خودکار حداقل ۲۴ ساعت قبل از پایان دوره جاری خاموش شود.<br><br>• هزینه تمدید اشتراک ظرف ۲۴ ساعت از پایان دوره جاری به حساب iTunes شما کسر می‌شود.<br><br>• می‌توانید اشتراک‌های خود را مدیریت کرده و تمدید خودکار را با مراجعه به تنظیمات حساب پس از خرید غیر فعال کنید.<br><br>آدگارد <a href=%2$@>EULA</a> و <a href=%1$@>سیاست حفظ حریم خصوصی</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "من AdGuard را قبول می کنم <a href=\"%2$s\">EULA</a> و <a href=\"%1$s\">سیاست حریم خصوصی</a>";
+"lifetime_purchase_description_format" = "<a href=%2$@>قرارداد مجوز کاربر نهایی</a> و <a href=%1$@>سیاست حفظ حریم خصوصی</a> AdGuard\n";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "تأیید";
@@ -758,7 +764,7 @@
 "advanced_protection_onboarding_third_step_text" = "همه گزینه‌های ادگارد را روی <b>روشن</b> تنظیم کنید. شما برای شروع آماده‌اید!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "برای محافظت <b>پیشرفته</b>، سافاری را باز کنید، روی نماد در سمت چپ فیلد URL ضربه بزنید، <br><br> %@ <br><br>سپس روی <b>مدیریت برنامه‌های افزودنی</b> ضربه بزنید و کلید <b>ادگارد</b> را روشن کنید.";
+"onboarding_fours_step_text" = "برای <b>پیشرفته</b> حفاظت، سافاری را باز کنید، روی نماد سمت چپ فیلد URL ضربه بزنید،<br><br> %@ <br><br>سپس روی <b>مدیریت برنامه های افزودنی</b> و دکمه <b>آگهی تبلیغاتی</b> ضامن.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "مسدود کردن درخواست";
@@ -878,7 +884,7 @@
 "bug_report_successed_message" = "گزارش اشکال شما با موفقیت ارسال شد!";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "با ادامه استفاده از آن، شما <br /><a href=\"%2$s\">شرایط و ضوابط</a> و <a href=\"%1$s\">سیاست حریم خصوصی</a> را می‌پذیرید.";
+"introduction_license_agreement" = "من با <a href=%2$@>EULA و <a href=%1$@>سیاست حفظ حریم خصوصی AdGuard موافقم.\n\n";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "درخواست";

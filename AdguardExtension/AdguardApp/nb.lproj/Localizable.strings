@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Gå til kontoen min";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Slett konto";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Du vil bli omdirigert til AdGuard-kontoens innstillinger for å bekrefte sletting <br><br> Etter at du har slettet kontoen din, vil du ikke kunne logge inn igjen med din e-postadresse ";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Kjøp";
 
@@ -200,7 +206,7 @@
 "update_filter_start_message" = "Oppdaterer…";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Legg til ny regel";
+"add_blacklist_rule_title" = "Legg til en ny regel";
 
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "Legg til et domene";
@@ -413,7 +419,7 @@
 "on_state" = "Aktivert";
 
 /* (FiltersController) Disabled state in groups section */
-"off_state" = "Deaktivert";
+"off_state" = "Skrudd av";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Hjemmeside: ";
@@ -905,7 +911,7 @@
 "average_info_alert_message" = "Gjennomsnittlig tid det tar å behandle en DNS-forespørsel. Jo raskere DNS-server du bruker, desto lavere blir denne.";
 
 /* (ActivityViewController) -  Data saved alret title */
-"data_saved_info_alert_title" = "Data lagret";
+"data_saved_info_alert_title" = "Data spart";
 
 /* (ActivityViewController) -  Data saved alret message */
 "data_saved_info_alert_message" = "AdGuard hindrer enheten din fra å laste inn verktøy for sporing i appen, og reduserer databruken til enheten din\n\nHer er den totale mengden data som er lagret av AdGuard for den valgte tidsperioden";

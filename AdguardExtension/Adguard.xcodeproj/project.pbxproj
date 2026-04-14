@@ -414,6 +414,8 @@
 		60DB6EC727AC266C00C2CFC4 /* userscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 60DB6EC327AC266C00C2CFC4 /* userscript.js */; };
 		60DB6EC927AC2E9300C2CFC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		60DB6ECA27AC2E9600C2CFC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
+		AA00000327032026000A0003 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = AA00000127032026000A0001 /* AppIcon.icon */; };
+		AA00000427032026000A0004 /* ProAppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = AA00000227032026000A0002 /* ProAppIcon.icon */; };
 		6513182E1BDE448D008DCFF9 /* ActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65C52B361B906105003AF42F /* ActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
 		655A02171C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
@@ -3344,6 +3346,8 @@
 		65B007101BCD6D2600844F2E /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65B40D391BDE807400A9C595 /* stringUIResources.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = stringUIResources.plist; sourceTree = "<group>"; };
 		65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA00000127032026000A0001 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		AA00000227032026000A0002 /* ProAppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = ProAppIcon.icon; sourceTree = "<group>"; };
 		65C52B361B906105003AF42F /* ActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		65C52B3C1B906105003AF42F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		65C52B3E1B906105003AF42F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -6979,6 +6983,8 @@
 				7E252217240821BE00743648 /* safari_tracking_protection_step3.json */,
 				D02B550722EED8740039BC48 /* PTMono-Regular.ttf */,
 				65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */,
+				AA00000127032026000A0001 /* AppIcon.icon */,
+				AA00000227032026000A0002 /* ProAppIcon.icon */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -8134,6 +8140,7 @@
 				D0D7E54B24371C8C001801A5 /* Settings.storyboard in Resources */,
 				D0D7E54724371C8C001801A5 /* Filters.storyboard in Resources */,
 				D0D7E55124373E89001801A5 /* Assets.xcassets in Resources */,
+				AA00000427032026000A0004 /* ProAppIcon.icon in Resources */,
 				659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */,
 				C234FE61928E718C0E9D61A6 /* filter.json in Resources */,
 			);
@@ -8162,6 +8169,7 @@
 				65711E561B8C670A00C8C4E7 /* defaults.plist in Resources */,
 				D0D6B9F621A6AF40007360BC /* About.storyboard in Resources */,
 				7E536C7B238D3A9400A83A79 /* Assets.xcassets in Resources */,
+				AA00000327032026000A0003 /* AppIcon.icon in Resources */,
 				D7C90DE927AD764F008BD92C /* pip.js in Resources */,
 				7EA7DCC026C674FE0032AD5C /* SafariProtectionGroupCell.xib in Resources */,
 				D0D6BA0B21A6AF6C007360BC /* UserFilter.storyboard in Resources */,
@@ -14626,7 +14634,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
-				branch = "v2.8.25@swift-5";
+				branch = "v2.8.45@swift-5";
 				kind = branch;
 			};
 		};

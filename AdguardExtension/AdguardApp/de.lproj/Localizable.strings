@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Zu meinem Konto";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Konto löschen";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Sie werden zu den AdGuard-Kontoeinstellungen weitergeleitet, um die Löschung zu bestätigen<br><br>Nach dem Löschen Ihres Kontos ist eine Anmeldung mit dieser E-Mail-Adresse nicht mehr möglich";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Kaufen";
 
@@ -333,6 +339,9 @@
 
 /* (ContentBlockersTableController) - Other content blocker name */
 "cb_screen_content_blockers_other_name" = "Sonstiges";
+
+/* (ContentBlockersTableController) - Custom content blocker name */
+"cb_screen_content_blockers_custom_name" = "Benutzerdefiniert";
 
 /* (ContentBlockersTableController) - Security content blocker name */
 "cb_screen_content_blockers_security_name" = "Sicherheit";

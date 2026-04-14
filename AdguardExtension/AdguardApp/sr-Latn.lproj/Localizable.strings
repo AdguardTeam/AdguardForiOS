@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Idi na moj nalog";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Izbriši moj nalog";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Bićete preusmereni na podešavanja vašeg AdGuard naloga da potvrdite brisanje<br><br>Nakon što obrišete nalog, nećete moći ponovo da se prijavite koristeći vašu email adresu";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Kupi";
 

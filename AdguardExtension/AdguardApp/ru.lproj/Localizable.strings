@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Перейти в личный кабинет";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Удалить аккаунт";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Вы перейдёте в настройки аккаунта AdGuard, чтобы подтвердить удаление\n<br><br>После удаления аккаунта вы больше не сможете войти с помощью адреса электронной почты";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Купить";
 
@@ -326,16 +332,16 @@
 "cb_screen_content_blockers_general_name" = "Основные";
 
 /* (ContentBlockersTableController) - Privacy content blocker name */
-"cb_screen_content_blockers_privacy_name" = "Антитрекинг";
+"cb_screen_content_blockers_privacy_name" = "Конфиденциальность";
 
 /* (ContentBlockersTableController) - Social content blocker name */
 "cb_screen_content_blockers_social_name" = "Виджеты соцсетей";
 
 /* (ContentBlockersTableController) - Other content blocker name */
-"cb_screen_content_blockers_other_name" = "Прочее";
+"cb_screen_content_blockers_other_name" = "Другие";
 
 /* (ContentBlockersTableController) - Custom content blocker name */
-"cb_screen_content_blockers_custom_name" = "Другая";
+"cb_screen_content_blockers_custom_name" = "Пользовательские";
 
 /* (ContentBlockersTableController) - Security content blocker name */
 "cb_screen_content_blockers_security_name" = "Безопасность";

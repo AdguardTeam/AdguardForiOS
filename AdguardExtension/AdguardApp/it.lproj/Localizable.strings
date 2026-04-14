@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Vai al mio profilo";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Elimina profilo";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Sarai reindirizzato alle impostazioni del tuo profilo AdGuard per confermarne l'eliminazione<br><br>Dopo aver eliminato il tuo profilo, non potrai più accedervi usando il tuo indirizzo e-mail";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Acquista";
 
@@ -548,7 +554,7 @@
 "pornvertising" = "Annunci pornografici";
 
 /*(LogCategory) advertising category*/
-"advertising" = "Annunci";
+"advertising" = "Pubblicità";
 
 /*(LogCategory) essential category*/
 "essential" = "Essenziale";
@@ -749,7 +755,7 @@
 "advanced_protection_onboarding_second_step_text" = "Dirigiti su <b>Safari > Estensioni</b>.";
 
 /* (OnboardingController) second step with advanced protection text for iOS 18+ */
-"advanced_protection_onboarding_second_step_text_ios_18" = "Dirigiti su <b>App > Safari > Estensioni</b>.";
+"advanced_protection_onboarding_second_step_text_ios_18" = "Vai in <b>App > Safari > Estensioni</b>.";
 
 /* (OnboardingController) third step text */
 "onboarding_third_step_text" = "<b>Attiva</b> tutte le estensioni AdGuard.";

@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Перейти до облікового запису";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Видалити обліковий запис";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Вас буде перенаправлено до налаштувань вашого облікового запису AdGuard для підтвердити видалення<br><br>Після того, як ви Видалити свій обліковий запис, ви не зможете увійти знову, використовуючи вашу адресу електронної пошти";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Придбати";
 
@@ -752,7 +758,7 @@
 "advanced_protection_onboarding_third_step_text" = "<b>Увімкніть</b> кожен перемикач для AdGuard. Готово!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "Щоб увімкнути <b>Розширений захист</b>, відкрийте Safari, торкніть ліворуч від поля адреси, <br><br> %@ <br><br>потім торкніть <b>Керувати розширеннями</b> та увімкніть <b>AdGuard</b>.";
+"onboarding_fours_step_text" = "Щоб увімкнути <b>Розширений захист</b>, відкрийте Safari, торкніть значка ліворуч від поля адреси, <br><br> %@ <br><br>потім торкніть <b>Керувати розширеннями</b> та увімкніть <b>AdGuard</b>.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Блокувати запит";

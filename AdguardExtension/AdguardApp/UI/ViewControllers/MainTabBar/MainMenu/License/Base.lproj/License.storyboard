@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y7A-ot-Avu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y7A-ot-Avu">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,17 +14,17 @@
             <objects>
                 <viewController storyboardIdentifier="EmailSignInScene" extendedLayoutIncludesOpaqueBars="YES" id="YAD-0P-paW" customClass="EmailSignInController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gvD-Ne-xOz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWX-pJ-1zR">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="790"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WT-eT-xqR">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="343"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="383"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJj-cc-Ko5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="61" width="382" height="17"/>
+                                                <rect key="frame" x="16" y="53" width="382" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -36,7 +36,7 @@
                                                 </variation>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3iu-SA-2Ay" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="82" width="382" height="40"/>
+                                                <rect key="frame" x="16" y="78" width="382" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="pNP-oN-fyq">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
@@ -53,7 +53,7 @@
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6N-OK-fHG" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="160" width="66.5" height="17"/>
+                                                <rect key="frame" x="16" y="158" width="382" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -91,7 +91,7 @@
                                                 </variation>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUa-fF-AXO" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="24" y="259" width="366" height="48"/>
+                                                <rect key="frame" x="16" y="255" width="382" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="199-9p-SYV">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
@@ -240,11 +240,11 @@
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" id="WvU-yq-t4d" customClass="Confirm2FaController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uhQ-yW-M5R">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Code from the authentication app:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53G-qY-SZ5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="16" y="52" width="382" height="19.5"/>
+                                <rect key="frame" x="16" y="56" width="382" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -256,7 +256,7 @@
                                 </variation>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="opD-uD-yGj" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="16" y="79.5" width="382" height="40"/>
+                                <rect key="frame" x="16" y="83.5" width="382" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Hbk-Ja-6xJ">
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
@@ -272,7 +272,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-Kc-9wb" userLabel="Error Label">
-                                <rect key="frame" x="16" y="123.5" width="382" height="0.0"/>
+                                <rect key="frame" x="16" y="127.5" width="382" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.87450980389999999" green="0.21960784310000001" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -281,7 +281,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrj-Gm-LCJ" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="16" y="151" width="382" height="48"/>
+                                <rect key="frame" x="16" y="155.5" width="382" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="tPl-aP-jJv">
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
@@ -355,19 +355,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxK-6y-LB6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="20" y="56" width="374" height="29"/>
+                                <rect key="frame" x="20" y="60" width="374" height="29"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in with your AdGuard account or use social login" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuM-Nn-uXv" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="36" y="109" width="342" height="41"/>
+                                <rect key="frame" x="36" y="113" width="342" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9V-eQ-pZp" customClass="SocialSignInButton" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="20" y="310" width="374" height="50"/>
+                                <rect key="frame" x="20" y="314" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="qW2-bl-zRS"/>
                                 </constraints>
@@ -383,7 +383,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9l-1b-Wa8" customClass="SocialSignInButton" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="20" y="310.5" width="560" height="50"/>
+                                <rect key="frame" x="20" y="379" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="iK7-eL-rz6"/>
                                 </constraints>
@@ -399,7 +399,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1AU-Vc-Pfi" customClass="SocialSignInButton" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="20" y="115.5" width="560" height="50"/>
+                                <rect key="frame" x="20" y="184" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="foD-Fk-JsG"/>
                                 </constraints>
@@ -415,7 +415,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSE-uk-lAE" customClass="SocialSignInButton" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="20" y="180.5" width="560" height="50"/>
+                                <rect key="frame" x="20" y="249" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="yRj-fz-TUe"/>
                                 </constraints>
@@ -486,6 +486,102 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sWf-Fk-sf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1186" y="4706"/>
+        </scene>
+        <!--Delete Account Bottom Alert Controller-->
+        <scene sceneID="3zE-pJ-Irx">
+            <objects>
+                <viewController storyboardIdentifier="DeleteAccountBottomAlertController" id="o8S-rd-Dsl" customClass="DeleteAccountBottomAlertController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bzv-Uo-mgL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4CC-Jw-4m5">
+                                <rect key="frame" x="0.0" y="705" width="414" height="191"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sWC-Rc-fUQ">
+                                        <rect key="frame" x="195" y="8" width="24" height="2"/>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="9bC-r8-XCe"/>
+                                            <constraint firstAttribute="height" constant="2" id="eE4-ba-fRq"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJT-OU-IOd">
+                                        <rect key="frame" x="16" y="26" width="382" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dL1-Rd-Abc">
+                                        <rect key="frame" x="16" y="66" width="382" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIo-kb-pVa">
+                                        <rect key="frame" x="16" y="74" width="382" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="cN9-rP-EzU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Delete account"/>
+                                        <connections>
+                                            <action selector="deleteAccountTapped" destination="o8S-rd-Dsl" eventType="touchUpInside" id="6sx-E1-MY3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFB-lA-lsv">
+                                        <rect key="frame" x="16" y="130" width="382" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="8tW-L4-bwe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelTapped" destination="o8S-rd-Dsl" eventType="touchUpInside" id="TqL-Ke-2Aw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="sJT-OU-IOd" firstAttribute="top" secondItem="sWC-Rc-fUQ" secondAttribute="bottom" constant="16" id="1X5-4J-HvX"/>
+                                    <constraint firstItem="xFB-lA-lsv" firstAttribute="top" secondItem="yIo-kb-pVa" secondAttribute="bottom" constant="16" id="2Pm-njy-bz0"/>
+                                    <constraint firstItem="sJT-OU-IOd" firstAttribute="leading" secondItem="4CC-Jw-4m5" secondAttribute="leading" constant="16" id="95b-g4-5gH"/>
+                                    <constraint firstItem="sWC-Rc-fUQ" firstAttribute="centerX" secondItem="4CC-Jw-4m5" secondAttribute="centerX" id="AbX-BS-QcW"/>
+                                    <constraint firstItem="yIo-kb-pVa" firstAttribute="leading" secondItem="4CC-Jw-4m5" secondAttribute="leading" constant="16" id="B6F-Sk-rdI"/>
+                                    <constraint firstItem="sWC-Rc-fUQ" firstAttribute="top" secondItem="4CC-Jw-4m5" secondAttribute="top" constant="8" id="DY6-njy-0jd"/>
+                                    <constraint firstItem="xFB-lA-lsv" firstAttribute="leading" secondItem="4CC-Jw-4m5" secondAttribute="leading" constant="16" id="F0h-Vb-L0W"/>
+                                    <constraint firstAttribute="trailing" secondItem="sJT-OU-IOd" secondAttribute="trailing" constant="16" id="Gz2-ZF-DY4"/>
+                                    <constraint firstAttribute="trailing" secondItem="xFB-lA-lsv" secondAttribute="trailing" constant="16" id="Nsz-4o-pIN"/>
+                                    <constraint firstAttribute="bottom" secondItem="xFB-lA-lsv" secondAttribute="bottom" constant="21" id="c6Z-Wl-MtT"/>
+                                    <constraint firstItem="dL1-Rd-Abc" firstAttribute="top" secondItem="sJT-OU-IOd" secondAttribute="bottom" constant="16" id="dC1-Tp-L1t"/>
+                                    <constraint firstItem="dL1-Rd-Abc" firstAttribute="leading" secondItem="4CC-Jw-4m5" secondAttribute="leading" constant="16" id="dC2-Ld-L1l"/>
+                                    <constraint firstAttribute="trailing" secondItem="dL1-Rd-Abc" secondAttribute="trailing" constant="16" id="dC3-Tr-L1r"/>
+                                    <constraint firstItem="yIo-kb-pVa" firstAttribute="top" secondItem="dL1-Rd-Abc" secondAttribute="bottom" constant="24" id="e0g-f8-vJr"/>
+                                    <constraint firstAttribute="trailing" secondItem="yIo-kb-pVa" secondAttribute="trailing" constant="16" id="jk6-Tw-Iyb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="d1t-Jq-8co"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="d1t-Jq-8co" firstAttribute="trailing" secondItem="4CC-Jw-4m5" secondAttribute="trailing" id="7oW-ed-6q3"/>
+                            <constraint firstAttribute="bottom" secondItem="4CC-Jw-4m5" secondAttribute="bottom" id="Ir6-EW-5lY"/>
+                            <constraint firstItem="4CC-Jw-4m5" firstAttribute="leading" secondItem="d1t-Jq-8co" secondAttribute="leading" id="e6s-zY-fG8"/>
+                            <constraint firstItem="4CC-Jw-4m5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="d1t-Jq-8co" secondAttribute="top" constant="24" id="wA3-Xg-zBt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="xFB-lA-lsv" id="5nM-5E-pJL"/>
+                        <outlet property="contentView" destination="4CC-Jw-4m5" id="7gw-FM-V4A"/>
+                        <outlet property="deleteAccountButton" destination="yIo-kb-pVa" id="Y5X-njy-zmD"/>
+                        <outlet property="keyboardHeightLayoutConstraint" destination="Ir6-EW-5lY" id="dXk-eX-K8g"/>
+                        <outlet property="descriptionLabel" destination="dL1-Rd-Abc" id="oL1-Ds-Abc"/>
+                        <outlet property="titleLabel" destination="sJT-OU-IOd" id="RoT-ge-eAi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w5N-LB-kR3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4606" y="4706"/>
         </scene>
     </scenes>
     <resources>

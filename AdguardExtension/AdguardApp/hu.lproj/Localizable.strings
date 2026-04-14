@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Menj a fiókomhoz";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Fiók törlése";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Átlesz irányítva az AdGuard fiókbeállításaidhoz, hogy megerősítsd a törlést<br><br>Miután törölted a fiókodat, nem fogsz tudni újra belépni az Email címeddel ";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Vásárlás";
 
@@ -752,7 +758,7 @@
 "advanced_protection_onboarding_third_step_text" = "Állítsa az összes AdGuard kapcsolót <b>be</b> állásba. Már mehet is!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "A <b>speciális</b> védelem bekapcsolásához nyisd meg a Safarit, koppints az ikonra az URL mező bal oldalán,<br><br> %@ <br><br>majd koppints a <b>Bővítmények kezelése</b> lehetőségre, és kapcsold be az <b>AdGuard</b> kapcsolót.";
+"onboarding_fours_step_text" = "A <b>Fokozott</b> védelemhez nyissa meg a Safarit, koppintson az URL-mező bal oldalán lévő ikonra, a<br><br> %@ <br><br>, majd koppintson a <b>Bővítmények kezelése</b> elemre, és kapcsolja be az <b>AdGuard</b> kapcsolót.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Kérés blokkolása";

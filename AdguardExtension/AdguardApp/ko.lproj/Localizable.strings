@@ -20,10 +20,10 @@
 "common_error_title" = "오류";
 
 /* Something went wrong title for unknown error */
-"something_went_wrong_title" = "무엇인가 잘못되었습니다!";
+"something_went_wrong_title" = "오류 발생";
 
 /* Unknown error desription */
-"unknown_error_description" = "지원을 받으려면 오류를 신고해주십시오.";
+"unknown_error_description" = "해당 오류를 지원 팀에 보고해 주시기 바랍니다.";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Safari에 필터를 로드할 수 없으므로 최근 변경 사항이 적용되지 않았습니다.";
@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "내 계정으로 이동";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "계정 삭제";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "삭제를 확인하기 위해 AdGuard 계정 설정 페이지로 이동하게 됩니다.<br><br> 계정을 삭제하면 해당 이메일 주소로는 다시 로그인할 수 없습니다.";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "구매";
 
@@ -149,7 +155,7 @@
 "premium_expired_title" = "주의";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "AdGuard 계정에 성공적으로 로그인 하였으나 프리미엄 버전을 활성화 시킬 수 있는 라이선스 키가 없습니다.";
+"not_premium_message" = "AdGuard 계정에 성공적으로 로그인했으나 프리미엄 버전을 활성화할 수 있는 라이선스 키가 없습니다.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
 "login_success_message" = "AdGuard 계정에 성공적으로 로그인하였습니다! iOS용 AdGuard의 프리미엄 버전이 활성화 되었습니다.";
@@ -296,7 +302,7 @@
 "vpn_confirm_title" = "VPN이 생성됩니다.";
 
 /* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_confirm_message" = "사용자 정의 DNS 설정을 사용하기 위해서는 VPN이 필요합니다. 생성된 VPN은 현지 지역에 대한 것이며, 귀하의 연결이 어떠한 서버로부터도 전송되지 않을 것을 의미합니다.\n저희는 귀하가 이 VPN 프로필을 사용하고 있을 때 어떠한 데이터도 수집하지 않습니다.";
+"vpn_confirm_message" = "사용자 정의 DNS 설정을 위해 VPN 연결이 필요합니다. 생성된 VPN은 로컬 방식으로 구동되며, 귀하의 트래픽은 외부 서버를 거치지 않습니다.\n당사는 이 VPN 프로필을 통해 어떠한 데이터도 수집하지 않습니다.";
 
 /* this message is shown during the login on the license screen */
 "loading_message" = "잠시만 기다려주세요...";
@@ -749,7 +755,7 @@
 "advanced_protection_onboarding_second_step_text" = "<b>Safari > 확장 프로그램</b>으로 이동합니다.";
 
 /* (OnboardingController) second step with advanced protection text for iOS 18+ */
-"advanced_protection_onboarding_second_step_text_ios_18" = "<b>앱 > Safari > 확장프로그램</b>으로 이동합니다.";
+"advanced_protection_onboarding_second_step_text_ios_18" = "<b>앱 > Safari > 확장 프로그램</b>으로 이동합니다.";
 
 /* (OnboardingController) third step text */
 "onboarding_third_step_text" = "모든 AdGuard 확장 프로그램을 <b>활성화합니다</b>.";
@@ -758,7 +764,7 @@
 "advanced_protection_onboarding_third_step_text" = "모든 AdGuard 설정을 <b>켜세요</b>. 그럼 준비는 끝났습니다!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "<b>고급 보호</b> 기능을 이용하려면, Safari를 열고, URL 입력란 좌측의 아이콘을 누르고,<br><br> %@ <br><br>확장 프로그램 관리를 누른 다음 <b>AdGuard</b> 항목을 켜세요.";
+"onboarding_fours_step_text" = "<b>고급 보호</b>를 위해 Safari를 열고 URL 필드 왼쪽의 아이콘을 탭한 다음,<br><br> %@ <br><br><b>확장 프로그램 관리</b>를 누른 다음 <b>AdGuard</b> 항목을 켜세요.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "요청 차단";

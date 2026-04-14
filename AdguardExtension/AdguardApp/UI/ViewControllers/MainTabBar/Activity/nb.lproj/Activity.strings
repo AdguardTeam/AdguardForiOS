@@ -2,10 +2,10 @@
 "1A6-DD-78f.normalTitle" = "Skift modus";
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
-"1rj-wD-aeH.normalTitle" = "LEGG TIL";
+"1rj-wD-aeH.normalTitle" = "Legg til";
 
 /* Class = "UIButton"; normalTitle = "blocked"; ObjectID = "4IJ-xy-hky"; */
-"4IJ-xy-hky.normalTitle" = "blokkert";
+"4IJ-xy-hky.normalTitle" = "blokkért";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Aktivitet";
@@ -77,7 +77,7 @@
 "kwZ-Kw-f1R.text" = "Blokker forespørsel";
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "l5B-oj-DnW"; */
-"l5B-oj-DnW.normalTitle" = "LEGG TIL";
+"l5B-oj-DnW.normalTitle" = "Legg til";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "forespørsler";
@@ -98,7 +98,7 @@
 "w2i-mK-dfO.text" = "Mest blokkerte";
 
 /* Class = "UIButton"; normalTitle = "blocked"; ObjectID = "wt5-4Q-CTq"; */
-"wt5-4Q-CTq.normalTitle" = "blokkert";
+"wt5-4Q-CTq.normalTitle" = "blokkért";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "Blokker forespørsel";

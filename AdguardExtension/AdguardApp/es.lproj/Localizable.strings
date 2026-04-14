@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Ir a mi cuenta";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Borrar cuenta";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Serás redirigido a la configuración de tu cuenta de AdGuard para confirmar la eliminación<br><br>Después de eliminar tu cuenta, no podrás volver a iniciar sesión con tu dirección de correo electrónico";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Comprar";
 
@@ -749,7 +755,7 @@
 "advanced_protection_onboarding_second_step_text" = "Ve a <b>Safari > Extensiones</b>.";
 
 /* (OnboardingController) second step with advanced protection text for iOS 18+ */
-"advanced_protection_onboarding_second_step_text_ios_18" = "Vaya a <b>Aplicaciones > Safari > Extensiones</b>.";
+"advanced_protection_onboarding_second_step_text_ios_18" = "Ve a <b>Apps > Safari > Extensiones</b>.";
 
 /* (OnboardingController) third step text */
 "onboarding_third_step_text" = "<b>Habilita</b> todas las extensiones de AdGuard.";
@@ -758,7 +764,7 @@
 "advanced_protection_onboarding_third_step_text" = "Establece todos los interruptores de AdGuard en <b>encendido</b>. ¡Ya está listo!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "Para la protección <b>Avanzada</b>, abre Safari, toca el icono en la parte izquierda del campo de la URL, <br><br> %@ <br><br>luego toca <b>Administrar extensiones</b> y habilita el interruptor <b>AdGuard</b>.";
+"onboarding_fours_step_text" = "Para la protección <b>Avanzada</b>, abre Safari, toca el icon en la parte izquierda del campo de la URL, <br><br> %@ <br><br>luego toca <b>Administrar extensiones</b> y habilita el interruptor <b>AdGuard</b>.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Bloquear petición";

@@ -2,7 +2,7 @@
 "53G-qY-SZ5.text" = "Kode fra autentiseringsappen:";
 
 /* Class = "UILabel"; text = "Log in"; ObjectID = "J8s-sG-FKu"; */
-"J8s-sG-FKu.text" = "LOGG INN";
+"J8s-sG-FKu.text" = "Logg inn";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "E-post:";
@@ -17,7 +17,16 @@
 "bUa-fF-AXO.normalTitle" = "LOGG INN";
 
 /* Class = "UILabel"; text = "Log in"; ObjectID = "fxK-6y-LB6"; */
-"fxK-6y-LB6.text" = "LOGG INN";
+"fxK-6y-LB6.text" = "Logg inn";
 
 /* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "BEKREFT";
+
+/* Class = "UILabel"; text = "Delete account"; ObjectID = "sJT-OU-IOd"; */
+"sJT-OU-IOd.text" = "Slett konto";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "xFB-lA-lsv"; */
+"xFB-lA-lsv.normalTitle" = "Avbryt";
+
+/* Class = "UIButton"; normalTitle = "Delete account"; ObjectID = "yIo-kb-pVa"; */
+"yIo-kb-pVa.normalTitle" = "Slett konto";

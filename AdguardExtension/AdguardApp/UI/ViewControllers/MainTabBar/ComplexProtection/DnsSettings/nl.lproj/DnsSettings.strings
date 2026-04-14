@@ -59,13 +59,13 @@
 "o1z-O6-Bk9.normalTitle" = "OK";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
-"pC4-RU-DaD.text" = "DNS filtering";
+"pC4-RU-DaD.text" = "DNS-filtering";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "Beveiligingsfilters, DNS privacy, gebruikersfilters, enz.";
 
 /* Class = "UILabel"; text = "DNS filters"; ObjectID = "plc-eu-aXh"; */
-"plc-eu-aXh.text" = "DNS filters";
+"plc-eu-aXh.text" = "DNS-filters";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Servernaam";
@@ -80,7 +80,7 @@
 "uCw-Mi-HiJ.title" = "Selecteren";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
-"vDF-5j-uJn.text" = "DNS filtering";
+"vDF-5j-uJn.text" = "DNS-filtering";
 
 /* Class = "UILabel"; text = "Protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Protocol";

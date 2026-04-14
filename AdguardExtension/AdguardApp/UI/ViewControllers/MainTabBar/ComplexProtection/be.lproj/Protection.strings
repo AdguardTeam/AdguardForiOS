@@ -1,30 +1,56 @@
+/* Class = "UILabel"; text = "premium"; ObjectID = "7ma-TB-Yab"; */
+"7ma-TB-Yab.text" = "прэміяльны";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Абарона Safari";
 
 /* Class = "UILabel"; text = "Enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "9wg-p1-Dh8"; */
-"9wg-p1-Dh8.text" = "Пашыраная функцыянальнасць для максімальнай блакіроўкі рэкламы і фільтрацыі кантэнту";
+"9wg-p1-Dh8.text" = "Палепшаная функцыянальнасць для максімальнай блакіроўкі рэкламы і фільтрацыі змесціва";
+
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
+"AZY-QZ-8d9.text" = "Блакіроўка рэкламы на YouTube";
 
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
+
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "Lsa-74-hd5"; */
+"Lsa-74-hd5.text" = "Дадатковая абарона";
+
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "OxY-0X-J4W"; */
+"OxY-0X-J4W.text" = "Дадатковая абарона";
+
+/* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
+"P9C-72-GAw.text" = "прэміяльны";
 
 /* Class = "UILabel"; text = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube"; ObjectID = "Sry-3f-FQj"; */
 "Sry-3f-FQj.text" = "Гэта пашырэнне для Safari выдаляе рэкламу і яе рэшткі, а таксама адраджае функцыю аўтаматычнага прайгравання на YouTube";
 
 /* Class = "UILabel"; text = "Uses enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "WOG-Hk-11z"; */
-"WOG-Hk-11z.text" = "Выкарыстоўвае пашыраную функцыянальнасць для максімальнай блакіроўкі рэкламы і фільтрацыі кантэнту";
+"WOG-Hk-11z.text" = "Выкарыстоўвае палепшаную функцыянальнасць для максімальнай блакіроўкі рэкламы і фільтрацыі змесціва";
 
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
-"XXP-EO-M4h.text" = "Блакіраванне рэкламы на YouTube (ад AdGuard)";
+"XXP-EO-M4h.text" = "Блакіраваць рэкламу на YouTube (ад AdGuard)";
 
 /* Class = "UILabel"; text = "Blocks ads even on the websites that try to circumvent ad blocking"; ObjectID = "ZgQ-6Q-ytX"; */
-"ZgQ-6Q-ytX.text" = "Блакуе рэкламу нават на сайтах, якія спрабуюць абысці блакіроўку рэкламы";
+"ZgQ-6Q-ytX.text" = "Блакіруе рэкламу нават на тых вэб-сайтах, якія спрабуюць абысці блакіроўку рэкламы";
+
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
+"cnF-td-Ba1.text" = "Абарона DNS";
+
+/* Class = "UILabel"; text = "Requires access to web pages' contents but uses it only for ad blocking"; ObjectID = "i0Z-fi-Rc0"; */
+"i0Z-fi-Rc0.text" = "Патрабуе доступ да змесціва старонак, але выкарыстоўвае яго толькі для блакіроўкі рэкламы";
+
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "Блакіроўка рэкламы на YouTube";
+
+/* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
+"l1g-hs-4EK.text" = "бясплатна";
 
 /* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
 "pv0-hE-9gb.normalTitle" = "Купіць ліцэнзію";
 
 /* Class = "UILabel"; text = "Blocks complex ads, such as YouTube ads in Safari"; ObjectID = "rm0-Ip-riS"; */
-"rm0-Ip-riS.text" = "Блакуе складаную рэкламу, напрыклад рэкламу YouTube у Safari";
+"rm0-Ip-riS.text" = "Блакіруе складаную рэкламу (напрыклад, рэкламу YouTube у Safari)";
 
 /* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
 "rr4-ic-Pg8.text" = "Выкарыстоўвае складаныя шматузроўневыя правілы фільтрацыі";
@@ -35,5 +61,11 @@
 /* Class = "UILabel"; text = "Enhances your privacy by blocking in-app trackers and encrypting your DNS requests"; ObjectID = "teo-vm-NRJ"; */
 "teo-vm-NRJ.text" = "Гэты модуль дазваляе вам выкарыстоўваць уласны сервер DNS і павышае вашу прыватнасць, шыфруючы вашыя DNS-запыты.";
 
+/* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
+"vNo-hV-l4c.text" = "Не ўсталявана";
+
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Гэты модуль блакуе рэкламу і асочванне на сайтах, адкрытых у Safari";
+"vlx-BS-A2y.text" = "Блакіруе рэкламу і праграмы сачэння на вэб-сайтах адкрытых у Safari";
+
+/* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
+"wyK-CX-EwT.text" = "Абарона";

@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Lihat akun saya";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Hapus akun";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Anda akan dialihkan ke pengaturan akun AdGuard Anda untuk mengonfirmasi penghapusan<br><br>Setelah Anda menghapus akun Anda, Anda tidak akan dapat masuk kembali menggunakan alamat e-mail Anda";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Beli";
 

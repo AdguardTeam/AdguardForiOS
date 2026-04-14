@@ -115,6 +115,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Ga naar mijn account";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Account verwijderen";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Je wordt doorgestuurd naar je AdGuard-accountinstellingen om het verwijderen te bevestigen<br><br>Nadat je je account hebt verwijderd, kun je niet meer aanmelden met je e-mailadres";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Kopen";
 
@@ -338,7 +344,7 @@
 "reset_stat_title" = "Herstel statistieken";
 
 /* (AdvancedSettingsController) Reset statistics description */
-"reset_stat_descr" = "Alle statistieken worden verwijderd!";
+"reset_stat_descr" = "Alle statistieken worden gewist!";
 
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Herstellen";
@@ -413,7 +419,7 @@
 "delete_filter_title" = "Filter verwijderen";
 
 /* (FilterDetailsController) delete filter message */
-"delete_filter_message" = "Ben je zeker om deze filter te verwijderen?";
+"delete_filter_message" = "Weet je zeker dat je dit filter wilt verwijderen?";
 
 /* (AboutViewController) current app version format */
 "about_version_format" = "Versie %@";
@@ -497,7 +503,7 @@
 "editor_dns_blocklist_rules_description" = "Aangepaste DNS-blokkeringsregels toevoegen";
 
 /* (ListOfRulesModel) title for Clear button*/
-"common_clear" = "Verwijder";
+"common_clear" = "Wissen";
 
 /* (ListOfRulesModel) title for Save button */
 "common_save" = "Opslaan";
@@ -617,7 +623,7 @@
 "confirm_reset_text" = "Alle instellingen, inclusief gebruikersregels, DNS-bescherming, interface en autorisatie-instellingen, worden hersteld. Deze bewerking kan niet ongedaan worden gemaakt. Instellingen herstellen?";
 
 /* (DnsLogContainerController) reset activity log title */
-"reset_activity_title" = "Activiteiten logboek resetten";
+"reset_activity_title" = "Activiteiten logboek herstellen";
 
 /* (DnsLogContainerController) reset activity log message */
 "reset_activity_message" = "Alle activiteiten logs worden verwijderd!";
@@ -638,7 +644,7 @@
 "chart_alltime" = "Totaal";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Inhoudblokkeerders worden bijgewerkt...";
+"loading_content_blockers" = "Inhoudblokkers worden bijgewerkt...";
 
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "Filters laden...";
@@ -650,7 +656,7 @@
 "new_filter_title" = "Nieuw aangepaste filter";
 
 /*(NewCustomFilterDetailsController) title for new dns filter */
-"new_dns_filter_title" = "Nieuw DNS filter";
+"new_dns_filter_title" = "Nieuw DNS-filter";
 
 /* (NewCustomFilterDetailsController) Error message when adding custom filter fails */
 "add_custom_filter_error_message" = "Er is iets misgegaan, of het formaat van het bestand met aangepaste filtering is onjuist";
@@ -677,7 +683,7 @@
 "complex_disabled" = "Safari- en DNS-bescherming is uit";
 
 /*(TodayViewController) DNS protection is enabled text  */
-"system_enabled" = "DNS bescherming";
+"system_enabled" = "DNS-bescherming";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d verzoeken, %2$d versleuteld";
@@ -701,7 +707,7 @@
 "dns_filters_notification_title" = "Schakel enkele filters uit voor een goede werking";
 
 /* (DnsFiltersTableController) - DNS filters title */
-"dns_filters_title" = "DNS filters";
+"dns_filters_title" = "DNS-filters";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Geblokkeerd";
@@ -722,7 +728,7 @@
 "dns_request_user_status_added_to_blacklist" = "aan de blokkeerlijst toegevoegd";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "verwijderd van de toelatingslijst";
+"dns_request_user_status_removed_from_whitelist" = "van de toelatingslijst verwijderd";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "van de blokkeerlijst verwijderd";
@@ -920,7 +926,7 @@
 "none_message" = "Geen";
 
 /* (DnsLogContainerController) - Activity title */
-"activity_title" = "Activiteit";
+"activity_title" = "Activiteiten";
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d verzoeken";
@@ -1018,7 +1024,7 @@
 "protection_page_tab" = "Beschermingspagina";
 
 /* (MainTabBarController) Activity page tab for VoiceOver*/
-"activity_page_tab" = "Activiteitspagina";
+"activity_page_tab" = "Activiteitenpagina";
 
 /* (MainTabBarController) Settings page tab for VoiceOver*/
 "settings_page_tab" = "Instellingen pagina";
@@ -1266,4 +1272,4 @@ DO NOT TRANSLATE "none" */
 "youtube_share_extension_item_provider_unknown_error_summary" = "Er is iets verkeerd gegaan";
 
 /* (DevAccountMigrationHelper) 'Content blockers are disabled after dev account migration' notification title */
-"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard-inhoudblokkeerders zijn uitgeschakeld in de Safari-instellingen. Schakel ze in zodat we advertenties en volgers kunnen blokkeren.";
+"dev_account_migration_helper_content_blockers_disabled_title" = "AdGuard-inhoudblokkers zijn uitgeschakeld in de Safari-instellingen. Schakel ze in zodat we advertenties en volgers kunnen blokkeren.";

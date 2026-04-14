@@ -3210,7 +3210,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
-				branch = "v2.8.25@swift-5";
+				branch = "v2.8.45@swift-5";
 				kind = branch;
 			};
 		};

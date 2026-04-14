@@ -1,5 +1,5 @@
 /* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
-"1A6-DD-78f.normalTitle" = "Anahtar modu";
+"1A6-DD-78f.normalTitle" = "Bağlantıyı değiştir";
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "Ekle";
@@ -47,7 +47,7 @@
 "Xj3-X8-fnq.normalTitle" = "şirket";
 
 /* Class = "UILabel"; text = "AdGuard can’t see DNS queries in this mode. If you want to see DNS activity of your device, use AdGuard implementation."; ObjectID = "a0E-KM-oA3"; */
-"a0E-KM-oA3.text" = "AdGuard, bu modda DNS sorgularını göremez. Cihazınızın DNS etkinliğini görmek istiyorsanız, AdGuard uygulamasını kullanın.";
+"a0E-KM-oA3.text" = "AdGuard, bu modda DNS sorgularını göremez. Cihazınızın DNS etkinliğini görmek istiyorsanız, AdGuard bağlantısını kullanın.";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Güvenlik filtreleri, DNS gizliliği, özel filtreler, vb.";

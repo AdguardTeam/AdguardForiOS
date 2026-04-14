@@ -17,7 +17,7 @@
 "7SB-2j-FAc.normalTitle" = "Doorgaan";
 
 /* Class = "UILabel"; text = "Using native DNS"; ObjectID = "8Z0-0U-Hfk"; */
-"8Z0-0U-Hfk.text" = "Systeemeigen DNS in gebruik";
+"8Z0-0U-Hfk.text" = "Systeem-eigen DNS in gebruik";
 
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
 "Btd-nN-zLO.text" = "verzoeken";

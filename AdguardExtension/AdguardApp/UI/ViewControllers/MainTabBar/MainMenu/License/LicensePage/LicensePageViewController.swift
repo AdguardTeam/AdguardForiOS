@@ -17,6 +17,7 @@
 //
 
 import UIKit
+import SafariServices
 
 protocol LicensePageViewControllerDelegate: AnyObject {
     func controllerDismissed()
@@ -24,6 +25,7 @@ protocol LicensePageViewControllerDelegate: AnyObject {
 
 /// This controller is responsible for managing free and premium view depending on the license status
 final class LicensePageViewController: UIViewController {
+    private let deleteAccountAlertControllerIdentifier = "DeleteAccountBottomAlertController"
 
     private enum LicenseState {
         case free
@@ -149,7 +151,7 @@ final class LicensePageViewController: UIViewController {
             navigationItem.rightBarButtonItems = [makeLoginButton()]
         case .premium:
             if purchaseService.purchasedThroughLogin {
-                navigationItem.rightBarButtonItems = [makeLogoutButton()]
+                navigationItem.rightBarButtonItems = [generateBarButtonItem()]
             } else {
                 navigationItem.rightBarButtonItems = []
             }
@@ -165,10 +167,36 @@ final class LicensePageViewController: UIViewController {
         return button
     }
 
-    private func makeLogoutButton() -> UIBarButtonItem {
-        let button = UIBarButtonItem(title: String.localizedString("common_logout"), style: .plain, target: self, action: #selector(logoutButtonTapped))
-        button.tintColor = UIColor.AdGuardColor.red
-        return button
+    @available(iOS 14.0, *)
+    private func createMenu() -> UIMenu {
+        let logoutAction = UIAction(
+            title: String.localizedString("common_logout"),
+            image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
+            attributes: .destructive
+        ) { [weak self] _ in
+            self?.logoutButtonTapped()
+        }
+
+        let deleteAccountAction = UIAction(
+            title: String.localizedString("license_delete_account_title"),
+            image: UIImage(systemName: "trash"),
+            attributes: .destructive
+        ) { [weak self] _ in
+            self?.deleteAccountButtonTapped()
+        }
+
+        return UIMenu(children: [logoutAction, deleteAccountAction])
+    }
+
+    private func generateBarButtonItem() -> UIBarButtonItem {
+        let image = UIImage(named: "edit")
+
+        if #available(iOS 14.0, *) {
+            let button = UIBarButtonItem(image: image, menu: createMenu())
+            return button
+        } else {
+            return UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(accountActionsButtonTapped(_:)))
+        }
     }
 
     private func makeExitButton() -> UIBarButtonItem {
@@ -180,6 +208,29 @@ final class LicensePageViewController: UIViewController {
         performSegue(withIdentifier: loginSegueId, sender: self)
     }
 
+    @objc private final func accountActionsButtonTapped(_ sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
+
+        let logoutAction = UIAlertAction(title: String.localizedString("common_logout"), style: .destructive) { [weak self] _ in
+            self?.logoutButtonTapped()
+        }
+        actionSheet.addAction(logoutAction)
+
+        let deleteAccountAction = UIAlertAction(title: String.localizedString("license_delete_account_title"), style: .destructive) { [weak self] _ in
+            self?.deleteAccountButtonTapped()
+        }
+        actionSheet.addAction(deleteAccountAction)
+
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+
+        if let popoverPresentationController = actionSheet.popoverPresentationController {
+            popoverPresentationController.barButtonItem = sender
+        }
+
+        present(actionSheet, animated: true)
+    }
+
     @objc private final func logoutButtonTapped() {
         let alert = UIAlertController(title: nil, message: String.localizedString("confirm_logout_text"), preferredStyle: .deviceAlertStyle)
 
@@ -187,15 +238,22 @@ final class LicensePageViewController: UIViewController {
         alert.addAction(cancelAction)
 
         let okAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) { [weak self] _ in
-            if self?.purchaseService.logout() ?? false {
-                self?.setupView()
-                self?.setupNavigationBar()
-                self?.setNavBarColor()
-            }
+            self?.performLogoutAndRefreshUI()
         }
         alert.addAction(okAction)
 
         self.present(alert, animated: true, completion: nil)
+    }
+
+    @objc private final func deleteAccountButtonTapped() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: deleteAccountAlertControllerIdentifier) as? DeleteAccountBottomAlertController else {
+            return
+        }
+
+        controller.onDeleteAccount = { [weak self] in
+            self?.openDeleteAccountPage()
+        }
+        present(controller, animated: true)
     }
 
     @objc private final func exitButtonTapped() {
@@ -210,6 +268,40 @@ final class LicensePageViewController: UIViewController {
             themeService.setupNavigationBar(navigationController?.navigationBar, backgroundColor: color)
         } else {
             themeService.setupNavigationBar(navigationController?.navigationBar)
+        }
+    }
+
+    private func performLogoutAndRefreshUI() {
+        guard purchaseService.logout() else { return }
+
+        setupView()
+        setupNavigationBar()
+        setNavBarColor()
+    }
+
+    private func openDeleteAccountPage() {
+        let accountAction = "delete_account"
+        let from = "license"
+        let urlString = UIApplication.shared.adguardUrl(action: accountAction, from: from, buildVersion: productInfo.buildVersion())
+
+        guard let url = URL(string: urlString) else { return }
+        presentSafariViewController(url: url, logoutAfterPresentation: true)
+    }
+
+    private func openMyAccountPage() {
+        let accountAction = "account"
+        let from = "license"
+        let urlString = UIApplication.shared.adguardUrl(action: accountAction, from: from, buildVersion: productInfo.buildVersion())
+
+        guard let url = URL(string: urlString) else { return }
+        presentSafariViewController(url: url)
+    }
+
+    private func presentSafariViewController(url: URL, logoutAfterPresentation: Bool = false) {
+        let safariViewController = SFSafariViewController(url: url)
+        present(safariViewController, animated: true) { [weak self] in
+            guard logoutAfterPresentation else { return }
+            self?.performLogoutAndRefreshUI()
         }
     }
 }
@@ -251,9 +343,7 @@ extension LicensePageViewController: FreeLicenseStateTableViewPresentor {
 
 extension LicensePageViewController: PremiumLicenseStateViewDelegate {
     func goToMyAccount() {
-        let accountAction = "account"
-        let from = "license"
-        UIApplication.shared.openAdguardUrl(action: accountAction, from: from, buildVersion: productInfo.buildVersion())
+        openMyAccountPage()
     }
 }
 
@@ -268,5 +358,56 @@ extension LicensePageViewController: ThemableProtocol {
             view.updateTheme()
         }
         setNavBarColor()
+    }
+}
+
+final class DeleteAccountBottomAlertController: BottomAlertController {
+
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var deleteAccountButton: UIButton!
+    @IBOutlet private weak var cancelButton: UIButton!
+
+    var onDeleteAccount: (() -> Void)?
+
+    private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        titleLabel.text = String.localizedString("license_delete_account_title")
+        deleteAccountButton.setTitle(String.localizedString("license_delete_account_title"), for: .normal)
+        cancelButton.setTitle(String.localizedString("common_action_cancel"), for: .normal)
+
+        deleteAccountButton.applyStandardGreenStyle()
+        deleteAccountButton.backgroundColor = UIColor.AdGuardColor.red
+
+        cancelButton.applyStandardOpaqueStyle()
+
+        setupDescriptionLabel()
+        updateTheme()
+    }
+
+    private func setupDescriptionLabel() {
+        let text = String.localizedString("delete_account_description_format")
+        descriptionLabel.setAttributedTitle(text, fontSize: descriptionLabel.font!.pointSize, color: themeService.popupTitleTextColor, textAlignment: .center)
+    }
+
+    @IBAction private func cancelTapped() {
+        dismiss(animated: true)
+    }
+
+    @IBAction private func deleteAccountTapped() {
+        dismiss(animated: true) { [weak self] in
+            self?.onDeleteAccount?()
+        }
+    }
+}
+
+extension DeleteAccountBottomAlertController: ThemableProtocol {
+    func updateTheme() {
+        titleLabel.textColor = themeService.popupTitleTextColor
+        contentView.backgroundColor = themeService.popupBackgroundColor
+        setupDescriptionLabel()
     }
 }

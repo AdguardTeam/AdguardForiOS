@@ -2,7 +2,7 @@
 "support_unexpected_error" = "Beklenmeyen bir hata oluştu. Destek ekibiyle iletişime geçin.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "Beklenmeyen bir hata nedeniyle kurallar dönüştürülemiyor. Destek ekibiyle iletişime geçin.";
+"support_rule_converting_error" = "Beklenmeyen bir hata nedeniyle kurallar dönüştürülemiyor. Destek ekibi ile iletişime geçin.";
 
 /* (AEService) Service errors descriptions */
 "json_converting_error" = "Dönüştürücü JSON biçiminde başlatılamıyor.";
@@ -117,6 +117,12 @@
 
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Hesabıma git";
+
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Hesabı sil";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Silme işlemini onaylamak için AdGuard hesap ayarlarınıza yönlendirileceksiniz<br><br>Hesabınızı sildikten sonra e-posta adresinizi kullanarak tekrar giriş yapamazsınız";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Satın al";
@@ -449,7 +455,7 @@
 "account_is_locked_error" = "Hesap geçici olarak kilitlenmiştir";
 
 /* (Confirm2faController) Invalid 2fa token on login */
-"invalid_2fa_code_error" = "Geçersiz 2FA kodu";
+"invalid_2fa_code_error" = "Geçersiz 2FKD tokenı";
 
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi istisnaları";
@@ -839,7 +845,7 @@
 "status_title" = "Durum";
 
 /* (DnsRequestDetailsController) "Time" title for cell */
-"time_title" = "Saat";
+"time_title" = "Süre";
 
 /* (DnsRequestDetailsController) "Size" title for cell */
 "size_title" = "Boyut";

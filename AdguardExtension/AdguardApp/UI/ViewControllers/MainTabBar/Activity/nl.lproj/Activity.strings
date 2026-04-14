@@ -8,7 +8,7 @@
 "4IJ-xy-hky.normalTitle" = "geblokkeerd";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
-"5bV-zZ-4dr.text" = "Activiteit";
+"5bV-zZ-4dr.text" = "Activiteiten";
 
 /* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "6xN-ij-jJj"; */
 "6xN-ij-jJj.normalTitle" = "Gratis testen";
@@ -20,13 +20,13 @@
 "Asq-k8-hi1.text" = "Meest actieve bedrijven";
 
 /* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
-"DCy-so-G1C.text" = "Geen recente activiteit (we houden enkel de laatste 1500 verzoeken bij)";
+"DCy-so-G1C.text" = "Geen recente activiteiten (we houden enkel de laatste 1500 verzoeken bij)";
 
 /* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
-"Epn-q1-BdL.text" = "Geen recente activiteit (we houden enkel de laatste 1500 verzoeken bij)";
+"Epn-q1-BdL.text" = "Geen recente activiteiten (we houden enkel de laatste 1500 verzoeken bij)";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
-"Hbu-Bm-HWZ.text" = "Activiteit";
+"Hbu-Bm-HWZ.text" = "Activiteiten";
 
 /* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
 "M4r-q5-RXv.text" = "Domeinnaam:";
@@ -71,7 +71,7 @@
 "hoI-YR-JcD.normalTitle" = "Terug";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
-"kX9-ZX-NOu.text" = "Recente activiteit";
+"kX9-ZX-NOu.text" = "Recente activiteiten";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Blokkeer verzoek";

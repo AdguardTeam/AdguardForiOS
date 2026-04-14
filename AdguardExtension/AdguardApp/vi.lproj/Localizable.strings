@@ -115,6 +115,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Đi tới tài khoản của tôi";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Xóa tài khoản";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Bạn sẽ được chuyển hướng đến cài đặt tài khoản AdGuard của mình để xác nhận xóa\n<br><br>Sau khi bạn xóa tài khoản, bạn sẽ không thể đăng nhập lại bằng Địa chỉ email";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Trả phí";
 
@@ -749,7 +755,7 @@
 "advanced_protection_onboarding_third_step_text" = "Đặt các tuỳ chọn của AdGuard về trạng thái <b>Bật</b>. Vậy là xong!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "Với bảo vệ <b>Nâng Cao</b>, mở Safari, chọn biểu tượng ở góc bên trái của thanh URL, <br><br>%@<br><br> sau đó chọn Quản lý tiện ích mở rộng và kích hoạt công tắc của <b>AdGuard</b>.";
+"onboarding_fours_step_text" = "Với sự bảo vệ <b>Nâng cao</b>, mở Safari, nhấn vào biểu tượng ở phía bên trái của trường URL,<br><br> %@ <br><br>rồi nhấn vào <b>Chỉnh sửa phần mở rộng</b> và bật chuyển đổi <b>AdGuard</b>.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Chặn yêu cầu";
@@ -1157,10 +1163,10 @@ DO NOT TRANSLATE "none" */
 "block_youtube_ads_instructions" = "Bạn có biết rằng YouTube đã thay đổi thuật toán để bạn sẽ nhiều quảng cáo hơn không?<br><br>Bây giờ, để chặn những quảng cáo đó bạn chỉ cần phải:<br><br>1. Truy cập <a href=\"%@\">youtube.com</a> trong Safari.<br><br>2. Nhấp vào %@ Chia sẻ.<br><br>3. Nhấp vào \"Chặn quảng cáo YouTube (bởi AdGuard)\".";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_done_text_safari" = "Khi tiện tích kích hoạt, dòng tiêu đề \"với AdGaurd\" sẽ hiện thị cạnh biểu tượng YouTube.<br><br><b> Nếu bạn tải lại trang, bạn sẽ cần phải thực hiện bước 3 và 4 lần nữa.</b>";
+"block_youtube_ads_instructions_done_text_safari" = "Xong! Bây giờ bạn có thể xem YouTube mà không có quảng cáo.\n\nKhi tiện ích mở rộng được bật, dòng chú thích \"với AdGuard\" sẽ hiển thị bên cạnh biểu tượng YouTube.<br><br><b>Nếu bạn tải lại trang, bạn sẽ phải thực hiện lại bước 3 và 4.</b>";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
-"block_youtube_ads_instructions_done_text" = "Khi tiện tích kích hoạt, dòng tiêu đề \"với AdGaurd\" sẽ hiện thị cạnh biểu tượng YouTube.<br><br><b> Nếu bạn tải lại trang, bạn sẽ cần phải thực hiện bước 2 và 3 lần nữa.</b>";
+"block_youtube_ads_instructions_done_text" = "Xong! Giờ bạn có thể xem YouTube mà không có quảng cáo.\n\nKhi tiện ích mở rộng được kích hoạt, dòng chữ “với AdGuard” sẽ hiển thị bên cạnh biểu tượng YouTube.<br><br><b>Nếu bạn tải lại trang, bạn sẽ phải thực hiện lại bước 2 và 3.</b>";
 
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */

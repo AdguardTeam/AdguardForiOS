@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Gå til min konto";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Slet konto";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Du omdirigeres til dine AdGuard-kontoindstillinger for at bekræfte sletningen <br><br> Der vil efter sletningen af din konto ikke længere kunne logges ind med e-mailadressen ";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Køb";
 
@@ -680,7 +686,7 @@
 "complex_enabled" = "Safari- og DNS-beskyttelse er slået til";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari-beskyttelse er slået fra";
+"safari_enabled" = "Safari-beskyttelse er slået til";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Safari- og DNS-beskyttelse er slået fra";

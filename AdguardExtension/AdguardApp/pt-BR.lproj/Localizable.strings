@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "Vá para a minha conta";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "Excluir conta";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "Você será redirecionado às configurações da sua conta AdGuard para confirmar a exclusão<br><br>Após excluir sua conta, você não poderá fazer login novamente usando seu endereço de e-mail";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Compra";
 
@@ -749,7 +755,7 @@
 "advanced_protection_onboarding_second_step_text" = "Vá para <b>Safari > Extensões</b>.";
 
 /* (OnboardingController) second step with advanced protection text for iOS 18+ */
-"advanced_protection_onboarding_second_step_text_ios_18" = "Vá para <b>Aplicativos > Safari > Extensões</b>.";
+"advanced_protection_onboarding_second_step_text_ios_18" = "Vá para <b>Apps > Safari > Extensões</b>.";
 
 /* (OnboardingController) third step text */
 "onboarding_third_step_text" = "<b>Ative</b> todas as extensões do AdGuard.";

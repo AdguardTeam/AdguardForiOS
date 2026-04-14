@@ -118,6 +118,12 @@
 /* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
 "go_to_my_account_title" = "マイ・アカウントへ";
 
+/* (LicensePageViewController) Delete account action title */
+"license_delete_account_title" = "アカウントの削除";
+
+/* (DeleteAccountBottomAlertController) Delete account description */
+"delete_account_description_format" = "削除を確定するため、AdGuardアカウントの設定画面にリダイレクトされます。<br><br>アカウントを削除しますと、現在のメールアドレスで再度ログインすることはできなくなります。";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "購入する";
 
@@ -749,7 +755,7 @@
 "advanced_protection_onboarding_second_step_text" = "<b>Safari</b> → <b>機能拡張</b>";
 
 /* (OnboardingController) second step with advanced protection text for iOS 18+ */
-"advanced_protection_onboarding_second_step_text_ios_18" = "<b>アプリ → Safari → 拡張機能</b>";
+"advanced_protection_onboarding_second_step_text_ios_18" = "<b>アプリ</b> → <b>Safari</b> → <b>拡張機能</b>";
 
 /* (OnboardingController) third step text */
 "onboarding_third_step_text" = "<b>AdGuard機能拡張のスイッチ</b>をすべて<b>オン</b>にする";
@@ -758,7 +764,7 @@
 "advanced_protection_onboarding_third_step_text" = "AdGuardスイッチをすべて<b>オン</b>にします。完了です！";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "<b>高度な保護機能</b>を有効にするには、<br>①Safariを開く→URL欄左側のアイコンをタップ<br><br> %@ <br><br>②「<b>機能拡張を管理</b>」をタップ→「<b>AdGuard</b>」スイッチをオンにします。";
+"onboarding_fours_step_text" = "<b>高度な保護機能</b>を有効にするには、<br>① Safariを開く → URL欄の左側にあるアイコンをタップ:<br><br> %@ <br><br>②「<b>機能拡張を管理</b> 」をタップ →「<b>AdGuard</b>」のスイッチをオンにします。";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "リクエストをブロック";

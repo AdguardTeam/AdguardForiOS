@@ -82,6 +82,46 @@
         <string>Падпішыцеся і атрымайце %d-гадовую бясплатную пробную версію</string>
       </dict>
     </dict>
+    <key>user_rules_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@rules@</string>
+      <key>rules</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 правіла ўлучана</string>
+        <key>few</key>
+        <string>Уключаны %d правілы</string>
+        <key>many</key>
+        <string>Уключаны %d правіл</string>
+        <key>other</key>
+        <string>Уключаны %d правіл</string>
+      </dict>
+    </dict>
+    <key>safari_filters_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@filters@</string>
+      <key>filters</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 фільтр уключаны</string>
+        <key>few</key>
+        <string>%d фільтры ўключаны</string>
+        <key>many</key>
+        <string>%d фільтраў уключана</string>
+        <key>other</key>
+        <string>%d фільтраў уключана</string>
+      </dict>
+    </dict>
     <key>getPro_full_access_days</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
@@ -93,13 +133,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Дармовы поўны доступ на адзін дзень</string>
+        <string>Бясплатны доступ на %d дзень да ўсіх функцый праграмы</string>
         <key>few</key>
-        <string>Дармовы поўны доступ на %d дня</string>
+        <string>Бясплатны доступ на %d дні да ўсіх функцый праграмы</string>
         <key>many</key>
-        <string>Бесплатный полный доступ на %d дней</string>
+        <string>Бясплатны доступ на %d дзён да ўсіх функцый праграмы</string>
         <key>other</key>
-        <string>Дармовы поўны доступ на %d дзён</string>
+        <string>Бясплатны доступ на %d дзён да ўсіх функцый праграмы</string>
       </dict>
     </dict>
     <key>getPro_full_access_weeks</key>
@@ -113,13 +153,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Дармовы поўны доступ на адзін тыдзень</string>
+        <string>Бясплатны доступ на %d дзень да ўсіх функцый праграмы</string>
         <key>few</key>
-        <string>Дармовы поўны доступ на %d тыдні</string>
+        <string>Бясплатны доступ на %d дзень да ўсіх функцый праграмы</string>
         <key>many</key>
-        <string>Дармовы поўны доступ на %d тыдняў</string>
+        <string>Бясплатны доступ на %d дзён да ўсіх функцый праграмы</string>
         <key>other</key>
-        <string>Дармовы поўны доступ на %d тыдняў</string>
+        <string>Бясплатны доступ на %d дзён да ўсіх функцый праграмы</string>
       </dict>
     </dict>
     <key>getPro_full_access_months</key>
@@ -133,13 +173,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Дармовы поўны доступ на адзін месяц</string>
+        <string>Бясплатны доступ на %d месяц да ўсіх функцый праграмы</string>
         <key>few</key>
-        <string>Дармовы поўны доступ на %d месяца</string>
+        <string>Бясплатны доступ на %d месяцы да ўсіх функцый праграмы</string>
         <key>many</key>
-        <string>Дармовы поўны доступ на %d месяцаў</string>
+        <string>Бясплатны доступ на %d месяцаў да ўсіх функцый праграмы</string>
         <key>other</key>
-        <string>Дармовы поўны доступ на %d месяцаў</string>
+        <string>Бясплатны доступ на %d месяц да ўсіх функцый праграмы</string>
       </dict>
     </dict>
     <key>getPro_full_access_years</key>
@@ -153,13 +193,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Дармовы поўны доступ на адзін год</string>
+        <string>Бясплатны доступ на %d год да ўсіх функцый праграмы</string>
         <key>few</key>
-        <string>Дармовы поўны доступ на %d гады</string>
+        <string>Бясплатны доступ на %d гады да ўсіх функцый праграмы</string>
         <key>many</key>
-        <string>Дармовы поўны доступ на %d гадоў</string>
+        <string>Бясплатны доступ на %d гадоў да ўсіх функцый праграмы</string>
         <key>other</key>
-        <string>Дармовы поўны доступ на %d гадоў</string>
+        <string>Бясплатны доступ на %d гадоў да ўсіх функцый праграмы</string>
       </dict>
     </dict>
   </dict>
