@@ -230,7 +230,7 @@
 "add_wifi_name_caption" = "Название:";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
-"bug_report_sending_error" = "Невозможно отправить отчет об ошибке. Возможно, на вашем устройстве не настроена электронная почта.";
+"bug_report_sending_error" = "Не удаётся отправить отчёт об ошибке. Возможно, на устройстве не настроена почта";
 
 /* (MainController) Error on check filter uspdates */
 "filter_updates_error" = "Ошибка обновления фильтров";
@@ -715,6 +715,15 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Отключите несколько фильтров для корректной работы";
 
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder title */
+"safari_filters_stale_notification_title" = "Реклама может проскользнуть";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body */
+"safari_filters_stale_notification_body" = "Откройте AdGuard — обновим фильтры и защитим от свежей рекламы";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body for Pro */
+"safari_filters_stale_notification_body_pro" = "Откройте AdGuard Pro — обновим фильтры и защитим от свежей рекламы";
+
 /* (DnsFiltersTableController) - DNS filters title */
 "dns_filters_title" = "DNS-фильтры";
 
@@ -878,7 +887,7 @@
 "empty_dns_answer" = "Пусто";
 
 /* (BugReportController) Message when bug report failed */
-"bug_report_failed_message" = "Не удалось отправить отчет об ошибке. Пожалуйста, повторите попытку позже.";
+"bug_report_failed_message" = "Не удалось отправить отчёт об ошибке. Подождите немного и попробуйте ещё раз";
 
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Ваш отчет об ошибке успешно отправлен!";

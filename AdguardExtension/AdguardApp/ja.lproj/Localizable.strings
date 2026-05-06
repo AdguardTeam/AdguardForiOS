@@ -715,6 +715,15 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "正しく動作するにはフィルタを一部オフにしてください";
 
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder title */
+"safari_filters_stale_notification_title" = "広告が表示される可能性があります";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body */
+"safari_filters_stale_notification_body" = "新しい広告にも対応するよう、AdGuardを開いてフィルタを更新してください。";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body for Pro */
+"safari_filters_stale_notification_body_pro" = "新しい広告にも対応するよう、AdGuard Pro を開いてフィルタを更新してください。";
+
 /* (DnsFiltersTableController) - DNS filters title */
 "dns_filters_title" = "DNSフィルタ";
 

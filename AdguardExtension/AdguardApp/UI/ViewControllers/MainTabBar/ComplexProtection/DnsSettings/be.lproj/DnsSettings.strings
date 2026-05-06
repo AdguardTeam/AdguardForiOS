@@ -41,7 +41,7 @@
 "Xa6-wl-aOE.text" = "Рэалізацыя DNS";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
-"ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// ці tls://";
+"ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// або tls://";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "Адрас сервера DNS";

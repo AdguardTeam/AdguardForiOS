@@ -709,6 +709,15 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Вимкніть деякі фільтри для правильної роботи";
 
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder title */
+"safari_filters_stale_notification_title" = "Можуть з'являтися деякі рекламні оголошення";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body */
+"safari_filters_stale_notification_body" = "Відкрийте AdGuard, щоб оновити фільтри та заблокувати нові оголошення";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body for Pro */
+"safari_filters_stale_notification_body_pro" = "Відкрийте AdGuard Pro, щоб оновити ваші фільтри та блокувати новішу рекламу";
+
 /* (DnsFiltersTableController) - DNS filters title */
 "dns_filters_title" = "DNS-фільтри";
 

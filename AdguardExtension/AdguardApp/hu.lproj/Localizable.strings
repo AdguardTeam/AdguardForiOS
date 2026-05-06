@@ -709,6 +709,15 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Kapcsoljon ki néhány szűrőt az optimális működés érdekében";
 
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder title */
+"safari_filters_stale_notification_title" = "Néhány hirdetés megjelenhet";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body */
+"safari_filters_stale_notification_body" = "Nyisd meg az AdGuardot a szűrők frissítéséhez és az újabb hirdetések blokkolásához";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body for Pro */
+"safari_filters_stale_notification_body_pro" = "Nyisd meg az AdGuard Pro-t a szűrők frissítéséhez és az újabb hirdetések blokkolásához";
+
 /* (DnsFiltersTableController) - DNS filters title */
 "dns_filters_title" = "DNS szűrők";
 

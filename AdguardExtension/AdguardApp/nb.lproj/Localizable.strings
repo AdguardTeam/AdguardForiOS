@@ -715,6 +715,15 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Skru av noen filtre for at det skal fungere riktig";
 
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder title */
+"safari_filters_stale_notification_title" = "Noen annonser kan vises";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body */
+"safari_filters_stale_notification_body" = "Åpne AdGuard for å oppdatere filtrene dine og blokkere nyere annonser";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body for Pro */
+"safari_filters_stale_notification_body_pro" = "Åpne AdGuard Pro for å oppdatere filtrene dine og blokkere nyere annonser";
+
 /* (DnsFiltersTableController) - DNS filters title */
 "dns_filters_title" = "DNS-filtre";
 

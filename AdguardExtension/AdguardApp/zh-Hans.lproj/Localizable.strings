@@ -715,6 +715,15 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "以正常工作，关闭一些过滤器";
 
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder title */
+"safari_filters_stale_notification_title" = "可能会出现部分广告";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body */
+"safari_filters_stale_notification_body" = "打开 AdGuard，更新过滤器以拦截新广告";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body for Pro */
+"safari_filters_stale_notification_body_pro" = "打开 AdGuard Pro，更新过滤器以拦截新广告";
+
 /* (DnsFiltersTableController) - DNS filters title */
 "dns_filters_title" = "DNS过滤器";
 

@@ -715,6 +715,15 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "올바른 작업을 위해 일부 필터를 끄세요";
 
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder title */
+"safari_filters_stale_notification_title" = "일부 광고가 표시될 수 있음";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body */
+"safari_filters_stale_notification_body" = "AdGuard를 열어 필터를 업데이트하고 새로운 광고 차단";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body for Pro */
+"safari_filters_stale_notification_body_pro" = "AdGuard Pro를 열어 필터를 업데이트하고 새로운 광고 차단";
+
 /* (DnsFiltersTableController) - DNS filters title */
 "dns_filters_title" = "DNS 필터";
 

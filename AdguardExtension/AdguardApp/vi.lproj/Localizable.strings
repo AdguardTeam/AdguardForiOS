@@ -706,6 +706,15 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Tắt bớt vài bộ lọc để làm việc chính xác";
 
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder title */
+"safari_filters_stale_notification_title" = "Một số quảng cáo có thể xuất hiện";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body */
+"safari_filters_stale_notification_body" = "Mở AdGuard để cập nhật các bộ lọc của bạn và chặn các quảng cáo mới hơn";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body for Pro */
+"safari_filters_stale_notification_body_pro" = "Mở AdGuard Pro để cập nhật các bộ lọc của bạn và chặn các quảng cáo mới hơn";
+
 /* (DnsFiltersTableController) - DNS filters title */
 "dns_filters_title" = "Các bộ lọc";
 

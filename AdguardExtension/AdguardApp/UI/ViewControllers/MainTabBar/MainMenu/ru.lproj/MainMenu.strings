@@ -62,7 +62,7 @@
 "gap-Uy-5ka.placeholder" = "Email-адрес";
 
 /* Class = "UIButton"; normalTitle = "Submit a report"; ObjectID = "in9-YT-8ra"; */
-"in9-YT-8ra.normalTitle" = "Отправить отчет";
+"in9-YT-8ra.normalTitle" = "Отправить отчёт";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Как блокировать рекламу с AdGuard";

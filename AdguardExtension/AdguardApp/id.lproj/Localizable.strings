@@ -715,6 +715,15 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Matikan beberapa filter agar berfungsi dengan benar";
 
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder title */
+"safari_filters_stale_notification_title" = "Beberapa iklan mungkin muncul";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body */
+"safari_filters_stale_notification_body" = "Buka AdGuard untuk memperbarui filter Anda dan memblokir iklan yang lebih baru";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body for Pro */
+"safari_filters_stale_notification_body_pro" = "Buka AdGuard Pro untuk memperbarui filter Anda dan memblokir iklan yang lebih baru";
+
 /* (DnsFiltersTableController) - DNS filters title */
 "dns_filters_title" = "Filter DNS";
 

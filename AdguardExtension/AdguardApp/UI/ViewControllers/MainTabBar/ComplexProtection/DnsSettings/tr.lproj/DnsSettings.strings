@@ -20,7 +20,7 @@
 "LTC-71-V9S.text" = "DNS sunucusu";
 
 /* Class = "UILabel"; text = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n"; ObjectID = "Mxf-0w-5MP"; */
-"Mxf-0w-5MP.text" = "İşletim sisteminin kendisi tarafından sağlanmıştır. Bu modda DNS etkinliğini incelemek mümkün olmayacaktır.\n\n";
+"Mxf-0w-5MP.text" = "İşletim sisteminin kendisi tarafından sağlanır. Bu modda DNS etkinliğini incelemek mümkün olmayacaktır.\n\n";
 
 /* Class = "UILabel"; text = "Enhances your privacy by blocking in-app trackers and encrypting your DNS requests"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
 "PFY-Cq-NFN.text" = "Uygulama içi izleyicileri engelleyerek ve DNS isteklerinizi şifreleyerek gizliliğinizi artırır";

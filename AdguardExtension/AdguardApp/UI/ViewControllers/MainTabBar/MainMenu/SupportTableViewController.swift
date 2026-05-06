@@ -66,8 +66,17 @@ class SupportTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        cell.isHidden = indexPath.section == optionsSection && indexPath.row == rateAppRow
         theme.setupTableCell(cell)
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == optionsSection && indexPath.row == rateAppRow {
+            return 0.0
+        }
+
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
 
     // MARK: - Table view delegate
@@ -84,8 +93,6 @@ class SupportTableViewController: UITableViewController {
             reportIncorrectBlockingRowTapped()
         case (optionsSection, discussRow):
             UIApplication.shared.openAdguardUrl(action: "discuss", from: "support", buildVersion: productInfo.buildVersion())
-        case (optionsSection, rateAppRow):
-            rateAppRowTapped()
         case (optionsSection, exportLogsRow):
             exportLogsTapped()
         default:
@@ -99,10 +106,6 @@ class SupportTableViewController: UITableViewController {
     private func reportIncorrectBlockingRowTapped() {
         let reportUrl = ApplicationWebReporter().createUrl()
         UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
-    }
-
-    private func rateAppRowTapped() {
-        AppDelegate.shared.presentRateAppController()
     }
 
     private func exportLogsTapped() {

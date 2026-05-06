@@ -149,7 +149,7 @@
 "sign_in_via_facebook_title" = "Увайсці праз Facebook";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
-"premium_expired_message" = "Тэрмін дзеяння ўліковага запісу прэміум скончаны";
+"premium_expired_message" = "Тэрмін дзеяння прэміяльнага ўліковага запісу завершаны";
 
 /* (AEUIGetProViewController) title of the message that appears if the account has expired */
 "premium_expired_title" = "Увага";
@@ -712,6 +712,15 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Адключыце некалькі фільтраў для карэктнай працы";
 
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder title */
+"safari_filters_stale_notification_title" = "Некаторая рэклама можа з'яўляцца";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body */
+"safari_filters_stale_notification_body" = "Адкрыйце AdGuard, каб абнаўленне вашых фільтраў і блакіраваць больш новую рэкламу";
+
+/*(SafariFiltersStaleNotificationHelper) stale Safari filters reminder body for Pro */
+"safari_filters_stale_notification_body_pro" = "Адкрыйце AdGuard Pro, каб абнавіць вашы фільтры і блакіраваць новую рэкламу";
+
 /* (DnsFiltersTableController) - DNS filters title */
 "dns_filters_title" = "Фільтры DNS";
 
@@ -749,7 +758,7 @@
 "onboarding_second_step_text" = "Націсніце <b>Safari</b> і правядзіце пальцам уніз, а потым націсніце <b>Блакіроўшчык кантэнту</b>.";
 
 /* (OnboardingController) second step with advanced protection text */
-"advanced_protection_onboarding_second_step_text" = "Перайдзіце да <b>Safari > Пашырэнні</b>.";
+"advanced_protection_onboarding_second_step_text" = "Перайдзіце ў <b>Safari > Пашырэнні</b>.";
 
 /* (OnboardingController) second step with advanced protection text for iOS 18+ */
 "advanced_protection_onboarding_second_step_text_ios_18" = "Перайдзіце ў <b>Праграмы > Safari > Пашырэнні</b>.";

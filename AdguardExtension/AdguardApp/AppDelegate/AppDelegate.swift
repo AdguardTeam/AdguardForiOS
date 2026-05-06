@@ -67,6 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let themeService: ThemeServiceProtocol
     private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
     private var keychain: KeychainServiceProtocol
+    private let safariFiltersStaleNotificationHelper = SafariFiltersStaleNotificationHelper()
 
     // MARK: - Application init
 
@@ -276,6 +277,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if backgroundTaskId == UIBackgroundTaskIdentifier.invalid {
             DDLogError("(AppDelegate) - backgroundFetch; cannot start background operation")
+            postSafariFiltersStaleNotificationIfNeeded()
             completionHandler(.noData)
             return
         }
@@ -287,6 +289,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // The logic for using the 20 seconds limit: it takes at least 10 seconds to run rules conversion with the
             // default set of filter lists, and a couple more seconds on saving content blockers to files.
             DDLogInfo("(AppDelegate) - backgroundFetch; remaining time is not enough to complete the task, exiting immediately")
+            postSafariFiltersStaleNotificationIfNeeded()
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
             completionHandler(.noData)
             return
@@ -355,6 +358,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let reachability = Reachability.forInternetConnection()
             let isWiFiNetwork = reachability?.isReachableViaWiFi() ?? false
             return isWiFiNetwork
+        }
+
+        defer {
+            postSafariFiltersStaleNotificationIfNeeded()
         }
 
         let shouldUpdate = shouldUpdateFilters()
@@ -426,6 +433,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
         let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]
         userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
+    }
+
+    private func postSafariFiltersStaleNotificationIfNeeded() {
+        safariFiltersStaleNotificationHelper.notifyIfNeeded(
+            safariLastFiltersUpdateCheckDate: safariProtection.lastFiltersUpdateCheckDate,
+            resources: resources,
+            notificationService: userNotificationService
+        )
     }
 
     private func addPurchaseStatusObserver() {
@@ -547,5 +562,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             DDLogInfo("(AppDelegate) - updateSafariProtectionMeta; Successfully reload CB")
         }
+    }
+}
+
+
+
+struct SafariFiltersStaleNotificationHelper {
+    private static let staleFiltersInterval: TimeInterval = 7 * 24 * 60 * 60
+
+    private static let notificationTitleKey = "safari_filters_stale_notification_title"
+    private static let notificationBodyKey = "safari_filters_stale_notification_body"
+    private static let notificationBodyProKey = "safari_filters_stale_notification_body_pro"
+
+    private static var notificationTitle: String {
+        String.localizedString(notificationTitleKey)
+    }
+
+    private static var notificationBody: String {
+        Bundle.main.isPro ? String.localizedString(notificationBodyProKey) : String.localizedString(notificationBodyKey)
+    }
+
+    func notifyIfNeeded(
+        safariLastFiltersUpdateCheckDate: Date?,
+        resources: AESharedResourcesProtocol,
+        notificationService: UserNotificationServiceProtocol,
+        now: Date = Date()
+    ) {
+        let safariProtectionEnabled = resources.safariProtectionEnabled
+        let dnsProtectionEnabledAndAdGuardUsed = resources.systemProtectionEnabled && resources.dnsImplementation == .adGuard
+        let shouldShowNotification = safariProtectionEnabled || dnsProtectionEnabledAndAdGuardUsed
+        var safariFiltersAreStale = false
+
+        guard shouldShowNotification else {
+            DDLogInfo("(SafariFiltersStaleNotificationHelper) - notifyIfNeeded; skipping reminder because both Safari and AdGuard DNS protections are disabled")
+            return
+        }
+
+        // Background fetch and the main-screen manual update start Safari and AdGuard DNS updates together,
+        // so the reminder intentionally uses the shared lastFiltersUpdateCheckDate instead of DNS per-filter dates.
+        if let safariLastFiltersUpdateCheckDate = safariLastFiltersUpdateCheckDate {
+            let safariStaleInterval = now.timeIntervalSince(safariLastFiltersUpdateCheckDate)
+            if safariStaleInterval >= Self.staleFiltersInterval {
+                safariFiltersAreStale = true
+                DDLogInfo("(SafariFiltersStaleNotificationHelper) - notifyIfNeeded; shared lastFiltersUpdateCheckDate is stale enough for reminder; safariLastFiltersUpdateCheckDate=\(safariLastFiltersUpdateCheckDate), staleInterval=\(safariStaleInterval)")
+            } else {
+                DDLogInfo("(SafariFiltersStaleNotificationHelper) - notifyIfNeeded; shared lastFiltersUpdateCheckDate is not stale enough for reminder; safariLastFiltersUpdateCheckDate=\(safariLastFiltersUpdateCheckDate), staleInterval=\(safariStaleInterval)")
+            }
+        } else {
+            DDLogInfo("(SafariFiltersStaleNotificationHelper) - notifyIfNeeded; shared lastFiltersUpdateCheckDate is nil while reminder is enabled")
+        }
+
+        guard safariFiltersAreStale else {
+            DDLogInfo("(SafariFiltersStaleNotificationHelper) - notifyIfNeeded; skipping reminder because shared lastFiltersUpdateCheckDate is not stale enough")
+            return
+        }
+
+        DDLogInfo("(SafariFiltersStaleNotificationHelper) - notifyIfNeeded; posting stale reminder based on shared lastFiltersUpdateCheckDate; safariLastFiltersUpdateCheckDate=\(String(describing: safariLastFiltersUpdateCheckDate))")
+        notificationService.postNotification(title: Self.notificationTitle, body: Self.notificationBody, userInfo: nil)
     }
 }
