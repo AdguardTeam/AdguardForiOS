@@ -36,9 +36,6 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                 </userDefinedRuntimeAttributes>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                </variation>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="636-Zz-5HO" customClass="ThemableImageView" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="88" y="148" width="199" height="162.66666666666663"/>
@@ -146,7 +143,7 @@
                             <constraint firstItem="htU-yE-FEi" firstAttribute="top" secondItem="oMX-oj-ZeJ" secondAttribute="bottom" constant="12" id="M0B-SI-tFz"/>
                             <constraint firstItem="636-Zz-5HO" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="V4V-p5-f0s"/>
                             <constraint firstItem="oLS-Tk-G1c" firstAttribute="leading" secondItem="c73-ge-xtS" secondAttribute="leading" constant="16" id="W1o-BR-YZV"/>
-                            <constraint firstItem="dw2-f1-QbR" firstAttribute="centerY" secondItem="c73-ge-xtS" secondAttribute="centerY" constant="-40" id="WA6-9k-tBW"/>
+                            <constraint firstItem="dw2-f1-QbR" firstAttribute="centerY" secondItem="c73-ge-xtS" secondAttribute="centerY" constant="-40" priority="250" id="WA6-9k-tBW"/>
                             <constraint firstItem="Jbp-5W-y9v" firstAttribute="top" secondItem="uyB-mD-gtt" secondAttribute="bottom" constant="12" id="bKW-dW-HQD"/>
                             <constraint firstItem="oLS-Tk-G1c" firstAttribute="top" secondItem="dw2-f1-QbR" secondAttribute="bottom" constant="8" id="cWE-TL-gMP"/>
                             <constraint firstItem="c73-ge-xtS" firstAttribute="trailing" secondItem="dw2-f1-QbR" secondAttribute="trailing" constant="16" id="dYw-es-YSG"/>

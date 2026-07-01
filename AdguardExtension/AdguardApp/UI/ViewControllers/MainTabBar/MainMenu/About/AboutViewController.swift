@@ -32,6 +32,10 @@ class AboutViewController: UIViewController {
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
 
+    /// Tracks whether the detailed (expanded) library versions are shown, so the
+    /// correct font can be re-applied after a trait-collection change (e.g. the
+    /// snapshot taken when the app is backgrounded).
+    private var isFullVersionShown = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +48,37 @@ class AboutViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showFullVersion))
         versionLabel.isUserInteractionEnabled = true
         versionLabel.addGestureRecognizer(tapGesture)
+
+        // Re-apply the version label font on a trait-collection change. The
+        // app-switcher snapshot taken when the app is backgrounded toggles
+        // userInterfaceStyle (not just the size class), which would otherwise
+        // revert the label to its storyboard font; subscribe to both
+        // userInterfaceStyle and the size-class traits (AG-55363).
+        if #available(iOS 17.0, *) {
+            registerForTraitChanges(
+                [
+                    UITraitUserInterfaceStyle.self,
+                    UITraitVerticalSizeClass.self,
+                    UITraitHorizontalSizeClass.self
+                ],
+                action: #selector(reapplyVersionLabelFont)
+            )
+        }
+    }
+
+    @objc
+    private func reapplyVersionLabelFont() {
+        setUpVersionLabel(showFullVersion: isFullVersionShown)
+    }
+
+    // traitCollectionDidChange is deprecated on iOS 17+, where the same work is
+    // done by registerForTraitChanges above. Kept for the iOS 13 deployment
+    // target and annotated to silence the deprecation warning.
+    @available(iOS, deprecated: 17.0, message: "Handled by registerForTraitChanges in viewDidLoad")
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if #available(iOS 17.0, *) { return }
+        setUpVersionLabel(showFullVersion: isFullVersionShown)
     }
 
     // MARK: - Actions
@@ -68,6 +103,7 @@ class AboutViewController: UIViewController {
 
     @objc
     private func showFullVersion() {
+        isFullVersionShown = true
         setUpVersionLabel(showFullVersion: true)
     }
 
@@ -80,11 +116,23 @@ class AboutViewController: UIViewController {
             versionFormat += "SafariConverterLib v\(ContentBlockerConverterVersion.library)\n"
             versionFormat += "Scriptlets v\(ContentBlockerConverterVersion.scriptlets)\n"
             versionFormat += "ExtendedCss v\(ContentBlockerConverterVersion.extendedCSS)\n"
-
-            versionLabel.font = .systemFont(ofSize: isIpadTrait ? 20.0 : 16.0, weight: .bold)
         }
 
+        // Own the font in code for both states so trait changes do not revert it
+        // to the storyboard value. See AG-55363.
+        versionLabel.font = desiredVersionFont(showFullVersion: showFullVersion)
         versionLabel.text = String(format: versionFormat, version)
+    }
+
+    /// The version label owns its font in code so it can be re-asserted after
+    /// UIKit resets it. Collapsed sizes match the former storyboard values
+    /// (iPad 40 / iPhone 26 bold); the expanded state uses the smaller sizes
+    /// (iPad 20 / iPhone 16 bold).
+    private func desiredVersionFont(showFullVersion: Bool) -> UIFont {
+        let fontSize: CGFloat = showFullVersion
+            ? (isIpadTrait ? 20.0 : 16.0)
+            : (isIpadTrait ? 40.0 : 26.0)
+        return .systemFont(ofSize: fontSize, weight: .bold)
     }
 
     private func setUpCopyrightLabel() {

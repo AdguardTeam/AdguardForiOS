@@ -42,6 +42,10 @@ final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtoc
     private let configuration: ConfigurationServiceProtocol
     private var modelsProvider: SafariGroupFiltersModelsProvider
 
+    /// Dedicated serial queue this view model uses to run the blocking filter/group
+    /// toggle calls off the main thread without loading the shared global queues (AG-54193).
+    private let queue = DispatchQueue(label: "AdGuardApp.AllSafariGroupsFiltersModel", qos: .userInitiated)
+
     private var proStatusObserver: NotificationToken?
 
     // MARK: - Initialization
@@ -142,23 +146,33 @@ extension AllSafariGroupsFiltersModel {
         guard let newModel = newModel as? StateHeaderViewModel<SafariGroup.GroupType> else { return }
 
         let groupType = newModel.id
-        DDLogInfo("(AllSafariGroupsFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
+        let enabled = newModel.isEnabled
+        DDLogInfo("(AllSafariGroupsFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(enabled)")
 
-        do {
-            try safariProtection.setGroup(groupType: groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
-        }
-        catch {
-            DDLogError("(AllSafariGroupsFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
-        }
+        // Move the blocking SDK call off the main thread: setGroup hops onto the
+        // SDK working queue (workingQueue.sync) and can stall the main thread past
+        // the watchdog limit while a filters update is in flight (AG-54193).
+        queue.async { [weak self] in
+            guard let self = self else { return }
+            do {
+                try self.safariProtection.setGroup(groupType: groupType, enabled: enabled, onCbReloaded: nil)
+            }
+            catch {
+                DDLogError("(AllSafariGroupsFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
+            }
 
-        modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: safariProtection.groups, proStatus: configuration.proStatus)
-        modelsProvider.searchString = searchString
+            DispatchQueue.asyncSafeMain { [weak self] in
+                guard let self = self else { return }
+                self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: self.safariProtection.groups, proStatus: self.configuration.proStatus)
+                self.modelsProvider.searchString = self.searchString
 
-        guard let sectionToReloadIndex = groupModels.firstIndex(where: { $0.id == groupType }) else {
-            assertionFailure("Failed to find group with groupType=\(groupType)")
-            return
+                guard let sectionToReloadIndex = self.groupModels.firstIndex(where: { $0.id == groupType }) else {
+                    assertionFailure("Failed to find group with groupType=\(groupType)")
+                    return
+                }
+                self.tableView?.reloadSections(IndexSet(integer: sectionToReloadIndex), with: .automatic)
+            }
         }
-        tableView?.reloadSections(IndexSet(integer: sectionToReloadIndex), with: .automatic)
     }
 }
 
@@ -167,11 +181,22 @@ extension AllSafariGroupsFiltersModel {
 
 extension AllSafariGroupsFiltersModel {
     func safariFilterStateChanged(_ filterId: Int, _ groupType: SafariGroup.GroupType, _ newState: Bool) {
-        do {
-            _ = try setFilter(with: groupType.id, filterId: filterId, enabled: newState)
-        }
-        catch {
-            DDLogError("(OneSafariGroupFiltersModel) - safariFilterStateChanged; Error changing safari filter state; Error: \(error)")
+        // Move the blocking SDK call off the main thread (AG-54193). The synchronous
+        // setFilter(with:filterId:enabled:) overload is kept intact for the filter
+        // details screen; the cell toggle discards its return value, so it can run
+        // the SDK call on a background queue and reconcile the UI on main.
+        queue.async { [weak self] in
+            guard let self = self else { return }
+            do {
+                try self.safariProtection.setFilter(withId: filterId, groupId: groupType.id, enabled: newState, onCbReloaded: nil)
+            }
+            catch {
+                DDLogError("(AllSafariGroupsFiltersModel) - safariFilterStateChanged; Error changing safari filter state; Error: \(error)")
+            }
+
+            DispatchQueue.asyncSafeMain { [weak self] in
+                self?.reinit()
+            }
         }
     }
 

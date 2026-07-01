@@ -131,7 +131,13 @@ extension SafariProtection {
 
     public var filtersAreConverting: Bool { workingQueue.sync { converter.filtersAreConverting } }
 
-    public var groups: [SafariGroup] { workingQueue.sync { filters.groups } }
+    // `filters.groups` is backed by an `@Atomic` property, so it is already
+    // thread-safe to read on its own. Reading it directly (instead of hopping
+    // onto `workingQueue.sync`) keeps this getter non-blocking: a `workingQueue`
+    // busy with a long filters update would otherwise stall the caller — and,
+    // when called from the main thread (e.g. building a filters screen), hang
+    // the UI past the watchdog limit and crash with 0x8BADF00D (AG-54193).
+    public var groups: [SafariGroup] { filters.groups }
 
     public var lastFiltersUpdateCheckDate: Date? {
         workingQueue.sync {

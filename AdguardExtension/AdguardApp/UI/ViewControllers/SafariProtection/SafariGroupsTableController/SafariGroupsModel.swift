@@ -40,6 +40,10 @@ final class SafariGroupsModel {
     private let configuration: ConfigurationServiceProtocol
     private let resources: AESharedResourcesProtocol
 
+    /// Dedicated serial queue this view model uses to run the blocking setGroup call
+    /// off the main thread without loading the shared global queues (AG-54193).
+    private let queue = DispatchQueue(label: "AdGuardApp.SafariGroupsModel", qos: .userInitiated)
+
     // MARK: - Initialization
 
     init(safariProtection: SafariProtectionProtocol, configuration: ConfigurationServiceProtocol, resources: AESharedResourcesProtocol ) {
@@ -59,14 +63,26 @@ final class SafariGroupsModel {
     func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool) {
         DDLogInfo("(SafariGroupsModel) - setGroup; Trying to change group=\(groupType) to state=\(enabled)")
 
-        do {
-            try safariProtection.setGroup(groupType: groupType, enabled: enabled, onCbReloaded: nil)
-            let row = groups.firstIndex(where: { $0.groupType == groupType }) ?? 0
-            createModels()
-            delegate?.modelChanged(row)
-        }
-        catch {
-            DDLogError("(SafariGroupsModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
+        // Move the blocking SDK call off the main thread: setGroup hops onto the
+        // SDK working queue (workingQueue.sync) and can stall the main thread past
+        // the watchdog limit while a filters update is in flight (AG-54193).
+        queue.async { [weak self] in
+            guard let self = self else { return }
+            do {
+                try self.safariProtection.setGroup(groupType: groupType, enabled: enabled, onCbReloaded: nil)
+            }
+            catch {
+                DDLogError("(SafariGroupsModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
+            }
+
+            // Always reconcile to the SDK's authoritative state on the main thread,
+            // even on error, so a rejected change reverts the toggle in the UI.
+            DispatchQueue.asyncSafeMain { [weak self] in
+                guard let self = self else { return }
+                let row = self.groups.firstIndex(where: { $0.groupType == groupType }) ?? 0
+                self.createModels()
+                self.delegate?.modelChanged(row)
+            }
         }
     }
 

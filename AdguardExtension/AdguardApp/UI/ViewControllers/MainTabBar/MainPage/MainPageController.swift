@@ -413,6 +413,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         configuration.showStatusBar = true
         onBoardingIsInProcess = false
         requestNotificationPermission()
+        processPresentingsRateAppDialog()
     }
 
     // MARK: - LicensePageViewControllerDelegate delegate
@@ -931,6 +932,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
 
         requestNotificationPermission()
+        processPresentingsRateAppDialog()
     }
 
     private func initChartViewModel() {
@@ -946,6 +948,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     private func showRateAppDialogIfNeeded() {
+        // Note: 3-second delay mitigates race condition with requestNotificationPermission() system alert.
+        // The presentedViewController == nil guard in presentRateAppController() prevents double-presentation,
+        // but if the user hasn't dismissed the notification alert within 3s, the rate dialog will be skipped.
         let rateService: RateAppServiceProtocol = ServiceLocator.shared.getService()!
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
             if rateService.shouldShowRateAppDialog {
