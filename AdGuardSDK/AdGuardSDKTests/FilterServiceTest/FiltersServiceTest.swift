@@ -1312,6 +1312,38 @@ class FiltersServiceTest: XCTestCase {
         }
     }
 
+    func testRemoveRestrictedFiltersStripsIds15And208() {
+        let group = ExtendedFiltersMeta.Group(groupId: 1,
+                                             groupName: "Ads",
+                                             displayNumber: 1)
+        let filterIds = [1, 15, 208, 224]
+        let filters = filterIds.map { id in
+            ExtendedFiltersMeta.Meta(filterId: id,
+                                     name: "Filter \(id)",
+                                     description: "Description \(id)",
+                                     homePage: "https://example.com",
+                                     displayNumber: id,
+                                     group: group,
+                                     filterDownloadPage: "https://example.com/filter_\(id)",
+                                     trustLevel: .full,
+                                     version: nil,
+                                     lastUpdateDate: nil,
+                                     languages: [],
+                                     tags: [],
+                                     rulesCount: 0)
+        }
+        let meta = ExtendedFiltersMeta(groups: [group],
+                                       tags: [],
+                                       filters: filters)
+        let service = filterService as! FiltersService
+        let result = service.removeRestrictedFilters(from: meta)
+
+        let resultIds = result.filters.map { $0.filterId }.sorted()
+        XCTAssertEqual(resultIds, [1, 224])
+        XCTAssertFalse(resultIds.contains(15), "Filter 15 (AdGuard DNS filter) should be restricted and removed")
+        XCTAssertFalse(resultIds.contains(208), "Filter 208 should be restricted and removed")
+    }
+
     private func customFilterMeta(name: String? = nil, filterDownloadPage: String? = nil) -> ExtendedCustomFilterMetaProtocol {
         return  CustomFilterMeta(name: name,
                                  description: nil,

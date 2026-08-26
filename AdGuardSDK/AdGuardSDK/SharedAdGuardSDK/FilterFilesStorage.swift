@@ -161,6 +161,11 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
     public func deleteFilter(withId id: Int) throws {
         Logger.logInfo("(FilterFilesStorage) - delete filter \(id)")
         let filterFileUrl = fileUrlForFilter(withId: id)
+        guard fileManager.fileExists(atPath: filterFileUrl.path) else {
+            Logger.logInfo("(FilterFilesStorage) - filter \(id) file not found, nothing to delete")
+            return
+        }
+
         try fileManager.removeItem(at: filterFileUrl)
     }
 

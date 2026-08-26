@@ -2,12 +2,11 @@
   "originHash" : "1710f31d759916095ba1c6ba0730754a72e336d7ec211292f8265fcbd186056b",
   "pins" : [
     {
-      "identity" : "dnslibs",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/AdguardTeam/DnsLibs",
+      "identity" : "core.dns-libs",
+      "kind" : "registry",
+      "location" : "",
       "state" : {
-        "branch" : "v2.8.45@swift-5",
-        "revision" : "5570e10e4883f9fe770a291b4025449127185f88"
+        "version" : "2.10.1"
       }
     },
     {

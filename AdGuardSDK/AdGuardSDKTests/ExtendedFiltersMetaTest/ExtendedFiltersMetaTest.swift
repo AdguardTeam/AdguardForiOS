@@ -20,7 +20,7 @@ class ExtendedFiltersMetaTest: XCTestCase {
                 XCTAssertFalse(group.groupName.isEmpty)
             }
 
-            XCTAssertEqual(extendedFiltersMeta.filters.count, 81)
+            XCTAssertEqual(extendedFiltersMeta.filters.count, 80)
             extendedFiltersMeta.filters.forEach { filter in
                 XCTAssertNotNil(filter.name)
                 XCTAssertNotNil(filter.description)

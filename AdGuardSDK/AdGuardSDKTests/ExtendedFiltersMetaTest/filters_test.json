@@ -1692,35 +1692,6 @@
 			]
 		},
 		{
-			"filterId": 15,
-			"name": "AdGuard DNS filter",
-			"description": "Filter composed of several other filters (AdGuard Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking.",
-			"timeAdded": "2014-06-30T07:56:55+0000",
-			"homepage": "https://kb.adguard.com/general/adguard-ad-filters",
-			"expires": 345600,
-			"displayNumber": 3,
-			"groupId": 6,
-			"subscriptionUrl": "https://filters.adtidy.org/ios/filters/15_optimized.txt",
-			"trustLevel": "full",
-			"version": "2.0.19.22",
-			"timeUpdated": "2021-05-12T12:30:47+0000",
-			"languages": [],
-			"tags": [
-				45,
-				1,
-				2,
-				9,
-				11,
-				25,
-				26,
-				13,
-				58,
-				59,
-				60,
-				61
-			]
-		},
-		{
 			"filterId": 16,
 			"name": "AdGuard French filter",
 			"description": "Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.",

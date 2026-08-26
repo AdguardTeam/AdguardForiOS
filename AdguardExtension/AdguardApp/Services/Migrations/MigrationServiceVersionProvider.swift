@@ -24,6 +24,7 @@ protocol MigrationServiceVersionProviderProtocol {
     var isMigrationFrom4_3_0To4_3_1Needed: Bool { get }
     var isMigrationFrom4_3_1_to_4_5_0Needed: Bool { get }
     var isMigrationTo4_5_11Needed: Bool { get }
+    var isMigrationToRemoveSafariDnsFilterNeeded: Bool { get }
 }
 
 class MigrationServiceVersionProvider: MigrationServiceVersionProviderProtocol {
@@ -55,6 +56,16 @@ class MigrationServiceVersionProvider: MigrationServiceVersionProviderProtocol {
 
         // The previous version is 4.5.10 or older.
         return lastBuildVersion <= 1031
+    }
+
+    var isMigrationToRemoveSafariDnsFilterNeeded: Bool {
+        let lastBuildVersion = resources.buildVersion
+
+        // Removes the AdGuard DNS filter (id=15) from Safari Protection for users
+        // upgrading from builds prior to v4.5.22 (build 1053). The filter is also
+        // in restrictedFilterIds, so it won't reappear after future metadata updates.
+        // Fresh installs (buildVersion == 0) are excluded — their default.db already omits it.
+        return lastBuildVersion > 0 && lastBuildVersion < 1053
     }
 
     private let resources: AESharedResourcesProtocol

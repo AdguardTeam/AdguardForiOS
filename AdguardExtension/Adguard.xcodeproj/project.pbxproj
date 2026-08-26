@@ -14632,10 +14632,10 @@
 		};
 		A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
+			repositoryURL = "core.dns-libs";
 			requirement = {
-				branch = "v2.8.45@swift-5";
-				kind = branch;
+				kind = exactVersion;
+				version = 2.10.1;
 			};
 		};
 		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {

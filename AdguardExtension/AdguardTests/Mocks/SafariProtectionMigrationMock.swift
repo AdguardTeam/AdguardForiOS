@@ -95,6 +95,22 @@ class SafariProtectionMigrationMock: SafariProtectionMigrationsProtocol {
         }
     }
 
+    var invokedDeleteFilter = false
+    var invokedDeleteFilterCount = 0
+    var invokedDeleteFilterParameters: (id: Int, Void)?
+    var invokedDeleteFilterParametersList = [(id: Int, Void)]()
+    var stubbedDeleteFilterError: Error?
+
+    func deleteFilter(withId id: Int) throws {
+        invokedDeleteFilter = true
+        invokedDeleteFilterCount += 1
+        invokedDeleteFilterParameters = (id, ())
+        invokedDeleteFilterParametersList.append((id, ()))
+        if let error = stubbedDeleteFilterError {
+            throw error
+        }
+    }
+
     var invokedReinitializeGroupsAndFilters = false
     var invokedReinitializeGroupsAndFiltersCount = 0
     var stubbedReinitializeGroupsAndFiltersError: Error?

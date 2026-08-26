@@ -150,13 +150,14 @@ final class LicensePageViewController: UIViewController {
         case .free:
             navigationItem.rightBarButtonItems = [makeLoginButton()]
         case .premium:
-            if purchaseService.purchasedThroughLogin {
+            let showAccountControls = purchaseService.purchasedThroughLogin && !purchaseService.purchasedThroughInApp
+            if showAccountControls {
                 navigationItem.rightBarButtonItems = [generateBarButtonItem()]
             } else {
                 navigationItem.rightBarButtonItems = []
             }
             if let view = view as? PremiumLicenseStateView {
-                view.setAccountButtonHidden(!purchaseService.purchasedThroughLogin)
+                view.setAccountButtonHidden(!showAccountControls)
             }
         }
     }

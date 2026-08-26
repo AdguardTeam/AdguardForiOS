@@ -381,7 +381,7 @@ class MetaStorageMock: MetaStorageProtocol {
             SafariGroup.GroupType.ads.id: [1, 2, 3, 4, 5, 6],
             SafariGroup.GroupType.privacy.id: [7, 8, 9, 10],
             SafariGroup.GroupType.socialWidgets.id: [11, 12, 13],
-            SafariGroup.GroupType.annoyances.id: [14, 15, 16, 17],
+            SafariGroup.GroupType.annoyances.id: [14, 16, 17],
             SafariGroup.GroupType.security.id: [18, 19, 20],
             SafariGroup.GroupType.other.id: [21, 22, 23, 24, 25],
             SafariGroup.GroupType.languageSpecific.id: [26, 27, 28],

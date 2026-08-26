@@ -161,6 +161,41 @@ final class MigrationService: MigrationServiceProtocol {
             DDLogInfo("(MigrationService) - Migration for 4.5.0 ended")
         }
 
+        if versionProvider.isMigrationToRemoveSafariDnsFilterNeeded {
+            DDLogInfo("(MigrationService) - Starting remove Safari DNS filter (id=15) migration")
+            let safariMigration = safariProtection as! SafariProtectionMigrationsProtocol
+
+            do {
+                try safariMigration.deleteFilter(withId: 15)
+                DDLogInfo("(MigrationService) - Successfully deleted Safari DNS filter (id=15)")
+            } catch {
+                DDLogError("(MigrationService) - Failed to delete Safari DNS filter (id=15); Error: \(error)")
+            }
+
+            do {
+                try safariMigration.reinitializeGroupsAndFilters()
+                DDLogInfo("(MigrationService) - Successfully reinitialized groups and filters")
+            } catch {
+                DDLogError("(MigrationService) - Failed to reinitialize groups and filters; Error: \(error)")
+            }
+
+            // Only reload CBs when Safari protection is actually enabled.
+            // When protection is off, CBs have empty rule sets and reconverting
+            // would incorrectly populate them. They will be regenerated on re-enable.
+            let isSafariProtectionEnabled = resources.safariProtectionEnabled && resources.complexProtectionEnabled
+            if isSafariProtectionEnabled {
+                safariMigration.convertFiltersAndReloadCbs(onCbReloaded: { error in
+                    if let error = error {
+                        DDLogError("(MigrationService) - CB reload after DNS filter removal failed; Error: \(error)")
+                    } else {
+                        DDLogInfo("(MigrationService) - CB reload after DNS filter removal succeeded")
+                    }
+                })
+            } else {
+                DDLogInfo("(MigrationService) - Skipping CB reload, Safari protection is disabled")
+            }
+        }
+
         let currentBuildVersion = Int(productInfo.buildNumber())
         resources.buildVersion = currentBuildVersion ?? 0
         resources.isMigrationTo4_3Passed = true

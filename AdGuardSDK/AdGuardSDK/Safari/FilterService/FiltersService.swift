@@ -98,6 +98,16 @@ protocol FiltersServiceProtocol: ResetableAsyncProtocol {
     func deleteCustomFilter(withId id: Int) throws
 
     /**
+     Deletes any filter (including built-in ones) with **id**
+     Unlike `deleteCustomFilter`, this method does not guard on custom filter id range.
+     Used by app-level migrations to remove specific built-in filters.
+     Idempotent: SQLite DELETE is a no-op if the row does not exist.
+     - Parameter id: id of the filter that should be deleted
+     - throws: Can throw error if an error occurred while deleting filter
+     */
+    func deleteFilter(withId id: Int) throws
+
+    /**
      Renames filter with **id** to **name**
      - Parameter id: id of the filter that should be deleted
      - Parameter name: new filter name
@@ -167,7 +177,9 @@ final class FiltersService: FiltersServiceProtocol {
     /// So this list of identifiers is for such filters
     /// 208 - Online Malicious URL Blocklist; Should be removed because it contains `malware` word in it's description;
     /// There was a case when Apple declined our app because there can't be any malware on iOS :)
-    private static let restrictedFilterIds = [208]
+    /// 15 - AdGuard DNS filter; Should be removed from Safari Protection per AG-57637;
+    /// It is a DNS-level filter that should not be part of Safari content blocking
+    private static let restrictedFilterIds = [208, 15]
 
     // MARK: - Private properties
 
@@ -419,6 +431,22 @@ final class FiltersService: FiltersServiceProtocol {
             let customGroupIndex = groupsAtomic.firstIndex(where: { $0.groupType == .custom })!
             _groupsAtomic.mutate { $0[customGroupIndex].filters.removeAll(where: { $0.filterId == id }) }
             Logger.logDebug("(FiltersService) - deleteCustomFilter; Custom filter with id = \(id) was successfully deleted")
+        }
+    }
+
+    func deleteFilter(withId id: Int) throws {
+        try workingQueue.sync {
+            Logger.logInfo("(FiltersService) - deleteFilter; Deleting filter with id=\(id)")
+            try metaStorage.deleteFilter(withId: id)
+            try filterFilesStorage.deleteFilter(withId: id)
+
+            // Remove the filter from the in-memory cache in all groups
+            _groupsAtomic.mutate { groups in
+                for index in groups.indices {
+                    groups[index].filters.removeAll(where: { $0.filterId == id })
+                }
+            }
+            Logger.logDebug("(FiltersService) - deleteFilter; Filter with id=\(id) was successfully deleted")
         }
     }
 

@@ -63,7 +63,7 @@ extension DnsProxyBlockingMode {
         case .defaultMode: return AGDnsProxyConfig.getDefault().adblockRulesBlockingMode
         case .refused: return .AGBM_REFUSED
         case .nxdomain: return .AGBM_NXDOMAIN
-        case .unspecifiedAddress: return .AGBM_ADDRESS
+        case .unspecifiedAddress: return .AGBM_UNSPECIFIED_ADDRESS
         case .customAddress: return .AGBM_ADDRESS
         }
     }
@@ -73,7 +73,7 @@ extension DnsProxyBlockingMode {
         case .defaultMode: return AGDnsProxyConfig.getDefault().hostsRulesBlockingMode
         case .refused: return .AGBM_REFUSED
         case .nxdomain: return .AGBM_NXDOMAIN
-        case .unspecifiedAddress: return .AGBM_ADDRESS
+        case .unspecifiedAddress: return .AGBM_UNSPECIFIED_ADDRESS
         case .customAddress: return .AGBM_ADDRESS
         }
     }

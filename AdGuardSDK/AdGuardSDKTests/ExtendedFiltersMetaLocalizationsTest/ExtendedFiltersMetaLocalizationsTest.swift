@@ -16,7 +16,7 @@ class ExtendedFiltersMetaLocalizationsTest: XCTestCase {
              filters_test.json contains 81 filter, however there are 82 localizations for filters in filters_i18n_test.json
              filters_i18n_test.json contains localization for filter with id=17, but there is no filter with id=17 in filters_test.json
              */
-            XCTAssertEqual(extendedFiltersMetaLocalizations.filters.count, 82)
+            XCTAssertEqual(extendedFiltersMetaLocalizations.filters.count, 81)
         }
         catch {
             XCTFail(error.localizedDescription)

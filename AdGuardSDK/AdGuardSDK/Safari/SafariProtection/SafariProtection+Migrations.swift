@@ -25,6 +25,7 @@ public protocol SafariProtectionMigrationsProtocol: AnyObject {
     func add(rules: [UserRule], for type: SafariUserRuleType, override: Bool) throws
     func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool) throws
     func setFilter(withId id: Int, _ groupId: Int, enabled: Bool) throws
+    func deleteFilter(withId id: Int) throws
     func reinitializeGroupsAndFilters() throws
     func convertFiltersAndReloadCbs(onCbReloaded: ((_ error: Error?) -> Void)?)
 }
@@ -66,6 +67,13 @@ extension SafariProtection: SafariProtectionMigrationsProtocol {
         try workingQueue.sync {
             Logger.logInfo("(SafariProtection+Migrations) - setFilter; Setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
             try self.filters.setFilter(withId: id, groupId, enabled: enabled)
+        }
+    }
+
+    public func deleteFilter(withId id: Int) throws {
+        try workingQueue.sync {
+            Logger.logInfo("(SafariProtection+Migrations) - deleteFilter; Deleting filter with id=\(id)")
+            try filters.deleteFilter(withId: id)
         }
     }
 

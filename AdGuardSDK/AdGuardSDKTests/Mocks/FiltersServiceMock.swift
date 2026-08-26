@@ -48,6 +48,15 @@ final class FiltersServiceMock: FiltersServiceProtocol {
         }
     }
 
+    var deleteFilterCalledCount = 0
+    var deleteFilterError: Error?
+    func deleteFilter(withId id: Int) throws {
+        deleteFilterCalledCount += 1
+        if let error = deleteFilterError {
+            throw error
+        }
+    }
+
     var renameCustomFilterCalledCount = 0
     var renameCustomFilterError: Error?
     func renameCustomFilter(withId id: Int, to name: String) throws {
