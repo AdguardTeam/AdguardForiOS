@@ -8,33 +8,32 @@
 </p>
 
   <p align="center">
-    <a href="https://adguard.com/">Website</a> |
+    <a href="https://adguard.com/adguard-ios/overview.html">Website</a> |
     <a href="https://reddit.com/r/Adguard">Reddit</a> |
-    <a href="https://twitter.com/AdGuard">Twitter</a> |
+    <a href="https://x.com/AdGuard">X</a> |
     <a href="https://t.me/adguard_en">Telegram</a>
     <br/><br/>
-
-  <a href="https://github.com/AdguardTeam/AdguardForiOS/releases">
-      <img src="https://img.shields.io/github/release/AdguardTeam/AdguardForiOS/all.svg" alt="Latest release" />
-  </a>
-  <a href="https://agrd.io/ios">
-    <img alt="iTunes App Store" src="https://img.shields.io/itunes/v/1047223162.svg">
-  </a>
+    <a href="https://github.com/AdguardTeam/AdguardForiOS/releases"><img src="https://img.shields.io/github/release/AdguardTeam/AdguardForiOS/all.svg" alt="Latest release" /></a>
+    <a href="https://agrd.io/ios"><img alt="iTunes App Store" src="https://img.shields.io/itunes/v/1047223162.svg"></a>
   </p>
+<br />
+<p align="center">
+<img src="https://user-images.githubusercontent.com/17472907/105178597-4b542000-5b39-11eb-86ed-136f0697bcec.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178604-4f803d80-5b39-11eb-9381-24682e06b8d8.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105339304-93347f00-5bed-11eb-99b6-ab438b34eb34.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178609-50b16a80-5b39-11eb-9723-5179fb811b65.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105339299-92035200-5bed-11eb-87ef-a7171432fe5d.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178607-5018d400-5b39-11eb-97d6-9dc792b28654.png" width="250">
+</p>
+<br />
+
+AdGuard for iOS is an app that blocks ads in Safari browser at exceptional level, and also provides additional Premium features like configurable DNS settings, encrypted DNS support (DOH, DOT, DNSCrypt), and custom ad blocking subscriptions. To get more information and to download AdGuard for iOS, [visit our website](https://adguard.com/adguard-ios/overview.html).
+
+<br />
 
 - [Contribution](#contribution)
   - [How to report an issue](#issue)
   - [Translating AdGuard](#contribution-translating)
   - [Other options](#contribution-other)
   - [How to become a Beta tester](#beta-tester)
-- [Our plans](#our-plans)
 - [How to build](#how-to-build)
 
-AdGuard for iOS is an app that blocks ads in Safari browser at exceptional level, and also provides additional Premium features like configurable DNS settings, encrypted DNS support (DOH, DOT, DNSCrypt), and custom ad blocking subscriptions. To get more information and to download AdGuard for iOS, [visit our website](https://adguard.com/adguard-ios/overview.html).
-
-<p align="center">
-<img src="https://user-images.githubusercontent.com/17472907/105178597-4b542000-5b39-11eb-86ed-136f0697bcec.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178604-4f803d80-5b39-11eb-9381-24682e06b8d8.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105339304-93347f00-5bed-11eb-99b6-ab438b34eb34.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178609-50b16a80-5b39-11eb-9723-5179fb811b65.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105339299-92035200-5bed-11eb-87ef-a7171432fe5d.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178607-5018d400-5b39-11eb-97d6-9dc792b28654.png" width="250">
-</p>
+<br />
 
 <a id="contribution"></a>
 
@@ -42,17 +41,17 @@ AdGuard for iOS is an app that blocks ads in Safari browser at exceptional level
 
 <a id="issue"></a>
 
-### How to report an issue?
+### How to report an issue
 
 GitHub can be used to report a bug or to submit a feature request. To do so, go to [this page](https://github.com/AdguardTeam/AdGuardforiOS/issues) and click the _New issue_ button.
 
-> **Note:** for the filter-related issues (missed ads, false positives etc.) use our [reporting tool](https://reports.adguard.com/new_issue.html).
+> **Note:** for the filter-related issues (missed ads, false positives etc.) use our [reporting tool](https://link.adtidy.org/forward.html?action=report&app=home&from=github).
 
 <a id="contribution-translating"></a>
 
 ### Translating AdGuard
 
-If you want to help with AdGuard translations, please learn more about translating our products here: https://kb.adguard.com/en/general/adguard-translations
+If you want to help with AdGuard translations, please learn more about translating our products [here](https://adguard.com/kb/miscellaneous/contribute/translate/program/).
 
 <a id="contribution-other"></a>
 
@@ -62,15 +61,9 @@ Here is a [dedicated page](https://adguard.com/contribute.html) for those who ar
 
 <a id="beta-tester"></a>
 
-### How to become a beta tester?
+### How to become a beta tester
 
-You can submit an application to participate in AdGuard for beta-testing program. All necessary information on this topic can be found on the [dedicated page](https://adguard.com/beta.html).
-
-<a id="our-plans"></a>
-
-## Our plans
-
-To see the 'big picture', to watch current progress and to get an idea of approximate dates for upcoming AdGuard for iOS releases, see this page: https://github.com/AdguardTeam/AdguardForIos/milestones
+You can use TestFlight to participate in the AdGuard for iOS beta-testing program. All necessary information on this topic can be found on the [dedicated page](https://adguard.com/beta.html?platform=ios).
 
 <a id="how-to-build"></a>
 
@@ -160,4 +153,4 @@ bundle exec fastlane auth
 
 ### Acknowledgments
 
-Please visit the acknowledgements [page](https://kb.adguard.com/en/miscellaneous/acknowledgments#ios)
+Please visit the acknowledgements [page](https://kb.adguard.com/miscellaneous/acknowledgments#ios)
