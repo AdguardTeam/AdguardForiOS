@@ -36,7 +36,7 @@ protocol PacketTunnelProviderProxyProtocol: AnyObject {
     func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void)
     func sleep(completionHandler: @escaping () -> Void)
     func wake()
-    func networkChanged()
+    func networkChanged(physicalNetworkChanged: Bool)
 }
 
 /**
@@ -50,6 +50,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     // MARK: - Private variables
 
     private var shouldProcessPackets = false
+    private var stopped = false // Access only on restartQueue.
     private let readPacketsQueue = DispatchQueue(label: "DnsAdGuardSDK.PacketTunnelProviderProxy.readPacketsQueue")
     private let restartQueue = DispatchQueue(label: "DnsAdGuardSDK.PacketTunnelProviderProxy.restartQueue")
 
@@ -93,13 +94,29 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     // MARK: - Internal methods
 
     func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
-        startTunnel(completionHandler)
+        restartQueue.async { [weak self] in
+            guard let self = self else { completionHandler(CommonError.missingSelf); return }
+            self.stopped = false
+            let group = DispatchGroup()
+            group.enter()
+            var startError: Error?
+            self.startTunnel { error in
+                startError = error
+                group.leave()
+            }
+            group.wait()
+            self.stopped = startError != nil
+            completionHandler(startError)
+        }
     }
 
     func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
-        stopPacketHanding()
-        dnsProxy.stop()
-        completionHandler()
+        restartQueue.async { [weak self] in
+            self?.stopped = true
+            self?.stopPacketHanding()
+            self?.dnsProxy.stop()
+            completionHandler()
+        }
     }
 
     func sleep(completionHandler: @escaping () -> Void) {
@@ -110,13 +127,27 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
         // Maybe we will use it, like we do in VPN
     }
 
-    func networkChanged() {
+    func networkChanged(physicalNetworkChanged: Bool) {
         // Restarting tunnel synchronously in a separate queue to avoid races
         restartQueue.async { [weak self] in
-            guard let self = self else { return }
+            guard let self = self, !self.stopped else { return }
 
-            let shouldRestartWhenNetworkChanges = self.dnsConfiguration.lowLevelConfiguration.restartByReachability
+            let shouldRestartWhenNetworkChanges = self.dnsConfiguration.lowLevelConfiguration.restartByReachability && physicalNetworkChanged
             Logger.logInfo("(PacketTunnelProviderProxy) - networkChanged; shouldRestartWhenNetworkChanges=\(shouldRestartWhenNetworkChanges)")
+
+            if !physicalNetworkChanged {
+                // Reapplying tunnel settings here can itself change the route and retrigger the loop.
+                self.dnsProxy.stop()
+                let servers = self.networkUtils.systemDnsServers.filter {
+                    $0 != self.addresses.localDnsIpv4 && $0 != self.addresses.localDnsIpv6
+                }
+                if let error = self.startDnsProxy(with: servers, outboundInterface: self.networkUtils.getCurrentNetworkInterfaceSync()) {
+                    self.stopped = true
+                    self.stopPacketHanding()
+                    self.delegate?.cancelTunnel(with: error)
+                }
+                return
+            }
 
             // Stop packet handling and dnsProxy right away
             Logger.logInfo("(PacketTunnelProviderProxy) - stopping packet handling")
@@ -125,28 +156,32 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             Logger.logInfo("(PacketTunnelProviderProxy) - stopping dnsProxy")
             self.dnsProxy.stop()
 
-            // If the user has enabled "restartByReachability", we reinitialize the whole PacketTunnelProvider on every network change
+            // The switch applies to physical changes, not VPN route changes.
             // This is done by cancelling tunnel (it will be then restarted back automatically due to the on-demand rules)
             if shouldRestartWhenNetworkChanges {
                 Logger.logInfo("(PacketTunnelProviderProxy) - cancelling tunnel")
+                self.stopped = true
                 self.delegate?.cancelTunnel(with: nil)
                 return
             }
 
-            // This is the default behavior, we restart proxy internally without reinitializing PacketTunnelProvider.
+            // With the switch off, physical changes still refresh network settings internally.
             let group = DispatchGroup()
             group.enter()
             Logger.logInfo("(PacketTunnelProviderProxy) - starting the tunnel")
-            self.startTunnel { [weak self] error in
-                if let error = error {
-                    Logger.logError("(PacketTunnelProviderProxy) - networkChanged; Error: \(error)")
-                    self?.delegate?.cancelTunnel(with: error)
-                } else {
-                    Logger.logInfo("(PacketTunnelProviderProxy) - networkChanged; Successfully restarted proxy after the network change")
-                }
+            var restartError: Error?
+            self.startTunnel { error in
+                restartError = error
                 group.leave()
             }
             group.wait()
+            if let error = restartError {
+                Logger.logError("(PacketTunnelProviderProxy) - networkChanged; Error: \(error)")
+                self.stopped = true
+                self.delegate?.cancelTunnel(with: error)
+            } else {
+                Logger.logInfo("(PacketTunnelProviderProxy) - networkChanged; Successfully restarted proxy after the network change")
+            }
         }
     }
 
