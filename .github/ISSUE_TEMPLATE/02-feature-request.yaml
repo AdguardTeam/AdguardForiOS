@@ -2,6 +2,10 @@ name: 🌱 Feature request
 description: If you know how AdGuard for iOS can be improved
 labels: ["Feature request"]
 body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to fill out this form!
+  
   - type: textarea
     id: what-happened
     attributes:
@@ -14,7 +18,7 @@ body:
   - type: textarea
     id: how_it_should_be
     attributes:
-      label: Proposed solution
+      label: Proposed Solution
       description:
       placeholder: Describe the solution you'd like in a clear and concise manner.
     validations:
@@ -23,7 +27,7 @@ body:
   - type: textarea
     id: additional
     attributes:
-      label: Alternative solution
+      label: Alternative Solution
       description:
       placeholder: A clear and concise description of any alternative solutions or features you've considered.
     validations:
