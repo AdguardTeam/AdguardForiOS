@@ -50,11 +50,24 @@ public class NetworkUtils: NetworkUtilsProtocol {
         return _monitor as! NWPathMonitor
     }
 
+    private let pathQueue = DispatchQueue(label: "NWPathMonitor handler queue")
+    private let physicalStateLock = NSLock()
+    private var physicalNetwork: PhysicalNetworkState?
+    private let physicalMonitor: NWPathMonitor? = {
+        if #available(iOS 14.0, macOS 11.0, *) {
+            return NWPathMonitor(prohibitedInterfaceTypes: [.other, .loopback])
+        }
+        return nil
+    }()
+
     public init() {
         _monitor = NWPathMonitor()
-        var group: DispatchGroup? = DispatchGroup()
-        group?.enter()
-        monitor().pathUpdateHandler = { newPath in
+        let group = DispatchGroup()
+        group.enter()
+        var receivedInitialPath = false
+        var previousPath: Network.NWPath?
+        monitor().pathUpdateHandler = { [weak self] newPath in
+            guard let self = self else { return }
             self.logNWPath(newPath)
 
             let internetState: InternetState = switch newPath.status {
@@ -64,23 +77,41 @@ public class NetworkUtils: NetworkUtilsProtocol {
                 @unknown default: .unavailable
             }
 
-            NotificationCenter.default.post(name: .networkStateChanged, object: NetworkStateInfo(internetState, self.getInterface(newPath.availableInterfaces)))
+            let state = NetworkStateInfo(internetState, self.getInterface(newPath.availableInterfaces))
+            self.physicalStateLock.lock()
+            state.physicalNetwork = self.physicalNetwork
+            self.physicalStateLock.unlock()
+            state.routeChanged = previousPath != newPath
+            previousPath = newPath
+            NotificationCenter.default.post(name: .networkStateChanged, object: state)
 
-            group?.leave()
-            group = nil
+            if !receivedInitialPath {
+                receivedInitialPath = true
+                group.leave()
+            }
         }
         Logger.logInfo("(NetworkUtils) - NWPathMonitor start")
 
         // We must start the monitor to have the actual value of the path at any time
-        monitor().start(queue: DispatchQueue(label: "NWPathMonitor handler queue"))
+        monitor().start(queue: pathQueue)
+        physicalMonitor?.pathUpdateHandler = { [weak self] path in
+            guard let self = self else { return }
+            guard let physicalNetwork = PhysicalNetworkState.capture(path) else { return }
+            self.physicalStateLock.lock()
+            self.physicalNetwork = physicalNetwork
+            self.physicalStateLock.unlock()
+            NotificationCenter.default.post(name: .networkStateChanged, object: self.getCurrentNetworkStateSync())
+        }
+        physicalMonitor?.start(queue: pathQueue)
 
         // we must wait for fist pathUpdateHandler call to get the actual network state
         // TODO: 0.5 is a magic number, at least should be explained why.
-        _ = group?.wait(timeout: .now() + 0.5)
+        _ = group.wait(timeout: .now() + 0.5)
     }
 
     deinit {
         monitor().cancel()
+        physicalMonitor?.cancel()
     }
 
     public var systemDnsServers: [String] {
@@ -183,7 +214,11 @@ public class NetworkUtils: NetworkUtilsProtocol {
             @unknown default: .unavailable
         }
 
-        return NetworkStateInfo(internetState, getInterface(path.availableInterfaces))
+        let state = NetworkStateInfo(internetState, getInterface(path.availableInterfaces))
+        physicalStateLock.lock()
+        state.physicalNetwork = physicalNetwork
+        physicalStateLock.unlock()
+        return state
     }
 
 
