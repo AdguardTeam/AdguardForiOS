@@ -49,6 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     private var activateWithOpenUrl: Bool = false
 
+    /// Set once per process: either by the first foreground entry of the scene, which runs
+    /// `performForegroundLaunchWorkIfNeeded()`, or by an earlier background fetch, which skips it.
+    private var isForegroundLaunchWorkDecided = false
+
     // MARK: - Services
 
     private let resources: AESharedResourcesProtocol
@@ -114,11 +118,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //------------- Preparing for start application. Stage 1. -----------------
 
-        // Do not migrate data while background fetch
-        if application.applicationState != .background {
-            migrationService.migrateIfNeeded()
-        }
-
         // This part checks if the user has installed a new version of the application with a new Team ID.
         // When transferring an app to another developer account, the keychain from the old application becomes invalid.
         // This leads to the fact that the appId is no longer available and the user logged in with the key becomes a 'free' user.
@@ -140,10 +139,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //------------ Interface Tuning -----------------------------------
         self.window?.backgroundColor = UIColor.clear
 
-        if application.applicationState != .background {
-            purchaseService.checkPremiumStatusChanged()
-        }
-
         return true
     }
 
@@ -155,10 +150,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             options.enableAutoSessionTracking = false
         }
 
-        if application.applicationState != .background {
-            prepareControllers()
-        }
-
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
 
@@ -166,34 +157,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppDelegate.setBackgroundFetchInterval(interval)
         subscribeToNotifications()
 
-        // Install default DNS filter if needed
-        if application.applicationState != .background {
-            let defaultDnsFilterInstaller = DefaultDnsFilterInstaller(resources: resources, dnsProtection: dnsProtection)
-            defaultDnsFilterInstaller.installDefaultDnsFilterIfNeeded()
-        }
+        return true
+    }
 
-        if firstRun && application.applicationState != .background {
+    /// Runs the launch work that needs the UI. Before the scene life cycle it ran in
+    /// `application(_:willFinishLaunchingWithOptions:)` and `application(_:didFinishLaunchingWithOptions:)`
+    /// unless the app was launched in the background. With scenes the app is always in the background
+    /// state during launch, and the scene is connected even when the app is launched for background fetch,
+    /// so `SceneDelegate` calls this method on the first foreground entry of the scene. The work runs at
+    /// most once per process and does not run in a process that has been launched for background fetch.
+    func performForegroundLaunchWorkIfNeeded() {
+        guard !isForegroundLaunchWorkDecided else { return }
+        isForegroundLaunchWorkDecided = true
+        DDLogInfo("(AppDelegate) Foreground launch work started")
+
+        // Do not migrate data while background fetch
+        migrationService.migrateIfNeeded()
+
+        purchaseService.checkPremiumStatusChanged()
+
+        prepareControllers()
+
+        // Install default DNS filter if needed
+        let defaultDnsFilterInstaller = DefaultDnsFilterInstaller(resources: resources, dnsProtection: dnsProtection)
+        defaultDnsFilterInstaller.installDefaultDnsFilterIfNeeded()
+
+        if firstRun {
             configuration.showStatusBar = false
             // TODO: this is a slow operation that works with network and it is called on the main thread, rework this
             setupOnFirstAppRun()
 
             // After first app run we don't need to call finishBackgroundUpdate
-            return true
+            return
         }
 
         // Background fetch consists of 3 steps, so if the update process
         // didn't fully finish in the background than we should continue it here
-        if application.applicationState != .background {
-            safariProtection.finishBackgroundUpdate { error in
-                if let error = error {
-                    DDLogError("(AppDelegate) - didFinishLaunchingWithOptions; Finished background update with error: \(error)")
-                    return
-                }
-                DDLogInfo("(AppDelegate) - didFinishLaunchingWithOptions; Finish background update successfully")
+        safariProtection.finishBackgroundUpdate { error in
+            if let error = error {
+                DDLogError("(AppDelegate) - didFinishLaunchingWithOptions; Finished background update with error: \(error)")
+                return
             }
+            DDLogInfo("(AppDelegate) - didFinishLaunchingWithOptions; Finish background update successfully")
         }
-
-        return true
     }
 
 
@@ -263,6 +269,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // For more information on background update strategies check the documentation:
     // https://developer.apple.com/documentation/backgroundtasks/choosing_background_strategies_for_your_app
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+
+        // A process launched for background fetch does not run the foreground launch work when the user
+        // opens it later, as before the scene life cycle.
+        if !isForegroundLaunchWorkDecided {
+            isForegroundLaunchWorkDecided = true
+            DDLogInfo("(AppDelegate) Foreground launch work skipped: launched for background fetch")
+        }
 
         // Note that all heavy background operations should be accompanied by calling beginBackgroundTask/endBackgroundTask.
         // The explanation on why it is important can be found in the documentation (see the section on 0xdead10cc).

@@ -85,6 +85,7 @@
 		240F6F362732C17B00FD5430 /* ImportSettingsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F6F352732C17B00FD5430 /* ImportSettingsServiceTest.swift */; };
 		240F6F382732C29300FD5430 /* DnsProtectionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F6F372732C29300FD5430 /* DnsProtectionMock.swift */; };
 		2410C1C425EFDC3E00F29487 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
+		82C7D645CFEF4FE887012EB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D8783C67F4295A8E6AE5F /* SceneDelegate.swift */; };
 		2411AA292733F6F500E82F2E /* SafariProtectionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2411AA282733F6F500E82F2E /* SafariProtectionMock.swift */; };
 		241346CC26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */; };
 		241346CD26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */; };
@@ -166,6 +167,7 @@
 		244E3B0D273988A300FD4C1E /* DnsConfigManagerAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244E3B0C273988A300FD4C1E /* DnsConfigManagerAssistant.swift */; };
 		244E3B0E273988A300FD4C1E /* DnsConfigManagerAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244E3B0C273988A300FD4C1E /* DnsConfigManagerAssistant.swift */; };
 		24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
+		FF5DEE2946C14380BB915EFD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D8783C67F4295A8E6AE5F /* SceneDelegate.swift */; };
 		2455B21127317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
 		2455B21227317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
 		2455B21327317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
@@ -6677,6 +6679,7 @@
 			isa = PBXGroup;
 			children = (
 				24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */,
+				5B5D8783C67F4295A8E6AE5F /* SceneDelegate.swift */,
 				7E0F9BAB272BF47C00B1D831 /* StatusBar */,
 				24D923212604C6D6002F368B /* Extensions */,
 				24D6A9CB25FB60A200674D11 /* URLScheme */,
@@ -8878,6 +8881,7 @@
 				24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */,
 				D0611F1B2739717300124BC4 /* SafariMigration4_3.swift in Sources */,
 				2410C1C425EFDC3E00F29487 /* AppDelegate.swift in Sources */,
+				82C7D645CFEF4FE887012EB2 /* SceneDelegate.swift in Sources */,
 				D0B545E12435D69B002F0AEC /* ThemableLabel.swift in Sources */,
 				2491F74226F63AF5006CF561 /* DnsProviderDetailsModel.swift in Sources */,
 				D0D7E62224445731001801A5 /* MostActiveCompaniesCell.swift in Sources */,
@@ -9508,6 +9512,7 @@
 				B2673DC227173DFD00E04747 /* SDKMigrationServiceHelper.swift in Sources */,
 				D0F7F0C82268946700592B1E /* KeychainService.swift in Sources */,
 				24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */,
+				FF5DEE2946C14380BB915EFD /* SceneDelegate.swift in Sources */,
 				7E3FEFBA26CE9E2F0080EC03 /* FilterDetailsViewController.swift in Sources */,
 				241346CC26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */,
 				7E3FEFB426CD3AB60080EC03 /* UITableView+Utils.swift in Sources */,
@@ -12546,7 +12551,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -12614,7 +12619,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
