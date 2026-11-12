@@ -47,7 +47,10 @@ extension NSMutableAttributedString {
         style.lineBreakMode = lineBreakMode
 
         let format = NSMutableString(string: html)
-        let wrapped = "<span style=\"font-family: -apple-system; font-size: \(fontSize); color: \(color.hex())\">\(format)</span>"
+        // The importer drops #RRGGBBAA, so <b> and <strong> fall back to a dynamic label color.
+        // A light color-scheme plus a 6-digit color keeps the caller's color on those runs.
+        let rgb = String(color.hex().prefix(7))
+        let wrapped = "<style>body, b, strong { color-scheme: light; color: \(rgb); }</style><span style=\"font-family: -apple-system; font-size: \(fontSize);\">\(format)</span>"
         guard let htmlData = wrapped.data(using: .utf8) else { return nil}
 
         guard let resultText = try? NSMutableAttributedString(
@@ -85,8 +88,24 @@ extension NSMutableAttributedString {
         }
 
         resultText.addAttributes([NSAttributedString.Key.paragraphStyle : style], range: NSRange(location: 0, length: resultText.length))
+        fillMissingForegroundColor(in: resultText, with: color)
 
         return resultText
+    }
+
+    /// Visible runs the importer left uncolored get the caller's color. Inline colors stay as they are.
+    private static func fillMissingForegroundColor(in string: NSMutableAttributedString, with color: UIColor) {
+        var rangesMissingColor = [NSRange]()
+        let fullRange = NSRange(location: 0, length: string.length)
+        string.enumerateAttribute(NSAttributedString.Key.foregroundColor, in: fullRange, options: []) { value, range, _ in
+            guard value == nil else { return }
+            let chunk = string.attributedSubstring(from: range).string
+            guard chunk.contains(where: { !$0.isWhitespace }) else { return }
+            rangesMissingColor.append(range)
+        }
+        for range in rangesMissingColor {
+            string.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+        }
     }
 }
 
