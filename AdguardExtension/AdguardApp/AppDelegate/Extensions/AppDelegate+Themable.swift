@@ -32,23 +32,19 @@ extension AppDelegate {
 
     func updateTheme() {
         guard let root =  window?.rootViewController else { return }
-        recursiveThemeUpdate(vc: root)
+        var visited = Set<ObjectIdentifier>()
+        recursiveThemeUpdate(vc: root, visited: &visited)
     }
 
-    private func recursiveThemeUpdate(vc: UIViewController?) {
-        if vc == nil { return }
-        recursiveThemeUpdate(vc: vc?.presentedViewController)
-        recursiveChildrenThemeUpdate(children: vc?.children)
-        (vc as? ThemableProtocol)?.updateTheme()
-    }
-
-    private func recursiveChildrenThemeUpdate(children: [UIViewController]?) {
-        guard let children = children, !children.isEmpty else { return }
+    private func recursiveThemeUpdate(vc controller: UIViewController?, visited: inout Set<ObjectIdentifier>) {
+        guard let controller = controller, visited.insert(ObjectIdentifier(controller)).inserted else { return }
+        recursiveThemeUpdate(vc: controller.presentedViewController, visited: &visited)
+        let children = (controller as? MainTabBarController)?.viewControllers ?? controller.children
         children.forEach {
-            recursiveChildrenThemeUpdate(children: $0.children)
-            if $0.isViewLoaded {
-                ($0 as? ThemableProtocol)?.updateTheme()
-            }
+            recursiveThemeUpdate(vc: $0, visited: &visited)
+        }
+        if controller.isViewLoaded {
+            (controller as? ThemableProtocol)?.updateTheme()
         }
     }
 }

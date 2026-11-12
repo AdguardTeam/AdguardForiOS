@@ -43,6 +43,7 @@ final class OnboardingController: UIViewController {
     @IBOutlet weak var switchLabel: ThemableLabel!
     @IBOutlet weak var onboardingContentView: OnboardingContentView!
     @IBOutlet weak var onboardingContentViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var onboardingContentHeightConstraints: [NSLayoutConstraint]!
 
     @IBOutlet weak var watchManualButtonIpad: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -63,6 +64,11 @@ final class OnboardingController: UIViewController {
         } else {
             onboardingContentViewTopConstraint.constant = 30.0
             onboardingContentView.onboardingType = .withoutAdvancedProtection
+        }
+
+        if #available(iOS 18.0, *) {
+            onboardingContentHeightConstraints.forEach { $0.priority = .defaultLow }
+            onboardingContentView.heightAnchor.constraint(equalToConstant: 0).isActive = true
         }
         self.updateTheme()
     }

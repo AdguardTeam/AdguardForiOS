@@ -28,7 +28,6 @@ final class ExtendedTitleTableHeaderView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 40.0 : 24.0, weight: .bold)
         return label
     }()
 
@@ -40,9 +39,12 @@ final class ExtendedTitleTableHeaderView: UIView {
         textView.textAlignment = .center
         textView.isScrollEnabled = false
         textView.textContainer.lineFragmentPadding = 0.0
-        textView.font = UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 16.0, weight: .bold)
         return textView
     }()
+
+    // MARK: - Layout metrics
+
+    private var layoutConstraints: [NSLayoutConstraint] = []
 
     // MARK: - Services
 
@@ -77,8 +79,10 @@ final class ExtendedTitleTableHeaderView: UIView {
         self.title = title
         self.descr = normalDescription
         super.init(frame: .zero)
-        setNormalTitle(normalDescription)
+        // setupUI must run first: it applies the size-class fonts that
+        // setupTextView reads when building the attributed description.
         setupUI()
+        setNormalTitle(normalDescription)
         setupTheme()
     }
 
@@ -86,8 +90,9 @@ final class ExtendedTitleTableHeaderView: UIView {
         self.title = title
         self.descr = htmlDescription
         super.init(frame: .zero)
-        setAttributedTitle(htmlDescription)
+        // See the note in init(title:normalDescription:).
         setupUI()
+        setAttributedTitle(htmlDescription)
         setupTheme()
     }
 
@@ -107,23 +112,46 @@ final class ExtendedTitleTableHeaderView: UIView {
 
     // MARK: - Private methods
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        traitCollection.onSizeClassChange(previousTraitCollection) {
+            applyLayoutMetrics()
+        }
+    }
+
     private func setupUI() {
         titleLabel.text = title
         addSubview(titleLabel)
         addSubview(descriptionTextView)
+        applyLayoutMetrics()
+    }
 
-        NSLayoutConstraint.activate([
+    private func applyLayoutMetrics() {
+        let sideInset: CGFloat = isIpadTrait ? 24.0 : 16.0
+        let bottomInset: CGFloat = isIpadTrait ? -96.0 : -24.0
+
+        titleLabel.font = UIFont.systemFont(ofSize: isIpadTrait ? 40.0 : 24.0, weight: .bold)
+        descriptionTextView.font = UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 16.0, weight: .bold)
+
+        NSLayoutConstraint.deactivate(layoutConstraints)
+        layoutConstraints = [
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: sideInset),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -sideInset),
             titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: titleLabel.font.pointSize + 2.0),
 
             descriptionTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8.0),
-            descriptionTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
-            descriptionTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
-            descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: isIpadTrait ? -96.0 : -24.0),
-            descriptionTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: descriptionTextView.font!.pointSize + 2.0),
-        ])
+            descriptionTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: sideInset),
+            descriptionTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -sideInset),
+            descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: bottomInset),
+            descriptionTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: descriptionTextView.font!.pointSize + 2.0)
+        ]
+        NSLayoutConstraint.activate(layoutConstraints)
+
+        // The description is an attributed string rendered with the font size
+        // at build time — rebuild it after the font changes.
+        setupTextView()
+
     }
 
     private func setupTheme() {

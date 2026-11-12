@@ -38,7 +38,6 @@ class OnboardingAnimationsController: UIViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
-    private var orientationChangeNotification: NotificationToken?
 
     private var currentStep = 1
 
@@ -53,12 +52,11 @@ class OnboardingAnimationsController: UIViewController {
         setupAnimationViews()
         addGestureRecognizers()
         firstAnimationView.play()
+    }
 
-        orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: nil, using: {[weak self] (notification) in
-            DispatchQueue.main.async {
-                self?.setupScrollViews()
-            }
-        })
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        alignCarouselsToCurrentStepIfNeeded()
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -141,20 +139,29 @@ class OnboardingAnimationsController: UIViewController {
     }
 
     private func setupScrollViews() {
-        var offset: CGFloat = 0.0
+        // The carousels are non-interactive; offsets change only programmatically.
+        view.layoutIfNeeded()
 
-        if currentStep == 1 {
-            offset = 0.0
-        }
-        else if currentStep == 2 {
-            offset = secondAnimationView.frame.minX
-        }
-        else if currentStep == 3 {
-            offset = thirdAnimationView.frame.minX
-        }
-
+        let offset = CGFloat(currentStep - 1) * animationsScrollView.bounds.width
         animationsScrollView.setContentOffset(CGPoint(x: offset, y: 0.0), animated: true)
         textsScrollView.setContentOffset(CGPoint(x: offset, y: 0.0), animated: true)
+    }
+
+    /// Window size changes settle the scroll views' sizes over several layout
+    /// passes. The carousels are non-interactive (offsets change only
+    /// programmatically), so it is safe to verify the alignment on every
+    /// layout pass.
+    private func alignCarouselsToCurrentStepIfNeeded() {
+        alignCarouselIfNeeded(animationsScrollView, page: currentStep - 1)
+        alignCarouselIfNeeded(textsScrollView, page: currentStep - 1)
+    }
+
+    private func alignCarouselIfNeeded(_ scrollView: UIScrollView, page: Int) {
+        let pageWidth = scrollView.bounds.width
+        guard pageWidth > 0 else { return }
+        let target = CGFloat(page) * pageWidth
+        guard abs(scrollView.contentOffset.x - target) > 0.5 else { return }
+        scrollView.setContentOffset(CGPoint(x: target, y: 0.0), animated: false)
     }
 
     private func addGestureRecognizers() {

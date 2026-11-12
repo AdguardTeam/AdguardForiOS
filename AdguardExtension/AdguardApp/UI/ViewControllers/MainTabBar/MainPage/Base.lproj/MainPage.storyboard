@@ -363,7 +363,9 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="nTP-os-Pis" secondAttribute="bottom" id="2Gu-lX-ZeZ"/>
                                                                     <constraint firstItem="Btd-nN-zLO" firstAttribute="trailing" secondItem="eIf-j0-9oP" secondAttribute="trailing" id="38z-me-zgz"/>
-                                                                    <constraint firstItem="eIf-j0-9oP" firstAttribute="centerY" secondItem="IiS-6i-NUq" secondAttribute="centerY" constant="-11" id="AcT-su-ayz"/>
+                                                                    <constraint firstItem="eIf-j0-9oP" firstAttribute="centerY" secondItem="IiS-6i-NUq" secondAttribute="centerY" constant="-11" id="AcT-su-ayz">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="-17"/>
+                                                                    </constraint>
                                                                     <constraint firstAttribute="trailing" secondItem="eIf-j0-9oP" secondAttribute="trailing" constant="4" id="B8G-kF-5eM"/>
                                                                     <constraint firstAttribute="trailing" secondItem="nTP-os-Pis" secondAttribute="trailing" id="FxI-Sh-I5N"/>
                                                                     <constraint firstItem="eIf-j0-9oP" firstAttribute="leading" secondItem="IiS-6i-NUq" secondAttribute="leading" constant="4" id="J70-fm-x2d"/>
@@ -453,7 +455,9 @@
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="4"/>
                                                                     </constraint>
                                                                     <constraint firstAttribute="trailing" secondItem="561-fR-2DC" secondAttribute="trailing" id="sZy-Xc-9QS"/>
-                                                                    <constraint firstItem="Kxe-Kt-6aQ" firstAttribute="centerY" secondItem="427-Te-NP9" secondAttribute="centerY" constant="-11" id="tQP-lb-Icj"/>
+                                                                    <constraint firstItem="Kxe-Kt-6aQ" firstAttribute="centerY" secondItem="427-Te-NP9" secondAttribute="centerY" constant="-11" id="tQP-lb-Icj">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="-17"/>
+                                                                    </constraint>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MHS-lb-bSq" userLabel="Data Saved View">
@@ -530,7 +534,9 @@
                                                                     <constraint firstAttribute="bottom" secondItem="vwk-XK-u63" secondAttribute="bottom" id="NNw-Qu-nPH"/>
                                                                     <constraint firstItem="Cfe-vu-29O" firstAttribute="leading" secondItem="Zbr-WF-bsX" secondAttribute="leading" id="h9F-je-07W"/>
                                                                     <constraint firstItem="Cfe-vu-29O" firstAttribute="trailing" secondItem="Zbr-WF-bsX" secondAttribute="trailing" id="oiy-MN-ArI"/>
-                                                                    <constraint firstItem="Zbr-WF-bsX" firstAttribute="centerY" secondItem="MHS-lb-bSq" secondAttribute="centerY" constant="-11" id="os3-Gh-Jrp"/>
+                                                                    <constraint firstItem="Zbr-WF-bsX" firstAttribute="centerY" secondItem="MHS-lb-bSq" secondAttribute="centerY" constant="-11" id="os3-Gh-Jrp">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="-17"/>
+                                                                    </constraint>
                                                                     <constraint firstAttribute="trailing" secondItem="Zbr-WF-bsX" secondAttribute="trailing" constant="4" id="r7G-OI-qVj"/>
                                                                     <constraint firstItem="vwk-XK-u63" firstAttribute="top" secondItem="MHS-lb-bSq" secondAttribute="top" id="rNO-ph-FvM"/>
                                                                     <constraint firstItem="Zbr-WF-bsX" firstAttribute="leading" secondItem="MHS-lb-bSq" secondAttribute="leading" constant="4" id="rZg-EZ-TcK"/>
@@ -541,10 +547,21 @@
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="xbW-Q6-fAi" firstAttribute="height" secondItem="m7T-1D-DMy" secondAttribute="height" multiplier="0.4" id="u0A-LV-upn"/>
+                                                    <constraint firstItem="xbW-Q6-fAi" firstAttribute="height" secondItem="m7T-1D-DMy" secondAttribute="height" multiplier="0.4" priority="750" id="u0A-LV-upn"/>
+                                                    <constraint firstItem="xbW-Q6-fAi" firstAttribute="height" relation="greaterThanOrEqual" constant="76" id="ag6-05-x005"/>
                                                     <constraint firstItem="su3-Wd-237" firstAttribute="height" secondItem="m7T-1D-DMy" secondAttribute="height" multiplier="0.2" id="vln-gm-Lkd"/>
                                                     <constraint firstItem="kfe-5H-fB1" firstAttribute="width" secondItem="m7T-1D-DMy" secondAttribute="width" multiplier="0.5" id="zhc-l1-Ajj"/>
                                                 </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="ag6-05-x005"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <mask key="constraints">
+                                                        <include reference="ag6-05-x005"/>
+                                                    </mask>
+                                                </variation>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -554,10 +571,10 @@
                                             <constraint firstAttribute="bottom" secondItem="m7T-1D-DMy" secondAttribute="bottom" id="9dI-Xa-RWp"/>
                                             <constraint firstAttribute="trailing" secondItem="jbE-Rs-Ce2" secondAttribute="trailing" id="GDg-rR-88l"/>
                                             <constraint firstAttribute="trailing" secondItem="W8L-FJ-MBf" secondAttribute="trailing" id="NuU-tj-pNg"/>
-                                            <constraint firstItem="m7T-1D-DMy" firstAttribute="leading" secondItem="uI9-pN-tdm" secondAttribute="leading" id="VXW-3S-t7C"/>
+                                            <constraint firstItem="m7T-1D-DMy" firstAttribute="leading" secondItem="Qnu-x2-MQD" secondAttribute="leading" id="VXW-3S-t7C"/>
                                             <constraint firstItem="m7T-1D-DMy" firstAttribute="height" secondItem="uI9-pN-tdm" secondAttribute="height" multiplier="0.9" id="ZRo-bB-hCM"/>
                                             <constraint firstItem="jbE-Rs-Ce2" firstAttribute="top" secondItem="uI9-pN-tdm" secondAttribute="top" id="fqP-7s-pYr"/>
-                                            <constraint firstAttribute="trailing" secondItem="m7T-1D-DMy" secondAttribute="trailing" id="h3g-rc-2nL"/>
+                                            <constraint firstItem="Qnu-x2-MQD" firstAttribute="trailing" secondItem="m7T-1D-DMy" secondAttribute="trailing" id="h3g-rc-2nL"/>
                                             <constraint firstItem="W8L-FJ-MBf" firstAttribute="top" secondItem="uI9-pN-tdm" secondAttribute="top" id="n2o-gP-Uvg"/>
                                             <constraint firstItem="W8L-FJ-MBf" firstAttribute="leading" secondItem="uI9-pN-tdm" secondAttribute="leading" id="rj2-SE-jTp"/>
                                             <constraint firstAttribute="bottom" secondItem="W8L-FJ-MBf" secondAttribute="bottom" id="zS8-Oi-HIG"/>
@@ -740,11 +757,12 @@
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="subviews">
                                 <include reference="IU2-ER-A7n"/>
+                                <include reference="k8E-Jo-8op"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="k7s-6e-bka"/>
-                                <include reference="zNb-KE-xE5"/>
                                 <include reference="UZf-6G-4fC"/>
+                                <include reference="hHh-fA-Fhj"/>
                             </mask>
                         </variation>
                     </view>
@@ -880,8 +898,8 @@
                         <viewLayoutGuide key="safeArea" id="mm7-4u-ZPA"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="pWB-sb-M6q" firstAttribute="leading" secondItem="mm7-4u-ZPA" secondAttribute="leading" id="6JA-rF-nTZ"/>
-                            <constraint firstItem="mm7-4u-ZPA" firstAttribute="trailing" secondItem="pWB-sb-M6q" secondAttribute="trailing" id="Tg7-Vm-qWJ"/>
+                            <constraint firstItem="pWB-sb-M6q" firstAttribute="leading" secondItem="wVH-Tk-RRB" secondAttribute="leading" id="6JA-rF-nTZ"/>
+                            <constraint firstItem="wVH-Tk-RRB" firstAttribute="trailing" secondItem="pWB-sb-M6q" secondAttribute="trailing" id="Tg7-Vm-qWJ"/>
                             <constraint firstAttribute="bottom" secondItem="pWB-sb-M6q" secondAttribute="bottom" id="W8j-KJ-gd3"/>
                             <constraint firstItem="pWB-sb-M6q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mm7-4u-ZPA" secondAttribute="top" constant="24" id="ZNK-GZ-xa9"/>
                         </constraints>
@@ -921,20 +939,13 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="fc9-PX-xZu">
             <objects>
-                <tabBarController id="JHi-Bg-bgC" customClass="MainTabBarController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" itemPositioning="fill" id="AYN-zm-rHp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <color key="selectedImageTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="V7O-aY-Q6U" kind="relationship" relationship="viewControllers" id="Cs4-n3-Hg1"/>
-                        <segue destination="hin-Y2-xP7" kind="relationship" relationship="viewControllers" id="BLs-77-iUo"/>
-                        <segue destination="oBM-uz-5je" kind="relationship" relationship="viewControllers" id="CIh-tx-7ua"/>
-                        <segue destination="kEy-qQ-X5z" kind="relationship" relationship="viewControllers" id="GqF-dW-tfv"/>
-                    </connections>
-                </tabBarController>
+                <viewController id="JHi-Bg-bgC" customClass="MainTabBarController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MTB-view-0001">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBf-W0-LLf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1277" y="-196"/>
@@ -942,7 +953,7 @@
         <!--Main Navigation Controller-->
         <scene sceneID="sbd-8q-qvm">
             <objects>
-                <navigationController id="kEy-qQ-X5z" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SettingsMainNavigationControllerId" id="kEy-qQ-X5z" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="advanced-settings-icon" id="rSl-EE-s3a"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="lWN-o9-MaD">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1002,7 +1013,7 @@
         <!--Main Navigation Controller-->
         <scene sceneID="ekN-2o-N88">
             <objects>
-                <navigationController id="hin-Y2-xP7" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProtectionMainNavigationControllerId" id="hin-Y2-xP7" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="adguard-small-icon" id="z6O-uu-b8f"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="taq-cg-Czj">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1140,10 +1151,10 @@
                         <viewLayoutGuide key="safeArea" id="my1-dU-EdT"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="my1-dU-EdT" firstAttribute="trailing" secondItem="fqS-eX-cxs" secondAttribute="trailing" id="4tg-Kp-OKF"/>
+                            <constraint firstItem="l5r-kL-Gh2" firstAttribute="trailing" secondItem="fqS-eX-cxs" secondAttribute="trailing" id="4tg-Kp-OKF"/>
                             <constraint firstAttribute="bottom" secondItem="fqS-eX-cxs" secondAttribute="bottom" id="Ct8-0t-hcZ"/>
                             <constraint firstItem="fqS-eX-cxs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="my1-dU-EdT" secondAttribute="top" constant="24" id="QFT-Fj-c4s"/>
-                            <constraint firstItem="fqS-eX-cxs" firstAttribute="leading" secondItem="my1-dU-EdT" secondAttribute="leading" id="XUQ-Uo-tkx"/>
+                            <constraint firstItem="fqS-eX-cxs" firstAttribute="leading" secondItem="l5r-kL-Gh2" secondAttribute="leading" id="XUQ-Uo-tkx"/>
                         </constraints>
                     </view>
                     <connections>

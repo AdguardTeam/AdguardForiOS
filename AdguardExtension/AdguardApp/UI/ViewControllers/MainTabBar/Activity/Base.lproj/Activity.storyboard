@@ -1440,8 +1440,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="dgc-l5-iRo" secondAttribute="bottom" id="15l-j3-GWo"/>
-                            <constraint firstItem="UAI-yh-59O" firstAttribute="trailing" secondItem="dgc-l5-iRo" secondAttribute="trailing" id="DbG-jm-yyY"/>
-                            <constraint firstItem="dgc-l5-iRo" firstAttribute="leading" secondItem="UAI-yh-59O" secondAttribute="leading" id="HO4-OD-dlg"/>
+                            <constraint firstItem="noU-WV-2Uo" firstAttribute="trailing" secondItem="dgc-l5-iRo" secondAttribute="trailing" id="DbG-jm-yyY"/>
+                            <constraint firstItem="dgc-l5-iRo" firstAttribute="leading" secondItem="noU-WV-2Uo" secondAttribute="leading" id="HO4-OD-dlg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PDE-ha-orb"/>

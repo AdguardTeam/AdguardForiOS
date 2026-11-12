@@ -46,10 +46,13 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.greyText = true
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16.0 , weight: .regular)
         label.textAlignment = .left
         return label
     }()
+
+    // MARK: - Layout metrics
+
+    private var layoutConstraints: [NSLayoutConstraint] = []
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -61,6 +64,13 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
         setupUI()
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        traitCollection.onSizeClassChange(previousTraitCollection) {
+            applyLayoutMetrics()
+        }
+    }
+
     func updateTheme(_ themeService: ThemeServiceProtocol) {
         themeService.setupLabel(titleLabel)
         themeService.setupTableCell(self)
@@ -69,17 +79,28 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
     private func setupUI() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(stateSwitch)
+        applyLayoutMetrics()
+    }
 
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: isIpadTrait ? 20.0 : 16.0),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: isIpadTrait ? -20.0 : -16.0),
-            titleLabel.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
+    private func applyLayoutMetrics() {
+        let verticalInset: CGFloat = isIpadTrait ? 20.0 : 16.0
+        let sideInset: CGFloat = isIpadTrait ? 24.0 : 16.0
 
-            stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
+        titleLabel.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .regular)
+
+        NSLayoutConstraint.deactivate(layoutConstraints)
+        layoutConstraints = [
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: verticalInset),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -verticalInset),
+            titleLabel.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
+
+            stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             stateSwitch.widthAnchor.constraint(equalToConstant: 50.0),
             stateSwitch.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)
-        ])
+        ]
+        NSLayoutConstraint.activate(layoutConstraints)
+
     }
 
     /// Switch action handler

@@ -56,10 +56,13 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
         label.lightGreyText = false
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+
+    // MARK: - Layout metrics
+
+    private var layoutConstraints: [NSLayoutConstraint] = []
 
     // MARK: - Init
 
@@ -75,6 +78,13 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
         self.selectionStyle = .none
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        traitCollection.onSizeClassChange(previousTraitCollection) {
+            applyLayoutMetrics()
+        }
+    }
+
     // MARK: - Public methods
 
     func updateTheme(themeService: ThemeServiceProtocol) {
@@ -88,13 +98,19 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
     private func setupConstraint() {
         self.contentView.addSubview(logoImageView)
         self.contentView.addSubview(descriptionLabel)
+        applyLayoutMetrics()
+    }
 
+    private func applyLayoutMetrics() {
         let logoImageViewHeightConst = isIpadTrait ? 168.0 : 56.0
         let logoImageViewWidthConst = isIpadTrait ? 936.0 : 312.0
         let topConst = isIpadTrait ? 40.0 : 16.0
         let bottomConst = isIpadTrait ? 96.0 : 32.0
 
-        NSLayoutConstraint.activate([
+        descriptionLabel.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .medium)
+
+        NSLayoutConstraint.deactivate(layoutConstraints)
+        layoutConstraints = [
             logoImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16.0),
             logoImageView.heightAnchor.constraint(equalToConstant: logoImageViewHeightConst),
             logoImageView.widthAnchor.constraint(equalToConstant: logoImageViewWidthConst),
@@ -104,6 +120,8 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
             descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24.0),
             descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24.0),
             descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -bottomConst)
-        ])
+        ]
+        NSLayoutConstraint.activate(layoutConstraints)
+
     }
 }

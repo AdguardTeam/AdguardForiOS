@@ -61,13 +61,13 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
-        fromOnboarding = self.tabBarController == nil
+        // If there is no tab bar container this means that we are trying to log in from the onboarding license screen and must dismiss it after a successful login
+        fromOnboarding = self.findParentContainer(of: MainTabBarController.self) == nil
 
         setupBackButton()
 
-        let tabBar = tabBarController?.tabBar
-        keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: scrollView, tabBar: tabBar)
+        let bottomBar = findParentContainer(of: MainTabBarController.self)?.tabBarView
+        keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: scrollView, bottomBar: bottomBar)
 
         // setup activity indicator in login button
         loginButton.indicatorStyle = .white

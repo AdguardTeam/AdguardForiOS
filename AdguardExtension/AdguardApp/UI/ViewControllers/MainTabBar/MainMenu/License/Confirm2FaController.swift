@@ -53,7 +53,7 @@ final class Confirm2FaController : UIViewController, UITextFieldDelegate {
         codeTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         codeTextField.keyboardType = .numberPad
 
-        fromOnboarding = self.tabBarController == nil
+        fromOnboarding = self.findParentContainer(of: MainTabBarController.self) == nil
 
         purchaseObserver = NotificationCenter.default.observe(
             name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification),

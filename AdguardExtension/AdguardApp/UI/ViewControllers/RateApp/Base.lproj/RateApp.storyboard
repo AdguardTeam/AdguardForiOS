@@ -103,8 +103,8 @@
                         <viewLayoutGuide key="safeArea" id="sD1-Bz-tKN"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="OyI-jv-Crn" firstAttribute="leading" secondItem="sD1-Bz-tKN" secondAttribute="leading" id="HyV-Ac-v3k"/>
-                            <constraint firstItem="sD1-Bz-tKN" firstAttribute="trailing" secondItem="OyI-jv-Crn" secondAttribute="trailing" id="Vem-RN-vSB"/>
+                            <constraint firstItem="OyI-jv-Crn" firstAttribute="leading" secondItem="o4r-wn-WEe" secondAttribute="leading" id="HyV-Ac-v3k"/>
+                            <constraint firstItem="o4r-wn-WEe" firstAttribute="trailing" secondItem="OyI-jv-Crn" secondAttribute="trailing" id="Vem-RN-vSB"/>
                             <constraint firstAttribute="bottom" secondItem="OyI-jv-Crn" secondAttribute="bottom" id="zBK-0B-0Jg"/>
                         </constraints>
                     </view>
@@ -206,9 +206,9 @@
                         <viewLayoutGuide key="safeArea" id="MPI-eA-tR7"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="DZV-gK-Wqa" firstAttribute="leading" secondItem="MPI-eA-tR7" secondAttribute="leading" id="FYt-sn-2Sy"/>
+                            <constraint firstItem="DZV-gK-Wqa" firstAttribute="leading" secondItem="Z9o-FJ-LhD" secondAttribute="leading" id="FYt-sn-2Sy"/>
                             <constraint firstAttribute="bottom" secondItem="DZV-gK-Wqa" secondAttribute="bottom" id="OYw-pT-uLL"/>
-                            <constraint firstItem="MPI-eA-tR7" firstAttribute="trailing" secondItem="DZV-gK-Wqa" secondAttribute="trailing" id="bOF-IG-Ql8"/>
+                            <constraint firstItem="Z9o-FJ-LhD" firstAttribute="trailing" secondItem="DZV-gK-Wqa" secondAttribute="trailing" id="bOF-IG-Ql8"/>
                         </constraints>
                     </view>
                     <connections>

@@ -1797,8 +1797,8 @@
                         <viewLayoutGuide key="safeArea" id="ZPg-1f-cAV"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="9ND-xt-WuZ" firstAttribute="leading" secondItem="ZPg-1f-cAV" secondAttribute="leading" id="ASe-Dw-TCa"/>
-                            <constraint firstItem="ZPg-1f-cAV" firstAttribute="trailing" secondItem="9ND-xt-WuZ" secondAttribute="trailing" id="Miv-gN-2bL"/>
+                            <constraint firstItem="9ND-xt-WuZ" firstAttribute="leading" secondItem="DG1-0h-cvW" secondAttribute="leading" id="ASe-Dw-TCa"/>
+                            <constraint firstItem="DG1-0h-cvW" firstAttribute="trailing" secondItem="9ND-xt-WuZ" secondAttribute="trailing" id="Miv-gN-2bL"/>
                             <constraint firstAttribute="bottom" secondItem="9ND-xt-WuZ" secondAttribute="bottom" id="rxM-V9-1b2"/>
                         </constraints>
                     </view>
@@ -1902,8 +1902,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="C1U-08P-KgO" secondAttribute="bottom" id="94I-5Lq-shF"/>
-                            <constraint firstItem="zwM-dmP-ZXL" firstAttribute="trailing" secondItem="C1U-08P-KgO" secondAttribute="trailing" id="SJj-TJv-351"/>
-                            <constraint firstItem="C1U-08P-KgO" firstAttribute="leading" secondItem="zwM-dmP-ZXL" secondAttribute="leading" id="ppo-WRK-txj"/>
+                            <constraint firstItem="uNL-YCV-leT" firstAttribute="trailing" secondItem="C1U-08P-KgO" secondAttribute="trailing" id="SJj-TJv-351"/>
+                            <constraint firstItem="C1U-08P-KgO" firstAttribute="leading" secondItem="uNL-YCV-leT" secondAttribute="leading" id="ppo-WRK-txj"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2117,8 +2117,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="DJG-Ph-mha" secondAttribute="bottom" id="OeM-KL-NMD"/>
-                            <constraint firstItem="DJG-Ph-mha" firstAttribute="leading" secondItem="oR3-20-Gd3" secondAttribute="leading" id="QoR-Kc-SVP"/>
-                            <constraint firstItem="oR3-20-Gd3" firstAttribute="trailing" secondItem="DJG-Ph-mha" secondAttribute="trailing" id="m6I-Im-fsw"/>
+                            <constraint firstItem="DJG-Ph-mha" firstAttribute="leading" secondItem="0kt-XH-b5I" secondAttribute="leading" id="QoR-Kc-SVP"/>
+                            <constraint firstItem="0kt-XH-b5I" firstAttribute="trailing" secondItem="DJG-Ph-mha" secondAttribute="trailing" id="m6I-Im-fsw"/>
                         </constraints>
                     </view>
                     <connections>

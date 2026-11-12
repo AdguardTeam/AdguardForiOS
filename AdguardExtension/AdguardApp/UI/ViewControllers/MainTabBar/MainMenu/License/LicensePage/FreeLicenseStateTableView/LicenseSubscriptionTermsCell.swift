@@ -21,7 +21,24 @@ import UIKit
 /// This cell displays EULA and Privacy policy for selected license product
 final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
 
+    var usesCompactLayout = false {
+        didSet {
+            guard usesCompactLayout != oldValue else { return }
+            layout(for: traitCollection)
+            if let originalText = originalText {
+                setAttributedText(originalText)
+            }
+        }
+    }
+
     // MARK: - Private properties
+
+    private var originalText: NSAttributedString?
+
+    /// Compact mode squeezes empty paragraphs to a visually
+    /// negligible height instead of removing them: deleting characters would
+    /// shift the source ranges of the remaining EULA/Privacy links.
+    private static let compactEmptyLineHeight: CGFloat = 4.0
 
     /* UI elements */
 
@@ -43,6 +60,7 @@ final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
     private var sharedConstraints: [NSLayoutConstraint] = []
     private var iPhoneConstraints: [NSLayoutConstraint] = []
     private var iPadConstraints: [NSLayoutConstraint] = []
+    private var compactConstraints: [NSLayoutConstraint] = []
 
     // MARK: - Public methods
 
@@ -64,7 +82,7 @@ final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
     }
 
     func setAttributedText(_ text: NSAttributedString) {
-
+        originalText = text
         let mutableAttrString = NSMutableAttributedString(attributedString: text)
 
         mutableAttrString.removeAttribute(NSAttributedString.Key.foregroundColor, range: NSRange(location: 0, length: mutableAttrString.length))
@@ -72,6 +90,25 @@ final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
 
         mutableAttrString.removeAttribute(NSAttributedString.Key.font, range: NSRange(location: 0, length: mutableAttrString.length))
         mutableAttrString.addAttribute(NSAttributedString.Key.font, value: textView.font!, range: NSRange(location: 0, length: mutableAttrString.length))
+
+        if usesCompactLayout {
+            mutableAttrString.mutableString.replaceOccurrences(
+                of: "\u{2028}", with: "\n", options: [],
+                range: NSRange(location: 0, length: mutableAttrString.length)
+            )
+            let string = mutableAttrString.string
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.minimumLineHeight = Self.compactEmptyLineHeight
+            paragraphStyle.maximumLineHeight = Self.compactEmptyLineHeight
+            let fullRange = string.startIndex..<string.endIndex
+            string.enumerateSubstrings(in: fullRange, options: .byLines) { paragraph, _, enclosingRange, _ in
+                guard paragraph?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true else { return }
+                mutableAttrString.addAttributes(
+                    [.font: UIFont.systemFont(ofSize: Self.compactEmptyLineHeight), .paragraphStyle: paragraphStyle],
+                    range: NSRange(enclosingRange, in: string)
+                )
+            }
+        }
 
         DispatchQueue.asyncSafeMain { self.textView.attributedText = mutableAttrString }
     }
@@ -123,14 +160,21 @@ final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
             container.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24.0),
             container.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24.0)
         ]
+        compactConstraints = [
+            container.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
+            container.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
+            container.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8.0),
+            container.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8.0)
+        ]
     }
 
     private func layout(for traitCollection: UITraitCollection) {
-        if traitCollection.isIpadTraitCollection {
-            NSLayoutConstraint.deactivate(iPhoneConstraints)
+        NSLayoutConstraint.deactivate(iPhoneConstraints + iPadConstraints + compactConstraints)
+        if usesCompactLayout {
+            NSLayoutConstraint.activate(compactConstraints)
+        } else if traitCollection.isIpadTraitCollection {
             NSLayoutConstraint.activate(iPadConstraints)
         } else {
-            NSLayoutConstraint.deactivate(iPadConstraints)
             NSLayoutConstraint.activate(iPhoneConstraints)
         }
     }

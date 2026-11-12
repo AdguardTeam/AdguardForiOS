@@ -85,7 +85,6 @@
 		240F6F362732C17B00FD5430 /* ImportSettingsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F6F352732C17B00FD5430 /* ImportSettingsServiceTest.swift */; };
 		240F6F382732C29300FD5430 /* DnsProtectionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F6F372732C29300FD5430 /* DnsProtectionMock.swift */; };
 		2410C1C425EFDC3E00F29487 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
-		82C7D645CFEF4FE887012EB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D8783C67F4295A8E6AE5F /* SceneDelegate.swift */; };
 		2411AA292733F6F500E82F2E /* SafariProtectionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2411AA282733F6F500E82F2E /* SafariProtectionMock.swift */; };
 		241346CC26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */; };
 		241346CD26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */; };
@@ -167,7 +166,6 @@
 		244E3B0D273988A300FD4C1E /* DnsConfigManagerAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244E3B0C273988A300FD4C1E /* DnsConfigManagerAssistant.swift */; };
 		244E3B0E273988A300FD4C1E /* DnsConfigManagerAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244E3B0C273988A300FD4C1E /* DnsConfigManagerAssistant.swift */; };
 		24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
-		FF5DEE2946C14380BB915EFD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D8783C67F4295A8E6AE5F /* SceneDelegate.swift */; };
 		2455B21127317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
 		2455B21227317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
 		2455B21327317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
@@ -539,6 +537,7 @@
 		65EC9CFD1BB9850300F53F3B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		65F398681B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F3986D1B7C894000ABCD39 /* SafariServices.framework */; };
+		7D9AADFE76E6676A87823C87 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB1CE2F27A255132E5E0F9 /* CustomTabBarView.swift */; };
 		7E06B66722FB1606006859AC /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B8219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m */; };
 		7E06B66822FB1606006859AC /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
 		7E06B66922FB1606006859AC /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
@@ -1054,6 +1053,7 @@
 		7EF5C57226C26E18001851D6 /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C57126C26E18001851D6 /* EdgeInsetLabel.swift */; };
 		7EF5C57326C26E18001851D6 /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C57126C26E18001851D6 /* EdgeInsetLabel.swift */; };
 		7EF6AF87233D11B000D29B36 /* RequestsBlockingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */; };
+		82C7D645CFEF4FE887012EB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D8783C67F4295A8E6AE5F /* SceneDelegate.swift */; };
 		9538244825EE1D4C56266B8D /* UIBackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9538230DE1EE6F0E77428D65 /* UIBackgroundTask.swift */; };
 		953824D8D036C781AB604207 /* UIBackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9538230DE1EE6F0E77428D65 /* UIBackgroundTask.swift */; };
 		A5E02637261E336100198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02636261E336100198396 /* AGDnsProxy */; };
@@ -1392,6 +1392,7 @@
 		B2C8E9902716ECA100ACDED8 /* PurchaseAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */; };
 		B2C8E9A42716FDF500ACDED8 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9A32716FDF500ACDED8 /* Setapp */; };
 		B2C8E9A52716FECB00ACDED8 /* AdGuardDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		C09179BCAD41E7533CA9B833 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBB1CE2F27A255132E5E0F9 /* CustomTabBarView.swift */; };
 		C230008F30675255C14BCC41 /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
 		C23032179D836CE21967D1C2 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
 		C2306B5EBD6E32E284E334C9 /* YouTubeShareLinkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23EEA92DDBC526C3FA37E2F /* YouTubeShareLinkResult.swift */; };
@@ -2369,6 +2370,7 @@
 		D7C90DEA27AD764F008BD92C /* pip.js in Resources */ = {isa = PBXBuildFile; fileRef = D7C90DE827AD764E008BD92C /* pip.js */; };
 		D7C90DEB27AD764F008BD92C /* pip.js in Resources */ = {isa = PBXBuildFile; fileRef = D7C90DE827AD764E008BD92C /* pip.js */; };
 		D7C90DEC27AD764F008BD92C /* pip.js in Resources */ = {isa = PBXBuildFile; fileRef = D7C90DE827AD764E008BD92C /* pip.js */; };
+		FF5DEE2946C14380BB915EFD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D8783C67F4295A8E6AE5F /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3264,6 +3266,7 @@
 		4982C1AA26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.typescript; path = index.ts; sourceTree = "<group>"; };
 		4982C1AB26D78F2A00CACBBE /* constants.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = constants.ts; sourceTree = "<group>"; };
 		4982C1AC26D78F2A00CACBBE /* log.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.ts; sourceTree = "<group>"; };
+		5B5D8783C67F4295A8E6AE5F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6089DFC527A846C200536667 /* ProInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProInfo.plist; sourceTree = "<group>"; };
 		60DB6EC327AC266C00C2CFC4 /* userscript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = userscript.js; sourceTree = "<group>"; };
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
@@ -3968,6 +3971,7 @@
 		B2C7275E2716AC6300A37BA3 /* Tunnel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tunnel-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseAssistant.swift; sourceTree = "<group>"; };
 		B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFBB1CE2F27A255132E5E0F9 /* CustomTabBarView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
 		C231D3CF4A743835726A0C26 /* YoutubePlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlayerController.swift; sourceTree = "<group>"; };
 		C2325E02A9A9579A8947440B /* YouTubeAdsJsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeAdsJsResult.swift; sourceTree = "<group>"; };
 		C23386887409D1DD26F5D582 /* filter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = filter.json; sourceTree = "<group>"; };
@@ -6435,6 +6439,7 @@
 				7EF4285823AB766500948B65 /* ComplexProtection */,
 				7E902ADF23CCB4E700215B33 /* Activity */,
 				D0EDE45122A9284800086C00 /* MainMenu */,
+				BFBB1CE2F27A255132E5E0F9 /* CustomTabBarView.swift */,
 			);
 			path = MainTabBar;
 			sourceTree = "<group>";
@@ -8073,7 +8078,7 @@
 				7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */,
 				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
-				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "dns-libs" */,
+				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "core.dns-libs" */,
 				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				7EF5C55E26C269D6001851D6 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
@@ -9183,6 +9188,7 @@
 				336FA69C52A731B5F7AD61B0 /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FABBA68FEDE84B0764298 /* InAppPurchaseReceiptHashRequest.swift in Sources */,
 				336FA4677C7944E51C66C587 /* IPAddressValidation.swift in Sources */,
+				7D9AADFE76E6676A87823C87 /* CustomTabBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9690,6 +9696,7 @@
 				336FAD63B08330A891F0474B /* InAppPurchaseReceiptHashParser.swift in Sources */,
 				336FAB694C086D71BF1258D8 /* InAppPurchaseReceiptHashRequest.swift in Sources */,
 				336FA2C195ABE8509541EB34 /* IPAddressValidation.swift in Sources */,
+				C09179BCAD41E7533CA9B833 /* CustomTabBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14599,7 +14606,7 @@
 				version = 8.37.0;
 			};
 		};
-		A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "dns-libs" */ = {
+		A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "core.dns-libs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "core.dns-libs";
 			requirement = {
@@ -14648,17 +14655,17 @@
 		};
 		A5E02630261E330900198396 /* AGDnsProxy */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "dns-libs" */;
+			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "core.dns-libs" */;
 			productName = AGDnsProxy;
 		};
 		A5E02636261E336100198396 /* AGDnsProxy */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "dns-libs" */;
+			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "core.dns-libs" */;
 			productName = AGDnsProxy;
 		};
 		B29D5393270D1D9E0045CB16 /* AGDnsProxy */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "dns-libs" */;
+			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "core.dns-libs" */;
 			productName = AGDnsProxy;
 		};
 		B2C727612716AFA300A37BA3 /* Sentry */ = {

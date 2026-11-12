@@ -68,6 +68,12 @@ final class StateHeaderView<ModelIdType: Equatable>: UIView, IdentifiableObjectP
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Properties
+
+    /// Switch metrics mirroring the filter cells (SafariFilterCell / DnsFilterCell):
+    /// one aligned switch column across section headers and cells.
+    private var sideInset: CGFloat { isIpadTrait ? 24.0 : 16.0 }
+    private let switchWidth: CGFloat = 50.0
+
     private var themeObserver: NotificationToken?
 
     required init?(coder: NSCoder) {
@@ -105,9 +111,9 @@ final class StateHeaderView<ModelIdType: Equatable>: UIView, IdentifiableObjectP
             titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16.0),
             titleLabel.centerYAnchor.constraint(equalTo: iconImageView.centerYAnchor),
 
-            stateSwitch.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 16.0),
-            stateSwitch.widthAnchor.constraint(equalToConstant: 50.0),
-            stateSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
+            stateSwitch.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: sideInset),
+            stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
+            stateSwitch.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -sideInset),
             stateSwitch.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)
         ])
     }

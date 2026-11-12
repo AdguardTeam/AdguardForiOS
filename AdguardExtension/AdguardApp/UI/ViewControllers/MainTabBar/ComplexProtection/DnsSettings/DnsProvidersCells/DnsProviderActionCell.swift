@@ -40,7 +40,6 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
         label.textAlignment = .left
         label.numberOfLines = 1
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
-        label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -51,7 +50,6 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
         label.lightGreyText = false
         label.textAlignment = .right
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -62,6 +60,10 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+
+    // MARK: - Layout metrics
+
+    private var layoutConstraints: [NSLayoutConstraint] = []
 
     // MARK: - Init
 
@@ -77,6 +79,13 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
         self.selectionStyle = .none
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        traitCollection.onSizeClassChange(previousTraitCollection) {
+            applyLayoutMetrics()
+        }
+    }
+
     // MARK: - Public methods
 
     func updateTheme(themeService: ThemeServiceProtocol) {
@@ -90,12 +99,19 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
         self.contentView.addSubview(actionNameLabel)
         self.contentView.addSubview(selectedOptionLabel)
         self.contentView.addSubview(rightArrowImageView)
+        applyLayoutMetrics()
+    }
 
+    private func applyLayoutMetrics() {
         let topBottomConst = isIpadTrait ? 20.0 : 16.0
         let leadingTrailingConst = isIpadTrait ? 24.0 : 16.0
         let heightWidthConst = isIpadTrait ? 32.0 : 24.0
 
-        NSLayoutConstraint.activate([
+        actionNameLabel.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .medium)
+        selectedOptionLabel.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0)
+
+        NSLayoutConstraint.deactivate(layoutConstraints)
+        layoutConstraints = [
             actionNameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: topBottomConst),
             actionNameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: leadingTrailingConst),
             actionNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.selectedOptionLabel.leadingAnchor, constant: -20.0),
@@ -108,6 +124,8 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
             rightArrowImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -leadingTrailingConst),
             rightArrowImageView.heightAnchor.constraint(equalToConstant: heightWidthConst),
             rightArrowImageView.widthAnchor.constraint(equalToConstant: heightWidthConst)
-        ])
+        ]
+        NSLayoutConstraint.activate(layoutConstraints)
+
     }
 }

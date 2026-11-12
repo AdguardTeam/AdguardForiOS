@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum TabBarTabs: Int, CaseIterable {
     typealias RawValue = Int
@@ -27,56 +28,93 @@ enum TabBarTabs: Int, CaseIterable {
     case settingTab = 3
 }
 
-class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+class MainTabBarController: UIViewController {
+
+    // Storyboard identifiers of the tab root navigation controllers.
+    private enum TabStoryboardIds {
+        static let main = "mainNavigationController"
+        static let protection = "ProtectionMainNavigationControllerId"
+        static let activity = "ActivityMainNavigationControllerId"
+        static let settings = "SettingsMainNavigationControllerId"
+    }
+
+    private struct Tab {
+        let tab: TabBarTabs
+        let controller: UIViewController
+    }
 
     private let resource: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-
-    private var bottomView: UIView?
-    private let bottomLineHeight: CGFloat = 4.0
-
-    private var bottomViewLeftAnchor: NSLayoutConstraint?
 
     private var onSettingsImportDidEndObserver: NotificationToken?
     private var onSettingsResetObserver: NotificationToken?
 
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
 
+    /// The custom tab bar (exposed read-only for keyboard avoidance in child screens).
+    private(set) var tabBarView: CustomTabBarView!
+    private var contentContainer: UIView!
+
+    /// Tab controllers in display order.
+    private var tabs: [Tab] = []
+
+    /// Index of the selected tab in `tabs`.
+    private var selectedTabIndex: Int = TabBarTabs.mainTab.rawValue
+
+    /// The currently displayed child controller.
+    private(set) var displayedController: UIViewController?
+
+    /// Guards the tab switch animation (replaces the former `transitionCoordinator == nil` check).
+    private var isSwitchingTabs = false
+
+    /// A programmatic tab selection that arrived while a slide animation was in
+    /// flight (e.g. a deep link right after a user tap); applied when the animation ends.
+    private var pendingTabSelection: Int?
+
+    // MARK: - Compatibility API (the former UITabBarController surface)
+
+    /// The tab root controllers in display order.
+    var viewControllers: [UIViewController] {
+        return tabs.map { $0.controller }
+    }
+
+    /// The index of the selected tab; setting it switches the tab.
+    var selectedIndex: Int {
+        get { return selectedTabIndex }
+        set { setSelectedTab(at: newValue, animated: true) }
+    }
+
+    /// The selected tab controller; setting it switches the tab.
+    var selectedViewController: UIViewController? {
+        get {
+            return tabs.indices.contains(selectedTabIndex) ? tabs[selectedTabIndex].controller : nil
+        }
+        set {
+            guard let controller = newValue,
+                  let index = tabs.firstIndex(where: { $0.controller === controller }) else { return }
+            setSelectedTab(at: index, animated: true)
+        }
+    }
+
+    /// The enum of the currently selected tab (nil if the selected tab is not present in `tabs`).
+    var selectedTab: TabBarTabs? {
+        return tabs.indices.contains(selectedTabIndex) ? tabs[selectedTabIndex].tab : nil
+    }
+
+    /// Returns the navigation controller of the given tab
+    /// (nil if the tab is not currently present, e.g. the removed activity tab).
+    func navigationController(for tab: TabBarTabs) -> MainNavigationController? {
+        return tabs.first { $0.tab == tab }?.controller as? MainNavigationController
+    }
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        delegate = self
 
-        if tabBar.items == nil {
-            return
-        }
-
-        for (index, item) in tabBar.items!.enumerated() {
-            item.title = nil
-            item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-
-            if index == TabBarTabs.mainTab.rawValue {
-                item.accessibilityLabel = String.localizedString("main_page_tab")
-                continue
-            }
-
-            if index == TabBarTabs.protectionTab.rawValue {
-                item.accessibilityLabel = String.localizedString("protection_page_tab")
-                continue
-            }
-
-            if index == TabBarTabs.activityTab.rawValue {
-                item.accessibilityLabel = String.localizedString("activity_page_tab")
-                continue
-            }
-
-            if index == TabBarTabs.settingTab.rawValue {
-                item.accessibilityLabel = String.localizedString("settings_page_tab")
-                continue
-            }
-        }
-
-        updateTheme()
-        createSelectionIndicator()
-        addTabBarShadow()
+        setupLayout()
+        setupTabs()
+        addOrRemoveActivityTabIfNeeded()
+        showSelectedTab()
 
         onSettingsImportDidEndObserver = NotificationCenter.default.observe(name: .settingsImportDidEnd, object: nil, queue: .main) { [weak self] _ in
             self?.addOrRemoveActivityTabIfNeeded()
@@ -86,145 +124,266 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             self?.addOrRemoveActivityTabIfNeeded()
         }
 
-        addOrRemoveActivityTabIfNeeded()
+        updateTheme()
     }
 
-    override var selectedViewController: UIViewController? {
-        didSet {
-            if let item = tabBar.selectedItem {
-                changeLeftAnchor(for: item)
+    // Forwards the status bar appearance to the selected tab (as the former UITabBarController did).
+    override var childForStatusBarStyle: UIViewController? { displayedController }
+    override var childForStatusBarHidden: UIViewController? { displayedController }
+    override var childForHomeIndicatorAutoHidden: UIViewController? { displayedController }
+    override var childForScreenEdgesDeferringSystemGestures: UIViewController? { displayedController }
+
+    // MARK: - Layout setup
+
+    private func setupLayout() {
+        contentContainer = UIView()
+        contentContainer.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(contentContainer)
+
+        tabBarView = CustomTabBarView()
+        tabBarView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tabBarView)
+        tabBarView.onItemTap = { [weak self] index in
+            self?.selectTab(at: index, animated: true)
+        }
+
+        NSLayoutConstraint.activate([
+            contentContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentContainer.topAnchor.constraint(equalTo: view.topAnchor),
+            contentContainer.bottomAnchor.constraint(equalTo: tabBarView.topAnchor),
+
+            tabBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tabBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    private func setupTabs() {
+        let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+        let initialTabs: [(tab: TabBarTabs, storyboardId: String)] = [
+            (.mainTab, TabStoryboardIds.main),
+            (.protectionTab, TabStoryboardIds.protection),
+            (.activityTab, TabStoryboardIds.activity),
+            (.settingTab, TabStoryboardIds.settings)
+        ]
+
+        tabs = initialTabs.compactMap { tabInfo in
+            guard let controller = storyboard.instantiateViewController(withIdentifier: tabInfo.storyboardId) as? MainNavigationController else {
+                assertionFailure("MainPage.storyboard doesn't contain a controller with id \(tabInfo.storyboardId)")
+                return nil
             }
+            return Tab(tab: tabInfo.tab, controller: controller)
         }
     }
 
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        changeLeftAnchor(for: item)
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        guard let item = tabBar.selectedItem else { return }
-        resizeIndicator()
-        changeLeftAnchor(for: item)
+    /// Rebuilds the tab bar items to match `tabs` and the current selection.
+    private func refreshTabBarItems() {
+        let items = tabs.map { tab -> TabBarItem in
+            switch tab.tab {
+            case .mainTab:
+                return TabBarItem(image: UIImage(named: "home"), accessibilityLabel: String.localizedString("main_page_tab"))
+            case .protectionTab:
+                return TabBarItem(image: UIImage(named: "adguard-small-icon"), accessibilityLabel: String.localizedString("protection_page_tab"))
+            case .activityTab:
+                return TabBarItem(image: UIImage(named: "activity"), accessibilityLabel: String.localizedString("activity_page_tab"))
+            case .settingTab:
+                return TabBarItem(image: UIImage(named: "advanced-settings-icon"), accessibilityLabel: String.localizedString("settings_page_tab"))
+            }
+        }
+        tabBarView.setItems(items)
     }
 
     private func addOrRemoveActivityTabIfNeeded() {
-        guard var viewControllersCount = viewControllers?.count else { return }
+        let activityIndex = tabs.firstIndex { $0.tab == TabBarTabs.activityTab }
 
-        if resource.disableSecurityRelatedFeatures && viewControllersCount == TabBarTabs.allCases.count {
-            self.viewControllers?.remove(at: TabBarTabs.activityTab.rawValue)
-            return
-        }
+        if resource.disableSecurityRelatedFeatures, let activityIndex = activityIndex, tabs.count == TabBarTabs.allCases.count {
+            tabs.remove(at: activityIndex)
 
-        // We'll assume that this is the case when the activity screen was removed
-        if !resource.disableSecurityRelatedFeatures && viewControllersCount < TabBarTabs.allCases.count,
-           let activityController = UIStoryboard(name: "MainPage", bundle: nil).instantiateViewController(withIdentifier: "ActivityMainNavigationControllerId") as? MainNavigationController
-        {
-            self.viewControllers?.insert(activityController, at: TabBarTabs.activityTab.rawValue)
-            return
-        }
-    }
-
-    private func changeLeftAnchor(for item: UITabBarItem){
-        let numberOfItems = CGFloat(tabBar.items!.count)
-        let width: CGFloat = tabBar.frame.width / numberOfItems
-
-        let selectedItem = tabBar.items?.firstIndex(of: item) ?? 0
-
-        bottomViewLeftAnchor?.constant = width / 4 + CGFloat(selectedItem) * width
-
-        UIView.animate(withDuration: 0.3) {[weak self] in
-            self?.tabBar.layoutIfNeeded()
-        }
-    }
-
-    private func addTabBarShadow(){
-        tabBar.shadowImage = UIImage()
-        tabBar.backgroundImage = UIImage()
-
-        tabBar.layer.shadowColor = UIColor.black.cgColor
-        tabBar.layer.shadowOpacity = 0.1
-        tabBar.layer.shadowRadius = 2.0
-    }
-
-    private func createSelectionIndicator() {
-        if bottomView != nil {
-            return
-        }
-
-        bottomView = UIView()
-        bottomView?.isUserInteractionEnabled = false
-        bottomView?.translatesAutoresizingMaskIntoConstraints = false
-        bottomView?.backgroundColor = UIColor.AdGuardColor.lightGreen1
-        tabBar.addSubview(bottomView ?? UIView())
-
-        let numberOfItems = CGFloat(tabBar.items!.count)
-
-        let width: CGFloat = tabBar.frame.width / numberOfItems
-
-        let mult = 1 / (numberOfItems * 2)
-
-        bottomView?.heightAnchor.constraint(equalToConstant: bottomLineHeight).isActive = true
-        bottomView?.widthAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: mult).isActive = true
-        bottomViewLeftAnchor = bottomView?.leftAnchor.constraint(equalTo: tabBar.leftAnchor, constant: width / 4)
-        bottomViewLeftAnchor?.isActive = true
-        bottomView?.bottomAnchor.constraint(equalTo: tabBar.bottomAnchor).isActive = true
-    }
-
-    private func resizeIndicator(){
-        let bottomInset = tabBar.safeAreaInsets.bottom
-
-        if bottomInset != 0.0 {
-            bottomView?.isHidden = true
-            return
-        }
-
-        let numberOfItems = CGFloat(tabBar.items!.count)
-        let width: CGFloat = tabBar.frame.width / numberOfItems
-        let bounds = CGRect(x: 0.0, y: 0.0, width: width / 2, height: bottomLineHeight)
-        let maskPath1 = UIBezierPath(roundedRect: bounds,
-            byRoundingCorners: [.topLeft , .topRight],
-            cornerRadii: CGSize(width: 20, height: 20))
-        let maskLayer = CAShapeLayer()
-        maskLayer.frame = bounds
-        maskLayer.path = maskPath1.cgPath
-        bottomView?.layer.mask = maskLayer
-    }
-
-    func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let fromVCIndex = tabBarController.viewControllers?.firstIndex(of: fromVC),
-            let toVCIndex = tabBarController.viewControllers?.firstIndex(of: toVC) else {
-                return nil
-        }
-        let edge: UIRectEdge = fromVCIndex > toVCIndex ? .right : .left
-
-        return CustomNavigationTransitionAnimator(presenting: edge == .left)
-    }
-
-    // Set transitionCoordinator to nil to prevent controllers disappearing
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        return transitionCoordinator == nil
-    }
-}
-
-extension UITabBar {
-    override open var traitCollection: UITraitCollection {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            if #available(iOS 17.0, *) {
-                super.traitOverrides.horizontalSizeClass = .compact
-                return super.traitCollection
+            if selectedTabIndex == activityIndex {
+                selectedTabIndex = TabBarTabs.mainTab.rawValue
+            } else if selectedTabIndex > activityIndex {
+                selectedTabIndex -= 1
             }
-
-            return UITraitCollection(horizontalSizeClass: .compact)
+        } else if !resource.disableSecurityRelatedFeatures, activityIndex == nil, tabs.count < TabBarTabs.allCases.count,
+            let activityController = UIStoryboard(name: "MainPage", bundle: nil).instantiateViewController(withIdentifier: TabStoryboardIds.activity) as? MainNavigationController
+        {
+            tabs.insert(Tab(tab: .activityTab, controller: activityController), at: TabBarTabs.activityTab.rawValue)
+            if selectedTabIndex >= TabBarTabs.activityTab.rawValue {
+                selectedTabIndex += 1
+            }
+        } else {
+            return
         }
-        return super.traitCollection
+
+        refreshTabBarItems()
+
+        // Re-show the selected tab if the displayed controller has changed
+        // (e.g. the activity tab was selected at the moment it was removed).
+        if isViewLoaded,
+           tabs.indices.contains(selectedTabIndex),
+           displayedController !== tabs[selectedTabIndex].controller {
+            switchToTab(at: selectedTabIndex, animated: false)
+        }
+    }
+
+    // MARK: - Tab switching
+
+    /// Selects the tab at the given index (user-driven: re-selecting the current tab
+    /// pops its navigation stack to root, the former system tab bar behavior).
+    /// Selections made while a slide transition is in flight are queued and applied
+    /// when the transition completes (see `pendingTabSelection`).
+    func selectTab(at index: Int, animated: Bool) {
+        guard tabs.indices.contains(index) else { return }
+
+        if index == selectedTabIndex {
+            if let navController = tabs[index].controller as? UINavigationController {
+                navController.popToRootViewController(animated: animated)
+            }
+            return
+        }
+
+        if !isViewLoaded {
+            // The selection is stored and applied by `showSelectedTab()` on the initial show.
+            selectedTabIndex = index
+            return
+        }
+
+        switchToTab(at: index, animated: animated)
+    }
+
+    /// Selects the tab at the given index (programmatic: re-selecting the current tab does nothing).
+    /// Selections made while a slide transition is in flight are queued and applied
+    /// when the transition completes (see `pendingTabSelection`).
+    private func setSelectedTab(at index: Int, animated: Bool) {
+        guard tabs.indices.contains(index) else { return }
+        guard index != selectedTabIndex else { return }
+
+        if !isViewLoaded {
+            // The selection is stored and applied by `showSelectedTab()` on the initial show.
+            selectedTabIndex = index
+            return
+        }
+
+        switchToTab(at: index, animated: animated)
+    }
+
+    /// Displays the tab selected by `selectedTabIndex` (used on the initial show).
+    private func showSelectedTab() {
+        refreshTabBarItems()
+        switchToTab(at: selectedTabIndex, animated: false)
+    }
+
+    private func switchToTab(at newIndex: Int, animated: Bool) {
+        guard tabs.indices.contains(newIndex) else { return }
+        let newController = tabs[newIndex].controller
+        let previousController = displayedController
+        guard previousController !== newController else {
+            pendingTabSelection = nil
+            return
+        }
+
+        // Queue the selection while a slide transition is in flight; it is applied
+        // in the transition completion so that a programmatic switch is never dropped.
+        if isSwitchingTabs {
+            pendingTabSelection = newIndex
+            return
+        }
+
+        addChild(newController)
+        newController.view.translatesAutoresizingMaskIntoConstraints = false
+        contentContainer.addSubview(newController.view)
+        pin(newController.view, to: contentContainer)
+        displayedController = newController
+        // The selected index is updated atomically with the displayed controller,
+        // so `selectedIndex` never reports a tab that is not on screen yet.
+        selectedTabIndex = newIndex
+
+        if previousController == nil || !animated {
+            previousController?.willMove(toParent: nil)
+            previousController?.view.removeFromSuperview()
+            previousController?.removeFromParent()
+            newController.didMove(toParent: self)
+            tabBarView.setSelectedItemIndex(newIndex)
+            return
+        }
+
+        // Slide transition replicating the former CustomNavigationTransitionAnimator
+        // that used to be provided by UITabBarControllerDelegate.
+        isSwitchingTabs = true
+        let previousIndex = tabs.firstIndex { $0.controller === previousController } ?? newIndex
+        let presenting = newIndex > previousIndex
+        tabBarView.setSelectedItemIndex(newIndex)
+
+        guard let previousView = previousController?.view else { return }
+        animateSlide(of: newController.view, over: previousView, presenting: presenting) { [weak self] in
+            guard let self = self else { return }
+            previousController?.willMove(toParent: nil)
+            previousController?.view.removeFromSuperview()
+            previousController?.removeFromParent()
+            newController.didMove(toParent: self)
+            self.isSwitchingTabs = false
+            self.applyPendingTabSelectionIfNeeded()
+        }
+    }
+
+    /// Applies a tab selection that was queued while a slide transition was in flight.
+    private func applyPendingTabSelectionIfNeeded() {
+        guard let pending = pendingTabSelection, !isSwitchingTabs else { return }
+        pendingTabSelection = nil
+        switchToTab(at: pending, animated: true)
+    }
+
+    private func pin(_ childView: UIView, to container: UIView) {
+        NSLayoutConstraint.activate([
+            childView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            childView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+            childView.topAnchor.constraint(equalTo: container.topAnchor),
+            childView.bottomAnchor.constraint(equalTo: container.bottomAnchor)
+        ])
+    }
+
+    /// Slides the new tab view over the old one, moving to the left when
+    /// switching to a tab on the right (`presenting`) and to the right otherwise —
+    /// a replica of the former `CustomNavigationTransitionAnimator` keyframes.
+    private func animateSlide(of newView: UIView, over oldView: UIView, presenting: Bool, completion: @escaping () -> Void) {
+        let width = contentContainer.bounds.width
+        newView.transform = CGAffineTransform(translationX: presenting ? width : -width, y: 0)
+
+        if presenting {
+            contentContainer.addSubview(newView)
+        } else {
+            contentContainer.insertSubview(newView, belowSubview: oldView)
+        }
+
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveLinear], animations: {
+            newView.transform = .identity
+            oldView.transform = CGAffineTransform(translationX: presenting ? -width : width, y: 0)
+        }, completion: { _ in
+            oldView.transform = .identity
+            completion()
+        })
     }
 }
 
 extension MainTabBarController: ThemableProtocol {
-    func updateTheme(){
-        tabBar.backgroundColor = theme.tabBarColor
-        tabBar.barTintColor = theme.tabBarColor
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        tabBarView.updateTheme()
     }
 }
 
+extension UIViewController {
+    /// Searches the parent chain for a container of the given type
+    /// (a replacement for the former `tabBarController` lookups).
+    func findParentContainer<T: UIViewController>(of type: T.Type) -> T? {
+        var current: UIViewController? = self
+        while let candidate = current {
+            if let match = candidate as? T {
+                return match
+            }
+            current = candidate.parent
+        }
+        return nil
+    }
+}

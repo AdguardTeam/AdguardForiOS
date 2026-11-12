@@ -29,6 +29,16 @@ final class PremiumFeaturesPagingView: UIView {
         }
     }
 
+    var usesCompactLayout = false {
+        didSet {
+            guard usesCompactLayout != oldValue else { return }
+            horizontalStackView.arrangedSubviews.forEach {
+                ($0 as? PremiumFeatureView)?.usesCompactLayout = usesCompactLayout
+            }
+            layout(for: traitCollection)
+        }
+    }
+
     // MARK: - Private properties
 
     private lazy var horizontalStackView: UIStackView = {
@@ -61,6 +71,7 @@ final class PremiumFeaturesPagingView: UIView {
     private var sharedConstraints: [NSLayoutConstraint] = []
     private var iPhoneConstraints: [NSLayoutConstraint] = []
     private var iPadConstraints: [NSLayoutConstraint] = []
+    private var compactConstraints: [NSLayoutConstraint] = []
 
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
@@ -137,14 +148,19 @@ final class PremiumFeaturesPagingView: UIView {
             pageControl.heightAnchor.constraint(equalToConstant: 16.0),
             pageControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24.0)
         ]
+        compactConstraints = [
+            pageControl.heightAnchor.constraint(equalToConstant: 10.0),
+            pageControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8.0)
+        ]
     }
 
     private func layout(for traitCollection: UITraitCollection) {
-        if traitCollection.isIpadTraitCollection {
-            NSLayoutConstraint.deactivate(iPhoneConstraints)
+        NSLayoutConstraint.deactivate(iPhoneConstraints + iPadConstraints + compactConstraints)
+        if usesCompactLayout {
+            NSLayoutConstraint.activate(compactConstraints)
+        } else if traitCollection.isIpadTraitCollection {
             NSLayoutConstraint.activate(iPadConstraints)
         } else {
-            NSLayoutConstraint.deactivate(iPadConstraints)
             NSLayoutConstraint.activate(iPhoneConstraints)
         }
     }
@@ -153,6 +169,7 @@ final class PremiumFeaturesPagingView: UIView {
         horizontalStackView.arrangedSubviews.forEach { horizontalStackView.removeArrangedSubview($0) }
         models.forEach {
             let view = PremiumFeatureView()
+            view.usesCompactLayout = usesCompactLayout
             view.model = $0
             horizontalStackView.addArrangedSubview(view)
         }

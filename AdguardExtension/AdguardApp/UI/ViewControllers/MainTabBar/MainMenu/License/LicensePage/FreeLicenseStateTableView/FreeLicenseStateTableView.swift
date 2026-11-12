@@ -30,6 +30,12 @@ final class FreeLicenseStateTableView: UITableView, FreeLicenseStateTableViewPro
 
     private let model: FreeLicenseStateTableViewModelProtocol
     private let themeService: ThemeServiceProtocol
+    private var usesCompactLayout = false
+
+    /// Measured standard-height threshold: windows with at least this
+    /// much available height keep the large tall-window layout (iPad); shorter
+    /// wide windows (Duo unfolded) use compact metrics.
+    private static let compactModeMaxAvailableHeight: CGFloat = 850.0
 
     // MARK: - Public methods
 
@@ -47,6 +53,15 @@ final class FreeLicenseStateTableView: UITableView, FreeLicenseStateTableViewPro
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        let availableHeight = bounds.height - adjustedContentInset.top - adjustedContentInset.bottom
+        let compact = isIpadTrait && availableHeight > 0
+            && availableHeight < Self.compactModeMaxAvailableHeight && bounds.width > availableHeight
+        if compact != usesCompactLayout {
+            usesCompactLayout = compact
+            insetsContentViewsToSafeArea = !compact
+            (tableHeaderView as? PremiumFeaturesPagingView)?.usesCompactLayout = compact
+            reloadData()
+        }
         layoutTableHeaderView()
     }
 
@@ -125,6 +140,7 @@ extension FreeLicenseStateTableView: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = LicenseProductChoiceCell.getCell(forTableView: tableView)
+            cell.usesCompactLayout = usesCompactLayout
             cell.setTrialAvailability(model.trialIsAvailable)
             cell.setLoading(false)
                 if model.selectedProductIsSubscription, let text = model.getSubscriptionButtonText() {
@@ -139,6 +155,7 @@ extension FreeLicenseStateTableView: UITableViewDataSource {
             return cell
         case 1:
             let cell = LicenseSubscriptionTermsCell.getCell(forTableView: tableView)
+            cell.usesCompactLayout = usesCompactLayout
             if let text = model.getSubscriptionsTermsText() {
                 cell.setAttributedText(text)
             }
@@ -152,6 +169,12 @@ extension FreeLicenseStateTableView: UITableViewDataSource {
 // MARK: - FreeLicenseStateTableView + UITableViewDelegate
 
 extension FreeLicenseStateTableView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Compact mode uses a flat estimate; actual heights stay automatic
+        // (avoids provisional estimated offsets while rows settle).
+        return usesCompactLayout ? 44.0 : UITableView.automaticDimension
+    }
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }

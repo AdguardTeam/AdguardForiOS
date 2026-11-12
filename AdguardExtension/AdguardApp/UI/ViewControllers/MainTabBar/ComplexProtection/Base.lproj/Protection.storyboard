@@ -84,7 +84,7 @@
                                                         <action selector="safariProtectionChanged:" destination="1Sw-2h-d5a" eventType="valueChanged" id="UJ4-bF-8cm"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Safari protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="884-Hm-mb6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Safari protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="884-Hm-mb6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="22" width="277" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -108,7 +108,7 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Blocks ads and trackers on websites opened in Safari" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlx-BS-A2y" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Blocks ads and trackers on websites opened in Safari" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="vlx-BS-A2y" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="42" width="277" height="14.333333333333336"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -201,7 +201,7 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DNS protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnF-td-Ba1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DNS protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="cnF-td-Ba1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="22" width="277" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -213,7 +213,7 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enhances your privacy by blocking in-app trackers and encrypting your DNS requests" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teo-vm-NRJ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enhances your privacy by blocking in-app trackers and encrypting your DNS requests" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="teo-vm-NRJ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="42" width="277" height="57.333333333333343"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -225,7 +225,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connectivity Assist may conflict with DNS protection" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caw-n1-Lb1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connectivity Assist may conflict with DNS protection" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="caw-n1-Lb1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="79" width="277" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" id="caw-h1-Hgt"/>
@@ -398,7 +398,7 @@
                                                     </constraints>
                                                     <imageReference key="image" image="advanced_protection_icon"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Advanced protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lsa-74-hd5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Advanced protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Lsa-74-hd5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="22" width="277" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -410,7 +410,7 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Uses enhanced functionality for ultimate ad blocking and content filtering" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOG-Hk-11z" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Uses enhanced functionality for ultimate ad blocking and content filtering" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="WOG-Hk-11z" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="42" width="277" height="57.333333333333343"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -1098,7 +1098,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cIW-ej-Mu3" firstAttribute="height" secondItem="YP6-Fs-z3O" secondAttribute="height" priority="250" id="8Ol-An-ktJ"/>
-                            <constraint firstItem="cIW-ej-Mu3" firstAttribute="width" secondItem="pdV-uu-C05" secondAttribute="width" id="FTd-gv-fG1"/>
+                            <constraint firstItem="cIW-ej-Mu3" firstAttribute="width" secondItem="h9Y-1J-Xxk" secondAttribute="width" id="FTd-gv-fG1"/>
                             <constraint firstItem="dHt-xX-w9c" firstAttribute="leading" secondItem="YP6-Fs-z3O" secondAttribute="leading" id="Tel-ey-kMW"/>
                             <constraint firstItem="dHt-xX-w9c" firstAttribute="top" secondItem="YP6-Fs-z3O" secondAttribute="top" id="X81-1E-CXL"/>
                             <constraint firstItem="dHt-xX-w9c" firstAttribute="trailing" secondItem="YP6-Fs-z3O" secondAttribute="trailing" id="eTq-tu-acY"/>
@@ -1115,7 +1115,15 @@
                         <outlet property="firstDescriptionLabelTopConstraint" destination="eZ4-z4-y8Y" id="vlw-Gs-HF9"/>
                         <outlet property="onOffLabel" destination="kfG-2o-Ru6" id="aTO-FH-raP"/>
                         <outlet property="purchaseButton" destination="pv0-hE-9gb" id="dH0-CW-0Da"/>
+                        <outlet property="purchaseButtonHeightConstraint" destination="klH-ya-GOJ" id="ag6-05-adv1"/>
+                        <outlet property="switchTopConstraint" destination="SDX-FD-eoK" id="ag6-05-adv2"/>
+                        <outlet property="titleLabel" destination="OxY-0X-J4W" id="ag6-05-adv3"/>
                         <outlet property="uiSwitch" destination="I6b-LU-Dw9" id="YdK-Lj-jWK"/>
+                        <outletCollection property="descriptionSpacingConstraints" destination="uwy-Y5-jOd" collectionClass="NSMutableArray" id="ag6-05-adv4"/>
+                        <outletCollection property="descriptionSpacingConstraints" destination="FxO-tx-x6g" collectionClass="NSMutableArray" id="ag6-05-adv5"/>
+                        <outletCollection property="descriptionSpacingConstraints" destination="chC-uc-tSs" collectionClass="NSMutableArray" id="ag6-05-adv6"/>
+                        <outletCollection property="iconSizeConstraints" destination="igh-Vb-1xg" collectionClass="NSMutableArray" id="ag6-05-adv7"/>
+                        <outletCollection property="iconSizeConstraints" destination="kWe-Fx-vUD" collectionClass="NSMutableArray" id="ag6-05-adv8"/>
                         <outletCollection property="themableLabels" destination="OxY-0X-J4W" collectionClass="NSMutableArray" id="Kmh-IX-BPn"/>
                         <outletCollection property="themableLabels" destination="9wg-p1-Dh8" collectionClass="NSMutableArray" id="9Ay-6L-Ta5"/>
                         <outletCollection property="themableLabels" destination="ZgQ-6Q-ytX" collectionClass="NSMutableArray" id="nL6-if-D0J"/>

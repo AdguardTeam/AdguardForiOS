@@ -49,7 +49,11 @@ final class BugReportController: UIViewController {
         super.viewDidLoad()
         emailAddressTextField.delegate = self
 
-        keyboardMover = KeyboardMover(bottomConstraint: scrollViewBottomConstraint, view: scrollView, tabBar: tabBarController?.tabBar)
+        keyboardMover = KeyboardMover(
+            bottomConstraint: scrollViewBottomConstraint,
+            view: scrollView,
+            bottomBar: findParentContainer(of: MainTabBarController.self)?.tabBarView
+        )
 
         setupToHideKeyboardOnTapOnView(ignoringViews: [emailAddressTextField, emailAddressTextField.rightView, sendButton].compactMap { $0 }) // Tap anywhere to hide keyboard
         setupTextView()

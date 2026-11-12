@@ -476,11 +476,9 @@ extension AppDelegate {
             return
         }
 
-        if let tabs = tabBar.viewControllers {
-            for viewController in tabs {
-                if let navController = viewController as? UINavigationController {
-                    navController.popToRootViewController(animated: animated)
-                }
+        for viewController in tabBar.viewControllers {
+            if let navController = viewController as? UINavigationController {
+                navController.popToRootViewController(animated: animated)
             }
         }
 
@@ -748,7 +746,7 @@ extension AppDelegate {
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)
         }
-        if let tabController = controller as? UITabBarController {
+        if let tabController = controller as? MainTabBarController {
             if let selected = tabController.selectedViewController {
                 return topViewController(controller: selected)
             }
@@ -783,7 +781,7 @@ extension AppDelegate {
             return
         }
 
-        guard let selectedTab = TabBarTabs(rawValue: tabBar.selectedIndex) else {
+        guard let selectedTab = tabBar.selectedTab else {
             DDLogError("Failed to push sign in controller, selected tab is missing")
             return
         }
@@ -804,8 +802,8 @@ extension AppDelegate {
     /* Returns navigation controller for certain tab */
     private func getNavigationController(for tab: TabBarTabs) -> MainNavigationController? {
         let tabBar = getMainTabController()
-        let navController = tabBar?.viewControllers?[tab.rawValue] as? MainNavigationController
-        assert(navController != nil, "Tab bar doesn't have navigation controller for tab = \(tab.rawValue)")
+        let navController = tabBar?.navigationController(for: tab)
+        assert(navController != nil, "Tab bar doesn't have navigation controller for tab = \(tab)")
         return navController
     }
 

@@ -32,10 +32,13 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             let iconSize = CGRect(origin: .zero, size: CGSize(width: 24.0, height: 24.0))
             let tintColor = UIColor.AdGuardColor.lightGreen1
             iconButton = UIButton(frame: iconSize)
-            iconButton?.setBackgroundImage(icon, for: .normal)
+            // The iOS 27 navigation bar platter stretches the hosted
+            // custom view to its own metrics (40x24) regardless of explicit size
+            // constraints, so the icon must keep its aspect by itself: setImage
+            // with aspect-fit instead of a .fill-stretched background image.
+            iconButton?.setImage(icon, for: .normal)
+            iconButton?.imageView?.contentMode = .scaleAspectFit
             iconButton?.tintColor = tintColor
-            iconButton?.contentVerticalAlignment = .fill
-            iconButton?.contentHorizontalAlignment = .fill
             updateButton.customView = iconButton
             iconButton?.addTarget(self, action: #selector(updateFilters(_:)), for: .touchUpInside)
         }
@@ -134,14 +137,30 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private var contentBlockersGestureRecognizer: UIPanGestureRecognizer? = nil
 
     // We change constraints only for iphone SE - like devices
-    private let isIphoneSeLike = UIScreen.main.bounds.width == 320.0
-    private let screenIsLessThanIphone6 = UIScreen.main.bounds.width <= 414.0
+    // View-relative: UIScreen.main.bounds reports the cover display
+    // (466 pt) on Duo unfolded, not the actual view width.
+    private var isIphoneSeLike: Bool { view.bounds.width == 320.0 }
+    private var screenIsLessThanIphone6: Bool { view.bounds.width <= 414.0 }
+
+    // view.bounds during viewDidLoad holds the storyboard placeholder
+    // (414 pt), so setupProtectionButtonsStackView initially builds non-SE button
+    // metrics even on real SE devices; re-apply once the actual width is known.
+    // The flag records which metrics the current button layout was built with.
+    private var protectionButtonsAppliedForSeLike = false
 
     // Indicates whether filters are updating
     private var updateInProcess = false
 
     // Show helper only once during app lifecycle
     private var contentBlockerHelperWasShown = false
+
+    // Indicates whether the content blockers info is currently shown
+    private var contentBlockersInfoShown = false
+
+    // Top stack compact mode (see setTopStackCompactMode)
+    private var topStackCompactApplied = false
+    private var topStackCompactConstraints: [NSLayoutConstraint] = []
+    private weak var topStack: UIStackView?
 
     private var onBoardingIsInProcess = false
 
@@ -186,6 +205,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         super.viewDidLoad()
 
         setupProtectionButtonsStackView()
+        // The buttons row must keep its content height when the top stack
+        // uses `.fill` (see setTopStackCompactMode).
+        protectionButtonsStackView.setContentHuggingPriority(.required, for: .vertical)
         updateTheme()
         initChartViewModel()
         statisticsPeriodChanged(statisticsPeriod: resources.chartDateType)
@@ -246,7 +268,14 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         chartView.layoutIfNeeded()
         chartModel.chartViewSizeChanged(frame: chartView.frame)
 
-        if isIphoneSeLike {
+        // Re-apply the protection buttons only when the SE-ness they
+        // were built with changes (guarded, so no per-pass rebuilds or loops).
+        let seLike = isIphoneSeLike
+        if seLike != protectionButtonsAppliedForSeLike {
+            protectionButtonsAppliedForSeLike = seLike
+            reapplyProtectionButtons()
+        }
+        if seLike {
             setupConstraintsForIphoneSe()
         }
         if screenIsLessThanIphone6 {
@@ -256,6 +285,15 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         getProButton.layer.cornerRadius = getProButton.frame.height / 2
         fixItIphoneButton.layer.cornerRadius = fixItIphoneButton.frame.height / 2
         fixItiPadButton.layer.cornerRadius = fixItiPadButton.frame.height / 2
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        traitCollection.onSizeClassChange(previousTraitCollection) { [weak self] in
+            // The content blockers view is picked per layout, so it is
+            // re-picked when the size classes change.
+            self?.updateContentBlockersInfoView()
+        }
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -579,6 +617,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
             self?.processState()
+            self?.updateContentBlockersInfoView()
         }
 
         contentBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main) { [weak self] _ in
@@ -811,8 +850,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
      */
     private func showContentBlockersInfo() {
         DispatchQueue.main.async {[weak self] in
-            self?.showIphoneContentBlockersInfo()
-            self?.showIpadContentBlockersInfo()
+            self?.contentBlockersInfoShown = true
+            self?.updateContentBlockersInfoView()
         }
     }
 
@@ -821,9 +860,61 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
      */
     private func hideContentBlockersInfo() {
         DispatchQueue.main.async {[weak self] in
-            self?.hideIpadContentBlockersInfo()
+            self?.contentBlockersInfoShown = false
             self?.hideIphoneContentBlockersInfo()
+            self?.hideIpadContentBlockersInfo()
         }
+    }
+
+    /**
+     Picks the content blockers view for the current layout and pro state:
+     the floating card is only used in the wide layout without pro (it sits
+     next to the get-pro promo); otherwise the bottom banner is used.
+     */
+    private func updateContentBlockersInfoView() {
+        guard contentBlockersInfoShown else { return }
+
+        if isIpadTrait && !configuration.proStatus {
+            setTopStackCompactMode(false)
+            showIpadContentBlockersInfo()
+            hideIphoneContentBlockersInfo()
+        } else if isIpadTrait {
+            setTopStackCompactMode(true)
+            showIphoneContentBlockersInfo()
+            hideIpadContentBlockersInfo()
+        } else {
+            setTopStackCompactMode(false)
+            showIphoneContentBlockersInfo()
+        }
+    }
+
+    /**
+     In the wide layout the bottom banner takes vertical space from the top
+     stack, whose `.fillEqually` distribution would then squeeze the protection
+     labels under the switch. In that mode the stack is switched to `.fill`
+     with the labels zone pinned to its content height, so the switch zone
+     absorbs the rest.
+     */
+    private func setTopStackCompactMode(_ compact: Bool) {
+        guard topStackCompactApplied != compact else { return }
+        topStackCompactApplied = compact
+
+        if topStackCompactConstraints.isEmpty {
+            guard
+                let labelsZone = protectionButtonsStackView.superview,
+                let topStack = complexProtectionView.superview as? UIStackView
+            else { return }
+            self.topStack = topStack
+            topStackCompactConstraints = [
+                protectionButtonsStackView.topAnchor.constraint(equalTo: labelsZone.topAnchor, constant: 20.0),
+                labelsZone.bottomAnchor.constraint(equalTo: protectionStatusLabel.bottomAnchor, constant: 20.0),
+                complexProtectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 75.0)
+            ]
+        }
+
+        topStackCompactConstraints.forEach { $0.isActive = compact }
+        topStack?.distribution = compact ? .fill : .fillEqually
+        view.setNeedsLayout()
     }
 
     @objc private func handleContentBlockersView(_ gestureRecognizer: UIPanGestureRecognizer) {

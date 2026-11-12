@@ -36,6 +36,14 @@ class LicenseProductButton: UIButton {
         }
     }
 
+    var usesCompactLayout = false {
+        didSet {
+            guard usesCompactLayout != oldValue else { return }
+            layout(for: traitCollection)
+            setFonts(for: traitCollection)
+        }
+    }
+
     // MARK: - Private properties
 
     private lazy var containerView: UIView = {
@@ -161,7 +169,7 @@ class LicenseProductButton: UIButton {
     }
 
     private func layout(for traitCollection: UITraitCollection) {
-        if traitCollection.isIpadTraitCollection {
+        if traitCollection.isIpadTraitCollection && !usesCompactLayout {
             NSLayoutConstraint.deactivate(iPhoneConstraints)
             NSLayoutConstraint.activate(iPadConstraints)
         } else {
@@ -171,7 +179,8 @@ class LicenseProductButton: UIButton {
     }
 
     private func setFonts(for traitCollection: UITraitCollection) {
-        let buttonFont = UIFont.systemFont(ofSize: traitCollection.isIpadTraitCollection ? 24.0 : 16.0, weight: .regular)
+        let fontSize: CGFloat = traitCollection.isIpadTraitCollection && !usesCompactLayout ? 24.0 : 16.0
+        let buttonFont = UIFont.systemFont(ofSize: fontSize, weight: .regular)
         productDescriptionLabel.font = buttonFont
         productPriceLabel.font = buttonFont
     }

@@ -428,12 +428,12 @@
                             <constraint firstItem="bhL-36-5FQ" firstAttribute="top" secondItem="gUM-wj-KUt" secondAttribute="top" constant="16" id="k1i-Mz-hke">
                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                             </constraint>
-                            <constraint firstItem="7iu-xS-0z8" firstAttribute="width" secondItem="Cqc-ee-WYS" secondAttribute="width" multiplier="3" id="mVU-x6-d0u"/>
+                            <constraint firstItem="7iu-xS-0z8" firstAttribute="width" secondItem="y3T-Ho-ORm" secondAttribute="width" multiplier="3" id="mVU-x6-d0u"/>
                             <constraint firstItem="bhL-36-5FQ" firstAttribute="leading" secondItem="gUM-wj-KUt" secondAttribute="leading" constant="8" id="nFc-Bh-mA5">
                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                             </constraint>
                             <constraint firstItem="zNS-Iy-bW2" firstAttribute="leading" secondItem="gUM-wj-KUt" secondAttribute="leading" id="qUt-hY-6hV"/>
-                            <constraint firstItem="4pL-oy-3Mq" firstAttribute="width" secondItem="Cqc-ee-WYS" secondAttribute="width" multiplier="3" id="sxl-e5-LNK"/>
+                            <constraint firstItem="4pL-oy-3Mq" firstAttribute="width" secondItem="zNS-Iy-bW2" secondAttribute="width" multiplier="3" id="sxl-e5-LNK"/>
                             <constraint firstItem="q8l-xM-B5q" firstAttribute="centerX" secondItem="gUM-wj-KUt" secondAttribute="centerX" id="vtk-Oc-YM6"/>
                             <constraint firstItem="q8l-xM-B5q" firstAttribute="top" secondItem="fH8-gi-DtH" secondAttribute="bottom" constant="42" id="zuL-9A-diC"/>
                         </constraints>
@@ -823,6 +823,8 @@
                         <outlet property="settingsLabel" destination="tsx-Ce-cc8" id="oSv-VA-ASX"/>
                         <outlet property="switchLabel" destination="eyJ-Xh-OdS" id="SUU-NP-2XH"/>
                         <outlet property="watchManualButtonIpad" destination="GOu-4j-RcN" id="GcB-qt-Kfa"/>
+                        <outletCollection property="onboardingContentHeightConstraints" destination="iHy-dC-CTa" collectionClass="NSMutableArray" id="ag6-05-onb1"/>
+                        <outletCollection property="onboardingContentHeightConstraints" destination="iJy-l1-Y8P" collectionClass="NSMutableArray" id="ag6-05-onb2"/>
                         <outletCollection property="themableLabels" destination="F7O-MB-LHu" collectionClass="NSMutableArray" id="eIt-3Z-pZR"/>
                         <segue destination="CxR-gs-ONl" kind="show" identifier="ShowLicenseSegue" id="0vG-94-8fw"/>
                     </connections>

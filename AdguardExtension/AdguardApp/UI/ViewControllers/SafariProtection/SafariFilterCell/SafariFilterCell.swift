@@ -109,7 +109,18 @@ final class SafariFilterCell: UITableViewCell, Reusable {
     private let switchWidth: CGFloat = 50.0
     private var tagHeight: CGFloat { isIpadTrait ? 22.0 : 16.0 }
     private var tagsInset: CGFloat { isIpadTrait ? 10.0 : 6.0 }
-    private var tagsStackViewWidth: CGFloat { UIScreen.main.bounds.width - (sideInset * 3) - switchWidth }
+
+    /// Width of the area the tags are wrapped into.
+    private var tagsStackViewWidth: CGFloat {
+        let availableWidth = contentView.bounds.width > 0
+            ? contentView.bounds.width
+            : contentView.window?.frame.width ?? 0.0
+        return availableWidth - (sideInset * 3) - switchWidth
+    }
+
+    /// Width the current tag wrap was built for; the tags and the label fonts
+    /// are rebuilt when the size class or the width changes.
+    private var lastTagLayoutWidth: CGFloat = 0.0
 
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private var themeObserver: NotificationToken?
@@ -130,6 +141,22 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         super.prepareForReuse()
         titleLabel.text = nil
         DispatchQueue.asyncSafeMain { self.titleLabel.attributedText = nil }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        traitCollection.onSizeClassChange(previousTraitCollection) {
+            processModel()
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        // The wrap depends on the width, which can change without a size
+        // class change — re-render the cell then.
+        guard !model.tags.isEmpty, contentView.bounds.width != lastTagLayoutWidth else { return }
+        processModel()
     }
 
     // MARK: - Private methods
@@ -153,6 +180,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
     }
 
     private func processModel() {
+        lastTagLayoutWidth = contentView.bounds.width
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
@@ -191,7 +219,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         var currentStackWidth: CGFloat = 0.0
 
         for tag in model.tags {
-            let button = SafariTagButton(model: tag)
+            let button = SafariTagButton(model: tag, isIpadTrait: isIpadTrait)
             button.addTarget(self, action: #selector(tagButtonTapped(_:)), for: .touchUpInside)
             button.setTitleColor(UIColor.AdGuardColor.lightGreen1, for: .normal)
             button.setTitleColor(UIColor.AdGuardColor.lightGreen1.withAlphaComponent(0.3), for: .highlighted)

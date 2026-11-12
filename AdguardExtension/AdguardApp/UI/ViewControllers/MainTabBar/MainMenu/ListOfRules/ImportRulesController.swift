@@ -52,7 +52,9 @@ class ImportRulesController : UIViewController {
             let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
             let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
             let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
-            if endFrameY >= UIScreen.main.bounds.size.height {
+            // Window-relative check; with no window, treat the keyboard as hidden.
+            let visibleHeight = view.window?.frame.height ?? 0.0
+            if endFrameY >= visibleHeight {
                 self.keyboardHeightLayoutConstraint?.constant = 0.0
             } else {
                 self.keyboardHeightLayoutConstraint?.constant = endFrame?.size.height ?? 0.0

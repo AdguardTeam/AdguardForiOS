@@ -42,6 +42,13 @@ final class OnboardingAdvancedProtectionView: UIView {
         }
     }
 
+    var usesCompactLayout = false {
+        didSet {
+            guard usesCompactLayout != oldValue, let string = labelString else { return }
+            processAttributes(with: string)
+        }
+    }
+
     // MARK: - Services
 
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -92,7 +99,12 @@ final class OnboardingAdvancedProtectionView: UIView {
             size: .customSize(width: image.size.width, height: image.size.height)
         )
 
-        attributedLabel.setAttributedTitle(string, fontSize: isIpadTrait ? 24.0 : 16.0, color: themeService.grayTextColor, attachmentSettings: attachmentSettings)
+        attributedLabel.setAttributedTitle(
+            string,
+            fontSize: isIpadTrait && !usesCompactLayout ? 24.0 : 16.0,
+            color: themeService.grayTextColor,
+            attachmentSettings: attachmentSettings
+        )
     }
 }
 

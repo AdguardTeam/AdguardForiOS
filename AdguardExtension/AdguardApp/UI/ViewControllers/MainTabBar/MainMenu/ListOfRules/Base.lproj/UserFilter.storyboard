@@ -513,9 +513,9 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ea0-Ie-qcn" secondAttribute="bottom" id="4qq-HU-zL7"/>
                             <constraint firstItem="qqd-eK-U6s" firstAttribute="top" secondItem="Rhk-Mc-bP1" secondAttribute="bottom" constant="24" id="C9b-Tb-jtw"/>
-                            <constraint firstItem="kha-j3-Mof" firstAttribute="trailing" secondItem="ea0-Ie-qcn" secondAttribute="trailing" id="XRd-ok-cQn"/>
+                            <constraint firstItem="oeq-tc-6np" firstAttribute="trailing" secondItem="ea0-Ie-qcn" secondAttribute="trailing" id="XRd-ok-cQn"/>
                             <constraint firstItem="Rhk-Mc-bP1" firstAttribute="top" secondItem="ea0-Ie-qcn" secondAttribute="top" constant="8" id="aZk-lf-LYZ"/>
-                            <constraint firstItem="ea0-Ie-qcn" firstAttribute="leading" secondItem="kha-j3-Mof" secondAttribute="leading" id="jXp-uH-LuH"/>
+                            <constraint firstItem="ea0-Ie-qcn" firstAttribute="leading" secondItem="oeq-tc-6np" secondAttribute="leading" id="jXp-uH-LuH"/>
                             <constraint firstItem="Rhk-Mc-bP1" firstAttribute="centerX" secondItem="ea0-Ie-qcn" secondAttribute="centerX" id="qUk-4T-25G"/>
                         </constraints>
                     </view>

@@ -58,6 +58,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appDelegate?.applicationDidEnterBackground(UIApplication.shared)
     }
 
+    func windowScene(_ windowScene: UIWindowScene,
+                     didUpdate previousCoordinateSpace: UICoordinateSpace,
+                     interfaceOrientation previousInterfaceOrientation: UIInterfaceOrientation,
+                     traitCollection previousTraitCollection: UITraitCollection) {
+        // The app reads the system appearance only on scene activation by default
+        // (see AppDelegate.setAppInterfaceStyle call sites). Forward live appearance
+        // changes here so the System theme mode re-themes without a background trip.
+        // Orientation-only or size-only updates are ignored via the style guard.
+        let newStyle = windowScene.traitCollection.userInterfaceStyle
+        guard previousTraitCollection.userInterfaceStyle != newStyle else { return }
+        appDelegate?.setAppInterfaceStyle()
+    }
+
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         open(URLContexts)
     }

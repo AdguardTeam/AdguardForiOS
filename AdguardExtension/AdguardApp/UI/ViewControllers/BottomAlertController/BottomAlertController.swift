@@ -23,13 +23,13 @@ class KeyboardMover {
     private weak var constraint: NSLayoutConstraint!
     private weak var view: UIView!
     private var initialValue: CGFloat!
-    private var tabBar: UITabBar?
+    private var bottomBar: UIView?
 
-    init(bottomConstraint: NSLayoutConstraint, view: UIView, tabBar: UITabBar?) {
+    init(bottomConstraint: NSLayoutConstraint, view: UIView, bottomBar: UIView?) {
         self.constraint = bottomConstraint
         self.view = view
         self.initialValue = bottomConstraint.constant
-        self.tabBar = tabBar
+        self.bottomBar = bottomBar
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardNotification(notification:)),
@@ -49,10 +49,10 @@ class KeyboardMover {
 
         let keyboardHeight = keyboardFrame.height
         let stateIsActive = UIApplication.shared.applicationState == .active
-        let tabBarHeight = tabBar?.frame.height ?? 0.0
+        let bottomBarHeight = bottomBar?.frame.height ?? 0.0
 
         if belongsToApp && stateIsActive {
-            constraint.constant = keyboardHeight - tabBarHeight + initialValue
+            constraint.constant = keyboardHeight - bottomBarHeight + initialValue
         }
 
         UIView.animate(withDuration: 0.5,
@@ -107,8 +107,8 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.bottomViewPulled(_:)))
         contentView.addGestureRecognizer(gestureRecognizer)
 
-        let tabBar = tabBarController?.tabBar
-        keyboardMover = KeyboardMover(bottomConstraint: keyboardHeightLayoutConstraint, view: view, tabBar: tabBar)
+        let bottomBar = findParentContainer(of: MainTabBarController.self)?.tabBarView
+        keyboardMover = KeyboardMover(bottomConstraint: keyboardHeightLayoutConstraint, view: view, bottomBar: bottomBar)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

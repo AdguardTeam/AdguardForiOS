@@ -49,10 +49,13 @@ final class SafariTagButton: UIButton {
 
     // MARK: - Private properties
 
-    private var tagCornerRadius: CGFloat { isIpadTrait ? 5.0 : 3.0 }
-    private var buttonHeight: CGFloat { isIpadTrait ? 22.0 : 16.0 }
-    private var langButtonWidth: CGFloat { isIpadTrait ? 32.0 : 23.0 }
-    private var tagFont: UIFont { UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 14.0, weight: .regular) }
+    /// Layout metrics source, passed by the owning cell.
+    private let usesIpadMetrics: Bool
+
+    private var tagCornerRadius: CGFloat { usesIpadMetrics ? 5.0 : 3.0 }
+    private var buttonHeight: CGFloat { usesIpadMetrics ? 22.0 : 16.0 }
+    private var langButtonWidth: CGFloat { usesIpadMetrics ? 32.0 : 23.0 }
+    private var tagFont: UIFont { UIFont.systemFont(ofSize: usesIpadMetrics ? 20.0 : 14.0, weight: .regular) }
 
     private let langFlags = [
         "en":"gb",
@@ -77,18 +80,21 @@ final class SafariTagButton: UIButton {
 
     required init?(coder: NSCoder) {
         self.model = SafariTagButtonModel()
+        self.usesIpadMetrics = false
         super.init(coder: coder)
         initializeTag()
     }
 
     override init(frame: CGRect) {
         self.model = SafariTagButtonModel()
+        self.usesIpadMetrics = false
         super.init(frame: frame)
         initializeTag()
     }
 
-    init(model: SafariTagButtonModel) {
+    init(model: SafariTagButtonModel, isIpadTrait: Bool) {
         self.model = model
+        self.usesIpadMetrics = isIpadTrait
         super.init(frame: .zero)
         model.isLang ? initializeLang() : initializeTag()
     }

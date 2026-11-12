@@ -52,7 +52,6 @@ final class DnsProviderFeatureCell: UITableViewCell, Reusable {
         label.greyText = true
         label.lightGreyText = false
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -62,7 +61,6 @@ final class DnsProviderFeatureCell: UITableViewCell, Reusable {
         label.greyText = false
         label.lightGreyText = true
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: isIpadTrait ? 20.0 : 14.0, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -73,6 +71,10 @@ final class DnsProviderFeatureCell: UITableViewCell, Reusable {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+
+    // MARK: - Layout metrics
+
+    private var layoutConstraints: [NSLayoutConstraint] = []
 
     // MARK: - Init
 
@@ -86,6 +88,13 @@ final class DnsProviderFeatureCell: UITableViewCell, Reusable {
         super.init(coder: coder)
         setupConstraint()
         self.selectionStyle = .none
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        traitCollection.onSizeClassChange(previousTraitCollection) {
+            applyLayoutMetrics()
+        }
     }
 
     // MARK: - Public methods
@@ -102,12 +111,19 @@ final class DnsProviderFeatureCell: UITableViewCell, Reusable {
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(descriptionLabel)
         self.contentView.addSubview(logoCheckImageView)
+        applyLayoutMetrics()
+    }
 
+    private func applyLayoutMetrics() {
         let heightWidthConst = isIpadTrait ? 32.0 : 24.0
         let leadingTrailingConst = isIpadTrait ? 24.0 : 16.0
         let topBottomConst = isIpadTrait ? 20.0 : 16.0
 
-        NSLayoutConstraint.activate([
+        nameLabel.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .medium)
+        descriptionLabel.font = .systemFont(ofSize: isIpadTrait ? 20.0 : 14.0, weight: .medium)
+
+        NSLayoutConstraint.deactivate(layoutConstraints)
+        layoutConstraints = [
             logoImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             logoImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: leadingTrailingConst),
             logoImageView.trailingAnchor.constraint(equalTo: self.nameLabel.leadingAnchor, constant: -leadingTrailingConst),
@@ -126,7 +142,9 @@ final class DnsProviderFeatureCell: UITableViewCell, Reusable {
             logoCheckImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -leadingTrailingConst),
             logoCheckImageView.heightAnchor.constraint(equalToConstant: heightWidthConst),
             logoCheckImageView.widthAnchor.constraint(equalToConstant: heightWidthConst)
-        ])
+        ]
+        NSLayoutConstraint.activate(layoutConstraints)
+
     }
 }
 

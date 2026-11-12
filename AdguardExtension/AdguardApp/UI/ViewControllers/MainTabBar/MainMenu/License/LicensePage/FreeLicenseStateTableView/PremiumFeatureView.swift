@@ -35,6 +35,14 @@ final class PremiumFeatureView: UIView {
         }
     }
 
+    var usesCompactLayout = false {
+        didSet {
+            guard usesCompactLayout != oldValue else { return }
+            layout(for: traitCollection)
+            setupFonts(for: traitCollection)
+        }
+    }
+
     // MARK: - Private properties
 
     private lazy var featureImageView: UIImageView = {
@@ -66,6 +74,11 @@ final class PremiumFeatureView: UIView {
     private var sharedConstraints: [NSLayoutConstraint] = []
     private var iPhoneConstraints: [NSLayoutConstraint] = []
     private var iPadConstraints: [NSLayoutConstraint] = []
+    private var compactConstraints: [NSLayoutConstraint] = []
+
+    /// Compact-mode minimum height: the measured smallest feature
+    /// block (icon + title + two description lines) that still reads well.
+    private static let compactMinimumHeight: CGFloat = 128.0
 
     // MARK: - Public methods
 
@@ -146,21 +159,34 @@ final class PremiumFeatureView: UIView {
 
             heightAnchor.constraint(equalToConstant: 400.0)
         ]
+        compactConstraints = [
+            featureImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8.0),
+            featureImageView.widthAnchor.constraint(equalToConstant: 40.0),
+            featureImageView.heightAnchor.constraint(equalToConstant: 40.0),
+            featureNameLabel.topAnchor.constraint(equalTo: featureImageView.bottomAnchor, constant: 8.0),
+            featureNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24.0),
+            featureNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24.0),
+            featureDescriptionLabel.topAnchor.constraint(equalTo: featureNameLabel.bottomAnchor, constant: 4.0),
+            featureDescriptionLabel.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -24.0),
+            heightAnchor.constraint(greaterThanOrEqualToConstant: Self.compactMinimumHeight)
+        ]
     }
 
     private func layout(for traitCollection: UITraitCollection) {
-        if traitCollection.isIpadTraitCollection {
-            NSLayoutConstraint.deactivate(iPhoneConstraints)
+        NSLayoutConstraint.deactivate(iPhoneConstraints + iPadConstraints + compactConstraints)
+        if usesCompactLayout {
+            NSLayoutConstraint.activate(compactConstraints)
+        } else if traitCollection.isIpadTraitCollection {
             NSLayoutConstraint.activate(iPadConstraints)
         } else {
-            NSLayoutConstraint.deactivate(iPadConstraints)
             NSLayoutConstraint.activate(iPhoneConstraints)
         }
     }
 
     private func setupFonts(for traitCollection: UITraitCollection) {
-        featureNameLabel.font = UIFont.systemFont(ofSize: traitCollection.isIpadTraitCollection ? 36.0 : 20.0, weight: .bold)
-        featureDescriptionLabel.font = UIFont.systemFont(ofSize: traitCollection.isIpadTraitCollection ? 24.0 : 14.0)
+        let largeMetrics = traitCollection.isIpadTraitCollection && !usesCompactLayout
+        featureNameLabel.font = UIFont.systemFont(ofSize: largeMetrics ? 36.0 : 20.0, weight: .bold)
+        featureDescriptionLabel.font = UIFont.systemFont(ofSize: largeMetrics ? 24.0 : 14.0)
     }
 
     private func processModel() {

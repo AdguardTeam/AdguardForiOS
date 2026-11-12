@@ -29,6 +29,15 @@ final class LicenseProductChoiceCell: UITableViewCell, Reusable {
 
     weak var delegate: LicenseProductChoiceCellDelegate?
 
+    var usesCompactLayout = false {
+        didSet {
+            guard usesCompactLayout != oldValue else { return }
+            layout(for: traitCollection)
+            setFonts(for: traitCollection)
+            licenseProductButton.usesCompactLayout = usesCompactLayout
+        }
+    }
+
     // MARK: - Private properties
 
     /* UI elements */
@@ -78,8 +87,11 @@ final class LicenseProductChoiceCell: UITableViewCell, Reusable {
     private var sharedConstraints: [NSLayoutConstraint] = []
     private var iPhoneConstraints: [NSLayoutConstraint] = []
     private var iPadConstraints: [NSLayoutConstraint] = []
+    private var compactConstraints: [NSLayoutConstraint] = []
     private var licenseProductButtonTopConstraintWithTrialLabel: NSLayoutConstraint!
     private var licenseProductButtonTopConstraintWithoutTrialLabel: NSLayoutConstraint!
+    private lazy var compactSubscribeHeightConstraint =
+        subscribeButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44.0)
 
 
     // MARK: - Public methods
@@ -111,6 +123,7 @@ final class LicenseProductChoiceCell: UITableViewCell, Reusable {
     }
 
     func setTrialAvailability(_ isAvailable: Bool) {
+        trialLabel.isHidden = !isAvailable
         licenseProductButtonTopConstraintWithTrialLabel.isActive = isAvailable
         licenseProductButtonTopConstraintWithoutTrialLabel.isActive = !isAvailable
     }
@@ -208,32 +221,52 @@ final class LicenseProductChoiceCell: UITableViewCell, Reusable {
             restorePurchaseButton.topAnchor.constraint(equalTo: subscribeButton.bottomAnchor, constant: 24.0),
             restorePurchaseButton.heightAnchor.constraint(equalToConstant: 50.0)
         ]
+
+        // Compact metrics for short wide windows (Duo unfolded):
+        // tighter paddings and standard 44 pt tap-target button heights.
+        compactConstraints = [
+            container.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8.0),
+            container.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8.0),
+            container.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
+            container.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
+
+            licenseProductButton.heightAnchor.constraint(equalToConstant: 44.0),
+
+            subscribeButton.topAnchor.constraint(equalTo: licenseProductButton.bottomAnchor, constant: 8.0),
+
+            restorePurchaseButton.topAnchor.constraint(equalTo: subscribeButton.bottomAnchor, constant: 8.0),
+            restorePurchaseButton.heightAnchor.constraint(equalToConstant: 44.0)
+        ]
     }
 
     private func layout(for traitCollection: UITraitCollection) {
-        var constraintsToActivate: [NSLayoutConstraint] = []
+        let largeMetrics = traitCollection.isIpadTraitCollection && !usesCompactLayout
+        let trialSpacing: CGFloat = usesCompactLayout ? 12.0 : (largeMetrics ? 32.0 : 24.0)
+        licenseProductButtonTopConstraintWithTrialLabel.constant = trialSpacing
 
-        if traitCollection.isIpadTraitCollection {
-            licenseProductButtonTopConstraintWithTrialLabel.constant = 32.0
-            constraintsToActivate.append(contentsOf: iPadConstraints)
-            NSLayoutConstraint.deactivate(iPhoneConstraints)
+        let buttonInset: CGFloat = usesCompactLayout ? 4.0 : 8.0
+        subscribeButton.contentEdgeInsets = .init(top: buttonInset, left: 0, bottom: buttonInset, right: 0)
+        compactSubscribeHeightConstraint.isActive = usesCompactLayout
+
+        NSLayoutConstraint.deactivate(iPhoneConstraints + iPadConstraints + compactConstraints)
+        if usesCompactLayout {
+            NSLayoutConstraint.activate(compactConstraints)
+        } else if largeMetrics {
+            NSLayoutConstraint.activate(iPadConstraints)
         } else {
-            licenseProductButtonTopConstraintWithTrialLabel.constant = 24.0
-            constraintsToActivate.append(contentsOf: iPhoneConstraints)
-            NSLayoutConstraint.deactivate(iPadConstraints)
+            NSLayoutConstraint.activate(iPhoneConstraints)
         }
         if trialLabel.isHidden {
-            constraintsToActivate.append(licenseProductButtonTopConstraintWithoutTrialLabel)
+            NSLayoutConstraint.activate([licenseProductButtonTopConstraintWithoutTrialLabel])
         } else {
-            constraintsToActivate.append(licenseProductButtonTopConstraintWithTrialLabel)
+            NSLayoutConstraint.activate([licenseProductButtonTopConstraintWithTrialLabel])
         }
-        NSLayoutConstraint.activate(constraintsToActivate)
     }
 
     private func setFonts(for traitCollection: UITraitCollection) {
-        let isIpad = traitCollection.isIpadTraitCollection
+        let isIpad = traitCollection.isIpadTraitCollection && !usesCompactLayout
         let trialLabelFont = UIFont.systemFont(ofSize: isIpad ? 24.0 : 16.0, weight: .bold)
-        let buttonFont = UIFont.systemFont(ofSize: traitCollection.isIpadTraitCollection ? 24.0 : 16.0, weight: .regular)
+        let buttonFont = UIFont.systemFont(ofSize: isIpad ? 24.0 : 16.0, weight: .regular)
 
         trialLabel.font = trialLabelFont
         subscribeButton.titleLabel?.font = buttonFont
