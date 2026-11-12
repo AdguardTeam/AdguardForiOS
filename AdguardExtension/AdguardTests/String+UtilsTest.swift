@@ -77,4 +77,43 @@ class StringUtilsTest: XCTestCase {
             XCTAssertEqual(testCase.discardPortFromIpAddress(), result)
         }
     }
+
+    func testFromHtmlKeepsRequestedColorOnBoldText() {
+        guard #available(iOS 13.0, *) else { return }
+
+        let html = "We recommend disabling Connectivity Assist in <b>System settings → Wi-Fi → Connectivity Assist</b>"
+        let color = UIColor(hexString: "4d4d4d")
+        let styles: [UIUserInterfaceStyle] = [.dark, .light]
+
+        for style in styles {
+            let traits = UITraitCollection(userInterfaceStyle: style)
+            var attributed: NSMutableAttributedString?
+            traits.performAsCurrent {
+                attributed = NSMutableAttributedString.fromHtml(html, fontSize: 16, color: color)
+            }
+
+            XCTAssertNotNil(attributed)
+            guard let attributed = attributed else { continue }
+
+            let fullRange = NSRange(location: 0, length: attributed.length)
+            attributed.enumerateAttributes(in: fullRange, options: []) { attributes, range, _ in
+                let text = attributed.attributedSubstring(from: range).string
+                guard text.contains(where: { !$0.isWhitespace }) else { return }
+
+                let foreground = attributes[NSAttributedString.Key.foregroundColor] as? UIColor
+                XCTAssertNotNil(foreground)
+                guard let foreground = foreground else { return }
+
+                let resolved = foreground.resolvedColor(with: traits)
+                var red: CGFloat = 0
+                var green: CGFloat = 0
+                var blue: CGFloat = 0
+                var alpha: CGFloat = 0
+                XCTAssertTrue(resolved.getRed(&red, green: &green, blue: &blue, alpha: &alpha))
+                XCTAssertEqual(red * 255, CGFloat(0x4d), accuracy: 2)
+                XCTAssertEqual(green * 255, CGFloat(0x4d), accuracy: 2)
+                XCTAssertEqual(blue * 255, CGFloat(0x4d), accuracy: 2)
+            }
+        }
+    }
 }
