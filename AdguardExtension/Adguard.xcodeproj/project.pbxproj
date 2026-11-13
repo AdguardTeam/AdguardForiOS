@@ -12873,7 +12873,7 @@
 				CODE_SIGN_ENTITLEMENTS = SafariWebExtension/SafariWebExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(AG_BUILD)";
 				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -12890,7 +12890,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "$(AG_VERSION)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
@@ -12925,7 +12925,7 @@
 				CODE_SIGN_ENTITLEMENTS = SafariWebExtension/SafariWebExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(AG_BUILD)";
 				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TC3Q7MAJXF;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -12939,7 +12939,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "$(AG_VERSION)";
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12974,7 +12974,7 @@
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/ProSafariWebExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(AG_BUILD)";
 				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -12991,7 +12991,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "$(AG_VERSION)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
@@ -13026,7 +13026,7 @@
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/ProSafariWebExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(AG_BUILD)";
 				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TC3Q7MAJXF;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -13040,7 +13040,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "$(AG_VERSION)";
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
