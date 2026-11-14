@@ -56,8 +56,9 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     private var tunnelProxy: PacketTunnelProviderProxyProtocol!
     private var onNetworkStateChangedObserver: NotificationToken?
 
-    @Atomic
-    private var networkState: NetworkStateInfo = NetworkStateInfo()
+    private let networkEventQueue = DispatchQueue(label: "PacketTunnelProvider.networkEvents")
+    private var networkChanges: NetworkChangeTracker?
+    private var stopping = false // Access only on networkEventQueue.
 
 
     override public init() {
@@ -134,19 +135,25 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     public override func startTunnel(options: [String : NSObject]? = nil, completionHandler: @escaping (Error?) -> Void) {
         Logger.logInfo("(PacketTunnelProvider) startTunnel")
 
+        networkEventQueue.sync { stopping = false }
         tunnelProxy.startTunnel(options: options) { [weak self] error in
             if error == nil {
                 Logger.logInfo("(PacketTunnelProvider) startTunnel; finished starting")
             } else {
                 Logger.logInfo("(PacketTunnelProvider) startTunnel; finished starting with error: \(error!)")
             }
-            self?.startObservingNetworkStateChanging()
+            if error == nil { self?.startObservingNetworkStateChanging() }
             completionHandler(error)
         }
     }
 
     public override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
         Logger.logInfo("(PacketTunnelProvider) stopTunnel with reason: \(reason)")
+        networkEventQueue.sync {
+            stopping = true
+            onNetworkStateChangedObserver = nil
+            networkChanges = nil
+        }
         tunnelProxy.stopTunnel(with: reason, completionHandler: completionHandler)
     }
 
@@ -165,24 +172,33 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     private func startObservingNetworkStateChanging() {
         guard let networkUtils = networkUtils else { return }
 
-        self.networkState = networkUtils.getCurrentNetworkStateSync()
-
-        onNetworkStateChangedObserver = NotificationCenter.default.observe(name: .networkStateChanged, object: nil, queue: nil) { [weak self] notification in
-        Logger.logInfo("Receive 'Network state changed' event")
-        guard let self = self, let currentNetworkStateInfo = notification.object as? NetworkStateInfo else { return }
-
-        Logger.logInfo("Old state: [\(self.networkState)]; new state: [\(currentNetworkStateInfo)]")
-
-        // However, we don't need to restart tunnel when there is no connection.
-        if currentNetworkStateInfo.internetState != .unavailable  {
-            if currentNetworkStateInfo.internetState != self.networkState.internetState ||
-                currentNetworkStateInfo.interface?.name != self.networkState.interface?.name {
-                self.tunnelProxy.networkChanged()
+        networkEventQueue.sync {
+            guard !stopping else { return }
+            let initial = networkUtils.getCurrentNetworkStateSync()
+            networkChanges = NetworkChangeTracker(available: initial.internetState == .available,
+                interfaceName: initial.interface?.name, physicalNetwork: initial.physicalNetwork)
+            onNetworkStateChangedObserver = NotificationCenter.default.observe(name: .networkStateChanged, object: nil, queue: nil) { [weak self] notification in
+                guard let state = notification.object as? NetworkStateInfo else { return }
+                self?.networkEventQueue.async { [weak self] in
+                    guard let self = self, self.networkChanges != nil else { return }
+                    let supported: Bool
+                    if #available(iOS 14.0, macOS 11.0, *) { supported = true } else { supported = false }
+                    let action = self.networkChanges?.update(available: state.internetState == .available,
+                        interfaceName: state.interface?.name, physicalNetwork: state.physicalNetwork,
+                        routeChanged: state.routeChanged, physicalMonitoringSupported: supported)
+                    switch action {
+                    case .restartTunnel:
+                        Logger.logInfo("Network change: physical network changed or recovered")
+                        self.tunnelProxy.networkChanged(physicalNetworkChanged: true)
+                    case .refreshProxy:
+                        Logger.logInfo("Network change: refreshing DNS egress without changing tunnel settings")
+                        self.tunnelProxy.networkChanged(physicalNetworkChanged: false)
+                    default: break
+                    }
+                }
             }
         }
-
-        self.networkState = currentNetworkStateInfo
-    } }
+    }
 }
 
 // MARK: - PacketTunnelProvider + PacketTunnelProviderProxyDelegate
